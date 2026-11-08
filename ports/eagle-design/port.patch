@@ -1767,10 +1767,10 @@ index 9c7b0cf..ce1fef1 100644
 +export type { TrackFinding, TrackReading, TrackRow };
 diff --git a/scope.ts b/scope.ts
 new file mode 100644
-index 0000000..10a9ca7
+index 0000000..864e313
 --- /dev/null
 +++ b/scope.ts
-@@ -0,0 +1,115 @@
+@@ -0,0 +1,125 @@
 +// scope.ts · what the design project names once: its ESLint config, its shared tests and its tools read it
 +import type { RepoScope } from './shared/repoScope.ts';
 +import {
@@ -1790,6 +1790,9 @@ index 0000000..10a9ca7
 +const PARTS = MODULE_FILES.filter(
 +  (file) => !isEntry(file) && entryOfPart(file) !== null,
 +);
++
++// each skill, which the build writes from docs/skills/
++const SKILLS = '.claude/skills/*/SKILL.md';
 +
 +const scope: RepoScope = {
 +  root: import.meta.dirname,
@@ -1863,11 +1866,18 @@ index 0000000..10a9ca7
 +        'dev/map.md',
 +        'docs/process/*.md',
 +        'sheet/contract/*.md',
-+        '.claude/skills/*/SKILL.md',
++        SKILLS,
 +        'app/styles/tokens.ts',
 +      ],
 +    },
 +  ],
++  // a skill is read whole when it loads, the rule files when a skill or CLAUDE.md sends a reader there
++  instructions: {
++    skills: [SKILLS],
++    whole: [SKILLS],
++    onDemand: ['docs/rules/*.md'],
++    everyTurn: ['CLAUDE.md'],
++  },
 +  // a types file holds types alone (docs/rules/names.md)
 +  typesOnly: ['**/*Types.ts'],
 +  // a module's file takes its kind's case, and never `index` (docs/rules/names.md)

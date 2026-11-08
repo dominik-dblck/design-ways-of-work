@@ -190,3 +190,13 @@ for the port (phase 8) or the PM's word. Ranked: the first of each group is the 
     TypeScript honours in a JSDoc comment, `/** @ts-expect-error */`), and no suppression of a linked file in
     the rehearsal copy. A component root names its tiers and its tests (`componentFolders`), so a stray folder
     under it fails too (eagle-dev's probe).
+36. The skill tests are shared (chunk 7b, first of four): `shared/tests/aSkillSaysWhatAndWhen.test.ts` (a
+    description, "Use when", 1024 characters, its name its folder's) and `shared/tests/everySkillIsShort.test.ts`
+    (2000 words for a file read whole, 1000 for one read every turn, `## Contents` past 100 lines for one read
+    on demand) read the scope's `instructions`: this side's skills (`.claude/skills/*/SKILL.md`, one spelling
+    with the generator's `writes`), read whole, `docs/rules/*.md` on demand, `CLAUDE.md` every turn. A glob
+    that names no file fails, in each of the four lists. A skill's entry holds its reasons, so a listed skill
+    that gains one is new. A scan of counts says so (`heldToItsCount(scan, Map)`): its entry `{key} · {count}`
+    may fall, never rise; a plain scan reads an entry whole. This side's two tests retire; the size row is
+    shared. `shared/tests/globs.ts` is the one reading of a glob list with `!` (the generators' test reads it
+    too): in the disk's case (a Mac echoes a glob's), the scope's ignored folders never read (eagle-dev).

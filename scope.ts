@@ -43,6 +43,8 @@ const scope: RepoScope = {
   renderers: [],
   // no file it writes from a source of its own
   generators: [],
+  // no skill, and no instruction an agent loads: its sessions read the products'
+  instructions: { skills: [], whole: [], onDemand: [], everyTurn: [] },
 };
 
 export { scope };

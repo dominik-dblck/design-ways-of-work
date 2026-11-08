@@ -6,7 +6,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { afterAll, describe, expect, it } from 'vitest';
-import { driftFrom, heldIn } from './baseline.ts';
+import { countDriftFrom, driftFrom, heldIn } from './baseline.ts';
 
 const made: string[] = [];
 afterAll(() => {
@@ -27,11 +27,20 @@ const held = ({
   folder,
   offenders,
   asked,
+  counted,
 }: {
   readonly folder: string;
   readonly offenders: readonly string[];
   readonly asked?: string;
-}) => heldIn({ folder, scan: 'aScan', offenders, asked });
+  readonly counted?: boolean;
+}) =>
+  heldIn({
+    folder,
+    scan: 'aScan',
+    offenders,
+    asked,
+    counted: counted ?? false,
+  });
 
 describe('a baseline starts once, only shrinks, and goes when it empties', () => {
   it('a new offender and a fixed one still listed are both drift; the same list is none', () => {
@@ -40,6 +49,51 @@ describe('a baseline starts once, only shrinks, and goes when it empties', () =>
       fixed: ['a'],
     });
     expect(driftFrom(['a'], ['a'])).toEqual({ added: [], fixed: [] });
+  });
+
+  it('a counted entry may fall, never rise: a rise is new, a fall still listed, the same count none', () => {
+    expect(countDriftFrom(['a.md · 4556'], ['a.md · 6000'])).toEqual({
+      added: ['a.md · 6000'],
+      fixed: [],
+    });
+    expect(countDriftFrom(['a.md · 4556'], ['a.md · 3000'])).toEqual({
+      added: [],
+      fixed: ['a.md · 4556'],
+    });
+    expect(countDriftFrom(['a.md · 4556'], ['a.md · 4556'])).toEqual({
+      added: [],
+      fixed: [],
+    });
+  });
+
+  it('a plain scan reads an entry whole: two of one key are two; a counted one refuses a bare entry', () => {
+    expect(driftFrom(['a.md · 3', 'a.md · 9'], ['a.md · 3'])).toEqual({
+      added: [],
+      fixed: ['a.md · 9'],
+    });
+    expect(() => countDriftFrom(['a.md'], [])).toThrow('a counted entry');
+  });
+
+  it('a write records a counted entry that fell, and refuses one that rose', () => {
+    const folder = aFolder();
+    held({
+      folder,
+      offenders: ['a.md · 4556'],
+      asked: 'start:aScan',
+      counted: true,
+    });
+    held({ folder, offenders: ['a.md · 3000'], asked: 'write', counted: true });
+    expect(JSON.parse(fs.readFileSync(LIST(folder), 'utf8'))).toEqual([
+      'a.md · 3000',
+    ]);
+    expect(() =>
+      held({
+        folder,
+        offenders: ['a.md · 3001'],
+        asked: 'write',
+        counted: true,
+      }),
+    ).toThrow('never grows');
   });
 
   it('a list starts by its own act, its folder made, and never twice', () => {

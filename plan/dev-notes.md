@@ -189,3 +189,17 @@ mailing-automation: each line waits for its port (phase 9) and the PM's word. Ra
     list. A component root now names its tiers and `__tests__` alone: its `app/components/icons/` needs a
     tier or a scope field at its port. Route segments under `app/api` and `packages/domain/*` areas are held
     by its map alone. All Dom's.
+25. At its port (chunk 7b, skills): its scope's `instructions` (its view, 8 Nov): `skills` its
+    `.claude/skills/*/SKILL.md` but the pipeline's generated ones (`!` globs); `whole` each `SKILL.md`,
+    `_shared.md`, `ticket/_*.md` and command; `onDemand` the rest of `.claude/skills`, `patterns`,
+    `evaluations`; `everyTurn` `CLAUDE.md` or none (2,034 words today: listing it starts a counted list; Dom's).
+    Its lists start by `BASELINES=start:{scan}`: `aSkillSaysWhatAndWhen` its 9 planning skills,
+    `everySkillIsShort` `architect/SKILL.md · 4556`, `evaluate-onboarding-ux · 3222`, `evaluate-app-ux · 2511`,
+    `aLongFileOpensWithContents` its 5; `OVER_TODAY` and `WITHOUT_CONTENTS_TODAY` retire into them. A name is
+    now checked against its folder (its 22 hold). Its size rows 14 and 15 are shared rows. Its four entry
+    globs are one const (`whole`, and negated in `onDemand`); `!.claude/skills/ticket-*/SKILL.md` is its
+    skill generator's `writes`, one const too. Its `describe('every ticket skill')` (each ticket skill's first
+    task reads `ticket/_shared.md`) moves to a test of its own before `everySkillIsShort` retires, or it is
+    lost. "The ticket skills also keep their pipeline's 100 lines" is held by nothing (the pipeline counts
+    words since D8; `ticket-feature/SKILL.md` 104 lines, `ticket/_shared.md` 123): left out of the shared
+    row; its own row is Dom's.

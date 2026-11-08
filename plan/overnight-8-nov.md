@@ -109,3 +109,9 @@ messages read, the next part resumed. When the run is done: `CronDelete 1577e92f
   tables' aligned rows) is an exemption from a rule it keeps, the format. A: a shape the formatter keeps, no
   comment; B: one override in the prettier config, its one home; C: `keeps-its-rules` names ESLint and
   TypeScript alone, and says so. 0 of istanbul, c8, v8, Stryker or knip tags.
+- 7b, this side's `onDemand` names `docs/rules/*.md` alone; its CLAUDE.md and skills also send a reader to
+  `docs/process/ticket-pipeline.md` (1035 lines, no Contents) and `sheet/contract/api-convention.md` (137),
+  both generated and released. A: list them, a 2-entry list started; B: their generator opens them with
+  Contents (a release's change); C: leave them out, as today.
+- 7b, the build side's "ticket skills keep their pipeline's 100 lines" is held by nothing since D8: drop it,
+  or a test of its own (its scope: Dom's).

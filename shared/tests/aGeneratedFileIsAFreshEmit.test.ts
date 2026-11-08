@@ -6,10 +6,10 @@ import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { minimatch } from 'minimatch';
 import { afterAll, describe, expect, it } from 'vitest';
 import type { Generator } from '../repoScope.ts';
 import { scope } from '../../scope.ts';
+import { isNamedBy } from './globs.ts';
 
 const made: string[] = [];
 afterAll(() => {
@@ -32,10 +32,7 @@ const filesUnder = (folder: string): readonly string[] =>
 
 // a path a generator owns: one of its globs names it, and none of its `!` globs
 const isOwnedBy = (file: string, { writes }: Generator): boolean =>
-  writes.some((glob) => !glob.startsWith('!') && minimatch(file, glob)) &&
-  !writes.some(
-    (glob) => glob.startsWith('!') && minimatch(file, glob.slice(1)),
-  );
+  isNamedBy(file, writes);
 
 // the tree's files a generator owns
 const ownedBy = (generator: Generator): readonly string[] =>

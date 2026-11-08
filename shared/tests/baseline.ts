@@ -1,6 +1,7 @@
 /**
- * - `heldToItsBaseline`, `heldIn` · a scan's offenders against its list
- * - `driftFrom` · what moved: a new offender, and one fixed but still listed
+ * - `heldToItsBaseline`, `heldToItsCount`, `heldIn` · a scan's offenders, its list
+ * - `driftFrom`, `countDriftFrom` · what moved: new, or fixed but still listed
+ * - a counted scan's entry, `{key} · {count}`, may fall and never rise
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -16,6 +17,7 @@ interface Held {
   readonly scan: string;
   readonly offenders: readonly string[];
   readonly asked: string | undefined;
+  readonly counted: boolean;
 }
 
 // a list per scan, which `BASELINES=start:{scan}` starts once and `BASELINES=write` only shrinks
@@ -50,17 +52,41 @@ function baselineOf(file: string, scan: string): readonly string[] {
   return strings;
 }
 
-function driftFrom(
-  baseline: readonly string[],
-  offenders: readonly string[],
-): Drift {
-  const now = new Set(offenders);
-  const then = new Set(baseline);
-  return {
-    added: [...now].filter((offender) => !then.has(offender)).sort(),
-    fixed: [...then].filter((offender) => !now.has(offender)).sort(),
+const A_COUNT = /^(.*) · (\d+)$/;
+
+// an entry's key and count: a plain one is its own key, a counted one is `{key} · {count}`
+type Reading = (entry: string) => readonly [string, number];
+const plain: Reading = (entry) => [entry, 0];
+const counted: Reading = (entry) => {
+  const [, key, count] = A_COUNT.exec(entry) ?? [];
+  if (key === undefined)
+    throw new Error(`a counted entry is "{key} · {count}": ${entry}`);
+  return [key, Number(count)];
+};
+
+// an offender is new, or counted higher than its listed entry; a listed one is gone, or counted lower now
+const driftBy =
+  (read: Reading) =>
+  (baseline: readonly string[], offenders: readonly string[]): Drift => {
+    const listed = new Map(baseline.map((entry) => [read(entry)[0], entry]));
+    const found = new Map(offenders.map((entry) => [read(entry)[0], entry]));
+    const rose = (entry: string, than: string | undefined): boolean =>
+      than === undefined || read(entry)[1] > read(than)[1];
+    return {
+      added: [...found.values()]
+        .filter((entry) => rose(entry, listed.get(read(entry)[0])))
+        .sort(),
+      fixed: [...listed.values()]
+        .filter((entry) => {
+          const now = found.get(read(entry)[0]);
+          return now === undefined || read(now)[1] < read(entry)[1];
+        })
+        .sort(),
+    };
   };
-}
+
+const driftFrom = driftBy(plain);
+const countDriftFrom = driftBy(counted);
 
 // a list starts once, from offenders the code already holds
 function start(file: string, { scan, offenders }: Held): void {
@@ -77,9 +103,13 @@ function start(file: string, { scan, offenders }: Held): void {
 }
 
 // a list only shrinks, and goes when it empties: a scan with no list holds every offender red
-function shrink(file: string, { scan, offenders }: Held): void {
+function shrink(file: string, held: Held): void {
+  const { scan, offenders } = held;
   if (!fs.existsSync(file)) return;
-  const { added } = driftFrom(baselineOf(file, scan), offenders);
+  const { added } = (held.counted ? countDriftFrom : driftFrom)(
+    baselineOf(file, scan),
+    offenders,
+  );
   if (added.length > 0)
     throw new Error(`${scan}: a baseline never grows · ${added.join(', ')}`);
   if (offenders.length > 0) {
@@ -95,7 +125,10 @@ function heldIn(held: Held): Drift {
   const file = path.join(held.folder, `${held.scan}.json`);
   if (held.asked === `start:${held.scan}`) start(file, held);
   if (held.asked === 'write') shrink(file, held);
-  return driftFrom(baselineOf(file, held.scan), held.offenders);
+  return (held.counted ? countDriftFrom : driftFrom)(
+    baselineOf(file, held.scan),
+    held.offenders,
+  );
 }
 
 const heldToItsBaseline = (scan: string, offenders: readonly string[]): Drift =>
@@ -104,6 +137,20 @@ const heldToItsBaseline = (scan: string, offenders: readonly string[]): Drift =>
     scan,
     offenders,
     asked: process.env.BASELINES,
+    counted: false,
   });
 
-export { driftFrom, heldIn, heldToItsBaseline };
+// a scan of counts, one per key: an offender is a key over its limit, with how far
+const heldToItsCount = (
+  scan: string,
+  counts: ReadonlyMap<string, number>,
+): Drift =>
+  heldIn({
+    folder: path.join(scope.root, BASELINES),
+    scan,
+    offenders: [...counts].map(([key, count]) => `${key} · ${String(count)}`),
+    asked: process.env.BASELINES,
+    counted: true,
+  });
+
+export { countDriftFrom, driftFrom, heldIn, heldToItsBaseline, heldToItsCount };

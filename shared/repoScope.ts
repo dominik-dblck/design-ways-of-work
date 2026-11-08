@@ -13,6 +13,14 @@ interface Generator {
   readonly writes: readonly string[];
 }
 
+// the files an agent reads, by globs: its skills, and those read whole, on demand, every turn
+interface Instructions {
+  readonly skills: readonly string[];
+  readonly whole: readonly string[];
+  readonly onDemand: readonly string[];
+  readonly everyTurn: readonly string[];
+}
+
 interface RepoScope {
   readonly root: string;
   readonly ignores: readonly string[];
@@ -35,6 +43,7 @@ interface RepoScope {
   readonly components: readonly string[];
   readonly renderers: readonly Renderer[];
   readonly generators: readonly Generator[];
+  readonly instructions: Instructions;
 }
 
 // the way of working's shared tests, which each side's runner includes beside its own
