@@ -19,10 +19,10 @@ import {
 } from './layout.ts';
 import type { Page } from './layout.ts';
 import { BUILT } from './root.ts';
+import { A_HEADER } from '../shared/lint/header.ts';
 
 const OUT = BUILT;
 
-const A_HEADER = /^\/\*\*\n(?:[^*]|\*(?!\/))*\*\//;
 const LEADING_COMMENTS = /^(?:\/\/[^\n]*\n)+/;
 const FIRST_LINE_NAME = /^(\/\/ [\w.-]+)\.ts\b/;
 

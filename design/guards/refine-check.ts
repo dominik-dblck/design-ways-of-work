@@ -56,9 +56,9 @@ function findingsOf(
   edges: readonly SheetEdge[],
 ): Finding[] {
   const read = ticket.touches;
-  const placeholder = /^PLACEHOLDER/.test(ticket.acceptance[0] || '');
+  const isPlaceholder = /^PLACEHOLDER/.test(ticket.acceptance[0] || '');
   return [
-    ...criterionFindings(ticket, { edges, placeholder }),
+    ...criterionFindings(ticket, { edges, placeholder: isPlaceholder }),
     ...edges.flatMap((edge, index) =>
       edgeFindings(edge, {
         where: `E${index + 1}`,
@@ -66,7 +66,7 @@ function findingsOf(
       }),
     ),
     ...whyFindings(ticket),
-    ...(placeholder ? [] : routeFindings(ticket)),
+    ...(isPlaceholder ? [] : routeFindings(ticket)),
     ...journeyFindings(ticket),
     ...notebookFindings(ticket, { edges, read }),
     ...closingFindings(ticket, read),

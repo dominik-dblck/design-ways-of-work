@@ -1,5 +1,5 @@
 /**
- * - `FieldTable` · one block's or config's fields: name, kind, when required, length, rules
+ * - `FieldTable` · a block's or config's fields: name, kind, required, length, rules
  */
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';

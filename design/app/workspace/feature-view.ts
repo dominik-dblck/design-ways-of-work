@@ -8,7 +8,7 @@ import { byId as EPICS } from '../../roadmaps/backlog.ts';
 import { stepsOf } from '../../roadmaps/features.ts';
 import { notesOf } from '../../roadmaps/notes.ts';
 import { casesOfEpic, flat, named } from '../../sheet/cases/test-cases.ts';
-import { ticketOf } from './board-view.ts';
+import { ticketDetailOf } from './board-view.ts';
 import { endpointsOf } from './contract-view.ts';
 import { caseGroupsOf, caseKindsOf } from './feature-view/featureCases.ts';
 import { coverOf } from './feature-view/featureCover.ts';
@@ -68,7 +68,7 @@ function featureOf(epic: string): FeatureView {
     fieldOptions: fieldOptionsOf(epic),
     fieldsCode: fieldsCodeOf(epic),
     docTypes: docTypesOf(epic),
-    decisions: ticket ? (ticketOf(ticket.id)?.edgeSections ?? []) : [],
+    decisions: ticket ? (ticketDetailOf(ticket.id)?.edgeSections ?? []) : [],
     notes: notesOf(epic),
     combinations: combinationsOf(epic),
     statesNamed: statesNamed(epic),

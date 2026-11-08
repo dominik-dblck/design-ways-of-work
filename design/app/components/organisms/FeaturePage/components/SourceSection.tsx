@@ -1,5 +1,5 @@
 /**
- * - `SourceSection` · the source check: the copies in the scope, the ratchet, each kind
+ * - `SourceSection` · the source check: copies in scope, the ratchet, each kind
  */
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
@@ -21,12 +21,12 @@ const inkOf = ({ n, base }: KindStanding): string =>
 function useStanding(): SourceStanding | null {
   const [standing, setStanding] = useState<SourceStanding | null>(null);
   useEffect(() => {
-    let live = true;
+    let isLive = true;
     void scanAll().then((found) => {
-      if (live) setStanding(standingOf(found));
+      if (isLive) setStanding(standingOf(found));
     });
     return () => {
-      live = false;
+      isLive = false;
     };
   }, []);
   return standing;

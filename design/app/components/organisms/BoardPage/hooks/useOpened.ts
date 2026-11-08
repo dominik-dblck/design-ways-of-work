@@ -2,7 +2,7 @@
  * - `useOpened` · what the drawer holds: an idea, or an epic and one of its tickets
  */
 import { useState } from 'react';
-import { ticketOf } from '../../../../workspace/board-view.ts';
+import { ticketDetailOf } from '../../../../workspace/board-view.ts';
 
 interface Opened {
   readonly ideaId: string | null;
@@ -33,7 +33,7 @@ function useOpened(): Opened {
       setTicket(null);
     },
     openTicket: (id) => {
-      open(null, ticketOf(id)?.epic ?? null);
+      open(null, ticketDetailOf(id)?.epic ?? null);
       setTicket(id);
     },
     showTicket: setTicket,

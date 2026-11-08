@@ -20,10 +20,10 @@ function editedFile(input: string): string | null {
 }
 
 async function formatOne(file: string): Promise<void> {
-  const info = await prettier.getFileInfo(file, {
+  const fileInfo = await prettier.getFileInfo(file, {
     ignorePath: path.join(ROOT, '.prettierignore'),
   });
-  if (info.ignored || info.inferredParser === null) return;
+  if (fileInfo.ignored || fileInfo.inferredParser === null) return;
   const text = fs.readFileSync(file, 'utf8');
   const options = await prettier.resolveConfig(file);
   const formatted = await prettier.format(text, { ...options, filepath: file });
@@ -33,10 +33,10 @@ async function formatOne(file: string): Promise<void> {
 async function lintOne(file: string): Promise<readonly string[]> {
   const eslint = new ESLint({ cwd: ROOT, fix: true, applySuppressions: true });
   if (!LINTED.test(file) || (await eslint.isPathIgnored(file))) return [];
-  const results = await eslint.lintFiles([file]);
-  await ESLint.outputFixes(results);
-  return results.flatMap((result) =>
-    result.messages.map(
+  const fileResults = await eslint.lintFiles([file]);
+  await ESLint.outputFixes(fileResults);
+  return fileResults.flatMap((fileResult) =>
+    fileResult.messages.map(
       (one) => `${path.relative(ROOT, file)}:${one.line} ${one.message}`,
     ),
   );

@@ -2,7 +2,7 @@
  * - `wireframesPart` · part w: every wireframe through the editor's view: no error,
  * - the gaps under their baseline, the views against their snapshot
  */
-import { lineOf, messageOf } from './checkWorld.ts';
+import { lineOf, errorMessageOf } from './checkWorld.ts';
 import type { Mirror } from './checkWorld.ts';
 import * as SCREEN_VIEW from '../../sheet/screens/screen-view.ts';
 import * as WIREFRAMES from '../../sheet/screens/wireframes.ts';
@@ -41,12 +41,12 @@ function swept(): Swept {
     try {
       const drawn = JSON.stringify(
         SCREEN_VIEW.editorView(frame.num),
-        (_, value: unknown) =>
-          typeof value === 'function' ? undefined : value,
+        (_, drawnValue: unknown) =>
+          typeof drawnValue === 'function' ? undefined : drawnValue,
       );
       views.set(frame.num, JSON.parse(drawn));
     } catch (error) {
-      errors.push(`${frame.num} view · ${messageOf(error)}`);
+      errors.push(`${frame.num} view · ${errorMessageOf(error)}`);
     }
   return { errors, gaps, views: Object.fromEntries(views) };
 }

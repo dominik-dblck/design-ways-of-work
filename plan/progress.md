@@ -95,6 +95,15 @@
         '0' is a count, `__tests__/` is a test; the hooks keep the links. Its build-side points: `plan/dev-notes.md`
       - [x] the last baseline is an ESLint suppression (`Payloads.DOC`, read by the build side); a fixed one left
         listed fails the lint until pruned, as the baseline's `fixed` did
+      - [x] the way of working's own ESLint plugin, `shared/lint/wowPlugin.ts`: six architecture tests became its
+        rules (no ticket in a name, a file's header, comments, readonly data, nothing read at load, one home per
+        name, now every file's: values, types, components), each proven by RuleTester (`yarn test:rules`, 34 cases)
+      - [x] names (PM, 8 Nov · B): `naming-convention` (types and components PascalCase, a boolean `is…`) and the
+        placeholder and count-alone shapes; the way of working's own 70 names renamed by `scripts/rename.ts`, the
+        product's 193 in ESLint's suppressions until the port renames them
+      - [x] eagle-dev's cross-check of chunk 3, its rules worth porting asked with it
+      - [ ] eagle-dev's rules and tests the design side lacks: which come to the way of working, for both sides
+        (PM, 8 Nov), a table and the PM's form
 - [x] no file named by a number: the documents' parts named by what they hold (15 pipeline parts, 2 api-convention
       parts, agent-instructions in one file); `aFileNamesItsPurpose` refuses a number; size.md says why
 

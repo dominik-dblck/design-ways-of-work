@@ -43,14 +43,14 @@ function perDay(done: readonly BoardTicket[]): readonly VelocityDay[] {
     .map(([day, count]) => ({ day, ...count }));
 }
 
-const average = (list: readonly number[]): number =>
-  list.length ? list.reduce((sum, one) => sum + one, 0) / list.length : 0;
+const average = (rates: readonly number[]): number =>
+  rates.length ? rates.reduce((sum, one) => sum + one, 0) / rates.length : 0;
 
 // the rate the forecast reads: the last days' once there are more of them, else every day's
-function rateOf(values: readonly number[]): number {
-  return values.length > RECENT_DAYS
-    ? average(values.slice(-RECENT_DAYS))
-    : average(values);
+function rateOf(counts: readonly number[]): number {
+  return counts.length > RECENT_DAYS
+    ? average(counts.slice(-RECENT_DAYS))
+    : average(counts);
 }
 
 function velocity(): Velocity {

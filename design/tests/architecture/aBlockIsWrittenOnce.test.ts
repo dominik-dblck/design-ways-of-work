@@ -37,19 +37,19 @@ function tokensOf(source: Source): readonly Token[] {
   const scanner = ts.createScanner(ts.ScriptTarget.Latest, true);
   scanner.setText(source.text);
   const tokens: Token[] = [];
-  let inImport = false;
+  let isInImport = false;
   for (
     let kind = scanner.scan();
     kind !== ts.SyntaxKind.EndOfFileToken;
     kind = scanner.scan()
   ) {
-    if (kind === ts.SyntaxKind.ImportKeyword) inImport = true;
-    if (!inImport)
+    if (kind === ts.SyntaxKind.ImportKeyword) isInImport = true;
+    if (!isInImport)
       tokens.push({
         text: scanner.getTokenText(),
         at: scanner.getTokenStart(),
       });
-    if (kind === ts.SyntaxKind.SemicolonToken) inImport = false;
+    if (kind === ts.SyntaxKind.SemicolonToken) isInImport = false;
   }
   return tokens;
 }

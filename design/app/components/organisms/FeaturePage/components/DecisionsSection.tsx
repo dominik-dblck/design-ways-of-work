@@ -1,5 +1,5 @@
 /**
- * - `DecisionsSection` · the feature ticket's edges: each question, its options and the pick
+ * - `DecisionsSection` · the feature ticket's edges: question, options, the pick
  */
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';

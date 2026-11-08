@@ -1,8 +1,7 @@
 /**
- * - `node scripts/rehearse.ts [product] [copy]` · a port rehearsal on a copy, never the product
- * - copies the product's tracked files but the wow set; links design/ in place, dev/ and shared/ by name
- * - then applies ports/<product>/port.patch: what the port changes in the product itself
- * - its node runs keep the link's path (NODE_OPTIONS), so `..` still reaches the product
+ * - `node scripts/rehearse.ts [product] [copy]` · a port rehearsal on a copy
+ * - the product's files but the wow set, design/ and the rest linked in place
+ * - then ports/<product>/port.patch; node runs keep the links (NODE_OPTIONS)
  */
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
@@ -136,9 +135,9 @@ function main(): void {
   execFileSync('git', ['init', '-q'], { cwd: COPY });
   commit('the product, design/ linked');
   execFileSync('git', ['tag', 'product'], { cwd: COPY });
-  const patched = applyPort();
+  const isPatched = applyPort();
   console.log(
-    `${path.relative(HERE, COPY) || COPY} · ${copied} product files copied, ${linked} files of design/, dev/, shared/ and design-system/ linked, ${patched ? 'the port applied' : 'no port'}`,
+    `${path.relative(HERE, COPY) || COPY} · ${copied} product files copied, ${linked} files of design/, dev/, shared/ and design-system/ linked, ${isPatched ? 'the port applied' : 'no port'}`,
   );
 }
 

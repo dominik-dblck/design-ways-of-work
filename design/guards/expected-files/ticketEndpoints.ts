@@ -4,12 +4,12 @@
 import type { SpecRow } from '../spec-check.ts';
 import { named } from '../../sheet/cases/test-cases.ts';
 import type { ReadEndpoint } from '../../sheet/cases/test-cases.ts';
-import type { ComponentsSpec, TicketRow } from './expectedFilesTypes.ts';
+import type { ComponentsSpec, ExpectedTicket } from './expectedFilesTypes.ts';
 
 const TIERS = ['atoms', 'molecules', 'organisms'] as const;
 
 function endpointsOf(
-  ticket: TicketRow,
+  ticket: ExpectedTicket,
   rows: readonly ReadEndpoint[],
 ): ReadEndpoint[] {
   const names = named(ticket.touches || ticket.read);

@@ -42,10 +42,10 @@ function blockEnd(lines: readonly string[], start: number): number {
   let last = start;
   for (let at = start + 1; at < lines.length; at += 1) {
     const line = String(lines[at]);
-    const outer = line.trim() !== '' && indentOf(line) <= indent;
-    if (outer && !CLOSES.test(line.trim())) return last;
+    const isOuter = line.trim() !== '' && indentOf(line) <= indent;
+    if (isOuter && !CLOSES.test(line.trim())) return last;
     if (line.trim()) last = at;
-    if (outer && !STILL_OPEN.test(line.trim())) return at;
+    if (isOuter && !STILL_OPEN.test(line.trim())) return at;
   }
   return last;
 }
@@ -75,8 +75,8 @@ function keyRowsAt(lines: readonly string[], key: RegExp): readonly number[] {
   const alone = new RegExp(`^\\s*'${key.source}`);
   return lines.flatMap((line, at) => {
     if (inline.test(line)) return [at];
-    const under = (lines[at - 1] ?? '').trim() === '[';
-    return alone.test(line) && under ? [at - 1] : [];
+    const isUnder = (lines[at - 1] ?? '').trim() === '[';
+    return alone.test(line) && isUnder ? [at - 1] : [];
   });
 }
 

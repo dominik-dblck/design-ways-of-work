@@ -13,7 +13,7 @@ function organismPart(
   row: TieredRow,
   { organism, spec }: { readonly organism: string; readonly spec: Spec },
 ): string[] {
-  if (!spec.organisms.some((item) => item.id === organism)) {
+  if (!spec.organisms.some((organismRow) => organismRow.id === organism)) {
     return [`1 · ${row.id} names organism "${organism}" — no such organism`];
   }
   if (organism === row.id) return [`1 · ${row.id} names itself`];
@@ -30,7 +30,7 @@ function moleculePart(
   row: TieredRow,
   { molecule, spec }: { readonly molecule: string; readonly spec: Spec },
 ): string[] {
-  if (!spec.molecules.some((item) => item.id === molecule)) {
+  if (!spec.molecules.some((moleculeRow) => moleculeRow.id === molecule)) {
     return [`1 · ${row.id} names molecule "${molecule}" — no such molecule`];
   }
   return molecule === row.id ? [`1 · ${row.id} names itself as a part`] : [];
@@ -44,7 +44,7 @@ function partFindings(
     return organismPart(row, { organism: part.organism, spec });
   if (part.molecule)
     return moleculePart(row, { molecule: part.molecule, spec });
-  const atom = spec.atoms.find((item) => item.id === part.atom);
+  const atom = spec.atoms.find((atomRow) => atomRow.id === part.atom);
   if (!atom) return [`1 · ${row.id} names part "${part.atom}" — no such atom`];
   const variants = atom.variants ?? {};
   if (part.variant && !variants[part.variant]) {
@@ -80,31 +80,31 @@ function partsFindings(rows: readonly TieredRow[], spec: Spec): string[] {
 }
 
 function walk(
-  value: unknown,
+  node: unknown,
   at: { path: string; rowId: string; declared: ReadonlySet<string> },
 ): string[] {
-  if (typeof value === 'string') {
-    const tokens = [...value.matchAll(/--[\w-]+/g)]
+  if (typeof node === 'string') {
+    const tokens = [...node.matchAll(/--[\w-]+/g)]
       .filter((found) => !at.declared.has(found[0]))
       .map(
         (found) =>
           `2 · ${at.rowId} · ${at.path} uses ${found[0]} — not declared in design-system/ or the product's tokens`,
       );
-    const hex = value.match(/#[0-9a-f]{3,8}/i);
+    const hex = node.match(/#[0-9a-f]{3,8}/i);
     const field = at.path.split('.').pop() ?? '';
-    const loose =
-      /#[0-9a-f]{3,8}\b/i.test(value) &&
+    const isLoose =
+      /#[0-9a-f]{3,8}\b/i.test(node) &&
       at.rowId !== 'gate-dot' &&
       !/^(notes|wireframe|props)$/.test(field);
     return [
       ...tokens,
-      ...(loose && hex
+      ...(isLoose && hex
         ? [`3 · ${at.rowId} · ${at.path} carries a hex: ${hex[0]}`]
         : []),
     ];
   }
-  if (!value || typeof value !== 'object') return [];
-  return Object.entries(value).flatMap(([key, inner]) =>
+  if (!node || typeof node !== 'object') return [];
+  return Object.entries(node).flatMap(([key, inner]) =>
     walk(inner, { ...at, path: at.path ? `${at.path}.${key}` : key }),
   );
 }

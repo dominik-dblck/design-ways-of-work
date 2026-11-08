@@ -12,21 +12,21 @@ import type { Emitted } from './layout.ts';
 
 const HEAD = ['Rule', 'Gate', 'Exceptions', 'Why'] as const;
 
-const isRuleFile = (value: unknown): value is RuleFile =>
-  typeof value === 'object' &&
-  value !== null &&
+const isRuleFile = (loaded: unknown): loaded is RuleFile =>
+  typeof loaded === 'object' &&
+  loaded !== null &&
   ['title', 'intro', 'outro'].every(
-    (key) => typeof Reflect.get(value, key) === 'string',
+    (key) => typeof Reflect.get(loaded, key) === 'string',
   ) &&
-  Array.isArray(Reflect.get(value, 'rows'));
+  Array.isArray(Reflect.get(loaded, 'rows'));
 
-const isSkillFile = (value: unknown): value is SkillFile =>
-  typeof value === 'object' &&
-  value !== null &&
+const isSkillFile = (loaded: unknown): loaded is SkillFile =>
+  typeof loaded === 'object' &&
+  loaded !== null &&
   ['title', 'description', 'intro'].every(
-    (key) => typeof Reflect.get(value, key) === 'string',
+    (key) => typeof Reflect.get(loaded, key) === 'string',
   ) &&
-  Array.isArray(Reflect.get(value, 'sections'));
+  Array.isArray(Reflect.get(loaded, 'sections'));
 
 // a skill as Claude Code loads it: its name is its folder's, its sections numbered when the order holds
 function skillMarkdown(one: Emitted, file: SkillFile): string {
@@ -80,11 +80,11 @@ function rulesMarkdown(file: RuleFile): string {
   ].join('\n');
 }
 
-const isDocumentFile = (value: unknown): value is DocumentFile =>
-  typeof value === 'object' &&
-  value !== null &&
-  typeof Reflect.get(value, 'path') === 'string' &&
-  Array.isArray(Reflect.get(value, 'sections'));
+const isDocumentFile = (loaded: unknown): loaded is DocumentFile =>
+  typeof loaded === 'object' &&
+  loaded !== null &&
+  typeof Reflect.get(loaded, 'path') === 'string' &&
+  Array.isArray(Reflect.get(loaded, 'sections'));
 
 // a document's sections joined by newlines, each heading line above its own
 const documentMarkdown = (file: DocumentFile): string =>
@@ -96,23 +96,23 @@ const documentMarkdown = (file: DocumentFile): string =>
     )
     .join('\n');
 
-function printed(one: Emitted, data: unknown): string {
-  if (one.print === 'json') return `${JSON.stringify(data, null, 2)}\n`;
+function printed(one: Emitted, exported: unknown): string {
+  if (one.print === 'json') return `${JSON.stringify(exported, null, 2)}\n`;
   if (one.print === 'document') {
-    if (!isDocumentFile(data) || data.path !== one.fixture)
+    if (!isDocumentFile(exported) || exported.path !== one.fixture)
       throw new Error(
         `${one.module} · ${one.name} is no document of ${one.fixture}`,
       );
-    return documentMarkdown(data);
+    return documentMarkdown(exported);
   }
   if (one.print === 'skill') {
-    if (!isSkillFile(data))
+    if (!isSkillFile(exported))
       throw new Error(`${one.module} · ${one.name} is no skill file`);
-    return skillMarkdown(one, data);
+    return skillMarkdown(one, exported);
   }
-  if (!isRuleFile(data))
+  if (!isRuleFile(exported))
     throw new Error(`${one.module} · ${one.name} is no rule file`);
-  return rulesMarkdown(data);
+  return rulesMarkdown(exported);
 }
 
 // [the file, its text] for each module the layout lists, in its order, then the tokens
@@ -120,10 +120,10 @@ async function emittedTexts(): Promise<readonly (readonly [string, string])[]> {
   const texts = await Promise.all(
     emitted().map(async (one) => {
       const loaded: unknown = await import(path.join(ROOT, one.module));
-      const data: unknown = Reflect.get(Object(loaded), one.name);
-      if (data === undefined)
+      const exported: unknown = Reflect.get(Object(loaded), one.name);
+      if (exported === undefined)
         throw new Error(`${one.module} exports no ${one.name}`);
-      return [one.fixture, printed(one, data)] as const;
+      return [one.fixture, printed(one, exported)] as const;
     }),
   );
   return [...texts, ['app/styles/tokens.ts', tokensText()]];

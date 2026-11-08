@@ -1,6 +1,6 @@
 /**
- * - `HERE`, `PRODUCT_REPO`, `BUILD_REPO` · this repository, and the two it was taken from
- * - `repoAt` · a repository a script is handed: the nth argument that is not a flag, or the default
+ * - `HERE`, `PRODUCT_REPO`, `BUILD_REPO` · this repository, the two it came from
+ * - `repoAt` · the repository a script is handed: its nth bare argument, or default
  * - `LINKED_HOMES` · this repository's folders a product links in place, and where
  */
 import path from 'node:path';

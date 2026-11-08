@@ -1,7 +1,7 @@
 /**
- * - `RuleFile`, `RuleRow` · a file of rules: its title, its text, its rows
+ * - `RuleFile`, `CodeRuleRow` · a file of rules: its title, its text, its rows
  */
-interface RuleRow {
+interface CodeRuleRow {
   readonly rule: string;
   readonly gate: string;
   readonly exceptions: string;
@@ -11,8 +11,8 @@ interface RuleRow {
 interface RuleFile {
   readonly title: string;
   readonly intro: string;
-  readonly rows: readonly RuleRow[];
+  readonly rows: readonly CodeRuleRow[];
   readonly outro: string;
 }
 
-export type { RuleFile, RuleRow };
+export type { RuleFile, CodeRuleRow };

@@ -6,7 +6,7 @@
 import { describe, expect, it } from 'vitest';
 import { rules, ticketChecklist } from '../../docs/process/plans.ts';
 import { rows as productRows } from '../../sheet/rules.ts';
-import { AN_EPIC, TRACES } from './traces.ts';
+import { AN_EPIC, TRACES } from '../../shared/lint/traces.ts';
 import { textsUnder } from './tree.ts';
 
 const A_FINDING = /\b[A-Z]{1,3}\d{1,2}[a-z]?\b/;

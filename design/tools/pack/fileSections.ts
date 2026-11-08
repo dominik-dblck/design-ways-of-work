@@ -4,10 +4,10 @@
  */
 import type { Source } from './packSources.ts';
 import { MAX_LINES, tsSection } from './tsSections.ts';
-import type { Asked, Section } from './tsSections.ts';
+import type { Asked, TsSection } from './tsSections.ts';
 
 // a model entry by its "name", the one that carries "src" (the type) over a level row
-function jsonSection(lines: readonly string[], want: string): Section | null {
+function jsonSection(lines: readonly string[], want: string): TsSection | null {
   const name = (want.split(/[\s·,(—]+/).find(Boolean) ?? '').toLowerCase();
   const named = /^(\s*)"(?:name|id)":\s*"([^"]+)"/;
   const hits = lines.flatMap((line, at) =>
@@ -36,7 +36,7 @@ function jsonSection(lines: readonly string[], want: string): Section | null {
 }
 
 // a screen of a page: a pointer to its lines, too long to inline
-function screenSection(lines: readonly string[], want: string): Section | null {
+function screenSection(lines: readonly string[], want: string): TsSection | null {
   const label = /^screen\s+(\w+)$/i.exec(want)?.[1];
   if (label === undefined) return null;
   const at = lines.findIndex((line) =>
@@ -65,7 +65,7 @@ const HEADS: readonly (readonly [RegExp, RegExp])[] = [
 function headingSection(
   lines: readonly string[],
   { file, want }: { readonly file: string; readonly want: string },
-): Section | null {
+): TsSection | null {
   const head = (HEADS.find(([kind]) => kind.test(file)) ?? HEADS[3])?.[1];
   const heads = lines.flatMap((line, at) => (head?.test(line) ? [at] : []));
   const needle = want.toLowerCase().replace(/[’']/g, "'");
@@ -89,7 +89,7 @@ function headingSection(
   return { from: start + 1, to: end, text: lines.slice(start, end).join('\n') };
 }
 
-function sectionOf(source: Source, asked: Asked): Section | null {
+function sectionOf(source: Source, asked: Asked): TsSection | null {
   const lines = source.text.split('\n');
   const file = source.path;
   if (/\.json$/.test(file)) return jsonSection(lines, asked.want);

@@ -1,5 +1,5 @@
 /**
- * - `ScreenPlaceholder` · one screen: its number, title and line, a frame held for its drawing
+ * - `ScreenPlaceholder` · one screen: number, title, line, a frame for its drawing
  */
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';

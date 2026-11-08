@@ -1,5 +1,5 @@
 /**
- * - `TicketEdges` · a ticket's edges: the question each is decided by, then each edge
+ * - `TicketEdges` · a ticket's edges: the question deciding each, then the edge
  */
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';

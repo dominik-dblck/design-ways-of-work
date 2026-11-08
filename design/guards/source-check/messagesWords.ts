@@ -47,9 +47,9 @@ function quoted(src: string, start: number): { token: string; end: number } {
   let token = '';
   let at = start + 1;
   while (at < src.length && src.charAt(at) !== quote) {
-    const escaped = src.charAt(at) === '\\';
-    token += escaped ? `\\${String(src[at + 1])}` : src.charAt(at);
-    at += escaped ? 2 : 1;
+    const isEscaped = src.charAt(at) === '\\';
+    token += isEscaped ? `\\${String(src[at + 1])}` : src.charAt(at);
+    at += isEscaped ? 2 : 1;
   }
   return { token, end: at };
 }
@@ -127,13 +127,13 @@ function keysTwice(src: string): readonly SourceFinding[] {
 function countWithoutOne({ text, key, siblings }: Leaf): boolean {
   const match = /\{(count|days)\}\s+(?:\w+\s+){0,2}?(\w+s)\b/.exec(text);
   if (!match || /^(is|was|this|its|has)$/.test(String(match[2]))) return false;
-  const paired = (siblings ?? []).some(
+  const isPaired = (siblings ?? []).some(
     (other) =>
       other !== key &&
       /One$/.test(other) &&
       String(key).indexOf(other.replace(/One$/, '')) === 0,
   );
-  return !paired;
+  return !isPaired;
 }
 
 // a key no file reads: the build reads messages.js too, so a component to draw, not a copy

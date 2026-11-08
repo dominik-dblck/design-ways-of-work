@@ -64,15 +64,15 @@ function shownTexts(line: string): readonly string[] {
   ];
 }
 
-function copiedLiteral(value: string, sayings: Sayings): string | null {
-  const segment = sayings.segments.get(value);
-  if (segment) return `${value} · the words of ${segment}`;
-  const chip = sayings.chips.get(value);
-  if (chip) return `${value} · catalog.js STATE.${chip}.label`;
-  const whole = / /.test(value)
-    ? sayings.whole.get(normalized(value))
+function copiedLiteral(literal: string, sayings: Sayings): string | null {
+  const segment = sayings.segments.get(literal);
+  if (segment) return `${literal} · the words of ${segment}`;
+  const chip = sayings.chips.get(literal);
+  if (chip) return `${literal} · catalog.js STATE.${chip}.label`;
+  const whole = / /.test(literal)
+    ? sayings.whole.get(normalized(literal))
     : undefined;
-  return whole ? `${value} · ${whole}` : null;
+  return whole ? `${literal} · ${whole}` : null;
 }
 
 // a template text with holes that is a line's words, or starts like one

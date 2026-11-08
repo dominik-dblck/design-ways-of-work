@@ -20,7 +20,7 @@ interface VelocityPanelProps {
 }
 
 function VelocityPanel({ pace }: VelocityPanelProps): ReactElement {
-  const [table, setTable] = useState(false);
+  const [isTableShown, setTableShown] = useState(false);
   const { velocity } = words;
   const of = (key: 'tickets' | 'criteria') =>
     pace.days.map((one) => ({ day: one.day, value: one[key] }));
@@ -41,12 +41,12 @@ function VelocityPanel({ pace }: VelocityPanelProps): ReactElement {
             <DayBars label={velocity.criteria} days={of('criteria')} />
           </Box>
           <Button
-            onClick={() => setTable(!table)}
+            onClick={() => setTableShown(!isTableShown)}
             sx={{ alignSelf: 'flex-start' }}
           >
-            {table ? velocity.hide : velocity.show}
+            {isTableShown ? velocity.hide : velocity.show}
           </Button>
-          <Collapse in={table} unmountOnExit>
+          <Collapse in={isTableShown} unmountOnExit>
             <VelocityTable days={pace.days} />
           </Collapse>
         </Stack>

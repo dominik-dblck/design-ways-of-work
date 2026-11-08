@@ -12,18 +12,18 @@ function routeFindings(ticket: SheetTicket): Finding[] {
   const commands = COMMANDS.all;
   return commands.flatMap((command) => {
     const route = command.route;
-    const named =
+    const isNamed =
       ticket.command === command.id ||
       (Boolean(route) &&
         ticket.acceptance.some((criterion) => criterion.includes(route ?? '')));
-    if (!named) return [];
-    const typed =
+    if (!isNamed) return [];
+    const isTyped =
       Boolean(command.writes) &&
       (command.body === '—' ||
         (command.body || '')
           .split('·')
           .every((field) => field.indexOf(':') > 0));
-    if (typed) return [];
+    if (isTyped) return [];
     return [
       {
         rule: 'route-names-a-typed-row',
@@ -87,7 +87,7 @@ function notebookFindings(
     ...Object.entries(checklistRead).flatMap(([key, text]) =>
       notebookAt(`read ${key}`, text),
     ),
-    ...read.flatMap((item) => notebookAt('read', item)),
+    ...read.flatMap((file) => notebookAt('read', file)),
   ];
 }
 

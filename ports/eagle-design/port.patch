@@ -705,12 +705,526 @@ index db1e4a6..2b5d301 100644
  **And one the checklist does not ask.** Count the reading table against the criteria. A row the
 diff --git a/eslint-suppressions.json b/eslint-suppressions.json
 new file mode 100644
-index 0000000..bf47271
+index 0000000..b05b116
 --- /dev/null
 +++ b/eslint-suppressions.json
-@@ -0,0 +1,7 @@
+@@ -0,0 +1,521 @@
 +{
++  "app/styles/gate-states.ts": {
++    "no-restricted-syntax": {
++      "count": 1
++    }
++  },
++  "guards/checks/contentTypeData.ts": {
++    "no-restricted-syntax": {
++      "count": 1
++    }
++  },
++  "guards/checks/contentTypePart.ts": {
++    "no-restricted-syntax": {
++      "count": 1
++    }
++  },
++  "guards/checks/listPart.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 1
++    },
++    "no-restricted-syntax": {
++      "count": 2
++    }
++  },
++  "guards/checks/measureCheck.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 2
++    }
++  },
++  "guards/checks/sentenceSurfaces.ts": {
++    "no-restricted-syntax": {
++      "count": 1
++    }
++  },
++  "roadmaps/backlog.ts": {
++    "no-restricted-syntax": {
++      "count": 1
++    }
++  },
++  "roadmaps/tickets/ticketContext.ts": {
++    "no-restricted-syntax": {
++      "count": 2
++    }
++  },
++  "roadmaps/tickets/ticketExpand.ts": {
++    "no-restricted-syntax": {
++      "count": 1
++    }
++  },
++  "roadmaps/tickets/ticketViews.ts": {
++    "no-restricted-syntax": {
++      "count": 2
++    }
++  },
++  "roadmaps/tracks.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 2
++    }
++  },
++  "sheet/cases/journeys/journeyCheck.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 1
++    }
++  },
++  "sheet/cases/journeys/typeJourneys.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 1
++    }
++  },
++  "sheet/cases/test-cases/caseBaseline.ts": {
++    "no-restricted-syntax": {
++      "count": 6
++    }
++  },
++  "sheet/contract/events.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 2
++    }
++  },
++  "sheet/contract/events/eventProducers.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 1
++    }
++  },
++  "sheet/contract/refusals/refusalActors.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 1
++    }
++  },
++  "sheet/contract/refusals/refusalSentences.ts": {
++    "no-restricted-syntax": {
++      "count": 2
++    }
++  },
++  "sheet/logic/approval/approval-logic/approvalChips.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 2
++    }
++  },
++  "sheet/logic/approval/approval-logic/barScenes.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 1
++    }
++  },
++  "sheet/logic/approval/approval-logic/chipCtas.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 3
++    },
++    "no-restricted-syntax": {
++      "count": 1
++    }
++  },
++  "sheet/logic/approval/approval-logic/docMatrix.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 1
++    }
++  },
++  "sheet/logic/approval/approval-logic/languageChips.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 1
++    }
++  },
++  "sheet/logic/approval/approval-logic/roleMatrix.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 1
++    }
++  },
++  "sheet/logic/approval/approval-logic/rowFill.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 1
++    }
++  },
++  "sheet/logic/approval/approval-logic/sceneBuild.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 1
++    },
++    "no-restricted-syntax": {
++      "count": 1
++    }
++  },
++  "sheet/logic/approval/approval-logic/seatChip.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 2
++    }
++  },
++  "sheet/logic/approval/approval-logic/todoBuilt.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 3
++    }
++  },
++  "sheet/logic/approval/approval-logic/todoPill.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 2
++    },
++    "no-restricted-syntax": {
++      "count": 1
++    }
++  },
++  "sheet/logic/approval/approval-logic/todoRows.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 4
++    }
++  },
++  "sheet/logic/approval/approval-logic/todoSituations.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 1
++    }
++  },
++  "sheet/logic/approval/flow-check/flowEffects.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 1
++    }
++  },
++  "sheet/logic/approval/flow-check/flowMoves.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 4
++    }
++  },
++  "sheet/logic/approval/flow-check/flowViews.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 3
++    }
++  },
++  "sheet/logic/approval/flow-check/flowWalk.ts": {
++    "no-restricted-syntax": {
++      "count": 1
++    }
++  },
++  "sheet/logic/approval/gate-rules/gateConfirm.ts": {
++    "no-restricted-syntax": {
++      "count": 3
++    }
++  },
++  "sheet/logic/approval/gate-rules/gateDialog.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 1
++    }
++  },
++  "sheet/logic/approval/gate-rules/gateList.ts": {
++    "no-restricted-syntax": {
++      "count": 5
++    }
++  },
++  "sheet/logic/approval/gate-rules/gateNotices.ts": {
++    "no-restricted-syntax": {
++      "count": 2
++    }
++  },
++  "sheet/logic/approval/gate-rules/gateSituations.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 5
++    },
++    "no-restricted-syntax": {
++      "count": 1
++    }
++  },
++  "sheet/logic/approval/gate-rules/gateTokens.ts": {
++    "no-restricted-syntax": {
++      "count": 1
++    }
++  },
++  "sheet/logic/approval/gate-rules/gateWords.ts": {
++    "no-restricted-syntax": {
++      "count": 1
++    }
++  },
++  "sheet/logic/approval/gate-rules/manageRows.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 6
++    }
++  },
++  "sheet/logic/approval/gate-rules/manageWindow.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 2
++    }
++  },
++  "sheet/logic/approval/gate-rules/seatMenu.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 5
++    }
++  },
++  "sheet/logic/approval/role-combinations/combinationChecks.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 2
++    },
++    "no-restricted-syntax": {
++      "count": 1
++    }
++  },
++  "sheet/logic/approval/role-combinations/combinationFacts.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 2
++    }
++  },
++  "sheet/logic/approval/role-combinations/combinationRows.ts": {
++    "no-restricted-syntax": {
++      "count": 1
++    }
++  },
++  "sheet/logic/approval/role-combinations/combinationSituations.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 1
++    }
++  },
++  "sheet/logic/approval/scenes/localeFacts.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 1
++    }
++  },
++  "sheet/logic/approval/scenes/sceneFacts.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 2
++    }
++  },
++  "sheet/logic/approval/scenes/sceneIndex.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 2
++    }
++  },
++  "sheet/logic/approval/signatures.ts": {
++    "no-restricted-syntax": {
++      "count": 1
++    }
++  },
++  "sheet/logic/assembly/content-assembly/typeConfig.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 2
++    }
++  },
++  "sheet/logic/assembly/content-check/contractChecks.ts": {
++    "no-restricted-syntax": {
++      "count": 1
++    }
++  },
++  "sheet/logic/assembly/content-check/typeChecks.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 1
++    }
++  },
++  "sheet/logic/assembly/content-type-logic/apiContract.ts": {
++    "no-restricted-syntax": {
++      "count": 3
++    }
++  },
++  "sheet/logic/assembly/content-type-logic/fileFlow.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 1
++    },
++    "no-restricted-syntax": {
++      "count": 4
++    }
++  },
++  "sheet/logic/assembly/content-type-logic/partViews.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 1
++    },
++    "no-restricted-syntax": {
++      "count": 1
++    }
++  },
++  "sheet/logic/assembly/content-type-logic/requirementHomes.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 2
++    }
++  },
++  "sheet/logic/assembly/content-type-logic/typeAssembly.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 1
++    }
++  },
++  "sheet/logic/assembly/content-type-logic/typeChain.ts": {
++    "no-restricted-syntax": {
++      "count": 4
++    }
++  },
++  "sheet/logic/assembly/content-type-logic/typeModules.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 1
++    },
++    "no-restricted-syntax": {
++      "count": 1
++    }
++  },
++  "sheet/logic/document/block-rules/blockFacts.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 1
++    }
++  },
++  "sheet/logic/document/block-rules/blockRun.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 2
++    }
++  },
++  "sheet/logic/document/threads.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 1
++    },
++    "no-restricted-syntax": {
++      "count": 3
++    }
++  },
++  "sheet/logic/document/threads/threadReading.ts": {
++    "no-restricted-syntax": {
++      "count": 2
++    }
++  },
++  "sheet/logic/translation/translation-flow/flowStatuses.ts": {
++    "no-restricted-syntax": {
++      "count": 1
++    }
++  },
++  "sheet/model/content-types/typeTree.ts": {
++    "no-restricted-syntax": {
++      "count": 1
++    }
++  },
++  "sheet/samples/blocks/blockLocales.ts": {
++    "no-restricted-syntax": {
++      "count": 1
++    }
++  },
++  "sheet/samples/blocks/blockReads.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 3
++    },
++    "no-restricted-syntax": {
++      "count": 1
++    }
++  },
++  "sheet/samples/blocks/blockRows.ts": {
++    "no-restricted-syntax": {
++      "count": 1
++    }
++  },
++  "sheet/samples/blocks/blockSpecs.ts": {
++    "no-restricted-syntax": {
++      "count": 1
++    }
++  },
 +  "sheet/samples/payloads.ts": {
++    "no-restricted-syntax": {
++      "count": 1
++    }
++  },
++  "sheet/samples/payloads/localePayloads.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 1
++    }
++  },
++  "sheet/samples/payloads/reviewPayloads.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 2
++    }
++  },
++  "sheet/samples/payloads/stepReading.ts": {
++    "no-restricted-syntax": {
++      "count": 2
++    }
++  },
++  "sheet/samples/projections/blockProjections.ts": {
++    "no-restricted-syntax": {
++      "count": 2
++    }
++  },
++  "sheet/samples/projections/threadRows.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 1
++    },
++    "no-restricted-syntax": {
++      "count": 2
++    }
++  },
++  "sheet/samples/sample-run/runReads.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 1
++    }
++  },
++  "sheet/screens/content-list/listPage.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 2
++    }
++  },
++  "sheet/screens/content-list/listRows.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 1
++    }
++  },
++  "sheet/screens/content-list/rowState.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 1
++    }
++  },
++  "sheet/screens/content-list/rowStrings.ts": {
++    "no-restricted-syntax": {
++      "count": 1
++    }
++  },
++  "sheet/screens/screen-view/blockRows.ts": {
++    "no-restricted-syntax": {
++      "count": 3
++    }
++  },
++  "sheet/screens/screen-view/blockThread.ts": {
++    "no-restricted-syntax": {
++      "count": 1
++    }
++  },
++  "sheet/screens/screen-view/editorView.ts": {
++    "no-restricted-syntax": {
++      "count": 2
++    }
++  },
++  "sheet/screens/screen-view/screenPanes.ts": {
++    "@typescript-eslint/naming-convention": {
++      "count": 1
++    },
++    "no-restricted-syntax": {
++      "count": 2
++    }
++  },
++  "sheet/screens/screen-view/viewParts.ts": {
++    "no-restricted-syntax": {
++      "count": 2
++    }
++  },
++  "sheet/screens/wireframes/screenContracts.ts": {
++    "no-restricted-syntax": {
++      "count": 2
++    }
++  },
++  "sheet/screens/wireframes/screenRows.ts": {
++    "no-restricted-syntax": {
++      "count": 2
++    }
++  },
++  "sheet/words/messages/messageCells.ts": {
++    "no-restricted-syntax": {
++      "count": 2
++    }
++  },
++  "sheet/words/messages/messageChecks.ts": {
++    "no-restricted-syntax": {
++      "count": 4
++    }
++  },
++  "sheet/words/messages/messageUsage.ts": {
++    "no-restricted-syntax": {
++      "count": 1
++    }
++  },
++  "sheet/words/messages/refusals.ts": {
++    "no-restricted-syntax": {
++      "count": 2
++    }
++  },
++  "tests/sheet/roleCombinations.test.ts": {
 +    "no-restricted-syntax": {
 +      "count": 1
 +    }
@@ -718,10 +1232,10 @@ index 0000000..bf47271
 +}
 \ No newline at end of file
 diff --git a/eslint.config.ts b/eslint.config.ts
-index c66b230..6c60073 100644
+index c66b230..55b6fcf 100644
 --- a/eslint.config.ts
 +++ b/eslint.config.ts
-@@ -1,98 +1,28 @@
+@@ -1,98 +1,45 @@
 -// eslint.config.ts · the gates of docs/rules/ that ESLint holds, over the design project's TypeScript
 -import js from '@eslint/js';
 -import comments from '@eslint-community/eslint-plugin-eslint-comments';
@@ -825,8 +1339,6 @@ index c66b230..6c60073 100644
 -    linterOptions: { reportUnusedDisableDirectives: 'error' },
 -    plugins: { '@eslint-community/eslint-comments': comments },
 -    rules: { '@eslint-community/eslint-comments/require-description': 'error' },
--  },
--];
 +export default eslintConfig({
 +  root: import.meta.dirname,
 +  ignores: ['dist/**', 'node_modules/**', 'poc/**', '.artifact/**'],
@@ -837,6 +1349,8 @@ index c66b230..6c60073 100644
 +    'guards/**/*.ts',
 +    'app/**/*.{ts,tsx}',
 +    'tools/**/*.ts',
++    'shared/**/*.ts',
++    'dev/**/*.ts',
 +  ],
 +  // a file a tool writes is exempt from the size rules (docs/rules/size.md · generated files)
 +  generated: ['app/styles/tokens.ts'],
@@ -845,6 +1359,22 @@ index c66b230..6c60073 100644
 +  parts: MODULE_FILES.filter(
 +    (file) => !isEntry(file) && entryOfPart(file) !== null,
 +  ),
++  // a tally a scan fills as it runs, mutated by design
++  mutable: {
++    'guards/expected-files/packReads.ts': ['EndpointFacts'],
++    'sheet/samples/payloads/payloadsTypes.ts': ['WalkState'],
++    'sheet/logic/approval/role-combinations/combinationRows.ts': ['ClassTally'],
++    'sheet/screens/screen-view/screenViewTypes.ts': ['Gaps'],
++    'guards/checks/checkWorld.ts': ['World'],
+   },
+-];
++  // each file of a family exports one name, and its loader reads every file
++  families: [
++    { files: 'docs/rules/*.ts', names: ['rules'] },
++    { files: 'docs/skills/*.ts', names: ['skill'] },
++    { files: 'shared/rules/*.ts', names: ['shared'] },
++    { files: 'dev/rules/*.ts', names: ['rules'] },
++  ],
 +});
 diff --git a/guards/checks/legacyWorld.ts b/guards/checks/legacyWorld.ts
 new file mode 100644
@@ -900,6 +1430,37 @@ index 0000000..1d37bad
 +}
 +
 +export { legacyWorld };
+diff --git a/guards/checks/measureCheck.ts b/guards/checks/measureCheck.ts
+index 1b6f9d6..1e58b2a 100644
+--- a/guards/checks/measureCheck.ts
++++ b/guards/checks/measureCheck.ts
+@@ -2,7 +2,7 @@
+  * - `measureLines` · Measure.run as the repository runs it, against its snapshot
+  * - every payload and every seeded document names a kind content-types.js holds
+  */
+-import { lineOf, messageOf } from './checkWorld.ts';
++import { lineOf, errorMessageOf } from './checkWorld.ts';
+ import type { Mirror } from './checkWorld.ts';
+ import * as CATALOG from '../../sheet/model/catalog.ts';
+ import * as CONTENT_TYPES from '../../sheet/model/content-types.ts';
+@@ -19,7 +19,7 @@ function measured(): Measured {
+   try {
+     return { text: MEASURE.text().split('\n').slice(1).join('\n'), error: '' };
+   } catch (error) {
+-    return { text: '', error: `Measure.run · ${messageOf(error)}` };
++    return { text: '', error: `Measure.run · ${errorMessageOf(error)}` };
+   }
+ }
+ 
+@@ -100,7 +100,7 @@ function measureLines(mirror: Mirror): readonly string[] {
+   } catch (error) {
+     kinds = lineOf('kinds in the run and the seed', {
+       ok: false,
+-      text: messageOf(error).slice(0, 160),
++      text: errorMessageOf(error).slice(0, 160),
+     });
+   }
+   if (mirror.mode === 'snap' && !run.error)
 diff --git a/guards/checks/pageShims.ts b/guards/checks/pageShims.ts
 new file mode 100644
 index 0000000..4993b9c
@@ -927,6 +1488,37 @@ index 0000000..4993b9c
 +const LIST_REACT = { createRef: (): object => ({}) };
 +
 +export { LIST_REACT, ListLogic };
+diff --git a/guards/checks/rulesParts.ts b/guards/checks/rulesParts.ts
+index ecaa74c..80b2277 100644
+--- a/guards/checks/rulesParts.ts
++++ b/guards/checks/rulesParts.ts
+@@ -2,7 +2,7 @@
+  * - `flowPart` · part e: every flow of FlowCheck walked, none dead
+  * - `rulesPart` · part f: the combinations', the scenes' and the gate rules' checks
+  */
+-import { lineOf, messageOf } from './checkWorld.ts';
++import { lineOf, errorMessageOf } from './checkWorld.ts';
+ import * as APPROVAL_LOGIC from '../../sheet/logic/approval/approval-logic.ts';
+ import * as FLOW_CHECK from '../../sheet/logic/approval/flow-check.ts';
+ import * as GATE_RULES from '../../sheet/logic/approval/gate-rules.ts';
+@@ -20,7 +20,7 @@ function flowPart(): readonly string[] {
+       }),
+     ];
+   } catch (error) {
+-    return [lineOf('FlowCheck', { ok: false, text: messageOf(error) })];
++    return [lineOf('FlowCheck', { ok: false, text: errorMessageOf(error) })];
+   }
+ }
+ 
+@@ -30,7 +30,7 @@ function countLine(label: string, check: () => readonly unknown[]): string {
+     const count = check().length;
+     return lineOf(label, { ok: !count, text: String(count) });
+   } catch (error) {
+-    return lineOf(label, { ok: false, text: messageOf(error).slice(0, 80) });
++    return lineOf(label, { ok: false, text: errorMessageOf(error).slice(0, 80) });
+   }
+ }
+ 
 diff --git a/guards/measure/measureFiles.ts b/guards/measure/measureFiles.ts
 index 2f7db81..fe9cfad 100644
 --- a/guards/measure/measureFiles.ts

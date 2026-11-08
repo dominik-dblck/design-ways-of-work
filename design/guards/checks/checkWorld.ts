@@ -1,7 +1,7 @@
 /**
  * - `Mirror`, `mirrorAt` · the built project a run reads and writes, file by file
  * - `pageWorld`, `bareWorld`, `loadAll` · a window, and the bundles run in it
- * - `messageOf`, `parsedOr`, `lineOf`, `tallyOf` · an error, a JSON, a line, a tally
+ * - `errorMessageOf`, `parsedOr`, `lineOf`, `tallyOf` · error, JSON, line, tally
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -103,7 +103,7 @@ function parsedOr(text: string | null): unknown {
   }
 }
 
-function messageOf(error: unknown): string {
+function errorMessageOf(error: unknown): string {
   return error instanceof Error ? error.message : String(error);
 }
 
@@ -124,7 +124,7 @@ function loadAll(
     try {
       runIn(world, mirror.read(file));
     } catch (error) {
-      failed?.(file, messageOf(error));
+      failed?.(file, errorMessageOf(error));
     }
 }
 
@@ -145,7 +145,7 @@ export {
   bareWorld,
   lineOf,
   loadAll,
-  messageOf,
+  errorMessageOf,
   mirrorAt,
   pageWorld,
   parsedOr,

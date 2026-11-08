@@ -77,8 +77,8 @@ function fixturesOf(cut: Cut): readonly string[] {
     /const [A-Z_]*FIXTURES: readonly string\[\] = \[([^\]]*)\]/g,
   );
   return [
-    ...[...lists].flatMap((list) =>
-      [...String(list[1]).matchAll(/'([^']+)'/g)].map((one) => String(one[1])),
+    ...[...lists].flatMap((entry) =>
+      [...String(entry[1]).matchAll(/'([^']+)'/g)].map((one) => String(one[1])),
     ),
     'measure.js',
   ].filter((file) => !file.includes('/'));

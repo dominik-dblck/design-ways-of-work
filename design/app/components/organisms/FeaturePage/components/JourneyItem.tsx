@@ -1,5 +1,5 @@
 /**
- * - `JourneyItem` · one journey, folded: its id, goal and people; open, its steps and its test
+ * - `JourneyItem` · one journey: folded, its id, goal, people; open, steps and test
  */
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
 import { featureWords as words } from '../../../../workspace/feature-view.ts';
 import type { JourneyCard } from '../../../../workspace/feature-view.ts';
-import { JourneyStep } from './JourneyStep.tsx';
+import { JourneyStepItem } from './JourneyStepItem.tsx';
 
 function JourneyItem({ journey }: { readonly journey: JourneyCard }): ReactElement {
   return (
@@ -26,7 +26,7 @@ function JourneyItem({ journey }: { readonly journey: JourneyCard }): ReactEleme
       <AccordionDetails>
         <Stack spacing={1.5}>
           {journey.steps.map((step) => (
-            <JourneyStep key={step.n} step={step} />
+            <JourneyStepItem key={step.n} step={step} />
           ))}
           <Typography variant="body2">
             <Typography component="span" variant="overline" color="textSecondary">{`${words.journeys.test} · `}</Typography>

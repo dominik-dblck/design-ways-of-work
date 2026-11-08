@@ -5,11 +5,11 @@
  */
 import { sectionOf } from './fileSections.ts';
 import type { Source } from './packSources.ts';
-import type { Asked, Section } from './tsSections.ts';
+import type { Asked, TsSection } from './tsSections.ts';
 
 interface Found {
   readonly source: Source;
-  readonly section: Section;
+  readonly section: TsSection;
 }
 
 // the entry's exports: each name the global offers, and the name its source declares
@@ -28,9 +28,9 @@ function declaredName(sources: readonly Source[], want: string): string | null {
   const entry = sources[0];
   if (!entry || !/\.ts$/.test(entry.path) || !/^\w+$/.test(want)) return null;
   const named = exportedAs(entry);
-  const upper = /^[A-Z][A-Z0-9_]*$/.test(want);
+  const isUpper = /^[A-Z][A-Z0-9_]*$/.test(want);
   const local =
-    named.get(want) ?? (upper ? named.get(want.toLowerCase()) : undefined);
+    named.get(want) ?? (isUpper ? named.get(want.toLowerCase()) : undefined);
   return local !== undefined && local !== want ? local : null;
 }
 

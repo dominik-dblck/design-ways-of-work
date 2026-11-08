@@ -48,7 +48,7 @@ function screenKeysLine(mirror: Mirror): string {
   const keys: Readonly<Record<string, unknown>> = WIREFRAMES.byKey;
   const family: Readonly<Record<string, unknown>> = WIREFRAMES.family;
   const bad = (mirror.read('backlog.js').match(/screens:\s*\[[^\]]*\]/g) ?? [])
-    .flatMap((list) => list.match(/'([^']+)'/g) ?? [])
+    .flatMap((screensLine) => screensLine.match(/'([^']+)'/g) ?? [])
     .map((quoted) => quoted.slice(1, -1))
     .filter((key) => !keys[key] && !family[key] && key !== 'all')
     .map((key) => `backlog ${key}`);

@@ -7,7 +7,7 @@ import { named } from '../sheet/cases/test-cases.ts';
 import type {
   ComponentsSpec,
   ExpectedFile,
-  TicketRow,
+  ExpectedTicket,
 } from './expected-files/expectedFilesTypes.ts';
 import { reads } from './expected-files/packReads.ts';
 import { endpointsOf, specRowsOf } from './expected-files/ticketEndpoints.ts';
@@ -45,7 +45,7 @@ function collector(): {
 type Add = (path: string, why: string) => void;
 
 function addSpecFiles(
-  ticket: TicketRow,
+  ticket: ExpectedTicket,
   { spec, add }: { readonly spec: ComponentsSpec; readonly add: Add },
 ): void {
   for (const row of specRowsOf(spec)) {
@@ -57,7 +57,7 @@ function addSpecFiles(
   }
 }
 
-function addEndpointFiles(ticket: TicketRow, add: Add): void {
+function addEndpointFiles(ticket: ExpectedTicket, add: Add): void {
   const sources = [
     [COMMANDS.all, 'commands'],
     [QUERIES.all, 'queries'],
@@ -71,7 +71,7 @@ function addEndpointFiles(ticket: TicketRow, add: Add): void {
 }
 
 // the journeys' flows are not listed: the repository names each file, its title opening with the journey's id
-function of(ticket: TicketRow, spec: ComponentsSpec): ExpectedFile[] {
+function of(ticket: ExpectedTicket, spec: ComponentsSpec): ExpectedFile[] {
   const { files, add } = collector();
   addSpecFiles(ticket, { spec, add });
   addEndpointFiles(ticket, add);
@@ -82,7 +82,7 @@ function of(ticket: TicketRow, spec: ComponentsSpec): ExpectedFile[] {
   return files;
 }
 
-function text(ticket: TicketRow, spec: ComponentsSpec): string {
+function text(ticket: ExpectedTicket, spec: ComponentsSpec): string {
   return of(ticket, spec)
     .map((file) => `${file.path} (${file.why.join(', ')})`)
     .join(' · ');

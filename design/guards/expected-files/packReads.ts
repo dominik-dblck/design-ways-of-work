@@ -1,7 +1,7 @@
 /**
  * - `reads` · a pack's read list: rows, refusals, events, types, journeys, specs
  */
-import type { ComponentsSpec, TicketRow } from './expectedFilesTypes.ts';
+import type { ComponentsSpec, ExpectedTicket } from './expectedFilesTypes.ts';
 import type { ReadEndpoint } from '../../sheet/cases/test-cases.ts';
 import { endpointsOf, specRowsOf } from './ticketEndpoints.ts';
 import { modelTypes } from '../../sheet/contract/block-model.ts';
@@ -47,8 +47,8 @@ interface EndpointFacts {
   contentManagerOnly: boolean;
 }
 
-function pushNew(list: string[], items: readonly string[]): void {
-  for (const item of items) if (!list.includes(item)) list.push(item);
+function pushNew(into: string[], incoming: readonly string[]): void {
+  for (const file of incoming) if (!into.includes(file)) into.push(file);
 }
 
 function takeRow(
@@ -65,7 +65,7 @@ function takeRow(
 }
 
 // the events the epic's commands emit, their refusals, their mention table and the text of their bodies and answers
-function factsOf(ticket: TicketRow): EndpointFacts {
+function factsOf(ticket: ExpectedTicket): EndpointFacts {
   const facts: EndpointFacts = {
     ids: [],
     keys: [],
@@ -85,7 +85,7 @@ function factsOf(ticket: TicketRow): EndpointFacts {
   return facts;
 }
 
-function reads(ticket: TicketRow, spec: ComponentsSpec): string[] {
+function reads(ticket: ExpectedTicket, spec: ComponentsSpec): string[] {
   const facts = factsOf(ticket);
   const journeys = JOURNEYS.journeysOfEpic(ticket.epic);
   const specReads = specRowsOf(spec)
@@ -106,7 +106,7 @@ function reads(ticket: TicketRow, spec: ComponentsSpec): string[] {
     ...specReads,
     ...ALWAYS,
   ];
-  return all.filter((item, index) => item && all.indexOf(item) === index);
+  return all.filter((file, index) => file && all.indexOf(file) === index);
 }
 
 export { reads };

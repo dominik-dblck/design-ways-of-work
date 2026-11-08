@@ -1,5 +1,5 @@
 /**
- * - `colourOf`, `lengthOf`, `textOf` · one token read off `tokens.ts`, by mode
+ * - `colourOf`, `lengthOf`, `tokenTextOf` · one token read off `tokens.ts`, by mode
  * - a dark read falls back to the light block: the dark block flips only some roles
  */
 import { tokens } from '../styles/tokens.ts';
@@ -13,15 +13,15 @@ function valueOf(key: LightToken, mode: Mode): string | number {
     : tokens.light[key];
 }
 
-const textOf = (key: LightToken, mode: Mode = 'light'): string =>
+const tokenTextOf = (key: LightToken, mode: Mode = 'light'): string =>
   String(valueOf(key, mode));
 
-const colourOf = textOf;
+const colourOf = tokenTextOf;
 
 function lengthOf(key: LightToken): number {
-  const value = valueOf(key, 'light');
-  if (typeof value !== 'number') throw new Error(`${key} is no length`);
-  return value;
+  const size = valueOf(key, 'light');
+  if (typeof size !== 'number') throw new Error(`${key} is no length`);
+  return size;
 }
 
-export { colourOf, lengthOf, textOf };
+export { colourOf, lengthOf, tokenTextOf };

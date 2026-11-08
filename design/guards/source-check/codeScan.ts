@@ -83,11 +83,11 @@ function fileFindings(
 }
 
 function retired(files: Texts): readonly SourceFinding[] {
-  return requirementItems().flatMap((item) =>
-    item.replaces.flatMap((replaced): readonly SourceFinding[] => {
+  return requirementItems().flatMap((requirement) =>
+    requirement.replaces.flatMap((replaced): readonly SourceFinding[] => {
       const [file = '', ...rest] = String(replaced).split(' · ');
       const text = rest.join(' · ');
-      const said = `${item.id} · ${text}`;
+      const said = `${requirement.id} · ${text}`;
       if (!(file in files))
         return [
           {
@@ -123,17 +123,17 @@ function retired(files: Texts): readonly SourceFinding[] {
 
 function twiceWritten(): readonly SourceFinding[] {
   const seen = new Set<string>();
-  return requirementItems().flatMap((item) => {
-    const again = seen.has(item.id);
-    seen.add(item.id);
-    return again
+  return requirementItems().flatMap((requirement) => {
+    const wasSeen = seen.has(requirement.id);
+    seen.add(requirement.id);
+    return wasSeen
       ? [
           {
             kind: 'requirement twice',
             row: VIEW,
             file: 'approval-logic.js',
             line: 1,
-            text: item.id.slice(0, 140),
+            text: requirement.id.slice(0, 140),
           },
         ]
       : [];

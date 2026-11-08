@@ -1,10 +1,10 @@
 /**
- * - `TicketRow`, `ComponentsSpec` · a ticket and the spec's rows, as read here
+ * - `ExpectedTicket`, `ComponentsSpec` · a ticket and the spec's rows, as read here
  * - `ExpectedFile` · a path and why the run touches it
  */
 import type { SpecRow } from '../spec-check.ts';
 
-interface TicketRow {
+interface ExpectedTicket {
   readonly id: string;
   readonly epic: string;
   readonly touches?: readonly unknown[];
@@ -21,4 +21,4 @@ interface ExpectedFile {
   readonly why: readonly string[];
 }
 
-export type { ComponentsSpec, ExpectedFile, TicketRow };
+export type { ComponentsSpec, ExpectedFile, ExpectedTicket };

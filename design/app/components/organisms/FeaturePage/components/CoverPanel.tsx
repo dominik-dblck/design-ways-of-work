@@ -1,5 +1,5 @@
 /**
- * - `CoverPanel` · the test cases and the states the journeys cover, a bar each, and what is not
+ * - `CoverPanel` · the cases and states the journeys cover, a bar each, and the rest
  */
 import Chip from '@mui/material/Chip';
 import LinearProgress from '@mui/material/LinearProgress';

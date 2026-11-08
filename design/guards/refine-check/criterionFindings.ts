@@ -107,11 +107,11 @@ function criterionFindings(
   edges.forEach((edge) => edgeOn.set(edge.on, (edgeOn.get(edge.on) ?? 0) + 1));
   return ticket.acceptance.flatMap((criterion, index) => {
     const where = `c${index + 1}`;
-    const unedged = !edgeOn.get(index + 1) && !placeholder;
+    const isUnedged = !edgeOn.get(index + 1) && !placeholder;
     return [
       ...shapeFindings(criterion, where),
       ...historyFindings(criterion, where),
-      ...(unedged
+      ...(isUnedged
         ? [
             {
               rule: 'every-case-has-an-edge' as const,

@@ -74,15 +74,15 @@ describe('a release record is whole', () => {
       .filter((name) => !BEFORE_THE_TOOL.includes(name));
     const faults = records.flatMap((name) => {
       const text = fs.readFileSync(path.join(ROOT, 'records', name), 'utf8');
-      const stamped = text.includes(MARK) && text.includes(WRITTEN_BY);
-      const whole =
+      const isStamped = text.includes(MARK) && text.includes(WRITTEN_BY);
+      const isWhole =
         BEFORE_THE_FILES.includes(name) ||
         PROJECT.buildReads.files.every((file) =>
           text.includes(`- ${file} · sha256 `),
         );
       return [
-        ...(stamped ? [] : [`${name} · not written by the tool`]),
-        ...(whole ? [] : [`${name} · the files read whole are not all named`]),
+        ...(isStamped ? [] : [`${name} · not written by the tool`]),
+        ...(isWhole ? [] : [`${name} · the files read whole are not all named`]),
         ...countFaults(name, text),
       ];
     });

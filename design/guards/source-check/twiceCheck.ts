@@ -27,13 +27,13 @@ function heldIn(
   const lists = exampleRow(file, line)
     ? []
     : (line.match(LIST) ?? []).map(
-        (list): readonly [string, string, string] => [
+        (heldList): readonly [string, string, string] => [
           'list held twice',
-          (list.match(/'([^']+)'/g) ?? [])
+          (heldList.match(/'([^']+)'/g) ?? [])
             .map((one) => one.slice(1, -1))
             .sort()
             .join(','),
-          list,
+          heldList,
         ],
       );
   if (file === 'messages.js') return lists;

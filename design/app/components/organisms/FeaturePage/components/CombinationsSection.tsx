@@ -44,12 +44,12 @@ function CombinationFile({ one }: { readonly one: CombinationView }): ReactEleme
 }
 
 function CombinationsSection({ view }: { readonly view: FeatureView }): ReactElement | null {
-  const missing = !view.combinations.length && view.statesNamed > 0;
-  if (!view.combinations.length && !missing) return null;
+  const isMissing = !view.combinations.length && view.statesNamed > 0;
+  if (!view.combinations.length && !isMissing) return null;
   return (
     <Stack spacing={1.5} id="combinations">
       <SectionHead label={words.combinations.label} note={words.combinations.note} />
-      {missing ? (
+      {isMissing ? (
         <Typography variant="body2" color="error">{words.combinations.missing(view.statesNamed, view.epic)}</Typography>
       ) : null}
       {view.combinations.map((one) => (

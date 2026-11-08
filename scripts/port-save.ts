@@ -1,7 +1,7 @@
 /**
- * - `node scripts/port-save.ts [product]` · saves the rehearsal copy's own edits as the port
- * - the diff from the copy's `product` tag to its working tree: product files only, links never move
- * - written to ports/<product>/port.patch, which rehearse.ts applies; a patch that no longer applies fails loudly
+ * - `node scripts/port-save.ts [product]` · the rehearsal copy's own edits, saved
+ * - the diff from its `product` tag: product files only; links never move
+ * - written to ports/<product>/port.patch; one that no longer applies fails loudly
  */
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';

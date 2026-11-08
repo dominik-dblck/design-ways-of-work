@@ -1,7 +1,7 @@
 /**
- * - `node scripts/verify.ts [product]` · the product on design/ against the product as it is
- * - a clone and a rehearsal copy run the same commands; outputs, dist/ and written files compared
- * - a difference fails unless plan/expected-differences.tsv names it with why (* ends a prefix)
+ * - `node scripts/verify.ts [product]` · the product on design/ against as it is
+ * - a clone and a rehearsal copy run alike; outputs, dist/ and files compared
+ * - a difference fails unless plan/expected-differences.tsv names it, with why
  */
 import { execFileSync, spawnSync } from 'node:child_process';
 import crypto from 'node:crypto';
@@ -45,12 +45,12 @@ function normalised(text: string): string {
 
 function runAll(root: string): readonly Run[] {
   return COMMANDS.map((args) => {
-    const result = spawnSync('yarn', ['-s', ...args], {
+    const spawned = spawnSync('yarn', ['-s', ...args], {
       cwd: root,
       encoding: 'utf8',
       maxBuffer: 1 << 28,
     });
-    const output = normalised(`${result.stdout}${result.stderr}`);
+    const output = normalised(`${spawned.stdout}${spawned.stderr}`);
     fs.mkdirSync(path.join(RUNS, 'out'), { recursive: true });
     fs.writeFileSync(
       path.join(
@@ -60,7 +60,7 @@ function runAll(root: string): readonly Run[] {
       ),
       output,
     );
-    return { command: args.join(' '), status: result.status, output };
+    return { command: args.join(' '), status: spawned.status, output };
   });
 }
 
@@ -156,11 +156,11 @@ function outputDifferences(
   return base.flatMap((run, at) => {
     const other = linked[at];
     if (other === undefined) return [`missing run · ${run.command}`];
-    const same = run.status === other.status && run.output === other.output;
+    const isSame = run.status === other.status && run.output === other.output;
     console.log(
-      `${same ? 'SAME' : 'DIFF'} · yarn ${run.command} · exit ${run.status}${same ? '' : ` → ${other.status}`}`,
+      `${isSame ? 'SAME' : 'DIFF'} · yarn ${run.command} · exit ${run.status}${isSame ? '' : ` → ${other.status}`}`,
     );
-    return same ? [] : [`output · yarn ${run.command}`];
+    return isSame ? [] : [`output · yarn ${run.command}`];
   });
 }
 
@@ -183,13 +183,13 @@ function report(found: readonly string[]): boolean {
   }
   for (const line of stale)
     console.log(`  STALE · ${line} · listed as expected, and the same now`);
-  const clean = unexplained.length === 0 && stale.length === 0;
+  const isClean = unexplained.length === 0 && stale.length === 0;
   console.log(
-    clean
+    isClean
       ? `ALL SAME · ${path.basename(SOURCE)} on design/, ${expected.size} differences expected`
       : `${unexplained.length} unexplained, ${stale.length} stale`,
   );
-  return clean;
+  return isClean;
 }
 
 function main(): void {

@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Drawer from '@mui/material/Drawer';
 import type { ReactElement } from 'react';
-import { epicOf, ticketOf, words } from '../../../../workspace/board-view.ts';
+import { epicOf, ticketDetailOf, words } from '../../../../workspace/board-view.ts';
 import type { IdeaCard } from '../../../../workspace/board-view.ts';
 import { EpicPanel } from './EpicPanel.tsx';
 import { IdeaPanel } from './IdeaPanel.tsx';
@@ -20,7 +20,7 @@ interface OpenedPanelProps {
 function OpenedPanel({ opened, ideas }: OpenedPanelProps): ReactElement {
   const idea = ideas.find((one) => one.id === opened.ideaId) ?? null;
   const epic = opened.epicId ? epicOf(opened.epicId) : null;
-  const ticket = opened.ticketId ? ticketOf(opened.ticketId) : null;
+  const ticket = opened.ticketId ? ticketDetailOf(opened.ticketId) : null;
   return (
     <Drawer
       anchor="right"

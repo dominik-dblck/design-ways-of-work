@@ -1,6 +1,7 @@
 /**
  * - `eslintConfig` · one ESLint for every repository, each naming its own scope
  * - a scope names its React code, entries and parts; each kind takes its own shapes
+ * - and the types mutable by design, and the families whose files share one name
  */
 import js from '@eslint/js';
 import comments from '@eslint-community/eslint-plugin-eslint-comments';
@@ -9,8 +10,11 @@ import { defineConfig } from 'eslint/config';
 import type { Linter } from 'eslint';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
+import { namingRules } from './naming.ts';
+import type { Family } from './rules/oneHomePerName.ts';
 import { ENTRY_SHAPES, PART_SHAPES, REACT_SHAPES, SHAPES } from './shapes.ts';
 import type { Shape } from './shapes.ts';
+import { wowPlugin } from './wowPlugin.ts';
 
 interface RepoScope {
   readonly root: string;
@@ -20,6 +24,8 @@ interface RepoScope {
   readonly react: readonly string[];
   readonly entries: readonly string[];
   readonly parts: readonly string[];
+  readonly mutable: Readonly<Record<string, readonly string[]>>;
+  readonly families: readonly Family[];
 }
 
 const TESTS = [
@@ -87,6 +93,7 @@ const sourceRules = (root: string): Linter.Config => ({
   rules: {
     'no-undef': 'off',
     ...restricted(),
+    ...namingRules({ react: false }),
     ...TYPES,
     ...IMPORTS,
   },
@@ -102,9 +109,15 @@ const restricted = (
 // React code, entries and parts are three sets no file is in twice · never a test nor a generated file
 const scopedRules = (scope: RepoScope): Linter.Config[] =>
   [
-    { files: scope.react, rules: restricted(REACT_SHAPES) },
-    { files: scope.entries, rules: restricted(ENTRY_SHAPES) },
-    { files: scope.parts, rules: restricted(PART_SHAPES) },
+    {
+      files: scope.react,
+      rules: { ...restricted(REACT_SHAPES), ...namingRules({ react: true }) },
+    },
+    {
+      files: scope.entries,
+      rules: { ...restricted(ENTRY_SHAPES), ...AT_LOAD },
+    },
+    { files: scope.parts, rules: { ...restricted(PART_SHAPES), ...AT_LOAD } },
   ]
     .filter((one) => one.files.length > 0)
     .map((one) => ({
@@ -112,6 +125,41 @@ const scopedRules = (scope: RepoScope): Linter.Config[] =>
       files: [...one.files],
       ignores: [...TESTS, ...scope.generated],
     }));
+
+const WOW: Linter.Config = { plugins: { wow: wowPlugin } };
+
+const AT_LOAD: Linter.RulesRecord = { 'wow/reads-nothing-at-load': 'error' };
+
+// the production code's own rules · a type a scan fills as it runs is named, mutable by design
+const productionRules = (scope: RepoScope): Linter.Config[] => {
+  const ignores = [...TESTS, ...scope.generated];
+  return [
+    {
+      files: [...scope.production],
+      ignores,
+      rules: {
+        ...SIZE,
+        'wow/no-ticket-names': 'error',
+        'wow/comments-are-invariants': 'error',
+        'wow/data-is-readonly': 'error',
+        'wow/file-states-its-job': ['error', { entries: scope.entries }],
+        'wow/one-home-per-name': [
+          'error',
+          {
+            files: scope.production,
+            ignores: [...scope.ignores, ...ignores],
+            entries: scope.entries,
+            families: scope.families,
+          },
+        ],
+      },
+    },
+    ...Object.entries(scope.mutable).map(([file, mutable]): Linter.Config => ({
+      files: [file],
+      rules: { 'wow/data-is-readonly': ['error', { mutable }] },
+    })),
+  ];
+};
 
 const TEST_RULES: Linter.Config[] = [
   {
@@ -140,14 +188,11 @@ const eslintConfig = (scope: RepoScope): Linter.Config[] =>
     { ignores: ['**/*.js', '**/*.mjs', '**/*.d.ts', ...scope.ignores] },
     js.configs.recommended,
     ...tseslint.configs.recommended,
+    WOW,
     sourceRules(scope.root),
     ...scopedRules(scope),
     ...TEST_RULES,
-    {
-      files: [...scope.production],
-      ignores: [...TESTS, ...scope.generated],
-      rules: SIZE,
-    },
+    ...productionRules(scope),
     DISABLES,
   );
 

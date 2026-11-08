@@ -14,16 +14,16 @@ interface Place {
 function leavesOf(root: unknown): readonly Leaf[] {
   const seen = new Set<unknown>();
   const leaves: Leaf[] = [];
-  const visit = (value: unknown, place: Place): void => {
-    if (typeof value === 'string') {
-      if (/\s/.test(value)) leaves.push({ ...place, text: value });
+  const visit = (node: unknown, place: Place): void => {
+    if (typeof node === 'string') {
+      if (/\s/.test(node)) leaves.push({ ...place, text: node });
       return;
     }
-    if (value === null || typeof value !== 'object' || seen.has(value)) return;
-    seen.add(value);
-    if (Array.isArray(value)) {
-      value.forEach((item: unknown, index) =>
-        visit(item, {
+    if (node === null || typeof node !== 'object' || seen.has(node)) return;
+    seen.add(node);
+    if (Array.isArray(node)) {
+      node.forEach((child: unknown, index) =>
+        visit(child, {
           path: `${place.path}[${index}]`,
           key: index,
           siblings: null,
@@ -31,10 +31,10 @@ function leavesOf(root: unknown): readonly Leaf[] {
       );
       return;
     }
-    const keys = Object.keys(value);
-    for (const [key, item] of Object.entries(value))
+    const keys = Object.keys(node);
+    for (const [key, child] of Object.entries(node))
       if (key !== 'bySituation')
-        visit(item, {
+        visit(child, {
           path: place.path ? `${place.path}.${key}` : key,
           key,
           siblings: keys,

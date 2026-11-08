@@ -1,11 +1,11 @@
 /**
  * - `SharedRule`, `Side` · a rule both sides keep, and each side’s gate for it
  */
-import type { RuleRow } from '../../docs/rules/ruleTypes.ts';
+import type { CodeRuleRow } from '../../docs/rules/ruleTypes.ts';
 
 type Side = 'design' | 'build';
 
-type SideGate = Pick<RuleRow, 'gate' | 'exceptions'>;
+type SideGate = Pick<CodeRuleRow, 'gate' | 'exceptions'>;
 
 interface SharedRule {
   readonly rule: string;

@@ -9,8 +9,8 @@ const SKILL_HEADING = /^# `\.claude\/skills\/(ticket-[\w-]+)\/SKILL\.md`$/gm;
 
 type Mode = { readonly id: string; readonly skills: readonly string[] };
 
-const textsOf = (value: unknown): readonly string[] =>
-  Array.isArray(value) ? value.map(String) : [];
+const textsOf = (field: unknown): readonly string[] =>
+  Array.isArray(field) ? field.map(String) : [];
 
 function pageModes(mirror: Mirror): readonly Mode[] {
   const page: unknown = parsedOr(mirror.readOr('modes.json', null));

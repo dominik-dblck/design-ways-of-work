@@ -1,5 +1,5 @@
 /**
- * - `ticketOf` · one ticket opened: its context pack, each pointer read as it names
+ * - `ticketDetailOf` · one ticket opened: its context pack, each pointer read
  */
 import { contextOf, edgeQuestion } from '../../../roadmaps/tickets.ts';
 import { edgeSectionsOf, whyOf } from './boardEdges.ts';
@@ -21,7 +21,7 @@ function commandLine(command: Command): string {
   return `${command.route} · ${command.body} · ${words.emits} ${emits} · ${words.pings} ${pings}`;
 }
 
-function ticketOf(id: string): TicketDetail | null {
+function ticketDetailOf(id: string): TicketDetail | null {
   const context = contextOf(id);
   if (!context) return null;
   const { ticket, story, command } = context;
@@ -45,4 +45,4 @@ function ticketOf(id: string): TicketDetail | null {
   };
 }
 
-export { ticketOf };
+export { ticketDetailOf };

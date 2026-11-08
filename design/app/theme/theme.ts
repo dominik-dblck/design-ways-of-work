@@ -5,7 +5,7 @@
 import { createTheme } from '@mui/material/styles';
 import type { CSSProperties } from 'react';
 import { paletteFor } from './palette.ts';
-import { lengthOf, textOf } from './tokenReads.ts';
+import { lengthOf, tokenTextOf } from './tokenReads.ts';
 
 const theme = createTheme({
   cssVariables: { colorSchemeSelector: 'data-theme' },
@@ -14,17 +14,17 @@ const theme = createTheme({
     dark: { palette: paletteFor('dark') },
   },
   typography: {
-    fontFamily: textOf('fontSans'),
+    fontFamily: tokenTextOf('fontSans'),
     fontSize: lengthOf('uiBody'),
     overline: {
-      fontFamily: textOf('uiEyebrowFont'),
+      fontFamily: tokenTextOf('uiEyebrowFont'),
       fontSize: lengthOf('uiEyebrow'),
       fontWeight: 500,
       letterSpacing: '0.1em',
       lineHeight: 1.4,
     },
     code: {
-      fontFamily: textOf('fontMono'),
+      fontFamily: tokenTextOf('fontMono'),
       fontSize: lengthOf('uiLabel'),
       lineHeight: 1.6,
       whiteSpace: 'pre',

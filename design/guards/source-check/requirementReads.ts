@@ -30,8 +30,8 @@ function decisionLines(file: string, text: unknown): ReadonlySet<number> {
 
 // the files a requirement's replaces names, beyond the scope
 function targets(): readonly string[] {
-  const files = requirementItems().flatMap((item) =>
-    item.replaces.map((replaced) => String(replaced).split(' · ')[0] ?? ''),
+  const files = requirementItems().flatMap((requirement) =>
+    requirement.replaces.map((replaced) => String(replaced).split(' · ')[0] ?? ''),
   );
   return [...new Set(files.filter((file) => !SCOPE.includes(file)))];
 }

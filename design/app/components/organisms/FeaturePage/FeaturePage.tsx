@@ -1,5 +1,5 @@
 /**
- * - `FeaturePage` · the feature tabs, then the epic picked: every section of it in turn
+ * - `FeaturePage` · the feature tabs, then the epic picked, section by section
  */
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';

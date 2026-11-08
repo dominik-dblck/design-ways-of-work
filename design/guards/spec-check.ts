@@ -31,9 +31,9 @@ function rowsOf(spec: Spec): TieredRow[] {
 function duplicateIds(rows: readonly TieredRow[]): string[] {
   const seen = new Set<string>();
   return rows.flatMap((row) => {
-    const twice = seen.has(row.id);
+    const wasSeen = seen.has(row.id);
     seen.add(row.id);
-    return twice ? [`7 · duplicate id ${row.id}`] : [];
+    return wasSeen ? [`7 · duplicate id ${row.id}`] : [];
   });
 }
 

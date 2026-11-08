@@ -1,5 +1,5 @@
 /**
- * - `CaseTable` · one endpoint's test cases: the id, the kind, when, then, and its reach
+ * - `CaseTable` · one endpoint's test cases: id, kind, when, then, its reach
  */
 import Chip from '@mui/material/Chip';
 import Paper from '@mui/material/Paper';

@@ -13,7 +13,7 @@ import {
   kinds,
   nextUp,
   stats,
-  ticketOf,
+  ticketDetailOf,
   velocity,
 } from '../../app/workspace/board-view.ts';
 
@@ -43,7 +43,7 @@ describe('the board view', () => {
         .map((one) => one.id)
         .sort(),
     );
-    const done = held.filter((id) => ticketOf(id)?.column === 'done').length;
+    const done = held.filter((id) => ticketDetailOf(id)?.column === 'done').length;
     expect(stats().map((stat) => stat.value)).toContain(
       `${done} / ${held.length}`,
     );
@@ -52,7 +52,7 @@ describe('the board view', () => {
   it('next up is ready tickets, and an opened ticket names its epic', () => {
     for (const line of nextUp()) expect(line.column).toBe('ready');
     const feature = cards.find((card) => card.feature)?.feature;
-    const opened = feature ? ticketOf(feature.id) : null;
+    const opened = feature ? ticketDetailOf(feature.id) : null;
     expect(opened?.acceptance.length).toBeGreaterThan(0);
     expect(epicOf(opened?.epic ?? '')?.feature?.id).toBe(feature?.id);
   });
@@ -71,7 +71,7 @@ describe('the board view', () => {
 
   it('a command ticket opens with its command, refusals and reads resolved', () => {
     const command = allTickets().find((one) => one.command !== null);
-    const opened = ticketOf(command?.id ?? '');
+    const opened = ticketDetailOf(command?.id ?? '');
     expect(opened?.command).toContain(' · ');
     expect(opened?.reading.length).toBe(opened?.read.length);
     for (const one of opened?.reading ?? []) expect(one.title).not.toBe('');
@@ -92,7 +92,7 @@ describe('the board view', () => {
 
   it('a ticket opened carries each edge with its options, and every kind its line', () => {
     const edged = allTickets().find((one) => one.edges.length > 0);
-    const opened = ticketOf(edged?.id ?? '');
+    const opened = ticketDetailOf(edged?.id ?? '');
     expect(opened?.edgeSections.length).toBe(edged?.edges.length);
     expect(kinds().length).toBeGreaterThan(5);
   });

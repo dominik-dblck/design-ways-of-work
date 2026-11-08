@@ -6,7 +6,7 @@
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
-import { messageOf, mirrorAt } from '../guards/checks/checkWorld.ts';
+import { errorMessageOf, mirrorAt } from '../guards/checks/checkWorld.ts';
 import { homes, sourceOf } from './layout.ts';
 import type { Mirror } from '../guards/checks/checkWorld.ts';
 import { answerFails } from './pack/answerCheck.ts';
@@ -125,12 +125,12 @@ function main(): number {
     log: (line) => lines.push(line),
   };
   let removed: readonly string[] = [];
-  let ok = true;
+  let isOk = true;
   try {
     removed = cutAll(ids, run);
   } catch (error) {
-    ok = false;
-    lines.push(`REFUSED · ${messageOf(error).slice(0, 4000)}`);
+    isOk = false;
+    lines.push(`REFUSED · ${errorMessageOf(error).slice(0, 4000)}`);
   }
   console.log([...lines, uncommitted()].join('\n'));
   const saved = mirror.saved();
@@ -141,7 +141,7 @@ function main(): number {
     console.log(
       `removed (publish as null): ${removed.map((file) => `project/${file}`).join(', ')}`,
     );
-  return ok && saved.length ? 0 : 1;
+  return isOk && saved.length ? 0 : 1;
 }
 
 process.exitCode = main();

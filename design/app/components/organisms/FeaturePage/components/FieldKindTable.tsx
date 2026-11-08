@@ -1,5 +1,5 @@
 /**
- * - `FieldKindTable` · each field kind: its value, its editor, what it always does, its validators
+ * - `FieldKindTable` · each field kind: value, editor, what it always does, checks
  */
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';

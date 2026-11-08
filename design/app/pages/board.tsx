@@ -1,5 +1,5 @@
 /**
- * - the Board page: every epic by the column it stands in, under the workspace's theme
+ * - the Board page: every epic by its column, under the workspace's theme
  */
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';

@@ -51,8 +51,8 @@ function mapsOf(idea: Idea): readonly Section[] {
 
 function sectionsOf(idea: Idea): readonly Section[] {
   const { idea: words } = BOARD_WORDS;
-  const pairs = (list: Idea['example']): readonly string[] =>
-    list.map(([one, other]) => `${one} — ${other}`);
+  const pairs = (example: Idea['example']): readonly string[] =>
+    example.map(([one, other]) => `${one} — ${other}`);
   return [
     { label: words.points, lines: idea.points },
     { label: words.example, lines: pairs(idea.example) },

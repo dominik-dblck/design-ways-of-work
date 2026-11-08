@@ -1,5 +1,5 @@
 /**
- * - `JourneysSection` · how far the journeys cover the epic, then each journey in turn
+ * - `JourneysSection` · how far the journeys cover the epic, then each journey
  */
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';

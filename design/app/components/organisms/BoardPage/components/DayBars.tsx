@@ -30,7 +30,7 @@ function DayBars({ label, days }: DayBarsProps): ReactElement {
         }}
       >
         {days.map((one) => (
-          <DayBar key={one.day} day={one.day} value={one.value} peak={peak} />
+          <DayBar key={one.day} day={one.day} count={one.value} peak={peak} />
         ))}
       </Box>
       <Stack direction="row" sx={{ justifyContent: 'space-between' }}>

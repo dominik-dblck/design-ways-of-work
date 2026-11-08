@@ -1,7 +1,7 @@
 /**
- * - `node scripts/take-dev-map.ts [build repo]` · its directory map, the product's folders cut: dev/map.ts
- * - reads the tree in docs/map.md; keeps a folder unless PRODUCT_FOLDERS names it or a folder above it
- * - the folders only: a file line is the product's, and the build repository's own map lists its files
+ * - `node scripts/take-dev-map.ts [build repo]` · its folder map, product cut out
+ * - read from docs/map.md; a folder stays unless PRODUCT_FOLDERS names it or above
+ * - folders only: a file line is the product's, and its own map lists its files
  */
 import fs from 'node:fs';
 import path from 'node:path';

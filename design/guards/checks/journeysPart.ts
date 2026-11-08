@@ -2,7 +2,7 @@
  * - `journeysPart` · part g: every epic's journeys against the test cases: each
  * - case a step names exists, each person, each refusal key; each ticket's cases
  */
-import { lineOf, messageOf } from './checkWorld.ts';
+import { lineOf, errorMessageOf } from './checkWorld.ts';
 import * as COMMANDS from '../../sheet/contract/commands.ts';
 import * as JOURNEYS from '../../sheet/cases/journeys.ts';
 import * as QUERIES from '../../sheet/contract/queries.ts';
@@ -57,7 +57,7 @@ function metLines({
       ];
     } catch (error) {
       return [
-        lineOf(`cases met ${epic}`, { ok: false, text: messageOf(error) }),
+        lineOf(`cases met ${epic}`, { ok: false, text: errorMessageOf(error) }),
       ];
     }
   });
@@ -76,7 +76,7 @@ function idsLine(cases: Cases): string {
       text: `${count} cases over ${every.length} endpoints, every id once`,
     });
   } catch (error) {
-    return lineOf('case ids', { ok: false, text: messageOf(error) });
+    return lineOf('case ids', { ok: false, text: errorMessageOf(error) });
   }
 }
 

@@ -1,11 +1,11 @@
 /**
  * - `tsSection` · the block a name asks for in a TS source: a declaration,
  * - a term, a key's rows, a table's entry, a row by its id, preferring the epic's
- * - `Section`, `MAX_LINES` · a cut of a file's lines, at most 160
+ * - `TsSection`, `MAX_LINES` · a cut of a file's lines, at most 160
  */
 import { blockEnd, declarationAt, keyRowsAt, rowStart } from './tsBlocks.ts';
 
-interface Section {
+interface TsSection {
   readonly from: number;
   readonly to: number;
   readonly text: string;
@@ -27,7 +27,7 @@ const escaped = (text: string): string =>
 function sliceOf(
   lines: readonly string[],
   { start, max }: { readonly start: number; readonly max: number },
-): Section {
+): TsSection {
   const end = Math.min(blockEnd(lines, start), start + max - 1);
   return {
     from: start + 1,
@@ -38,14 +38,14 @@ function sliceOf(
 }
 
 // a function or a table named by its own name is that block, never a line that says the word
-function byName(lines: readonly string[], want: string): Section | null {
+function byName(lines: readonly string[], want: string): TsSection | null {
   if (!/^[A-Za-z_]\w*$/.test(want)) return null;
   const at = declarationAt(lines, want);
   return at < 0 ? null : sliceOf(lines, { start: at, max: MAX_LINES });
 }
 
 // a glossary term is its row
-function byTerm(lines: readonly string[], want: string): Section | null {
+function byTerm(lines: readonly string[], want: string): TsSection | null {
   const term = `term: '${want.toLowerCase()}'`;
   const at = lines.findIndex((line) => line.toLowerCase().includes(term));
   if (at < 0) return null;
@@ -53,7 +53,7 @@ function byTerm(lines: readonly string[], want: string): Section | null {
 }
 
 // a key's family (field.*) is each of its rows, forty lines at most each
-function byWildcard(lines: readonly string[], want: string): Section | null {
+function byWildcard(lines: readonly string[], want: string): TsSection | null {
   const wild = /^([a-z_]+)\.\*/.exec(want)?.[1];
   if (wild === undefined) return null;
   const starts = keyRowsAt(lines, new RegExp(`${wild}\\.`));
@@ -68,7 +68,7 @@ function byWildcard(lines: readonly string[], want: string): Section | null {
   };
 }
 
-function byKey(lines: readonly string[], want: string): Section | null {
+function byKey(lines: readonly string[], want: string): TsSection | null {
   const key = /^[a-z]+\.[a-z_]+/.exec(want)?.[0];
   if (key === undefined) return null;
   const at = keyRowsAt(lines, new RegExp(`${escaped(key)}'`))[0];
@@ -78,7 +78,7 @@ function byKey(lines: readonly string[], want: string): Section | null {
 }
 
 // a table's entry: TABLE key
-function byEntry(lines: readonly string[], want: string): Section | null {
+function byEntry(lines: readonly string[], want: string): TsSection | null {
   const named = /^([A-Z_]{3,})\s+([\w-]+)$/.exec(want);
   if (!named) return null;
   const table = declarationAt(lines, String(named[1]));
@@ -91,7 +91,7 @@ function byEntry(lines: readonly string[], want: string): Section | null {
 }
 
 // a row found by its own id, the epic's when two epics number theirs alike
-function byId(lines: readonly string[], { want, epic }: Asked): Section | null {
+function byId(lines: readonly string[], { want, epic }: Asked): TsSection | null {
   const id = want.split(/[\s·,(—]+/).find(Boolean) ?? '';
   const held = new RegExp(`\\bid: '${escaped(id)}'`);
   const found = lines.flatMap((line, at) => (held.test(line) ? [at] : []));
@@ -106,7 +106,7 @@ function byId(lines: readonly string[], { want, epic }: Asked): Section | null {
 function tsSection(
   text: string,
   { want, epic, glossary }: Asked & { readonly glossary: boolean },
-): Section | null {
+): TsSection | null {
   const lines = text.split('\n');
   return (
     byName(lines, want) ??
@@ -119,4 +119,4 @@ function tsSection(
 }
 
 export { MAX_LINES, tsSection };
-export type { Asked, Section };
+export type { Asked, TsSection };

@@ -1,5 +1,5 @@
 /**
- * - `CodeBlock` · lines of code, each piece coloured by what it is, in the theme's code face
+ * - `CodeBlock` · lines of code, each piece coloured by its kind, in the code face
  */
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';

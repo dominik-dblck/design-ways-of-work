@@ -36,7 +36,7 @@ const lastGreen = (): string =>
   fs.existsSync(GREEN) ? fs.readFileSync(GREEN, 'utf8') : '';
 
 const said: unknown = JSON.parse(fs.readFileSync(0, 'utf8') || '{}');
-const again = Reflect.get(Object(said), 'stop_hook_active') === true;
+const isAgain = Reflect.get(Object(said), 'stop_hook_active') === true;
 const key = workKey();
 if (key !== null && key !== lastGreen()) {
   const run = spawnSync('yarn', ['-s', 'check:chunk'], {
@@ -52,7 +52,7 @@ if (key !== null && key !== lastGreen()) {
       .join('\n');
     console.log(
       JSON.stringify(
-        again
+        isAgain
           ? { systemMessage: `check:chunk is still red:\n${tail}` }
           : {
               decision: 'block',

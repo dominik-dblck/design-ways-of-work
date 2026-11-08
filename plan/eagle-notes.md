@@ -62,3 +62,14 @@ for the port (phase 8) or the PM's word. Ranked: the first of each group is the 
     Every runner keeps the links today (`NODE_OPTIONS`, the hooks too since chunk 2: `runKeepsTheTurn` read
     `.claude/run.json` from the wrong root without them); a root read from where the run stands would hold
     without the flags, as `edit-check` does (eagle-dev's cross-check, 8 Nov).
+19. 97 booleans in the product's own files carry no `is`/`has`/`can` (`live`, `draft`, `seated`, `fourEyes`…),
+    and 95 declarations name a placeholder (`list`, `value`, `item`, `data`, `num`…), one a count alone: each
+    is held in `eslint-suppressions.json` (PM, 8 Nov · B). At the port, `scripts/rename.ts` renames them from a
+    map (`file:line:column`, new name), by TypeScript's own rename; the suppressions are pruned after it.
+20. The way of working's own names moved with the rules: `ticketOf` → `ticketDetailOf` (the board's), `textOf`
+    → `tokenTextOf`, `messageOf` → `errorMessageOf` (checkWorld; `guards/checks/measureCheck.ts` and
+    `rulesParts.ts` follow it in the port), `RuleRow` → `CodeRuleRow` (docs/rules), `Section` → `TsSection`,
+    `TicketRow` → `ExpectedTicket`, the component `JourneyStep` → `JourneyStepItem` (the sheet's type keeps the
+    word): `plan/renames-chunk-3*.tsv`.
+21. A component's header (`.tsx`) was never read by `aFileStatesItsJob`, which walked `.ts` alone: ESLint reads
+    every production file, and 16 bullets over 80 characters were cut in the way of working's own components.

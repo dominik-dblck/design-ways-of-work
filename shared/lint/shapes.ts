@@ -8,7 +8,41 @@ interface Shape {
   readonly message: string;
 }
 
+const DECLARED = [
+  'VariableDeclarator > Identifier.id',
+  'FunctionDeclaration > Identifier.id',
+  'ClassDeclaration > Identifier.id',
+  'TSTypeAliasDeclaration > Identifier.id',
+  'TSInterfaceDeclaration > Identifier.id',
+  'TSEnumDeclaration > Identifier.id',
+].join(', ');
+const BOUND = [
+  'VariableDeclarator > Identifier.id',
+  'FunctionDeclaration > Identifier.id',
+  ':function > Identifier.params',
+  ':function > AssignmentPattern > Identifier.left',
+  'ArrayPattern > Identifier',
+  'RestElement > Identifier.argument',
+  // a shorthand `{ data }` keeps its source's name: only a rename `{ rows: data }` names it here
+  'ObjectPattern > Property[shorthand=false] > Identifier.value',
+].join(', ');
+const A_COUNT_ALONE =
+  '/^(?:THE_)?(?:ONE|TWO|THREE|FOUR|FIVE|SIX|SEVEN|EIGHT|NINE|TEN|ELEVEN|TWELVE|THIRTEEN|FOURTEEN|FIFTEEN|SIXTEEN|SEVENTEEN|EIGHTEEN|NINETEEN|TWENTY|THIRTY|FORTY|FIFTY|SIXTY|SEVENTY|EIGHTY|NINETY|HUNDRED|THOUSAND)$/';
+// `bar` is no placeholder here: the approval's bar is a thing of the model
+const A_PLACEHOLDER =
+  '/^(?:data|info|obj|tmp|temp|val|foo|baz|stuff|things?|res|ret|items?|results?|values?|arr|list|str|num|el|elem)$/';
+
 const SHAPES: readonly Shape[] = [
+  {
+    selector: `:matches(${DECLARED})[name=${A_COUNT_ALONE}]`,
+    message:
+      'A name says what it holds, never only how many: `DOCUMENT_STATES`, not `THE_SEVEN` (docs/rules/names.md).',
+  },
+  {
+    selector: `:matches(${BOUND})[name=${A_PLACEHOLDER}]`,
+    message:
+      'A name says what it holds or does, never a placeholder: `rates`, not `list` (docs/rules/names.md).',
+  },
   {
     selector:
       ':function[params.length>2]:not(CallExpression > :function, NewExpression > :function)',

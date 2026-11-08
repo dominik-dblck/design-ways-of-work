@@ -1,5 +1,5 @@
 /**
- * - `JourneyStep` · one step: where, what the person does, what they see, the cases it makes happen
+ * - `JourneyStepItem` · one step: where, what is done and seen, the cases it covers
  */
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
 import type { JourneyStepView } from '../../../../workspace/feature-view.ts';
 
-function JourneyStep({ step }: { readonly step: JourneyStepView }): ReactElement {
+function JourneyStepItem({ step }: { readonly step: JourneyStepView }): ReactElement {
   return (
     <Stack spacing={0.5}>
       <Typography variant="overline" color="textSecondary">{`${step.n} · ${step.where}`}</Typography>
@@ -30,4 +30,4 @@ function JourneyStep({ step }: { readonly step: JourneyStepView }): ReactElement
   );
 }
 
-export { JourneyStep };
+export { JourneyStepItem };

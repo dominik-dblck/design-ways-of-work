@@ -1,7 +1,7 @@
 /**
- * - `node scripts/move.ts <map.tsv>` · moves design/'s files by a map, every relative import rewritten after them
- * - a map row: `from` and `to`, both under design/; a component's root (`{tier}/{Name}/{Name}.tsx`) gets an index.ts
- * - an import from outside a component's folder reads its index.ts, as its barrel; one inside keeps the file
+ * - `node scripts/move.ts <map.tsv>` · moves design/'s files by a map of from, to
+ * - every relative import rewritten; a component's root gets its index.ts
+ * - an import from outside a component reads its index.ts; one inside, the file
  */
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';

@@ -5,12 +5,19 @@
 import type { KnipConfig } from 'knip';
 
 const config: KnipConfig = {
-  entry: ['scripts/*.ts', 'shared/hooks/*.ts', 'design-system/index.ts'],
+  entry: [
+    'scripts/*.ts',
+    'shared/hooks/*.ts',
+    'design-system/index.ts',
+    'tests/lint/*.test.ts',
+  ],
   project: [
     'scripts/**/*.ts',
     'shared/hooks/**/*.ts',
     'shared/lint/**/*.ts',
     'design-system/**/*.ts',
+    'tests/**/*.ts',
+    '!tests/lint/fixtures/**',
   ],
   // the product's code runs on this repository's packages through the rehearsal's link
   exclude: ['dependencies', 'devDependencies'],

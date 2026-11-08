@@ -1,5 +1,5 @@
 /**
- * - `CasesSection` · the epic's test cases by endpoint, narrowed to one kind when picked
+ * - `CasesSection` · the epic's test cases by endpoint, or of the one kind picked
  */
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';

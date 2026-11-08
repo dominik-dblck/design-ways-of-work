@@ -72,8 +72,8 @@ function queryField([name, prose]: Param): BodyField {
   if (typed) return [typed[1] ?? name, typed[2] ?? UNTYPED];
   const draft = draftOf(prose);
   if (!draft) return [name, UNTYPED];
-  const optional = OPTIONAL.test(prose) || LEFT_OUT.includes(name);
-  return [`${name}${optional ? '?' : ''}`, drafted(draft)];
+  const isOptional = OPTIONAL.test(prose) || LEFT_OUT.includes(name);
+  return [`${name}${isOptional ? '?' : ''}`, drafted(draft)];
 }
 
 function queryFields(params: readonly Param[], answered: boolean): Fields {

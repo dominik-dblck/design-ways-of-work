@@ -40,8 +40,8 @@ function linesOf(input: string): readonly string[] {
 
 function heldBecause(run: string, lines: readonly string[]): string | null {
   if (lines.some((line) => STOP.test(line))) return null;
-  const opens = WHOLE.test(lines[0] ?? '') && PIECE.test(lines[1] ?? '');
-  if (!opens)
+  const hasOpening = WHOLE.test(lines[0] ?? '') && PIECE.test(lines[1] ?? '');
+  if (!hasOpening)
     return `${run} is a run: a reply opens with two progress lines, the whole run, then the piece in hand, e.g.\n${EXAMPLE}\nWrite them, then go on with the next step in this turn. ${EACH_CHUNK}`;
   return `${run} goes on: end the turn only with a line opening \`⏸️ stop:\` and one of decyzja (a choice the PM makes), migawka (a snapshot to retake), koniec (the run done) or blokada (blocked). ${EACH_CHUNK}`;
 }

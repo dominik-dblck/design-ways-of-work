@@ -95,19 +95,19 @@ function startFails(
 function entryFails(ticket: Ticket, expanded: string): readonly string[] {
   return (ticket.read || []).flatMap((ref) => {
     const entry = entryOf(expanded, ref);
-    const journey =
+    const hasJourney =
       /^journeys\.ts · J\d+/.test(ref) &&
       !entry.includes(`epic: '${ticket.epic}'`) &&
       !entry.includes(`"epic": "${ticket.epic}"`);
-    const row =
+    const hasRow =
       /^(commands|queries|refusals|events|glossary)\.ts · /.test(ref) &&
       !/sha256 [0-9a-f]{64}/.test(entry);
     return [
       ...(expanded.includes(`### ${ref}\n`)
         ? []
         : [`${ticket.id} no expansion: ${ref.slice(0, 40)}`]),
-      ...(journey ? [`${ticket.id} · a journey of another epic: ${ref}`] : []),
-      ...(row ? [`${ticket.id} · no digest on ${ref.slice(0, 50)}`] : []),
+      ...(hasJourney ? [`${ticket.id} · a journey of another epic: ${ref}`] : []),
+      ...(hasRow ? [`${ticket.id} · no digest on ${ref.slice(0, 50)}`] : []),
     ];
   });
 }

@@ -160,10 +160,10 @@ function quotedTexts(at: LineAt): readonly string[] {
     /'((?:[^'\\]|\\.)*)'|"((?:[^"\\]|\\.)*)"|>([^<>{}]+)</g,
   )) {
     const before = at.line.slice(0, match.index);
-    const sheet =
+    const isSheet =
       match[3] == null &&
       kindOf(at.file, { key: stringKeyOf(before), decl: at.decl }) === 'sheet';
-    if (!/name=$/.test(before) && !sheet)
+    if (!/name=$/.test(before) && !isSheet)
       texts.push(String(match[1] ?? match[2] ?? match[3]).trim());
   }
   return texts;

@@ -127,8 +127,8 @@ function guardFindings({
 
 function guardRun(mirror: Mirror): GuardRun {
   const guard: Guard = SOURCE_CHECK;
-  const list = guard.readList();
-  const files = textsOf(mirror, { files: list, fallback: '' });
+  const readList = guard.readList();
+  const files = textsOf(mirror, { files: readList, fallback: '' });
   const layered = textsOf(mirror, {
     files: Object.keys(guard.layers),
     fallback: null,
@@ -142,7 +142,7 @@ function guardRun(mirror: Mirror): GuardRun {
     rest: counted(found, (file) => !scope.has(file)),
     ratchet: guard.ratchet(found),
     layered,
-    list,
+    list: readList,
     fileTexts: {
       ...files,
       'components.spec.json': mirror.readOr('components.spec.json', null),

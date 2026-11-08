@@ -34,3 +34,23 @@ mailing-automation: each line waits for its port (phase 9) and the PM's word. Ra
    child node processes, harmlessly.
 8. **The way of working stays in the tree.** Node refuses to strip types under `node_modules`: `shared/`, `tools/`
    and `design-system/` are linked into the tree, never a `link:` dependency.
+
+## The way of working's own rules (chunk 3, 8 Nov)
+
+9. **Its tests that are now `wow` rules.** `theCodeNamesNoTicket`, `aFileStatesItsJob`, `commentsAreInvariants`,
+   `dataIsReadonly`, `aNameHasOneHome` exist on both sides; the shared config runs them as
+   `wow/no-ticket-names`, `wow/file-states-its-job`, `wow/comments-are-invariants`, `wow/data-is-readonly`,
+   `wow/one-home-per-name`. Its `mutableByDesign.json` becomes the scope's `mutable`; a route's HTTP verbs and
+   `default` become the scope's `families` (`{ files: 'app/**/route.ts', name: 'GET' }`…).
+10. **Names.** `naming-convention` (types PascalCase, values camelCase or UPPER_SNAKE, a boolean `is…`) and the
+    placeholder and count-alone shapes (its `aNameSaysWhatNotHowMany`, regex unchanged) reach it with the config:
+    its count of fails is measured at its port, each held in its suppressions until renamed by `scripts/rename.ts`.
+11. **What its tests hold beyond the rules (its cross-check of chunk 3).** Its `theCodeNamesNoTicket` reads
+    strings, test titles, assertion messages, the root configs, `db/*.sql` and `.husky/`: ESLint reads
+    identifiers, so the rest stays its test until a shape on test titles holds it. Its `dataIsReadonly` also reads
+    a function's signature, a module's unexported constants, zod's `.readonly()` and exempts a ref's `current`:
+    `wow/data-is-readonly` grows to the union at its port. Its header may run 12 prose lines and its comments
+    carry `Read at stream:`; both stay its own.
+12. **Its scope at its port.** Next's handlers written `export async function GET` need UPPER_CASE functions in
+    `app/**/route.ts`; the boolean prefix flags 224 names there and the placeholder shape 152 (`value` in its type
+    guards and handlers most), each held in its suppressions; `scripts/` adds 19 names twice to one-home.

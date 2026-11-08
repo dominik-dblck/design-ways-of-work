@@ -18,8 +18,8 @@ interface TicketPanelProps {
 }
 
 function TicketPanel({ ticket, onBack }: TicketPanelProps): ReactElement {
-  const read = (list: TicketDetail['reading']): readonly string[] =>
-    list.map((one) => `${one.title} — ${one.body}`);
+  const read = (reading: TicketDetail['reading']): readonly string[] =>
+    reading.map((one) => `${one.title} — ${one.body}`);
   return (
     <Stack spacing={2.5}>
       <Button onClick={onBack} sx={{ alignSelf: 'flex-start' }}>

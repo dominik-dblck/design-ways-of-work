@@ -10,10 +10,14 @@ export default eslintConfig({
     'dev/**',
     'shared/rules/**',
     'legacy/**',
+    // the files a rule's tests read as a program, wrong on purpose
+    'tests/lint/fixtures/**',
   ],
   production: ['scripts/**/*.ts', 'shared/**/*.ts', 'design-system/**/*.ts'],
   generated: [],
   react: [],
   entries: [],
   parts: [],
+  mutable: {},
+  families: [],
 });

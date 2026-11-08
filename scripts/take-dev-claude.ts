@@ -1,7 +1,7 @@
 /**
- * - `node scripts/take-dev-claude.ts [build repo]` · its own skills, evaluations, patterns and commands
- * - copied byte for byte into dev/claude/ at their paths; the ticket skills are not: ticket-pipeline.md writes them
- * - prints each file's sha256, and the files that still name the build repository's product
+ * - `node scripts/take-dev-claude.ts [build repo]` · its skills, patterns, commands
+ * - copied byte for byte into dev/claude/, the ticket skills aside (the pipeline's)
+ * - prints each file's sha256, and the files that name its product
  */
 import { execFileSync } from 'node:child_process';
 import crypto from 'node:crypto';
