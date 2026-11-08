@@ -1,0 +1,6 @@
+yarn lint:fix
+yarn tsc
+yarn format
+yarn -s test:architecture
+yarn -s checks:gate
+git update-index --again

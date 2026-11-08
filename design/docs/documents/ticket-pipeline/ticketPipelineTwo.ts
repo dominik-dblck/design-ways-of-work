@@ -1,0 +1,177 @@
+/**
+ * - `PIPELINE_TWO` · ticket-pipeline.md, its part 2 of 8
+ */
+import type { DocumentSection } from '../documentTypes.ts';
+
+// prettier-ignore
+export const PIPELINE_TWO: readonly DocumentSection[] = [
+  {
+    heading: '## The pack is verified before every stage',
+    lines: [
+      '',
+      'The read list and EXPECTED FILES are derived from the sheet’s data; EXPECTED',
+      'FILES is a proposal recon confirms path by path. A pointer that does not resolve fails the cut on the design side.',
+      'The design side re-cuts the pack in the same move as any sheet edit and sends the digest with the answer.',
+      '`why: T-E01-08` — a verified pack once lacked the sentence the answer described',
+      '',
+    ],
+  },
+  {
+    heading: '## The line between the two sides',
+    lines: [
+      '',
+      'The design side says what — values as tokens, states, parts, a layout line, what is forbidden. This',
+      "side decides how — file, tier, props, DOM, MUI slot — from the repository's conventions. A test asserts",
+      'a value or a mechanism; a shape is checked by a reader at arch-review and snapshot, never parsed. A',
+      'criterion that says how is a finding at recon. `why: T-E01-09`',
+      '',
+    ],
+  },
+  {
+    heading: '## When something does not work, say so',
+    lines: [
+      '',
+      '"I could not read X" is a fact about a tool call; "X cannot be read" is a claim about the world and',
+      'needs proof. Never route around a failure through the next-best source as if it were the named one.',
+      '',
+    ],
+  },
+  {
+    heading: '## A note is the current truth, never a chronicle',
+    lines: [
+      '',
+      'When a later decision changes a fact an earlier note or D-row states, edit that row — never append a',
+      'superseding entry. Git holds the history; the reader holds one document. `why: T-E01-07` — N5 kept a',
+      'replaced hash, D3 a removed mixin',
+      '',
+    ],
+  },
+  {
+    heading: '## No document repeats another',
+    lines: [
+      '',
+      'Reading lives in the recon. Criteria and criterion → test live in the contract table (standard) or the',
+      'contract snapshot (feature). Counts live in the report. A section that appears in two of them is fixed with a pointer, not a copy. A code comment',
+      'follows `docs/rules/comments.md`. `why: T-E00-08, T-E01-09`',
+      '',
+    ],
+  },
+  {
+    heading: '## One pass at a time',
+    lines: [
+      '',
+      'Work that splits — the recon by area, the endpoint tests by row, the arch-review by step, the regression by',
+      'slice — runs as passes, one after another, in the main thread; no sub-agents for now. A pass is one aspect: it starts',
+      "from the pack's path, its aspect and the pass files before it, writes",
+      '`roadmaps/{epic}/{id}/passes/{stage}-{n}-{aspect}.md`, and only then does the next start. A pass sends nothing to',
+      "the design side. The stage's document is written from the pass files and points at them, never repeats them;",
+      'they go into the commit with it. `why:` PM, 7 Oct — one aspect at a time, nothing racing for a file, the',
+      'database or a test run',
+      '',
+    ],
+  },
+  {
+    heading: '## Spellings that hold everywhere',
+    lines: [
+      '',
+      '- **A story quote is verbatim from backlog.ts.** If the story does not describe the ticket, quote it',
+      '  and add "placed here by the PM" — never paraphrase in a blockquote. `why: T-E01-10`',
+      '- **A file is named from the repo root** — `packages/domain/commands/createDocument.ts`, never `createDocument.ts`; scans and',
+      '  indexes match on the path (`tests/architecture/theDocsNameRealPaths.test.ts`). `why: T-E01-10`',
+      '',
+    ],
+  },
+  {
+    heading: '## Decisions are written, design-side files compared',
+    lines: [
+      '',
+      '- **A file the design side authors is compared, never described.** Where a criterion names one, it is read',
+      '  at the release, hashed, and every count stated about it is parsed off the file',
+      '  (`tests/architecture/everyFixtureRootIsHeld.test.ts`). `why: T-E01-08`',
+      '- **A criterion that reads "X, or Y" is decided, never taken in silence:** the pick and why the other',
+      '  lost go into the report as “did X because Y”. `why: T-E01-08`',
+      '- **The decisions no criterion asked for** — every value, branch or shape chosen because the sheet was',
+      '  silent, one line each with `file:line` — open the report (feature: the contract snapshot for the',
+      "  contract's). `why: T-E00-08`",
+      '',
+    ],
+  },
+  {
+    heading: '## The message shape',
+    lines: [
+      '',
+      'Whenever anything goes back, it is written as the message itself — English, fenced, sent whole to the design session with `SendMessage`,',
+      'with one line outside saying which gate it came from and whether it blocks. The block is',
+      '`roadmaps/templates/ticket-recon.md · ## Questions`: `{id} · {stage} · {n} question(s)`, then per',
+      'question — one line saying what cannot be decided, the sentence quoted with its file, what fires and',
+      'why both readings survive, a table (shape · against it · cost in code) over A and B, **Recommended**',
+      'with a check somebody can verify, **If it goes the other way**. Then, when non-empty: **Narrowings**',
+      '(decisions already taken, "say if wrong") and **Findings** (wrong in the sheet — one touching a',
+      'landed ticket names it: it costs a re-port). "Cleaner" is not a check.',
+      '',
+      '---',
+      '',
+    ],
+  },
+  {
+    heading: '# `.claude/skills/ticket/_code.md`',
+    lines: [
+      '',
+      'Rules for writing and reviewing code and tests, read after `ticket/_shared.md` by feature, standard, fast,',
+      'arch-review, regression and report. Recon does not read it.',
+      '',
+    ],
+  },
+  {
+    heading: '## Tests',
+    lines: [
+      '',
+      "- **The test clause's kind decides when a test is red.** `test (domain)`, `(endpoint)` and `(architecture)`",
+      '  are written before the code and fail on their assertion first — not on an import or a type. `(app)` and',
+      '  `(browser)` are written after the code and run once against a planted fault. `(measured, date)` is no',
+      '  test: the report quotes the measurement. A test green before any code counts as red only through a control',
+      '  in the same test that fails on a planted input, and that red is quoted. `why: T-E01-06, T-E02-01`',
+      '- **An app or browser test is trusted once it has been red.** The fault — the id removed, the branch',
+      '  inverted — and the red are quoted in the report before the fault is taken out. `why: T-E01-06`',
+      "- **A criterion's worked example is measured before a test is written to it.** An example is an",
+      '  assertion. `why: T-E01-09`',
+      '- **A test over the shared database runs five times under `--sequence.shuffle`** before it is called',
+      '  green, and the runs are quoted in the report. `why: T-E02-04`',
+      '- **A test on a span or a range asserts both ends.** `why: T-E01-10`',
+      '- **An inverse is emitted by whatever performed the transform, never inferred from its output.** `why: T-E01-09`',
+      '- **A body schema is emitted, never written** (`tests/architecture/theBodiesAreEmitted.test.ts`). `why: T-E00-13`',
+      "- **A check that only a hook runs is not a check.** A fixture root's own verifier is called by a test in the",
+      '  suite (`tests/architecture/everyFixtureRootIsHeld.test.ts`). `why: T-E01-09` — recon F2: a verifier',
+      "  nothing in the suite ran ignored a row's path",
+      '',
+    ],
+  },
+  {
+    heading: '## Code',
+    lines: [
+      '',
+      '- **A name says what, never how many** (`tests/architecture/aNameSaysWhatNotHowMany.test.ts`). `why: T-E01-07`',
+      '- **A file a script generates goes into `.prettierignore` the moment it exists.** `why: T-E01-10`',
+      '- **No comment describes the stage** (`tests/architecture/commentsAreInvariants.test.ts`). `why: T-E00-08`',
+      '- **A value a delayed read refreshes has a settling state the screen reads**, and its test asserts the',
+      '  screen after the write lands and before the read. `why: T-E04-00` — Close without changes offered over four saved edits',
+      '',
+    ],
+  },
+  {
+    heading: '## Browser flows',
+    lines: [
+      '',
+      '- **A drag in the browser tier goes through `e2e/framework/dragging.ts`**',
+      '  (`tests/architecture/aDragGoesThroughTheFramework.test.ts`); a drag flow that stays green with its guard',
+      '  out leaves the catalogue. `why: T-E04-00` — J4, J7',
+      "- **A flow reads a refusal's sentence through `say(key, facts)`**",
+      "  (`tests/architecture/aFlowSaysARefusal.test.ts`). `why: T-E04-00` — Q21's `{document}`",
+      '- **When a ticket moves where a press lands, every flow that makes that press asserts the new landing.**',
+      '  `why: T-E04-00` — Create went to the editor and the copy flow kept checking the list',
+      '',
+      '---',
+      '',
+    ],
+  },
+];

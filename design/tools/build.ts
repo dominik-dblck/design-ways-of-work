@@ -1,0 +1,170 @@
+/**
+ * - writes `dist/project/`: every home's files where `tools/layout.ts` puts them
+ * - each sheet entry a classic script setting its global, its imports inlined
+ * - a React page bundled with React and all it imports, beside the shell it draws in
+ */
+import fs from 'node:fs';
+import path from 'node:path';
+import { build } from 'rolldown';
+import { moduleEntries, moduleImports } from '../guards/source-check.ts';
+import { copySheetIcons } from './build/sheetIcons.ts';
+import { emittedTexts } from './emit.ts';
+import {
+  entryOfModule,
+  filesOf,
+  importsOfEntry,
+  isEntry,
+  pageOf,
+  publishedOf,
+} from './layout.ts';
+import type { Page } from './layout.ts';
+import { BUILT } from './root.ts';
+
+const OUT = BUILT;
+
+const A_HEADER = /^\/\*\*\n(?:[^*]|\*(?!\/))*\*\//;
+const LEADING_COMMENTS = /^(?:\/\/[^\n]*\n)+/;
+const FIRST_LINE_NAME = /^(\/\/ [\w.-]+)\.ts\b/;
+
+// the bundle drops comments, and the header is what source-check reads of every file
+function bannerOf(file: string): string {
+  const text = fs.readFileSync(file, 'utf8');
+  const header = A_HEADER.exec(text)?.[0];
+  if (header !== undefined) return header;
+  const head = LEADING_COMMENTS.exec(text)?.[0] ?? '';
+  return head.replace(FIRST_LINE_NAME, '$1.js').trimEnd();
+}
+
+// the pages read an entry under its PascalCase name: sheet-status.ts is SheetStatus
+function globalOf(file: string): string {
+  return path
+    .basename(file, '.ts')
+    .split('-')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join('');
+}
+
+async function bundle(file: string): Promise<void> {
+  const name = globalOf(file);
+  await build({
+    input: file,
+    write: true,
+    logLevel: 'warn',
+    resolve: { symlinks: false },
+    output: {
+      file: path.join(OUT, `${path.basename(file, '.ts')}.js`),
+      format: 'iife',
+      name,
+      esModule: false,
+      banner: bannerOf(file),
+      footer: `globalThis.${name} = ${name};`,
+    },
+  });
+}
+
+// the one document a page needs: a root to draw in, and its bundle
+function shellOf(page: Page): string {
+  return [
+    '<!doctype html>',
+    '<html lang="en">',
+    '<head>',
+    '<meta charset="utf-8">',
+    '<meta name="viewport" content="width=device-width, initial-scale=1">',
+    `<title>${page.title}</title>`,
+    '</head>',
+    '<body>',
+    '<div id="root"></div>',
+    `<script src="./${page.script}"></script>`,
+    '</body>',
+    '</html>',
+    '',
+  ].join('\n');
+}
+
+async function bundlePage(file: string, page: Page): Promise<void> {
+  await build({
+    input: file,
+    write: true,
+    logLevel: 'warn',
+    resolve: { symlinks: false },
+    // MUI marks its modules `use client`, which means nothing in one bundle
+    onwarn: (warning, report) => {
+      if (warning.code !== 'MODULE_LEVEL_DIRECTIVE') report(warning);
+    },
+    platform: 'browser',
+    transform: { jsx: 'react-jsx' },
+    output: {
+      file: path.join(OUT, page.script),
+      format: 'iife',
+      minify: true,
+    },
+  });
+  fs.writeFileSync(path.join(OUT, page.shell), shellOf(page));
+}
+
+// every file a home holds but its TypeScript, at its published path
+function copyFiles(): number {
+  const files = filesOf().filter((file) => !file.endsWith('.ts'));
+  for (const file of files) {
+    const at = publishedOf(file);
+    if (at === null) continue;
+    const to = path.join(OUT, at);
+    fs.mkdirSync(path.dirname(to), { recursive: true });
+    fs.copyFileSync(file, to);
+  }
+  return files.length;
+}
+
+// each entry and the entries its files import, for the same scan: who reads whom
+function writeModuleImports(): void {
+  const reads = filesOf()
+    .filter(isEntry)
+    .map((entry) => [entry, importsOfEntry(entry)] as const)
+    .filter(([, read]) => read.length > 0);
+  fs.writeFileSync(
+    path.join(OUT, moduleImports),
+    `${JSON.stringify(Object.fromEntries(reads))}\n`,
+  );
+}
+
+// each part and the entry it is bundled with, for a scan a page runs over the bundles
+function writeModuleEntries(): void {
+  const parts = filesOf()
+    .filter((file) => file.endsWith('.ts'))
+    .flatMap((file) => {
+      const entry = entryOfModule(file);
+      return entry === file ? [] : [[file, entry] as const];
+    });
+  fs.writeFileSync(
+    path.join(OUT, moduleEntries),
+    `${JSON.stringify(Object.fromEntries(parts))}\n`,
+  );
+}
+
+// the JSON written from its module, into the repository, only when its text moved
+async function emitFixtures(): Promise<void> {
+  for (const [file, text] of await emittedTexts()) {
+    const was = fs.existsSync(file) ? fs.readFileSync(file, 'utf8') : null;
+    if (was === text) continue;
+    fs.mkdirSync(path.dirname(file), { recursive: true });
+    fs.writeFileSync(file, text);
+    console.log(`${file} · written from its module`);
+  }
+}
+
+await emitFixtures();
+fs.rmSync(OUT, { recursive: true, force: true });
+const copied = copyFiles();
+const icons = copySheetIcons(OUT);
+const scripts = filesOf().filter(isEntry);
+await Promise.all(scripts.map(bundle));
+const pages = filesOf().flatMap((file) => {
+  const page = pageOf(file);
+  return page ? [{ file, page }] : [];
+});
+await Promise.all(pages.map(({ file, page }) => bundlePage(file, page)));
+writeModuleEntries();
+writeModuleImports();
+console.log(
+  `dist/project · ${scripts.length} scripts, ${pages.length} pages built, ${copied} files copied, ${icons} icons from lucide-static`,
+);

@@ -1,0 +1,13 @@
+{
+  "name": "design-ways-of-work",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "22.23.1"
+  },
+  "scripts": {
+    "extract": "node scripts/extract.ts",
+    "rehearse": "node scripts/rehearse.ts",
+    "verify": "node scripts/verify.ts"
+  }
+}

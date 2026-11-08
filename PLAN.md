@@ -1,6 +1,7 @@
 # design-ways-of-work · the extraction plan
 
-v1.1 · 8 Nov 2026 · written by the eagle-design session on the PM's word; eagle-dev's answers folded in. eagle-design itself is not
+v1.2 · 8 Nov 2026 · written by the eagle-design session on the PM's word; eagle-dev's answers folded in; v1.2 links
+files in place (phase 2 proved it) and leaves the `.dc.html` wireframes out (PM, 8 Nov). eagle-design itself is not
 touched until phase 8, and only on the PM's word.
 
 ## What this repository is
@@ -40,17 +41,16 @@ design-ways-of-work/
 
 ## How a product uses it
 
-- The product's `package.json` links it: `"way-of-working": "link:../design-ways-of-work"`.
-- `yarn build` and `yarn checks` in the product run this repository's tools with the product's root.
-  `tools/root.ts` splits in two: `WOW_ROOT` (here) and `PRODUCT_ROOT` (the product).
-- This repository reads a product two ways only:
-  - the alias `@product/*`: every product keeps the same layout of homes (`new-project.md`
-    requires it), so a view imports `@product/sheet/contract/commands.ts` and each product points
-    the alias at itself
-  - `product.ts` at the product's root: today's `sheet/project.ts`, plus its homes (`tools/layout.ts`
-    SHEET_HOMES and the rest), its own check parts, the source-check map, and the files the build
-    side reads
-- A product reads this repository through `@wow/*`: types and registry machinery only.
+- Every file here keeps the path a product reads it at: `design/tools/build.ts` is the product's `tools/build.ts`.
+- A product links each of them back in place, and runs node with `--preserve-symlinks --preserve-symlinks-main`
+  (tsconfig `preserveSymlinks`, vitest `resolve.preserveSymlinks`, rolldown `resolve.symlinks: false`): a linked
+  file's `../sheet/...` reaches the product's sheet, and `ROOT` is the product's root, unchanged.
+- So no import is rewritten and no home path moves. Phase 2 proved it on eagle-design: `yarn verify` runs build,
+  checks, tsc, lint, the tests, spec-check and the gate on a linked copy and on a clone, and every output is the same.
+- What this repository reads of a product is what its files import today (the coupled files): phases 3 to 5 cut it
+  down to the registries' named exports and `product.ts`, so a second product needs only those.
+- How the links stand in a product's git (committed links, or written by a script and ignored) is decided at the
+  port (phase 8), with the PM.
 
 ## The release still reads one repository at one sha
 
@@ -69,8 +69,8 @@ those modules and their import closure into the product under `vendor/wow/`, com
 the release record like `fixtures/data/` (D21). eagle-dev's take accepts the path (answer 2): it
 reads each entry by `git cat-file` and follows relative imports as written, so:
 
-- the vendored copy rewrites every `@product/*` and `@wow/*` import to a relative path that resolves
-  inside the release tree
+- git stores a link as the path it points to, so a release blob of a linked file is not its text: the
+  vendored copy is real files, and its relative imports resolve inside the release tree
 - no two vendored entries share a basename (the take names a module by it: `measure.ts` → `Measure`)
 - on the build side the change is three lines of `scripts/lib/sheetReads.ts`, theirs at the port
 
@@ -81,7 +81,7 @@ Every tracked file of eagle-design at `266822b`, one row each: `plan/inventory.t
 | category | files | what happens |
 |---|---|---|
 | wow, pure | 301 | copied as they are: they read nothing of the product |
-| wow, coupled | 63 | copied, their product imports turned to `@product/*` |
+| wow, coupled | 63 | copied as they are; their product imports cut to named exports in phases 3–5 |
 | registry entry | 22 | split: the machinery (aggregation, lookups, derived values) comes here, the rows stay |
 | registry types | 23 | come here: the shape every product's rows take |
 | mixed check | 7 | split: the generic core here, the product's part exported from `product.ts` |
@@ -92,7 +92,7 @@ Every tracked file of eagle-design at `266822b`, one row each: `plan/inventory.t
 | artefact | 300 | stay: records, legacy, fixtures, poc, notes, snapshots, assets |
 | generated | 12 | stay generated in the product: skills, `ticket-pipeline.md`, `agent-instructions.md` |
 
-What the way-of-working files read of the product today, as (file, home) import pairs, product checks and tests included (the `@product/*` surface):
+What the way-of-working files read of the product today, as (file, home) import pairs, product checks and tests included:
 
 | product home | import pairs |
 |---|---|
@@ -106,9 +106,9 @@ What the way-of-working files read of the product today, as (file, home) import 
 
 ## The direction of every import
 
-- This repository → a product: only through `@product/*` (data) and `product.ts`.
-- A product → this repository: types and registry machinery through `@wow/*`. A module the build
-  side reads imports nothing of `@wow/*` unless the vendored copy carries it.
+- This repository → a product: only the registries' named exports and `product.ts`, once phases 3–5 are done.
+- A product → this repository: types and registry machinery, at their linked paths. A module the build
+  side reads imports nothing linked unless the vendored copy carries it.
 - Three product files import tooling today and are settled in phase 3:
   - `sheet/logic/assembly/content-type-logic/fileFlow.ts` and `typeChain.ts` read
     `app/workspace/sheet-status.ts`
@@ -122,10 +122,10 @@ Each phase ends with the tests and the checks green here, one commit, one push.
 | # | phase | what it does | estimate |
 |---|---|---|---|
 | 0 | plan | this file and `plan/inventory.tsv` | done |
-| 1 | scaffold | package.json, tsconfig with `@product/*` and `@wow/*`, eslint, prettier, vitest, husky, README | 0.5 day |
-| 2 | pure files | the 301 pure files into `design/`, compiled with no product | 0.5 day |
+| 1 | scaffold | package.json, README, `scripts/rehearse.ts`, `scripts/verify.ts` | done |
+| 2 | files | the 371 files of the wow categories into `design/` at their paths; `yarn verify` the same | done |
 | 3 | registries | the 23 types and the machinery of the 22 entries come here; each entry's rows get one named export in the product; the three product files that import tooling settled, `ticketExpand.ts` first (it pulls `expected-files` into the build side's closure) | 1 day |
-| 4 | coupled files | the 63 files read `@product/*`; the 7 mixed checks split, their product parts named in `product.ts` | 1 day |
+| 4 | coupled files | the 63 files read named exports only; the 7 mixed checks split, their product parts named in `product.ts` | 1 day |
 | 5 | product.ts | its contract written as a type here: homes, check parts, source-check map, build reads, design system | 0.5 day |
 | 6 | sample product | `examples/sample-product`: one epic, a command, a query, an event, a refusal, a journey, a ticket, a decision, a notebook; every generic check and architecture test green on it | 0.5 day |
 | 7 | port rehearsal | `scripts/rehearse.ts ../eagle-design` copies the product to a scratch folder, cuts what came here, links this repository, runs build, checks and tests; every output byte-equal to today's (snapshots, `fixtures/data/`, packs, release record) | 0.5 day |
@@ -175,15 +175,13 @@ phase 9: the rules inside `ticket-pipeline.md`, or a second released source pass
 
 - A change here reaches every linked product at once (a path link has no version): this
   repository's pre-push runs the rehearsal on every product it knows.
-- The `@product/*` alias needs every product to keep the same layout: `new-project.md` and
+- Links in place need every product to keep the same layout of homes: `new-project.md` and
   `theWayOfWorkingNamesNoProduct` hold it.
 - The release's import closure crosses two repositories: the vendored copy keeps it one.
-- The tools assume today that the product and the tools share one root: phase 1 splits the root,
-  and phase 7 proves nothing else assumed it.
+- A walk that skips links, or a bundler that resolves them, reads the wrong root: `yarn verify` catches it.
 
 ## To iterate before phase 3
 
-- `design/` as a folder, or the design side at the root and `dev/` beside it.
 - The registry machinery's names here, and the one export each product entry gives.
 - `product.ts`: one file, or `sheet/project.ts` kept and `product.ts` beside it.
 - How `tools/checks.ts` takes a product's own parts (a to h are mixed today).

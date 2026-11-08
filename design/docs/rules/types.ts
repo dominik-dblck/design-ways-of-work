@@ -1,0 +1,90 @@
+/**
+ * - `rules` · types: each rule, its gate, its exceptions and why
+ */
+import type { RuleFile } from './ruleTypes.ts';
+
+const rules: RuleFile = {
+  title: 'Types',
+  intro: '\nA type holds the values the code can meet\nand no others.\n',
+  rows: [
+    {
+      rule: "A type takes the highest rung its set of values allows: a literal union (`'page' \\| 'spec'`, `keyof typeof THE_TABLE`), then a narrowing tied to a sibling (`Record<GroupId, …>`), then a primitive, left for a value that is open (a sentence, an id the sheet mints).",
+      gate: '`review`',
+      exceptions: '—',
+      why: 'A primitive where the set is known lets a wrong value compile.',
+    },
+    {
+      rule: 'No cast (`as`, `<T>`).',
+      gate: 'ESLint `consistent-type-assertions` (`assertionStyle: "never"`)',
+      exceptions: '`as const` · tests',
+      why: "A cast is the one place the compiler takes the code's word for it.",
+    },
+    {
+      rule: 'No `any`.',
+      gate: 'ESLint `no-explicit-any`',
+      exceptions: '—',
+      why: '`any` switches the checker off for everything the value touches.',
+    },
+    {
+      rule: 'No `@ts-ignore`; `@ts-expect-error` stands only in a `*.test-d.ts`, where it is the proof.',
+      gate: 'ESLint `ban-ts-comment`',
+      exceptions: '—',
+      why: 'An error silenced in production code is an error nobody reads.',
+    },
+    {
+      rule: 'An exported function states its parameter and return types.',
+      gate: 'ESLint `explicit-module-boundary-types`',
+      exceptions: '—',
+      why: 'The signature is the contract a caller reads; an inferred one changes when the body does.',
+    },
+    {
+      rule: 'A type-only import is `import type`.',
+      gate: 'ESLint `consistent-type-imports`',
+      exceptions: '—',
+      why: 'It is erased at build, so a bundle never pulls a module in through a type.',
+    },
+    {
+      rule: 'A `switch` over a union handles every member.',
+      gate: 'ESLint `switch-exhaustiveness-check`',
+      exceptions: '—',
+      why: 'A member added to the union is a red line at every switch, not a silent fall-through.',
+    },
+    {
+      rule: 'A field always present is not optional; shapes that differ are a discriminated union, not one shape of optional fields; a union of literals stands where a boolean flag would.',
+      gate: '`review`',
+      exceptions:
+        "a row of the sheet's data that leaves a field out, as written",
+      why: 'Each shape says what it carries, so no reader checks a field the shape cannot have.',
+    },
+    {
+      rule: 'A rule or a checklist line is `{ id, says, why }` in an array, its id a kebab-case key that says what it does, cited as rule:{key}; a decision or a finding is cited by its number (`D25`, `O17`); a table the code reads by key is a `Record` (D26, D29).',
+      gate: '`checks` (each key once, each run of numbers without a gap) · `aCitedRowExists`',
+      exceptions:
+        'a decision’s own words, dated, which may cite a rule by its old number',
+      why: 'A citation by place points at the wrong row the day one is inserted above it, and a key says what it points at.',
+    },
+    {
+      rule: 'Data nobody mutates is `readonly` (`readonly T[]`, `Readonly<Record<…>>`, a `readonly` field).',
+      gate: '`dataIsReadonly`',
+      exceptions:
+        "a function's local · a tally a scan fills (`ScanCounts`), named in the scan",
+      why: 'A mutation becomes a compile error instead of a shared-state bug.',
+    },
+    {
+      rule: 'A file reads another module by import, typed by that module, never off `globalThis`: no file declares a global.',
+      gate: '`review`',
+      exceptions:
+        'a legacy page reads the globals its classic bundles set, until it leaves (`guards/checks/legacyWorld.ts`)',
+      why: 'An import is the module itself, never undefined, and its type cannot drift from it.',
+    },
+    {
+      rule: 'The code compiles under `strict`.',
+      gate: '`tsc` (pre-commit)',
+      exceptions: '—',
+      why: 'Strict is the floor every rule above stands on.',
+    },
+  ],
+  outro: '',
+};
+
+export { rules };
