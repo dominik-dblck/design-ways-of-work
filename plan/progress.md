@@ -114,15 +114,19 @@
         --bail 1` a mutant, coverage off), the domain folder by folder, then app services and utils, a second pass of
         the survivors on the database tests; no threshold, a measure; by hand only, never CI nor a hook
       - [ ] ⏸ mutation tests in the way of working: whether, where, how (PM decides)
+      - [ ] the stricter flags, into `shared/tsconfig.base.json` each once both sides read 0 (measured 8 Nov):
+        `noUncheckedIndexedAccess` design 44, dev 877 · `exactOptionalPropertyTypes` design 88, dev 379 ·
+        `noPropertyAccessFromIndexSignature` design 107, dev 399; a mechanical fix by script
       - [x] eagle-dev's criterion and its consistency points, before chunk 5 (PM, 8 Nov · A): 8 rows in
         `shared/rules/checks.ts`; the scope is one `scope.ts` a repository, `RepoScope` in `shared/repoScope.ts`
       - [x] chunk 5: boundaries and the molecule count on one element map · the tiers, the barrel and a context
         by boundaries, `parts-serve-their-entry` and `molecules-compose-one-molecule`, a hook never off `React`,
         the resolvers on the tsconfig's symlinks; 3 design tests retire, 2 rows to `shared/rules/components.ts`
         (`plan/eagle-notes.md` 24–26, `plan/dev-notes.md` 16) · eagle-dev's consult and cross-check taken
-      - [ ] chunk 6: ls-lint, knip and tsc from one scope · 6a the rehearsal hard-linked, a real tree, its
+      - [x] chunk 6: ls-lint, knip and tsc from one scope · 6a the rehearsal hard-linked, a real tree, its
         links checked and its rewrites verified (`plan/eagle-notes.md` 27, `plan/dev-notes.md` 7) ✓ · 6b knip from the scope (`plan/eagle-notes.md` 28, `plan/dev-notes.md` 17) ✓ · 6c the file names, one wow rule (`plan/eagle-notes.md` 29) ✓ · 6d the component file shapes, one wow rule and the folder rules, a renderer an app inside the app
-        (`plan/eagle-notes.md` 30, `plan/dev-notes.md` 19) ✓ · 6e one tsconfig base
+        (`plan/eagle-notes.md` 30, `plan/dev-notes.md` 19) ✓ · 6e one tsconfig base (`plan/eagle-notes.md` 31,
+        `plan/dev-notes.md` 20) ✓
       - [ ] the build side's skills (PM, 8 Nov: architect and orchestrator unused): `dev/claude/skills` keeps what
         the feature pipeline names (the `e2e` three, the `ticket*` written from `ticket-pipeline.md`, the
         review command and the evaluations it reads); the discovery → plan → orchestration flow, `brainstorm`,

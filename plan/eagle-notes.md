@@ -143,3 +143,10 @@ for the port (phase 8) or the PM's word. Ranked: the first of each group is the 
     package outside the app it reads as the app does), the app enters it at a component's barrel
     (`wow/renderer-stands-alone`, Dom through the build side, 8 Nov); the app's roots climb one ladder, and the
     molecule count reads one ladder.
+31. One tsconfig base (chunk 6e, `shared/tsconfig.base.json`): the checking options both sides keep, `strict`,
+    `verbatimModuleSyntax`, `erasableSyntaxOnly`, `isolatedModules`, `noImplicitOverride`, `noImplicitReturns`,
+    `noFallthroughCasesInSwitch`, `noEmit` and with it `allowImportingTsExtensions` (a path written `.ts`, so
+    node runs the code by type stripping), `skipLibCheck`. This side's tsconfig extends it and keeps its
+    environment (target, lib, modules, JSON, types, JSX, include). Measured on its tree: each 0 but
+    `noUncheckedIndexedAccess` (44), `exactOptionalPropertyTypes` (88) and `noPropertyAccessFromIndexSignature`
+    (107), which stay out of the base (`plan/progress.md`, the stricter flags).

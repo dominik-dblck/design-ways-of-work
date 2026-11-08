@@ -141,3 +141,16 @@ mailing-automation: each line waits for its port (phase 9) and the PM's word. Ra
     read as the app reads one (`wow/renderer-stands-alone`; its re-check, read-only and typed: 0 hits over
     1,658 files, the 6 imports into it all at barrels). Its `components.md` row's build gate is `review` until
     then.
+20. Its root tsconfig extends `shared/tsconfig.base.json` at its port (chunk 6e), and its two packages' through it;
+    it keeps its environment (lib, JSX, the Next plugin, `paths`, `incremental`, `allowJs`, `esModuleInterop`,
+    `resolveJsonModule`, its target). With `extends` there Next 16 stops writing its tsconfig (no option, include
+    line or plugin, `writeConfigurationDefaults.js` 238), so a Next upgrade's new include or option reaches it by
+    script at its port: Next's setup run on a copy without `extends`, what it writes diffed.
+    Measured read-only over its three tsconfigs (`tsc --incremental false` and one flag; its consult added the
+    packages; its cross-check: `--showConfig` moves by the five new flags alone, its file sets the same):
+    `verbatimModuleSyntax`, `noImplicitReturns`, `noFallthroughCasesInSwitch` 0; `erasableSyntaxOnly`
+    4 (`e2e/framework/theCoverageRegistry.ts` 9 and 10, `tests/store-contract/store.test.ts` 745,
+    `packages/domain/log/digest.test.ts` 120: a parameter property each, a field and an assignment instead);
+    `noImplicitOverride` 2 (`app/components/organisms/TypeLibrary/__tests__/theGroupsPage.test.tsx` 61 and 65,
+    `override` on `state` and `render`): all six test code, its to fix on its port branch unless the PM says
+    earlier. `noUncheckedIndexedAccess` 877 (root 454, domain 418, store 5) stays out of the base.

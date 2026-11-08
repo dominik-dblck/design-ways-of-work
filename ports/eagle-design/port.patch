@@ -2218,10 +2218,28 @@ index 1e8082f..a84aa0c 100644
 -export type { GlossaryPoint, ScreenWord, ScreenWordRow, Term };
 +export type { GlossaryPoint, ScreenWordRow, Term };
 diff --git a/tsconfig.json b/tsconfig.json
-index 453869a..73569ab 100644
+index 453869a..a4ccd76 100644
 --- a/tsconfig.json
 +++ b/tsconfig.json
-@@ -25,7 +25,10 @@
+@@ -1,16 +1,11 @@
+ {
++  "extends": "./shared/tsconfig.base.json",
+   "compilerOptions": {
+     "target": "ES2022",
+     "lib": ["ES2022", "DOM"],
+     "module": "esnext",
+     "moduleResolution": "bundler",
+-    "allowImportingTsExtensions": true,
+-    "erasableSyntaxOnly": true,
+-    "strict": true,
+-    "noEmit": true,
+-    "skipLibCheck": true,
+     "resolveJsonModule": true,
+-    "isolatedModules": true,
+     "types": ["node", "vitest/globals"],
+     "jsx": "react-jsx"
+   },
+@@ -25,7 +20,10 @@
      "tests/**/*.ts",
      "tests/**/*.tsx",
      "*.config.ts",
