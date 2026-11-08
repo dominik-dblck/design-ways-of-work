@@ -33,8 +33,14 @@
       each a placeholder frame until the design system's components draw it; tested
       - found on the way: a page's bundle could overwrite a sheet module's (`wireframes.js`): a page bundles as
         `<page>-page.js` now, and the build refuses two sources at one path
-- [ ] `dev/` holds the build side's coding rules and skills (arch review, a component's structure…), taken from
-      eagle-dev, and its folder structure, atomic design, product-agnostic
+- [x] `dev/rules/` · eagle-dev's 18 code-rule files as data, taken by `scripts/take-dev.ts`; the product's build
+      prints them back byte for byte (`take-dev --check`), so a release can carry them to every build repository
+- [x] `dev/map.ts` → `dev/map.md` · the build repository's folders, atomic design and the organism's inner folders
+      included, eagle-dev's routes, renderers and domain concepts cut (`scripts/take-dev-map.ts`, 93 folders)
+- [ ] the skills: the ticket skills already ride `ticket-pipeline.md`; eagle-dev's lane-B skills (architect,
+      plan-*, orchestrator, evaluate-*, e2e) and `.claude/evaluations/` come next, the same way
+- [ ] one set of code rules: `design/docs/rules` (13 files, the design side's) and `dev/rules` (18, eagle-dev's)
+      overlap in 11 files and mostly disagree in wording — a decision for the PM
 - [ ] the design side's own pages follow those rules: Board, Feature and Wireframes restructured the eagle-dev way
 - [ ] one design system at the top, `design-system/`: the tokens and the shared atomic components, loaded into every
       repository by a script, never copied by hand (PM, 8 Nov; changes D62, where eagle-dev owned it)

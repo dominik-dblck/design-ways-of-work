@@ -8,6 +8,9 @@
   "scripts": {
     "extract": "node scripts/extract.ts",
     "rehearse": "node scripts/rehearse.ts",
-    "verify": "node scripts/verify.ts"
+    "verify": "node scripts/verify.ts",
+    "take-dev": "node scripts/take-dev.ts",
+    "take-dev-map": "node scripts/take-dev-map.ts",
+    "port-save": "node scripts/port-save.ts"
   }
 }

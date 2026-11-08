@@ -57,6 +57,7 @@ const RUN_HOMES: readonly string[] = [
   'docs/rules',
   'docs/skills',
   'docs/documents',
+  'dev',
 ];
 
 // the React code: a `.tsx` straight in `app/pages` is a page, bundled with all it imports; its theme

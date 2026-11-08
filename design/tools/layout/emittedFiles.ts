@@ -58,6 +58,12 @@ const EMITTED: readonly Emitted[] = [
     fixture: 'sheet/contract/api-convention.md',
     print: 'document',
   },
+  {
+    module: 'dev/map.ts',
+    name: 'directoryMap',
+    fixture: 'dev/map.md',
+    print: 'document',
+  },
 ];
 
 // a folder whose every data file prints as one markdown file: [its export, how it prints, where]
@@ -68,6 +74,7 @@ const DATA_FOLDERS: readonly (readonly [
   (base: string) => string,
 ])[] = [
   ['docs/rules', 'rules', 'rules', (base) => `docs/rules/${base}.md`],
+  ['dev/rules', 'rules', 'rules', (base) => `dev/rules/${base}.md`],
   [
     'docs/skills',
     'skill',

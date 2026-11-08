@@ -170,3 +170,17 @@ index 0000000..cc4c2b3
 @@ -0,0 +1 @@
 +["sheet/contract/block-model/settledFrom1.ts \u00b7 a part named by a number", "sheet/contract/block-model/settledFrom25.ts \u00b7 a part named by a number", "sheet/model/eagle-review/pointsOne.ts \u00b7 a part named by a number", "sheet/model/eagle-review/pointsThree.ts \u00b7 a part named by a number", "sheet/model/eagle-review/pointsTwo.ts \u00b7 a part named by a number", "sheet/words/messages/refusalOne.ts \u00b7 a part named by a number", "sheet/words/messages/refusalTwo.ts \u00b7 a part named by a number", "sheet/words/messages/rowsOne.ts \u00b7 a part named by a number", "sheet/words/messages/rowsThree.ts \u00b7 a part named by a number", "sheet/words/messages/rowsTwo.ts \u00b7 a part named by a number", "sheet/words/messages/screenFour.ts \u00b7 a part named by a number", "sheet/words/messages/screenOne.ts \u00b7 a part named by a number", "sheet/words/messages/screenThree.ts \u00b7 a part named by a number", "sheet/words/messages/screenTwo.ts \u00b7 a part named by a number"]
 \ No newline at end of file
+diff --git a/tsconfig.json b/tsconfig.json
+index 4f3e659..16acd84 100644
+--- a/tsconfig.json
++++ b/tsconfig.json
+@@ -32,7 +32,8 @@
+     "tests/**/*.ts",
+     "tests/**/*.tsx",
+     "*.config.ts",
+-    "*.config.mts"
++    "*.config.mts",
++    "dev/**/*.ts"
+   ],
+   "exclude": [
+     "node_modules",

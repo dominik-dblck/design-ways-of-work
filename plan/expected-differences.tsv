@@ -1,5 +1,5 @@
 difference	because
-output · yarn build	70 scripts, 3 pages, 368 files copied, 21 icons: ds-scan.js not built, the Wireframes view and page built, the 71 icon copies gone · the .dc.html wireframes leave the way of working; a third page, Wireframes, and its view: every screen of the sheet, a placeholder each (PM, 8 Nov)
+output · yarn build	70 scripts, 3 pages, 387 files copied, 21 icons: ds-scan.js not built; the Wireframes view and page built; the 71 icon copies gone, dev/'s 19 printed rule and map files counted · the PM's scope of 8 Nov
 output · yarn checks	parts r and h (legacy pages run, their props), src holes, app mark and page scripts gone; the guard map reads modules only (56 files, 0 pages, 0 type-name branches in pages); design-scan-before-ready moved to the product's rules (32 checklist lines, 31 product rules) · the .dc.html wireframes leave the way of working (PM, 8 Nov)
 output · yarn test	the Feature page's drawing test went with the frames; the Wireframes page's test came · a third page, Wireframes, and its view: every screen of the sheet, a placeholder each (PM, 8 Nov)
 output · yarn spec-check	it builds first: the same build line as yarn build
