@@ -7,11 +7,9 @@ import { execFileSync, spawnSync } from 'node:child_process';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
+import { HERE, PRODUCT_REPO, repoAt } from './repos.ts';
 
-const HERE = path.resolve(import.meta.dirname, '..');
-const SOURCE = path.resolve(
-  process.argv[2] ?? path.join(HERE, '..', 'eagle-design'),
-);
+const SOURCE = repoAt(PRODUCT_REPO);
 const RUNS = path.join(HERE, '.rehearsal');
 const BASE = path.join(RUNS, 'base');
 const LINKED = path.join(RUNS, path.basename(SOURCE));

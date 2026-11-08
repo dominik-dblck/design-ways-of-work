@@ -5,26 +5,13 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { HERE } from './repos.ts';
+import { quoted, ruleTableOf } from './ruleTables.ts';
+import type { RuleTable, RuleTableRow } from './ruleTables.ts';
 
-const HERE = path.resolve(import.meta.dirname, '..');
 const DESIGN = path.join(HERE, 'design', 'docs', 'rules');
 const DEV = path.join(HERE, 'dev', 'rules');
 const SHARED = path.join(HERE, 'shared', 'rules');
-const CELL_BREAK = /(?<!\\) \| /;
-
-interface Row {
-  readonly rule: string;
-  readonly gate: string;
-  readonly exceptions: string;
-  readonly why: string;
-}
-
-interface Printed {
-  readonly title: string;
-  readonly intro: string;
-  readonly rows: readonly Row[];
-  readonly outro: string;
-}
 
 type Split = readonly [
   file: string,
@@ -34,31 +21,10 @@ type Split = readonly [
   wording: string,
 ];
 
-const quoted = (text: string): string =>
-  `'${text.replaceAll('\\', '\\\\').replaceAll("'", "\\'").replaceAll('\n', '\\n')}'`;
+const printedOf = (file: string): RuleTable =>
+  ruleTableOf(fs.readFileSync(file, 'utf8'));
 
-function printedOf(file: string): Printed {
-  const lines = fs.readFileSync(file, 'utf8').split('\n');
-  const head = lines.findIndex((line) => line.startsWith('| Rule'));
-  let end = head + 2;
-  while (lines[end]?.startsWith('|')) end += 1;
-  const rows = lines.slice(head + 2, end).map((line) => {
-    const [rule = '', gate = '', exceptions = '', why = ''] = line
-      .replace(/^\| /, '')
-      .replace(/ \|$/, '')
-      .split(CELL_BREAK)
-      .map((cell) => cell.trimEnd());
-    return { rule, gate, exceptions, why };
-  });
-  return {
-    title: (lines[0] ?? '').replace(/^# /, ''),
-    intro: lines.slice(1, head).join('\n'),
-    rows,
-    outro: lines.slice(end).join('\n'),
-  };
-}
-
-const rowLine = (row: Row): string =>
+const rowLine = (row: RuleTableRow): string =>
   `    { rule: ${quoted(row.rule)}, gate: ${quoted(row.gate)}, exceptions: ${quoted(row.exceptions)}, why: ${quoted(row.why)} },`;
 
 function sideFile(
@@ -69,8 +35,8 @@ function sideFile(
     side,
   }: {
     readonly name: string;
-    readonly printed: Printed;
-    readonly own: readonly Row[];
+    readonly printed: RuleTable;
+    readonly own: readonly RuleTableRow[];
     readonly side: 'design' | 'build';
   },
   shared: boolean,
@@ -109,9 +75,9 @@ function sideFile(
 function sharedFile(
   title: string,
   pairs: readonly {
-    readonly words: Row;
-    readonly design: Row;
-    readonly dev: Row;
+    readonly words: RuleTableRow;
+    readonly design: RuleTableRow;
+    readonly dev: RuleTableRow;
   }[],
 ): string {
   return [
@@ -137,7 +103,7 @@ function splitOne(file: string, splits: readonly Split[]): number {
   const name = file.replace(/\.md$/, '');
   const design = printedOf(path.join(DESIGN, file));
   const dev = printedOf(path.join(DEV, file));
-  const at = (printed: Printed, index: string): Row => {
+  const at = (printed: RuleTable, index: string): RuleTableRow => {
     const row = printed.rows[Number(index) - 1];
     if (row === undefined) throw new Error(`${file} has no row ${index}`);
     return row;
@@ -152,7 +118,11 @@ function splitOne(file: string, splits: readonly Split[]): number {
         dev: devRow,
       };
     });
-  const own = (home: string, printed: Printed, column: 2 | 3): readonly Row[] =>
+  const own = (
+    home: string,
+    printed: RuleTable,
+    column: 2 | 3,
+  ): readonly RuleTableRow[] =>
     splits
       .filter((split) => split[1] === home)
       .map((split) => at(printed, split[column]));

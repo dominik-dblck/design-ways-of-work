@@ -6,12 +6,9 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { HERE, PRODUCT_REPO, repoAt } from './repos.ts';
 
-const HERE = path.resolve(import.meta.dirname, '..');
-const SOURCE = path.resolve(
-  process.argv.slice(2).find((arg) => !arg.startsWith('--')) ??
-    path.join(HERE, '..', 'eagle-design'),
-);
+const SOURCE = repoAt(PRODUCT_REPO);
 const OUT = path.join(HERE, 'design');
 const WOW_CATEGORY = /^(wow, |mixed check)/;
 

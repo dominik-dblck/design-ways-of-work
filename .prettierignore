@@ -2,7 +2,7 @@ node_modules/
 .rehearsal/
 design/
 dev/
-shared/
+shared/rules/
 ports/
 plan/
 *.md

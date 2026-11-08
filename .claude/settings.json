@@ -1,0 +1,29 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd \"$CLAUDE_PROJECT_DIR\" && node shared/hooks/edit-check.ts",
+            "timeout": 60,
+            "statusMessage": "Prettier and ESLint on the edited file"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd \"$CLAUDE_PROJECT_DIR\" && node shared/hooks/chunk-check.ts",
+            "timeout": 180,
+            "statusMessage": "The chunk's checks"
+          }
+        ]
+      }
+    ]
+  }
+}

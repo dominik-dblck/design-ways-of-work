@@ -1,4 +1,3 @@
-yarn -s tsc
-yarn -s lint
 yarn -s format
 git update-index --again
+yarn -s check:chunk

@@ -11,5 +11,11 @@
     "skipLibCheck": true,
     "types": ["node"]
   },
-  "include": ["scripts/**/*.ts", "eslint.config.ts"]
+  "include": [
+    "scripts/**/*.ts",
+    "shared/hooks/**/*.ts",
+    "shared/lint/**/*.ts",
+    "eslint.config.ts",
+    "knip.ts"
+  ]
 }

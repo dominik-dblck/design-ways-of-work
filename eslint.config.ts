@@ -17,7 +17,7 @@ export default [
       '.rehearsal/**',
       'design/**',
       'dev/**',
-      'shared/**',
+      'shared/rules/**',
       'poc/**',
       '.artifact/**',
       '**/*.js',

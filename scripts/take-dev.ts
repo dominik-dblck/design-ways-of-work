@@ -5,59 +5,31 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { BUILD_REPO, HERE, repoAt } from './repos.ts';
+import { quoted, ruleTableOf } from './ruleTables.ts';
 
-const HERE = path.resolve(import.meta.dirname, '..');
-const SOURCE = path.resolve(
-  process.argv.slice(2).find((arg) => !arg.startsWith('--')) ??
-    path.join(HERE, '..', 'mailing-automation'),
-);
-const FROM = path.join(SOURCE, 'docs', 'rules');
+const FROM = path.join(repoAt(BUILD_REPO), 'docs', 'rules');
 const TO = path.join(HERE, 'dev', 'rules');
-const CELL_BREAK = /(?<!\\) \| /;
 
-interface Row {
-  readonly rule: string;
-  readonly gate: string;
-  readonly exceptions: string;
-  readonly why: string;
-}
-
-const quoted = (text: string): string =>
-  `'${text.replaceAll('\\', '\\\\').replaceAll("'", "\\'").replaceAll('\n', '\\n')}'`;
-
-function rowOf(line: string): Row {
-  const [rule = '', gate = '', exceptions = '', why = ''] = line
-    .replace(/^\| /, '')
-    .replace(/ \|$/, '')
-    .split(CELL_BREAK)
-    .map((cell) => cell.trimEnd());
-  return { rule, gate, exceptions, why };
-}
-
-function dataOf(name: string, text: string): string {
-  const lines = text.split('\n');
-  const head = lines.findIndex((line) => line.startsWith('| Rule'));
-  let end = head + 2;
-  while (lines[end]?.startsWith('|')) end += 1;
-  const title = (lines[0] ?? '').replace(/^# /, '');
-  const rows = lines.slice(head + 2, end).map(rowOf);
+function dataOf(text: string): string {
+  const table = ruleTableOf(text);
   return [
     '/**',
-    ` * - \`rules\` · ${title.toLowerCase()}: each rule, its gate, its exceptions and why`,
+    ` * - \`rules\` · ${table.title.toLowerCase()}: each rule, its gate, its exceptions and why`,
     ' */',
     "import type { RuleFile } from '../../docs/rules/ruleTypes.ts';",
     '',
     '// prettier-ignore',
     'const rules: RuleFile = {',
-    `  title: ${quoted(title)},`,
-    `  intro: ${quoted(lines.slice(1, head).join('\n'))},`,
+    `  title: ${quoted(table.title)},`,
+    `  intro: ${quoted(table.intro)},`,
     '  rows: [',
-    ...rows.map(
+    ...table.rows.map(
       (row) =>
         `    { rule: ${quoted(row.rule)}, gate: ${quoted(row.gate)}, exceptions: ${quoted(row.exceptions)}, why: ${quoted(row.why)} },`,
     ),
     '  ],',
-    `  outro: ${quoted(lines.slice(end).join('\n'))},`,
+    `  outro: ${quoted(table.outro)},`,
     '};',
     '',
     `export { rules };`,
@@ -82,7 +54,7 @@ function take(): void {
   for (const file of ruleFiles()) {
     const text = fs.readFileSync(path.join(FROM, file), 'utf8');
     const name = file.replace(/\.md$/, '');
-    fs.writeFileSync(path.join(TO, `${name}.ts`), dataOf(name, text));
+    fs.writeFileSync(path.join(TO, `${name}.ts`), dataOf(text));
     fs.writeFileSync(path.join(TO, file), text);
   }
   console.log(

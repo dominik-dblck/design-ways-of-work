@@ -6,11 +6,9 @@
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
+import { HERE, PRODUCT_REPO, repoAt } from './repos.ts';
 
-const HERE = path.resolve(import.meta.dirname, '..');
-const PRODUCT = path.basename(
-  path.resolve(process.argv[2] ?? path.join(HERE, '..', 'eagle-design')),
-);
+const PRODUCT = path.basename(repoAt(PRODUCT_REPO));
 const COPY = path.join(HERE, '.rehearsal', PRODUCT);
 const PATCH = path.join(HERE, 'ports', PRODUCT, 'port.patch');
 

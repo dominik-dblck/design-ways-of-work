@@ -7,14 +7,10 @@
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
+import { HERE, PRODUCT_REPO, repoAt } from './repos.ts';
 
-const HERE = path.resolve(import.meta.dirname, '..');
-const SOURCE = path.resolve(
-  process.argv[2] ?? path.join(HERE, '..', 'eagle-design'),
-);
-const COPY = path.resolve(
-  process.argv[3] ?? path.join(HERE, '.rehearsal', path.basename(SOURCE)),
-);
+const SOURCE = repoAt(PRODUCT_REPO);
+const COPY = repoAt(path.join(HERE, '.rehearsal', path.basename(SOURCE)), 1);
 const DESIGN = path.join(HERE, 'design');
 const DEV = path.join(HERE, 'dev');
 const SHARED = path.join(HERE, 'shared');

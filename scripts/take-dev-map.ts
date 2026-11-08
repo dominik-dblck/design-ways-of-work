@@ -5,11 +5,9 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { BUILD_REPO, HERE, repoAt } from './repos.ts';
 
-const HERE = path.resolve(import.meta.dirname, '..');
-const SOURCE = path.resolve(
-  process.argv[2] ?? path.join(HERE, '..', 'mailing-automation'),
-);
+const SOURCE = repoAt(BUILD_REPO);
 const TO = path.join(HERE, 'dev', 'map.ts');
 
 // the build repository's own product: its routes, its screens' renderers, its domain's concepts

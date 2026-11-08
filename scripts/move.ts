@@ -6,8 +6,8 @@
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
+import { HERE } from './repos.ts';
 
-const HERE = path.resolve(import.meta.dirname, '..');
 const DESIGN = path.join(HERE, 'design');
 const SPECIFIER =
   /(from\s+|import\s*\(\s*|import\s+|export\s+\*\s+from\s+)(['"])(\.{1,2}\/[^'"]+)\2/g;

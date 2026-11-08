@@ -43,3 +43,6 @@ for the port (phase 8) or the PM's word. Ranked: the first of each group is the 
     pages follow them.
 11. ds-scan leaves `buildReads`: eagle-dev loads it and never calls it; its `dsScan` test runs an old JS copy
     and can go with it.
+12. The agent's hooks: `tools/lintEdited.ts` and the Stop hook become `shared/hooks/edit-check.ts` and
+    `chunk-check.ts`; the product names a `check:chunk` script (ls-lint, Prettier, ESLint, tsc, jscpd, knip).
+13. `aPublishedPathHasOneSource` says what the build's `refuseClashes` already refuses: one of them goes.

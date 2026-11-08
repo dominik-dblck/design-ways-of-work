@@ -54,6 +54,21 @@
         move to `shared/rules/components.ts` once design-side tests hold them
 - [ ] one design system at the top, `design-system/`: the tokens and the shared atomic components, loaded into every
       repository by a script, never copied by hand (PM, 8 Nov; changes D62, where eagle-dev owned it)
+      - the same for both sides, and all TypeScript: no CSS and no HTML in this repository; what a browser needs
+        is written by a build. A change a repository asks for goes, once approved, up to its root here (PM, 8 Nov)
+- [x] the checks are tools first (PM, 8 Nov · A): linters, then tsc, unit tests last, for what crosses files
+      in a way no tool reads. ls-lint (the tree), jscpd (a block written twice, 50 tokens), knip (what nobody
+      reads) beside ESLint and Prettier; `yarn check:chunk` runs them all, in ~5 s
+      - work goes in chunks: the agent's Stop hook (`shared/hooks/chunk-check.ts`) runs `check:chunk` on
+        uncommitted work and sends the agent back while it is red; the edit hook (`shared/hooks/edit-check.ts`)
+        formats and fixes each file written; pre-commit runs `check:chunk` too; both hooks read the repository
+        they run in, so a product takes them with `shared/`
+      - ls-lint's config is data (`shared/lint/fileRules.ts`), printed as YAML only for the run
+      - jscpd found five copies in `scripts/`: `scripts/repos.ts` and `scripts/ruleTables.ts` hold them once
+- [ ] the checks as tools, ported: the 36 design-side checks and the 23 both sides wrote twice, each to the first
+      tool that holds it (ESLint `boundaries`, `import-x`, `no-restricted-syntax`, `max-params`, `no-nested-ternary`,
+      `naming-convention`; ls-lint; jscpd; knip; tsc unions for token names, rule keys and gates), the rest one
+      shared test; known fails in ESLint's suppressions, one mechanism
 - [x] no file named by a number: the documents' parts named by what they hold (15 pipeline parts, 2 api-convention
       parts, agent-instructions in one file); `aFileNamesItsPurpose` refuses a number; size.md says why
 
