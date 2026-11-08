@@ -102,6 +102,12 @@ async function bundlePage(file: string, page: Page): Promise<void> {
   fs.writeFileSync(path.join(OUT, page.shell), shellOf(page));
 }
 
+// two sources written at one published path: the second would overwrite the first unseen
+function refuseClashes(outputs: readonly string[]): void {
+  const twice = outputs.filter((one, at) => outputs.indexOf(one) !== at);
+  if (twice.length) throw new Error(`two sources write ${twice.join(', ')} in dist/project`);
+}
+
 // every file a home holds but its TypeScript, at its published path
 function copyFiles(): number {
   const files = filesOf().filter((file) => !file.endsWith('.ts'));
@@ -157,11 +163,15 @@ fs.rmSync(OUT, { recursive: true, force: true });
 const copied = copyFiles();
 const icons = copyNamedIcons(OUT);
 const scripts = filesOf().filter(isEntry);
-await Promise.all(scripts.map(bundle));
 const pages = filesOf().flatMap((file) => {
   const page = pageOf(file);
   return page ? [{ file, page }] : [];
 });
+refuseClashes([
+  ...scripts.map((file) => `${path.basename(file, '.ts')}.js`),
+  ...pages.flatMap(({ page }) => [page.script, page.shell]),
+]);
+await Promise.all(scripts.map(bundle));
 await Promise.all(pages.map(({ file, page }) => bundlePage(file, page)));
 writeModuleEntries();
 writeModuleImports();

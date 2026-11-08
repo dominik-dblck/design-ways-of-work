@@ -29,7 +29,10 @@
         type page, a legacy page
 - [x] every icon a source names is written from lucide-static (21 today); `public/lucide-icons` (71 hand copies,
       used only by the legacy pages) does not come here, and the port drops it from eagle
-- [ ] a third page, Wireframes, and its view in `app/workspace/`: a placeholder first (PM, 8 Nov)
+- [x] a third page, Wireframes, and its view `app/workspace/wireframes-view.ts`: every screen of the sheet by track,
+      each a placeholder frame until the design system's components draw it; tested
+      - found on the way: a page's bundle could overwrite a sheet module's (`wireframes.js`): a page bundles as
+        `<page>-page.js` now, and the build refuses two sources at one path
 - [ ] `dev/` holds the build side's coding rules and skills (arch review, a component's structure…), taken from
       eagle-dev, and its folder structure, atomic design, product-agnostic
 - [ ] the design side's own pages follow those rules: Board, Feature and Wireframes restructured the eagle-dev way

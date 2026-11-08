@@ -211,7 +211,7 @@ interface Page {
 
 const A_PAGE = /^app\/pages\/([a-z][a-z\d-]*)\.tsx$/;
 
-// a page's bundle keeps its file's name; its shell and its title are that name in capitals
+// a page's bundle is its file's name and `-page`, never a module's; its shell and title, the name in capitals
 function pageOf(file: string): Page | null {
   const name = A_PAGE.exec(file)?.[1];
   if (name === undefined) return null;
@@ -219,7 +219,7 @@ function pageOf(file: string): Page | null {
     .split('-')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
-  return { script: `${name}.js`, shell: `${title}.html`, title };
+  return { script: `${name}-page.js`, shell: `${title}.html`, title };
 }
 
 export {
