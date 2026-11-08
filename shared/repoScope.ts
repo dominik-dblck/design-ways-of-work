@@ -1,10 +1,17 @@
 /**
- * - `RepoScope` · what a repository names once, for its ESLint, shared tests, tools
- * - `testsOf` · the files read as tests: the convention (`TESTS`), and a scope's own
+ * - `RepoScope`, `Generator` · what a repository names once; a script that emits
+ * - `testsOf`, `SHARED_TESTS` · the files read as tests; the way of working's own
  */
 import type { Renderer } from './lint/componentLadders.ts';
 import type { Named } from './lint/rules/fileNamesItsPurpose.ts';
 import type { Family } from './lint/rules/oneHomePerName.ts';
+
+// a script writing what it generates under `--out <folder>`; `writes` globs what it owns, `!` not
+interface Generator {
+  readonly script: string;
+  readonly args: readonly string[];
+  readonly writes: readonly string[];
+}
 
 interface RepoScope {
   readonly root: string;
@@ -28,10 +35,15 @@ interface RepoScope {
   readonly components: readonly string[];
   readonly componentShape: boolean;
   readonly renderers: readonly Renderer[];
+  readonly generators: readonly Generator[];
 }
+
+// the way of working's shared tests, which each side's runner includes beside its own
+const SHARED_TESTS = 'shared/tests';
 
 const TESTS = [
   'tests/**',
+  `${SHARED_TESTS}/**`,
   '**/__tests__/**',
   '**/*.test.{ts,tsx}',
   '**/*.test-d.ts',
@@ -43,5 +55,5 @@ const testsOf = (scope: RepoScope): readonly string[] => [
   ...scope.tests,
 ];
 
-export { testsOf };
-export type { RepoScope };
+export { SHARED_TESTS, testsOf };
+export type { Generator, RepoScope };

@@ -1,6 +1,6 @@
 /**
  * - `knipConfig` · knip from a scope: a file, an export or a type nobody reads
- * - its entries: the scope's, what it starts from, what its Claude hooks run
+ * - its entries: the scope's, what it starts from, its generators, its hooks' runs
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -38,6 +38,7 @@ const knipConfig = (scope: RepoScope): KnipSettings => ({
   entry: [
     ...scope.entries,
     ...scope.starts,
+    ...scope.generators.map(({ script }) => script),
     ...hookRuns(scope.root),
     ...CONFIGS,
   ],

@@ -5,7 +5,7 @@ import { ESLint } from 'eslint';
 import fs from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { ROOT, textsUnder } from './tree.ts';
+import { ROOT, TEST_HOMES, textsUnder } from './tree.ts';
 import type { Source } from './tree.ts';
 
 const LONGEST = 200;
@@ -87,7 +87,7 @@ async function theWorld(): Promise<World> {
     // what ESLint runs with, wherever the config spells it
     lintOptions: JSON.stringify(config?.linterOptions ?? {}),
     testFiles: new Set(
-      textsUnder('tests', ['.test.ts']).map((one) =>
+      TEST_HOMES.flatMap((home) => textsUnder(home, ['.test.ts'])).map((one) =>
         path.posix.basename(one.path, '.ts'),
       ),
     ),

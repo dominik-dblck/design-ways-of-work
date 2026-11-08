@@ -3,7 +3,7 @@
  * - a skipped test names what it waits on, in a `waits on` comment on its line or the one above
  */
 import { describe, expect, it } from 'vitest';
-import { productionSources, textsUnder } from './tree.ts';
+import { productionSources, TEST_HOMES, textsUnder } from './tree.ts';
 
 const A_TEST_FILE = /\.test\.tsx?$/;
 const A_SWITCH =
@@ -26,7 +26,11 @@ describe('a test lives under tests/', () => {
     expect(
       textsUnder('.', ['.ts', '.tsx'])
         .map((source) => source.path)
-        .filter((file) => A_TEST_FILE.test(file) && !file.startsWith('tests/')),
+        .filter(
+          (file) =>
+            A_TEST_FILE.test(file) &&
+            !TEST_HOMES.some((home) => file.startsWith(`${home}/`)),
+        ),
     ).toEqual([]);
   });
 
@@ -58,8 +62,9 @@ describe('a test lives under tests/', () => {
       ),
     ).toEqual([]);
     expect(
-      textsUnder('tests', ['.ts', '.tsx']).flatMap((source) =>
-        silentSkipsIn(source.text).map((line) => `${source.path}:${line}`),
+      TEST_HOMES.flatMap((home) => textsUnder(home, ['.ts', '.tsx'])).flatMap(
+        (source) =>
+          silentSkipsIn(source.text).map((line) => `${source.path}:${line}`),
       ),
     ).toEqual([]);
   });

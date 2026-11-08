@@ -38,6 +38,8 @@ const scope: RepoScope = {
   componentShape: false,
   // and no renderer drawn inside it
   renderers: [],
+  // no file it writes from a source of its own
+  generators: [],
 };
 
 export { scope };

@@ -6,8 +6,9 @@
     "node": "22.23.1"
   },
   "scripts": {
-    "check:chunk": "yarn -s lint:files && yarn -s format:check && yarn -s lint && yarn -s tsc && yarn -s lint:copies && yarn -s lint:exports && yarn -s test:rules",
+    "check:chunk": "yarn -s lint:files && yarn -s format:check && yarn -s lint && yarn -s tsc && yarn -s lint:copies && yarn -s lint:exports && yarn -s test:rules && yarn -s test:shared",
     "test:rules": "vitest run tests/lint",
+    "test:shared": "vitest run shared/tests",
     "tsc": "tsc --noEmit",
     "lint": "eslint .",
     "lint:files": "node scripts/lint-files.ts",

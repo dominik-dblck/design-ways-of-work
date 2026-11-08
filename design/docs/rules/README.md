@@ -7,8 +7,8 @@ reviewer reads only the rows marked `review`, the suite holds the rest. Adapted 
 project has no such code.
 
 Each rule file is data (D21): `{concern}.ts` holds its rows, and `yarn build` writes `{concern}.md` from it
-(`tools/emit.ts`), the table padded to its widest cell. Edit the `.ts`; `aGeneratedFileIsItsModule` fails on a
-hand-edited `.md`.
+(`tools/emit.ts`), the table padded to its widest cell. Edit the `.ts`; the shared `aGeneratedFileIsAFreshEmit`
+fails on a hand-edited `.md`.
 
 Production code here is a hand-written `.ts` in a home of `tools/layout.ts` or under `tools/`, and a `.mjs` under `tools/`.
 A `.d.ts`, a test and a sheet file still in `.js` (the move to TypeScript, D12) are not.

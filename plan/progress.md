@@ -140,8 +140,15 @@
         the design side's skills are (PM, 8 Nov)
       - [ ] one design system, `wow-design-system` (PM, 8 Nov): `design-system/deblock-guide.md` folded into it,
         one coherent system both products read, no product's own in it · after chunk 6
+      - [ ] chunk 7, seven parts: 7a the generators' check mode, the first shared test (`plan/eagle-notes.md` 32,
+        `plan/dev-notes.md` 21) ✓ · 7b the tests both sides wrote twice, shared on the scope (the skills, a
+        sentence once, every rule's gate, the docs' paths) · 7c one baseline format · 7d sonarjs · 7e cspell ·
+        7f syncpack · 7g commitlint
       - [ ] the shared tests read `scope.ts` (chunk 7), with the way of working's one baseline format
       - [ ] the spawn check: a blank repository from the template green on every shared check (phase 7)
+      - [ ] the way of working's own owner (PM, 8 Nov · A): once both ports land, a session `wow` is this
+        repository's one writer; the design and build sides send it requests, take it by a tag through their port
+        script, and cross-check each change on their own tree; until then the design side finishes the extraction
 - [ ] the e2e framework comes to the way of working whole (PM, 8 Nov): eagle-dev's e2e skills (`e2e`,
       `e2e-category`, `e2e-discovery`), `e2e/framework/` (13 files) and the test-id registry, the journeys staying
       each product's; its 11 gates become shared tests

@@ -1777,10 +1777,10 @@ index 9c7b0cf..ce1fef1 100644
 +export type { TrackFinding, TrackReading, TrackRow };
 diff --git a/scope.ts b/scope.ts
 new file mode 100644
-index 0000000..c01e449
+index 0000000..5e4c66d
 --- /dev/null
 +++ b/scope.ts
-@@ -0,0 +1,99 @@
+@@ -0,0 +1,117 @@
 +// scope.ts · what the design project names once: its ESLint config, its shared tests and its tools read it
 +import type { RepoScope } from './shared/repoScope.ts';
 +import {
@@ -1862,6 +1862,24 @@ index 0000000..c01e449
 +  componentShape: false,
 +  // no renderer: no app drawn inside the app (docs/rules/components.md)
 +  renderers: [],
++  // what the build writes from a module: the emitted JSON, rule files, skills, documents, tokens
++  generators: [
++    {
++      script: 'tools/emit-into.ts',
++      args: [],
++      writes: [
++        'fixtures/data/*.json',
++        'docs/rules/*.md',
++        '!docs/rules/README.md',
++        'dev/rules/*.md',
++        'dev/map.md',
++        'docs/process/*.md',
++        'sheet/contract/*.md',
++        '.claude/skills/*/SKILL.md',
++        'app/styles/tokens.ts',
++      ],
++    },
++  ],
 +  // a types file holds types alone (docs/rules/names.md)
 +  typesOnly: ['**/*Types.ts'],
 +  // a module's file takes its kind's case, and never `index` (docs/rules/names.md)
@@ -2251,3 +2269,21 @@ index 453869a..a4ccd76 100644
    ],
    "exclude": ["node_modules", "dist", "poc", ".artifact"]
  }
+diff --git a/vitest.config.mts b/vitest.config.mts
+index d9e8e7d..712e067 100644
+--- a/vitest.config.mts
++++ b/vitest.config.mts
+@@ -1,10 +1,11 @@
+-// vitest.config.mts · one project for now: the design project's own tests under tests/
++// vitest.config.mts · one project: the design project's own tests, and the way of working's shared ones
+ import { defineConfig } from 'vitest/config';
++import { SHARED_TESTS } from './shared/repoScope.ts';
+ 
+ export default defineConfig({
+   test: {
+     globals: true,
+-    include: ['tests/**/*.test.{ts,tsx}'],
++    include: ['tests/**/*.test.{ts,tsx}', `${SHARED_TESTS}/**/*.test.ts`],
+     passWithNoTests: true,
+     // a scan reads the whole tree, which takes seconds on a loaded machine
+     testTimeout: 30_000,

@@ -150,3 +150,12 @@ for the port (phase 8) or the PM's word. Ranked: the first of each group is the 
     environment (target, lib, modules, JSON, types, JSX, include). Measured on its tree: each 0 but
     `noUncheckedIndexedAccess` (44), `exactOptionalPropertyTypes` (88) and `noPropertyAccessFromIndexSignature`
     (107), which stay out of the base (`plan/progress.md`, the stricter flags).
+32. The generators' check mode is the way of working's first shared test (chunk 7a,
+    `shared/tests/aGeneratedFileIsAFreshEmit.test.ts`, run by each side's vitest, reading `scope.generators`): each
+    generator runs into a fresh folder under `--permission`, allowed to write there alone, and writes what the tree
+    holds byte for byte; each owns its files by `writes` globs, and one it no longer writes is stale. This side's
+    one generator is `tools/emit-into.ts`, its emitted texts under `--out` (the JSON, the rule files, the skills,
+    the documents, `tokens.ts`); `aGeneratedFileIsItsModule` retires. `scope.generated` stays what lint skips. A
+    test lives under `tests/` or the way of working's `shared/tests/` (`TEST_HOMES`, from `SHARED_TESTS` in
+    `shared/repoScope.ts`, which the vitest config reads too). The build side's probe of this copy, its first:
+    48 written, 48 owned, 0 stale; a stale line in `docs/rules/README.md` fixed.

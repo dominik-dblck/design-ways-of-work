@@ -12,11 +12,13 @@
     "shared/hooks/**/*.ts",
     "shared/lint/**/*.ts",
     "shared/repoScope.ts",
+    "shared/tests/**/*.ts",
     "scope.ts",
     "design-system/**/*.ts",
     "tests/**/*.ts",
     "eslint.config.ts",
-    "knip.ts"
+    "knip.ts",
+    "vitest.config.ts"
   ],
   "exclude": ["tests/lint/fixtures/**"]
 }

@@ -152,5 +152,21 @@ mailing-automation: each line waits for its port (phase 9) and the PM's word. Ra
     4 (`e2e/framework/theCoverageRegistry.ts` 9 and 10, `tests/store-contract/store.test.ts` 745,
     `packages/domain/log/digest.test.ts` 120: a parameter property each, a field and an assignment instead);
     `noImplicitOverride` 2 (`app/components/organisms/TypeLibrary/__tests__/theGroupsPage.test.tsx` 61 and 65,
-    `override` on `state` and `render`): all six test code, its to fix on its port branch unless the PM says
-    earlier. `noUncheckedIndexedAccess` 877 (root 454, domain 418, store 5) stays out of the base.
+    `override` on `state` and `render`): all six test code, its to fix on its port branch, unhurried, nothing
+    before it (PM, 8 Nov). `noUncheckedIndexedAccess` 877 (root 454, domain 418, store 5) stays out of the base.
+21. Its generators become `scope.generators` rows at its port (chunk 7a), each `--out` its final text (prettier
+    runs inside the seed generator) and `writes` the globs it owns: generateSeedFixture and generateRunFixture
+    (`--fixtures`), generateSkills (`--source`), generateTokens and renderComponentsDoc given an `--out` (today
+    `--check` and `--print`). The day leaves the `// Generated` line (3 files, `dayless` deleted). Its six tests
+    keep their content and digest halves (the 32 bodies, `QUERY_IDS`, the six forms, `hashes.json`); renderCurlDoc
+    calls the database, so it stays its own test. Its `generated` (`**/__fixtures__/**`, `legacy/**`, tokens) stays
+    what lint skips: it holds the design side's copies, which no generator writes. Its own, on its
+    port branch with the rest (PM, 8 Nov): `.prettierignore` comments still name `.mjs` generators.
+    Its cross-check (read-only, outputs to scratch): seed 13 files, run 1, skills 14 under the permission contract,
+    nothing more needed (prettier's API no cache, no child process); 25 of 28 byte for byte, the 3 others the day
+    alone; tokens and the components doc read-only. Its `writes`, explicit where a folder holds hand-written
+    files: seed `packages/domain/{commands/commandActors,commands/commandBodies,directory/directory,log/blockSpecs,
+    messages/messageTables,model/blockTypes,model/contentTypes,model/nodeData,queries/queryIds,queries/queryParams,
+    seed/__fixtures__/expected,seed/summerInsurance,seed/theCatalog}.ts` · run `packages/domain/log/__fixtures__/run.ts` ·
+    skills `.claude/skills/ticket-*/SKILL.md`, `.claude/skills/ticket/_*.md`, `roadmaps/templates/ticket-*.md` ·
+    tokens `app/styles/tokens.ts` · components `docs/components.md`.

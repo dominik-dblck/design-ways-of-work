@@ -8,10 +8,15 @@ import path from 'node:path';
 import { entryOfPart, filesOf, isEntry } from '../../tools/layout.ts';
 import { ROOT } from '../../tools/root.ts';
 import { isGenerated } from '../../shared/lint/header.ts';
+import { SHARED_TESTS } from '../../shared/repoScope.ts';
 
 export type Source = { readonly path: string; readonly text: string };
 
 export { ROOT };
+
+// where a test lives: the product's own, and the way of working's shared ones
+const TEST_HOMES = ['tests', SHARED_TESTS] as const;
+export { TEST_HOMES };
 
 const NEVER_WALKED = ['node_modules', '.git', 'dist', 'poc', '.artifact'];
 
