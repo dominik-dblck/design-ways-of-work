@@ -26,12 +26,15 @@ const A_PART: FolderRules = {
   '.*': 'exists:0',
 };
 
-// one root's folders: a component, a stray folder in it, an atom's parts, the shape's depths
+// one root's folders: its tiers, a component, a stray folder in it, an atom's parts, the shape's depths
 const foldersOf = (
   root: string,
 ): readonly (readonly [string, FolderRules])[] => {
   const shape = `${root}/${ANY_TIER}/*/{${SHAPE_FOLDERS.join(',')}}`;
+  // a root holds its tiers and its tests, nothing else
+  const tiers = [root.slice(root.lastIndexOf('/') + 1), ...TIERS, '__tests__'];
   return [
+    [root, { '.dir': `regex:^(?:${tiers.join('|')})$` }],
     [
       `${root}/${ANY_TIER}/*`,
       {

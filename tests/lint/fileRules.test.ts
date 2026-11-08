@@ -26,6 +26,15 @@ describe("a repository's folder rules", () => {
     ]);
   });
 
+  it("a folder no key covers takes the root's rules, keyed ''", () => {
+    expect(
+      lintedTree(['app/x.ts', 'stray/y.ts', 'notes/z.md'], {
+        folders: { '': { '.dir': 'regex:^(?:app|notes)$' }, ...FOLDERS },
+        ignore: [],
+      }),
+    ).toEqual(['stray']);
+  });
+
   it('a style, a page and a script are banned in every folder, found by their folder, an ignored one aside', () => {
     expect(
       lintedTree(['app/deep/look.css', 'notes/page.html', 'dist/bundle.js'], {

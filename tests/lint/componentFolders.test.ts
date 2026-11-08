@@ -31,7 +31,7 @@ describe('a component folder has its shape', () => {
     ).toEqual([]);
   });
 
-  it('a loose file, a stray folder, an atom with parts, under either root', () => {
+  it('a loose file, a stray folder, a folder no tier, an atom with parts, under either root', () => {
     expect(
       lintedTree(
         [
@@ -44,6 +44,7 @@ describe('a component folder has its shape', () => {
           `${COMPONENTS}/molecules/Planted/components/Row.tsx`,
           `${COMPONENTS}/organisms/EditorScreen/components/state-views/ReadyView.tsx`,
           `${COMPONENTS}/atoms/Dot/components/DotPart.tsx`,
+          `${COMPONENTS}/junk/stray.ts`,
           'app/renderers/mobile/components/organisms/MobileHome/homeWords.ts',
         ],
         RULES,
@@ -51,6 +52,7 @@ describe('a component folder has its shape', () => {
     ).toEqual([
       `${COMPONENTS}/atoms/Dot/components`,
       `${COMPONENTS}/atoms/Dot/components`,
+      `${COMPONENTS}/junk`,
       `${COMPONENTS}/molecules/Planted/Extra`,
       `${COMPONENTS}/molecules/Planted/Extra`,
       `${COMPONENTS}/molecules/Planted/plantedWords.ts`,

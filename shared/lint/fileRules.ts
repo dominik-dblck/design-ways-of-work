@@ -1,7 +1,7 @@
 /**
  * - `fileLintConfig` · ls-lint's config: no style, page or script file in a folder
  * - `FolderRules` · a repository's naming of its folders, a key covering those below
- * - each folder gets one rule set, its most specific key's: ls-lint picks no glob
+ * - a folder gets its most specific key's rules, else the root's, keyed `''`
  */
 import { minimatch } from 'minimatch';
 import fs from 'node:fs';
@@ -73,14 +73,14 @@ function bansIn(root: string, folder: string): FolderRules {
   };
 }
 
-// the most specific key covering a folder, the later of two alike; the bans always
+// the most specific key covering a folder, the later of two alike, else the root's; the bans always
 function rulesOf(folder: string, folders: Folders): FolderRules {
   const depth = (key: string): number => key.split('/').length;
   const [, rules] = Object.entries(folders)
     .filter(([key]) => covers(key, folder))
     .reduce<readonly [number, FolderRules]>(
       (best, [key, own]) => (depth(key) >= best[0] ? [depth(key), own] : best),
-      [0, {}],
+      [0, folders[''] ?? {}],
     );
   return rules;
 }

@@ -179,3 +179,14 @@ for the port (phase 8) or the PM's word. Ranked: the first of each group is the 
     `molecules` elsewhere is no component (eagle-dev's probe).
     The folder-shape row and the drawer-word row are shared now. The two height suppressions in its organisms
     go: the day bars and the screen frame take an aspect ratio (5 / 1, 16 / 9), size following width.
+35. Every folder has its place (chunk 6g, the PM's audit): `tools/lint-files.ts` passes ls-lint the rules
+    `tools/layout/folderRules.ts` writes from the homes: a home that bundles names its folders (its child homes
+    and the folder of each module straight in it, an entry or one written as JSON), every folder on the way to a
+    home names its children, and a home that bundles nothing, the repository's own folders (`OWN_FOLDERS`:
+    tools, tests, .claude, .husky, design-system, notes) and a module's folder are free below. A new folder
+    anywhere else fails, naming the ones it could be. The root's rules are keyed `''` (`shared/lint/fileRules.ts`).
+    The way of working keeps its rules (`scripts/keeps-its-rules.ts`, in its check:chunk): no ESLint or
+    TypeScript directive in a file of its own, read from the compiler's comments (a JSX brace's too, and one
+    TypeScript honours in a JSDoc comment, `/** @ts-expect-error */`), and no suppression of a linked file in
+    the rehearsal copy. A component root names its tiers and its tests (`componentFolders`), so a stray folder
+    under it fails too (eagle-dev's probe).

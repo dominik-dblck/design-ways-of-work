@@ -146,13 +146,14 @@
         (the PM: a part two organisms use stands alone in its tier; one organism's keeps its structure;
         measured: none is used by two) · a part's name and a drawer's word held by ESLint from
         `shared/lint/partNames.ts` (`plan/eagle-notes.md` 34, `plan/dev-notes.md` 23)
-      - [ ] 6g what else breaks the structure, and why no lint caught it (the PM's audit, 8 Nov):
+      - [x] 6g what else breaks the structure, and why no lint caught it (the PM's audit, 8 Nov):
         the 2 breaches held in the way of working's own organisms (`DayBars.tsx` 27, `ScreenPlaceholder.tsx` 25,
         a component writing a height) fixed, never suppressed (done in 6f, an aspect ratio each) · a way of working's file holds no suppression, a
         check in verify · the design side's own folders get ls-lint rules (its `lint-files.ts` passes
         `folders: {}`: app/pages, app/theme, app/workspace, tools/, guards/, tests/, docs/ unheld), written from
         `tools/layout.ts`'s homes, never a second list · `dev/claude` (75 files) held by the shared skill tests
-        (7b) and the build side's skills todo
+        (7b) and the build side's skills todo · done: `keeps-its-rules.ts`, the folders from the homes
+        (`plan/eagle-notes.md` 35, `plan/dev-notes.md` 24)
       - [ ] chunk 7, seven parts: 7a the generators' check mode, the first shared test (`plan/eagle-notes.md` 32,
         `plan/dev-notes.md` 21) ✓ · 7b the tests both sides wrote twice, shared on the scope (the skills, a
         sentence once, every rule's gate, the docs' paths) · 7c one baseline format (`plan/eagle-notes.md` 33, `plan/dev-notes.md` 22) ✓ · 7d sonarjs · 7e cspell ·

@@ -76,6 +76,13 @@ messages read, the next part resumed. When the run is done: `CronDelete 1577e92f
   "—" (its list is empty). `componentOf` reads the scope's roots, never a tier folder anywhere. Undo:
   `PURPOSED` in `shared/lint/partNames.ts`.
 
+- 6g, the repository's own folders (tools, tests, .claude, .husky, design-system, notes) are named in
+  `tools/layout/folderRules.ts`, not added to the layout's homes: a home's files are what the scans and the
+  build read, and these hold none of them. Free below: a home that bundles nothing, an own folder, a module's
+  folder. Undo: `folders: {}` in `tools/lint-files.ts`.
+- 6g, "a way of working's file holds no suppression" is a script of its own (`keeps-its-rules.ts`, run by
+  check:chunk), never part of verify: verify compares the product, this asks another question.
+
 ## Morning: for the PM
 
 - The five patterns beside SSoT and SRP (dependency inversion, ratchet, explicit over implicit, least privilege,
@@ -92,3 +99,13 @@ messages read, the next part resumed. When the run is done: `CronDelete 1577e92f
   through rename.ts? And the two aspect ratios: a look to check on the page.
 - 6f, a purpose in a `constants/` file's name too (`approvalBarLabelWords`, not `approvalBarWords`)? Today
   only in `utils/`; yes renames 88 build-side files by script, the build side recommends no.
+- 6g, the shared checks row says "a file's name or path by ls-lint", while a name's pattern is ESLint's
+  (`file-names-its-purpose`: a scope's `names`, a drawer, now a part's name, one file deciding each). Reword
+  the row (A: a folder and a path by ls-lint, a file's name by ESLint), or move the names to ls-lint (B)?
+- 6g, a file's case outside the homes that bundle is held by nothing (tools/, tests/, app/pages, docs/rules,
+  dev/: measured, mixed kebab, lower and camel), and assets keep their source's names (`ic_de_color_flag.svg`).
+  A rule for them is a new convention: the PM's.
+- 6g, `// prettier-ignore` (eagle-dev's count: 93 in 90 of the way of working's files, the tokens' and the rule
+  tables' aligned rows) is an exemption from a rule it keeps, the format. A: a shape the formatter keeps, no
+  comment; B: one override in the prettier config, its one home; C: `keeps-its-rules` names ESLint and
+  TypeScript alone, and says so. 0 of istanbul, c8, v8, Stryker or knip tags.

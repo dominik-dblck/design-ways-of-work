@@ -183,3 +183,9 @@ mailing-automation: each line waits for its port (phase 9) and the PM's word. Ra
     `aComponentFolderIsStructured` goes to ls-lint only if its port takes `lint-files` with `componentFolders`.
     `aFileNamesItsPurpose` retires only once ESLint also reads "wherever it lies": its 6 Utils/Adapters files
     outside `utils/`, which `wordsOwed` does not read today.
+24. If its port takes `lint-files` (chunk 6g): the root's ls-lint rules are keyed `''`, for a folder no key
+    covers, so a top folder nothing names fails; the design side writes its keys from its layout's homes.
+    Its view: its `docs/map.md` (856 folders, held both ways by `theMapIsTheTree`) would be its homes, one
+    list. A component root now names its tiers and `__tests__` alone: its `app/components/icons/` needs a
+    tier or a scope field at its port. Route segments under `app/api` and `packages/domain/*` areas are held
+    by its map alone. All Dom's.
