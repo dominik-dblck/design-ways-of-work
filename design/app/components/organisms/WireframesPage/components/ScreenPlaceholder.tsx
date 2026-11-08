@@ -8,10 +8,11 @@ import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
 import { wireframesWords as words } from '../../../../workspace/wireframes-view.ts';
 import type { ScreenCard } from '../../../../workspace/wireframes-view.ts';
+import { radiusOf } from '../../../../theme/tokenReads.ts';
 
 function ScreenPlaceholder({ screen }: { readonly screen: ScreenCard }): ReactElement {
   return (
-    <Paper variant="outlined" id={`w-${screen.num}`} sx={{ p: 2, borderRadius: 2 }}>
+    <Paper variant="outlined" id={`w-${screen.num}`} sx={{ p: 2, borderRadius: radiusOf('uiRContainer') }}>
       <Stack spacing={1}>
         <Typography variant="subtitle2">
           {screen.num} · {screen.title}
@@ -25,7 +26,7 @@ function ScreenPlaceholder({ screen }: { readonly screen: ScreenCard }): ReactEl
             border: 1,
             borderStyle: 'dashed',
             borderColor: 'divider',
-            borderRadius: 2,
+            borderRadius: radiusOf('uiRContainer'),
           }}
         >
           <Typography variant="caption" color="textSecondary">{words.placeholder}</Typography>

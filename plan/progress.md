@@ -108,7 +108,16 @@
         the TypeScript resolver; 5 boundaries, the alias rule and the molecule count on one element map; 6 ls-lint,
         knip and tsc from one layout source; 7 the generators' check mode, the shared tests, cspell, syncpack,
         sonarjs, commitlint; 8 the e2e framework · `plan/checks-inventory.tsv` holds each of the 184 tests' tool
-      - [ ] chunk 4: the shapes, the plugin's rules and brands, with the TypeScript resolver
+      - [x] chunk 4: the shapes, the plugin's rules and brands, with the TypeScript resolver · 14 shapes,
+        4 `wow` rules, `production-syntax`, 10 rows to `shared/rules/` (`plan/eagle-notes.md` 22–23, `plan/dev-notes.md` 14–15)
+      - [x] ask eagle-dev how it runs mutation tests (PM, 8 Nov): Stryker 10 on a command runner (`vitest related
+        --bail 1` a mutant, coverage off), the domain folder by folder, then app services and utils, a second pass of
+        the survivors on the database tests; no threshold, a measure; by hand only, never CI nor a hook
+      - [ ] ⏸ mutation tests in the way of working: whether, where, how (PM decides)
+      - [ ] ⏸ eagle-dev's criterion (one file: ESLint · many files or not TS: a test · names: ls-lint · exports:
+        knip · language: tsc · generated: check mode) and its consistency points: one row one gate, one scope
+        contract read by lint and tests, one exception mechanism a tool, one proof it fires, one message shape;
+        spawning a blank product as a check (PM decides, 8 Nov)
 - [ ] the e2e framework comes to the way of working whole (PM, 8 Nov): eagle-dev's e2e skills (`e2e`,
       `e2e-category`, `e2e-discovery`), `e2e/framework/` (13 files) and the test-id registry, the journeys staying
       each product's; its 11 gates become shared tests

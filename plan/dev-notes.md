@@ -59,3 +59,25 @@ mailing-automation: each line waits for its port (phase 9) and the PM's word. Ra
     (`e2e/theDocuments/`, `e2e/theEditor/`…) stay its own. The 11 gates that hold the framework (every role a
     flow, every path walked, test ids from the registry and prefixed, a drag through the framework…) become shared
     tests, each scope naming its own roles and paths.
+
+## The shapes and rules of chunk 4 (8 Nov)
+
+14. **Its tests that are now shapes and `wow` rules.** `timeIsMovedNotWaited` and `aPresenceIsReadOneWay`
+    (shapes on tests), the `__brand` half of `brandsCrossOnce` (every file), `noComponentWritesAHeight`,
+    `anSxIsAsConst` and `aStyleReadsItsScale` (React code), `aWordIsNotInTheMarkup` and `hoverTextIsAHint`
+    (`wow/markup-syntax`), `noTestOnlyBranchInProduction`, `aSchemaIsStrict` (with zod 4's `.loose()`),
+    `copyLivesInAWordsFile` and `.brand()` outside its home (`wow/production-syntax`), `reExportsLiveInBarrels`,
+    `noTestMocksItsSubject`, `aHookIsNamedForItsFile`, `aFileTakesOneStyle` (`wow` rules). Their rows moved to
+    `shared/rules/`: its gate stays its test until the port. A layer, a weight, a fade or a radius named off its
+    scale (`zIndex: 'appBar'`) stays its test: a selector cannot know a scale's names.
+15. **Its scope at its port (its cross-check of chunk 4).** `react` is the look (renderers, icons, `app/styles/**`,
+    `layout.tsx`, `global-error.tsx` out); `markup` is what a person reads, every `app/**/*.tsx`, renderers in;
+    `barrels: ['app/**/route.ts']`, a route re-exporting its own handler; `words:
+    ['packages/domain/messages/**']` (`messageTables.ts`' four tables); `brands: ['packages/domain/model/brands/**']`;
+    `production` decides whether `scripts/` takes `one-call-style` (4 hits there). Its named waits (`aWhile`,
+    `holding`), the two loose schemas that read part of more, its `PhonePreview`/`LayoutPreview` corners and its
+    fixtures' brands are suppressions with their reasons. Its 27 `.not.toMatchTypeOf` in
+    `tests/types/brands.test-d.ts` become `.not.toExtend` (expect-type 1.2), never `.not.toEqualTypeOf`.
+    A corner is one style on both sides (PM, 8 Nov): its `radiusOf` is the design side's too
+    (`design/app/theme/tokenReads.ts`), one helper for both at its port. The TypeScript resolver reads its `@/`
+    aliases (`import-x/no-cycle` proven on an aliased fixture).

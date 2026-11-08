@@ -1,22 +1,10 @@
-import { RuleTester } from 'eslint';
-import { builtinRules } from 'eslint/use-at-your-own-risk';
-import tseslint from 'typescript-eslint';
-import { afterAll, describe, it } from 'vitest';
 import { SHAPES } from '../../shared/lint/shapes.ts';
+import { refusal, restrictedSyntax, shapeTester } from './shapeTester.ts';
 
-// a core rule is tested by ESLint's own RuleTester, its types the core's
-Object.assign(RuleTester, { afterAll, describe, it });
-const ruleTester = new RuleTester({
-  languageOptions: { parser: tseslint.parser },
-});
-
-const restricted = builtinRules.get('no-restricted-syntax');
-if (restricted === undefined)
-  throw new Error('ESLint lost no-restricted-syntax');
 const OPTIONS = [...SHAPES];
-const placeholder = { message: SHAPES[1]?.message ?? '' };
+const placeholder = refusal(SHAPES, 'placeholder');
 
-ruleTester.run('the shapes every file refuses', restricted, {
+shapeTester.run('the shapes every file refuses', restrictedSyntax, {
   valid: [
     {
       name: "a shorthand keeps its source's name",
@@ -52,7 +40,13 @@ ruleTester.run('the shapes every file refuses', restricted, {
       name: 'a count alone',
       code: 'const THE_SEVEN = 7;',
       options: OPTIONS,
-      errors: [{ message: SHAPES[0]?.message ?? '' }],
+      errors: [refusal(SHAPES, 'how many')],
+    },
+    {
+      name: 'a brand written by hand',
+      code: "type Id = string & { readonly __brand: 'Id' };",
+      options: OPTIONS,
+      errors: [refusal(SHAPES, '__brand')],
     },
   ],
 });

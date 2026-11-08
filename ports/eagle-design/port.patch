@@ -705,11 +705,21 @@ index db1e4a6..2b5d301 100644
  **And one the checklist does not ask.** Count the reading table against the criteria. A row the
 diff --git a/eslint-suppressions.json b/eslint-suppressions.json
 new file mode 100644
-index 0000000..b05b116
+index 0000000..5a04f85
 --- /dev/null
 +++ b/eslint-suppressions.json
-@@ -0,0 +1,521 @@
+@@ -0,0 +1,541 @@
 +{
++  "app/components/organisms/BoardPage/components/DayBars.tsx": {
++    "no-restricted-syntax": {
++      "count": 1
++    }
++  },
++  "app/components/organisms/WireframesPage/components/ScreenPlaceholder.tsx": {
++    "no-restricted-syntax": {
++      "count": 1
++    }
++  },
 +  "app/styles/gate-states.ts": {
 +    "no-restricted-syntax": {
 +      "count": 1
@@ -801,6 +811,16 @@ index 0000000..b05b116
 +  "sheet/contract/refusals/refusalSentences.ts": {
 +    "no-restricted-syntax": {
 +      "count": 2
++    }
++  },
++  "sheet/logic/agent/agent-access/accessFlow.ts": {
++    "wow/production-syntax": {
++      "count": 1
++    }
++  },
++  "sheet/logic/agent/agent-flow/agentCommands.ts": {
++    "wow/production-syntax": {
++      "count": 1
 +    }
 +  },
 +  "sheet/logic/approval/approval-logic/approvalChips.ts": {
@@ -1232,10 +1252,10 @@ index 0000000..b05b116
 +}
 \ No newline at end of file
 diff --git a/eslint.config.ts b/eslint.config.ts
-index c66b230..55b6fcf 100644
+index c66b230..dc336c7 100644
 --- a/eslint.config.ts
 +++ b/eslint.config.ts
-@@ -1,98 +1,45 @@
+@@ -1,98 +1,53 @@
 -// eslint.config.ts · the gates of docs/rules/ that ESLint holds, over the design project's TypeScript
 -import js from '@eslint/js';
 -import comments from '@eslint-community/eslint-plugin-eslint-comments';
@@ -1375,6 +1395,14 @@ index c66b230..55b6fcf 100644
 +    { files: 'shared/rules/*.ts', names: ['shared'] },
 +    { files: 'dev/rules/*.ts', names: ['rules'] },
 +  ],
++  // no brand is minted here: the sheet carries no zod
++  brands: [],
++  // the sheet's words home, besides each `{name}Words.ts`
++  words: ['sheet/words/**'],
++  // what a person reads is drawn in TSX
++  markup: ['app/**/*.tsx'],
++  // barrels besides the entries and each `index.ts`: none
++  barrels: [],
 +});
 diff --git a/guards/checks/legacyWorld.ts b/guards/checks/legacyWorld.ts
 new file mode 100644

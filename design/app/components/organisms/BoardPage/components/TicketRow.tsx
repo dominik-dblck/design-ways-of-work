@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import type { TicketLine } from '../../../../workspace/board-view.ts';
 import { toneOf } from '../utils/tones.ts';
 import type { ReactElement } from 'react';
+import { radiusOf } from '../../../../theme/tokenReads.ts';
 
 interface TicketRowProps {
   readonly ticket: TicketLine;
@@ -18,7 +19,7 @@ function TicketRow({ ticket, onOpen }: TicketRowProps): ReactElement {
   return (
     <ListItemButton
       onClick={() => onOpen(ticket.id)}
-      sx={{ gap: 1.5, alignItems: 'baseline', borderRadius: 1 }}
+      sx={{ gap: 1.5, alignItems: 'baseline', borderRadius: radiusOf('uiRControl') }}
     >
       <Typography variant="overline" sx={{ flex: 'none' }}>
         {ticket.id}

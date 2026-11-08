@@ -1,0 +1,89 @@
+/**
+ * - `reExportsInBarrels` · `export … from` stands only in a barrel or an entry
+ * - a barrel re-exports its own folder, never another barrel
+ */
+import type { TSESTree } from '@typescript-eslint/utils';
+import path from 'node:path';
+import ts from 'typescript';
+import { createRule, matchesAny, pathOf } from './ruleKit.ts';
+import type { Context } from './ruleKit.ts';
+
+// the repository path a specifier names: the program's resolution, else a relative one by its folder
+function moduleOf(context: Context, specifier: string): string | null {
+  const program = context.sourceCode.parserServices?.program;
+  const resolved =
+    program === undefined || program === null
+      ? undefined
+      : ts.resolveModuleName(
+          specifier,
+          context.filename,
+          program.getCompilerOptions(),
+          ts.sys,
+        ).resolvedModule;
+  if (resolved !== undefined)
+    return resolved.isExternalLibraryImport === true
+      ? null
+      : pathOf(context, resolved.resolvedFileName);
+  return specifier.startsWith('.')
+    ? path.posix.join(path.posix.dirname(pathOf(context)), specifier)
+    : null;
+}
+
+type Stray = 'outside' | 'away' | 'barrel';
+
+function strayOf(
+  context: Context,
+  {
+    specifier,
+    barrels,
+  }: { readonly specifier: string; readonly barrels: readonly string[] },
+): Stray | null {
+  const file = pathOf(context);
+  if (!matchesAny(file, barrels)) return 'outside';
+  const module = moduleOf(context, specifier);
+  if (module === null || !module.startsWith(`${path.posix.dirname(file)}/`))
+    return 'away';
+  return matchesAny(module, barrels) ? 'barrel' : null;
+}
+
+const reExportsInBarrels = createRule<
+  [{ readonly barrels: readonly string[] }],
+  Stray
+>({
+  name: 're-exports-in-barrels',
+  meta: {
+    type: 'suggestion',
+    docs: {
+      description: 'A re-export stands in a barrel, of its own folder',
+    },
+    messages: {
+      outside:
+        '`export … from {{specifier}}` stands only in a barrel (docs/rules/one-home.md).',
+      away: 'A barrel re-exports its own folder: {{specifier}} is outside it (docs/rules/one-home.md).',
+      barrel:
+        'A barrel re-exports its own folder, never another barrel: {{specifier}} (docs/rules/one-home.md).',
+    },
+    schema: [
+      {
+        type: 'object',
+        properties: { barrels: { type: 'array', items: { type: 'string' } } },
+        additionalProperties: false,
+      },
+    ],
+  },
+  defaultOptions: [{ barrels: [] }],
+  create(context, [{ barrels }]) {
+    const check = (
+      node: TSESTree.ExportAllDeclaration | TSESTree.ExportNamedDeclaration,
+    ): void => {
+      if (node.source === null) return;
+      const specifier = node.source.value;
+      const stray = strayOf(context, { specifier, barrels });
+      if (stray !== null)
+        context.report({ node, messageId: stray, data: { specifier } });
+    };
+    return { ExportAllDeclaration: check, ExportNamedDeclaration: check };
+  },
+});
+
+export { reExportsInBarrels };

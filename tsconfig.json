@@ -19,5 +19,6 @@
     "tests/**/*.ts",
     "eslint.config.ts",
     "knip.ts"
-  ]
+  ],
+  "exclude": ["tests/lint/fixtures/**"]
 }

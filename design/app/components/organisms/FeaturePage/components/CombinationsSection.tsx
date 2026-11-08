@@ -10,6 +10,7 @@ import type { ReactElement } from 'react';
 import { countLine, featureWords as words } from '../../../../workspace/feature-view.ts';
 import type { CombinationView, FeatureView } from '../../../../workspace/feature-view.ts';
 import { SectionHead } from '../../../atoms/SectionHead/index.ts';
+import { radiusOf } from '../../../../theme/tokenReads.ts';
 
 // counting walks every row for seconds, so it runs when asked, after the line has drawn
 function useCount(file: string): readonly [string | null, () => void] {
@@ -24,7 +25,7 @@ function useCount(file: string): readonly [string | null, () => void] {
 function CombinationFile({ one }: { readonly one: CombinationView }): ReactElement {
   const [line, count] = useCount(one.file);
   return (
-    <Paper variant="outlined" sx={{ borderRadius: 2, p: 2 }}>
+    <Paper variant="outlined" sx={{ borderRadius: radiusOf('uiRContainer'), p: 2 }}>
       <Stack spacing={1}>
         <Stack direction="row" spacing={1.5} useFlexGap sx={{ alignItems: 'baseline', flexWrap: 'wrap' }}>
           <Typography variant="subtitle2" sx={{ fontFamily: 'monospace' }}>{one.file}</Typography>

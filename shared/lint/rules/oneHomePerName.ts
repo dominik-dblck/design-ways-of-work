@@ -6,7 +6,7 @@ import { ESLintUtils } from '@typescript-eslint/utils';
 import path from 'node:path';
 import type ts from 'typescript';
 import { declaredNamesOf } from '../exportedNames.ts';
-import { createRule, pathOf } from './ruleKit.ts';
+import { createRule, matchesAny, pathOf } from './ruleKit.ts';
 import type { Context } from './ruleKit.ts';
 
 interface Family {
@@ -23,14 +23,11 @@ interface Scope {
 
 type Homes = ReadonlyMap<string, readonly string[]>;
 
-const matches = (file: string, globs: readonly string[]): boolean =>
-  globs.some((glob) => path.matchesGlob(file, glob));
-
 const isCounted = (file: string, scope: Scope): boolean =>
   !file.startsWith('..') &&
   !file.includes('node_modules/') &&
-  matches(file, scope.files) &&
-  !matches(file, scope.ignores) &&
+  matchesAny(file, scope.files) &&
+  !matchesAny(file, scope.ignores) &&
   !scope.entries.includes(file);
 
 // the names a file declares that count: a family's one name is the family's

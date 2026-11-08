@@ -20,4 +20,8 @@ export default eslintConfig({
   parts: [],
   mutable: {},
   families: [],
+  brands: [],
+  words: [],
+  markup: [],
+  barrels: [],
 });

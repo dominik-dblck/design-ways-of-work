@@ -8,6 +8,7 @@ import type { ReactElement } from 'react';
 import { open, ports, words } from '../../../../workspace/board-view.ts';
 import { SectionHead } from '../../../atoms/SectionHead/index.ts';
 import { TitledList } from '../../../atoms/TitledList/index.ts';
+import { radiusOf } from '../../../../theme/tokenReads.ts';
 
 function OutsideAndOpen(): ReactElement {
   return (
@@ -21,7 +22,7 @@ function OutsideAndOpen(): ReactElement {
         }}
       >
         {ports().map((port) => (
-          <Paper key={port.name} variant="outlined" sx={{ p: 2.5, borderRadius: 2 }}>
+          <Paper key={port.name} variant="outlined" sx={{ p: 2.5, borderRadius: radiusOf('uiRContainer') }}>
             <TitledList
               label={`${port.name} · ${port.epic}`}
               lines={port.questions}
@@ -30,7 +31,7 @@ function OutsideAndOpen(): ReactElement {
         ))}
       </Box>
       <SectionHead {...words.open} />
-      <Paper variant="outlined" sx={{ p: 2.5, borderRadius: 2 }}>
+      <Paper variant="outlined" sx={{ p: 2.5, borderRadius: radiusOf('uiRContainer') }}>
         <Stack spacing={2}>
           {open().map((point) => (
             <TitledList key={point.area} label={point.area} lines={[point.why]} />

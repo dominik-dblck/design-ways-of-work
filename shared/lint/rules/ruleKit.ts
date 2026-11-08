@@ -1,6 +1,7 @@
 /**
  * - `createRule` · a rule of the way of working's plugin, documented by its gate
  * - `syntaxOf`, `pathOf` · the file a rule reads: its tree, its repository path
+ * - `matchesAny` · whether a repository path is one a scope's globs name
  */
 import { ESLintUtils } from '@typescript-eslint/utils';
 import type { TSESLint } from '@typescript-eslint/utils';
@@ -37,5 +38,8 @@ function syntaxOf(context: Context): ts.SourceFile {
 const pathOf = (context: Context, file = context.filename): string =>
   path.relative(context.cwd, file).split(path.sep).join('/');
 
-export { createRule, pathOf, syntaxOf };
+const matchesAny = (file: string, globs: readonly string[]): boolean =>
+  globs.some((glob) => path.matchesGlob(file, glob));
+
+export { createRule, matchesAny, pathOf, syntaxOf };
 export type { Context };

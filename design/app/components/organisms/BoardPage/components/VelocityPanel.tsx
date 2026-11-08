@@ -14,6 +14,7 @@ import type { Velocity } from '../../../../workspace/board-view.ts';
 import { DayBars } from './DayBars.tsx';
 import { SectionHead } from '../../../atoms/SectionHead/index.ts';
 import { VelocityTable } from './VelocityTable.tsx';
+import { radiusOf } from '../../../../theme/tokenReads.ts';
 
 interface VelocityPanelProps {
   readonly pace: Velocity;
@@ -27,7 +28,7 @@ function VelocityPanel({ pace }: VelocityPanelProps): ReactElement {
   return (
     <Stack spacing={1.5}>
       <SectionHead label={velocity.label} note={velocity.note} />
-      <Paper variant="outlined" sx={{ borderRadius: 2, p: 2.5 }}>
+      <Paper variant="outlined" sx={{ borderRadius: radiusOf('uiRContainer'), p: 2.5 }}>
         <Stack spacing={2}>
           <Typography variant="body2">{pace.summary}</Typography>
           <Box

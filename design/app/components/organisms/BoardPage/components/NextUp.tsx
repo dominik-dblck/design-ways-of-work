@@ -10,6 +10,7 @@ import { words } from '../../../../workspace/board-view.ts';
 import type { TicketLine } from '../../../../workspace/board-view.ts';
 import { SectionHead } from '../../../atoms/SectionHead/index.ts';
 import { TicketRow } from './TicketRow.tsx';
+import { radiusOf } from '../../../../theme/tokenReads.ts';
 
 interface NextUpProps {
   readonly tickets: readonly TicketLine[];
@@ -20,7 +21,7 @@ function NextUp({ tickets, onTicket }: NextUpProps): ReactElement {
   return (
     <Stack spacing={1.5}>
       <SectionHead {...words.nextUp} />
-      <Paper variant="outlined" sx={{ borderRadius: 2, p: 1 }}>
+      <Paper variant="outlined" sx={{ borderRadius: radiusOf('uiRContainer'), p: 1 }}>
         {tickets.length ? (
           <List dense disablePadding>
             {tickets.map((ticket) => (

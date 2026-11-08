@@ -73,3 +73,14 @@ for the port (phase 8) or the PM's word. Ranked: the first of each group is the 
     word): `plan/renames-chunk-3*.tsv`.
 21. A component's header (`.tsx`) was never read by `aFileStatesItsJob`, which walked `.ts` alone: ESLint reads
     every production file, and 16 bullets over 80 characters were cut in the way of working's own components.
+22. The shared shapes of chunk 4 find four things, each held in `eslint-suppressions.json` until decided: two
+    heights in the way of working's own components (`DayBars`' plot, `ScreenPlaceholder`'s `minHeight`), layout
+    sizes the height shape reads as a control's; and two `…_WORDS` tables the product declares outside a words
+    home (`accessFlow.ts`' `SWITCH_WORDS`, `agentCommands.ts`' `KIND_WORDS`). The scope names `sheet/words/**`
+    as a words home besides each `{name}Words.ts`, and no brand home (the sheet carries no zod).
+23. A corner is one style on both sides (PM, 8 Nov): a role of the design system's radius scale read by name,
+    `radiusOf('uiRContainer')` on `borderRadius` (MUI counts it in `shape.borderRadius`, the control's 8px) and
+    `lengthOf('uiRTag')` on one corner (plain CSS, px). The way of working's 15 corners moved to it, the same
+    pixels (`borderRadius: 2` was 16px, `uiRContainer`). The three React rows of `docs/rules/styling.ts` (a
+    colour, a space, raw markup) are held by the shared shapes but are still this side's own: they join the
+    build side's into `shared/rules/styling.ts` with one wording, a later step.

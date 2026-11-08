@@ -7,6 +7,7 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
 import type { IdeaCard } from '../../../../workspace/board-view.ts';
+import { radiusOf } from '../../../../theme/tokenReads.ts';
 
 interface IdeaTileProps {
   readonly idea: IdeaCard;
@@ -15,7 +16,7 @@ interface IdeaTileProps {
 
 function IdeaTile({ idea, onOpen }: IdeaTileProps): ReactElement {
   return (
-    <Card variant="outlined" sx={{ borderRadius: 2 }}>
+    <Card variant="outlined" sx={{ borderRadius: radiusOf('uiRContainer') }}>
       <CardActionArea onClick={() => onOpen(idea.id)} sx={{ p: 2 }}>
       <Stack spacing={0.75}>
         <Typography variant="overline" color="textSecondary">

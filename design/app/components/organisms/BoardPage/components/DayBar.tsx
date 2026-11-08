@@ -4,6 +4,7 @@
 import Box from '@mui/material/Box';
 import Tooltip from '@mui/material/Tooltip';
 import type { ReactElement } from 'react';
+import { lengthOf } from '../../../../theme/tokenReads.ts';
 
 interface DayBarProps {
   readonly day: string;
@@ -21,8 +22,9 @@ function DayBar({ day, count, peak }: DayBarProps): ReactElement {
             width: '100%',
             height: `${(100 * count) / peak}%`,
             bgcolor: 'primary.main',
-            borderTopLeftRadius: (theme) => Number(theme.shape.borderRadius) / 2,
-            borderTopRightRadius: (theme) => Number(theme.shape.borderRadius) / 2,
+            // one corner is plain CSS, in px: only `borderRadius` counts in the theme's units
+            borderTopLeftRadius: lengthOf('uiRTag'),
+            borderTopRightRadius: lengthOf('uiRTag'),
           }}
         />
       </Box>
