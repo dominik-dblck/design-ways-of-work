@@ -85,22 +85,25 @@ function configs(): void {
   );
 }
 
-function main(): void {
-  fs.rmSync(COPY, { recursive: true, force: true });
+// the product's tracked files, but the way of working's own, copied as they are
+function copyProduct(): number {
   const tracked = execFileSync('git', ['ls-files'], {
     cwd: SOURCE,
     encoding: 'utf8',
   })
     .split('\n')
-    .filter(Boolean);
-  let copied = 0;
-  let linked = 0;
-  for (const file of tracked.filter((one) => !WOW.has(one))) {
+    .filter((file) => file !== '' && !WOW.has(file));
+  for (const file of tracked) {
     const target = path.join(COPY, file);
     fs.mkdirSync(path.dirname(target), { recursive: true });
     fs.copyFileSync(path.join(SOURCE, file), target);
-    copied += 1;
   }
+  return tracked.length;
+}
+
+// this repository's homes linked file by file, and its packages linked whole
+function linkHomes(): number {
+  let linked = 0;
   for (const [home, at] of LINKED_HOMES)
     for (const file of filesUnder(path.join(HERE, home))) {
       const target = path.join(COPY, at, file);
@@ -112,18 +115,28 @@ function main(): void {
     path.join(HERE, 'node_modules'),
     path.join(COPY, 'node_modules'),
   );
+  return linked;
+}
+
+function applyPort(): boolean {
+  if (!fs.existsSync(PATCH)) return false;
+  execFileSync('git', ['apply', '--whitespace=nowarn', PATCH], {
+    cwd: COPY,
+    stdio: 'inherit',
+  });
+  commit('the port');
+  return true;
+}
+
+function main(): void {
+  fs.rmSync(COPY, { recursive: true, force: true });
+  const copied = copyProduct();
+  const linked = linkHomes();
   configs();
   execFileSync('git', ['init', '-q'], { cwd: COPY });
   commit('the product, design/ linked');
   execFileSync('git', ['tag', 'product'], { cwd: COPY });
-  const patched = fs.existsSync(PATCH);
-  if (patched) {
-    execFileSync('git', ['apply', '--whitespace=nowarn', PATCH], {
-      cwd: COPY,
-      stdio: 'inherit',
-    });
-    commit('the port');
-  }
+  const patched = applyPort();
   console.log(
     `${path.relative(HERE, COPY) || COPY} · ${copied} product files copied, ${linked} files of design/, dev/, shared/ and design-system/ linked, ${patched ? 'the port applied' : 'no port'}`,
   );

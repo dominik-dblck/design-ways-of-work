@@ -4,5 +4,6 @@ design/
 dev/
 shared/rules/
 ports/
+legacy/
 plan/
 *.md

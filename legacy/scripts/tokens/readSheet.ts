@@ -37,27 +37,38 @@ function dedent(text: string): string {
     .join('\n');
 }
 
-function lightOf(rule: Rule, source: Source, into: SheetGroup[]): void {
+interface Reading {
+  readonly source: Source;
+  readonly into: SheetGroup[];
+}
+
+// a header comment opens a group; any other comment on its own line opens a part
+function headingInto(comment: Comment, { source, into }: Reading): void {
+  const header = HEADER.exec(comment.text);
+  if (!header) {
+    into.at(-1)?.parts.push({ note: dedent(comment.text), tokens: [] });
+    return;
+  }
+  const [, title = '', rest = ''] = header;
+  into.push({
+    source,
+    title,
+    intro: dedent(rest),
+    darkNotes: [],
+    parts: [{ note: null, tokens: [] }],
+  });
+}
+
+function lightOf(rule: Rule, reading: Reading): void {
   const nodes = rule.nodes;
   for (const [at, node] of nodes.entries()) {
-    if (node.type === 'comment' && onItsOwnLine(node)) {
-      const header = HEADER.exec(node.text);
-      if (header) {
-        const [, title = '', rest = ''] = header;
-        into.push({
-          source,
-          title,
-          intro: dedent(rest),
-          darkNotes: [],
-          parts: [{ note: null, tokens: [] }],
-        });
-      } else into.at(-1)?.parts.push({ note: dedent(node.text), tokens: [] });
-    }
+    if (node.type === 'comment' && onItsOwnLine(node))
+      headingInto(node, reading);
     if (node.type !== 'decl') continue;
     const token: SheetToken = { name: node.prop, light: oneLineOf(node.value) };
     const why = besideText(nodes[at + 1]);
     if (why !== null) token.why = why;
-    const part = into.at(-1)?.parts.at(-1);
+    const part = reading.into.at(-1)?.parts.at(-1);
     if (!part) throw new Error(`${node.prop} · declared before any group`);
     part.tokens.push(token);
   }
@@ -121,7 +132,10 @@ function reducedOf(media: Container, groups: readonly SheetGroup[]): void {
   }
 }
 
-function readSheet(css: string, source: Source, sheet: Sheet): void {
+function readSheet(
+  css: string,
+  { source, sheet }: { readonly source: Source; readonly sheet: Sheet },
+): void {
   const own: SheetGroup[] = [];
   postcss.parse(css).each((node) => {
     if (node.type === 'comment') sheet.notes.push(dedent(node.text));
@@ -130,7 +144,7 @@ function readSheet(css: string, source: Source, sheet: Sheet): void {
     if (node.type === 'atrule' && node.name === 'media')
       reducedOf(node, [...sheet.groups, ...own]);
     if (node.type !== 'rule') return;
-    if (node.selector === ':root') lightOf(node, source, own);
+    if (node.selector === ':root') lightOf(node, { source, into: own });
     else if (DARK.test(node.selector)) darkOf(node, [...sheet.groups, ...own]);
     else
       sheet.elements.push({

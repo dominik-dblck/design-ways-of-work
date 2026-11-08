@@ -76,10 +76,17 @@
         edit hook on `shared/hooks/edit-check.ts` (its own `tools/lintEdited.ts` was the same code) and the Stop hook
       - next: a header bullet over 80 characters in this repository's own scripts (about 40) waits for the rule as
         an ESLint rule, so it is held by the tool, not by hand
-- [ ] the checks as tools, ported: the 36 design-side checks and the 23 both sides wrote twice, each to the first
+- [ ] the checks as tools, ported (PM, 8 Nov: imports on ESLint `boundaries` + `import-x`, A; cspell, syncpack,
+      sonarjs and commitlint added): the 36 design-side checks and the 23 both sides wrote twice, each to the first
       tool that holds it (ESLint `boundaries`, `import-x`, `no-restricted-syntax`, `max-params`, `no-nested-ternary`,
       `naming-convention`; ls-lint; jscpd; knip; tsc unions for token names, rule keys and gates), the rest one
       shared test; known fails in ESLint's suppressions, one mechanism
+      - [x] one ESLint config for every repository, `shared/lint/eslintConfig.ts`: wow's and the product's were the
+        same file twice; each now names only its scope. wow's own scripts meet the size rules for the first time
+      - [x] five tests became its rules, each planted case caught as the test caught it: past two parameters
+        (callbacks kept), a chain three deep (two kept, types kept), cycles (type-only kept), an empty clause,
+        an import's extension; the rule rows' design gates name the ESLint rules
+      - the one-shot scripts that refuse a second run moved to `legacy/scripts/`, frozen and out of every check
 - [x] no file named by a number: the documents' parts named by what they hold (15 pipeline parts, 2 api-convention
       parts, agent-instructions in one file); `aFileNamesItsPurpose` refuses a number; size.md says why
 

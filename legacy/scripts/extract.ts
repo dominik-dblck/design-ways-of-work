@@ -6,7 +6,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
-import { HERE, PRODUCT_REPO, repoAt } from './repos.ts';
+import { HERE, PRODUCT_REPO, repoAt } from '../../scripts/repos.ts';
 
 const SOURCE = repoAt(PRODUCT_REPO);
 const OUT = path.join(HERE, 'design');

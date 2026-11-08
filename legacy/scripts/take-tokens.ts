@@ -6,7 +6,7 @@
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
-import { HERE, repoAt } from './repos.ts';
+import { HERE, repoAt } from '../../scripts/repos.ts';
 import {
   elementsModule,
   fontsModule,
@@ -63,21 +63,21 @@ const noteOf = (notes: readonly string[], opening: string): string => {
 
 function readBoth(system: string): Sheet {
   const sheet: Sheet = { groups: [], fonts: [], elements: [], notes: [] };
-  readSheet(
-    fs.readFileSync(path.join(system, 'colors_and_type.css'), 'utf8'),
-    'ds',
+  readSheet(fs.readFileSync(path.join(system, 'colors_and_type.css'), 'utf8'), {
+    source: 'ds',
     sheet,
-  );
-  readSheet(
-    fs.readFileSync(path.join(STYLES, 'tokens.css'), 'utf8'),
-    'product',
+  });
+  readSheet(fs.readFileSync(path.join(STYLES, 'tokens.css'), 'utf8'), {
+    source: 'product',
     sheet,
-  );
+  });
   return sheet;
 }
 
-function writeSystem(sheet: Sheet, system: string): void {
-  const homes = splitGroups(sheet.groups, splitRows());
+type Homes = ReturnType<typeof splitGroups>;
+
+// each home of the system, then the product's own layer in the copy
+function writeHomes(homes: Homes): void {
   const stray = [...homes.keys()].filter(
     (home) =>
       !['product', 'cut', ...HOMES.map(([name]) => name)].includes(home),
@@ -104,20 +104,27 @@ function writeSystem(sheet: Sheet, system: string): void {
       types: '../../design-system/index.ts',
     }),
   );
+}
+
+// the notes, the faces and the element styles, then the fonts and the guide as files
+function writeBeside(sheet: Sheet, system: string): void {
   const darkRule = noteOf(sheet.notes, '===== DARK =====').replace(
     /^===== DARK =====\s*·\s*/,
     '',
   );
-  fs.writeFileSync(
-    path.join(OUT, 'origin.ts'),
+  const write = (file: string, text: string): void => {
+    fs.writeFileSync(path.join(OUT, file), text);
+  };
+  write(
+    'origin.ts',
     originModule(noteOf(sheet.notes, 'Deblock Design System'), darkRule),
   );
-  fs.writeFileSync(
-    path.join(OUT, 'fonts.ts'),
+  write(
+    'fonts.ts',
     fontsModule(sheet.fonts, noteOf(sheet.notes, 'Basis Grotesque Pro')),
   );
-  fs.writeFileSync(
-    path.join(OUT, 'elements.ts'),
+  write(
+    'elements.ts',
     elementsModule(sheet.elements, noteOf(sheet.notes, '===== BASE RESETS')),
   );
   fs.cpSync(path.join(system, 'fonts'), path.join(OUT, 'fonts'), {
@@ -127,6 +134,12 @@ function writeSystem(sheet: Sheet, system: string): void {
     path.join(system, 'README.md'),
     path.join(OUT, 'deblock-guide.md'),
   );
+}
+
+function writeSystem(sheet: Sheet, system: string): void {
+  const homes = splitGroups(sheet.groups, splitRows());
+  writeHomes(homes);
+  writeBeside(sheet, system);
   const cut = homes.get('cut') ?? [];
   console.log(
     `cut, no token in them: ${cut.map((group) => group.title.split(' · ')[0]).join(' · ')}`,

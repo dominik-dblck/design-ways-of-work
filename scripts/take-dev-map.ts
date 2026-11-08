@@ -6,6 +6,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { BUILD_REPO, HERE, repoAt } from './repos.ts';
+import { quoted } from './tsLiteral.ts';
 
 const SOURCE = repoAt(BUILD_REPO);
 const TO = path.join(HERE, 'dev', 'map.ts');
@@ -47,20 +48,18 @@ function treeOf(text: string): readonly TreeLine[] {
     });
 }
 
-const quoted = (text: string): string =>
-  `'${text.replaceAll('\\', '\\\\').replaceAll("'", "\\'")}'`;
-
-function main(): void {
-  const lines = treeOf(
-    fs.readFileSync(path.join(SOURCE, 'docs', 'map.md'), 'utf8'),
-  )
+// the folders of the build repository's map, its product's cut and its domain named by concept
+const mapLines = (): readonly string[] =>
+  treeOf(fs.readFileSync(path.join(SOURCE, 'docs', 'map.md'), 'utf8'))
     .filter((line) => !PRODUCT_FOLDERS.some((one) => one.test(line.path)))
     .flatMap((line) =>
       line.path === 'packages/domain/'
         ? [line.text, DOMAIN_CONCEPT]
         : [line.text],
     );
-  const data = [
+
+const mapModule = (lines: readonly string[]): string =>
+  [
     '/**',
     " * - `directoryMap` · the build repository's folders, every product's: dev/map.md",
     ' */',
@@ -90,7 +89,10 @@ function main(): void {
     'export { directoryMap };',
     '',
   ].join('\n');
-  fs.writeFileSync(TO, data);
+
+function main(): void {
+  const lines = mapLines();
+  fs.writeFileSync(TO, mapModule(lines));
   console.log(
     `dev/map.ts · ${lines.length} folders of ${path.relative(HERE, SOURCE)}/docs/map.md`,
   );

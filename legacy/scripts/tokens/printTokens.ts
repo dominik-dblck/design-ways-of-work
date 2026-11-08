@@ -2,7 +2,7 @@
  * - `groupsModule` · a home's token groups as one TypeScript module, a line a token
  * - `fontsModule`, `elementsModule`, `originModule` · the faces, the element styles, the system's notes
  */
-import { quoted } from '../tsLiteral.ts';
+import { quoted } from '../../../scripts/tsLiteral.ts';
 import type {
   ElementStyle,
   FontFace,

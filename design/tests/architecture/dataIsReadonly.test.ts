@@ -19,7 +19,10 @@ const MUTABLE_BY_DESIGN: Readonly<Record<string, readonly string[]>> = {
 
 const MUTABLE_KINDS = new Set(['Record', 'Map', 'Set']);
 
-function writableIn(node: ts.Node, owner: string, found: Set<string>): void {
+function writableIn(
+  node: ts.Node,
+  { owner, found }: { readonly owner: string; readonly found: Set<string> },
+): void {
   if (
     ts.isPropertySignature(node) &&
     !(ts.getModifiers(node) ?? []).some(
@@ -44,7 +47,7 @@ function writableIn(node: ts.Node, owner: string, found: Set<string>): void {
       node.parent.typeName.getText() === 'Readonly';
     if (!wrapped) found.add(`${owner} · ${node.getText()}`);
   }
-  ts.forEachChild(node, (child) => writableIn(child, owner, found));
+  ts.forEachChild(node, (child) => writableIn(child, { owner, found }));
 }
 
 function writablesIn(source: Source): readonly string[] {
@@ -56,7 +59,10 @@ function writablesIn(source: Source): readonly string[] {
         ts.isTypeAliasDeclaration(statement)) &&
       !allowed.includes(statement.name.text)
     )
-      writableIn(statement, `${source.path} · ${statement.name.text}`, found);
+      writableIn(statement, {
+        owner: `${source.path} · ${statement.name.text}`,
+        found,
+      });
     const exported =
       ts.canHaveModifiers(statement) &&
       (ts.getModifiers(statement) ?? []).some(
@@ -65,11 +71,10 @@ function writablesIn(source: Source): readonly string[] {
     if (ts.isVariableStatement(statement) && exported)
       for (const declaration of statement.declarationList.declarations)
         if (declaration.type)
-          writableIn(
-            declaration.type,
-            `${source.path} · ${declaration.name.getText()}`,
+          writableIn(declaration.type, {
+            owner: `${source.path} · ${declaration.name.getText()}`,
             found,
-          );
+          });
   }
   return [...found];
 }

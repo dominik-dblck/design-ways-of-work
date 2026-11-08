@@ -60,7 +60,10 @@ function shortfallOf(source: Source, world: World): readonly string[] {
 }
 
 async function theWorld(): Promise<World> {
-  const config: { rules?: Record<string, unknown> } = await new ESLint({
+  const config: {
+    rules?: Record<string, unknown>;
+    linterOptions?: Record<string, unknown>;
+  } = await new ESLint({
     cwd: ROOT,
   }).calculateConfigForFile('docs/process/plans.ts');
   const on = Object.entries(config.rules ?? {}).filter(([, setting]) => {
@@ -74,7 +77,8 @@ async function theWorld(): Promise<World> {
   );
   return {
     eslintRules: new Set(on.map(([rule]) => rule)),
-    lintOptions: read('eslint.config.ts'),
+    // what ESLint runs with, wherever the config spells it
+    lintOptions: JSON.stringify(config.linterOptions ?? {}),
     testFiles: new Set(
       textsUnder('tests', ['.test.ts']).map((one) =>
         path.posix.basename(one.path, '.ts'),

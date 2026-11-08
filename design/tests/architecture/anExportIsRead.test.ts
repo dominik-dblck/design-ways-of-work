@@ -3,9 +3,11 @@
  * - `READ_BY_THE_BUILD_SIDE` · what the build repository reads at `359b2ac`, and the pack offers it
  * - a module's data the build writes as JSON is read by name (`tools/layout.ts · emitted`)
  */
+import fs from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { emitted } from '../../tools/layout.ts';
+import { ROOT } from '../../tools/root.ts';
 import { heldToItsBaseline } from './baseline.ts';
 import { exportedValuesOf } from './fileSyntax.ts';
 import {
@@ -180,9 +182,20 @@ function unreadIn(
     .map((name) => `${source.path} · ${name}`);
 }
 
+// the repository's own configs read code too: eslint.config.ts reads the shared lint config
+const rootConfigs = (): readonly Source[] =>
+  fs
+    .readdirSync(ROOT)
+    .filter((file) => /\.config\.m?ts$/.test(file))
+    .map((file) => ({
+      path: file,
+      text: fs.readFileSync(path.join(ROOT, file), 'utf8'),
+    }));
+
 const theReaders = (): readonly Source[] => [
   ...homeTexts(['.ts', '.tsx', '.js', '.html', '.mjs']),
   ...textsUnder('tools', ['.ts', '.mjs']),
+  ...rootConfigs(),
 ];
 
 describe('an export is read', () => {

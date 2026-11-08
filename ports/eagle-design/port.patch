@@ -690,6 +690,125 @@ index db1e4a6..2b5d301 100644
  | …   | any line the file holds beyond these — the file is the count, this table follows it | |
  
  **And one the checklist does not ask.** Count the reading table against the criteria. A row the
+diff --git a/eslint.config.ts b/eslint.config.ts
+index c66b230..bbf3062 100644
+--- a/eslint.config.ts
++++ b/eslint.config.ts
+@@ -1,98 +1,17 @@
+-// eslint.config.ts · the gates of docs/rules/ that ESLint holds, over the design project's TypeScript
+-import js from '@eslint/js';
+-import comments from '@eslint-community/eslint-plugin-eslint-comments';
+-import globals from 'globals';
+-import tseslint from 'typescript-eslint';
++// eslint.config.ts · the way of working's ESLint over the design project's TypeScript
++import { eslintConfig } from './shared/lint/eslintConfig.ts';
+ 
+-// a file a tool writes is exempt from the size rules (docs/rules/size.md · generated files)
+-const GENERATED = ['app/styles/tokens.ts'];
+-
+-const TESTS = ['tests/**', '**/*.test.{ts,tsx}', '**/*.test-d.ts'];
+-
+-export default [
+-  {
+-    ignores: [
+-      'dist/**',
+-      'node_modules/**',
+-      'poc/**',
+-      '.artifact/**',
+-      '**/*.js',
+-      '**/*.mjs',
+-      '**/*.d.ts',
+-    ],
+-  },
+-  js.configs.recommended,
+-  ...tseslint.configs.recommended,
+-  {
+-    files: ['**/*.{ts,tsx}'],
+-    languageOptions: {
+-      parser: tseslint.parser,
+-      parserOptions: { project: true, tsconfigRootDir: import.meta.dirname },
+-      globals: { ...globals.node, ...globals.browser },
+-    },
+-    rules: {
+-      'no-undef': 'off',
+-      '@typescript-eslint/no-unused-vars': [
+-        'error',
+-        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+-      ],
+-      '@typescript-eslint/switch-exhaustiveness-check': 'error',
+-      '@typescript-eslint/no-floating-promises': 'error',
+-      '@typescript-eslint/explicit-module-boundary-types': 'error',
+-      '@typescript-eslint/consistent-type-imports': 'error',
+-      '@typescript-eslint/consistent-type-assertions': [
+-        'error',
+-        { assertionStyle: 'never' },
+-      ],
+-      '@typescript-eslint/ban-ts-comment': [
+-        'error',
+-        { 'ts-expect-error': true },
+-      ],
+-      'id-length': [
+-        'error',
+-        { min: 2, exceptions: ['_'], properties: 'never' },
+-      ],
+-    },
+-  },
+-  {
+-    files: ['**/*.test-d.ts'],
+-    rules: {
+-      '@typescript-eslint/ban-ts-comment': [
+-        'error',
+-        { 'ts-expect-error': 'allow-with-description' },
+-      ],
+-    },
+-  },
+-  {
+-    files: TESTS,
+-    rules: { '@typescript-eslint/consistent-type-assertions': 'off' },
+-  },
+-  {
+-    files: [
+-      'sheet/**/*.ts',
+-      'roadmaps/**/*.ts',
+-      'docs/**/*.ts',
+-      'guards/**/*.ts',
+-      'app/**/*.{ts,tsx}',
+-      'tools/**/*.ts',
+-    ],
+-    ignores: [...TESTS, ...GENERATED],
+-    rules: {
+-      'max-lines': [
+-        'error',
+-        { max: 200, skipBlankLines: true, skipComments: true },
+-      ],
+-      'max-lines-per-function': [
+-        'error',
+-        { max: 40, skipBlankLines: true, skipComments: true },
+-      ],
+-      complexity: ['error', 10],
+-      'max-depth': ['error', 3],
+-    },
+-  },
+-  {
+-    linterOptions: { reportUnusedDisableDirectives: 'error' },
+-    plugins: { '@eslint-community/eslint-comments': comments },
+-    rules: { '@eslint-community/eslint-comments/require-description': 'error' },
+-  },
+-];
++export default eslintConfig({
++  root: import.meta.dirname,
++  ignores: ['dist/**', 'node_modules/**', 'poc/**', '.artifact/**'],
++  production: [
++    'sheet/**/*.ts',
++    'roadmaps/**/*.ts',
++    'docs/**/*.ts',
++    'guards/**/*.ts',
++    'app/**/*.{ts,tsx}',
++    'tools/**/*.ts',
++  ],
++  // a file a tool writes is exempt from the size rules (docs/rules/size.md · generated files)
++  generated: ['app/styles/tokens.ts'],
++});
 diff --git a/guards/checks/legacyWorld.ts b/guards/checks/legacyWorld.ts
 new file mode 100644
 index 0000000..1d37bad
@@ -856,7 +975,7 @@ similarity index 100%
 rename from app/styles/tokens.css
 rename to legacy/tokens.css
 diff --git a/package.json b/package.json
-index de924c7..43574ae 100644
+index de924c7..38522f8 100644
 --- a/package.json
 +++ b/package.json
 @@ -21,9 +21,10 @@
@@ -872,6 +991,14 @@ index de924c7..43574ae 100644
    },
    "devDependencies": {
      "@eslint-community/eslint-plugin-eslint-comments": "4.8.1",
+@@ -33,6 +34,7 @@
+     "@types/react": "19.2.18",
+     "@types/react-dom": "19.2.7",
+     "eslint": "10.10.0",
++    "eslint-plugin-import-x": "4.18.0",
+     "globals": "17.12.0",
+     "husky": "9.1.7",
+     "jiti": "2.4.2",
 diff --git a/sheet/project.ts b/sheet/project.ts
 index dbcf477..5066d22 100644
 --- a/sheet/project.ts

@@ -5,7 +5,7 @@
 import type {
   ElementStyle,
   FontFace,
-} from '../../design-system/designTypes.ts';
+} from '../../../design-system/designTypes.ts';
 
 type Source = 'ds' | 'product';
 
