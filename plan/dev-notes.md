@@ -74,7 +74,8 @@ mailing-automation: each line waits for its port (phase 9) and the PM's word. Ra
     `layout.tsx`, `global-error.tsx` out); `markup` is what a person reads, every `app/**/*.tsx`, renderers in;
     `barrels: ['app/**/route.ts']`, a route re-exporting its own handler; `words:
     ['packages/domain/messages/**']` (`messageTables.ts`' four tables); `brands: ['packages/domain/model/brands/**']`;
-    `production` decides whether `scripts/` takes `one-call-style` (4 hits there). Its named waits (`aWhile`,
+    `scripts/` stays out of the loose-schema shape and `one-call-style` or takes a scope of its own (its re-check: 83 loose
+    schemas reading part of a report file, 4 one-call-style hits there; PM decides at its port). Its named waits (`aWhile`,
     `holding`), the two loose schemas that read part of more, its `PhonePreview`/`LayoutPreview` corners and its
     fixtures' brands are suppressions with their reasons. Its 27 `.not.toMatchTypeOf` in
     `tests/types/brands.test-d.ts` become `.not.toExtend` (expect-type 1.2), never `.not.toEqualTypeOf`.

@@ -703,6 +703,26 @@ index db1e4a6..2b5d301 100644
  | …   | any line the file holds beyond these — the file is the count, this table follows it | |
  
  **And one the checklist does not ask.** Count the reading table against the criteria. A row the
+diff --git a/docs/rules/checks.md b/docs/rules/checks.md
+new file mode 100644
+index 0000000..76eb993
+--- /dev/null
++++ b/docs/rules/checks.md
+@@ -0,0 +1,14 @@
++# Checks
++
++Which tool holds a rule, and what keeps the tools one system.
++
++| Rule                                                                                                                                                                                                                                                                                                                                                                                                                                                   | Gate                                       | Exceptions                                                         | Why                                                                                                                     |
++| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------ | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
++| A rule is held by the tool that reads its kind of fact: what one TypeScript file shows by ESLint (a rule or a shape of the way of working's plugin, reported as the code is written); what needs many files, running code or a file that is not TypeScript by a test, shared when the rule is; a file's name or path by ls-lint, an unused export or file by knip, a guarantee of the language by tsc, a generated file by its generator's check mode. | `review`                                   | —                                                                  | A rule reported where the code is written is fixed in the same place; each kind of fact has the one tool that reads it. |
++| A rule across files is an ESLint rule only when it indexes the program once (`wow/one-home-per-name`); any other is a shared test.                                                                                                                                                                                                                                                                                                                     | `review`                                   | —                                                                  | ESLint reads one file at a time; an index built once a run is the one read across files it holds cheaply.               |
++| A rule is one row naming its one gate, in `shared/rules/` when it is generic and in the product's rules when not; a rule moving between gates names until when.                                                                                                                                                                                                                                                                                        | `everyRuleHasAGate`                        | —                                                                  | Two gates for one rule drift apart, and a rule with none holds nothing.                                                 |
++| A repository names its code once, in its `scope.ts` (a `RepoScope`): its ESLint config, its shared tests and its tools read that one file, and a field holds one list for one job.                                                                                                                                                                                                                                                                     | `tsc` · `review`                           | —                                                                  | A list written twice drifts, and lint and a test then disagree on what a file is.                                       |
++| A tool takes its exceptions one way, the same in every repository: ESLint a directive with its reason (`comments.md`) or `eslint-suppressions.json`, a test the way of working's one baseline (`tests.md`); never a list a check invents for itself.                                                                                                                                                                                                   | ESLint `require-description` · `review`    | —                                                                  | What is let through is found in one place, in every repository.                                                         |
++| A lint rule or shape of the way of working is proven by its RuleTester cases, those that must fire and those that must pass, one for each case of the test it replaced.                                                                                                                                                                                                                                                                                | `review`                                   | the way of working's own `test:rules` runs them, in its repository | A gate never seen red is no gate.                                                                                       |
++| A finding says in one sentence what a person writes instead, names its rule file (`(docs/rules/names.md)`), and points at what it fired on.                                                                                                                                                                                                                                                                                                            | `review`                                   | the way of working's own `test:rules` reads each message           | The fix is made where the finding is read.                                                                              |
++| The way of working names no product: a blank repository spawned from its template, with an empty `scope.ts` and an empty rules file, passes every shared check from its first day.                                                                                                                                                                                                                                                                     | `theWayOfWorkingNamesNoProduct` · `review` | the spawn check comes with the template (phase 7)                  | What a product needs is its own; the way of working is the same for every product.                                      |
 diff --git a/eslint-suppressions.json b/eslint-suppressions.json
 new file mode 100644
 index 0000000..5a04f85
@@ -1252,26 +1272,22 @@ index 0000000..5a04f85
 +}
 \ No newline at end of file
 diff --git a/eslint.config.ts b/eslint.config.ts
-index c66b230..dc336c7 100644
+index c66b230..9c99f17 100644
 --- a/eslint.config.ts
 +++ b/eslint.config.ts
-@@ -1,98 +1,53 @@
+@@ -1,98 +1,5 @@
 -// eslint.config.ts · the gates of docs/rules/ that ESLint holds, over the design project's TypeScript
 -import js from '@eslint/js';
 -import comments from '@eslint-community/eslint-plugin-eslint-comments';
 -import globals from 'globals';
 -import tseslint from 'typescript-eslint';
 +// eslint.config.ts · the way of working's ESLint over the design project's TypeScript
++import { scope } from './scope.ts';
 +import { eslintConfig } from './shared/lint/eslintConfig.ts';
-+import { entryOfPart, filesOf, isEntry } from './tools/layout.ts';
  
 -// a file a tool writes is exempt from the size rules (docs/rules/size.md · generated files)
 -const GENERATED = ['app/styles/tokens.ts'];
-+// the modules' files, as tools/layout.ts places them: an entry's API and a part's values take their own case
-+const MODULE_FILES = filesOf().filter(
-+  (file) => file.endsWith('.ts') && !/\.(d|test)\.ts$/.test(file),
-+);
- 
+-
 -const TESTS = ['tests/**', '**/*.test.{ts,tsx}', '**/*.test-d.ts'];
 -
 -export default [
@@ -1359,51 +1375,9 @@ index c66b230..dc336c7 100644
 -    linterOptions: { reportUnusedDisableDirectives: 'error' },
 -    plugins: { '@eslint-community/eslint-comments': comments },
 -    rules: { '@eslint-community/eslint-comments/require-description': 'error' },
-+export default eslintConfig({
-+  root: import.meta.dirname,
-+  ignores: ['dist/**', 'node_modules/**', 'poc/**', '.artifact/**'],
-+  production: [
-+    'sheet/**/*.ts',
-+    'roadmaps/**/*.ts',
-+    'docs/**/*.ts',
-+    'guards/**/*.ts',
-+    'app/**/*.{ts,tsx}',
-+    'tools/**/*.ts',
-+    'shared/**/*.ts',
-+    'dev/**/*.ts',
-+  ],
-+  // a file a tool writes is exempt from the size rules (docs/rules/size.md · generated files)
-+  generated: ['app/styles/tokens.ts'],
-+  react: ['app/**/*.tsx', 'app/components/**/*.ts'],
-+  entries: MODULE_FILES.filter(isEntry),
-+  parts: MODULE_FILES.filter(
-+    (file) => !isEntry(file) && entryOfPart(file) !== null,
-+  ),
-+  // a tally a scan fills as it runs, mutated by design
-+  mutable: {
-+    'guards/expected-files/packReads.ts': ['EndpointFacts'],
-+    'sheet/samples/payloads/payloadsTypes.ts': ['WalkState'],
-+    'sheet/logic/approval/role-combinations/combinationRows.ts': ['ClassTally'],
-+    'sheet/screens/screen-view/screenViewTypes.ts': ['Gaps'],
-+    'guards/checks/checkWorld.ts': ['World'],
-   },
+-  },
 -];
-+  // each file of a family exports one name, and its loader reads every file
-+  families: [
-+    { files: 'docs/rules/*.ts', names: ['rules'] },
-+    { files: 'docs/skills/*.ts', names: ['skill'] },
-+    { files: 'shared/rules/*.ts', names: ['shared'] },
-+    { files: 'dev/rules/*.ts', names: ['rules'] },
-+  ],
-+  // no brand is minted here: the sheet carries no zod
-+  brands: [],
-+  // the sheet's words home, besides each `{name}Words.ts`
-+  words: ['sheet/words/**'],
-+  // what a person reads is drawn in TSX
-+  markup: ['app/**/*.tsx'],
-+  // barrels besides the entries and each `index.ts`: none
-+  barrels: [],
-+});
++export default eslintConfig(scope);
 diff --git a/guards/checks/legacyWorld.ts b/guards/checks/legacyWorld.ts
 new file mode 100644
 index 0000000..1d37bad
@@ -1669,6 +1643,69 @@ index de924c7..9f3f9c6 100644
      "globals": "17.12.0",
      "husky": "9.1.7",
      "jiti": "2.4.2",
+diff --git a/scope.ts b/scope.ts
+new file mode 100644
+index 0000000..c848a7b
+--- /dev/null
++++ b/scope.ts
+@@ -0,0 +1,57 @@
++// scope.ts · what the design project names once: its ESLint config, its shared tests and its tools read it
++import type { RepoScope } from './shared/repoScope.ts';
++import { entryOfPart, filesOf, isEntry } from './tools/layout.ts';
++
++// the modules' files, as tools/layout.ts places them: an entry's API and a part's values take their own case
++const MODULE_FILES = filesOf().filter(
++  (file) => file.endsWith('.ts') && !/\.(d|test)\.ts$/.test(file),
++);
++
++const scope: RepoScope = {
++  root: import.meta.dirname,
++  ignores: ['dist/**', 'node_modules/**', 'poc/**', '.artifact/**'],
++  production: [
++    'sheet/**/*.ts',
++    'roadmaps/**/*.ts',
++    'docs/**/*.ts',
++    'guards/**/*.ts',
++    'app/**/*.{ts,tsx}',
++    'tools/**/*.ts',
++    'shared/**/*.ts',
++    'dev/**/*.ts',
++  ],
++  // a file a tool writes is exempt from the size rules (docs/rules/size.md · generated files)
++  generated: ['app/styles/tokens.ts'],
++  react: ['app/**/*.tsx', 'app/components/**/*.ts'],
++  entries: MODULE_FILES.filter(isEntry),
++  parts: MODULE_FILES.filter(
++    (file) => !isEntry(file) && entryOfPart(file) !== null,
++  ),
++  // a tally a scan fills as it runs, mutated by design
++  mutable: {
++    'guards/expected-files/packReads.ts': ['EndpointFacts'],
++    'sheet/samples/payloads/payloadsTypes.ts': ['WalkState'],
++    'sheet/logic/approval/role-combinations/combinationRows.ts': ['ClassTally'],
++    'sheet/screens/screen-view/screenViewTypes.ts': ['Gaps'],
++    'guards/checks/checkWorld.ts': ['World'],
++  },
++  // each file of a family exports one name, and its loader reads every file
++  families: [
++    { files: 'docs/rules/*.ts', names: ['rules'] },
++    { files: 'docs/skills/*.ts', names: ['skill'] },
++    { files: 'shared/rules/*.ts', names: ['shared'] },
++    { files: 'dev/rules/*.ts', names: ['rules'] },
++  ],
++  // no brand is minted here: the sheet carries no zod
++  brands: [],
++  // the sheet's words home, besides each `{name}Words.ts`
++  words: ['sheet/words/**'],
++  // what a person reads is drawn in TSX
++  markup: ['app/**/*.tsx'],
++  // barrels besides the entries and each `index.ts`: none
++  barrels: [],
++  // its tests are the convention's
++  tests: [],
++};
++
++export { scope };
 diff --git a/sheet/project.ts b/sheet/project.ts
 index dbcf477..5066d22 100644
 --- a/sheet/project.ts

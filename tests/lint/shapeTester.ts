@@ -3,9 +3,9 @@
  * - `refusal` · the error a case expects, by a word of its shape's message
  */
 import { RuleTester } from 'eslint';
+import { builtinRules } from 'eslint/use-at-your-own-risk';
 import tseslint from 'typescript-eslint';
 import { afterAll, describe, it } from 'vitest';
-import { restrictedSyntax } from '../../shared/lint/wowPlugin.ts';
 import type { Shape } from '../../shared/lint/shapes.ts';
 
 // a core rule is tested by ESLint's own RuleTester, its types the core's
@@ -16,6 +16,11 @@ const shapeTester = new RuleTester({
     parserOptions: { ecmaFeatures: { jsx: true } },
   },
 });
+
+const restricted = builtinRules.get('no-restricted-syntax');
+if (restricted === undefined)
+  throw new Error('ESLint lost no-restricted-syntax');
+const restrictedSyntax: NonNullable<typeof restricted> = restricted;
 
 function refusal(
   shapes: readonly Shape[],

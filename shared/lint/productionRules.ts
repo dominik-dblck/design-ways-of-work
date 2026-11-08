@@ -8,8 +8,8 @@ import {
   PRODUCTION_SHAPES,
   WORDS_SHAPE,
 } from './productionShapes.ts';
-import { TESTS } from './repoScope.ts';
-import type { RepoScope } from './repoScope.ts';
+import { testsOf } from '../repoScope.ts';
+import type { RepoScope } from '../repoScope.ts';
 import type { Shape } from './shapes.ts';
 
 const SIZE: Linter.RulesRecord = {
@@ -66,7 +66,7 @@ const pluginRules = (
 
 // a type a scan fills as it runs is named, mutable by design
 const productionRules = (scope: RepoScope): Linter.Config[] => {
-  const ignores = [...TESTS, ...scope.generated];
+  const ignores = [...testsOf(scope), ...scope.generated];
   return [
     {
       files: [...scope.production],

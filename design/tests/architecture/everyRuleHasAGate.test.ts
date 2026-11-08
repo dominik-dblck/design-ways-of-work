@@ -60,13 +60,18 @@ function shortfallOf(source: Source, world: World): readonly string[] {
 }
 
 async function theWorld(): Promise<World> {
-  const config: {
+  const eslint = new ESLint({ cwd: ROOT });
+  // a rule runs on its kind of file: a module, a React page, a test
+  const configs: readonly {
     rules?: Record<string, unknown>;
     linterOptions?: Record<string, unknown>;
-  } = await new ESLint({
-    cwd: ROOT,
-  }).calculateConfigForFile('docs/process/plans.ts');
-  const on = Object.entries(config.rules ?? {}).filter(([, setting]) => {
+  }[] = await Promise.all(
+    ['docs/process/plans.ts', 'app/planted.tsx', 'tests/planted.test.ts'].map(
+      (file) => eslint.calculateConfigForFile(file),
+    ),
+  );
+  const [config] = configs;
+  const on = configs.flatMap((one) => Object.entries(one.rules ?? {})).filter(([, setting]) => {
     const level: unknown = Array.isArray(setting) ? setting[0] : setting;
     return level !== 0 && level !== 'off';
   });
@@ -78,7 +83,7 @@ async function theWorld(): Promise<World> {
   return {
     eslintRules: new Set(on.map(([rule]) => rule)),
     // what ESLint runs with, wherever the config spells it
-    lintOptions: JSON.stringify(config.linterOptions ?? {}),
+    lintOptions: JSON.stringify(config?.linterOptions ?? {}),
     testFiles: new Set(
       textsUnder('tests', ['.test.ts']).map((one) =>
         path.posix.basename(one.path, '.ts'),
@@ -127,7 +132,7 @@ describe('every rule has a gate', () => {
     const files = textsUnder('docs/rules', ['.md']).filter(
       (one) => !one.path.endsWith('README.md'),
     );
-    expect(files.length, 'the rule files are read').toBe(11);
+    expect(files.length, 'the rule files are read').toBe(12);
     expect(files.flatMap((file) => shortfallOf(file, world))).toEqual([]);
   });
 });

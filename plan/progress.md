@@ -114,10 +114,10 @@
         --bail 1` a mutant, coverage off), the domain folder by folder, then app services and utils, a second pass of
         the survivors on the database tests; no threshold, a measure; by hand only, never CI nor a hook
       - [ ] ⏸ mutation tests in the way of working: whether, where, how (PM decides)
-      - [ ] ⏸ eagle-dev's criterion (one file: ESLint · many files or not TS: a test · names: ls-lint · exports:
-        knip · language: tsc · generated: check mode) and its consistency points: one row one gate, one scope
-        contract read by lint and tests, one exception mechanism a tool, one proof it fires, one message shape;
-        spawning a blank product as a check (PM decides, 8 Nov)
+      - [x] eagle-dev's criterion and its consistency points, before chunk 5 (PM, 8 Nov · A): 8 rows in
+        `shared/rules/checks.ts`; the scope is one `scope.ts` a repository, `RepoScope` in `shared/repoScope.ts`
+      - [ ] the shared tests read `scope.ts` (chunk 7), with the way of working's one baseline format
+      - [ ] the spawn check: a blank repository from the template green on every shared check (phase 7)
 - [ ] the e2e framework comes to the way of working whole (PM, 8 Nov): eagle-dev's e2e skills (`e2e`,
       `e2e-category`, `e2e-discovery`), `e2e/framework/` (13 files) and the test-id registry, the journeys staying
       each product's; its 11 gates become shared tests

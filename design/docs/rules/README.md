@@ -28,6 +28,7 @@ epic, a date, a decision). The rules below hold the code around that data, never
 | `tests.md`          | every test and scan                                         |
 | `components.md`     | the React pages, once a page moves (D7)                     |
 | `styling.md`        | the React pages' look                                       |
+| `checks.md`         | every rule: the tool that holds it, its gate, its scope     |
 | `constants.md`      | the React pages' words and values                           |
 
 ## Adding a sheet file

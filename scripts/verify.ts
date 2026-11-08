@@ -160,7 +160,13 @@ function outputDifferences(
     console.log(
       `${isSame ? 'SAME' : 'DIFF'} · yarn ${run.command} · exit ${run.status}${isSame ? '' : ` → ${other.status}`}`,
     );
-    return isSame ? [] : [`output · yarn ${run.command}`];
+    // an exit that moved is its own difference: a row on a run's output never explains a failing run
+    return [
+      ...(run.output === other.output ? [] : [`output · yarn ${run.command}`]),
+      ...(run.status === other.status
+        ? []
+        : [`exit · yarn ${run.command} · ${run.status} → ${other.status}`]),
+    ];
   });
 }
 

@@ -1,6 +1,6 @@
 /**
  * - `wowPlugin` · the way of working's own ESLint rules, where no plugin has one
- * - `restrictedSyntax` · the core rule again: `production-syntax`, `markup-syntax`
+ * - and `no-restricted-syntax` again: `production-syntax`, `markup-syntax`
  */
 import { commentsAreInvariants } from './rules/commentsAreInvariants.ts';
 import { dataIsReadonly } from './rules/dataIsReadonly.ts';
@@ -46,4 +46,4 @@ const plugin = {
 // typescript-eslint types its rules apart from ESLint's; ESLint reads the plugin as its own kind
 const wowPlugin: CompatiblePlugin = plugin;
 
-export { restrictedSyntax, wowPlugin };
+export { wowPlugin };

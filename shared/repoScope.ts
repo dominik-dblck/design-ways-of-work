@@ -1,8 +1,8 @@
 /**
- * - `RepoScope` · what a repository names for the shared ESLint: kinds and homes
- * - `TESTS` · the files every repository reads as tests
+ * - `RepoScope` · what a repository names once, for its ESLint, shared tests, tools
+ * - `testsOf` · the files read as tests: the convention (`TESTS`), and a scope's own
  */
-import type { Family } from './rules/oneHomePerName.ts';
+import type { Family } from './lint/rules/oneHomePerName.ts';
 
 interface RepoScope {
   readonly root: string;
@@ -18,6 +18,7 @@ interface RepoScope {
   readonly words: readonly string[];
   readonly markup: readonly string[];
   readonly barrels: readonly string[];
+  readonly tests: readonly string[];
 }
 
 const TESTS = [
@@ -27,5 +28,11 @@ const TESTS = [
   '**/*.test-d.ts',
 ];
 
-export { TESTS };
+// a scope's own tests besides the convention: a repository's e2e folder
+const testsOf = (scope: RepoScope): readonly string[] => [
+  ...TESTS,
+  ...scope.tests,
+];
+
+export { testsOf };
 export type { RepoScope };

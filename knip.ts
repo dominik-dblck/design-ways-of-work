@@ -15,6 +15,8 @@ const config: KnipConfig = {
     'scripts/**/*.ts',
     'shared/hooks/**/*.ts',
     'shared/lint/**/*.ts',
+    'shared/repoScope.ts',
+    'scope.ts',
     'design-system/**/*.ts',
     'tests/**/*.ts',
     '!tests/lint/fixtures/**',

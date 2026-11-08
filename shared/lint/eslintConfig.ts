@@ -14,8 +14,8 @@ import path from 'node:path';
 import tseslint from 'typescript-eslint';
 import { namingRules } from './naming.ts';
 import { productionRules } from './productionRules.ts';
-import { TESTS } from './repoScope.ts';
-import type { RepoScope } from './repoScope.ts';
+import { testsOf } from '../repoScope.ts';
+import type { RepoScope } from '../repoScope.ts';
 import { MARKUP_SHAPES, REACT_SHAPES } from './reactShapes.ts';
 import { ENTRY_SHAPES, PART_SHAPES, SHAPES } from './shapes.ts';
 import type { Shape } from './shapes.ts';
@@ -104,7 +104,7 @@ const scopedRules = (scope: RepoScope): Linter.Config[] =>
     .map((one) => ({
       ...one,
       files: [...one.files],
-      ignores: [...TESTS, ...scope.generated],
+      ignores: [...testsOf(scope), ...scope.generated],
     }));
 
 const WOW: Linter.Config = { plugins: { wow: wowPlugin } };
@@ -115,7 +115,7 @@ const MARKUP: Linter.RulesRecord = {
 
 const AT_LOAD: Linter.RulesRecord = { 'wow/reads-nothing-at-load': 'error' };
 
-const TEST_RULES: Linter.Config[] = [
+const testRules = (scope: RepoScope): Linter.Config[] => [
   {
     files: ['**/*.test-d.ts'],
     rules: {
@@ -126,7 +126,7 @@ const TEST_RULES: Linter.Config[] = [
     },
   },
   {
-    files: TESTS,
+    files: [...testsOf(scope)],
     rules: {
       ...restricted(TEST_SHAPES),
       '@typescript-eslint/consistent-type-assertions': 'off',
@@ -149,7 +149,7 @@ const eslintConfig = (scope: RepoScope): Linter.Config[] =>
     WOW,
     sourceRules(scope.root),
     ...scopedRules(scope),
-    ...TEST_RULES,
+    ...testRules(scope),
     ...productionRules(scope),
     DISABLES,
   );
