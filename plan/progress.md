@@ -102,8 +102,16 @@
         placeholder and count-alone shapes; the way of working's own 70 names renamed by `scripts/rename.ts`, the
         product's 193 in ESLint's suppressions until the port renames them
       - [x] eagle-dev's cross-check of chunk 3, its rules worth porting asked with it
-      - [ ] eagle-dev's rules and tests the design side lacks: which come to the way of working, for both sides
+      - [x] eagle-dev's rules and tests the design side lacks: which come to the way of working, for both sides
         (PM, 8 Nov), a table and the PM's form
+      - [x] the chunks' order (PM, 8 Nov · C, eagle-dev's read): 4 the shapes, the plugin's rules and brands, with
+        the TypeScript resolver; 5 boundaries, the alias rule and the molecule count on one element map; 6 ls-lint,
+        knip and tsc from one layout source; 7 the generators' check mode, the shared tests, cspell, syncpack,
+        sonarjs, commitlint; 8 the e2e framework · `plan/checks-inventory.tsv` holds each of the 184 tests' tool
+      - [ ] chunk 4: the shapes, the plugin's rules and brands, with the TypeScript resolver
+- [ ] the e2e framework comes to the way of working whole (PM, 8 Nov): eagle-dev's e2e skills (`e2e`,
+      `e2e-category`, `e2e-discovery`), `e2e/framework/` (13 files) and the test-id registry, the journeys staying
+      each product's; its 11 gates become shared tests
 - [x] no file named by a number: the documents' parts named by what they hold (15 pipeline parts, 2 api-convention
       parts, agent-instructions in one file); `aFileNamesItsPurpose` refuses a number; size.md says why
 

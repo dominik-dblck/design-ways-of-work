@@ -54,3 +54,8 @@ mailing-automation: each line waits for its port (phase 9) and the PM's word. Ra
 12. **Its scope at its port.** Next's handlers written `export async function GET` need UPPER_CASE functions in
     `app/**/route.ts`; the boolean prefix flags 224 names there and the placeholder shape 152 (`value` in its type
     guards and handlers most), each held in its suppressions; `scripts/` adds 19 names twice to one-home.
+13. **Its e2e framework comes to the way of working whole (PM, 8 Nov).** The skills `e2e`, `e2e-category`,
+    `e2e-discovery`, `e2e/framework/` and the test-id registry are shared; its journeys and page objects
+    (`e2e/theDocuments/`, `e2e/theEditor/`…) stay its own. The 11 gates that hold the framework (every role a
+    flow, every path walked, test ids from the registry and prefixed, a drag through the framework…) become shared
+    tests, each scope naming its own roles and paths.
