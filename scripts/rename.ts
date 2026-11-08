@@ -6,6 +6,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import ts from 'typescript';
+import { mapRows } from './mapRows.ts';
 import { HERE, repoAt } from './repos.ts';
 
 interface Row {
@@ -18,15 +19,10 @@ interface Row {
 const MAP = repoAt('', 0);
 const COPY = repoAt(path.join(HERE, '.rehearsal', 'eagle-design'), 1);
 
-const rows: readonly Row[] = fs
-  .readFileSync(MAP, 'utf8')
-  .split('\n')
-  .filter((line) => line.trim() !== '' && !line.startsWith('#'))
-  .map((line) => {
-    const [at = '', name = ''] = line.split('\t');
-    const [file = '', row = '0', column = '0'] = at.split(':');
-    return { file, line: Number(row), column: Number(column), name };
-  });
+const rows: readonly Row[] = mapRows(MAP).map(([at = '', name = '']) => {
+  const [file = '', row = '0', column = '0'] = at.split(':');
+  return { file, line: Number(row), column: Number(column), name };
+});
 
 const parsed = ts.getParsedCommandLineOfConfigFile(
   path.join(COPY, 'tsconfig.json'),

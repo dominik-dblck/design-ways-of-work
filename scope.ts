@@ -32,6 +32,12 @@ const scope: RepoScope = {
   names: [],
   // a types file holds types alone, as the design side's (docs/rules/names.md)
   typesOnly: ['**/*Types.ts'],
+  // no component tree of its own: design-system's atoms come by script
+  components: [],
+  // with no component tree, no folder shape to keep
+  componentShape: false,
+  // and no renderer drawn inside it
+  renderers: [],
 };
 
 export { scope };

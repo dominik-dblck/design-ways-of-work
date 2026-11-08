@@ -127,3 +127,19 @@ for the port (phase 8) or the PM's word. Ranked: the first of each group is the 
     they sit in `eslint-suppressions.json` until the product names each split by its job (a file's rename is the
     product's content). `aFileNamesItsPurpose` retires with the port's baseline; this side has no baseline left,
     so the shared tests row names a list by its family, `tests/architecture/baselines/{scan}.json`.
+30. A component file holds one component and its props (chunk 6d, `wow/component-file-holds-its-component`,
+    under each root the scope names in `components`; a provider's file and an icon's hold more). This side's ten
+    parts moved by `scripts/move-declarations.ts` from `plan/moves/component-parts.tsv`: a second component to
+    `components/`, a hook to `hooks/`, a helper to `utils/`, a constant to `constants/`, the imports each reads
+    following it. `CombinationFile`, once exported, met the plans' type of that name: renamed
+    `CombinationFileItem` first by `scripts/rename.ts` (`plan/renames-chunk-6d.tsv`). The tiers and the molecule
+    count read the same roots. The file lint gives each folder one rule set, its most specific key's, written as
+    the folder's own path: a `**` key beside a glob made ls-lint pick at random, and a key never reached the
+    folders below it (the way of working's own fixtures, named as a product's, now have a key). From the build
+    side's cross-check: a key is written raw (an escaped `\[id\]` never matched), a folder's bans take each
+    many-dot extension it holds that ends in a banned one, ls-lint's lines come sorted, and an overload's
+    signatures are its one component. A renderer (`renderers`, its folder and the app it is drawn inside; none
+    here) is an app inside the app: its roots climb a ladder of their own, it imports nothing of its app (a
+    package outside the app it reads as the app does), the app enters it at a component's barrel
+    (`wow/renderer-stands-alone`, Dom through the build side, 8 Nov); the app's roots climb one ladder, and the
+    molecule count reads one ladder.

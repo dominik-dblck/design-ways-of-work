@@ -1,20 +1,25 @@
 /**
  * - `moleculesComposeOneMolecule` · a molecule composes atoms and one molecule
- * - counted over its folder, tests aside: one that composes two is an organism
+ * - counted over its folder, tests aside, among the molecules of its own ladder
  */
 import type { TSESTree } from '@typescript-eslint/utils';
 import ts from 'typescript';
+import {
+  ladderOf,
+  moleculeNameOf,
+  moleculeOf,
+  RENDERERS,
+} from '../componentLadders.ts';
+import type { Renderer } from '../componentLadders.ts';
 import { createRule, matchesAny, moduleOf, pathOf } from './ruleKit.ts';
 import type { Context } from './ruleKit.ts';
 
-// a file of the folder, or the folder itself as an import names it
-const A_MOLECULE = /^app\/components\/molecules\/([^/.]+)(?:\/|$)/;
-
-const moleculeOf = (file: string | null): string | null =>
-  file === null ? null : (A_MOLECULE.exec(file)?.[1] ?? null);
-
 type Composed = ReadonlyMap<string, ReadonlySet<string>>;
-type Options = readonly [{ readonly tests: readonly string[] }];
+interface Roots {
+  readonly components: readonly string[];
+  readonly renderers: readonly Renderer[];
+}
+type Options = readonly [Roots & { readonly tests: readonly string[] }];
 
 const indexed = new WeakMap<ts.Program, Composed>();
 
@@ -52,10 +57,12 @@ function moleculesImportedBy({
   syntax,
   program,
   context,
+  components,
 }: {
   readonly syntax: ts.SourceFile;
   readonly program: ts.Program;
   readonly context: Context;
+  readonly components: readonly string[];
 }): readonly string[] {
   return specifiersIn(syntax).flatMap((specifier) => {
     const resolved = ts.resolveModuleName(
@@ -66,6 +73,7 @@ function moleculesImportedBy({
     ).resolvedModule?.resolvedFileName;
     const other = moleculeOf(
       resolved === undefined ? null : pathOf(context, resolved),
+      components,
     );
     return other === null ? [] : [other];
   });
@@ -76,25 +84,74 @@ function composedIn({
   program,
   context,
   tests,
+  roots: { components, renderers },
 }: {
   readonly program: ts.Program;
   readonly context: Context;
   readonly tests: readonly string[];
+  readonly roots: Roots;
 }): Composed {
   const kept = indexed.get(program);
   if (kept !== undefined) return kept;
   const composed = new Map<string, Set<string>>();
   for (const syntax of program.getSourceFiles()) {
     const file = pathOf(context, syntax.fileName);
-    const own = matchesAny(file, tests) ? null : moleculeOf(file);
+    const own = matchesAny(file, tests) ? null : moleculeOf(file, components);
     if (own === null) continue;
     const found = composed.get(own) ?? new Set<string>();
-    for (const other of moleculesImportedBy({ syntax, program, context }))
-      if (other !== own) found.add(other);
+    for (const other of moleculesImportedBy({
+      syntax,
+      program,
+      context,
+      components,
+    }))
+      // a renderer's molecules spend none of the app's count, nor the app's a renderer's
+      if (
+        other !== own &&
+        ladderOf(other, renderers) === ladderOf(own, renderers)
+      )
+        found.add(other);
     composed.set(own, found);
   }
   indexed.set(program, composed);
   return composed;
+}
+
+// the folder's count when the program is read, this file's alone when not
+const namesComposed = ({
+  composed,
+  molecule,
+  own,
+}: {
+  readonly composed: Composed | null | undefined;
+  readonly molecule: string;
+  readonly own: ReadonlySet<string>;
+}): readonly string[] =>
+  [...(composed?.get(molecule) ?? own)]
+    .map(moleculeNameOf)
+    .sort((one, other) => one.localeCompare(other));
+
+// another molecule of its own ladder that a module literal names, or none
+function otherIn(
+  context: Context,
+  {
+    source,
+    molecule,
+    roots: { components, renderers },
+  }: {
+    readonly source: TSESTree.Node | null;
+    readonly molecule: string;
+    readonly roots: Roots;
+  },
+): string | null {
+  if (source?.type !== 'Literal' || typeof source.value !== 'string')
+    return null;
+  const other = moleculeOf(moduleOf(context, source.value), components);
+  return other === null ||
+    other === molecule ||
+    ladderOf(other, renderers) !== ladderOf(molecule, renderers)
+    ? null
+    : other;
 }
 
 const moleculesComposeOneMolecule = createRule<Options, 'two'>({
@@ -108,24 +165,28 @@ const moleculesComposeOneMolecule = createRule<Options, 'two'>({
     schema: [
       {
         type: 'object',
-        properties: { tests: { type: 'array', items: { type: 'string' } } },
+        properties: {
+          tests: { type: 'array', items: { type: 'string' } },
+          components: { type: 'array', items: { type: 'string' } },
+          renderers: RENDERERS,
+        },
         additionalProperties: false,
       },
     ],
   },
-  defaultOptions: [{ tests: [] }],
-  create(context, [{ tests }]) {
+  defaultOptions: [{ tests: [], components: [], renderers: [] }],
+  create(context, [{ tests, ...roots }]) {
     const file = pathOf(context);
-    const molecule = matchesAny(file, tests) ? null : moleculeOf(file);
+    const molecule = matchesAny(file, tests)
+      ? null
+      : moleculeOf(file, roots.components);
     const program = context.sourceCode.parserServices?.program;
     if (molecule === null) return {};
     const own = new Set<string>();
     const named: TSESTree.Node[] = [];
     const take = (source: TSESTree.Node | null): void => {
-      if (source?.type !== 'Literal' || typeof source.value !== 'string')
-        return;
-      const other = moleculeOf(moduleOf(context, source.value));
-      if (other === null || other === molecule) return;
+      const other = otherIn(context, { source, molecule, roots });
+      if (other === null || source === null) return;
       own.add(other);
       named.push(source);
     };
@@ -135,18 +196,21 @@ const moleculesComposeOneMolecule = createRule<Options, 'two'>({
       ExportAllDeclaration: (node) => take(node.source),
       ImportExpression: (node) => take(node.source),
       'Program:exit'() {
-        // the folder's count when the program is read, this file's alone when not
-        const names = [
-          ...((program === undefined || program === null
-            ? undefined
-            : composedIn({ program, context, tests }).get(molecule)) ?? own),
-        ].sort((one, other) => one.localeCompare(other));
+        const names = namesComposed({
+          composed: program && composedIn({ program, context, tests, roots }),
+          molecule,
+          own,
+        });
         if (names.length < 2) return;
         for (const node of named)
           context.report({
             node,
             messageId: 'two',
-            data: { molecule, count: names.length, names: names.join(', ') },
+            data: {
+              molecule: moleculeNameOf(molecule),
+              count: names.length,
+              names: names.join(', '),
+            },
           });
       },
     };

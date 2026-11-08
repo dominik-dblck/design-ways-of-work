@@ -5,22 +5,9 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
-import type { CodeLine, TokenKind } from '../../../workspace/contract-view.ts';
-
-// a piece's colour, as a palette role
-const INK: Readonly<Record<TokenKind, string>> = {
-  com: 'text.secondary',
-  kw: 'info.dark',
-  type: 'text.primary',
-  str: 'success.dark',
-  num: 'warning.dark',
-  txt: 'text.primary',
-  warn: 'error.main',
-};
-
-// a route and a warning stand out most, a type a little
-const weightOf = (piece: CodeLine[number]): number =>
-  piece.strong ? 600 : piece.kind === 'type' ? 500 : 400;
+import type { CodeLine } from '../../../workspace/contract-view.ts';
+import { INK } from './constants/codeBlockInkConstants.ts';
+import { weightOf } from './utils/codeBlockWeightUtils.ts';
 
 interface CodeBlockProps {
   readonly lines: readonly CodeLine[];

@@ -121,8 +121,8 @@
         the resolvers on the tsconfig's symlinks; 3 design tests retire, 2 rows to `shared/rules/components.ts`
         (`plan/eagle-notes.md` 24–26, `plan/dev-notes.md` 16) · eagle-dev's consult and cross-check taken
       - [ ] chunk 6: ls-lint, knip and tsc from one scope · 6a the rehearsal hard-linked, a real tree, its
-        links checked and its rewrites verified (`plan/eagle-notes.md` 27, `plan/dev-notes.md` 7) ✓ · 6b knip from the scope (`plan/eagle-notes.md` 28, `plan/dev-notes.md` 17) ✓ · 6c the file names, one wow rule (`plan/eagle-notes.md` 29) ✓ · 6d the component file shapes · 6e one
-        tsconfig base
+        links checked and its rewrites verified (`plan/eagle-notes.md` 27, `plan/dev-notes.md` 7) ✓ · 6b knip from the scope (`plan/eagle-notes.md` 28, `plan/dev-notes.md` 17) ✓ · 6c the file names, one wow rule (`plan/eagle-notes.md` 29) ✓ · 6d the component file shapes, one wow rule and the folder rules, a renderer an app inside the app
+        (`plan/eagle-notes.md` 30, `plan/dev-notes.md` 19) ✓ · 6e one tsconfig base
       - [ ] the build side's skills (PM, 8 Nov: architect and orchestrator unused): `dev/claude/skills` keeps what
         the feature pipeline names (the `e2e` three, the `ticket*` written from `ticket-pipeline.md`, the
         review command and the evaluations it reads); the discovery → plan → orchestration flow, `brainstorm`,

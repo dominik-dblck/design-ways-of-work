@@ -2,6 +2,7 @@
  * - `RepoScope` · what a repository names once, for its ESLint, shared tests, tools
  * - `testsOf` · the files read as tests: the convention (`TESTS`), and a scope's own
  */
+import type { Renderer } from './lint/componentLadders.ts';
 import type { Named } from './lint/rules/fileNamesItsPurpose.ts';
 import type { Family } from './lint/rules/oneHomePerName.ts';
 
@@ -24,6 +25,9 @@ interface RepoScope {
   readonly starts: readonly string[];
   readonly names: readonly Named[];
   readonly typesOnly: readonly string[];
+  readonly components: readonly string[];
+  readonly componentShape: boolean;
+  readonly renderers: readonly Renderer[];
 }
 
 const TESTS = [

@@ -125,3 +125,19 @@ mailing-automation: each line waits for its port (phase 9) and the PM's word. Ra
     its baseline's `[]`; every planted name caught, a content breach on its line; a term is read off the stem's
     last camel word (`rules2`, `changed2`, `index2` are counts; `imageBase64` a term). `minimatch` against node's
     `path.matchesGlob`, 62 globs × 3,798 files: two pairs differ, both node folding case under `__fixtures__/`.
+19. Its component tests become tools (chunk 6d): `oneComponentAFile` and `aComponentFileHoldsItsComponent` one
+    ESLint rule, `wow/component-file-holds-its-component` (a component read off the tree: a PascalCase function,
+    an arrow, `forwardRef`, `memo`, `lazy`, `dynamic`; a name in capitals is a constant; a directive no
+    declaration); `aComponentFolderIsStructured` ls-lint rules, `componentFolders(roots)`, which its lint-files
+    takes at its port (its root file and barrel, the shape's folders, every part named for it at any depth, an
+    atom without parts, the root `__tests__` and a dotfile aside). Its scope names both trees, `components:
+    ['app/components', 'app/renderers/mobile/components']`: the mobile one no scan read; there `MobileHome.tsx`'s
+    `FIGMA_BANNER` sits beside its component, its own to move. Measured on its tree read-only: the folder rules
+    0 under both roots. A part moved out of a component file takes the component's name (`{Component}{Part}.tsx`,
+    `use{Component}{What}.ts`, `{component}{Purpose}Utils.ts`), so a move map there is written to its names rows.
+    `FIGMA_BANNER` moved on its side (7c2fa3a5). Dom, 8 Nov: the mobile renderer is an app inside the app; at the
+    port `renderers: [{ folder: 'app/renderers/mobile', app: 'app' }]` beside both roots: its tiers held within
+    it, the app enters it at a component's barrel, it imports nothing of `app/` while a package (`@domain`) is
+    read as the app reads one (`wow/renderer-stands-alone`; its re-check, read-only and typed: 0 hits over
+    1,658 files, the 6 imports into it all at barrels). Its `components.md` row's build gate is `review` until
+    then.

@@ -4,6 +4,7 @@
  */
 import { commentsAreInvariants } from './rules/commentsAreInvariants.ts';
 import { dataIsReadonly } from './rules/dataIsReadonly.ts';
+import { componentFileHoldsItsComponent } from './rules/componentFileHoldsItsComponent.ts';
 import { fileNamesItsPurpose } from './rules/fileNamesItsPurpose.ts';
 import { fileStatesItsJob } from './rules/fileStatesItsJob.ts';
 import { hooksNamedForTheirFile } from './rules/hooksNamedForTheirFile.ts';
@@ -15,6 +16,7 @@ import { oneHomePerName } from './rules/oneHomePerName.ts';
 import { partsServeTheirEntry } from './rules/partsServeTheirEntry.ts';
 import { readsNothingAtLoad } from './rules/readsNothingAtLoad.ts';
 import { reExportsInBarrels } from './rules/reExportsInBarrels.ts';
+import { rendererStandsAlone } from './rules/rendererStandsAlone.ts';
 import type { Rule } from 'eslint';
 import { builtinRules } from 'eslint/use-at-your-own-risk';
 import type { CompatiblePlugin } from 'typescript-eslint';
@@ -34,6 +36,7 @@ const plugin = {
     'comments-are-invariants': commentsAreInvariants,
     'data-is-readonly': dataIsReadonly,
     'file-names-its-purpose': fileNamesItsPurpose,
+    'component-file-holds-its-component': componentFileHoldsItsComponent,
     'file-states-its-job': fileStatesItsJob,
     'hooks-named-for-their-file': hooksNamedForTheirFile,
     'molecules-compose-one-molecule': moleculesComposeOneMolecule,
@@ -46,6 +49,7 @@ const plugin = {
     'production-syntax': restrictedSyntax,
     'reads-nothing-at-load': readsNothingAtLoad,
     're-exports-in-barrels': reExportsInBarrels,
+    'renderer-stands-alone': rendererStandsAlone,
   },
 };
 

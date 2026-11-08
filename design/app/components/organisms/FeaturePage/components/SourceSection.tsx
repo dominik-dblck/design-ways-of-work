@@ -4,33 +4,11 @@
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { useEffect, useState } from 'react';
 import type { ReactElement } from 'react';
 import { featureWords as words } from '../../../../workspace/feature-view.ts';
-import { scanAll, standingOf } from '../../../../workspace/source-view.ts';
-import type {
-  KindStanding,
-  SourceStanding,
-} from '../../../../workspace/source-view.ts';
 import { SectionHead } from '../../../atoms/SectionHead/index.ts';
-
-// a count over its base rises, under it fell, at it holds
-const inkOf = ({ n, base }: KindStanding): string =>
-  n > base ? 'error.main' : n < base ? 'success.main' : 'text.secondary';
-
-function useStanding(): SourceStanding | null {
-  const [standing, setStanding] = useState<SourceStanding | null>(null);
-  useEffect(() => {
-    let isLive = true;
-    void scanAll().then((found) => {
-      if (isLive) setStanding(standingOf(found));
-    });
-    return () => {
-      isLive = false;
-    };
-  }, []);
-  return standing;
-}
+import { inkOf } from '../utils/sourceSectionInkUtils.ts';
+import { useStanding } from '../hooks/useStanding.ts';
 
 function SourceSection(): ReactElement {
   const standing = useStanding();

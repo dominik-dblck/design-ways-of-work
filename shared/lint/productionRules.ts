@@ -39,6 +39,26 @@ const homes = (
 ): readonly (readonly string[])[] =>
   globs.flatMap((home) => scope.production.map((glob) => [glob, home]));
 
+// the component roots' own rules: a file's one component, its tiers' counts, a renderer
+const componentRules = (scope: RepoScope): Linter.RulesRecord => ({
+  'wow/component-file-holds-its-component': [
+    'error',
+    { components: scope.components },
+  ],
+  'wow/molecules-compose-one-molecule': [
+    'error',
+    {
+      tests: testsOf(scope),
+      components: scope.components,
+      renderers: scope.renderers,
+    },
+  ],
+  'wow/renderer-stands-alone': [
+    'error',
+    { components: scope.components, renderers: scope.renderers },
+  ],
+});
+
 const pluginRules = (
   scope: RepoScope,
   ignores: readonly string[],
@@ -67,7 +87,7 @@ const pluginRules = (
   'wow/hooks-named-for-their-file': 'error',
   'wow/one-call-style': 'error',
   'wow/parts-serve-their-entry': ['error', { owners: scope.owners }],
-  'wow/molecules-compose-one-molecule': ['error', { tests: testsOf(scope) }],
+  ...componentRules(scope),
 });
 
 // a type a scan fills as it runs is named, mutable by design

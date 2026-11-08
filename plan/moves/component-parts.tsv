@@ -1,0 +1,12 @@
+# a component file's parts, each to its own file (shared rule: a component file holds one component and its props)
+# file	name	new file	its header bullet
+design/app/components/atoms/CodeBlock/CodeBlock.tsx	INK	design/app/components/atoms/CodeBlock/constants/codeBlockInkConstants.ts	a piece's colour by its kind, a palette role
+design/app/components/atoms/CodeBlock/CodeBlock.tsx	weightOf	design/app/components/atoms/CodeBlock/utils/codeBlockWeightUtils.ts	a piece's weight: a route and a warning most
+design/app/components/organisms/FeaturePage/components/ApiSection.tsx	EndpointItem	design/app/components/organisms/FeaturePage/components/EndpointItem.tsx	one endpoint: its title, kind, state and code
+design/app/components/organisms/FeaturePage/components/CombinationsSection.tsx	useCount	design/app/components/organisms/FeaturePage/hooks/useCount.ts	a file's combinations, counted when asked
+design/app/components/organisms/FeaturePage/components/CombinationsSection.tsx	CombinationFileItem	design/app/components/organisms/FeaturePage/components/CombinationFileItem.tsx	one combinations file and its count on demand
+design/app/components/organisms/FeaturePage/components/CoverPanel.tsx	CoverRow	design/app/components/organisms/FeaturePage/components/CoverRow.tsx	one cover line: its title, its chip, its share
+design/app/components/organisms/FeaturePage/components/FeatureHead.tsx	jumpsOf	design/app/components/organisms/FeaturePage/utils/featureHeadJumpUtils.ts	the page's jumps: each section, its word, its count
+design/app/components/organisms/FeaturePage/components/FeatureSteps.tsx	NOT_BEGUN	design/app/components/organisms/FeaturePage/constants/featureStepsConstants.ts	a step not begun: it reads todo, or a dash
+design/app/components/organisms/FeaturePage/components/SourceSection.tsx	inkOf	design/app/components/organisms/FeaturePage/utils/sourceSectionInkUtils.ts	a count's colour against its base
+design/app/components/organisms/FeaturePage/components/SourceSection.tsx	useStanding	design/app/components/organisms/FeaturePage/hooks/useStanding.ts	the source's standing, scanned once mounted

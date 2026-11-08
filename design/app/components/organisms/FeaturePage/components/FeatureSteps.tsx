@@ -7,9 +7,7 @@ import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
 import type { FeatureView } from '../../../../workspace/feature-view.ts';
 import { radiusOf } from '../../../../theme/tokenReads.ts';
-
-// a step not begun reads todo, or a dash
-const NOT_BEGUN = /^(todo|—)/;
+import { NOT_BEGUN } from '../constants/featureStepsConstants.ts';
 
 function FeatureSteps({ steps }: { readonly steps: FeatureView['steps'] }): ReactElement | null {
   if (!steps.length) return null;

@@ -151,7 +151,7 @@ const eslintConfig = (scope: RepoScope): Linter.Config[] =>
     ...testRules(scope),
     ...productionRules(scope),
     {
-      ...componentTiers(scope.root),
+      ...componentTiers(scope),
       files: [...scope.production],
       ignores: [...testsOf(scope), ...scope.generated],
     },

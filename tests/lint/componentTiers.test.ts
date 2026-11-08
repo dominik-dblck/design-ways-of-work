@@ -2,28 +2,38 @@ import { ESLint } from 'eslint';
 import path from 'node:path';
 import tseslint from 'typescript-eslint';
 import { describe, expect, it } from 'vitest';
+import type { Renderer } from '../../shared/lint/componentLadders.ts';
 import { componentTiers } from '../../shared/lint/componentTiers.ts';
 import { FIXTURES } from './ruleTester.ts';
 
 // the shared config's own tiers on the fixtures' components, every import resolved on disk
-const eslint = new ESLint({
-  cwd: FIXTURES,
-  overrideConfigFile: true,
-  overrideConfig: [
-    { files: ['**/*.ts'], languageOptions: { parser: tseslint.parser } },
-    componentTiers(FIXTURES),
-  ],
-});
-
-async function messagesOf(
-  file: string,
-  code: string,
-): Promise<readonly string[]> {
-  const [linted] = await eslint.lintText(code, {
-    filePath: path.join(FIXTURES, file),
+const linterOf = (renderers: readonly Renderer[]): ESLint =>
+  new ESLint({
+    cwd: FIXTURES,
+    overrideConfigFile: true,
+    overrideConfig: [
+      { files: ['**/*.ts'], languageOptions: { parser: tseslint.parser } },
+      componentTiers({
+        root: FIXTURES,
+        components: ['app/components', 'app/renderers/mobile/components'],
+        renderers,
+      }),
+    ],
   });
-  return (linted?.messages ?? []).map((one) => one.message);
-}
+// the build side's shape: a phone drawn inside the app
+const eslint = linterOf([{ folder: 'app/renderers/mobile', app: 'app' }]);
+// the same two roots, read as one app
+const oneApp = linterOf([]);
+
+const messagesIn =
+  (linter: ESLint) =>
+  async (file: string, code: string): Promise<readonly string[]> => {
+    const [linted] = await linter.lintText(code, {
+      filePath: path.join(FIXTURES, file),
+    });
+    return (linted?.messages ?? []).map((one) => one.message);
+  };
+const messagesOf = messagesIn(eslint);
 
 const ATOM = 'app/components/atoms/Mark/Mark.ts';
 const MOLECULE = 'app/components/molecules/Field/Field.ts';
@@ -34,6 +44,39 @@ const PAST_THE_BARREL = expect.stringContaining('through its barrel');
 const IN_ITS_HOOKS = expect.stringContaining('`providers/` or `hooks/`');
 
 describe('the component tiers', () => {
+  it("a renderer's components are no tier of the app's: any tier draws its template", async () => {
+    expect(
+      await messagesOf(
+        ATOM,
+        "import { HOME } from '../../../renderers/mobile/components/templates/Home/index.ts';",
+      ),
+    ).toEqual([]);
+    expect(
+      await messagesOf(
+        MOLECULE,
+        "import { HOME } from '../../../renderers/mobile/components/templates/Home/index.ts';",
+      ),
+    ).toEqual([]);
+  });
+
+  it("a renderer's tiers are held within it: its atom composes nothing of its own", async () => {
+    expect(
+      await messagesOf(
+        'app/renderers/mobile/components/atoms/Dot/Dot.ts',
+        "import { ROW } from '../../molecules/Row/index.ts';",
+      ),
+    ).toEqual([ATOMIC]);
+  });
+
+  it('two roots of the app climb one ladder: an atom of one composes nothing of the other', async () => {
+    expect(
+      await messagesIn(oneApp)(
+        'app/renderers/mobile/components/atoms/Dot/Dot.ts',
+        "import { MARK } from '../../../../../components/atoms/Mark/index.ts';",
+      ),
+    ).toEqual([ATOMIC]);
+  });
+
   it('an atom composes no component by any spelling, and passes its own folder and a package', async () => {
     expect(
       await messagesOf(

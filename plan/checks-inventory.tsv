@@ -22,8 +22,8 @@ design	theDocsNameRealPaths	shared test	agnostic	reads many files: no linter hol
 design	theWayOfWorkingNamesNoProduct	cspell	agnostic	the glossary as its dictionary (PM, 8 Nov)	the way of working names a role, never the product (D28) | read in the generic rules and the skills' data, against `sheet/project.ts`
 dev	aBlockIsWrittenOnce	jscpd · done	agnostic	lint:copies in check:chunk	`docs/rules/one-home.md`: a block is written once · fifty tokens alike, in two files or twice in one | jscpd's default size · imports are left out, a list of names is no copy of a rule
 dev	aColourIsAPaletteRole	ESLint · done in wow	agnostic	ported in chunks 1–3; the build side takes it with the shared config (phase 9)	A token variable in a component is a colour the palette cannot follow into the other mode · the
-dev	aComponentFileHoldsItsComponent	ls-lint (+ ESLint for one component a file)	agnostic	each scope names its suffixes	
-dev	aComponentFolderIsStructured	ls-lint (+ ESLint for one component a file)	agnostic	each scope names its suffixes	
+dev	aComponentFileHoldsItsComponent	ESLint · done in wow	agnostic	`wow/component-file-holds-its-component` (chunk 6d), under the scope's `components` roots	
+dev	aComponentFolderIsStructured	ls-lint · done in wow	agnostic	`componentFolders(roots)` (chunk 6d), taken by its lint-files at its port	
 dev	aConstantIsUpperCase	ESLint · done in wow	agnostic	ported in chunks 1–3; the build side takes it with the shared config (phase 9)	`docs/rules/names.md`: a value a `Constants` or `Words` file exports is UPPER_SNAKE | A function it exports is camelCase and a component PascalCase · neither is weighed here
 dev	aContextIsHeldByItsProvider	ESLint · boundaries + wow rule	product	its provider pattern	`docs/rules/state.md`: a provider is one file where providers live; its hook throws outside it | Its value is memoised where it is built · read off the syntax tree, following a hook's import
 dev	aCountIsReadOnce	ESLint · shape	product	its helpers byCount and versions	`docs/rules/constants.md`: a count picks its form in `byCount`, nowhere else | `A_HAND_COUNT` · a count against one choosing a written word or a `one` form
@@ -110,7 +110,7 @@ dev	nothingParsesAUserId	product test	product		The id is the directory's and opa
 dev	nothingReadsAnOwner	product test	product		A block has no owner: every block is the content manager's to write, and everyone else proposes.
 dev	nothingShipsTheSeed	knip · production entries	product		Neither script is in the production build, and the proof is the import graph rather than a grep
 dev	oneCommand	shared test	agnostic	reads many files: no linter holds it	The hooks are the pipeline · a commit runs the whole check, a push the whole suite, and nothing
-dev	oneComponentAFile	ls-lint (+ ESLint for one component a file)	agnostic	each scope names its suffixes	
+dev	oneComponentAFile	ESLint · done in wow	agnostic	`wow/component-file-holds-its-component` (chunk 6d), under the scope's `components` roots	
 dev	oneCookieSerialiser	product test	product		`docs/rules/security.md`: a `Set-Cookie` is spelled in one place, under the session's flags | The predicate is the join of attributes with `'; '`, never the substring `Set-Cookie`
 dev	oneDialogOneDrawer	ESLint · boundaries	agnostic	atomic design tiers, both sides	`docs/rules/state.md`: the page's one Dialog and one Drawer are the providers' | Each frame is imported by its provider alone, and MUI's by its molecule alone
 dev	oneDoor	ESLint · boundaries / no-restricted-imports	product	its layers and doors	`appendToStream` has two callers and no third: the runner, which states what it read and retries
