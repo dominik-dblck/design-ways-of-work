@@ -1,6 +1,6 @@
 # design-ways-of-work · the extraction plan
 
-v1 · 8 Nov 2026 · written by the eagle-design session on the PM's word. eagle-design itself is not
+v1.1 · 8 Nov 2026 · written by the eagle-design session on the PM's word; eagle-dev's answers folded in. eagle-design itself is not
 touched until phase 8, and only on the PM's word.
 
 ## What this repository is
@@ -54,12 +54,25 @@ design-ways-of-work/
 
 ## The release still reads one repository at one sha
 
-`sheet/project.ts · buildReads.modules` lists modules that become this repository's
-(`app/workspace/*-view.ts`, `guards/ds-scan.ts`, `expected-files`, `measure`, `refine-check`,
-`source-check`, `spec-check`). The build side reads one design repository at one sha (D6), so the
-product's `yarn build` writes a copy of exactly those modules and their import closure into the
-product (`vendor/wow/`), committed, digested in the release record like `fixtures/data/` (D21).
-The build side's question 1 and 2 below settle the set and the path.
+`sheet/project.ts · buildReads.modules` lists eleven modules of the way of working. eagle-dev read
+its tree (answer 1): it uses four of them.
+
+| module | what the build repository does with it | after the extraction |
+|---|---|---|
+| `guards/measure.ts` | runs `Measure.run()` for the seed fixture's headers | stays in the product (a product check): not vendored |
+| `guards/ds-scan.ts`, `guards/spec-check.ts` | takes and loads them, never calls them; the scans that run are older JS copies in its `.claude/__fixtures__/` | vendored; its two tests (`dsScan`, `theSpecHoldsTogether`) may move to them at the port |
+| `guards/expected-files.ts` | reaches it only by closure: `spec-check/ownerChecks.ts` → `roadmaps/tickets.ts` → `ticketExpand.ts` → it | leaves the closure once phase 3 settles `ticketExpand.ts` |
+| the four views, `sheet-status.ts`, `refine-check.ts`, `source-check.ts` | nothing | leave `buildReads.modules` at the port |
+
+The build side reads one design repository at one sha (D6), so the product's `yarn build` writes
+those modules and their import closure into the product under `vendor/wow/`, committed, digested in
+the release record like `fixtures/data/` (D21). eagle-dev's take accepts the path (answer 2): it
+reads each entry by `git cat-file` and follows relative imports as written, so:
+
+- the vendored copy rewrites every `@product/*` and `@wow/*` import to a relative path that resolves
+  inside the release tree
+- no two vendored entries share a basename (the take names a module by it: `measure.ts` → `Measure`)
+- on the build side the change is three lines of `scripts/lib/sheetReads.ts`, theirs at the port
 
 ## The inventory
 
@@ -111,16 +124,42 @@ Each phase ends with the tests and the checks green here, one commit, one push.
 | 0 | plan | this file and `plan/inventory.tsv` | done |
 | 1 | scaffold | package.json, tsconfig with `@product/*` and `@wow/*`, eslint, prettier, vitest, husky, README | 0.5 day |
 | 2 | pure files | the 301 pure files into `design/`, compiled with no product | 0.5 day |
-| 3 | registries | the 23 types and the machinery of the 22 entries come here; each entry's rows get one named export in the product; the three product files that import tooling settled | 1 day |
+| 3 | registries | the 23 types and the machinery of the 22 entries come here; each entry's rows get one named export in the product; the three product files that import tooling settled, `ticketExpand.ts` first (it pulls `expected-files` into the build side's closure) | 1 day |
 | 4 | coupled files | the 63 files read `@product/*`; the 7 mixed checks split, their product parts named in `product.ts` | 1 day |
 | 5 | product.ts | its contract written as a type here: homes, check parts, source-check map, build reads, design system | 0.5 day |
 | 6 | sample product | `examples/sample-product`: one epic, a command, a query, an event, a refusal, a journey, a ticket, a decision, a notebook; every generic check and architecture test green on it | 0.5 day |
 | 7 | port rehearsal | `scripts/rehearse.ts ../eagle-design` copies the product to a scratch folder, cuts what came here, links this repository, runs build, checks and tests; every output byte-equal to today's (snapshots, `fixtures/data/`, packs, release record) | 0.5 day |
-| 8 | port | into eagle-design on the PM's word, one commit per step; the first release after it carries `vendor/wow/`, agreed with eagle-dev first | 0.5 day |
+| 8 | port | into eagle-design on the PM's word, one commit per step; `buildReads.modules` cut to what the build side uses; the first release after it carries `vendor/wow/`; eagle-dev changes `sheetReads.ts` | 0.5 day |
 | 9 | dev way of working | with eagle-dev: the code rules as data (D76), the presets, the scripts; written into each build repository through its product's release | 1 day here, 1–2 days eagle-dev |
 | 10 | Argus | `new-project.md` rewritten for a product on this repository; argus-design, then argus-dev | 0.5 day |
 
-## Questions for eagle-dev (phases 8 and 9)
+## eagle-dev's answers (8 Nov, read off its tree at 7696dd86)
+
+Answers 1 and 2 are folded into the release section above. Answers 3 and 4 shape phase 9.
+
+What the build repository shares as it stands (no product fact): the husky hooks; the scripts
+`generateSkills.ts`, `takeRelease.ts`, `cacheSheet.ts`, `checkReports.ts`, `ticketSnapshot.ts`,
+`coverageRun.ts`, `coverageTrend.ts`, `zipRepo.sh` and their helpers; the Claude hooks
+`ticketRunKeepsTheTurn.py` and `e2eKeepsTheTurn.py`; the ticket skills (generated from
+`ticket-pipeline.md`, shared by construction).
+
+What carries Eagle facts and becomes a parameter in phase 9: `scripts/lib/repoPaths.ts` (the design
+repository's path, the sheet copies' root), `scripts/lib/sheetReads.ts` (the module list),
+`scripts/verifyFixtures.ts`, `scripts/lib/coverageRows.ts`, `scripts/lib/typescriptHooks.ts`, the
+eslint, tsconfig, vitest, stryker and mutation configs and scripts (the domain's folders, the test
+database, `STORE_IMPL`, `AUTH_GOOGLE_ID`), `docs/rules` (generic rules, Eagle's paths and examples),
+the Claude hooks `designRepoReadOnly.py` (the design repository's path hard-coded) and
+`reviewRows.py` (path globs), the lane-B skills (they point at `docs/app-architecture.md`,
+`docs/rules`, `knowledge/`).
+
+How the code rules ride the skills generator (answer 4): `yarn skills` cuts its released source on
+lines that are exactly `---`; a section headed `` # `path` `` is written at that path, a fenced
+`name:` / `description:` opening becomes frontmatter. The generator is path-agnostic: a section
+headed `` # `docs/rules/tests.md` `` is written like any template. What grows on the build side: its
+gate's generated set (`skillsAreGenerated.test.ts`) and the source's row in `hashes.json`. Open for
+phase 9: the rules inside `ticket-pipeline.md`, or a second released source passed by `--source`.
+
+## The questions asked (8 Nov)
 
 1. Of `buildReads.modules` (the views in `app/workspace/` and the guards), which does the build
    repository import or run, and for what? The vendored set is exactly that.
