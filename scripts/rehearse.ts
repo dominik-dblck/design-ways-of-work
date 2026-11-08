@@ -7,13 +7,10 @@
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
-import { HERE, PRODUCT_REPO, repoAt } from './repos.ts';
+import { HERE, LINKED_HOMES, PRODUCT_REPO, repoAt } from './repos.ts';
 
 const SOURCE = repoAt(PRODUCT_REPO);
 const COPY = repoAt(path.join(HERE, '.rehearsal', path.basename(SOURCE)), 1);
-const DESIGN = path.join(HERE, 'design');
-const DEV = path.join(HERE, 'dev');
-const SHARED = path.join(HERE, 'shared');
 const PATCH = path.join(HERE, 'ports', path.basename(SOURCE), 'port.patch');
 const WOW_CATEGORY = /^(wow, |mixed check)/;
 const KEEP_LINKS =
@@ -104,15 +101,11 @@ function main(): void {
     fs.copyFileSync(path.join(SOURCE, file), target);
     copied += 1;
   }
-  for (const [from, at] of [
-    [DESIGN, ''],
-    [DEV, 'dev'],
-    [SHARED, 'shared'],
-  ] as const)
-    for (const file of filesUnder(from)) {
+  for (const [home, at] of LINKED_HOMES)
+    for (const file of filesUnder(path.join(HERE, home))) {
       const target = path.join(COPY, at, file);
       fs.mkdirSync(path.dirname(target), { recursive: true });
-      fs.symlinkSync(path.join(from, file), target);
+      fs.symlinkSync(path.join(HERE, home, file), target);
       linked += 1;
     }
   fs.symlinkSync(
@@ -132,7 +125,7 @@ function main(): void {
     commit('the port');
   }
   console.log(
-    `${path.relative(HERE, COPY) || COPY} · ${copied} product files copied, ${linked} files of design/, dev/ and shared/ linked, ${patched ? 'the port applied' : 'no port'}`,
+    `${path.relative(HERE, COPY) || COPY} · ${copied} product files copied, ${linked} files of design/, dev/, shared/ and design-system/ linked, ${patched ? 'the port applied' : 'no port'}`,
   );
 }
 

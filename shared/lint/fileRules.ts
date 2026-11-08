@@ -1,6 +1,6 @@
 /**
- * - `BANNED_EXTENSIONS` · the files a repository of this way of working never holds, and why
- * - `FolderRules`, `fileLintConfig` · ls-lint's config: the bans in every folder, then a repository's naming
+ * - `fileLintConfig` · ls-lint's config: no style, page or script file in a folder
+ * - `FolderRules` · a repository's own naming of its folders, beside the bans
  */
 interface Banned {
   readonly extension: string;
@@ -53,5 +53,5 @@ const fileLintConfig = (
   ignore,
 });
 
-export { BANNED_EXTENSIONS, fileLintConfig };
+export { fileLintConfig };
 export type { FolderRules };

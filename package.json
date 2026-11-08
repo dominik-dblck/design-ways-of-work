@@ -10,7 +10,7 @@
     "tsc": "tsc --noEmit",
     "lint": "eslint .",
     "lint:files": "node scripts/lint-files.ts",
-    "lint:copies": "jscpd --min-tokens 50 --format typescript --reporters console --no-tips --exit-code 1 scripts shared/hooks shared/lint knip.ts",
+    "lint:copies": "jscpd --min-tokens 50 --format typescript --reporters console --no-tips --exit-code 1 scripts shared/hooks shared/lint design-system knip.ts",
     "lint:exports": "knip --no-progress",
     "format": "prettier --write . --log-level warn",
     "format:check": "prettier --check . --log-level warn",

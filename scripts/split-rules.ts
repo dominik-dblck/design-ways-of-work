@@ -6,7 +6,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { HERE } from './repos.ts';
-import { quoted, ruleTableOf } from './ruleTables.ts';
+import { ruleTableOf } from './ruleTables.ts';
+import { quoted } from './tsLiteral.ts';
 import type { RuleTable, RuleTableRow } from './ruleTables.ts';
 
 const DESIGN = path.join(HERE, 'design', 'docs', 'rules');

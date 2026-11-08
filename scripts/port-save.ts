@@ -6,7 +6,7 @@
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
-import { HERE, PRODUCT_REPO, repoAt } from './repos.ts';
+import { HERE, LINKED_HOMES, PRODUCT_REPO, repoAt } from './repos.ts';
 
 const PRODUCT = path.basename(repoAt(PRODUCT_REPO));
 const COPY = path.join(HERE, '.rehearsal', PRODUCT);
@@ -23,6 +23,7 @@ const diff = execFileSync(
     '--',
     '.',
     ':!guards/__snapshots__/guard-map.json',
+    ...LINKED_HOMES.flatMap(([, at]) => (at ? [`:!${at}`] : [])),
   ],
   {
     cwd: COPY,

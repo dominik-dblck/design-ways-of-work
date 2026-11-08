@@ -1,5 +1,5 @@
 difference	because
-output · yarn build	70 scripts, 3 pages, 422 files copied, 21 icons: ds-scan.js not built; the Wireframes view and page built; the 71 icon copies gone; dev/'s rules, map and claude files counted · the PM's scope of 8 Nov
+output · yarn build	71 scripts, 3 pages, 423 files copied, 21 icons: product-tokens.js built, and the Deblock export published from legacy/ in place of _ds/ (one design system, PM 8 Nov); ds-scan.js not built; the Wireframes view and page built; the 71 icon copies gone; dev/'s rules, map and claude files counted · the PM's scope of 8 Nov
 output · yarn checks	parts r and h (legacy pages run, their props), src holes, app mark and page scripts gone; the guard map reads modules only (56 files, 0 pages, 0 type-name branches in pages); design-scan-before-ready moved to the product's rules (32 checklist lines, 31 product rules) · the .dc.html wireframes leave the way of working (PM, 8 Nov)
 output · yarn test	the Feature page's drawing test went with the frames; the Wireframes page's test came · a third page, Wireframes, and its view: every screen of the sheet, a placeholder each (PM, 8 Nov)
 output · yarn spec-check	it builds first: the same build line as yarn build
@@ -33,3 +33,7 @@ dist · project/feature-page.js	the Feature page's bundle under its new name · 
 dist · project/Wireframes.html	a third page, Wireframes, and its view: every screen of the sheet, a placeholder each (PM, 8 Nov)
 dist · project/wireframes-page.js	a third page, Wireframes, and its view: every screen of the sheet, a placeholder each (PM, 8 Nov)
 dist · project/wireframes-view.js	a third page, Wireframes, and its view: every screen of the sheet, a placeholder each (PM, 8 Nov)
+dist · project/tokens.js	the same 264 light and 70 dark tokens, read from design-system/ and product-tokens.ts in the system's order, its header naming them · one design system for both sides, all TypeScript, in the way of working (PM, 8 Nov)
+dist · project/product-tokens.js	the tokens only the product holds: its mark, its document states, its type chips, its message states · one design system for both sides, all TypeScript, in the way of working (PM, 8 Nov)
+dist · project/_ds/*	the Deblock export is no fixture of the product: its tokens, fonts and element styles are design-system/ data · one design system for both sides, all TypeScript, in the way of working (PM, 8 Nov)
+dist · project/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/*	the Deblock export kept in legacy/ (D24), which the artifact still publishes at its root until phase 5 · one design system for both sides, all TypeScript, in the way of working (PM, 8 Nov)

@@ -1,3 +1,49 @@
+diff --git a/.claude/settings.json b/.claude/settings.json
+index f85224d..f495433 100644
+--- a/.claude/settings.json
++++ b/.claude/settings.json
+@@ -6,9 +6,9 @@
+         "hooks": [
+           {
+             "type": "command",
+-            "command": "cd \"$CLAUDE_PROJECT_DIR\" && node tools/lintEdited.ts",
++            "command": "cd \"$CLAUDE_PROJECT_DIR\" && node shared/hooks/edit-check.ts",
+             "timeout": 60,
+-            "statusMessage": "ESLint on the edited file"
++            "statusMessage": "Prettier and ESLint on the edited file"
+           }
+         ]
+       }
+@@ -20,6 +20,12 @@
+             "type": "command",
+             "command": "cd \"$CLAUDE_PROJECT_DIR\" && node tools/runKeepsTheTurn.ts",
+             "timeout": 10
++          },
++          {
++            "type": "command",
++            "command": "cd \"$CLAUDE_PROJECT_DIR\" && node shared/hooks/chunk-check.ts",
++            "timeout": 180,
++            "statusMessage": "The chunk's checks"
+           }
+         ]
+       }
+diff --git a/.claude/skills/design-criteria/SKILL.md b/.claude/skills/design-criteria/SKILL.md
+index b2b5131..62dbfe5 100644
+--- a/.claude/skills/design-criteria/SKILL.md
++++ b/.claude/skills/design-criteria/SKILL.md
+@@ -27,9 +27,9 @@ Every line is a rule with a pointer; the reason lives where the pointer says (`d
+ - A caveat has an `until` that names a ticket that exists; the board throws otherwise.
+ - An id is a name, not a position; a folded ticket is `dropped`, never renumbered. `rule:ticket-id-is-a-name`
+ - A wireframe is a reading of the spec; where they differ, the wireframe moves. `rule:wireframe-read-against-spec`
+-- Every colour is a role; a chip's pair flips together; under 12px the floor is 7:1 (`--ink-micro`); a strong outline is `--bd-strong`. `tokens.css`
+-- One hover: the fill arrives (`--ui-hover-fill`), nothing else moves; a filled control darkens. 16px boxes take a 28 halo; inside a row the row owns it. `tokens.css`
+-- Buttons are never pills; menus, popovers and dialogs share one paper; four z-layers. `tokens.css`
++- Every colour is a role; a chip's pair flips together; under 12px the floor is 7:1 (`--ink-micro`); a strong outline is `--bd-strong`. `design-system/`
++- One hover: the fill arrives (`--ui-hover-fill`), nothing else moves; a filled control darkens. 16px boxes take a 28 halo; inside a row the row owns it. `design-system/tokens/hover.ts`
++- Buttons are never pills; menus, popovers and dialogs share one paper; four z-layers. `design-system/`
+ - A component an organism owns is `{Organism}{Part}` (`campaigns-header`); a shared one has no prefix and `scope: global`. `rule:part-named-after-its-organism`
+ - A campaign is a folder of documents in the UI: `folder-*` / `document-*` parts are global, the organism hands them their words. `rule:campaign-is-a-folder`
+ - One smart organism per screen; every other component is dumb and gets its props from the organism’s adapters. `rule:one-smart-component-per-screen`
 diff --git a/.claude/skills/design-pack/SKILL.md b/.claude/skills/design-pack/SKILL.md
 index d98f0c0..dd6c01e 100644
 --- a/.claude/skills/design-pack/SKILL.md
@@ -10,10 +56,622 @@ index d98f0c0..dd6c01e 100644
  - `guards/source-check.ts` · after every change `SourceCheck.ratchet` reads 0 (no kind of copy above its baseline; a retired `replaces` still in its file fails) · zero copies before a feature ticket is READY; `tools/pack.ts` refuses the pack. `rule:one-source-of-truth`
  
  ## The cut
+diff --git a/.claude/skills/design-sheet/SKILL.md b/.claude/skills/design-sheet/SKILL.md
+index f72c4df..3e0cdc2 100644
+--- a/.claude/skills/design-sheet/SKILL.md
++++ b/.claude/skills/design-sheet/SKILL.md
+@@ -12,7 +12,7 @@ This repository is the source of truth (D5): the design project lives in the hom
+ ## Where it lives
+ 
+ - No `.js` in git (D12): a sheet file is `{home}/{name}.ts`; `yarn build` writes `dist/project/` (outside git), which the checks run on and the artifact is published from.
+-- A JSON the sheet publishes is written from TypeScript (D21): `tools/layout/emittedFiles.ts` names each module; `yarn build` writes it to `fixtures/data/`, committed so a release's commit holds it. Edit the module, never the JSON. The same build writes `app/styles/tokens.ts` from `app/styles/tokens.css` and the design system's stylesheet (`tools/tokens.ts`, D22), and each skill from `docs/skills/` (D25): edit the source, never what it writes. The markdown the build side reads — `ticket-pipeline.md`, `agent-instructions.md`, `api-convention.md` — is written the same way from `docs/documents/`, byte for byte at its path: edit the data, never the file.
++- A JSON the sheet publishes is written from TypeScript (D21): `tools/layout/emittedFiles.ts` names each module; `yarn build` writes it to `fixtures/data/`, committed so a release's commit holds it. Edit the module, never the JSON. The same build writes `app/styles/tokens.ts` from `design-system/` and `app/styles/product-tokens.ts` (`tools/tokens.ts`, D22), and each skill from `docs/skills/` (D25): edit the source, never what it writes. The markdown the build side reads — `ticket-pipeline.md`, `agent-instructions.md`, `api-convention.md` — is written the same way from `docs/documents/`, byte for byte at its path: edit the data, never the file.
+ - An epic's folder `roadmaps/EXX/` holds the epic whole: its notebook and its parts of the board's entries (`EXXTickets.ts`, `EXXEdges.ts`, `EXX…Receipts.ts`, each serving the entry its name ends with). A new epic's folder is started by `yarn new-epic EXX` once its backlog row stands: it writes the parts the folder lacks from `roadmaps/templates.ts` and lists each in its entry.
+ - How the app works is `sheet/logic/capabilities.ts` (D20): per capability what it decides, its states, rules, walk and examples, each a pointer `{file}.js · {export}`; checks part a holds every pointer to a live export.
+ - `tools/` is this repository's tooling and is not published. `poc/` holds trials.
+diff --git a/app/styles/product-tokens.ts b/app/styles/product-tokens.ts
+new file mode 100644
+index 0000000..0c2aec9
+--- /dev/null
++++ b/app/styles/product-tokens.ts
+@@ -0,0 +1,59 @@
++/**
++ * - `productTokens` · the tokens only this product holds, over design-system/
++ */
++import type { TokenGroup } from '../../design-system/index.ts';
++
++// prettier-ignore
++const productTokens: readonly TokenGroup[] = [
++  {
++    title: 'THE APP\'S MARK · one file, drawn as a mask in the ink of the place it sits (PM, 23 Oct)',
++    intro: '',
++    entries: [
++      { name: '--app-mark', light: 'url("assets/eagle2-black.png")' },
++      { name: '--app-wordmark-stroke', light: '0.6px', why: 'Michroma has one weight: the wordmark thickens by a stroke in its own ink' },
++    ],
++  },
++  {
++    title: 'DOCUMENT STATE CHIPS · seven states, one wash + one ink each',
++    intro: '',
++    darkNote: 'state chips · wash is a deep tint of the hue, ink is the light end of the ramp',
++    entries: [
++      { note: 'ink on wash measured 18 Sep (Measure · contrast): every pair ≥ 4.5:1' },
++      { name: '--st-draft-bg', light: 'var(--n-50)', dark: '#282828' },
++      { name: '--st-draft-fg', light: 'var(--n-600)', dark: 'var(--n-300)', why: '5.23', whyDark: '7.47' },
++      { name: '--st-review-bg', light: 'var(--y-50)', dark: '#3a3222' },
++      { name: '--st-review-fg', light: '#8a6a00', dark: 'var(--y-100)', why: '4.71 · y-500 (#a47c05) reads 3.57 — a y-600 the DS ramp lacks', whyDark: '9.75' },
++      { name: '--st-ready-bg', light: 'var(--g-50)', dark: '#12332f' },
++      { name: '--st-ready-fg', light: 'var(--g-600)', dark: 'var(--g-200)', why: '5.56', whyDark: '9.26' },
++      { name: '--st-published-bg', light: '#e4f5e3', dark: '#15291a' },
++      { name: '--st-published-fg', light: '#1f6b2a', dark: '#8fdc98', why: '5.78 · a document handed to its destination (PM, 6 Nov)', whyDark: '9.43' },
++    ],
++  },
++  {
++    title: 'TYPE CHIPS · email, push',
++    intro: '',
++    darkNote: 'type chips\n\nthe one wash the DS blue ramp lacks · in dark it is a deep tint, not a wash',
++    entries: [
++      { name: '--type-email-bg', light: 'var(--n-50)', dark: '#282828' },
++      { name: '--type-email-fg', light: 'var(--n-700)', dark: 'var(--n-200)', why: '7.13', whyDark: '8.97' },
++      { name: '--type-push-bg', light: 'var(--b-25)', dark: '#1b2440' },
++      { name: '--type-push-fg', light: 'var(--b-400)', dark: 'var(--b-50)', why: '5.80', whyDark: '10.84' },
++      { name: '--type-banner-bg', light: 'var(--o-50)', dark: '#3a2a12', why: 'the app banner · T-E06-13' },
++      { name: '--type-banner-fg', light: 'var(--n-800)', dark: 'var(--o-50)' },
++    ],
++  },
++  {
++    title: 'A MESSAGE\'S STATES · one hue each, none another state wears (PM, 6 Nov), measured on their wash',
++    intro: '',
++    entries: [
++      { name: '--ink-scheduled', light: '#5b34c7', dark: '#c4b2ff', why: '6.58', whyDark: '8.42 on the wash below' },
++      { name: '--wash-scheduled', light: '#f1ecfe', dark: '#261d3d' },
++      { name: '--ink-sent', light: '#a01d5c', dark: '#ff9ccb', why: '6.37', whyDark: '7.98' },
++      { name: '--wash-sent', light: '#fde8f2', dark: '#3a1a2b' },
++      { name: '--ink-finished', light: '#0b6b6b', dark: '#16eded', why: '5.72', whyDark: '9.35' },
++      { name: '--wash-finished', light: '#d6fbfb', dark: '#0c3333' },
++    ],
++  },
++];
++
++export { productTokens };
+diff --git a/app/styles/tokens.ts b/app/styles/tokens.ts
+index b83db18..7bccc2f 100644
+--- a/app/styles/tokens.ts
++++ b/app/styles/tokens.ts
+@@ -1,7 +1,7 @@
+-// GENERATED by tools/tokens.ts from app/styles/tokens.css and the design system's colors_and_type.css.
+-// Do not edit: edit the stylesheet, then run `node tools/build.ts`.
++// GENERATED by tools/tokens.ts from design-system/ and app/styles/product-tokens.ts.
++// Do not edit: edit the token's row, then run `node tools/build.ts`.
+ //
+-// Every reference is resolved at build rather than at paint, so the theme is readable without the
++// Every reference is resolved at build rather than at paint, so the theme is readable without a
+ // stylesheet — which is what lets a jsdom test measure a colour.
+ 
+ /** A resolved token · a hex, a px number, or a string a filter or a shadow needs. */
+@@ -86,6 +86,7 @@ export const tokens = {
+     trBlack03: "rgba(0,0,0,0.03)",
+     trWhite80: "rgba(255,255,255,0.80)",
+     trWhite45: "rgba(255,255,255,0.45)",
++    b25: "#e8eeff",
+     bgDisplay: "#fbfaf9",
+     bgDisplayWa: "#fafafa",
+     bgPrimary: "#000000",
+@@ -125,43 +126,6 @@ export const tokens = {
+     bdSuccess: "#1cd0ba",
+     bdDanger: "#ea5f5f",
+     bdWarning: "#f8c223",
+-    shadowMin: "0 12px 32px rgba(0,0,0,0.02), 0 1px 1px rgba(0,0,0,0.02)",
+-    shadowNuanced: "0 12px 32px rgba(0,0,0,0.02), 0 1px 3px rgba(0,0,0,0.05)",
+-    shadowSubtle: "0 3px 3px rgba(0,0,0,0.03)",
+-    shadowCard: "0 8px 6px rgba(0,0,0,0.10), 0 4px 4px rgba(0,0,0,0.15)",
+-    shadowIntense: "0 8px 7px rgba(0,0,0,0.10), 0 3px 3px rgba(0,0,0,0.15)",
+-    shadowBold: "0 4px 4px rgba(0,0,0,0.65)",
+-    shadowSolid: "2px 2px 0 #000000",
+-    shadowSolidBlue: "2px 2px 0 #0045f5",
+-    shadowNavigation: "0 -4px 4px rgba(0,0,0,0.05)",
+-    shadowTab: "0 3px 15px rgba(0,0,0,0.10)",
+-    shadowAvatar: "0 6px 16px rgba(0,0,0,0.10), 0 2px 4px rgba(0,0,0,0.05)",
+-    shadowLumos: "0 5px 14px rgba(0,0,0,0.10), 0 2px 4px rgba(253,240,200,0.60)",
+-    blurDefault: "blur(4px)",
+-    blurNav: "blur(20px)",
+-    blurPopover: "blur(54px)",
+-    blurSelector: "blur(9px)",
+-    blurSwipe: "blur(7px)",
+-    rPill: 999,
+-    r2xl: 32,
+-    rXl: 24,
+-    rLg: 20,
+-    rMd: 16,
+-    rSm: 12,
+-    rXs: 8,
+-    rXxs: 4,
+-    sp1: 4,
+-    sp2: 8,
+-    sp3: 12,
+-    sp4: 16,
+-    sp5: 20,
+-    sp6: 24,
+-    sp8: 32,
+-    sp10: 40,
+-    sp12: 48,
+-    sp16: 64,
+-    sp20: 80,
+-    sp24: 96,
+     fontSans: "\"Basis Grotesque Pro\", -apple-system, BlinkMacSystemFont, \"Inter\", \"Helvetica Neue\", Arial, sans-serif",
+     fontMono: "ui-monospace, \"SF Mono\", \"JetBrains Mono\", Menlo, monospace",
+     trTight: "-0.02em",
+@@ -184,27 +148,6 @@ export const tokens = {
+     lhSnug: 1.15,
+     lhNormal: 1.35,
+     lhLoose: 1.5,
+-    appMark: "url(\"assets/eagle2-black.png\")",
+-    appWordmarkStroke: 0.6,
+-    motionEase: "cubic-bezier(0.25, 0.1, 0.25, 1)",
+-    motionIn: "320ms",
+-    motionStagger: "70ms",
+-    motionReveal: "700ms",
+-    stDraftBg: "#eff0f2",
+-    stDraftFg: "#5c6472",
+-    stReviewBg: "#fff6e1",
+-    stReviewFg: "#8a6a00",
+-    stReadyBg: "#d5f7f3",
+-    stReadyFg: "#156b63",
+-    stPublishedBg: "#e4f5e3",
+-    stPublishedFg: "#1f6b2a",
+-    typeEmailBg: "#eff0f2",
+-    typeEmailFg: "#49505b",
+-    typePushBg: "var(--b-25)",
+-    typePushFg: "#0045f5",
+-    typeBannerBg: "#ffebcc",
+-    typeBannerFg: "#373c44",
+-    b25: "#e8eeff",
+     uiTitle: 20,
+     uiHeading: 16,
+     uiSubheading: 14,
+@@ -213,32 +156,55 @@ export const tokens = {
+     uiLabel: 12,
+     uiCaption: 10,
+     uiEyebrow: 10,
+-    uiChipEdge: "35%",
+     uiEyebrowFont: "ui-monospace, \"SF Mono\", \"JetBrains Mono\", Menlo, monospace",
++    sp1: 4,
++    sp2: 8,
++    sp3: 12,
++    sp4: 16,
++    sp5: 20,
++    sp6: 24,
++    sp8: 32,
++    sp10: 40,
++    sp12: 48,
++    sp16: 64,
++    sp20: 80,
++    sp24: 96,
++    rPill: 999,
++    r2xl: 32,
++    rXl: 24,
++    rLg: 20,
++    rMd: 16,
++    rSm: 12,
++    rXs: 8,
++    rXxs: 4,
+     uiRTag: 4,
+     uiRControl: 8,
+     uiRPopover: 12,
+     uiRContainer: 16,
+     uiRCard: 20,
+     uiRPill: 999,
+-    bdStrong: "#25282e",
+-    uiHoverFill: "var(--bg-subtle)",
+-    uiHoverInk: "var(--fg-primary)",
+-    uiSelectedFill: "var(--bg-subtle)",
+-    uiHoverHalo: 28,
+-    uiHSm: 28,
+-    uiHMd: 32,
+-    uiHLg: 40,
+-    uiGlyphSm: 14,
+-    uiGlyphMd: 16,
+-    uiGlyphLg: 20,
+-    uiMarkDot: 8,
+-    uiMarkBadge: 10,
+-    uiMarkInline: 12,
+-    uiToolbarH: 46,
++    shadowMin: "0 12px 32px rgba(0,0,0,0.02), 0 1px 1px rgba(0,0,0,0.02)",
++    shadowNuanced: "0 12px 32px rgba(0,0,0,0.02), 0 1px 3px rgba(0,0,0,0.05)",
++    shadowSubtle: "0 3px 3px rgba(0,0,0,0.03)",
++    shadowCard: "0 8px 6px rgba(0,0,0,0.10), 0 4px 4px rgba(0,0,0,0.15)",
++    shadowIntense: "0 8px 7px rgba(0,0,0,0.10), 0 3px 3px rgba(0,0,0,0.15)",
++    shadowBold: "0 4px 4px rgba(0,0,0,0.65)",
++    shadowSolid: "2px 2px 0 #000000",
++    shadowSolidBlue: "2px 2px 0 #0045f5",
++    shadowNavigation: "0 -4px 4px rgba(0,0,0,0.05)",
++    shadowTab: "0 3px 15px rgba(0,0,0,0.10)",
++    shadowAvatar: "0 6px 16px rgba(0,0,0,0.10), 0 2px 4px rgba(0,0,0,0.05)",
++    shadowLumos: "0 5px 14px rgba(0,0,0,0.10), 0 2px 4px rgba(253,240,200,0.60)",
++    blurDefault: "blur(4px)",
++    blurNav: "blur(20px)",
++    blurPopover: "blur(54px)",
++    blurSelector: "blur(9px)",
++    blurSwipe: "blur(7px)",
+     uiShadowRest: "0 3px 3px rgba(0,0,0,0.03)",
+     uiShadowPopover: "0 8px 6px rgba(0,0,0,0.10), 0 4px 4px rgba(0,0,0,0.15)",
+     uiShadowDialog: "0 8px 7px rgba(0,0,0,0.10), 0 3px 3px rgba(0,0,0,0.15)",
++    bdStrong: "#25282e",
++    uiChipEdge: "35%",
+     inkMicro: "#49505b",
+     inkRemoved: "#b03a3a",
+     washRemoved: "#fdecec",
+@@ -246,12 +212,6 @@ export const tokens = {
+     washProposed: "#fdefe4",
+     inkInfo: "#0045f5",
+     washInfo: "#e8eeff",
+-    inkScheduled: "#5b34c7",
+-    washScheduled: "#f1ecfe",
+-    inkSent: "#a01d5c",
+-    washSent: "#fde8f2",
+-    inkFinished: "#0b6b6b",
+-    washFinished: "#d6fbfb",
+     inkLink: "#0045f5",
+     inkLinkHover: "#0037c4",
+     inkDanger: "#911313",
+@@ -264,6 +224,20 @@ export const tokens = {
+     iconOnInverse: "invert(1)",
+     iconOnSignal: "none",
+     iconOnDanger: "invert(1)",
++    uiHoverFill: "var(--bg-subtle)",
++    uiHoverInk: "var(--fg-primary)",
++    uiSelectedFill: "var(--bg-subtle)",
++    uiHoverHalo: 28,
++    uiHSm: 28,
++    uiHMd: 32,
++    uiHLg: 40,
++    uiGlyphSm: 14,
++    uiGlyphMd: 16,
++    uiGlyphLg: 20,
++    uiMarkDot: 8,
++    uiMarkBadge: 10,
++    uiMarkInline: 12,
++    uiToolbarH: 46,
+     uiPaperBg: "#fff",
+     uiPaperBorder: "1px solid #e3e5e8",
+     uiPaperPadMenu: 6,
+@@ -273,8 +247,35 @@ export const tokens = {
+     uiZMenu: 60,
+     uiZOverlay: 100,
+     uiZDialog: 110,
++    motionEase: "cubic-bezier(0.25, 0.1, 0.25, 1)",
++    motionIn: "320ms",
++    motionStagger: "70ms",
++    motionReveal: "700ms",
++    appMark: "url(\"assets/eagle2-black.png\")",
++    appWordmarkStroke: 0.6,
++    stDraftBg: "#eff0f2",
++    stDraftFg: "#5c6472",
++    stReviewBg: "#fff6e1",
++    stReviewFg: "#8a6a00",
++    stReadyBg: "#d5f7f3",
++    stReadyFg: "#156b63",
++    stPublishedBg: "#e4f5e3",
++    stPublishedFg: "#1f6b2a",
++    typeEmailBg: "#eff0f2",
++    typeEmailFg: "#49505b",
++    typePushBg: "var(--b-25)",
++    typePushFg: "#0045f5",
++    typeBannerBg: "#ffebcc",
++    typeBannerFg: "#373c44",
++    inkScheduled: "#5b34c7",
++    washScheduled: "#f1ecfe",
++    inkSent: "#a01d5c",
++    washSent: "#fde8f2",
++    inkFinished: "#0b6b6b",
++    washFinished: "#d6fbfb",
+   },
+   dark: {
++    b25: "#1b2440",
+     bgDisplay: "#000000",
+     bgDisplayWa: "#15121d",
+     bgPrimary: "#16eded",
+@@ -301,6 +302,29 @@ export const tokens = {
+     bdContainer: "#49505b",
+     bdFocused: "#707b8c",
+     bdWarning: "#a47c05",
++    uiShadowRest: "0 0 0 1px rgba(255,255,255,0.06)",
++    uiShadowPopover: "0 0 0 1px rgba(255,255,255,0.10)",
++    uiShadowDialog: "0 0 0 1px rgba(255,255,255,0.14)",
++    bdStrong: "#c6cad1",
++    inkMicro: "#c6cad1",
++    inkRemoved: "#ff8383",
++    washRemoved: "#3a1f1f",
++    inkProposed: "#ffad33",
++    washProposed: "#3a2618",
++    inkInfo: "#cad9ff",
++    washInfo: "#1b2440",
++    inkLink: "#95b3ff",
++    inkLinkHover: "#cad9ff",
++    inkDanger: "#f29f9f",
++    inkReady: "#80e6dc",
++    washProposedDeep: "#4a3220",
++    iconOnSurface: "invert(1)",
++    iconOnInverse: "none",
++    uiHoverFill: "#25282e",
++    uiHoverInk: "var(--fg-primary)",
++    uiSelectedFill: "var(--bg-divider)",
++    uiPaperBg: "#181818",
++    uiPaperBorder: "1px solid #373c44",
+     stDraftBg: "#282828",
+     stDraftFg: "#b3b9c2",
+     stReviewBg: "#3a3222",
+@@ -315,36 +339,12 @@ export const tokens = {
+     typePushFg: "#cad9ff",
+     typeBannerBg: "#3a2a12",
+     typeBannerFg: "#ffebcc",
+-    b25: "#1b2440",
+-    inkRemoved: "#ff8383",
+-    washRemoved: "#3a1f1f",
+-    inkInfo: "#cad9ff",
+-    washInfo: "#1b2440",
+     inkScheduled: "#c4b2ff",
+     washScheduled: "#261d3d",
+     inkSent: "#ff9ccb",
+     washSent: "#3a1a2b",
+     inkFinished: "#16eded",
+     washFinished: "#0c3333",
+-    inkLink: "#95b3ff",
+-    inkDanger: "#f29f9f",
+-    inkReady: "#80e6dc",
+-    inkLinkHover: "#cad9ff",
+-    inkProposed: "#ffad33",
+-    washProposed: "#3a2618",
+-    washProposedDeep: "#4a3220",
+-    inkMicro: "#c6cad1",
+-    bdStrong: "#c6cad1",
+-    iconOnSurface: "invert(1)",
+-    iconOnInverse: "none",
+-    uiPaperBg: "#181818",
+-    uiPaperBorder: "1px solid #373c44",
+-    uiShadowRest: "0 0 0 1px rgba(255,255,255,0.06)",
+-    uiShadowPopover: "0 0 0 1px rgba(255,255,255,0.10)",
+-    uiShadowDialog: "0 0 0 1px rgba(255,255,255,0.14)",
+-    uiHoverFill: "#25282e",
+-    uiHoverInk: "var(--fg-primary)",
+-    uiSelectedFill: "var(--bg-divider)",
+   },
+ } as const;
+ 
+@@ -427,6 +427,7 @@ export const TOKEN_NAMES: Record<keyof typeof tokens.light, string> = {
+   trBlack03: "--tr-black-03",
+   trWhite80: "--tr-white-80",
+   trWhite45: "--tr-white-45",
++  b25: "--b-25",
+   bgDisplay: "--bg-display",
+   bgDisplayWa: "--bg-display-wa",
+   bgPrimary: "--bg-primary",
+@@ -466,43 +467,6 @@ export const TOKEN_NAMES: Record<keyof typeof tokens.light, string> = {
+   bdSuccess: "--bd-success",
+   bdDanger: "--bd-danger",
+   bdWarning: "--bd-warning",
+-  shadowMin: "--shadow-min",
+-  shadowNuanced: "--shadow-nuanced",
+-  shadowSubtle: "--shadow-subtle",
+-  shadowCard: "--shadow-card",
+-  shadowIntense: "--shadow-intense",
+-  shadowBold: "--shadow-bold",
+-  shadowSolid: "--shadow-solid",
+-  shadowSolidBlue: "--shadow-solid-blue",
+-  shadowNavigation: "--shadow-navigation",
+-  shadowTab: "--shadow-tab",
+-  shadowAvatar: "--shadow-avatar",
+-  shadowLumos: "--shadow-lumos",
+-  blurDefault: "--blur-default",
+-  blurNav: "--blur-nav",
+-  blurPopover: "--blur-popover",
+-  blurSelector: "--blur-selector",
+-  blurSwipe: "--blur-swipe",
+-  rPill: "--r-pill",
+-  r2xl: "--r-2xl",
+-  rXl: "--r-xl",
+-  rLg: "--r-lg",
+-  rMd: "--r-md",
+-  rSm: "--r-sm",
+-  rXs: "--r-xs",
+-  rXxs: "--r-xxs",
+-  sp1: "--sp-1",
+-  sp2: "--sp-2",
+-  sp3: "--sp-3",
+-  sp4: "--sp-4",
+-  sp5: "--sp-5",
+-  sp6: "--sp-6",
+-  sp8: "--sp-8",
+-  sp10: "--sp-10",
+-  sp12: "--sp-12",
+-  sp16: "--sp-16",
+-  sp20: "--sp-20",
+-  sp24: "--sp-24",
+   fontSans: "--font-sans",
+   fontMono: "--font-mono",
+   trTight: "--tr-tight",
+@@ -525,27 +489,6 @@ export const TOKEN_NAMES: Record<keyof typeof tokens.light, string> = {
+   lhSnug: "--lh-snug",
+   lhNormal: "--lh-normal",
+   lhLoose: "--lh-loose",
+-  appMark: "--app-mark",
+-  appWordmarkStroke: "--app-wordmark-stroke",
+-  motionEase: "--motion-ease",
+-  motionIn: "--motion-in",
+-  motionStagger: "--motion-stagger",
+-  motionReveal: "--motion-reveal",
+-  stDraftBg: "--st-draft-bg",
+-  stDraftFg: "--st-draft-fg",
+-  stReviewBg: "--st-review-bg",
+-  stReviewFg: "--st-review-fg",
+-  stReadyBg: "--st-ready-bg",
+-  stReadyFg: "--st-ready-fg",
+-  stPublishedBg: "--st-published-bg",
+-  stPublishedFg: "--st-published-fg",
+-  typeEmailBg: "--type-email-bg",
+-  typeEmailFg: "--type-email-fg",
+-  typePushBg: "--type-push-bg",
+-  typePushFg: "--type-push-fg",
+-  typeBannerBg: "--type-banner-bg",
+-  typeBannerFg: "--type-banner-fg",
+-  b25: "--b-25",
+   uiTitle: "--ui-title",
+   uiHeading: "--ui-heading",
+   uiSubheading: "--ui-subheading",
+@@ -554,32 +497,55 @@ export const TOKEN_NAMES: Record<keyof typeof tokens.light, string> = {
+   uiLabel: "--ui-label",
+   uiCaption: "--ui-caption",
+   uiEyebrow: "--ui-eyebrow",
+-  uiChipEdge: "--ui-chip-edge",
+   uiEyebrowFont: "--ui-eyebrow-font",
++  sp1: "--sp-1",
++  sp2: "--sp-2",
++  sp3: "--sp-3",
++  sp4: "--sp-4",
++  sp5: "--sp-5",
++  sp6: "--sp-6",
++  sp8: "--sp-8",
++  sp10: "--sp-10",
++  sp12: "--sp-12",
++  sp16: "--sp-16",
++  sp20: "--sp-20",
++  sp24: "--sp-24",
++  rPill: "--r-pill",
++  r2xl: "--r-2xl",
++  rXl: "--r-xl",
++  rLg: "--r-lg",
++  rMd: "--r-md",
++  rSm: "--r-sm",
++  rXs: "--r-xs",
++  rXxs: "--r-xxs",
+   uiRTag: "--ui-r-tag",
+   uiRControl: "--ui-r-control",
+   uiRPopover: "--ui-r-popover",
+   uiRContainer: "--ui-r-container",
+   uiRCard: "--ui-r-card",
+   uiRPill: "--ui-r-pill",
+-  bdStrong: "--bd-strong",
+-  uiHoverFill: "--ui-hover-fill",
+-  uiHoverInk: "--ui-hover-ink",
+-  uiSelectedFill: "--ui-selected-fill",
+-  uiHoverHalo: "--ui-hover-halo",
+-  uiHSm: "--ui-h-sm",
+-  uiHMd: "--ui-h-md",
+-  uiHLg: "--ui-h-lg",
+-  uiGlyphSm: "--ui-glyph-sm",
+-  uiGlyphMd: "--ui-glyph-md",
+-  uiGlyphLg: "--ui-glyph-lg",
+-  uiMarkDot: "--ui-mark-dot",
+-  uiMarkBadge: "--ui-mark-badge",
+-  uiMarkInline: "--ui-mark-inline",
+-  uiToolbarH: "--ui-toolbar-h",
++  shadowMin: "--shadow-min",
++  shadowNuanced: "--shadow-nuanced",
++  shadowSubtle: "--shadow-subtle",
++  shadowCard: "--shadow-card",
++  shadowIntense: "--shadow-intense",
++  shadowBold: "--shadow-bold",
++  shadowSolid: "--shadow-solid",
++  shadowSolidBlue: "--shadow-solid-blue",
++  shadowNavigation: "--shadow-navigation",
++  shadowTab: "--shadow-tab",
++  shadowAvatar: "--shadow-avatar",
++  shadowLumos: "--shadow-lumos",
++  blurDefault: "--blur-default",
++  blurNav: "--blur-nav",
++  blurPopover: "--blur-popover",
++  blurSelector: "--blur-selector",
++  blurSwipe: "--blur-swipe",
+   uiShadowRest: "--ui-shadow-rest",
+   uiShadowPopover: "--ui-shadow-popover",
+   uiShadowDialog: "--ui-shadow-dialog",
++  bdStrong: "--bd-strong",
++  uiChipEdge: "--ui-chip-edge",
+   inkMicro: "--ink-micro",
+   inkRemoved: "--ink-removed",
+   washRemoved: "--wash-removed",
+@@ -587,12 +553,6 @@ export const TOKEN_NAMES: Record<keyof typeof tokens.light, string> = {
+   washProposed: "--wash-proposed",
+   inkInfo: "--ink-info",
+   washInfo: "--wash-info",
+-  inkScheduled: "--ink-scheduled",
+-  washScheduled: "--wash-scheduled",
+-  inkSent: "--ink-sent",
+-  washSent: "--wash-sent",
+-  inkFinished: "--ink-finished",
+-  washFinished: "--wash-finished",
+   inkLink: "--ink-link",
+   inkLinkHover: "--ink-link-hover",
+   inkDanger: "--ink-danger",
+@@ -605,6 +565,20 @@ export const TOKEN_NAMES: Record<keyof typeof tokens.light, string> = {
+   iconOnInverse: "--icon-on-inverse",
+   iconOnSignal: "--icon-on-signal",
+   iconOnDanger: "--icon-on-danger",
++  uiHoverFill: "--ui-hover-fill",
++  uiHoverInk: "--ui-hover-ink",
++  uiSelectedFill: "--ui-selected-fill",
++  uiHoverHalo: "--ui-hover-halo",
++  uiHSm: "--ui-h-sm",
++  uiHMd: "--ui-h-md",
++  uiHLg: "--ui-h-lg",
++  uiGlyphSm: "--ui-glyph-sm",
++  uiGlyphMd: "--ui-glyph-md",
++  uiGlyphLg: "--ui-glyph-lg",
++  uiMarkDot: "--ui-mark-dot",
++  uiMarkBadge: "--ui-mark-badge",
++  uiMarkInline: "--ui-mark-inline",
++  uiToolbarH: "--ui-toolbar-h",
+   uiPaperBg: "--ui-paper-bg",
+   uiPaperBorder: "--ui-paper-border",
+   uiPaperPadMenu: "--ui-paper-pad-menu",
+@@ -614,6 +588,32 @@ export const TOKEN_NAMES: Record<keyof typeof tokens.light, string> = {
+   uiZMenu: "--ui-z-menu",
+   uiZOverlay: "--ui-z-overlay",
+   uiZDialog: "--ui-z-dialog",
++  motionEase: "--motion-ease",
++  motionIn: "--motion-in",
++  motionStagger: "--motion-stagger",
++  motionReveal: "--motion-reveal",
++  appMark: "--app-mark",
++  appWordmarkStroke: "--app-wordmark-stroke",
++  stDraftBg: "--st-draft-bg",
++  stDraftFg: "--st-draft-fg",
++  stReviewBg: "--st-review-bg",
++  stReviewFg: "--st-review-fg",
++  stReadyBg: "--st-ready-bg",
++  stReadyFg: "--st-ready-fg",
++  stPublishedBg: "--st-published-bg",
++  stPublishedFg: "--st-published-fg",
++  typeEmailBg: "--type-email-bg",
++  typeEmailFg: "--type-email-fg",
++  typePushBg: "--type-push-bg",
++  typePushFg: "--type-push-fg",
++  typeBannerBg: "--type-banner-bg",
++  typeBannerFg: "--type-banner-fg",
++  inkScheduled: "--ink-scheduled",
++  washScheduled: "--wash-scheduled",
++  inkSent: "--ink-sent",
++  washSent: "--wash-sent",
++  inkFinished: "--ink-finished",
++  washFinished: "--wash-finished",
+ };
+ 
+ export type LightToken = keyof typeof tokens.light;
 diff --git a/docs/process/new-project.md b/docs/process/new-project.md
-index 4ed4a71..a952839 100644
+index 4ed4a71..89724d3 100644
 --- a/docs/process/new-project.md
 +++ b/docs/process/new-project.md
+@@ -7,8 +7,8 @@ again, and what is the product’s own is cut by hand. No tool writes the copy.
+ ## 1 · Copy
+ 
+ - Copy the tree without `.git/`, `dist/` and `node_modules/`, then `git init` and `yarn install`.
+-- The design system’s files in `app/styles/__fixtures__/` and `app/styles/tokens.css` travel whole:
+-  the projects are the company’s, until the build side’s package brings the tokens (D60).
++- The design system is never copied: `design-system/` comes from the way of working, and the
++  product keeps only the tokens it alone holds, in `app/styles/product-tokens.ts` (PM, 8 Nov).
+ 
+ ## 2 · Fill: the product’s names and rules
+ 
 @@ -43,4 +43,4 @@ again, and what is the product’s own is cut by hand. No tool writes the copy.
  
  - `tools/`, `guards/` (the checks), `tests/architecture/`, the configs at the root.
@@ -114,35 +772,131 @@ index 0000000..4993b9c
 +
 +export { LIST_REACT, ListLogic };
 diff --git a/guards/measure/measureFiles.ts b/guards/measure/measureFiles.ts
-index 2f7db81..fe9d896 100644
+index 2f7db81..fe9cfad 100644
 --- a/guards/measure/measureFiles.ts
 +++ b/guards/measure/measureFiles.ts
-@@ -57,7 +57,7 @@ const FIXTURES: readonly string[] = [
+@@ -2,7 +2,6 @@
+  * - `LOAD`, `FIXTURES`, `FIXTURE_LOAD` · the files in load order, the copied ones
+  * - `hashes`, `hashesText` · each copied file's sha256, taken on this side
+  */
+-import { designSystem } from '../../sheet/project.ts';
+ 
+ // the layers' order: words, languages, people, types and modules, blocks, the run, its payloads
+ const LOAD: readonly string[] = [
+@@ -55,9 +54,9 @@ const FIXTURES: readonly string[] = [
+ ];
+ 
  // the theme, the pipeline and the scans: not the run's data, each copied with its own manifest
- const THEME_FIXTURES: readonly string[] = ['tokens.css', designSystem];
+-const THEME_FIXTURES: readonly string[] = ['tokens.css', designSystem];
++const THEME_FIXTURES: readonly string[] = ['tokens.js'];
  const PIPELINE_FIXTURES: readonly string[] = ['ticket-pipeline.md'];
 -const SCAN_FIXTURES: readonly string[] = ['ds-scan.js', 'spec-check.js'];
 +const SCAN_FIXTURES: readonly string[] = ['spec-check.js'];
  
  // the fixtures in the one order that loads them, never restated by a reader
  const FIXTURE_LOAD: readonly string[] = LOAD.filter((file) =>
+diff --git a/app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/README.md b/legacy/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/README.md
+similarity index 100%
+rename from app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/README.md
+rename to legacy/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/README.md
+diff --git a/app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/_ds_bundle.js b/legacy/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/_ds_bundle.js
+similarity index 100%
+rename from app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/_ds_bundle.js
+rename to legacy/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/_ds_bundle.js
+diff --git a/app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/_ds_manifest.json b/legacy/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/_ds_manifest.json
+similarity index 100%
+rename from app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/_ds_manifest.json
+rename to legacy/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/_ds_manifest.json
+diff --git a/app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/colors_and_type.css b/legacy/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/colors_and_type.css
+similarity index 100%
+rename from app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/colors_and_type.css
+rename to legacy/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/colors_and_type.css
+diff --git a/app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-Black.ttf b/legacy/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-Black.ttf
+similarity index 100%
+rename from app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-Black.ttf
+rename to legacy/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-Black.ttf
+diff --git a/app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-BlackItalic.ttf b/legacy/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-BlackItalic.ttf
+similarity index 100%
+rename from app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-BlackItalic.ttf
+rename to legacy/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-BlackItalic.ttf
+diff --git a/app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-Bold.ttf b/legacy/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-Bold.ttf
+similarity index 100%
+rename from app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-Bold.ttf
+rename to legacy/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-Bold.ttf
+diff --git a/app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-BoldItalic.ttf b/legacy/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-BoldItalic.ttf
+similarity index 100%
+rename from app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-BoldItalic.ttf
+rename to legacy/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-BoldItalic.ttf
+diff --git a/app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-Italic.ttf b/legacy/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-Italic.ttf
+similarity index 100%
+rename from app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-Italic.ttf
+rename to legacy/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-Italic.ttf
+diff --git a/app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-Light.ttf b/legacy/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-Light.ttf
+similarity index 100%
+rename from app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-Light.ttf
+rename to legacy/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-Light.ttf
+diff --git a/app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-LightItalic.ttf b/legacy/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-LightItalic.ttf
+similarity index 100%
+rename from app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-LightItalic.ttf
+rename to legacy/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-LightItalic.ttf
+diff --git a/app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-Medium.ttf b/legacy/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-Medium.ttf
+similarity index 100%
+rename from app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-Medium.ttf
+rename to legacy/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-Medium.ttf
+diff --git a/app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-MediumItalic.ttf b/legacy/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-MediumItalic.ttf
+similarity index 100%
+rename from app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-MediumItalic.ttf
+rename to legacy/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-MediumItalic.ttf
+diff --git a/app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-Regular.ttf b/legacy/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-Regular.ttf
+similarity index 100%
+rename from app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-Regular.ttf
+rename to legacy/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-Regular.ttf
+diff --git a/app/styles/tokens.css b/legacy/tokens.css
+similarity index 100%
+rename from app/styles/tokens.css
+rename to legacy/tokens.css
 diff --git a/package.json b/package.json
-index de924c7..20bcf17 100644
+index de924c7..43574ae 100644
 --- a/package.json
 +++ b/package.json
-@@ -21,7 +21,6 @@
+@@ -21,9 +21,10 @@
      "prepare": "husky",
      "checks:gate": "NODE_OPTIONS='--preserve-symlinks --preserve-symlinks-main' node tools/checksGate.ts",
      "test:architecture": "vitest --run tests/architecture",
 -    "ds-scan": "NODE_OPTIONS='--preserve-symlinks --preserve-symlinks-main' node tools/build.ts && NODE_OPTIONS='--preserve-symlinks --preserve-symlinks-main' node tools/ds-scan.ts",
      "new-epic": "NODE_OPTIONS='--preserve-symlinks --preserve-symlinks-main' node tools/new-epic.ts",
-     "release:record": "NODE_OPTIONS='--preserve-symlinks --preserve-symlinks-main' node tools/release-record.ts"
+-    "release:record": "NODE_OPTIONS='--preserve-symlinks --preserve-symlinks-main' node tools/release-record.ts"
++    "release:record": "NODE_OPTIONS='--preserve-symlinks --preserve-symlinks-main' node tools/release-record.ts",
++    "lint:files": "NODE_OPTIONS='--preserve-symlinks --preserve-symlinks-main' node tools/lint-files.ts",
++    "check:chunk": "yarn -s lint:files && yarn -s format:check && yarn -s lint && yarn -s tsc"
    },
+   "devDependencies": {
+     "@eslint-community/eslint-plugin-eslint-comments": "4.8.1",
 diff --git a/sheet/project.ts b/sheet/project.ts
-index dbcf477..c22aa26 100644
+index dbcf477..5066d22 100644
 --- a/sheet/project.ts
 +++ b/sheet/project.ts
-@@ -48,7 +48,6 @@ const buildReads: {
+@@ -1,7 +1,7 @@
+ /**
+  * - `product`, `company`, `buildSide`, `referenceTools` · who, the tools they know
+  * - `designSession`, `buildSession`, `buildRepository`, `buildBranch` · where
+- * - `buildPaths`, `designSystem`, `buildReads` · its paths, CSS, what it reads
++ * - `buildPaths`, `buildReads` · its paths, and what it reads
+  */
+ const product = 'Eagle';
+ const company = 'Deblock';
+@@ -31,10 +31,6 @@ const referenceTools: readonly string[] = [
+   'Mailchimp',
+   'Payload',
+ ];
+-// the company's design system stylesheet as published, travelling whole until the package brings it
+-const designSystem =
+-  '_ds/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/colors_and_type.css';
+-
+ // what the build side reads: every module under these homes, these beside them, what they import, and these files whole
+ const buildReads: {
+   readonly homes: readonly string[];
+@@ -48,19 +44,13 @@ const buildReads: {
      'app/workspace/feature-view.ts',
      'app/workspace/sheet-status.ts',
      'app/workspace/source-view.ts',
@@ -150,6 +904,27 @@ index dbcf477..c22aa26 100644
      'guards/expected-files.ts',
      'guards/measure.ts',
      'guards/refine-check.ts',
+     'guards/source-check.ts',
+     'guards/spec-check.ts',
+   ],
+-  files: [
+-    'app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/colors_and_type.css',
+-    'app/styles/tokens.css',
+-    'docs/process/ticket-pipeline.md',
+-    'fixtures/data/block-model.json',
+-  ],
++  files: ['docs/process/ticket-pipeline.md', 'fixtures/data/block-model.json'],
+ };
+ 
+ export {
+@@ -72,7 +62,6 @@ export {
+   buildSide,
+   company,
+   designSession,
+-  designSystem,
+   product,
+   referenceTools,
+ };
 diff --git a/sheet/rules/qualityRules.ts b/sheet/rules/qualityRules.ts
 index 212b847..337c4bf 100644
 --- a/sheet/rules/qualityRules.ts
@@ -164,24 +939,69 @@ index 212b847..337c4bf 100644
  
 diff --git a/tests/architecture/baselines/aFileNamesItsPurpose.json b/tests/architecture/baselines/aFileNamesItsPurpose.json
 new file mode 100644
-index 0000000..cc4c2b3
+index 0000000..7318aea
 --- /dev/null
 +++ b/tests/architecture/baselines/aFileNamesItsPurpose.json
-@@ -0,0 +1 @@
-+["sheet/contract/block-model/settledFrom1.ts \u00b7 a part named by a number", "sheet/contract/block-model/settledFrom25.ts \u00b7 a part named by a number", "sheet/model/eagle-review/pointsOne.ts \u00b7 a part named by a number", "sheet/model/eagle-review/pointsThree.ts \u00b7 a part named by a number", "sheet/model/eagle-review/pointsTwo.ts \u00b7 a part named by a number", "sheet/words/messages/refusalOne.ts \u00b7 a part named by a number", "sheet/words/messages/refusalTwo.ts \u00b7 a part named by a number", "sheet/words/messages/rowsOne.ts \u00b7 a part named by a number", "sheet/words/messages/rowsThree.ts \u00b7 a part named by a number", "sheet/words/messages/rowsTwo.ts \u00b7 a part named by a number", "sheet/words/messages/screenFour.ts \u00b7 a part named by a number", "sheet/words/messages/screenOne.ts \u00b7 a part named by a number", "sheet/words/messages/screenThree.ts \u00b7 a part named by a number", "sheet/words/messages/screenTwo.ts \u00b7 a part named by a number"]
-\ No newline at end of file
+@@ -0,0 +1,16 @@
++[
++  "sheet/contract/block-model/settledFrom1.ts \u00b7 a part named by a number",
++  "sheet/contract/block-model/settledFrom25.ts \u00b7 a part named by a number",
++  "sheet/model/eagle-review/pointsOne.ts \u00b7 a part named by a number",
++  "sheet/model/eagle-review/pointsThree.ts \u00b7 a part named by a number",
++  "sheet/model/eagle-review/pointsTwo.ts \u00b7 a part named by a number",
++  "sheet/words/messages/refusalOne.ts \u00b7 a part named by a number",
++  "sheet/words/messages/refusalTwo.ts \u00b7 a part named by a number",
++  "sheet/words/messages/rowsOne.ts \u00b7 a part named by a number",
++  "sheet/words/messages/rowsThree.ts \u00b7 a part named by a number",
++  "sheet/words/messages/rowsTwo.ts \u00b7 a part named by a number",
++  "sheet/words/messages/screenFour.ts \u00b7 a part named by a number",
++  "sheet/words/messages/screenOne.ts \u00b7 a part named by a number",
++  "sheet/words/messages/screenThree.ts \u00b7 a part named by a number",
++  "sheet/words/messages/screenTwo.ts \u00b7 a part named by a number"
++]
 diff --git a/tsconfig.json b/tsconfig.json
-index 4f3e659..0376a9a 100644
+index 4f3e659..cd9c393 100644
 --- a/tsconfig.json
 +++ b/tsconfig.json
-@@ -32,7 +32,9 @@
+@@ -1,10 +1,7 @@
+ {
+   "compilerOptions": {
+     "target": "ES2022",
+-    "lib": [
+-      "ES2022",
+-      "DOM"
+-    ],
++    "lib": ["ES2022", "DOM"],
+     "module": "esnext",
+     "moduleResolution": "bundler",
+     "allowImportingTsExtensions": true,
+@@ -14,10 +11,7 @@
+     "skipLibCheck": true,
+     "resolveJsonModule": true,
+     "isolatedModules": true,
+-    "types": [
+-      "node",
+-      "vitest/globals"
+-    ],
++    "types": ["node", "vitest/globals"],
+     "jsx": "react-jsx",
+     "preserveSymlinks": true
+   },
+@@ -32,12 +26,10 @@
      "tests/**/*.ts",
      "tests/**/*.tsx",
      "*.config.ts",
 -    "*.config.mts"
 +    "*.config.mts",
 +    "dev/**/*.ts",
-+    "shared/**/*.ts"
++    "shared/**/*.ts",
++    "design-system/**/*.ts"
    ],
-   "exclude": [
-     "node_modules",
+-  "exclude": [
+-    "node_modules",
+-    "dist",
+-    "poc",
+-    ".artifact"
+-  ]
++  "exclude": ["node_modules", "dist", "poc", ".artifact"]
+ }

@@ -1,7 +1,7 @@
 /**
- * - a Claude Code Stop hook: a chunk of work ends on `yarn check:chunk` green, or the agent fixes first
- * - nothing uncommitted, or the very same work already checked green: nothing runs
- * - a second refusal in a row only reports, so a check the agent cannot fix never holds the turn
+ * - a Claude Code Stop hook: a chunk ends green on `yarn check:chunk`, or is fixed
+ * - nothing uncommitted, or the same work already checked green: nothing runs
+ * - a second refusal in a row only reports: an unfixable check never holds the turn
  */
 import { execFileSync, spawnSync } from 'node:child_process';
 import crypto from 'node:crypto';

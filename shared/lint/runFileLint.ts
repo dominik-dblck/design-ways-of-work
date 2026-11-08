@@ -1,6 +1,6 @@
 /**
- * - `runFileLint` · ls-lint over a repository: its config written from fileRules.ts, never kept as YAML
- * - JSON is YAML: the config is printed to a temporary file, read once and removed
+ * - `runFileLint` · ls-lint over a repository, its config written from fileRules.ts
+ * - JSON is YAML: the config lives in a temporary file for one run, never kept
  */
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
@@ -20,9 +20,18 @@ function runFileLint({
 }): number {
   const config = path.join(os.tmpdir(), `ls-lint-${process.pid}.yml`);
   fs.writeFileSync(config, JSON.stringify(fileLintConfig(folders, ignore)));
+  // the package's own entry, not its .bin link: it finds its binary beside itself
+  const cli = path.join(
+    root,
+    'node_modules',
+    '@ls-lint',
+    'ls-lint',
+    'bin',
+    'cli.js',
+  );
   const run = spawnSync(
-    path.join(root, 'node_modules', '.bin', 'ls-lint'),
-    ['-config', config, '-workdir', root],
+    process.execPath,
+    [cli, '-config', config, '-workdir', root],
     { stdio: 'inherit' },
   );
   fs.rmSync(config);

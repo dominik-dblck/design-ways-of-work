@@ -1,6 +1,5 @@
 /**
  * - `RuleTableRow`, `RuleTable`, `ruleTableOf` · a printed rule file read back, row by row
- * - `quoted` · a string as one single-quoted TypeScript literal on one line
  */
 const CELL_BREAK = /(?<!\\) \| /;
 
@@ -40,8 +39,5 @@ function ruleTableOf(text: string): RuleTable {
   };
 }
 
-const quoted = (text: string): string =>
-  `'${text.replaceAll('\\', '\\\\').replaceAll("'", "\\'").replaceAll('\n', '\\n')}'`;
-
-export { quoted, ruleTableOf };
+export { ruleTableOf };
 export type { RuleTable, RuleTableRow };

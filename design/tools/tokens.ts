@@ -1,29 +1,27 @@
 /**
- * - `tokensText` · app/styles/tokens.ts as the two stylesheets write it (D22)
- * - the design system first, then the product layer: a key in both is the product's
+ * - `tokensText` · tokens.ts from design-system/ and product-tokens.ts (D22)
+ * - a name the system and the product both declare is refused, never overridden
  */
-import fs from 'node:fs';
-import path from 'node:path';
-import { designSystem } from '../sheet/project.ts';
-import { ROOT, sourceOf } from './layout.ts';
-import { declarationsOf, refuseUnlessCss } from './tokens/cssReads.ts';
+import { productTokens } from '../app/styles/product-tokens.ts';
+import { designSystem, isToken } from '../design-system/index.ts';
 import { tokensModule } from './tokens/tokenPrint.ts';
 
-const PRODUCT = 'app/styles/tokens.css';
-const SYSTEM = sourceOf(designSystem) ?? designSystem;
-
 function tokensText(): string {
-  const [product, system] = [PRODUCT, SYSTEM].map((file) => {
-    const css = fs.readFileSync(path.join(ROOT, file), 'utf8');
-    refuseUnlessCss(css, path.basename(file));
-    return css;
+  const tokens = [...designSystem, ...productTokens].flatMap((group) =>
+    group.entries.filter(isToken),
+  );
+  const names = tokens.map((token) => token.name);
+  const twice = names.filter((name, at) => names.indexOf(name) !== at);
+  if (twice.length)
+    throw new Error(`a token declared twice · ${twice.join(' · ')}`);
+  return tokensModule({
+    light: new Map(tokens.map((token) => [token.name, token.light])),
+    dark: new Map(
+      tokens.flatMap((token) =>
+        token.dark === undefined ? [] : [[token.name, token.dark] as const],
+      ),
+    ),
   });
-  const both = (selector: string): Map<string, string> =>
-    new Map([
-      ...declarationsOf(String(system), selector),
-      ...declarationsOf(String(product), selector),
-    ]);
-  return tokensModule({ light: both(':root'), dark: both('.dbk-dark') });
 }
 
 export { tokensText };

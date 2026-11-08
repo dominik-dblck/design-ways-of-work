@@ -24,11 +24,10 @@ function namesIn(source: Source, names: readonly string[]): readonly string[] {
 }
 
 describe('the way of working names no product', () => {
-  // the build repository's paths, what it reads and the stylesheet say where, not a name a text could carry
+  // the build repository's paths and what it reads say where, not a name a text could carry
   const {
     buildPaths: _paths,
     buildReads: _reads,
-    designSystem: _stylesheet,
     ...named
   } = project;
   const names: readonly string[] = Object.values(named).flat();

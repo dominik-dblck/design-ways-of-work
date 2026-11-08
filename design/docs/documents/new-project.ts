@@ -22,8 +22,8 @@ const newProject: DocumentFile = {
       lines: [
         '',
         '- Copy the tree without `.git/`, `dist/` and `node_modules/`, then `git init` and `yarn install`.',
-        '- The design system’s files in `app/styles/__fixtures__/` and `app/styles/tokens.css` travel whole:',
-        '  the projects are the company’s, until the build side’s package brings the tokens (D60).',
+        '- The design system is never copied: `design-system/` comes from the way of working, and the',
+        '  product keeps only the tokens it alone holds, in `app/styles/product-tokens.ts` (PM, 8 Nov).',
         '',
       ],
     },

@@ -1,0 +1,30 @@
+from	key	home
+ds	BASE PALETTE	palette
+ds	SEMANTIC TOKENS — LIGHT MODE	roles
+ds	ELEVATION	elevation
+ds	RADII	radii
+ds	SPACING (4pt grid)	spacing
+ds	TYPE	typography
+product	THE APP'S MARK	product
+product	MOTION	motion
+product	DOCUMENT STATE CHIPS	product
+product	TYPE CHIPS	product
+product	one wash the DS blue ramp lacks	palette
+product	RAW HEXES THE WIREFRAMES USED	cut
+product	DENSE TYPE	typography
+product	--ui-chip-edge	outlines
+product	RADII	radii
+product	THE STRONG OUTLINE	outlines
+product	ONE HOVER	hover
+product	CONTROL HEIGHTS	sizes
+product	ELEVATION	elevation
+product	MICRO INK	inks
+product	TWO DS ROLES THAT ARE NOT TEXT INK HERE	inks
+product	ANNOTATION INKS	inks
+product	A MESSAGE'S STATES	product
+product	INK ON A SIGNAL FILL	inks
+product	TWO GLYPHS THE DS SET LACKS	cut
+product	NOT PRODUCT COLOUR	cut
+product	GLYPH TINT	glyphs
+product	FLOATING SURFACES	surfaces
+product	Z-INDEX	layers

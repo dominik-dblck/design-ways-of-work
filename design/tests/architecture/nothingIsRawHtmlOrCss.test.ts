@@ -9,11 +9,6 @@ import { textsUnder } from './tree.ts';
 // the files of HTML or CSS kept, each with why · everything in `legacy/` retires with phase 6
 const KEPT: readonly (readonly [RegExp, string])[] = [
   [/^legacy\//, 'the Claude Design pages, until React replaces each'],
-  [/^app\/styles\/tokens\.css$/, 'the stylesheet `tokens.ts` is written from'],
-  [
-    /^app\/styles\/__fixtures__\//,
-    "the design system's files, as it gives them",
-  ],
 ];
 
 const RAW_MARKUP: readonly (readonly [RegExp, string])[] = [

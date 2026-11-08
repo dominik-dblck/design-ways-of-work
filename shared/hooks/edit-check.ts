@@ -1,7 +1,7 @@
 /**
- * - a Claude Code PostToolUse hook: the file just written is formatted (Prettier) and fixed (ESLint)
+ * - a Claude Code PostToolUse hook: a file just written is formatted and fixed
  * - what stays wrong goes back to the agent as context; it never blocks the edit
- * - each tool's own ignore decides its scope: run from the repository's root, any repository
+ * - each tool's own ignore decides its scope, in whichever repository it runs
  */
 import fs from 'node:fs';
 import path from 'node:path';

@@ -88,7 +88,7 @@ function walk(
       .filter((found) => !at.declared.has(found[0]))
       .map(
         (found) =>
-          `2 · ${at.rowId} · ${at.path} uses ${found[0]} — not declared in tokens.css or the DS`,
+          `2 · ${at.rowId} · ${at.path} uses ${found[0]} — not declared in design-system/ or the product's tokens`,
       );
     const hex = value.match(/#[0-9a-f]{3,8}/i);
     const field = at.path.split('.').pop() ?? '';

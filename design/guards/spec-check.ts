@@ -15,17 +15,10 @@ import {
   wrapperFindings,
 } from './spec-check/rowChecks.ts';
 import type { ScriptIo, Spec, TieredRow } from './spec-check/specCheckTypes.ts';
-import { designSystem } from '../sheet/project.ts';
+import { TOKEN_NAMES } from '../app/styles/tokens.ts';
 
-async function declaredTokens(io: ScriptIo): Promise<Set<string>> {
-  const tokens = await io.readFile('tokens.css');
-  const ds = await io.readFile(designSystem).catch(() => '');
-  return new Set(
-    [...`${tokens}\n${ds}`.matchAll(/(--[\w-]+)\s*:/g)].map(
-      (found) => found[1],
-    ),
-  );
-}
+// every token design-system/ and the product declare, by the name a spec row cites
+const declaredTokens = (): Set<string> => new Set(Object.values(TOKEN_NAMES));
 
 function rowsOf(spec: Spec): TieredRow[] {
   return [
@@ -58,7 +51,7 @@ function countsOf(spec: Spec): Record<string, number> {
 
 async function run(io: ScriptIo): Promise<void> {
   const spec: Spec = JSON.parse(await io.readFile('components.spec.json'));
-  const declared = await declaredTokens(io);
+  const declared = declaredTokens();
   const rows = rowsOf(spec);
   const organisms = new Set(spec.organisms.map((row) => row.id));
   const findings = [

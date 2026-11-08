@@ -39,7 +39,7 @@ const MAP: readonly MapRow[] = [
   { row: 'the walk of the whole document', home: ['flow-check.js'] },
   { row: 'sentences a person sees', home: ['messages.js'] },
   { row: 'screen words', home: ['glossary.js'] },
-  { row: 'colours', home: ['gate-states.js', 'tokens.css'] },
+  { row: 'colours', home: ['gate-states.js', 'tokens.js'] },
   { row: 'the view of it all', home: ['Feature.html', 'Board.html'] },
 ];
 

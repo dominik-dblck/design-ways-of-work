@@ -5,8 +5,13 @@
 import type { KnipConfig } from 'knip';
 
 const config: KnipConfig = {
-  entry: ['scripts/*.ts', 'shared/hooks/*.ts'],
-  project: ['scripts/**/*.ts', 'shared/hooks/**/*.ts', 'design-system/**/*.ts'],
+  entry: ['scripts/*.ts', 'shared/hooks/*.ts', 'design-system/index.ts'],
+  project: [
+    'scripts/**/*.ts',
+    'shared/hooks/**/*.ts',
+    'shared/lint/**/*.ts',
+    'design-system/**/*.ts',
+  ],
   // the product's code runs on this repository's packages through the rehearsal's link
   exclude: ['dependencies', 'devDependencies'],
   // the tests under design/ are the product's, run by its own vitest

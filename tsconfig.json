@@ -15,6 +15,7 @@
     "scripts/**/*.ts",
     "shared/hooks/**/*.ts",
     "shared/lint/**/*.ts",
+    "design-system/**/*.ts",
     "eslint.config.ts",
     "knip.ts"
   ]

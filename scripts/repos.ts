@@ -1,6 +1,7 @@
 /**
  * - `HERE`, `PRODUCT_REPO`, `BUILD_REPO` · this repository, and the two it was taken from
  * - `repoAt` · a repository a script is handed: the nth argument that is not a flag, or the default
+ * - `LINKED_HOMES` · this repository's folders a product links in place, and where
  */
 import path from 'node:path';
 
@@ -14,4 +15,12 @@ const repoAt = (fallback: string, at = 0): string =>
       fallback,
   );
 
-export { BUILD_REPO, HERE, PRODUCT_REPO, repoAt };
+// [folder here, folder in the product]: design/ lands on the product's own paths
+const LINKED_HOMES: readonly (readonly [string, string])[] = [
+  ['design', ''],
+  ['dev', 'dev'],
+  ['shared', 'shared'],
+  ['design-system', 'design-system'],
+];
+
+export { BUILD_REPO, HERE, LINKED_HOMES, PRODUCT_REPO, repoAt };

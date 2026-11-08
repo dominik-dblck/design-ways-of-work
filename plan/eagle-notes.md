@@ -46,3 +46,9 @@ for the port (phase 8) or the PM's word. Ranked: the first of each group is the 
 12. The agent's hooks: `tools/lintEdited.ts` and the Stop hook become `shared/hooks/edit-check.ts` and
     `chunk-check.ts`; the product names a `check:chunk` script (ls-lint, Prettier, ESLint, tsc, jscpd, knip).
 13. `aPublishedPathHasOneSource` says what the build's `refuseClashes` already refuses: one of them goes.
+14. One design system: `app/styles/tokens.css` and the Deblock export leave for `legacy/`; `product-tokens.ts`
+    holds Eagle's own; `sheet/project.ts` loses `designSystem` and `buildReads` its two CSS files; Measure's theme
+    fixture is `tokens.js`. The build side reads `design-system/` from the way of working (phase 9), not `_ds/`.
+15. Words left in the product's data name `tokens.css`: three spec rows' notes, two decisions (history, kept),
+    `public/assets/manifest.json`'s copiedBy; the spec rows read best moved at the port.
+

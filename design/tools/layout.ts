@@ -43,7 +43,6 @@ const SHEET_HOMES: readonly string[] = [
 const FILE_HOMES: readonly (readonly [string, string])[] = [
   ['records', ''],
   ['legacy', ''],
-  ['app/styles/__fixtures__', '_ds'],
   ['guards/__snapshots__', 'scraps'],
   ['public/assets', 'assets'],
   ['fixtures/data', ''],

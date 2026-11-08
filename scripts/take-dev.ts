@@ -6,7 +6,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { BUILD_REPO, HERE, repoAt } from './repos.ts';
-import { quoted, ruleTableOf } from './ruleTables.ts';
+import { ruleTableOf } from './ruleTables.ts';
+import { quoted } from './tsLiteral.ts';
 
 const FROM = path.join(repoAt(BUILD_REPO), 'docs', 'rules');
 const TO = path.join(HERE, 'dev', 'rules');

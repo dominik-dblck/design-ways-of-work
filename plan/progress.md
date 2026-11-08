@@ -56,6 +56,13 @@
       repository by a script, never copied by hand (PM, 8 Nov; changes D62, where eagle-dev owned it)
       - the same for both sides, and all TypeScript: no CSS and no HTML in this repository; what a browser needs
         is written by a build. A change a repository asks for goes, once approved, up to its root here (PM, 8 Nov)
+      - [x] the tokens: `scripts/take-tokens.ts` read the Deblock stylesheet and Eagle's `tokens.css` into
+        `design-system/` (14 homes by subject, `plan/token-split.tsv`), its fonts, element styles and guide beside
+        them; Eagle keeps only `app/styles/product-tokens.ts` (its mark, document states, type chips, message
+        states). `tools/tokens.ts` writes `tokens.ts` from both and refuses a name both declare: the same 264 light
+        and 70 dark tokens, compared value by value. Three comment-only groups about the `.dc.html` wireframes cut;
+        both stylesheets and the Deblock export moved to the product's `legacy/` (D24)
+      - [ ] the shared atomic components, from eagle-dev, by script
 - [x] the checks are tools first (PM, 8 Nov · A): linters, then tsc, unit tests last, for what crosses files
       in a way no tool reads. ls-lint (the tree), jscpd (a block written twice, 50 tokens), knip (what nobody
       reads) beside ESLint and Prettier; `yarn check:chunk` runs them all, in ~5 s
@@ -65,6 +72,10 @@
         they run in, so a product takes them with `shared/`
       - ls-lint's config is data (`shared/lint/fileRules.ts`), printed as YAML only for the run
       - jscpd found five copies in `scripts/`: `scripts/repos.ts` and `scripts/ruleTables.ts` hold them once
+      - the product takes them in the port: `lint:files` (ls-lint, `legacy/` and `poc/` aside), `check:chunk`, its
+        edit hook on `shared/hooks/edit-check.ts` (its own `tools/lintEdited.ts` was the same code) and the Stop hook
+      - next: a header bullet over 80 characters in this repository's own scripts (about 40) waits for the rule as
+        an ESLint rule, so it is held by the tool, not by hand
 - [ ] the checks as tools, ported: the 36 design-side checks and the 23 both sides wrote twice, each to the first
       tool that holds it (ESLint `boundaries`, `import-x`, `no-restricted-syntax`, `max-params`, `no-nested-ternary`,
       `naming-convention`; ls-lint; jscpd; knip; tsc unions for token names, rule keys and gates), the rest one

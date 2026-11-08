@@ -12,6 +12,11 @@ process.exitCode = runFileLint({
   folders: {
     scripts: { '.ts': ENTRY_OR_PART },
     shared: { '.ts': ENTRY_OR_PART },
+    'design-system': {
+      '.ts': 'camelCase',
+      '.md': 'kebab-case',
+      '.ttf': 'regex:[A-Z][A-Za-z]+-[A-Z][A-Za-z]+',
+    },
     plan: { '.md': 'kebab-case', '.tsv': 'kebab-case' },
     ports: { '.patch': 'kebab-case' },
   },
