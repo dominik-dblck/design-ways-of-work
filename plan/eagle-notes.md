@@ -51,4 +51,14 @@ for the port (phase 8) or the PM's word. Ranked: the first of each group is the 
     fixture is `tokens.js`. The build side reads `design-system/` from the way of working (phase 9), not `_ds/`.
 15. Words left in the product's data name `tokens.css`: three spec rows' notes, two decisions (history, kept),
     `public/assets/manifest.json`'s copiedBy; the spec rows read best moved at the port.
-
+16. `Payloads.DOC` is an entry's API name in UPPER case, and the build side reads it by that name
+    (`sheetValue('Payloads', 'DOC')`, mailing-automation `scripts/lib/runExpectations.ts`): it is held in
+    `eslint-suppressions.json`, the one known fail; `doc` lands with a release and the build side's read together.
+17. ESLint in a repository the way of working is linked into loads its config natively, symlinks kept
+    (`NODE_OPTIONS='--preserve-symlinks'`, `ESLINT_FLAGS=unstable_native_nodejs_ts_config`): lint, lint:fix,
+    test, test:architecture and the edit-check hook. Through jiti, `tools/layout.ts` resolves to the way of
+    working and reads the entries and parts from the wrong root. The flag goes when ESLint loads natively by default.
+18. `tools/root.ts` finds the repository from its own path: through a link that path is the way of working's.
+    Every runner keeps the links today (`NODE_OPTIONS`, the hooks too since chunk 2: `runKeepsTheTurn` read
+    `.claude/run.json` from the wrong root without them); a root read from where the run stands would hold
+    without the flags, as `edit-check` does (eagle-dev's cross-check, 8 Nov).

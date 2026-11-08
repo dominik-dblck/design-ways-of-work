@@ -87,6 +87,14 @@
         (callbacks kept), a chain three deep (two kept, types kept), cycles (type-only kept), an empty clause,
         an import's extension; the rule rows' design gates name the ESLint rules
       - the one-shot scripts that refuse a second run moved to `legacy/scripts/`, frozen and out of every check
+      - [x] four more became shapes of `no-restricted-syntax`, every planted case caught alike: a colour, a space and
+        raw markup in React code (`shared/lint/shapes.ts`; a stylesheet or a page file is ls-lint's), and a name's
+        case, read off the exported name of an entry or a part, which each scope lists from its own layout
+      - [x] eagle-dev's cross-check (8 Nov) taken: SVG inside `SvgIcon` passes, a quoted key and the X/Y and
+        logical spacing keys are read, `useTheme().palette` and a destructured `palette` are found, a helper's
+        '0' is a count, `__tests__/` is a test; the hooks keep the links. Its build-side points: `plan/dev-notes.md`
+      - [x] the last baseline is an ESLint suppression (`Payloads.DOC`, read by the build side); a fixed one left
+        listed fails the lint until pruned, as the baseline's `fixed` did
 - [x] no file named by a number: the documents' parts named by what they hold (15 pipeline parts, 2 api-convention
       parts, agent-instructions in one file); `aFileNamesItsPurpose` refuses a number; size.md says why
 

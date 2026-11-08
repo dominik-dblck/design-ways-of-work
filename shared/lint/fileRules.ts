@@ -24,6 +24,7 @@ const SCRIPTS = 'the code is TypeScript; what runs as JavaScript is built';
 const BANNED_EXTENSIONS: readonly Banned[] = [
   { extension: '.css', why: STYLES },
   { extension: '.scss', why: STYLES },
+  { extension: '.less', why: STYLES },
   { extension: '.html', why: PAGES },
   { extension: '.htm', why: PAGES },
   { extension: '.js', why: SCRIPTS },

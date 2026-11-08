@@ -1,5 +1,6 @@
 /**
  * - `eslintConfig` · one ESLint for every repository, each naming its own scope
+ * - a scope names its React code, entries and parts; each kind takes its own shapes
  */
 import js from '@eslint/js';
 import comments from '@eslint-community/eslint-plugin-eslint-comments';
@@ -8,35 +9,24 @@ import { defineConfig } from 'eslint/config';
 import type { Linter } from 'eslint';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
+import { ENTRY_SHAPES, PART_SHAPES, REACT_SHAPES, SHAPES } from './shapes.ts';
+import type { Shape } from './shapes.ts';
 
 interface RepoScope {
   readonly root: string;
   readonly ignores: readonly string[];
   readonly production: readonly string[];
   readonly generated: readonly string[];
+  readonly react: readonly string[];
+  readonly entries: readonly string[];
+  readonly parts: readonly string[];
 }
 
-const TESTS = ['tests/**', '**/*.test.{ts,tsx}', '**/*.test-d.ts'];
-
-// shapes no-restricted-syntax refuses, each with the rule row it holds
-const SHAPES = [
-  {
-    selector:
-      ':function[params.length>2]:not(CallExpression > :function, NewExpression > :function)',
-    message:
-      'Past two parameters a function takes one object (docs/rules/functions.md); a callback keeps its caller’s shape.',
-  },
-  {
-    selector:
-      'ConditionalExpression > ConditionalExpression > ConditionalExpression',
-    message:
-      'No ternary chain three deep (docs/rules/functions.md): name the branches, or a lookup.',
-  },
-  {
-    selector: 'ExportNamedDeclaration[source][specifiers.length=0]',
-    message:
-      'An export names what it takes, never an empty clause (docs/rules/names.md).',
-  },
+const TESTS = [
+  'tests/**',
+  '**/__tests__/**',
+  '**/*.test.{ts,tsx}',
+  '**/*.test-d.ts',
 ];
 
 const SIZE: Linter.RulesRecord = {
@@ -96,11 +86,32 @@ const sourceRules = (root: string): Linter.Config => ({
   },
   rules: {
     'no-undef': 'off',
-    'no-restricted-syntax': ['error', ...SHAPES],
+    ...restricted(),
     ...TYPES,
     ...IMPORTS,
   },
 });
+
+// the shapes every file refuses, and those its kind refuses besides
+const restricted = (
+  ...kinds: readonly (readonly Shape[])[]
+): Linter.RulesRecord => ({
+  'no-restricted-syntax': ['error', ...SHAPES, ...kinds.flat()],
+});
+
+// React code, entries and parts are three sets no file is in twice · never a test nor a generated file
+const scopedRules = (scope: RepoScope): Linter.Config[] =>
+  [
+    { files: scope.react, rules: restricted(REACT_SHAPES) },
+    { files: scope.entries, rules: restricted(ENTRY_SHAPES) },
+    { files: scope.parts, rules: restricted(PART_SHAPES) },
+  ]
+    .filter((one) => one.files.length > 0)
+    .map((one) => ({
+      ...one,
+      files: [...one.files],
+      ignores: [...TESTS, ...scope.generated],
+    }));
 
 const TEST_RULES: Linter.Config[] = [
   {
@@ -130,6 +141,7 @@ const eslintConfig = (scope: RepoScope): Linter.Config[] =>
     js.configs.recommended,
     ...tseslint.configs.recommended,
     sourceRules(scope.root),
+    ...scopedRules(scope),
     ...TEST_RULES,
     {
       files: [...scope.production],

@@ -13,4 +13,7 @@ export default eslintConfig({
   ],
   production: ['scripts/**/*.ts', 'shared/**/*.ts', 'design-system/**/*.ts'],
   generated: [],
+  react: [],
+  entries: [],
+  parts: [],
 });

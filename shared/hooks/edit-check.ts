@@ -31,7 +31,7 @@ async function formatOne(file: string): Promise<void> {
 }
 
 async function lintOne(file: string): Promise<readonly string[]> {
-  const eslint = new ESLint({ cwd: ROOT, fix: true });
+  const eslint = new ESLint({ cwd: ROOT, fix: true, applySuppressions: true });
   if (!LINTED.test(file) || (await eslint.isPathIgnored(file))) return [];
   const results = await eslint.lintFiles([file]);
   await ESLint.outputFixes(results);

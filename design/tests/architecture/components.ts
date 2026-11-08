@@ -1,6 +1,6 @@
 /**
  * - `placeOf`, `Place` · a component file's tier and component, read from its folder
- * - `componentSources`, `reactSources` · a tier folder's sources; those and every `.tsx` of `app/`
+ * - `componentSources` · a tier folder's sources, its tests aside
  * - `composedBy` · the other components a source imports, each with the import that does
  */
 import { importsOf, textsUnder } from './tree.ts';
@@ -29,18 +29,6 @@ function componentSources(): readonly Source[] {
   ).filter((source) => !A_TEST.test(source.path));
 }
 
-// the code that draws: the components, and any `.tsx` beside them; never the sheet's `.ts` entries
-function reactSources(): readonly Source[] {
-  const all = [...componentSources(), ...textsUnder('app', ['.tsx'])];
-  return [
-    ...new Map(
-      all
-        .filter((source) => !A_TEST.test(source.path))
-        .map((source) => [source.path, source]),
-    ).values(),
-  ];
-}
-
 /** Each import of a source that reaches `app/components/` outside its own component's folder. */
 function composedBy(
   source: Source,
@@ -57,5 +45,5 @@ function composedBy(
     .map(({ to }) => ({ to, place: placeOf(to) }));
 }
 
-export { componentSources, composedBy, placeOf, reactSources };
+export { componentSources, composedBy, placeOf };
 export type { Place };
