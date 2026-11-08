@@ -6,10 +6,12 @@ import { commentsAreInvariants } from './rules/commentsAreInvariants.ts';
 import { dataIsReadonly } from './rules/dataIsReadonly.ts';
 import { fileStatesItsJob } from './rules/fileStatesItsJob.ts';
 import { hooksNamedForTheirFile } from './rules/hooksNamedForTheirFile.ts';
+import { moleculesComposeOneMolecule } from './rules/moleculesComposeOneMolecule.ts';
 import { noMockOfItsSubject } from './rules/noMockOfItsSubject.ts';
 import { noTicketNames } from './rules/noTicketNames.ts';
 import { oneCallStyle } from './rules/oneCallStyle.ts';
 import { oneHomePerName } from './rules/oneHomePerName.ts';
+import { partsServeTheirEntry } from './rules/partsServeTheirEntry.ts';
 import { readsNothingAtLoad } from './rules/readsNothingAtLoad.ts';
 import { reExportsInBarrels } from './rules/reExportsInBarrels.ts';
 import type { Rule } from 'eslint';
@@ -32,10 +34,12 @@ const plugin = {
     'data-is-readonly': dataIsReadonly,
     'file-states-its-job': fileStatesItsJob,
     'hooks-named-for-their-file': hooksNamedForTheirFile,
+    'molecules-compose-one-molecule': moleculesComposeOneMolecule,
     'no-mock-of-its-subject': noMockOfItsSubject,
     'no-ticket-names': noTicketNames,
     'one-call-style': oneCallStyle,
     'one-home-per-name': oneHomePerName,
+    'parts-serve-their-entry': partsServeTheirEntry,
     'markup-syntax': restrictedSyntax,
     'production-syntax': restrictedSyntax,
     'reads-nothing-at-load': readsNothingAtLoad,

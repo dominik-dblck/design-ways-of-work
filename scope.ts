@@ -25,6 +25,7 @@ const scope: RepoScope = {
   markup: [],
   barrels: [],
   tests: [],
+  owners: {},
 };
 
 export { scope };

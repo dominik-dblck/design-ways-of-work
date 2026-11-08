@@ -62,6 +62,8 @@ const pluginRules = (
   ],
   'wow/hooks-named-for-their-file': 'error',
   'wow/one-call-style': 'error',
+  'wow/parts-serve-their-entry': ['error', { owners: scope.owners }],
+  'wow/molecules-compose-one-molecule': ['error', { tests: testsOf(scope) }],
 });
 
 // a type a scan fills as it runs is named, mutable by design

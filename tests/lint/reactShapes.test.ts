@@ -37,6 +37,10 @@ shapeTester.run('the shapes React code refuses', restrictedSyntax, {
       "const ROW_SX = { minHeight: 0, height: '100%', zIndex: 'modal', fontWeight: 'fontWeightBold', opacity: 0, borderRadius: '50%' } as const;",
     ),
     valid(
+      'a hook by its name, and a member of React that is no hook',
+      'const theme = useContext(ThemeContext);\nconst Lazy = React.lazy(load);\nconst user = React.user;\ntype RowProps = React.ComponentProps<typeof Lazy>;\nfunction Row(props: RowProps): React.ReactElement { return Lazy(props); }',
+    ),
+    valid(
       'a corner by its role, square or round',
       "const CARD_SX = { borderRadius: radiusOf('uiRCard'), borderTopLeftRadius: lengthOf('uiRTag'), '& img': { borderRadius: 0 }, '& i': { borderRadius: '50%' } } as const;",
     ),
@@ -65,6 +69,10 @@ shapeTester.run('the shapes React code refuses', restrictedSyntax, {
     invalid('a corner by number, by word and by the theme read by hand', {
       code: "const CARD_SX = { borderRadius: 2, '& img': { borderRadius: 'inherit' }, '& b': { borderTopLeftRadius: (theme) => theme.shape.borderRadius } } as const;",
       words: ['a corner', 'a corner', 'a corner'],
+    }),
+    invalid('a hook read off React, a context and another', {
+      code: 'const theme = React.useContext(ThemeContext);\nconst board = React.use(BoardContext);\nconst [open] = React.useState(false);',
+      words: ['by its name', 'by its name', 'by its name'],
     }),
   ],
 });

@@ -10,12 +10,13 @@ import importX from 'eslint-plugin-import-x';
 import { defineConfig } from 'eslint/config';
 import type { Linter } from 'eslint';
 import globals from 'globals';
-import path from 'node:path';
 import tseslint from 'typescript-eslint';
 import { namingRules } from './naming.ts';
 import { productionRules } from './productionRules.ts';
 import { testsOf } from '../repoScope.ts';
 import type { RepoScope } from '../repoScope.ts';
+import { componentTiers } from './componentTiers.ts';
+import { resolutionOf } from './resolution.ts';
 import { MARKUP_SHAPES, REACT_SHAPES } from './reactShapes.ts';
 import { ENTRY_SHAPES, PART_SHAPES, SHAPES } from './shapes.ts';
 import type { Shape } from './shapes.ts';
@@ -57,9 +58,7 @@ const sourceRules = (root: string): Linter.Config => ({
     'import-x/parsers': { '@typescript-eslint/parser': ['.ts', '.tsx'] },
     // the repository's own resolution: its aliases, its extensions
     'import-x/resolver-next': [
-      createTypeScriptImportResolver({
-        project: path.join(root, 'tsconfig.json'),
-      }),
+      createTypeScriptImportResolver(resolutionOf(root)),
     ],
   },
   languageOptions: {
@@ -151,6 +150,11 @@ const eslintConfig = (scope: RepoScope): Linter.Config[] =>
     ...scopedRules(scope),
     ...testRules(scope),
     ...productionRules(scope),
+    {
+      ...componentTiers(scope.root),
+      files: [...scope.production],
+      ignores: [...testsOf(scope), ...scope.generated],
+    },
     DISABLES,
   );
 

@@ -1,6 +1,6 @@
 /**
  * - `REACT_SHAPES` · React code's shapes: a colour, a space, raw markup, a loose sx
- * - and a height, a corner, a layer by hand · `MARKUP_SHAPES` · a word, a hover text
+ * - a height, a corner, a layer by hand; a hook off `React` · `MARKUP_SHAPES`: words
  */
 import { UPPER } from './shapes.ts';
 import type { Shape } from './shapes.ts';
@@ -125,6 +125,12 @@ const HAND_SHAPES: readonly Shape[] = [
     // a token's role handed to a function is the scale itself
     selector: `${keyed(A_CORNER)} :matches(${A_NUMBER}[raw!='0'], Literal[value=/^(?!50%$)/]:not(CallExpression > Literal), :function)`,
     message: `In React code a corner is a role of the radius scale (\`radiusOf('uiRCard')\`): a literal is square (0) or round ('50%') (docs/rules/styling.md).`,
+  },
+  {
+    selector:
+      "MemberExpression[object.name='React'][property.name=/^use(?:[A-Z]|$)/]",
+    message:
+      'In React code a hook is imported by its name, never read off `React`: the component tiers read what a file imports (docs/rules/components.md).',
   },
 ];
 

@@ -19,6 +19,7 @@ interface RepoScope {
   readonly markup: readonly string[];
   readonly barrels: readonly string[];
   readonly tests: readonly string[];
+  readonly owners: Readonly<Record<string, string>>;
 }
 
 const TESTS = [

@@ -19,6 +19,7 @@ const settings = eslintConfig({
   markup: [],
   barrels: [],
   tests: [],
+  owners: {},
 }).find(
   (one) => one.settings?.['import-x/resolver-next'] !== undefined,
 )?.settings;

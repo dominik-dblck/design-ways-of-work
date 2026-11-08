@@ -84,3 +84,19 @@ for the port (phase 8) or the PM's word. Ranked: the first of each group is the 
     pixels (`borderRadius: 2` was 16px, `uiRContainer`). The three React rows of `docs/rules/styling.ts` (a
     colour, a space, raw markup) are held by the shared shapes but are still this side's own: they join the
     build side's into `shared/rules/styling.ts` with one wording, a later step.
+24. Chunk 5 holds the tiers and the parts by tools, on one element map (`shared/lint/componentTiers.ts`):
+    boundaries refuses an atom composing any component (icons and any folder outside the tiers included), a
+    molecule a tier above it or a context (`useContext`, React 19's `use`), any file past an organism's
+    `index.ts`, and an organism's root and parts reading a context; `wow/molecules-compose-one-molecule` counts a
+    molecule folder's molecules over every file of it; `wow/parts-serve-their-entry` reads the scope's `owners`
+    (each part with its entry, as `tools/layout.ts` places it). A hook is never read off `React` (a shape), so
+    the tiers see every read. Measured: the real tree 792 files, the way of working's components 838, 0 hits;
+    every rule seen firing on a planted path. `aPartServesItsEntry`, `anAtomComposesNothing`,
+    `aMoleculeComposesOneMolecule` retire. A design test in `tests/` still reads a part past its barrel
+    (`featurePage.test.tsx`, `ticketPanel.test.tsx`): tests are not read as importers.
+25. The rehearsal copy links the way of working's files, and a resolver follows a link to its real path, so a
+    rule reading where an import lands saw the way of working's own path there: both resolvers now take
+    `symlinks` from the tsconfig's `preserveSymlinks` (`shared/lint/resolution.ts`), which the rehearsal sets,
+    as tsc does. A repository without it resolves as before.
+26. The way of working compiles at its products' floor, target ES2022 (this side's lib): verify caught a shared
+    rule calling `toSorted` (ES2023), which this side's tsc refused; the way of working's own tsc refuses it now.

@@ -4,30 +4,8 @@
  */
 import type { TSESTree } from '@typescript-eslint/utils';
 import path from 'node:path';
-import ts from 'typescript';
-import { createRule, matchesAny, pathOf } from './ruleKit.ts';
+import { createRule, matchesAny, moduleOf, pathOf } from './ruleKit.ts';
 import type { Context } from './ruleKit.ts';
-
-// the repository path a specifier names: the program's resolution, else a relative one by its folder
-function moduleOf(context: Context, specifier: string): string | null {
-  const program = context.sourceCode.parserServices?.program;
-  const resolved =
-    program === undefined || program === null
-      ? undefined
-      : ts.resolveModuleName(
-          specifier,
-          context.filename,
-          program.getCompilerOptions(),
-          ts.sys,
-        ).resolvedModule;
-  if (resolved !== undefined)
-    return resolved.isExternalLibraryImport === true
-      ? null
-      : pathOf(context, resolved.resolvedFileName);
-  return specifier.startsWith('.')
-    ? path.posix.join(path.posix.dirname(pathOf(context)), specifier)
-    : null;
-}
 
 type Stray = 'outside' | 'away' | 'barrel';
 

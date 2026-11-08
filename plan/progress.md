@@ -116,6 +116,10 @@
       - [ ] ⏸ mutation tests in the way of working: whether, where, how (PM decides)
       - [x] eagle-dev's criterion and its consistency points, before chunk 5 (PM, 8 Nov · A): 8 rows in
         `shared/rules/checks.ts`; the scope is one `scope.ts` a repository, `RepoScope` in `shared/repoScope.ts`
+      - [x] chunk 5: boundaries and the molecule count on one element map · the tiers, the barrel and a context
+        by boundaries, `parts-serve-their-entry` and `molecules-compose-one-molecule`, a hook never off `React`,
+        the resolvers on the tsconfig's symlinks; 3 design tests retire, 2 rows to `shared/rules/components.ts`
+        (`plan/eagle-notes.md` 24–26, `plan/dev-notes.md` 16) · eagle-dev's consult and cross-check taken
       - [ ] the shared tests read `scope.ts` (chunk 7), with the way of working's one baseline format
       - [ ] the spawn check: a blank repository from the template green on every shared check (phase 7)
 - [ ] the e2e framework comes to the way of working whole (PM, 8 Nov): eagle-dev's e2e skills (`e2e`,

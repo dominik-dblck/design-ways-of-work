@@ -1645,10 +1645,10 @@ index de924c7..9f3f9c6 100644
      "jiti": "2.4.2",
 diff --git a/scope.ts b/scope.ts
 new file mode 100644
-index 0000000..c848a7b
+index 0000000..2877d4d
 --- /dev/null
 +++ b/scope.ts
-@@ -0,0 +1,57 @@
+@@ -0,0 +1,64 @@
 +// scope.ts · what the design project names once: its ESLint config, its shared tests and its tools read it
 +import type { RepoScope } from './shared/repoScope.ts';
 +import { entryOfPart, filesOf, isEntry } from './tools/layout.ts';
@@ -1703,6 +1703,13 @@ index 0000000..c848a7b
 +  barrels: [],
 +  // its tests are the convention's
 +  tests: [],
++  // each part with the entry it serves, as tools/layout.ts places them
++  owners: Object.fromEntries(
++    MODULE_FILES.flatMap((file) => {
++      const entry = isEntry(file) ? null : entryOfPart(file);
++      return entry === null ? [] : [[file, entry]];
++    }),
++  ),
 +};
 +
 +export { scope };

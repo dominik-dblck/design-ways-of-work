@@ -82,3 +82,15 @@ mailing-automation: each line waits for its port (phase 9) and the PM's word. Ra
     A corner is one style on both sides (PM, 8 Nov): its `radiusOf` is the design side's too
     (`design/app/theme/tokenReads.ts`), one helper for both at its port. The TypeScript resolver reads its `@/`
     aliases (`import-x/no-cycle` proven on an aliased fixture).
+16. **Its tiers at its port (chunk 5, its consult).** `anAtomComposesNothing`, `aMoleculeComposesOneMolecule` and
+    `organismsMeetAtTheBarrel` are boundaries and `wow/molecules-compose-one-molecule` in the shared config;
+    `theMoleculesAreDumb` and `organismPartsOnlyDraw` keep their product halves (queries, requests, commands,
+    providers, clients, the router) as its scope's layers, their context half shared (`useContext`, `use`,
+    `React.use*`). Its rows moved: the barrel and the context to `shared/rules/components.ts`, the strip to a row
+    of its own (`theStripIsNotTheShells`); the barrel row's exception went, a header slot read through the barrel
+    being no exception to it. A known loss: its barrel test read tests as importers, the shared
+    config does not (0 such today; the design side's tests read parts from `tests/`). Its layers and doors
+    (`app/api`, `app/clients`, `app/services`, `app/providers`, `app/utils`, `packages/domain`, the store, the
+    edge) are named in its scope at its port, and `boundaries/no-unknown-files` turns on with them, a scope switch
+    off until a scope names every element. Its alias rule (`anImportLeavesByTheAlias`) lands with those layers:
+    the design side imports by relative path and has no alias to hold.
