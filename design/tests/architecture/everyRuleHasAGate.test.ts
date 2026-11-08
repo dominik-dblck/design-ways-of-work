@@ -71,10 +71,12 @@ async function theWorld(): Promise<World> {
     ),
   );
   const [config] = configs;
-  const on = configs.flatMap((one) => Object.entries(one.rules ?? {})).filter(([, setting]) => {
-    const level: unknown = Array.isArray(setting) ? setting[0] : setting;
-    return level !== 0 && level !== 'off';
-  });
+  const on = configs
+    .flatMap((one) => Object.entries(one.rules ?? {}))
+    .filter(([, setting]) => {
+      const level: unknown = Array.isArray(setting) ? setting[0] : setting;
+      return level !== 0 && level !== 'off';
+    });
   const read = (file: string): string =>
     fs.readFileSync(path.join(ROOT, file), 'utf8');
   const packageJson: { scripts?: Record<string, string> } = JSON.parse(

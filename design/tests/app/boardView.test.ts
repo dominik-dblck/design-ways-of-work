@@ -43,7 +43,9 @@ describe('the board view', () => {
         .map((one) => one.id)
         .sort(),
     );
-    const done = held.filter((id) => ticketDetailOf(id)?.column === 'done').length;
+    const done = held.filter(
+      (id) => ticketDetailOf(id)?.column === 'done',
+    ).length;
     expect(stats().map((stat) => stat.value)).toContain(
       `${done} / ${held.length}`,
     );

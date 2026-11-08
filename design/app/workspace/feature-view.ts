@@ -46,8 +46,9 @@ function firstEpic(): string | null {
   return (all.find((one) => one.status !== 'done') ?? all.at(-1))?.epic ?? null;
 }
 
-const readOf = (ticket: ReturnType<typeof TICKETS>[number] | undefined): readonly string[] =>
-  ticket?.read ?? [];
+const readOf = (
+  ticket: ReturnType<typeof TICKETS>[number] | undefined,
+): readonly string[] => ticket?.read ?? [];
 
 function featureOf(epic: string): FeatureView {
   const ticket = TICKETS().find((one) => one.id === `T-${epic}-00`);

@@ -91,7 +91,10 @@ function byEntry(lines: readonly string[], want: string): TsSection | null {
 }
 
 // a row found by its own id, the epic's when two epics number theirs alike
-function byId(lines: readonly string[], { want, epic }: Asked): TsSection | null {
+function byId(
+  lines: readonly string[],
+  { want, epic }: Asked,
+): TsSection | null {
   const id = want.split(/[\s·,(—]+/).find(Boolean) ?? '';
   const held = new RegExp(`\\bid: '${escaped(id)}'`);
   const found = lines.flatMap((line, at) => (held.test(line) ? [at] : []));

@@ -97,3 +97,17 @@ mailing-automation: each line waits for its port (phase 9) and the PM's word. Ra
     edge) are named in its scope at its port, and `boundaries/no-unknown-files` turns on with them, a scope switch
     off until a scope names every element. Its alias rule (`anImportLeavesByTheAlias`) lands with those layers:
     the design side imports by relative path and has no alias to hold.
+17. **Its knip at its port (chunk 6b, its consult).** `knipConfig(scope)` with its `starts: ['scripts/*.ts']` (five
+    run by hand or read by tests), and knip's plugins for next, vitest (its projects and the two mutation
+    configs), playwright, husky and stryker (its two configs name the mutation configs by string: entries if
+    the plugin misses them). Its scan reads values; knip reads types too: on, as new findings, or off at its
+    port (the shared row says so until then). `import.meta.glob` is unread by knip: its icons are imported
+    elsewhere and its fixtures ignored, to check on its tree. Its cross-check of 6b measured, on its tree: its
+    `starts` also take three files loaded by a string (`tests/forbiddenDriver.ts`, a vitest alias target;
+    `tests/architecture/theScanAdapter.ts` and `theSpecCheckAdapter.ts`, a variable `import()`); a package kept on
+    purpose (`recharts`, drawn later) needs a scope field knip ignores, at its port; knip finds what its scan
+    missed: two dead molecules (`SourceChip`, `UpdatedAt`, their barrels read by nobody), a dead test helper,
+    duplicate exports (`e2e/theDesk.ts`, `replaySteps.ts`), two stryker packages unlisted, one unused
+    (`@testing-library/jest-dom`). Its 172 unread types, 91 of them `{Name}Props` re-exported by barrels, ask a
+    convention at its port: Props out of the barrels, or a barrel's types public.
+

@@ -4,11 +4,18 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { filesOf } from '../layout.ts';
 import { ROOT } from '../root.ts';
 
 const NAMED = /lucide-icons\/([a-z0-9-]+)\.svg/g;
-const PACKAGE = path.join(ROOT, 'node_modules', 'lucide-static', 'icons');
+// the package where node finds it, so the dependency reads as one
+const PACKAGE = path.join(
+  path.dirname(
+    fileURLToPath(import.meta.resolve('lucide-static/package.json')),
+  ),
+  'icons',
+);
 
 // the icons any source names, each once
 const namedIcons = (): ReadonlySet<string> =>
@@ -27,9 +34,7 @@ function copyNamedIcons(out: string): number {
   for (const name of names) {
     const from = path.join(PACKAGE, `${name}.svg`);
     if (!fs.existsSync(from))
-      throw new Error(
-        `lucide-static has no ${name}.svg, which a source names`,
-      );
+      throw new Error(`lucide-static has no ${name}.svg, which a source names`);
     const to = path.join(out, 'lucide-icons', `${name}.svg`);
     fs.mkdirSync(path.dirname(to), { recursive: true });
     fs.copyFileSync(from, to);

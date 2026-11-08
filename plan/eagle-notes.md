@@ -110,3 +110,13 @@ for the port (phase 8) or the PM's word. Ranked: the first of each group is the 
     Its guards (eagle-dev's cross-check): verify hashes every linked file before the copy's run and after, a
     change being a difference (`rewrote · <file>`, seen firing on a stale rule document); `yarn rehearse --check`
     finds a link replaced, a file added or gone since the rehearsal; a copy on another volume fails with why.
+28. Knip holds what nobody reads (chunk 6b), from the scope (`shared/lint/knipConfig.ts`): the entries, what the
+    build starts from (`starts`: each page, each module it writes as data) and each file a Claude Code hook runs
+    are its entries; a part's value and type are read or gone. On a real tree it found the port's gaps: two
+    packages the shared config imports and this side lacked (`eslint-plugin-boundaries`,
+    `eslint-import-resolver-typescript`), two it no longer reads (`@testing-library/react`, `postcss`), and the
+    icons' package read by a joined path (now `import.meta.resolve`). `knip --fix` unexported 33 types and 2
+    values nobody read, a script, never a hand. Prettier now reads the way of working's files here too (it
+    skips a symlink): 20 formatted. Verify runs `format:check`, `lint:files` and `lint:exports`.
+    `aToolIsAScript` retires; `anExportIsRead` keeps an entry's half, read by its global, a ticket's read list
+    or the build side's list, which no tool reads.

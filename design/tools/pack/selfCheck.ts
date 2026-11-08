@@ -106,7 +106,9 @@ function entryFails(ticket: Ticket, expanded: string): readonly string[] {
       ...(expanded.includes(`### ${ref}\n`)
         ? []
         : [`${ticket.id} no expansion: ${ref.slice(0, 40)}`]),
-      ...(hasJourney ? [`${ticket.id} · a journey of another epic: ${ref}`] : []),
+      ...(hasJourney
+        ? [`${ticket.id} · a journey of another epic: ${ref}`]
+        : []),
       ...(hasRow ? [`${ticket.id} · no digest on ${ref.slice(0, 50)}`] : []),
     ];
   });

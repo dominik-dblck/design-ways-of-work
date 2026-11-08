@@ -142,9 +142,7 @@ function otherLines(ref: string, cut: Cut): readonly string[] {
   if (/^packs\//.test(ref))
     return ['_this file_ · the pack you are reading', ''];
   const read =
-    filesLines(ref, cut) ??
-    derivedLines(ref, cut) ??
-    namedFileLines(ref, cut);
+    filesLines(ref, cut) ?? derivedLines(ref, cut) ?? namedFileLines(ref, cut);
   if (read) return read;
   if (/\.(?:ts|js|json|md|css)\b/.test(coreOf(ref)))
     cut.miss(`${ref} · names a design file the pack cannot read`);

@@ -1488,7 +1488,7 @@ index 0000000..4993b9c
 +
 +export { LIST_REACT, ListLogic };
 diff --git a/guards/checks/rulesParts.ts b/guards/checks/rulesParts.ts
-index ecaa74c..80b2277 100644
+index ecaa74c..db5eb2c 100644
 --- a/guards/checks/rulesParts.ts
 +++ b/guards/checks/rulesParts.ts
 @@ -2,7 +2,7 @@
@@ -1509,12 +1509,15 @@ index ecaa74c..80b2277 100644
    }
  }
  
-@@ -30,7 +30,7 @@ function countLine(label: string, check: () => readonly unknown[]): string {
+@@ -30,7 +30,10 @@ function countLine(label: string, check: () => readonly unknown[]): string {
      const count = check().length;
      return lineOf(label, { ok: !count, text: String(count) });
    } catch (error) {
 -    return lineOf(label, { ok: false, text: messageOf(error).slice(0, 80) });
-+    return lineOf(label, { ok: false, text: errorMessageOf(error).slice(0, 80) });
++    return lineOf(label, {
++      ok: false,
++      text: errorMessageOf(error).slice(0, 80),
++    });
    }
  }
  
@@ -1542,6 +1545,17 @@ index 2f7db81..fe9cfad 100644
  
  // the fixtures in the one order that loads them, never restated by a reader
  const FIXTURE_LOAD: readonly string[] = LOAD.filter((file) =>
+diff --git a/knip.config.ts b/knip.config.ts
+new file mode 100644
+index 0000000..b1a971a
+--- /dev/null
++++ b/knip.config.ts
+@@ -0,0 +1,5 @@
++// knip.config.ts · knip over the design project, from its scope
++import { scope } from './scope.ts';
++import { knipConfig } from './shared/lint/knipConfig.ts';
++
++export default knipConfig(scope);
 diff --git a/app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/README.md b/legacy/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/README.md
 similarity index 100%
 rename from app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/README.md
@@ -1603,10 +1617,10 @@ similarity index 100%
 rename from app/styles/tokens.css
 rename to legacy/tokens.css
 diff --git a/package.json b/package.json
-index b0d8011..ccf1d6b 100644
+index b0d8011..97635a0 100644
 --- a/package.json
 +++ b/package.json
-@@ -12,18 +12,19 @@
+@@ -12,33 +12,37 @@
      "cut-pack": "node tools/build.ts && node tools/pack.ts",
      "apply-reports": "node tools/apply-reports.ts",
      "spec-check": "node tools/build.ts && node tools/spec-check.ts",
@@ -1628,27 +1642,83 @@ index b0d8011..ccf1d6b 100644
 -    "release:record": "node tools/release-record.ts"
 +    "release:record": "node tools/release-record.ts",
 +    "lint:files": "node tools/lint-files.ts",
-+    "check:chunk": "yarn -s lint:files && yarn -s format:check && yarn -s lint && yarn -s tsc"
++    "check:chunk": "yarn -s lint:files && yarn -s format:check && yarn -s lint && yarn -s tsc && yarn -s lint:exports",
++    "lint:exports": "knip --no-progress --no-config-hints"
    },
    "devDependencies": {
      "@eslint-community/eslint-plugin-eslint-comments": "4.8.1",
-@@ -33,6 +34,7 @@
+     "@eslint/js": "10.0.1",
+-    "@testing-library/react": "16.3.3",
+     "@types/node": "26.5.0",
      "@types/react": "19.2.18",
      "@types/react-dom": "19.2.7",
      "eslint": "10.10.0",
++    "eslint-import-resolver-typescript": "4.4.5",
++    "eslint-plugin-boundaries": "7.3.0",
 +    "eslint-plugin-import-x": "4.18.0",
      "globals": "17.12.0",
      "husky": "9.1.7",
      "jiti": "2.4.2",
+     "jsdom": "30.0.1",
++    "knip": "6.44.2",
+     "lucide-static": "1.69.0",
+-    "postcss": "8.5.28",
+     "prettier": "3.9.6",
+     "rolldown": "1.2.16",
+     "typescript": "6.0.3",
+diff --git a/roadmaps/backlog/backlogTypes.ts b/roadmaps/backlog/backlogTypes.ts
+index 1adcf09..f3210c8 100644
+--- a/roadmaps/backlog/backlogTypes.ts
++++ b/roadmaps/backlog/backlogTypes.ts
+@@ -84,5 +84,4 @@ export type {
+   EpicRow,
+   OpenPoint,
+   Port,
+-  Story,
+ };
+diff --git a/roadmaps/tickets/ticketsTypes.ts b/roadmaps/tickets/ticketsTypes.ts
+index 77d532b..aea5996 100644
+--- a/roadmaps/tickets/ticketsTypes.ts
++++ b/roadmaps/tickets/ticketsTypes.ts
+@@ -85,12 +85,4 @@ interface BoardTicket extends Ticket {
+   readonly read: readonly string[];
+ }
+ 
+-export type {
+-  AuthoredRow,
+-  BoardTicket,
+-  TicketReceipt,
+-  Resolved,
+-  Ticket,
+-  TicketKind,
+-  TicketWhy,
+-};
++export type { AuthoredRow, BoardTicket, TicketReceipt, Resolved, Ticket };
+diff --git a/roadmaps/tracks/tracksTypes.ts b/roadmaps/tracks/tracksTypes.ts
+index 9c7b0cf..ce1fef1 100644
+--- a/roadmaps/tracks/tracksTypes.ts
++++ b/roadmaps/tracks/tracksTypes.ts
+@@ -26,4 +26,4 @@ interface TrackFinding {
+   readonly text: string;
+ }
+ 
+-export type { Factors, TrackFinding, TrackReading, TrackRow };
++export type { TrackFinding, TrackReading, TrackRow };
 diff --git a/scope.ts b/scope.ts
 new file mode 100644
-index 0000000..2877d4d
+index 0000000..8118955
 --- /dev/null
 +++ b/scope.ts
-@@ -0,0 +1,64 @@
+@@ -0,0 +1,75 @@
 +// scope.ts · what the design project names once: its ESLint config, its shared tests and its tools read it
 +import type { RepoScope } from './shared/repoScope.ts';
-+import { entryOfPart, filesOf, isEntry } from './tools/layout.ts';
++import {
++  emitted,
++  entryOfPart,
++  filesOf,
++  isEntry,
++  pageOf,
++} from './tools/layout.ts';
 +
 +// the modules' files, as tools/layout.ts places them: an entry's API and a part's values take their own case
 +const MODULE_FILES = filesOf().filter(
@@ -1707,9 +1777,225 @@ index 0000000..2877d4d
 +      return entry === null ? [] : [[file, entry]];
 +    }),
 +  ),
++  // what the build starts from, beside the entries: each page it bundles, each module it writes as data
++  starts: [
++    ...filesOf().filter((file) => pageOf(file) !== null),
++    ...emitted().map((one) => one.module),
++  ],
 +};
 +
 +export { scope };
+diff --git a/sheet/cases/shared-cases/sharedCasesTypes.ts b/sheet/cases/shared-cases/sharedCasesTypes.ts
+index ac3a049..88d3fd9 100644
+--- a/sheet/cases/shared-cases/sharedCasesTypes.ts
++++ b/sheet/cases/shared-cases/sharedCasesTypes.ts
+@@ -39,4 +39,4 @@ interface Applies {
+   readonly whens?: readonly string[];
+ }
+ 
+-export type { Applies, CaseEndpoint, SharedCase };
++export type { Applies, SharedCase };
+diff --git a/sheet/cases/test-cases/testCasesTypes.ts b/sheet/cases/test-cases/testCasesTypes.ts
+index 046504b..ecc740e 100644
+--- a/sheet/cases/test-cases/testCasesTypes.ts
++++ b/sheet/cases/test-cases/testCasesTypes.ts
+@@ -100,10 +100,8 @@ interface Journey {
+ export type {
+   BaselineCase,
+   CaseChanges,
+-  CaseKind,
+   CaseSpec,
+   ReadEndpoint,
+-  EndpointCase,
+   EndpointGroup,
+   EndpointRow,
+   Journey,
+diff --git a/sheet/contract/commands/commandsTypes.ts b/sheet/contract/commands/commandsTypes.ts
+index 6a594a8..93ac037 100644
+--- a/sheet/contract/commands/commandsTypes.ts
++++ b/sheet/contract/commands/commandsTypes.ts
+@@ -60,4 +60,4 @@ interface CommandCounts {
+   readonly rules: number;
+ }
+ 
+-export type { Command, CommandCase, CommandCounts, CommandRow, Derived };
++export type { Command, CommandCounts, CommandRow, Derived };
+diff --git a/sheet/contract/queries/queriesTypes.ts b/sheet/contract/queries/queriesTypes.ts
+index bb5f421..851d889 100644
+--- a/sheet/contract/queries/queriesTypes.ts
++++ b/sheet/contract/queries/queriesTypes.ts
+@@ -44,4 +44,4 @@ interface QueryCounts {
+   readonly screens: number;
+ }
+ 
+-export type { QueryCase, QueryCounts, QueryParam, QueryRow, Store, StoreKey };
++export type { QueryCase, QueryCounts, QueryRow, Store, StoreKey };
+diff --git a/sheet/logic/agent/agent-access/agentAccessTypes.ts b/sheet/logic/agent/agent-access/agentAccessTypes.ts
+index 4141744..0e1574f 100644
+--- a/sheet/logic/agent/agent-access/agentAccessTypes.ts
++++ b/sheet/logic/agent/agent-access/agentAccessTypes.ts
+@@ -43,7 +43,6 @@ export type {
+   AccessMove,
+   AccessStatus,
+   AccessWalk,
+-  AppView,
+   ConnectedApp,
+   OtherAgent,
+   SignInStep,
+diff --git a/sheet/logic/approval/approval-logic/approvalLogicTypes.ts b/sheet/logic/approval/approval-logic/approvalLogicTypes.ts
+index 533de98..b578abe 100644
+--- a/sheet/logic/approval/approval-logic/approvalLogicTypes.ts
++++ b/sheet/logic/approval/approval-logic/approvalLogicTypes.ts
+@@ -167,7 +167,6 @@ export type {
+   BarScene,
+   ChipOptions,
+   Cta,
+-  PlayFacts,
+   PlayScene,
+   PlayView,
+   Requirement,
+diff --git a/sheet/logic/approval/approval-logic/todoBuilt.ts b/sheet/logic/approval/approval-logic/todoBuilt.ts
+index 089bf8f..99f7a29 100644
+--- a/sheet/logic/approval/approval-logic/todoBuilt.ts
++++ b/sheet/logic/approval/approval-logic/todoBuilt.ts
+@@ -185,5 +185,4 @@ function orderedRows(
+   };
+ }
+ 
+-export type { Built };
+ export { todoRowsOf, orderedRows };
+diff --git a/sheet/logic/approval/gate-rules/gateDialog.ts b/sheet/logic/approval/gate-rules/gateDialog.ts
+index f913540..4ba6ddf 100644
+--- a/sheet/logic/approval/gate-rules/gateDialog.ts
++++ b/sheet/logic/approval/gate-rules/gateDialog.ts
+@@ -142,4 +142,4 @@ function dialogRow(probe: Probe, mode: string): DialogRow {
+ }
+ 
+ export { dialogModes, dialogRow };
+-export type { DialogRow, Probe };
++export type { Probe };
+diff --git a/sheet/logic/approval/gate-rules/gateNotices.ts b/sheet/logic/approval/gate-rules/gateNotices.ts
+index 9121b59..4bf5c3b 100644
+--- a/sheet/logic/approval/gate-rules/gateNotices.ts
++++ b/sheet/logic/approval/gate-rules/gateNotices.ts
+@@ -71,4 +71,3 @@ function noticeFor(landed?: readonly (readonly [string, Landed?])[]): string {
+ }
+ 
+ export { NOTICE, noticeFill, noticeFor, outcomeOf };
+-export type { Outcome };
+diff --git a/sheet/logic/approval/gate-rules/gateRoles.ts b/sheet/logic/approval/gate-rules/gateRoles.ts
+index e5cf68f..ec0fd86 100644
+--- a/sheet/logic/approval/gate-rules/gateRoles.ts
++++ b/sheet/logic/approval/gate-rules/gateRoles.ts
+@@ -134,4 +134,3 @@ function stateChip(bar: Bar): string {
+ }
+ 
+ export { localeRoleOf, roleOf, stateChip };
+-export type { ReaderRole };
+diff --git a/sheet/logic/approval/gate-rules/gateRulesTypes.ts b/sheet/logic/approval/gate-rules/gateRulesTypes.ts
+index 0a5a1e6..1cba970 100644
+--- a/sheet/logic/approval/gate-rules/gateRulesTypes.ts
++++ b/sheet/logic/approval/gate-rules/gateRulesTypes.ts
+@@ -136,7 +136,6 @@ export type {
+   Button,
+   BarGate,
+   BarFact,
+-  Lapsed,
+   LanguageFact,
+   ManageAsk,
+   ManageGate,
+diff --git a/sheet/logic/approval/gate-rules/gateSituations.ts b/sheet/logic/approval/gate-rules/gateSituations.ts
+index 206228f..e59642c 100644
+--- a/sheet/logic/approval/gate-rules/gateSituations.ts
++++ b/sheet/logic/approval/gate-rules/gateSituations.ts
+@@ -195,4 +195,3 @@ export {
+   progressSituationOf,
+   todoSituationOf,
+ };
+-export type { LanguageFacts };
+diff --git a/sheet/logic/approval/role-combinations/combinationTypes.ts b/sheet/logic/approval/role-combinations/combinationTypes.ts
+index a04ce6c..e69f448 100644
+--- a/sheet/logic/approval/role-combinations/combinationTypes.ts
++++ b/sheet/logic/approval/role-combinations/combinationTypes.ts
+@@ -93,7 +93,6 @@ export type {
+   GateState,
+   Keyed,
+   LanguageRow,
+-  MenuItem,
+   SentenceRow,
+   RoleRow,
+ };
+diff --git a/sheet/logic/assembly/content-type-logic/boardTypes.ts b/sheet/logic/assembly/content-type-logic/boardTypes.ts
+index 4334fc9..2d8abca 100644
+--- a/sheet/logic/assembly/content-type-logic/boardTypes.ts
++++ b/sheet/logic/assembly/content-type-logic/boardTypes.ts
+@@ -188,14 +188,10 @@ export type {
+   AssemblyType,
+   Badge,
+   ChainRecord,
+-  ContractRow,
+   FieldLine,
+   FileFlow,
+-  FlowItem,
+-  Link,
+   MatrixRow,
+   PartUsage,
+   TypeChain,
+   TypeChecks,
+-  TypeExtension,
+ };
+diff --git a/sheet/logic/assembly/content-type-logic/partViews.ts b/sheet/logic/assembly/content-type-logic/partViews.ts
+index 750d06e..d3e2248 100644
+--- a/sheet/logic/assembly/content-type-logic/partViews.ts
++++ b/sheet/logic/assembly/content-type-logic/partViews.ts
+@@ -203,5 +203,4 @@ function partView(given: AssemblyPart | string, slug?: string): PartView {
+   return offers ? withTimes(view, offers) : view;
+ }
+ 
+-export type { PartView };
+ export { baseOf, identity, partView };
+diff --git a/sheet/logic/assembly/content-type-logic/sheetReads.ts b/sheet/logic/assembly/content-type-logic/sheetReads.ts
+index e7f0d16..372f36e 100644
+--- a/sheet/logic/assembly/content-type-logic/sheetReads.ts
++++ b/sheet/logic/assembly/content-type-logic/sheetReads.ts
+@@ -61,5 +61,4 @@ const partCell = (state: string, text: string | undefined): PartCell => ({
+   text,
+ });
+ 
+-export type { ModuleWords };
+ export { configOf, firstOfEmail, gateWord, moduleWords, partCell };
+diff --git a/sheet/logic/capabilities/capabilityTypes.ts b/sheet/logic/capabilities/capabilityTypes.ts
+index 0831fce..860e07a 100644
+--- a/sheet/logic/capabilities/capabilityTypes.ts
++++ b/sheet/logic/capabilities/capabilityTypes.ts
+@@ -18,4 +18,4 @@ interface Capability {
+   readonly examples: readonly string[];
+ }
+ 
+-export type { Capability, CapabilityStep };
++export type { Capability };
+diff --git a/sheet/model/content-modules/contentModulesTypes.ts b/sheet/model/content-modules/contentModulesTypes.ts
+index 7dfea0b..24476b8 100644
+--- a/sheet/model/content-modules/contentModulesTypes.ts
++++ b/sheet/model/content-modules/contentModulesTypes.ts
+@@ -93,6 +93,5 @@ export type {
+   ModuleField,
+   ModuleVariant,
+   Tab,
+-  VariantLimits,
+   Zone,
+ };
+diff --git a/sheet/model/content-types/contentTypesTypes.ts b/sheet/model/content-types/contentTypesTypes.ts
+index 5c27aaa..dd1a55c 100644
+--- a/sheet/model/content-types/contentTypesTypes.ts
++++ b/sheet/model/content-types/contentTypesTypes.ts
+@@ -106,6 +106,4 @@ export type {
+   KindKey,
+   Narrow,
+   Placeholder,
+-  PlaceholderType,
+-  TypeLanguages,
+ };
 diff --git a/sheet/project.ts b/sheet/project.ts
 index dbcf477..5066d22 100644
 --- a/sheet/project.ts
@@ -1775,6 +2061,67 @@ index 212b847..337c4bf 100644
    ],
  };
  
+diff --git a/sheet/samples/payloads/payloadsTypes.ts b/sheet/samples/payloads/payloadsTypes.ts
+index f786eda..678b89d 100644
+--- a/sheet/samples/payloads/payloadsTypes.ts
++++ b/sheet/samples/payloads/payloadsTypes.ts
+@@ -52,4 +52,4 @@ interface LoggedEvent {
+   readonly payload: Payload;
+ }
+ 
+-export type { Handler, LoggedEvent, OpenThread, Payload, Step, WalkState };
++export type { Handler, LoggedEvent, Payload, Step, WalkState };
+diff --git a/sheet/screens/content-list/rowState.ts b/sheet/screens/content-list/rowState.ts
+index 0a95ee5..04f7352 100644
+--- a/sheet/screens/content-list/rowState.ts
++++ b/sheet/screens/content-list/rowState.ts
+@@ -101,5 +101,4 @@ function barOf(document: Versioned, slug: string): BarState {
+   };
+ }
+ 
+-export type { Versioned };
+ export { barOf, stateOf };
+diff --git a/sheet/screens/screen-view/blockRows.ts b/sheet/screens/screen-view/blockRows.ts
+index 89863c4..a1d9f28 100644
+--- a/sheet/screens/screen-view/blockRows.ts
++++ b/sheet/screens/screen-view/blockRows.ts
+@@ -200,7 +200,6 @@ function autosavedAt(rows: readonly BlockRow[]): string | null {
+   return latest;
+ }
+ 
+-export type { RowAt };
+ export {
+   autosavedAt,
+   blockRow,
+diff --git a/sheet/screens/screen-view/viewInputs.ts b/sheet/screens/screen-view/viewInputs.ts
+index ff8398a..d2edf73 100644
+--- a/sheet/screens/screen-view/viewInputs.ts
++++ b/sheet/screens/screen-view/viewInputs.ts
+@@ -138,5 +138,4 @@ function personOf(contract: ScreenContract, gaps: Gap[]): Viewer | null {
+   return person;
+ }
+ 
+-export type { ViewInputs };
+ export { focusOf, messageOf, personOf, rowsOf, baselineOf, versionRowOf };
+diff --git a/sheet/screens/wireframes/screenRows.ts b/sheet/screens/wireframes/screenRows.ts
+index a174fc9..c9d85ac 100644
+--- a/sheet/screens/wireframes/screenRows.ts
++++ b/sheet/screens/wireframes/screenRows.ts
+@@ -191,4 +191,3 @@ const list = (track?: string): readonly Screen[] =>
+   SCREENS.filter((screen) => inTrack(screen, track));
+ 
+ export { SCREEN_BY_ID, SCREEN_BY_KEY, SCREEN_BY_NUM, FAMILY, SCREENS, list };
+-export type { Screen };
+diff --git a/sheet/words/glossary/glossaryTypes.ts b/sheet/words/glossary/glossaryTypes.ts
+index 1e8082f..a84aa0c 100644
+--- a/sheet/words/glossary/glossaryTypes.ts
++++ b/sheet/words/glossary/glossaryTypes.ts
+@@ -33,4 +33,4 @@ interface GlossaryPoint {
+   readonly touches: string;
+ }
+ 
+-export type { GlossaryPoint, ScreenWord, ScreenWordRow, Term };
++export type { GlossaryPoint, ScreenWordRow, Term };
 diff --git a/tests/architecture/baselines/aFileNamesItsPurpose.json b/tests/architecture/baselines/aFileNamesItsPurpose.json
 new file mode 100644
 index 0000000..7318aea

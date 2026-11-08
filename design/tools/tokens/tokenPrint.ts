@@ -21,7 +21,8 @@ const keyOf = (name: string): string => {
 
 function resolve(cssValue: string, at: Lookup): string {
   const alias = ALIAS.exec(cssValue.trim());
-  if (alias?.[1] !== undefined && at.flips.has(alias[1])) return cssValue.trim();
+  if (alias?.[1] !== undefined && at.flips.has(alias[1]))
+    return cssValue.trim();
   return cssValue.replace(
     /var\(\s*(--[\w-]+)\s*(?:,([^()]*))?\)/g,
     (_all, name: string, fallback: string | undefined) => {
@@ -79,7 +80,10 @@ function tokensModule({
   ): string =>
     [...source]
       .map(([name, cssValue]) =>
-        line(keyOf(name), typed(resolve(cssValue, { lookups, flips, seen: [] }))),
+        line(
+          keyOf(name),
+          typed(resolve(cssValue, { lookups, flips, seen: [] })),
+        ),
       )
       .join('\n');
   const names = [...light.keys()]

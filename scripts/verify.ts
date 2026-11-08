@@ -22,6 +22,9 @@ const COMMANDS: readonly (readonly string[])[] = [
   ['spec-check'],
   ['checks:gate'],
   ['ds-scan'],
+  ['format:check'],
+  ['lint:files'],
+  ['lint:exports'],
 ];
 const EXPECTED_FILE = path.join(HERE, 'plan', 'expected-differences.tsv');
 const TIMING = [

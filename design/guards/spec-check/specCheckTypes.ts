@@ -43,4 +43,4 @@ interface ScriptIo {
   log(...parts: readonly unknown[]): void;
 }
 
-export type { ScriptIo, Spec, SpecPart, SpecRow, Tier, TieredRow };
+export type { ScriptIo, Spec, SpecPart, SpecRow, TieredRow };

@@ -15,4 +15,4 @@ interface SkillFile {
   readonly sections: readonly SkillSection[];
 }
 
-export type { SkillFile, SkillSection };
+export type { SkillFile };

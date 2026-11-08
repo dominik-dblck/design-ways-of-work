@@ -26,6 +26,8 @@ const scope: RepoScope = {
   barrels: [],
   tests: [],
   owners: {},
+  // what runs with no script naming it: each script, each hook, the design system's face
+  starts: ['scripts/*.ts', 'shared/hooks/*.ts', 'design-system/index.ts'],
 };
 
 export { scope };

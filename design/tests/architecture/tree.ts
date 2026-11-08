@@ -11,7 +11,7 @@ import { isGenerated } from '../../shared/lint/header.ts';
 
 export type Source = { readonly path: string; readonly text: string };
 
-export { isGenerated, ROOT };
+export { ROOT };
 
 const NEVER_WALKED = ['node_modules', '.git', 'dist', 'poc', '.artifact'];
 
@@ -36,7 +36,6 @@ export function textsUnder(
 }
 
 const isTest = (file: string): boolean => /\.test(-d)?\.ts$/.test(file);
-
 
 /** Every file the homes of `tools/layout.ts` hold that ends in one of the endings, as `Source`. */
 export function homeTexts(endings: readonly string[]): readonly Source[] {

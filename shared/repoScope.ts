@@ -20,6 +20,7 @@ interface RepoScope {
   readonly barrels: readonly string[];
   readonly tests: readonly string[];
   readonly owners: Readonly<Record<string, string>>;
+  readonly starts: readonly string[];
 }
 
 const TESTS = [

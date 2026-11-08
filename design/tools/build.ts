@@ -105,7 +105,8 @@ async function bundlePage(file: string, page: Page): Promise<void> {
 // two sources written at one published path: the second would overwrite the first unseen
 function refuseClashes(outputs: readonly string[]): void {
   const twice = outputs.filter((one, at) => outputs.indexOf(one) !== at);
-  if (twice.length) throw new Error(`two sources write ${twice.join(', ')} in dist/project`);
+  if (twice.length)
+    throw new Error(`two sources write ${twice.join(', ')} in dist/project`);
 }
 
 // every file a home holds but its TypeScript, at its published path

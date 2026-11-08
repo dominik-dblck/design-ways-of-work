@@ -2,25 +2,10 @@ import importX from 'eslint-plugin-import-x';
 import path from 'node:path';
 import { eslintConfig } from '../../shared/lint/eslintConfig.ts';
 import { FIXTURES, ruleTester } from './ruleTester.ts';
+import { scopeAt } from './scopeAt.ts';
 
 // the shared config's own settings, on the fixtures' tsconfig and its alias
-const settings = eslintConfig({
-  root: FIXTURES,
-  ignores: [],
-  production: [],
-  generated: [],
-  react: [],
-  entries: [],
-  parts: [],
-  mutable: {},
-  families: [],
-  brands: [],
-  words: [],
-  markup: [],
-  barrels: [],
-  tests: [],
-  owners: {},
-}).find(
+const settings = eslintConfig(scopeAt(FIXTURES)).find(
   (one) => one.settings?.['import-x/resolver-next'] !== undefined,
 )?.settings;
 

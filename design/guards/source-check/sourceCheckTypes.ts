@@ -167,7 +167,6 @@ export type {
   GuardMap,
   Leaf,
   LineAt,
-  MapMove,
   MapOptions,
   MapRow,
   NodeBase,

@@ -28,7 +28,12 @@ function wireframesOf(): readonly TrackGroup[] {
   const groups = new Map<string, ScreenCard[]>();
   for (const screen of SCREENS) {
     const cards = groups.get(screen.track) ?? [];
-    cards.push({ id: screen.id, num: screen.num, title: screen.title, sub: screen.sub });
+    cards.push({
+      id: screen.id,
+      num: screen.num,
+      title: screen.title,
+      sub: screen.sub,
+    });
     groups.set(screen.track, cards);
   }
   return [...groups].map(([track, screens]) => ({ track, screens }));

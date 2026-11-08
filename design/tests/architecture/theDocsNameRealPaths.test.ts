@@ -26,7 +26,10 @@ const NOT_READ: readonly (readonly [RegExp, string])[] = [
     /^docs\/process\/(ticket-pipeline|agent-instructions)\.md$/,
     "the build side's process: its paths are the build repository's (O13)",
   ],
-  [/^dev\//, "the build side's way of working: its paths are the build repository's"],
+  [
+    /^dev\//,
+    "the build side's way of working: its paths are the build repository's",
+  ],
 ];
 
 /** The paths a document names that do not exist, given what does. */

@@ -1,0 +1,48 @@
+/**
+ * - `knipConfig` · knip from a scope: a file, an export or a type nobody reads
+ * - its entries: the scope's, what it starts from, what its Claude hooks run
+ */
+import fs from 'node:fs';
+import path from 'node:path';
+import type { KnipConfig } from 'knip';
+import { testsOf } from '../repoScope.ts';
+import type { RepoScope } from '../repoScope.ts';
+
+// `node` or `tsx`, its flags, a quote, the project's own folder named by Claude Code, then the file
+const A_RUN =
+  /\b(?:node|tsx)(?:\s+--?\S+)*\s+["']?(?:\$\{?CLAUDE_PROJECT_DIR\}?["']?\/)?([\w./-]+\.(?:ts|mts|js|mjs))\b/g;
+const SETTINGS = ['settings.json', 'settings.local.json'];
+const CONFIGS = ['*.config.{ts,mts}', 'scope.ts'];
+
+// every string a parsed settings file holds: a command, unescaped
+const stringsIn = (setting: unknown): readonly string[] =>
+  typeof setting === 'string'
+    ? [setting]
+    : typeof setting === 'object' && setting !== null
+      ? Object.values(setting).flatMap(stringsIn)
+      : [];
+
+// a hook's command runs a file no script names: knip reads no Claude Code settings
+function hookRuns(root: string): readonly string[] {
+  const text = SETTINGS.map((name) => path.join(root, '.claude', name))
+    .filter((file) => fs.existsSync(file))
+    .flatMap((file) => stringsIn(JSON.parse(fs.readFileSync(file, 'utf8'))))
+    .join('\n');
+  return [...new Set([...text.matchAll(A_RUN)].map(([, file]) => file ?? ''))];
+}
+
+// knip's settings as an object: its config may also be a function, which a scope never is
+type KnipSettings = Exclude<KnipConfig, (...args: readonly never[]) => unknown>;
+
+const knipConfig = (scope: RepoScope): KnipSettings => ({
+  entry: [
+    ...scope.entries,
+    ...scope.starts,
+    ...hookRuns(scope.root),
+    ...CONFIGS,
+  ],
+  project: [...scope.production, ...testsOf(scope), ...CONFIGS],
+  ignore: [...scope.ignores, ...scope.generated],
+});
+
+export { knipConfig };

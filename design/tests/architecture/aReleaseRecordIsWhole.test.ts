@@ -82,7 +82,9 @@ describe('a release record is whole', () => {
         );
       return [
         ...(isStamped ? [] : [`${name} · not written by the tool`]),
-        ...(isWhole ? [] : [`${name} · the files read whole are not all named`]),
+        ...(isWhole
+          ? []
+          : [`${name} · the files read whole are not all named`]),
         ...countFaults(name, text),
       ];
     });

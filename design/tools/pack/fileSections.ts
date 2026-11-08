@@ -36,7 +36,10 @@ function jsonSection(lines: readonly string[], want: string): TsSection | null {
 }
 
 // a screen of a page: a pointer to its lines, too long to inline
-function screenSection(lines: readonly string[], want: string): TsSection | null {
+function screenSection(
+  lines: readonly string[],
+  want: string,
+): TsSection | null {
   const label = /^screen\s+(\w+)$/i.exec(want)?.[1];
   if (label === undefined) return null;
   const at = lines.findIndex((line) =>

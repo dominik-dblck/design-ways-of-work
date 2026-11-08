@@ -1,5 +1,5 @@
 /**
- * - `docs/rules/responsibility.md`: an export is read · a part's by an import, an entry's by its global
+ * - `docs/rules/responsibility.md`: an entry's export is read by its global (a part's: knip)
  * - `READ_BY_THE_BUILD_SIDE` · what the build repository reads at `359b2ac`, and the pack offers it
  * - a module's data the build writes as JSON is read by name (`tools/layout.ts · emitted`)
  */
@@ -245,7 +245,9 @@ describe('an export is read', () => {
     expect(
       heldToItsBaseline(
         'anExportIsRead',
-        productionSources().flatMap((source) => unreadIn(source, readers)),
+        productionSources()
+          .filter((source) => isEntry(source.path))
+          .flatMap((source) => unreadIn(source, readers)),
       ),
     ).toEqual({
       added: [],

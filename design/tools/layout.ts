@@ -61,7 +61,11 @@ const RUN_HOMES: readonly string[] = [
 ];
 
 // the React code: a `.tsx` straight in `app/pages` is a page, bundled with all it imports; its theme
-const REACT_HOMES: readonly string[] = ['app/pages', 'app/components', 'app/theme'];
+const REACT_HOMES: readonly string[] = [
+  'app/pages',
+  'app/components',
+  'app/theme',
+];
 
 // an epic's own folder, its notebook published flat beside the sheet
 const EPIC_FOLDER = /^E\d{2}$/;
@@ -141,17 +145,12 @@ function sourceOf(published: string): string | null {
 
 const SYSTEM_FILE = /^\.DS_Store$/;
 
-function isFileOrLinkToOne(entry: fs.Dirent): boolean {
-  if (entry.isFile()) return true;
-  return entry.isSymbolicLink() && fs.statSync(path.join(entry.parentPath, entry.name)).isFile();
-}
-
 function walk(folder: string): readonly string[] {
   const full = path.join(ROOT, folder);
   if (!fs.existsSync(full)) return [];
   return fs
     .readdirSync(full, { recursive: true, withFileTypes: true })
-    .filter((entry) => isFileOrLinkToOne(entry) && !SYSTEM_FILE.test(entry.name))
+    .filter((entry) => entry.isFile() && !SYSTEM_FILE.test(entry.name))
     .map((entry) =>
       path
         .relative(ROOT, path.join(entry.parentPath, entry.name))
@@ -236,4 +235,4 @@ export {
   ROOT,
   sourceOf,
 };
-export type { Emitted, Home, Page };
+export type { Emitted, Page };

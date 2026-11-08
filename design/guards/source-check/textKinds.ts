@@ -116,8 +116,9 @@ function kindOf(
     typed: kinds.typed,
   };
   return (
-    Object.entries(lists).find(([, kindWords]) => (kindWords ?? []).includes(key))?.[0] ??
-    kinds.is
+    Object.entries(lists).find(([, kindWords]) =>
+      (kindWords ?? []).includes(key),
+    )?.[0] ?? kinds.is
   );
 }
 

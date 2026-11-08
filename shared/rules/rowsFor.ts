@@ -4,7 +4,10 @@
 import type { CodeRuleRow } from '../../docs/rules/ruleTypes.ts';
 import type { SharedRule, Side } from './sharedRuleTypes.ts';
 
-const rowsFor = (side: Side, shared: readonly SharedRule[]): readonly CodeRuleRow[] =>
+const rowsFor = (
+  side: Side,
+  shared: readonly SharedRule[],
+): readonly CodeRuleRow[] =>
   shared.map((one) => ({
     rule: one.rule,
     gate: one[side].gate,

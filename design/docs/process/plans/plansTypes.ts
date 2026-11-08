@@ -1,5 +1,5 @@
 /**
- * - `PlanPage`, `Neighbours` · a plan page, and its place in the reading order
+ * - `PlanPage` · a plan page, read in its order
  * - `FileRow`, `ContextRead`, `CombinationFile` · a spec file and a first read
  * - `RuleRow`, `RuleSlot`, `Guard`, `DriftDecision` · a rule, a slot, guard, point
  */
@@ -73,12 +73,6 @@ interface DriftDecision {
   readonly where: string;
 }
 
-interface Neighbours {
-  readonly prev: PlanPage | null;
-  readonly next: PlanPage | null;
-  readonly all: readonly PlanPage[];
-}
-
 export type {
   RuleRow,
   RuleSlot,
@@ -87,6 +81,5 @@ export type {
   DriftDecision,
   FileRow,
   Guard,
-  Neighbours,
   PlanPage,
 };
