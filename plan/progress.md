@@ -37,8 +37,9 @@
       prints them back byte for byte (`take-dev --check`), so a release can carry them to every build repository
 - [x] `dev/map.ts` → `dev/map.md` · the build repository's folders, atomic design and the organism's inner folders
       included, eagle-dev's routes, renderers and domain concepts cut (`scripts/take-dev-map.ts`, 93 folders)
-- [ ] the skills: the ticket skills already ride `ticket-pipeline.md`; eagle-dev's lane-B skills (architect,
-      plan-*, orchestrator, evaluate-*, e2e) and `.claude/evaluations/` come next, the same way
+- [x] the skills: the ticket skills ride `ticket-pipeline.md`; eagle-dev's own 35 files (architect, plan-*,
+      orchestrator, evaluate-*, e2e skills; evaluations; patterns; commands) are in `dev/claude/`, byte for byte
+      (`scripts/take-dev-claude.ts`); three still name Eagle: types-eval.md, domain-testing.md, nextjs-app-router.md
 - [ ] one set of code rules: `design/docs/rules` (13 files, the design side's) and `dev/rules` (18, eagle-dev's)
       overlap in 11 files and mostly disagree in wording — a decision for the PM
 - [ ] the design side's own pages follow those rules: Board, Feature and Wireframes restructured the eagle-dev way
