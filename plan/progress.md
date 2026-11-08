@@ -140,9 +140,21 @@
         the design side's skills are (PM, 8 Nov)
       - [ ] one design system, `wow-design-system` (PM, 8 Nov): `design-system/deblock-guide.md` folded into it,
         one coherent system both products read, no product's own in it · after chunk 6
+      - [ ] 6f the way of working's own organisms take the component shape (PM, 8 Nov: "organizm nie trzyma
+        struktury komponentów w WOW"): 48 parts of `design/app/components/organisms/` renamed by script to carry
+        their organism's name; the `componentShape` switch leaves the scope, the shape held for every root
+        (the PM: a part two organisms use stands alone in its tier; one organism's keeps its structure;
+        measured: none is used by two)
+      - [ ] 6g what else breaks the structure, and why no lint caught it (the PM's audit, 8 Nov):
+        the 2 breaches held in the way of working's own organisms (`DayBars.tsx` 27, `ScreenPlaceholder.tsx` 25,
+        a component writing a height) fixed, never suppressed · a way of working's file holds no suppression, a
+        check in verify · the design side's own folders get ls-lint rules (its `lint-files.ts` passes
+        `folders: {}`: app/pages, app/theme, app/workspace, tools/, guards/, tests/, docs/ unheld), written from
+        `tools/layout.ts`'s homes, never a second list · `dev/claude` (75 files) held by the shared skill tests
+        (7b) and the build side's skills todo
       - [ ] chunk 7, seven parts: 7a the generators' check mode, the first shared test (`plan/eagle-notes.md` 32,
         `plan/dev-notes.md` 21) ✓ · 7b the tests both sides wrote twice, shared on the scope (the skills, a
-        sentence once, every rule's gate, the docs' paths) · 7c one baseline format · 7d sonarjs · 7e cspell ·
+        sentence once, every rule's gate, the docs' paths) · 7c one baseline format (`plan/eagle-notes.md` 33, `plan/dev-notes.md` 22) ✓ · 7d sonarjs · 7e cspell ·
         7f syncpack · 7g commitlint
       - [ ] the shared tests read `scope.ts` (chunk 7), with the way of working's one baseline format
       - [ ] the spawn check: a blank repository from the template green on every shared check (phase 7)

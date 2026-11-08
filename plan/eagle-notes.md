@@ -159,3 +159,9 @@ for the port (phase 8) or the PM's word. Ranked: the first of each group is the 
     test lives under `tests/` or the way of working's `shared/tests/` (`TEST_HOMES`, from `SHARED_TESTS` in
     `shared/repoScope.ts`, which the vitest config reads too). The build side's probe of this copy, its first:
     48 written, 48 owned, 0 stale; a stale line in `docs/rules/README.md` fixed.
+33. One baseline helper (chunk 7c, `shared/tests/baseline.ts`, its tests beside it): a list starts by its own act,
+    `BASELINES=start:{scan}`, refused when it exists or holds nothing, and says so; `BASELINES=write` only shrinks
+    a list, never starts one, and removes an emptied one with a printed line, so "clean" has one spelling, no file,
+    and a cleaned scan stays red on a new offender (the PM: removed, a note in history; eagle-dev's fix, explicit
+    start). A list of anything but strings, or no JSON, is refused naming its scan. This side's `baseline.ts`
+    and its test retire; `anExportIsRead` reads the shared one.

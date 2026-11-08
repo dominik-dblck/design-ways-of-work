@@ -26,8 +26,13 @@ const scope: RepoScope = {
   barrels: [],
   tests: [],
   owners: {},
-  // what runs with no script naming it: each script, each hook, the design system's face
-  starts: ['scripts/*.ts', 'shared/hooks/*.ts', 'design-system/index.ts'],
+  // what runs with no script naming it: each script, each hook, the design system's face, the baseline a product's tests read
+  starts: [
+    'scripts/*.ts',
+    'shared/hooks/*.ts',
+    'design-system/index.ts',
+    'shared/tests/baseline.ts',
+  ],
   // its file names are the convention's alone
   names: [],
   // a types file holds types alone, as the design side's (docs/rules/names.md)

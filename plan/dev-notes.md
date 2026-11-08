@@ -170,3 +170,7 @@ mailing-automation: each line waits for its port (phase 9) and the PM's word. Ra
     seed/__fixtures__/expected,seed/summerInsurance,seed/theCatalog}.ts` · run `packages/domain/log/__fixtures__/run.ts` ·
     skills `.claude/skills/ticket-*/SKILL.md`, `.claude/skills/ticket/_*.md`, `roadmaps/templates/ticket-*.md` ·
     tokens `app/styles/tokens.ts` · components `docs/components.md`.
+22. Its baseline helper becomes the shared one at its port (chunk 7c): `heldToItsBaseline(scan, offenders)` keeps
+    its signature, so a caller changes its import alone; `aScanPlantsNothing`'s writer path moves to
+    `shared/tests/baseline.ts`; `docs/rules/tests.md` row 24 and the `.prettierignore` baselines comment say
+    start and write; its 11 `[]` lists go by script, each in a commit that says so.

@@ -8,7 +8,7 @@ import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { emitted } from '../../tools/layout.ts';
 import { ROOT } from '../../tools/root.ts';
-import { heldToItsBaseline } from './baseline.ts';
+import { heldToItsBaseline } from '../../shared/tests/baseline.ts';
 import { exportedValuesOf } from './fileSyntax.ts';
 import {
   entryOf,

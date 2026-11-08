@@ -18,6 +18,19 @@ przypominaj sobie nasze zasady, SRP SSoT i wszystkie zasady projektowe ktore wyp
 - Every part: consult eagle-dev, its cross-check of the diff and its probe of the design copy before the commit.
 - From code, not copies: a package gives what it holds; nothing hand-copied.
 - After the commit: the progress bar; notes in `plan/eagle-notes.md` and `plan/dev-notes.md`.
+- Dependency inversion: the way of working depends on the `RepoScope` contract, never on a product.
+- Ratchet: known fails only shrink, one mechanism a kind (ESLint suppressions, a test's baseline).
+- Explicit over implicit: a baseline starts by its own act, a generator names what it writes, a renderer is
+  named; nothing happens by default.
+- Least privilege: a generator writes its own folder alone (`--permission`); eagle-dev reads only.
+- One-way dependencies: the tiers, a renderer never back into its app, layers read downward.
+- The way of working keeps the rules it defines (PM, 8 Nov): its own code takes no switch, suppression or
+  exemption from them.
+
+## Heartbeat
+
+A session cron every 10 minutes (job `1577e92f`, PM 8 Nov): a stuck verify or test is killed and re-run, eagle-dev's
+messages read, the next part resumed. When the run is done: `CronDelete 1577e92f` (the PM's word), then a last line here.
 
 ## Calls (what · why · how to undo)
 
@@ -31,5 +44,29 @@ przypominaj sobie nasze zasady, SRP SSoT i wszystkie zasady projektowe ktore wyp
   in `plan/progress.md`.
 - 7c, the PM's answer (8 Nov): an emptied baseline is removed, never kept as `[]`; `BASELINES=write` prints
   the removal, and the commit that carries it says so (git is the record; rules carry no history).
+- 7c, settled with eagle-dev under the PM's "jeżeli wg zasad tak jest lepiej to lećmy": removal alone let a
+  cleaned scan refill on the next write, and `[]` kept it only where a file existed. So `BASELINES=write` never
+  creates a baseline, only shrinks or removes one; a baseline starts by `BASELINES=start:{scan}`, refused
+  when its file exists. "Clean" has one spelling, no file. Undo: the shared helper's start branch.
+
+- 6f, the PM's catch (8 Nov): the way of working's organisms broke the component shape, 48 parts not named for
+  their organism, because 6d set `componentShape: false` for the design side (my call, wrong: one way of
+  working for both sides). Fix after 7c: renames by script, the switch removed. Undo: the rename map reversed.
+
+- 6g, the PM's audit (8 Nov), nothing changed yet: (1) 48 organism parts unnamed, `componentShape: false` for
+  the design side; (2) 2 breaches of the way of working's own organisms held in ESLint's suppressions (a
+  height); (3) the design side's ls-lint gets `folders: {}`, so its own folders hold no layout rule; (4)
+  `dev/claude`, 75 files no check reads in the way of working. Todos 6f and 6g in `plan/progress.md`.
 
 ## Morning: for the PM
+
+- The five patterns beside SSoT and SRP (dependency inversion, ratchet, explicit over implicit, least privilege,
+  one-way dependencies) ran as the night's checklist (PM, 8 Nov · A): rows in `shared/rules`, with gates, or not?
+
+- 6g, the build side's own holes (its count, read-only, HEAD 2f0aab95; its scope, so Dom's): 0 entries in its
+  ESLint suppressions; 10 inline `eslint-disable` (app 6, packages 3, `e2e/framework/runCategorisedTests.ts:120`
+  `no-empty-pattern` for Playwright's fixtures); 364 of its 856 folders hold no file-name rule (196
+  `__tests__`/`__fixtures__` inside app/ and packages/; 168 outside: roadmaps 59, knowledge 37, .claude 30, e2e
+  20, tests 11, scripts 3, db 3, public 2, docs 2, .husky 1); no gate reads a file name's case. Its
+  recommendation: scripts/, tests/ and e2e/ first (34 folders), then .claude/ and docs/, roadmaps/ and
+  knowledge/ last. Question: which of them its ls-lint holds at its port, and in that order?
