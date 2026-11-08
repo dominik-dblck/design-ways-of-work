@@ -62,7 +62,7 @@ const RUN_HOMES: readonly string[] = [
 ];
 
 // the React code: a `.tsx` straight in `app/pages` is a page, bundled with all it imports; its theme
-const REACT_HOMES: readonly string[] = ['app/pages', 'app/theme'];
+const REACT_HOMES: readonly string[] = ['app/pages', 'app/components', 'app/theme'];
 
 // an epic's own folder, its notebook published flat beside the sheet
 const EPIC_FOLDER = /^E\d{2}$/;

@@ -4,8 +4,8 @@
 import { ThemeProvider } from '@mui/material/styles';
 import { renderToString } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
-import { CombinationsSection } from '../../app/pages/feature/CombinationsSection.tsx';
-import { FeaturePage } from '../../app/pages/feature/FeaturePage.tsx';
+import { CombinationsSection } from '../../app/components/organisms/FeaturePage/components/CombinationsSection.tsx';
+import { FeaturePage } from '../../app/components/organisms/FeaturePage/index.ts';
 import { theme } from '../../app/theme/theme.ts';
 import {
   featureOf,

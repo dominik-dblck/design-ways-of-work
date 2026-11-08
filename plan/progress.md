@@ -45,7 +45,13 @@
       read the shared rows first. `plan/rule-split.tsv` records where every row of both sets went; a rule both say is
       worded as eagle-dev words it, unless that wording names the build repository's own folders.
       Rows that differ in substance stayed on their side (styling shares none; `index.ts` barrels vs no `index.ts`)
-- [ ] the design side's own pages follow those rules: Board, Feature and Wireframes restructured the eagle-dev way
+- [x] the design side's app in eagle-dev's folders (`scripts/move.ts`, map `plan/moves/app-components.tsv`):
+      `app/components/atoms/{CodeBlock,SectionHead,TitledList}`, `app/components/organisms/{BoardPage,FeaturePage,
+      WireframesPage}` each with `index.ts`, `components/`, `hooks/`, `utils/`; `app/pages/*.tsx` mount them through
+      the barrel; every bundle byte-equal to before
+      - next: the words and view shapes in `app/workspace/` become each organism's `constants/` and `utils/`
+        (they are published bundles today); eagle-dev's component rules (folder shape, barrels, flow organisms)
+        move to `shared/rules/components.ts` once design-side tests hold them
 - [ ] one design system at the top, `design-system/`: the tokens and the shared atomic components, loaded into every
       repository by a script, never copied by hand (PM, 8 Nov; changes D62, where eagle-dev owned it)
 - [x] no file named by a number: the documents' parts named by what they hold (15 pipeline parts, 2 api-convention

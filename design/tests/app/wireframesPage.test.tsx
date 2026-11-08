@@ -4,7 +4,7 @@
 import { ThemeProvider } from '@mui/material/styles';
 import { renderToString } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
-import { WireframesPage } from '../../app/pages/wireframes/WireframesPage.tsx';
+import { WireframesPage } from '../../app/components/organisms/WireframesPage/index.ts';
 import { theme } from '../../app/theme/theme.ts';
 import { wireframesOf, wireframesWords as words } from '../../app/workspace/wireframes-view.ts';
 

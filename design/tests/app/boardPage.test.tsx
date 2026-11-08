@@ -4,7 +4,7 @@
 import { ThemeProvider } from '@mui/material/styles';
 import { renderToString } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
-import { BoardPage } from '../../app/pages/board/BoardPage.tsx';
+import { BoardPage } from '../../app/components/organisms/BoardPage/index.ts';
 import { theme } from '../../app/theme/theme.ts';
 import {
   columns,

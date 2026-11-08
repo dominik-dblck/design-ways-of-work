@@ -6,7 +6,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { theme } from '../theme/theme.ts';
-import { BoardPage } from './board/BoardPage.tsx';
+import { BoardPage } from '../components/organisms/BoardPage/index.ts';
 
 const root = document.getElementById('root');
 if (root)

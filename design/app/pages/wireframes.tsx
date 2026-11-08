@@ -6,7 +6,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { theme } from '../theme/theme.ts';
-import { WireframesPage } from './wireframes/WireframesPage.tsx';
+import { WireframesPage } from '../components/organisms/WireframesPage/index.ts';
 
 const root = document.getElementById('root');
 if (root)
