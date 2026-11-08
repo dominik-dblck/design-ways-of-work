@@ -1,6 +1,8 @@
 /**
- * - `rules` · components: each rule, its gate, its exceptions and why
+ * - `rules` · components: the shared rules, then this side’s own
  */
+import { rowsFor } from '../../shared/rules/rowsFor.ts';
+import { shared } from '../../shared/rules/components.ts';
 import type { RuleFile } from '../../docs/rules/ruleTypes.ts';
 
 // prettier-ignore
@@ -8,11 +10,10 @@ const rules: RuleFile = {
   title: 'Components',
   intro: '\n`app/components/` in atomic design: a tier is counted from what a component imports, never judged\nfrom its size.\n',
   rows: [
-    { rule: 'A tier is what a component imports from `app/components/`: an atom nothing, a molecule atoms and at most one other molecule, an organism two or more molecules or a screen\'s own flow, a template a page\'s layout.', gate: '`anAtomComposesNothing` · `aMoleculeComposesOneMolecule`', exceptions: '—', why: 'Counted, not judged, so two people sort a component the same way.' },
+    ...rowsFor('build', shared),
     { rule: 'An atom is one element over MUI and the theme; joined with another atom it is a molecule (`HintButton`, not a `Button` with two more props). A neighbour\'s id comes in as a prop (`describedBy`), and an atom under a `Hint` passes on its listeners and its ref.', gate: '`anAtomComposesNothing`', exceptions: '—', why: 'A prop that adds a neighbour is a second component hiding in the first.' },
     { rule: 'A molecule imports no organism, template, query, command or `useContext`.', gate: '`aMoleculeComposesOneMolecule` · `theMoleculesAreDumb`', exceptions: '—', why: 'It draws what it is handed, so every screen can use it.' },
     { rule: 'An organism is reached through its barrel: a page mounts one, and an organism may render another (`NameDialog`) only through `organisms/{Name}`.', gate: '`organismsMeetAtTheBarrel` · `theStripIsNotTheShells`', exceptions: 'one slot component exported beside the organism for the shell\'s header (`TypeLibraryHeader`, `EditorScreenHeader`)', why: 'The barrel is the organism\'s face; the files behind it can move.' },
-    { rule: 'A component file holds one component and its props type; a second component goes to `components/`, a type to `types/`, a helper to `utils/`, a constant to `constants/`, a hook to `hooks/`.', gate: '`oneComponentAFile` · `aComponentFileHoldsItsComponent`', exceptions: 'an icon: one flat file, its path data beside it', why: 'A file opened for a component shows that component and nothing else.' },
     { rule: 'Every component has the organism\'s folder shape: the root holds `{Name}.tsx` and `index.ts`, every other file sits in `components/`, `hooks/`, `utils/`, `types/`, `constants/`, `providers/`, `services/` or `__tests__/`, prefixed (`names.md`).', gate: '`aComponentFolderIsStructured`', exceptions: 'an atom has no `components/`, having no parts', why: 'One shape everywhere, so a file is found without a search.' },
     { rule: 'Every organism a page mounts is a flow organism; it keeps one view per state in `components/state-views/` and switches between them (`EditorScreenLoadingView`, `EditorScreenReadyView`).', gate: '`aScreenIsAFlowOrganism`', exceptions: '`Campaigns`, on the scan\'s baseline until the documents by type and kind replace it', why: 'Each state reads on its own, and the switch is the one place that chooses.' },
     { rule: '`@mui/material` is imported under `app/components/` only.', gate: '`theWrappersAreTheDoor`', exceptions: '—', why: 'A change to how MUI is used lands in the wrappers, not across the screens.' },

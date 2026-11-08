@@ -58,6 +58,7 @@ const RUN_HOMES: readonly string[] = [
   'docs/skills',
   'docs/documents',
   'dev',
+  'shared',
 ];
 
 // the React code: a `.tsx` straight in `app/pages` is a page, bundled with all it imports; its theme

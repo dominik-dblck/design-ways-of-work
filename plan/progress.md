@@ -40,8 +40,11 @@
 - [x] the skills: the ticket skills ride `ticket-pipeline.md`; eagle-dev's own 35 files (architect, plan-*,
       orchestrator, evaluate-*, e2e skills; evaluations; patterns; commands) are in `dev/claude/`, byte for byte
       (`scripts/take-dev-claude.ts`); three still name Eagle: types-eval.md, domain-testing.md, nextjs-app-router.md
-- [ ] one set of code rules: `design/docs/rules` (13 files, the design side's) and `dev/rules` (18, eagle-dev's)
-      overlap in 11 files and mostly disagree in wording — a decision for the PM
+- [x] the code rules split (PM, 8 Nov: two lists, the rules both keep in a third): `shared/rules/` holds the 43 rules
+      both sides keep, each once, with each side's gate; `design/docs/rules` and `dev/rules` keep only their own and
+      read the shared rows first. `plan/rule-split.tsv` records where every row of both sets went; a rule both say is
+      worded as eagle-dev words it, unless that wording names the build repository's own folders.
+      Rows that differ in substance stayed on their side (styling shares none; `index.ts` barrels vs no `index.ts`)
 - [ ] the design side's own pages follow those rules: Board, Feature and Wireframes restructured the eagle-dev way
 - [ ] one design system at the top, `design-system/`: the tokens and the shared atomic components, loaded into every
       repository by a script, never copied by hand (PM, 8 Nov; changes D62, where eagle-dev owned it)

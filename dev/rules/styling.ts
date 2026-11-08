@@ -1,5 +1,5 @@
 /**
- * - `rules` · styling: each rule, its gate, its exceptions and why
+ * - `rules` · styling: this side’s rules
  */
 import type { RuleFile } from '../../docs/rules/ruleTypes.ts';
 

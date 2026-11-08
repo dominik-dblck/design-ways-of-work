@@ -1,6 +1,6 @@
 /**
  * - `node scripts/rehearse.ts [product] [copy]` · a port rehearsal on a copy, never the product
- * - copies the product's tracked files but the wow set; links design/ in place, dev/ at dev/
+ * - copies the product's tracked files but the wow set; links design/ in place, dev/ and shared/ by name
  * - then applies ports/<product>/port.patch: what the port changes in the product itself
  * - its node runs keep the link's path (NODE_OPTIONS), so `..` still reaches the product
  */
@@ -13,6 +13,7 @@ const SOURCE = path.resolve(process.argv[2] ?? path.join(HERE, '..', 'eagle-desi
 const COPY = path.resolve(process.argv[3] ?? path.join(HERE, '.rehearsal', path.basename(SOURCE)));
 const DESIGN = path.join(HERE, 'design');
 const DEV = path.join(HERE, 'dev');
+const SHARED = path.join(HERE, 'shared');
 const PATCH = path.join(HERE, 'ports', path.basename(SOURCE), 'port.patch');
 const WOW_CATEGORY = /^(wow, |mixed check)/;
 const KEEP_LINKS = "NODE_OPTIONS='--preserve-symlinks --preserve-symlinks-main'";
@@ -71,7 +72,7 @@ function main(): void {
     fs.copyFileSync(path.join(SOURCE, file), target);
     copied += 1;
   }
-  for (const [from, at] of [[DESIGN, ''], [DEV, 'dev']] as const)
+  for (const [from, at] of [[DESIGN, ''], [DEV, 'dev'], [SHARED, 'shared']] as const)
     for (const file of filesUnder(from)) {
       const target = path.join(COPY, at, file);
       fs.mkdirSync(path.dirname(target), { recursive: true });
@@ -89,7 +90,7 @@ function main(): void {
     commit('the port');
   }
   console.log(
-    `${path.relative(HERE, COPY) || COPY} · ${copied} product files copied, ${linked} files of design/ and dev/ linked, ${patched ? 'the port applied' : 'no port'}`,
+    `${path.relative(HERE, COPY) || COPY} · ${copied} product files copied, ${linked} files of design/, dev/ and shared/ linked, ${patched ? 'the port applied' : 'no port'}`,
   );
 }
 

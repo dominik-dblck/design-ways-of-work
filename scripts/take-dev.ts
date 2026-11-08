@@ -1,7 +1,7 @@
 /**
  * - `node scripts/take-dev.ts [build repo]` · its code rules as data: docs/rules/{name}.md → dev/rules/{name}.ts
  * - each table read row by row; the markdown is kept beside it as the build will print it back
- * - `--check` · after a product build, every printed rule file equals the build repo's, byte for byte
+ * - ran once: the rules are split since (split-rules.ts) and this repository is their source; it refuses
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -68,6 +68,10 @@ const ruleFiles = (): readonly string[] =>
   fs.readdirSync(FROM).filter((file) => file.endsWith('.md') && file !== 'README.md').sort();
 
 function take(): void {
+  if (fs.existsSync(TO)) {
+    console.error('dev/rules exists: this repository is the rules\' source now, never take them again');
+    process.exit(1);
+  }
   fs.mkdirSync(TO, { recursive: true });
   for (const file of ruleFiles()) {
     const text = fs.readFileSync(path.join(FROM, file), 'utf8');
@@ -78,13 +82,4 @@ function take(): void {
   console.log(`dev/rules · ${ruleFiles().length} rule files taken from ${path.relative(HERE, FROM)}`);
 }
 
-function check(): void {
-  const moved = ruleFiles().filter(
-    (file) => fs.readFileSync(path.join(FROM, file), 'utf8') !== fs.readFileSync(path.join(TO, file), 'utf8'),
-  );
-  console.log(moved.length ? `printed back unlike the source: ${moved.join(', ')}` : `dev/rules · every rule file printed back byte for byte`);
-  process.exitCode = moved.length ? 1 : 0;
-}
-
-if (process.argv.includes('--check')) check();
-else take();
+take();
