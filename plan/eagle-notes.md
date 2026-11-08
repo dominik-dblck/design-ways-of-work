@@ -100,3 +100,13 @@ for the port (phase 8) or the PM's word. Ranked: the first of each group is the 
     as tsc does. A repository without it resolves as before.
 26. The way of working compiles at its products' floor, target ES2022 (this side's lib): verify caught a shared
     rule calling `toSorted` (ES2023), which this side's tsc refused; the way of working's own tsc refuses it now.
+27. The rehearsal copy hard-links the way of working's files (chunk 6): each one is the file itself at the
+    product's path, so every tool reads a real tree, as the product will after its port, and a write there lands
+    here. Symlinks had a tool follow a link to the way of working's path (knip, the resolvers, tsc) and needed
+    `--preserve-symlinks` in the copy's scripts, tsconfig and vitest config, 15 of which had leaked into the
+    port patch; the patch is rebased on the plain product, none left. A file the way of working replaces (a
+    new inode) leaves the copy's link behind until the next rehearsal; verify always rehearses afresh.
+    `dev/rules/checks.md` joins the other rule documents here, written from its module.
+    Its guards (eagle-dev's cross-check): verify hashes every linked file before the copy's run and after, a
+    change being a difference (`rewrote · <file>`, seen firing on a stale rule document); `yarn rehearse --check`
+    finds a link replaced, a file added or gone since the rehearsal; a copy on another volume fails with why.

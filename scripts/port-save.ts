@@ -1,12 +1,18 @@
 /**
  * - `node scripts/port-save.ts [product]` · the rehearsal copy's own edits, saved
- * - the diff from its `product` tag: product files only; links never move
+ * - the diff from its `product` tag: product files only, every linked file aside
  * - written to ports/<product>/port.patch; one that no longer applies fails loudly
  */
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
-import { HERE, LINKED_HOMES, PRODUCT_REPO, repoAt } from './repos.ts';
+import {
+  HERE,
+  LINKED_HOMES,
+  linkedFiles,
+  PRODUCT_REPO,
+  repoAt,
+} from './repos.ts';
 
 const PRODUCT = path.basename(repoAt(PRODUCT_REPO));
 const COPY = path.join(HERE, '.rehearsal', PRODUCT);
@@ -24,6 +30,8 @@ const diff = execFileSync(
     '.',
     ':!guards/__snapshots__/guard-map.json',
     ...LINKED_HOMES.flatMap(([, at]) => (at ? [`:!${at}`] : [])),
+    // a linked file is this repository's: a write through its link is no port
+    ...linkedFiles().map(([, at]) => `:!${at}`),
   ],
   {
     cwd: COPY,

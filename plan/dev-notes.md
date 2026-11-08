@@ -28,10 +28,13 @@ mailing-automation: each line waits for its port (phase 9) and the PM's word. Ra
 
 ## Linked in place
 
-7. **Every runner keeps the links.** Vitest `resolve.preserveSymlinks: true`; ESLint `NODE_OPTIONS='--preserve-symlinks'`
-   and `ESLINT_FLAGS=unstable_native_nodejs_ts_config`; a hook whose main file is linked adds `--preserve-symlinks-main`,
-   so `eslint` resolves from the repository's own `node_modules`. `NODE_OPTIONS` on `test` reaches its tests'
-   child node processes, harmlessly.
+7. **Its files are real, so no runner needs a flag (its cross-check of chunk 6a).** The rehearsal hard-links the
+   way of working, a real tree, and the patch carries no `--preserve-symlinks`; its port adds none. The way of
+   working reaches it as copies taken at a release sha (`git cat-file`) with a hashes file and a gate that the
+   copy's bytes are the release's (its `everyFixtureRootIsHeld` pattern), never links into its working tree: its
+   pre-commit `eslint --fix` and `prettier --write` would write through a link, and drift a copy; the copy is left
+   out of its writes, or takes the way of working's prettier config (3.9.6 and one `.prettierrc` today).
+   `ESLINT_FLAGS=unstable_native_nodejs_ts_config` stays: ESLint reads a TypeScript config.
 8. **The way of working stays in the tree.** Node refuses to strip types under `node_modules`: `shared/`, `tools/`
    and `design-system/` are linked into the tree, never a `link:` dependency.
 

@@ -37,4 +37,3 @@ dist · project/tokens.js	the same 264 light and 70 dark tokens, read from desig
 dist · project/product-tokens.js	the tokens only the product holds: its mark, its document states, its type chips, its message states · one design system for both sides, all TypeScript, in the way of working (PM, 8 Nov)
 dist · project/_ds/*	the Deblock export is no fixture of the product: its tokens, fonts and element styles are design-system/ data · one design system for both sides, all TypeScript, in the way of working (PM, 8 Nov)
 dist · project/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/*	the Deblock export kept in legacy/ (D24), which the artifact still publishes at its root until phase 5 · one design system for both sides, all TypeScript, in the way of working (PM, 8 Nov)
-written · dev/rules/checks.md	the checks rules, written from their module: which tool holds a rule, one row one gate, one scope contract (PM, 8 Nov · A)

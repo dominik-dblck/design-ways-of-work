@@ -1,19 +1,19 @@
 /**
  * - `node scripts/rehearse.ts [product] [copy]` · a port rehearsal on a copy
- * - the product's files but the wow set, design/ and the rest linked in place
- * - then ports/<product>/port.patch; node runs keep the links (NODE_OPTIONS)
+ * - the product's files but the wow set, the rest hard-linked; then its port.patch
+ * - `--check` · the copy still this repository's: each link, none added or gone
  */
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
-import { HERE, LINKED_HOMES, PRODUCT_REPO, repoAt } from './repos.ts';
+import { HERE, linkedFiles, PRODUCT_REPO, repoAt } from './repos.ts';
 
 const SOURCE = repoAt(PRODUCT_REPO);
 const COPY = repoAt(path.join(HERE, '.rehearsal', path.basename(SOURCE)), 1);
 const PATCH = path.join(HERE, 'ports', path.basename(SOURCE), 'port.patch');
 const WOW_CATEGORY = /^(wow, |mixed check)/;
-const KEEP_LINKS =
-  "NODE_OPTIONS='--preserve-symlinks --preserve-symlinks-main'";
+// what the last rehearsal linked, kept beside the copy's own history
+const LINKED_LIST = path.join(COPY, '.git', 'info', 'linked');
 
 const inventory = fs
   .readFileSync(path.join(HERE, 'plan', 'inventory.tsv'), 'utf8')
@@ -26,16 +26,6 @@ const WOW = new Set(
     .filter(([, category]) => WOW_CATEGORY.test(category ?? ''))
     .map(([file]) => file ?? ''),
 );
-
-function filesUnder(folder: string): readonly string[] {
-  if (!fs.existsSync(folder)) return [];
-  return fs
-    .readdirSync(folder, { recursive: true, withFileTypes: true })
-    .filter((entry) => entry.isFile() && entry.name !== '.DS_Store')
-    .map((entry) =>
-      path.relative(folder, path.join(entry.parentPath, entry.name)),
-    );
-}
 
 function commit(message: string): void {
   execFileSync('git', ['add', '-A'], { cwd: COPY });
@@ -55,35 +45,6 @@ function commit(message: string): void {
   );
 }
 
-function edit(file: string, change: (text: string) => string): void {
-  const at = path.join(COPY, file);
-  fs.writeFileSync(at, change(fs.readFileSync(at, 'utf8')));
-}
-
-function configs(): void {
-  edit('package.json', (text) => {
-    const json: Record<string, unknown> = Object(JSON.parse(text));
-    const scripts: Record<string, unknown> = Object(json.scripts);
-    for (const [name, script] of Object.entries(scripts))
-      scripts[name] = String(script).replaceAll(
-        'node tools/',
-        `${KEEP_LINKS} node tools/`,
-      );
-    return `${JSON.stringify(json, null, 2)}\n`;
-  });
-  edit('tsconfig.json', (text) => {
-    const json: Record<string, unknown> = Object(JSON.parse(text));
-    Reflect.set(Object(json.compilerOptions), 'preserveSymlinks', true);
-    return `${JSON.stringify(json, null, 2)}\n`;
-  });
-  edit('vitest.config.mts', (text) =>
-    text.replace(
-      'export default defineConfig({\n',
-      'export default defineConfig({\n  resolve: { preserveSymlinks: true },\n',
-    ),
-  );
-}
-
 // the product's tracked files, but the way of working's own, copied as they are
 function copyProduct(): number {
   const tracked = execFileSync('git', ['ls-files'], {
@@ -100,21 +61,31 @@ function copyProduct(): number {
   return tracked.length;
 }
 
-// this repository's homes linked file by file, and its packages linked whole
+function linkOne(here: string, target: string): void {
+  try {
+    fs.linkSync(here, target);
+  } catch (error) {
+    if (Object(error).code !== 'EXDEV') throw error;
+    throw new Error(
+      `${COPY} sits on another volume than ${HERE}: a hard link cannot cross volumes, so rehearse onto this one`,
+      { cause: error },
+    );
+  }
+}
+
+// a hard link is the file itself at the product's path; the packages are linked whole
 function linkHomes(): number {
-  let linked = 0;
-  for (const [home, at] of LINKED_HOMES)
-    for (const file of filesUnder(path.join(HERE, home))) {
-      const target = path.join(COPY, at, file);
-      fs.mkdirSync(path.dirname(target), { recursive: true });
-      fs.symlinkSync(path.join(HERE, home, file), target);
-      linked += 1;
-    }
+  const files = linkedFiles();
+  for (const [here, at] of files) {
+    const target = path.join(COPY, at);
+    fs.mkdirSync(path.dirname(target), { recursive: true });
+    linkOne(here, target);
+  }
   fs.symlinkSync(
     path.join(HERE, 'node_modules'),
     path.join(COPY, 'node_modules'),
   );
-  return linked;
+  return files.length;
 }
 
 function applyPort(): boolean {
@@ -127,18 +98,55 @@ function applyPort(): boolean {
   return true;
 }
 
+// a link this repository replaced (a new file), a file it added, one it removed
+function staleLinks(): readonly string[] {
+  const files = linkedFiles();
+  const kept = fs.existsSync(LINKED_LIST)
+    ? fs.readFileSync(LINKED_LIST, 'utf8').split('\n').filter(Boolean)
+    : [];
+  const now = new Set(files.map(([, at]) => at));
+  const moved = files.flatMap(([here, at]) => {
+    const there = path.join(COPY, at);
+    return fs.existsSync(there) &&
+      fs.statSync(there).ino === fs.statSync(here).ino
+      ? []
+      : [`${at} · not this repository's file now`];
+  });
+  return [
+    ...moved,
+    ...kept.filter((at) => !now.has(at)).map((at) => `${at} · gone here`),
+  ];
+}
+
+function check(): void {
+  const stale = staleLinks();
+  for (const line of stale) console.log(`  STALE · ${line}`);
+  console.log(
+    stale.length === 0
+      ? `${path.relative(HERE, COPY)} · every link this repository's file`
+      : `${stale.length} stale: rehearse again (port-save first)`,
+  );
+  process.exitCode = stale.length === 0 ? 0 : 1;
+}
+
 function main(): void {
   fs.rmSync(COPY, { recursive: true, force: true });
   const copied = copyProduct();
   const linked = linkHomes();
-  configs();
   execFileSync('git', ['init', '-q'], { cwd: COPY });
   commit('the product, design/ linked');
   execFileSync('git', ['tag', 'product'], { cwd: COPY });
+  fs.writeFileSync(
+    LINKED_LIST,
+    `${linkedFiles()
+      .map(([, at]) => at)
+      .join('\n')}\n`,
+  );
   const isPatched = applyPort();
   console.log(
     `${path.relative(HERE, COPY) || COPY} · ${copied} product files copied, ${linked} files of design/, dev/, shared/ and design-system/ linked, ${isPatched ? 'the port applied' : 'no port'}`,
   );
 }
 
-main();
+if (process.argv.includes('--check')) check();
+else main();

@@ -4,9 +4,9 @@
  * - a difference fails unless plan/expected-differences.tsv names it, with why
  */
 import { execFileSync, spawnSync } from 'node:child_process';
-import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
+import { hashes, linkedHashes, written } from './digests.ts';
 import { HERE, PRODUCT_REPO, repoAt } from './repos.ts';
 
 const SOURCE = repoAt(PRODUCT_REPO);
@@ -62,45 +62,6 @@ function runAll(root: string): readonly Run[] {
     );
     return { command: args.join(' '), status: spawned.status, output };
   });
-}
-
-function hashes(folder: string): ReadonlyMap<string, string> {
-  const out = new Map<string, string>();
-  if (!fs.existsSync(folder)) return out;
-  for (const entry of fs.readdirSync(folder, {
-    recursive: true,
-    withFileTypes: true,
-  })) {
-    if (!entry.isFile()) continue;
-    const full = path.join(entry.parentPath, entry.name);
-    out.set(
-      path.relative(folder, full),
-      crypto.createHash('sha256').update(contentOf(full)).digest('hex'),
-    );
-  }
-  return out;
-}
-
-function written(root: string): ReadonlyMap<string, string> {
-  const lines = execFileSync(
-    'git',
-    ['status', '--porcelain', '--untracked-files=all'],
-    { cwd: root, encoding: 'utf8' },
-  );
-  const files = lines
-    .split('\n')
-    .filter(Boolean)
-    .map((line) => line.slice(3))
-    .filter((file) => file !== 'node_modules');
-  return new Map(files.map((file) => [file, contentOf(path.join(root, file))]));
-}
-
-function contentOf(file: string): string {
-  if (!fs.existsSync(file)) return '<gone>';
-  const bytes = fs.readFileSync(file);
-  return file.endsWith('guard-map.json')
-    ? bytes.toString('utf8').replace(/"at":"[^"]*"/, '"at":""')
-    : bytes.toString('latin1');
 }
 
 function differences<T>(
@@ -200,13 +161,16 @@ function report(found: readonly string[]): boolean {
 
 function main(): void {
   prepare();
+  const before = linkedHashes();
+  const runs = outputDifferences(runAll(BASE), runAll(LINKED));
   const found = [
-    ...outputDifferences(runAll(BASE), runAll(LINKED)),
+    ...runs,
     ...differences('dist', {
       base: hashes(path.join(BASE, 'dist')),
       linked: hashes(path.join(LINKED, 'dist')),
     }),
     ...differences('written', { base: written(BASE), linked: written(LINKED) }),
+    ...differences('rewrote', { base: before, linked: linkedHashes() }),
   ];
   fs.writeFileSync(
     path.join(RUNS, 'out', 'differences.txt'),

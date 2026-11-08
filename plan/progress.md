@@ -120,6 +120,8 @@
         by boundaries, `parts-serve-their-entry` and `molecules-compose-one-molecule`, a hook never off `React`,
         the resolvers on the tsconfig's symlinks; 3 design tests retire, 2 rows to `shared/rules/components.ts`
         (`plan/eagle-notes.md` 24–26, `plan/dev-notes.md` 16) · eagle-dev's consult and cross-check taken
+      - [ ] chunk 6: ls-lint, knip and tsc from one scope · 6a the rehearsal hard-linked, a real tree, its
+        links checked and its rewrites verified (`plan/eagle-notes.md` 27, `plan/dev-notes.md` 7) ✓ · 6b knip from the scope · 6c the file and component shapes · 6d one tsconfig base
       - [ ] the shared tests read `scope.ts` (chunk 7), with the way of working's one baseline format
       - [ ] the spawn check: a blank repository from the template green on every shared check (phase 7)
 - [ ] the e2e framework comes to the way of working whole (PM, 8 Nov): eagle-dev's e2e skills (`e2e`,
