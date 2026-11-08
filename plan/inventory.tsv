@@ -1,0 +1,1223 @@
+file	category
+.claude/settings.json	generated skills (product, written by the build)
+.claude/skills/design-answer-cc/SKILL.md	generated skills (product, written by the build)
+.claude/skills/design-criteria/SKILL.md	generated skills (product, written by the build)
+.claude/skills/design-pack/SKILL.md	generated skills (product, written by the build)
+.claude/skills/design-publish/SKILL.md	generated skills (product, written by the build)
+.claude/skills/design-refine/SKILL.md	generated skills (product, written by the build)
+.claude/skills/design-release/SKILL.md	generated skills (product, written by the build)
+.claude/skills/design-sheet/SKILL.md	generated skills (product, written by the build)
+.claude/skills/design-start/SKILL.md	generated skills (product, written by the build)
+.gitignore	root config: wow (product keeps its own name, scripts)
+.husky/pre-commit	wow, pure: copy
+.husky/pre-push	wow, pure: copy
+.nvmrc	root config: wow (product keeps its own name, scripts)
+.prettierignore	root config: wow (product keeps its own name, scripts)
+.prettierrc	root config: wow (product keeps its own name, scripts)
+CLAUDE.md	root config: wow (product keeps its own name, scripts)
+app/components/.gitkeep	product placeholder (stays)
+app/pages/board.tsx	wow, pure: copy
+app/pages/board/BoardColumn.tsx	wow, pure: copy
+app/pages/board/BoardColumns.tsx	wow, pure: copy
+app/pages/board/BoardPage.tsx	wow, pure: copy
+app/pages/board/DayBar.tsx	wow, pure: copy
+app/pages/board/DayBars.tsx	wow, pure: copy
+app/pages/board/EpicPanel.tsx	wow, pure: copy
+app/pages/board/EpicTile.tsx	wow, pure: copy
+app/pages/board/IdeaPanel.tsx	wow, pure: copy
+app/pages/board/IdeaTile.tsx	wow, pure: copy
+app/pages/board/KindLegend.tsx	wow, pure: copy
+app/pages/board/NextUp.tsx	wow, pure: copy
+app/pages/board/OpenedPanel.tsx	wow, pure: copy
+app/pages/board/OutsideAndOpen.tsx	wow, pure: copy
+app/pages/board/PageHead.tsx	wow, pure: copy
+app/pages/board/StatRow.tsx	wow, pure: copy
+app/pages/board/StatTile.tsx	wow, pure: copy
+app/pages/board/TicketEdges.tsx	wow, pure: copy
+app/pages/board/TicketPanel.tsx	wow, pure: copy
+app/pages/board/TicketRow.tsx	wow, pure: copy
+app/pages/board/VelocityPanel.tsx	wow, pure: copy
+app/pages/board/VelocityTable.tsx	wow, pure: copy
+app/pages/board/tones.ts	wow, pure: copy
+app/pages/board/useOpened.ts	wow, pure: copy
+app/pages/common/CodeBlock.tsx	wow, pure: copy
+app/pages/common/SectionHead.tsx	wow, pure: copy
+app/pages/common/TitledList.tsx	wow, pure: copy
+app/pages/feature.tsx	wow, pure: copy
+app/pages/feature/ApiSection.tsx	wow, pure: copy
+app/pages/feature/CaseTable.tsx	wow, pure: copy
+app/pages/feature/CasesSection.tsx	wow, pure: copy
+app/pages/feature/CombinationsSection.tsx	wow, pure: copy
+app/pages/feature/ComponentsSection.tsx	wow, pure: copy
+app/pages/feature/CoverPanel.tsx	wow, pure: copy
+app/pages/feature/DecisionsSection.tsx	wow, pure: copy
+app/pages/feature/FeatureHead.tsx	wow, pure: copy
+app/pages/feature/FeaturePage.tsx	wow, pure: copy
+app/pages/feature/FeatureSteps.tsx	wow, pure: copy
+app/pages/feature/FieldKindTable.tsx	wow, pure: copy
+app/pages/feature/FieldOptions.tsx	wow, pure: copy
+app/pages/feature/FieldTable.tsx	wow, pure: copy
+app/pages/feature/FieldsSection.tsx	wow, pure: copy
+app/pages/feature/JourneyItem.tsx	wow, pure: copy
+app/pages/feature/JourneyStep.tsx	wow, pure: copy
+app/pages/feature/JourneysSection.tsx	wow, pure: copy
+app/pages/feature/NotesSection.tsx	wow, pure: copy
+app/pages/feature/ScreensSection.tsx	wow, pure: copy
+app/pages/feature/SourceSection.tsx	wow, pure: copy
+app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/README.md	product data (stays)
+app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/_ds_bundle.js	product data (stays)
+app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/_ds_manifest.json	product data (stays)
+app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/colors_and_type.css	product data (stays)
+app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-Black.ttf	product data (stays)
+app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-BlackItalic.ttf	product data (stays)
+app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-Bold.ttf	product data (stays)
+app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-BoldItalic.ttf	product data (stays)
+app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-Italic.ttf	product data (stays)
+app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-Light.ttf	product data (stays)
+app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-LightItalic.ttf	product data (stays)
+app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-Medium.ttf	product data (stays)
+app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-MediumItalic.ttf	product data (stays)
+app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/fonts/BasisGrotesquePro-Regular.ttf	product data (stays)
+app/styles/components.spec.ts	registry entry: machinery to wow, rows stay
+app/styles/components.spec/answersToScale.ts	product data (stays)
+app/styles/components.spec/atomsButton.ts	product data (stays)
+app/styles/components.spec/atomsCheckbox.ts	product data (stays)
+app/styles/components.spec/atomsChip.ts	product data (stays)
+app/styles/components.spec/atomsEyebrow.ts	product data (stays)
+app/styles/components.spec/atomsIconButton.ts	product data (stays)
+app/styles/components.spec/atomsInput.ts	product data (stays)
+app/styles/components.spec/atomsSwitch.ts	product data (stays)
+app/styles/components.spec/atomsText.ts	product data (stays)
+app/styles/components.spec/moleculesBadgeDot.ts	product data (stays)
+app/styles/components.spec/moleculesDialog.ts	product data (stays)
+app/styles/components.spec/moleculesDocumentListHeader.ts	product data (stays)
+app/styles/components.spec/moleculesGateDot.ts	product data (stays)
+app/styles/components.spec/moleculesLayoutPreview.ts	product data (stays)
+app/styles/components.spec/moleculesSearchBox.ts	product data (stays)
+app/styles/components.spec/moleculesSidebarRow.ts	product data (stays)
+app/styles/components.spec/organismsApprovalBar.ts	product data (stays)
+app/styles/components.spec/organismsDocumentPicker.ts	product data (stays)
+app/styles/components.spec/organismsDocumentRow.ts	product data (stays)
+app/styles/components.spec/organismsEditorScreen.ts	product data (stays)
+app/styles/components.spec/organismsManageApprovals.ts	product data (stays)
+app/styles/components.spec/organismsNameDialog.ts	product data (stays)
+app/styles/components.spec/organismsScreenHeader.ts	product data (stays)
+app/styles/components.spec/substitutes.ts	product data (stays)
+app/styles/gate-states.ts	product data (stays)
+app/styles/tokens.css	product data (stays)
+app/styles/tokens.ts	product data (stays)
+app/theme/palette.ts	wow, pure: copy
+app/theme/theme.ts	wow, pure: copy
+app/theme/tokenReads.ts	wow, pure: copy
+app/workspace/board-view.ts	wow, pure: copy
+app/workspace/board-view/boardAside.ts	wow, coupled: imports to @product
+app/workspace/board-view/boardEdges.ts	wow, coupled: imports to @product
+app/workspace/board-view/boardEpics.ts	wow, coupled: imports to @product
+app/workspace/board-view/boardIdeas.ts	wow, coupled: imports to @product
+app/workspace/board-view/boardNumbers.ts	wow, coupled: imports to @product
+app/workspace/board-view/boardPrototype.ts	wow, coupled: imports to @product
+app/workspace/board-view/boardTicket.ts	wow, coupled: imports to @product
+app/workspace/board-view/boardTypes.ts	wow, pure: copy
+app/workspace/board-view/boardVelocity.ts	wow, coupled: imports to @product
+app/workspace/board-view/boardWords.ts	wow, pure: copy
+app/workspace/contract-view.ts	wow, coupled: imports to @product
+app/workspace/contract-view/bodyFields.ts	wow, coupled: imports to @product
+app/workspace/contract-view/codeLines.ts	wow, pure: copy
+app/workspace/contract-view/codeTokens.ts	wow, pure: copy
+app/workspace/contract-view/contractTypes.ts	wow, pure: copy
+app/workspace/contract-view/endpointCode.ts	wow, coupled: imports to @product
+app/workspace/contract-view/portCode.ts	wow, coupled: imports to @product
+app/workspace/feature-view.ts	wow, coupled: imports to @product
+app/workspace/feature-view/featureCases.ts	wow, coupled: imports to @product
+app/workspace/feature-view/featureCombinations.ts	wow, coupled: imports to @product
+app/workspace/feature-view/featureCover.ts	wow, coupled: imports to @product
+app/workspace/feature-view/featureFieldTypes.ts	wow, pure: copy
+app/workspace/feature-view/featureFields.ts	wow, coupled: imports to @product
+app/workspace/feature-view/featureJourneys.ts	wow, coupled: imports to @product
+app/workspace/feature-view/featureLinks.ts	wow, coupled: imports to @product
+app/workspace/feature-view/featureTypes.ts	wow, coupled: imports to @product
+app/workspace/feature-view/featureWords.ts	wow, pure: copy
+app/workspace/sheet-status.ts	wow, pure: copy
+app/workspace/source-view.ts	wow, pure: copy
+docs/documents/agent-instructions.ts	wow, pure: copy
+docs/documents/agent-instructions/agentInstructionsOne.ts	wow, pure: copy
+docs/documents/api-convention.ts	wow, pure: copy
+docs/documents/api-convention/apiConventionOne.ts	wow, pure: copy
+docs/documents/api-convention/apiConventionTwo.ts	wow, pure: copy
+docs/documents/documentTypes.ts	wow, pure: copy
+docs/documents/new-project.ts	wow, pure: copy
+docs/documents/ticket-pipeline.ts	wow, pure: copy
+docs/documents/ticket-pipeline/ticketPipelineEight.ts	wow, pure: copy
+docs/documents/ticket-pipeline/ticketPipelineFive.ts	wow, pure: copy
+docs/documents/ticket-pipeline/ticketPipelineFour.ts	wow, pure: copy
+docs/documents/ticket-pipeline/ticketPipelineOne.ts	wow, pure: copy
+docs/documents/ticket-pipeline/ticketPipelineSeven.ts	wow, pure: copy
+docs/documents/ticket-pipeline/ticketPipelineSix.ts	wow, pure: copy
+docs/documents/ticket-pipeline/ticketPipelineThree.ts	wow, pure: copy
+docs/documents/ticket-pipeline/ticketPipelineTwo.ts	wow, pure: copy
+docs/process/agent-instructions.md	generated from wow data into the product (stays generated)
+docs/process/decisions.ts	registry entry: machinery to wow, rows stay
+docs/process/decisions/decisionTypes.ts	registry types: to wow
+docs/process/decisions/repositoryDecisions.ts	product data (stays)
+docs/process/decisions/restructureDecisions.ts	product data (stays)
+docs/process/decisions/roundDecisions.ts	product data (stays)
+docs/process/decisions/syncDecisions.ts	product data (stays)
+docs/process/decisions/typescriptDecisions.ts	product data (stays)
+docs/process/modes.ts	wow, pure: copy
+docs/process/modes/aboutToHoldsNote.ts	wow, pure: copy
+docs/process/modes/holdsToLegend.ts	wow, pure: copy
+docs/process/modes/runsFeature.ts	wow, pure: copy
+docs/process/modes/runsFeatureFirstRows.ts	wow, pure: copy
+docs/process/modes/runsFeatureLastRows.ts	wow, pure: copy
+docs/process/modes/runsFeatureLoads.ts	wow, pure: copy
+docs/process/modes/runsStandard.ts	wow, pure: copy
+docs/process/new-project.md	generated from wow data (wow)
+docs/process/plans.ts	wow, pure: copy
+docs/process/plans/checklistRules.ts	wow, pure: copy
+docs/process/plans/deliveryRules.ts	wow, pure: copy
+docs/process/plans/designRules.ts	wow, pure: copy
+docs/process/plans/driftGuards.ts	wow, pure: copy
+docs/process/plans/planPages.ts	wow, pure: copy
+docs/process/plans/plansTypes.ts	wow, coupled: imports to @product
+docs/process/plans/principleRules.ts	wow, pure: copy
+docs/process/plans/refineSteps.ts	wow, pure: copy
+docs/process/plans/specFiles.ts	wow, pure: copy
+docs/process/ticket-pipeline.md	generated from wow data into the product (stays generated)
+docs/rules/README.md	wow, pure: copy
+docs/rules/comments.md	wow, pure: copy
+docs/rules/comments.ts	wow, pure: copy
+docs/rules/components.md	wow, pure: copy
+docs/rules/components.ts	wow, pure: copy
+docs/rules/constants.md	wow, pure: copy
+docs/rules/constants.ts	wow, pure: copy
+docs/rules/functions.md	wow, pure: copy
+docs/rules/functions.ts	wow, pure: copy
+docs/rules/names.md	wow, pure: copy
+docs/rules/names.ts	wow, pure: copy
+docs/rules/one-home.md	wow, pure: copy
+docs/rules/one-home.ts	wow, pure: copy
+docs/rules/responsibility.md	wow, pure: copy
+docs/rules/responsibility.ts	wow, pure: copy
+docs/rules/ruleTypes.ts	wow, pure: copy
+docs/rules/size.md	wow, pure: copy
+docs/rules/size.ts	wow, pure: copy
+docs/rules/styling.md	wow, pure: copy
+docs/rules/styling.ts	wow, pure: copy
+docs/rules/tests.md	wow, pure: copy
+docs/rules/tests.ts	wow, pure: copy
+docs/rules/types.md	wow, pure: copy
+docs/rules/types.ts	wow, pure: copy
+docs/skills/answer-cc.ts	wow, pure: copy
+docs/skills/criteria.ts	wow, pure: copy
+docs/skills/pack.ts	wow, pure: copy
+docs/skills/publish.ts	wow, pure: copy
+docs/skills/refine.ts	wow, pure: copy
+docs/skills/release.ts	wow, pure: copy
+docs/skills/sheet.ts	wow, pure: copy
+docs/skills/skillTypes.ts	wow, pure: copy
+docs/skills/start.ts	wow, pure: copy
+eslint.config.ts	root config: wow (product keeps its own name, scripts)
+fixtures/data/block-model.json	artefact (product, stays)
+fixtures/data/components.spec.json	artefact (product, stays)
+fixtures/data/modes.json	artefact (product, stays)
+fixtures/packs/T-E18-00.2.md	artefact (product, stays)
+fixtures/packs/T-E18-00.md	artefact (product, stays)
+fixtures/screens/T-E09-00/02a-bar-per-role.png	artefact (product, stays)
+fixtures/screens/T-E09-00/window-approve-on-behalf.png	artefact (product, stays)
+fixtures/screens/T-E09-00/window-notify-and-assign.png	artefact (product, stays)
+fixtures/screens/T-E18-00/dialog-move-document-email.png	artefact (product, stays)
+fixtures/screens/T-E18-00/dialog-new-document-app-banner-from-existing.png	artefact (product, stays)
+fixtures/screens/T-E18-00/dialog-new-document-bottom-sheet-from-existing.png	artefact (product, stays)
+fixtures/screens/T-E18-00/dialog-new-document-email-blank-no-group.png	artefact (product, stays)
+fixtures/screens/T-E18-00/dialog-new-document-email-from-existing.png	artefact (product, stays)
+fixtures/screens/T-E18-00/dialog-new-document-push-from-existing.png	artefact (product, stays)
+fixtures/screens/T-E18-00/group-list-trashed-document-restore.png	artefact (product, stays)
+fixtures/screens/T-E18-00/images/MANIFEST.txt	artefact (product, stays)
+fixtures/screens/T-E18-00/images/assets/avatar-adrien.png	artefact (product, stays)
+fixtures/screens/T-E18-00/images/assets/avatar-baptiste.png	artefact (product, stays)
+fixtures/screens/T-E18-00/images/assets/avatar-dimitri.png	artefact (product, stays)
+fixtures/screens/T-E18-00/images/assets/avatar-dinis.png	artefact (product, stays)
+fixtures/screens/T-E18-00/images/assets/avatar-edgar.png	artefact (product, stays)
+fixtures/screens/T-E18-00/images/assets/avatar-jean.png	artefact (product, stays)
+fixtures/screens/T-E18-00/images/assets/avatar-maria.png	artefact (product, stays)
+fixtures/screens/T-E18-00/images/assets/avatar-nicolai.png	artefact (product, stays)
+fixtures/screens/T-E18-00/images/assets/avatar-thomas.png	artefact (product, stays)
+fixtures/screens/T-E18-00/images/assets/deblock-mark.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/assets/eagle2-black.png	artefact (product, stays)
+fixtures/screens/T-E18-00/images/assets/icons/ic_android_robot.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/assets/icons/ic_apple_filled.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/assets/icons/ic_facebook_logo.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/assets/icons/ic_google_special.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/assets/icons/ic_instagram_social.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/assets/icons/ic_linkedin_social.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/assets/icons/ic_x_logo.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/assets/icons/ic_x_outlined.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/assets/icons/slack.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/alarm-clock.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/arrow-left-right.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/arrow-right.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/arrow-up.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/bell-ring.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/bell.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/bot.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/calendar.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/chart-column.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/check-check.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/check.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/chevron-down.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/chevron-left.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/chevron-right.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/chevrons-down-up.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/chevrons-up-down.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/circle-check.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/clock.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/copy.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/download.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/file-text.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/folder.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/git-compare.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/globe.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/graduation-cap.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/headset.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/house.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/image.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/layers.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/link.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/list.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/mail.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/megaphone.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/message-circle.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/newspaper.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/panel-bottom.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/pencil.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/plus.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/receipt.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/rectangle-horizontal.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/reply.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/scale.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/search.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/send-horizontal.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/send.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/settings.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/shield-check.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/square-x.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/text-align-start.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/triangle-alert.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/users.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/images/lucide-icons/x.svg	artefact (product, stays)
+fixtures/screens/T-E18-00/row-menu-push-sent-document.png	artefact (product, stays)
+fixtures/screens/T-E18-00/screen-1-login.png	artefact (product, stays)
+fixtures/screens/T-E18-00/screen-1a-type-library-email-campaigns.png	artefact (product, stays)
+fixtures/screens/T-E18-00/screen-1a-type-library-email-templates.png	artefact (product, stays)
+fixtures/screens/T-E18-00/screen-1a-type-library-email-transactional.png	artefact (product, stays)
+fixtures/screens/T-E18-00/screen-1b-group-summer-insurance.png	artefact (product, stays)
+fixtures/screens/T-E18-00/screen-2g-email-editor-just-created.png	artefact (product, stays)
+fixtures/screens/T-E18-00/screen-3-app-banner-editor.png	artefact (product, stays)
+fixtures/screens/T-E18-00/screen-4-bottom-sheet-editor.png	artefact (product, stays)
+fixtures/screens/T-E18-00/screen-5-push-editor.png	artefact (product, stays)
+fixtures/screens/T-E18-00/screen-editor-email-template-greyed-tabs.png	artefact (product, stays)
+fixtures/screens/T-E18-00/screen-editor-email-transactional.png	artefact (product, stays)
+fixtures/screens/T-E18-00/screen-editor-email-trashed.png	artefact (product, stays)
+guards/__snapshots__/content-type-snapshot.json	artefact (product, stays)
+guards/__snapshots__/guard-map.json	artefact (product, stays)
+guards/__snapshots__/list-snapshot.json	artefact (product, stays)
+guards/__snapshots__/measure-snapshot.json	artefact (product, stays)
+guards/__snapshots__/pool-snapshot.json	artefact (product, stays)
+guards/__snapshots__/say-snapshot.json	artefact (product, stays)
+guards/__snapshots__/sentences-snapshot-19-oct.json	artefact (product, stays)
+guards/__snapshots__/wireframes-snapshot.json	artefact (product, stays)
+guards/checks/bundleText.ts	wow, pure: copy
+guards/checks/capabilitiesCheck.ts	wow, coupled: imports to @product
+guards/checks/checkWorld.ts	wow, pure: copy
+guards/checks/contentTypeData.ts	product check (stays)
+guards/checks/contentTypePart.ts	product check (stays)
+guards/checks/decisionsCheck.ts	wow, coupled: imports to @product
+guards/checks/guardPart.ts	mixed check: split (verify)
+guards/checks/idRuns.ts	wow, pure: copy
+guards/checks/journeysPart.ts	wow, coupled: imports to @product
+guards/checks/legacyWorld.ts	mixed check: split (verify)
+guards/checks/listPart.ts	product check (stays)
+guards/checks/measureCheck.ts	product check (stays)
+guards/checks/modesCheck.ts	wow, pure: copy
+guards/checks/pageShims.ts	mixed check: split (verify)
+guards/checks/pageTexts.ts	mixed check: split (verify)
+guards/checks/pagesPart.ts	mixed check: split (verify)
+guards/checks/parsePools.ts	product check (stays)
+guards/checks/propsPart.ts	wow, pure: copy
+guards/checks/rulesCheck.ts	wow, coupled: imports to @product
+guards/checks/rulesParts.ts	product check (stays)
+guards/checks/runChecks.ts	wow, coupled: imports to @product
+guards/checks/sentenceSurfaces.ts	product check (stays)
+guards/checks/sentencesPart.ts	product check (stays)
+guards/checks/wireframesPart.ts	mixed check: split (verify)
+guards/ds-scan.ts	wow, pure: copy
+guards/ds-scan/colourRules.ts	wow, pure: copy
+guards/ds-scan/dsScanTypes.ts	wow, pure: copy
+guards/ds-scan/fileScope.ts	wow, pure: copy
+guards/ds-scan/pairRule.ts	wow, pure: copy
+guards/ds-scan/scaleRules.ts	wow, pure: copy
+guards/ds-scan/scales.ts	wow, pure: copy
+guards/ds-scan/shapeRule.ts	wow, pure: copy
+guards/ds-scan/styleReading.ts	wow, pure: copy
+guards/ds-scan/surfaceRules.ts	wow, pure: copy
+guards/ds-scan/tintRules.ts	wow, pure: copy
+guards/ds-scan/tokenGraph.ts	wow, pure: copy
+guards/expected-files.ts	wow, coupled: imports to @product
+guards/expected-files/expectedFilesTypes.ts	wow, pure: copy
+guards/expected-files/packReads.ts	wow, coupled: imports to @product
+guards/expected-files/ticketEndpoints.ts	wow, coupled: imports to @product
+guards/measure.ts	product check (stays)
+guards/measure/campaignRows.ts	product check (stays)
+guards/measure/measureFiles.ts	product check (stays)
+guards/measure/measureRun.ts	product check (stays)
+guards/measure/measureText.ts	product check (stays)
+guards/measure/measureTypes.ts	product check (stays)
+guards/measure/sheetReads.ts	product check (stays)
+guards/refine-check.ts	wow, coupled: imports to @product
+guards/refine-check/criterionFindings.ts	wow, coupled: imports to @product
+guards/refine-check/refineCheckTypes.ts	wow, coupled: imports to @product
+guards/refine-check/refineRules.ts	wow, coupled: imports to @product
+guards/refine-check/sheetFindings.ts	wow, coupled: imports to @product
+guards/source-check.ts	mixed check: split (verify)
+guards/source-check/architecture.ts	wow, pure: copy
+guards/source-check/bundleExports.ts	wow, pure: copy
+guards/source-check/codeScan.ts	wow, coupled: imports to @product
+guards/source-check/componentChecks.ts	wow, pure: copy
+guards/source-check/fileHeads.ts	wow, pure: copy
+guards/source-check/fileLinks.ts	wow, pure: copy
+guards/source-check/fileUses.ts	wow, pure: copy
+guards/source-check/lineFindings.ts	wow, pure: copy
+guards/source-check/messageLeaves.ts	wow, pure: copy
+guards/source-check/messagesWords.ts	wow, coupled: imports to @product
+guards/source-check/ownModules.ts	wow, pure: copy
+guards/source-check/pageScripts.ts	wow, pure: copy
+guards/source-check/pageWords.ts	wow, coupled: imports to @product
+guards/source-check/projectCheck.ts	wow, pure: copy
+guards/source-check/ratchet.ts	wow, pure: copy
+guards/source-check/requirementReads.ts	wow, coupled: imports to @product
+guards/source-check/screenWords.ts	wow, coupled: imports to @product
+guards/source-check/sourceCheckTypes.ts	wow, pure: copy
+guards/source-check/sourceLayers.ts	wow, pure: copy
+guards/source-check/sourceScope.ts	wow, pure: copy
+guards/source-check/textKinds.ts	wow, pure: copy
+guards/source-check/twiceCheck.ts	wow, pure: copy
+guards/spec-check.ts	wow, coupled: imports to @product
+guards/spec-check/ownerChecks.ts	wow, coupled: imports to @product
+guards/spec-check/rowChecks.ts	wow, pure: copy
+guards/spec-check/specCheckTypes.ts	wow, pure: copy
+legacy/AgentConsentDialog.dc.html	artefact (product, stays)
+legacy/AppShell.dc.html	artefact (product, stays)
+legacy/ApprovalBar.dc.html	artefact (product, stays)
+legacy/ApprovalBarRoles.dc.html	artefact (product, stays)
+legacy/ApprovalsPill.dc.html	artefact (product, stays)
+legacy/ApproveOnBehalf.dc.html	artefact (product, stays)
+legacy/AssetLibrary.dc.html	artefact (product, stays)
+legacy/AvatarStack.dc.html	artefact (product, stays)
+legacy/BlockLibrary.dc.html	artefact (product, stays)
+legacy/BlockRow.dc.html	artefact (product, stays)
+legacy/BlockTree.dc.html	artefact (product, stays)
+legacy/Browser.dc.html	artefact (product, stays)
+legacy/CLAUDE.md	artefact (product, stays)
+legacy/Checkbox.dc.html	artefact (product, stays)
+legacy/Columns paint grid.dc.html	artefact (product, stays)
+legacy/ConfirmRow.dc.html	artefact (product, stays)
+legacy/ContextBar languages.dc.html	artefact (product, stays)
+legacy/ContextBar.dc.html	artefact (product, stays)
+legacy/DiffPane.dc.html	artefact (product, stays)
+legacy/DocumentRow.dc.html	artefact (product, stays)
+legacy/E02 Campaigns UI spec.dc.html	artefact (product, stays)
+legacy/E03 Documents UI spec.dc.html	artefact (product, stays)
+legacy/E04 Blocks UI spec.dc.html	artefact (product, stays)
+legacy/EditorScreen.dc.html	artefact (product, stays)
+legacy/EmailPreview.dc.html	artefact (product, stays)
+legacy/ExportDialog.dc.html	artefact (product, stays)
+legacy/Feature drawings.dc.html	artefact (product, stays)
+legacy/Field.dc.html	artefact (product, stays)
+legacy/FilterMenu.dc.html	artefact (product, stays)
+legacy/FolderRow.dc.html	artefact (product, stays)
+legacy/HistoryView.dc.html	artefact (product, stays)
+legacy/ImageField.dc.html	artefact (product, stays)
+legacy/LogEntry.dc.html	artefact (product, stays)
+legacy/LoginScreen.dc.html	artefact (product, stays)
+legacy/ManageApprovals.dc.html	artefact (product, stays)
+legacy/NameDialog.dc.html	artefact (product, stays)
+legacy/PanelHeader.dc.html	artefact (product, stays)
+legacy/ProposalPanel.dc.html	artefact (product, stays)
+legacy/README-design-side.md	artefact (product, stays)
+legacy/ReasonComposer.dc.html	artefact (product, stays)
+legacy/RetryLine.dc.html	artefact (product, stays)
+legacy/RichTextField.dc.html	artefact (product, stays)
+legacy/RowMenu.dc.html	artefact (product, stays)
+legacy/SaveState.dc.html	artefact (product, stays)
+legacy/Segmented.dc.html	artefact (product, stays)
+legacy/TimeTravelBar.dc.html	artefact (product, stays)
+legacy/TranslationPanel.dc.html	artefact (product, stays)
+legacy/TypeLibrary.dc.html	artefact (product, stays)
+legacy/VersionHistory.dc.html	artefact (product, stays)
+legacy/Wireframes.dc.html	artefact (product, stays)
+legacy/WithdrawDialog.dc.html	artefact (product, stays)
+legacy/checklist-read-done-tickets.md	artefact (product, stays)
+legacy/compat.json	artefact (product, stays)
+legacy/data-map.json	artefact (product, stays)
+legacy/design-side.md	artefact (product, stays)
+legacy/features.md	artefact (product, stays)
+legacy/findings-closed.md	artefact (product, stays)
+legacy/plan-Measure.html	artefact (product, stays)
+legacy/poc-theme.md	artefact (product, stays)
+legacy/rules-before-4-nov.md	artefact (product, stays)
+legacy/rules-retired.md	artefact (product, stays)
+legacy/skills-before-4-nov.md	artefact (product, stays)
+legacy/support.js	artefact (product, stays)
+legacy/words-retired.md	artefact (product, stays)
+notes/decision-round-4-nov.md	artefact (product, stays)
+notes/overnight-3-nov.md	artefact (product, stays)
+notes/restructure-calls.md	artefact (product, stays)
+notes/restructure-plan.md	artefact (product, stays)
+package.json	root config: wow (product keeps its own name, scripts)
+poc/react-wireframes/.prettierignore	artefact (product, stays)
+poc/react-wireframes/.prettierrc.json	artefact (product, stays)
+poc/react-wireframes/eslint.config.js	artefact (product, stays)
+poc/react-wireframes/package-lock.json	artefact (product, stays)
+poc/react-wireframes/package.json	artefact (product, stays)
+poc/react-wireframes/public/index.html	artefact (product, stays)
+poc/react-wireframes/src/App.tsx	artefact (product, stays)
+poc/react-wireframes/src/main.tsx	artefact (product, stays)
+poc/react-wireframes/src/sheet.d.ts	artefact (product, stays)
+poc/react-wireframes/tsconfig.json	artefact (product, stays)
+poc/react-wireframes/vite.config.ts	artefact (product, stays)
+public/assets/avatar-adrien.png	artefact (product, stays)
+public/assets/avatar-baptiste.png	artefact (product, stays)
+public/assets/avatar-chiara.png	artefact (product, stays)
+public/assets/avatar-content-specialist.png	artefact (product, stays)
+public/assets/avatar-dani.png	artefact (product, stays)
+public/assets/avatar-dimitri.png	artefact (product, stays)
+public/assets/avatar-dinis.png	artefact (product, stays)
+public/assets/avatar-dominik.png	artefact (product, stays)
+public/assets/avatar-edgar.png	artefact (product, stays)
+public/assets/avatar-fred.png	artefact (product, stays)
+public/assets/avatar-guilhem.png	artefact (product, stays)
+public/assets/avatar-jean.png	artefact (product, stays)
+public/assets/avatar-jose.png	artefact (product, stays)
+public/assets/avatar-maria.png	artefact (product, stays)
+public/assets/avatar-nicolai.png	artefact (product, stays)
+public/assets/avatar-thomas.png	artefact (product, stays)
+public/assets/claude-mark.svg	artefact (product, stays)
+public/assets/deblock-crm-logo.svg	artefact (product, stays)
+public/assets/deblock-mark.svg	artefact (product, stays)
+public/assets/eagle2-black.png	artefact (product, stays)
+public/assets/eagle2-white.png	artefact (product, stays)
+public/assets/example-build-preview.png	artefact (product, stays)
+public/assets/example-review-doc-comment.png	artefact (product, stays)
+public/assets/example-review-doc.png	artefact (product, stays)
+public/assets/icons/SOURCE.md	artefact (product, stays)
+public/assets/icons/delete_outlined.svg	artefact (product, stays)
+public/assets/icons/flags/ic_de_color_flag.svg	artefact (product, stays)
+public/assets/icons/flags/ic_es_color_flag.svg	artefact (product, stays)
+public/assets/icons/flags/ic_fr_color_flag.svg	artefact (product, stays)
+public/assets/icons/flags/ic_gb_color_flag.svg	artefact (product, stays)
+public/assets/icons/flags/ic_it_color_flag.svg	artefact (product, stays)
+public/assets/icons/flags/ic_pt_color_flag.svg	artefact (product, stays)
+public/assets/icons/ic_account_nav_outlined.svg	artefact (product, stays)
+public/assets/icons/ic_activate_outlined.svg	artefact (product, stays)
+public/assets/icons/ic_activity_outlined.svg	artefact (product, stays)
+public/assets/icons/ic_alert_filled.svg	artefact (product, stays)
+public/assets/icons/ic_android_robot.svg	artefact (product, stays)
+public/assets/icons/ic_apple_filled.svg	artefact (product, stays)
+public/assets/icons/ic_bell.svg	artefact (product, stays)
+public/assets/icons/ic_bills_2_filled.svg	artefact (product, stays)
+public/assets/icons/ic_calendar_outlined.svg	artefact (product, stays)
+public/assets/icons/ic_checked_1_outlined.svg	artefact (product, stays)
+public/assets/icons/ic_checked_2_outlined.svg	artefact (product, stays)
+public/assets/icons/ic_clock_filled.svg	artefact (product, stays)
+public/assets/icons/ic_copied_outlined.svg	artefact (product, stays)
+public/assets/icons/ic_details_outlined.svg	artefact (product, stays)
+public/assets/icons/ic_doorbell_filled.svg	artefact (product, stays)
+public/assets/icons/ic_double_checked_outlined.svg	artefact (product, stays)
+public/assets/icons/ic_down_outlined.svg	artefact (product, stays)
+public/assets/icons/ic_download_filled.svg	artefact (product, stays)
+public/assets/icons/ic_edit_filled.svg	artefact (product, stays)
+public/assets/icons/ic_edit_outlined.svg	artefact (product, stays)
+public/assets/icons/ic_email_filled.svg	artefact (product, stays)
+public/assets/icons/ic_exchange_1_outlined.svg	artefact (product, stays)
+public/assets/icons/ic_facebook_logo.svg	artefact (product, stays)
+public/assets/icons/ic_facebook_outlined.svg	artefact (product, stays)
+public/assets/icons/ic_facebook_social.svg	artefact (product, stays)
+public/assets/icons/ic_google_special.svg	artefact (product, stays)
+public/assets/icons/ic_hammer_filled.svg	artefact (product, stays)
+public/assets/icons/ic_home_nav_filled.svg	artefact (product, stays)
+public/assets/icons/ic_home_nav_outlined.svg	artefact (product, stays)
+public/assets/icons/ic_horizontal_card_filled.svg	artefact (product, stays)
+public/assets/icons/ic_info_filled.svg	artefact (product, stays)
+public/assets/icons/ic_info_outlined.svg	artefact (product, stays)
+public/assets/icons/ic_instagram_outlined.svg	artefact (product, stays)
+public/assets/icons/ic_instagram_social.svg	artefact (product, stays)
+public/assets/icons/ic_left_outlined.svg	artefact (product, stays)
+public/assets/icons/ic_link_outlined.svg	artefact (product, stays)
+public/assets/icons/ic_linkedin_outlined.svg	artefact (product, stays)
+public/assets/icons/ic_linkedin_social.svg	artefact (product, stays)
+public/assets/icons/ic_lock_filled.svg	artefact (product, stays)
+public/assets/icons/ic_menu_outlined.svg	artefact (product, stays)
+public/assets/icons/ic_message_filled.svg	artefact (product, stays)
+public/assets/icons/ic_order_outlined.svg	artefact (product, stays)
+public/assets/icons/ic_pending_outlined.svg	artefact (product, stays)
+public/assets/icons/ic_percentage_filled.svg	artefact (product, stays)
+public/assets/icons/ic_planet_filled.svg	artefact (product, stays)
+public/assets/icons/ic_plus_regular_outlined.svg	artefact (product, stays)
+public/assets/icons/ic_privacy_policy_filled.svg	artefact (product, stays)
+public/assets/icons/ic_recuring_outlined.svg	artefact (product, stays)
+public/assets/icons/ic_reference_filled.svg	artefact (product, stays)
+public/assets/icons/ic_reverted_filled.svg	artefact (product, stays)
+public/assets/icons/ic_right_arrow_outlined.svg	artefact (product, stays)
+public/assets/icons/ic_right_outlined.svg	artefact (product, stays)
+public/assets/icons/ic_robot_outlined.svg	artefact (product, stays)
+public/assets/icons/ic_send_small_filled.svg	artefact (product, stays)
+public/assets/icons/ic_settings_outlined.svg	artefact (product, stays)
+public/assets/icons/ic_statement_outlined.svg	artefact (product, stays)
+public/assets/icons/ic_stats_nav_outlined.svg	artefact (product, stays)
+public/assets/icons/ic_support_filled.svg	artefact (product, stays)
+public/assets/icons/ic_top_arrow_bubbles_filled.svg	artefact (product, stays)
+public/assets/icons/ic_up_arrow_outlined.svg	artefact (product, stays)
+public/assets/icons/ic_warning_outlined.svg	artefact (product, stays)
+public/assets/icons/ic_web_outlined.svg	artefact (product, stays)
+public/assets/icons/ic_x_logo.svg	artefact (product, stays)
+public/assets/icons/ic_x_outlined.svg	artefact (product, stays)
+public/assets/icons/slack.svg	artefact (product, stays)
+public/assets/isotype-black.svg	artefact (product, stays)
+public/assets/isotype-deblock.svg	artefact (product, stays)
+public/assets/logo-deblock.svg	artefact (product, stays)
+public/assets/manifest.json	artefact (product, stays)
+public/lucide-icons/LICENSE	wow, pure: copy
+public/lucide-icons/SOURCE.md	wow, pure: copy
+public/lucide-icons/alarm-clock.svg	wow, pure: copy
+public/lucide-icons/armchair.svg	wow, pure: copy
+public/lucide-icons/arrow-left-right.svg	wow, pure: copy
+public/lucide-icons/arrow-right.svg	wow, pure: copy
+public/lucide-icons/arrow-up.svg	wow, pure: copy
+public/lucide-icons/ban.svg	wow, pure: copy
+public/lucide-icons/bell-ring.svg	wow, pure: copy
+public/lucide-icons/bell.svg	wow, pure: copy
+public/lucide-icons/bot.svg	wow, pure: copy
+public/lucide-icons/calendar.svg	wow, pure: copy
+public/lucide-icons/chart-column.svg	wow, pure: copy
+public/lucide-icons/check-check.svg	wow, pure: copy
+public/lucide-icons/check.svg	wow, pure: copy
+public/lucide-icons/chevron-down.svg	wow, pure: copy
+public/lucide-icons/chevron-left.svg	wow, pure: copy
+public/lucide-icons/chevron-right.svg	wow, pure: copy
+public/lucide-icons/chevrons-down-up.svg	wow, pure: copy
+public/lucide-icons/chevrons-up-down.svg	wow, pure: copy
+public/lucide-icons/circle-check.svg	wow, pure: copy
+public/lucide-icons/clipboard-paste.svg	wow, pure: copy
+public/lucide-icons/clock.svg	wow, pure: copy
+public/lucide-icons/copy.svg	wow, pure: copy
+public/lucide-icons/cpu.svg	wow, pure: copy
+public/lucide-icons/crown.svg	wow, pure: copy
+public/lucide-icons/download.svg	wow, pure: copy
+public/lucide-icons/file-clock.svg	wow, pure: copy
+public/lucide-icons/file-text.svg	wow, pure: copy
+public/lucide-icons/folder-open.svg	wow, pure: copy
+public/lucide-icons/folder.svg	wow, pure: copy
+public/lucide-icons/git-compare.svg	wow, pure: copy
+public/lucide-icons/globe.svg	wow, pure: copy
+public/lucide-icons/graduation-cap.svg	wow, pure: copy
+public/lucide-icons/headset.svg	wow, pure: copy
+public/lucide-icons/house.svg	wow, pure: copy
+public/lucide-icons/image.svg	wow, pure: copy
+public/lucide-icons/info.svg	wow, pure: copy
+public/lucide-icons/languages.svg	wow, pure: copy
+public/lucide-icons/layers.svg	wow, pure: copy
+public/lucide-icons/life-buoy.svg	wow, pure: copy
+public/lucide-icons/lightbulb.svg	wow, pure: copy
+public/lucide-icons/link.svg	wow, pure: copy
+public/lucide-icons/list-ordered.svg	wow, pure: copy
+public/lucide-icons/list.svg	wow, pure: copy
+public/lucide-icons/lock.svg	wow, pure: copy
+public/lucide-icons/mail.svg	wow, pure: copy
+public/lucide-icons/megaphone.svg	wow, pure: copy
+public/lucide-icons/message-circle.svg	wow, pure: copy
+public/lucide-icons/newspaper.svg	wow, pure: copy
+public/lucide-icons/panel-bottom.svg	wow, pure: copy
+public/lucide-icons/pencil.svg	wow, pure: copy
+public/lucide-icons/pilcrow.svg	wow, pure: copy
+public/lucide-icons/plus.svg	wow, pure: copy
+public/lucide-icons/receipt.svg	wow, pure: copy
+public/lucide-icons/rectangle-horizontal.svg	wow, pure: copy
+public/lucide-icons/reply.svg	wow, pure: copy
+public/lucide-icons/scale.svg	wow, pure: copy
+public/lucide-icons/search.svg	wow, pure: copy
+public/lucide-icons/send-horizontal.svg	wow, pure: copy
+public/lucide-icons/send.svg	wow, pure: copy
+public/lucide-icons/settings.svg	wow, pure: copy
+public/lucide-icons/shield-check.svg	wow, pure: copy
+public/lucide-icons/signature.svg	wow, pure: copy
+public/lucide-icons/smartphone.svg	wow, pure: copy
+public/lucide-icons/square-x.svg	wow, pure: copy
+public/lucide-icons/text-align-start.svg	wow, pure: copy
+public/lucide-icons/trash.svg	wow, pure: copy
+public/lucide-icons/triangle-alert.svg	wow, pure: copy
+public/lucide-icons/users.svg	wow, pure: copy
+public/lucide-icons/x.svg	wow, pure: copy
+records/cleanup-plan.md	artefact (product, stays)
+records/handoff-22-oct.md	artefact (product, stays)
+records/handoff-3-nov.md	artefact (product, stays)
+records/release-3-1.md	artefact (product, stays)
+records/release-3-2.md	artefact (product, stays)
+records/release-3-3-1.md	artefact (product, stays)
+records/release-3-3.md	artefact (product, stays)
+records/release-3-4-1.md	artefact (product, stays)
+records/release-3-4.md	artefact (product, stays)
+records/release-3.md	artefact (product, stays)
+records/state-today-27-oct.md	artefact (product, stays)
+roadmaps/E00/E00EdgeTickets.ts	product data (stays)
+roadmaps/E00/E00Edges.ts	product data (stays)
+roadmaps/E00/E00Receipts.ts	product data (stays)
+roadmaps/E00/E00StoreTickets.ts	product data (stays)
+roadmaps/E01/E01Edges.ts	product data (stays)
+roadmaps/E01/E01Receipts.ts	product data (stays)
+roadmaps/E01/E01SignInTickets.ts	product data (stays)
+roadmaps/E01/E01ToolingTickets.ts	product data (stays)
+roadmaps/E02/E02Edges.ts	product data (stays)
+roadmaps/E02/E02Receipts.ts	product data (stays)
+roadmaps/E02/E02Tickets.ts	product data (stays)
+roadmaps/E03/E03Edges.ts	product data (stays)
+roadmaps/E03/E03Receipts.ts	product data (stays)
+roadmaps/E03/E03Tickets.ts	product data (stays)
+roadmaps/E03/feature-E03.md	product data (stays)
+roadmaps/E04/E04Edges.ts	product data (stays)
+roadmaps/E04/E04EndpointsReceipts.ts	product data (stays)
+roadmaps/E04/E04RunReceipts.ts	product data (stays)
+roadmaps/E04/E04Tickets.ts	product data (stays)
+roadmaps/E04/feature-E04.md	product data (stays)
+roadmaps/E05/E05Notes.ts	product data (stays)
+roadmaps/E05/E05Receipts.ts	product data (stays)
+roadmaps/E05/E05Tickets.ts	product data (stays)
+roadmaps/E06/E06Edges.ts	product data (stays)
+roadmaps/E06/E06Receipts.ts	product data (stays)
+roadmaps/E06/E06Tickets.ts	product data (stays)
+roadmaps/E06/feature-E06.md	product data (stays)
+roadmaps/E07/E07Tickets.ts	product data (stays)
+roadmaps/E08/E08Notes.ts	product data (stays)
+roadmaps/E08/E08Tickets.ts	product data (stays)
+roadmaps/E09/E09Edges.ts	product data (stays)
+roadmaps/E09/E09Receipts.ts	product data (stays)
+roadmaps/E09/E09Tickets.ts	product data (stays)
+roadmaps/E09/feature-E09.md	product data (stays)
+roadmaps/E10/E10Notes.ts	product data (stays)
+roadmaps/E10/E10Tickets.ts	product data (stays)
+roadmaps/E11/E11Tickets.ts	product data (stays)
+roadmaps/E12/E12Tickets.ts	product data (stays)
+roadmaps/E13/E13Tickets.ts	product data (stays)
+roadmaps/E14/E14Edges.ts	product data (stays)
+roadmaps/E14/E14Notes.ts	product data (stays)
+roadmaps/E14/E14PointNotes.ts	product data (stays)
+roadmaps/E14/E14Tickets.ts	product data (stays)
+roadmaps/E15/E15Notes.ts	product data (stays)
+roadmaps/E15/E15Tickets.ts	product data (stays)
+roadmaps/E16/E16Tickets.ts	product data (stays)
+roadmaps/E18/E18Edges.ts	product data (stays)
+roadmaps/E18/E18Receipts.ts	product data (stays)
+roadmaps/E18/E18Tickets.ts	product data (stays)
+roadmaps/E18/feature-E18.md	product data (stays)
+roadmaps/backlog.ts	registry entry: machinery to wow, rows stay
+roadmaps/backlog/backlogTypes.ts	registry types: to wow
+roadmaps/backlog/closingEpics.ts	product data (stays)
+roadmaps/backlog/draftEpics.ts	product data (stays)
+roadmaps/backlog/epicGroups.ts	product data (stays)
+roadmaps/backlog/foundationEpics.ts	product data (stays)
+roadmaps/backlog/frontendComponents.ts	product data (stays)
+roadmaps/backlog/lastEpics.ts	product data (stays)
+roadmaps/backlog/openQuestions.ts	product data (stays)
+roadmaps/backlog/sendEpics.ts	product data (stays)
+roadmaps/edges.ts	registry entry: machinery to wow, rows stay
+roadmaps/edges/edgeTypes.ts	registry types: to wow
+roadmaps/features.ts	registry entry: machinery to wow, rows stay
+roadmaps/features/featureRows.ts	product data (stays)
+roadmaps/features/featuresTypes.ts	registry types: to wow
+roadmaps/findings.ts	registry entry: machinery to wow, rows stay
+roadmaps/findings/designFindings.ts	product data (stays)
+roadmaps/findings/findingSides.ts	product data (stays)
+roadmaps/findings/findingTypes.ts	registry types: to wow
+roadmaps/findings/repoFindings.ts	product data (stays)
+roadmaps/ideas.ts	registry entry: machinery to wow, rows stay
+roadmaps/ideas/contentAppIdea.ts	product data (stays)
+roadmaps/ideas/ideasTypes.ts	registry types: to wow
+roadmaps/ideas/referencesIdea.ts	product data (stays)
+roadmaps/ideas/shrinkToFitIdea.ts	product data (stays)
+roadmaps/notes.ts	registry entry: machinery to wow, rows stay
+roadmaps/notes/notesTypes.ts	registry types: to wow
+roadmaps/receipts.ts	registry entry: machinery to wow, rows stay
+roadmaps/receipts/firstCaveats.ts	product data (stays)
+roadmaps/receipts/laterCaveats.ts	product data (stays)
+roadmaps/receipts/receiptsTypes.ts	registry types: to wow
+roadmaps/templates.ts	registry entry: machinery to wow, rows stay
+roadmaps/templates/epicFiles.ts	product data (stays)
+roadmaps/templates/templatesTypes.ts	registry types: to wow
+roadmaps/tickets.ts	registry entry: machinery to wow, rows stay
+roadmaps/tickets/checklistRead.ts	product data (stays)
+roadmaps/tickets/commandStates.ts	product data (stays)
+roadmaps/tickets/commandTickets.ts	product data (stays)
+roadmaps/tickets/pointerResolve.ts	product data (stays)
+roadmaps/tickets/receiptFlags.ts	product data (stays)
+roadmaps/tickets/ticketBoard.ts	product data (stays)
+roadmaps/tickets/ticketContext.ts	product data (stays)
+roadmaps/tickets/ticketExpand.ts	product data (stays)
+roadmaps/tickets/ticketKinds.ts	product data (stays)
+roadmaps/tickets/ticketList.ts	product data (stays)
+roadmaps/tickets/ticketStatus.ts	product data (stays)
+roadmaps/tickets/ticketViews.ts	product data (stays)
+roadmaps/tickets/ticketsTypes.ts	registry types: to wow
+roadmaps/tracks.ts	registry entry: machinery to wow, rows stay
+roadmaps/tracks/ticketTracks.ts	product data (stays)
+roadmaps/tracks/tracksTypes.ts	registry types: to wow
+sheet/cases/journeys.ts	registry entry: machinery to wow, rows stay
+sheet/cases/journeys/E04Journeys.ts	product data (stays)
+sheet/cases/journeys/E06Journeys.ts	product data (stays)
+sheet/cases/journeys/E09Journeys.ts	product data (stays)
+sheet/cases/journeys/E14Journeys.ts	product data (stays)
+sheet/cases/journeys/E18Journeys.ts	product data (stays)
+sheet/cases/journeys/journeyCheck.ts	product data (stays)
+sheet/cases/journeys/journeyReads.ts	product data (stays)
+sheet/cases/journeys/journeyTypes.ts	registry types: to wow
+sheet/cases/journeys/journeyWords.ts	product data (stays)
+sheet/cases/journeys/typeJourneys.ts	product data (stays)
+sheet/cases/shared-cases.ts	product data (stays)
+sheet/cases/shared-cases/sharedCaseRows.ts	product data (stays)
+sheet/cases/shared-cases/sharedCasesTypes.ts	registry types: to wow
+sheet/cases/test-cases.ts	registry entry: machinery to wow, rows stay
+sheet/cases/test-cases/caseBaseline.ts	product data (stays)
+sheet/cases/test-cases/caseReach.ts	product data (stays)
+sheet/cases/test-cases/caseText.ts	product data (stays)
+sheet/cases/test-cases/endpointCases.ts	product data (stays)
+sheet/cases/test-cases/testCasesTypes.ts	registry types: to wow
+sheet/contract/api-convention.md	product data (stays)
+sheet/contract/block-model.ts	product data (stays)
+sheet/contract/block-model/answersToNote.ts	product data (stays)
+sheet/contract/block-model/levelsToAttached.ts	product data (stays)
+sheet/contract/block-model/settledFrom1.ts	product data (stays)
+sheet/contract/block-model/settledFrom25.ts	product data (stays)
+sheet/contract/block-model/threadsToPictures.ts	product data (stays)
+sheet/contract/block-model/typesAliases.ts	product data (stays)
+sheet/contract/block-model/typesAsset.ts	product data (stays)
+sheet/contract/block-model/typesExport.ts	product data (stays)
+sheet/contract/block-model/typesGateFacts.ts	product data (stays)
+sheet/contract/block-model/typesProposalRoot.ts	product data (stays)
+sheet/contract/block-model/verdictToMatrix.ts	product data (stays)
+sheet/contract/commands.ts	registry entry: machinery to wow, rows stay
+sheet/contract/commands/E02Groups.ts	product data (stays)
+sheet/contract/commands/E03Documents.ts	product data (stays)
+sheet/contract/commands/E03Lifecycle.ts	product data (stays)
+sheet/contract/commands/E04Assets.ts	product data (stays)
+sheet/contract/commands/E04Blocks.ts	product data (stays)
+sheet/contract/commands/E04BulkEdit.ts	product data (stays)
+sheet/contract/commands/E04Paste.ts	product data (stays)
+sheet/contract/commands/E04Seat.ts	product data (stays)
+sheet/contract/commands/E04Structure.ts	product data (stays)
+sheet/contract/commands/E05Versions.ts	product data (stays)
+sheet/contract/commands/E06Approve.ts	product data (stays)
+sheet/contract/commands/E06Assign.ts	product data (stays)
+sheet/contract/commands/E06OnBehalf.ts	product data (stays)
+sheet/contract/commands/E06Withdraw.ts	product data (stays)
+sheet/contract/commands/E07Threads.ts	product data (stays)
+sheet/contract/commands/E08Proposals.ts	product data (stays)
+sheet/contract/commands/E09Languages.ts	product data (stays)
+sheet/contract/commands/E09Translations.ts	product data (stays)
+sheet/contract/commands/E10Send.ts	product data (stays)
+sheet/contract/commands/E14Agent.ts	product data (stays)
+sheet/contract/commands/bodyDrafts.ts	product data (stays)
+sheet/contract/commands/commandContract.ts	product data (stays)
+sheet/contract/commands/commandsTypes.ts	registry types: to wow
+sheet/contract/db-schema.ts	product data (stays)
+sheet/contract/db-schema/dbCriteria.ts	product data (stays)
+sheet/contract/db-schema/dbDecision.ts	product data (stays)
+sheet/contract/db-schema/dbSchemaTypes.ts	registry types: to wow
+sheet/contract/db-schema/dbTables.ts	product data (stays)
+sheet/contract/events.ts	registry entry: machinery to wow, rows stay
+sheet/contract/events/commentEvents.ts	product data (stays)
+sheet/contract/events/deliveryEvents.ts	product data (stays)
+sheet/contract/events/documentEvents.ts	product data (stays)
+sheet/contract/events/eventActors.ts	product data (stays)
+sheet/contract/events/eventProducers.ts	product data (stays)
+sheet/contract/events/eventsTypes.ts	registry types: to wow
+sheet/contract/events/reviewEvents.ts	product data (stays)
+sheet/contract/events/translationEvents.ts	product data (stays)
+sheet/contract/ports.ts	registry entry: machinery to wow, rows stay
+sheet/contract/ports/eagleCorePort.ts	product data (stays)
+sheet/contract/ports/portsTypes.ts	registry types: to wow
+sheet/contract/queries.ts	registry entry: machinery to wow, rows stay
+sheet/contract/queries/assetQueries.ts	product data (stays)
+sheet/contract/queries/audienceQueries.ts	product data (stays)
+sheet/contract/queries/documentQueries.ts	product data (stays)
+sheet/contract/queries/getDocumentCases.ts	product data (stays)
+sheet/contract/queries/groupQueries.ts	product data (stays)
+sheet/contract/queries/historyQueries.ts	product data (stays)
+sheet/contract/queries/listDocumentCases.ts	product data (stays)
+sheet/contract/queries/queriesTypes.ts	registry types: to wow
+sheet/contract/queries/queryContract.ts	product data (stays)
+sheet/contract/queries/sessionQueries.ts	product data (stays)
+sheet/contract/refusals.ts	registry entry: machinery to wow, rows stay
+sheet/contract/refusals/documentRefusals.ts	product data (stays)
+sheet/contract/refusals/gateRefusals.ts	product data (stays)
+sheet/contract/refusals/refusalActors.ts	product data (stays)
+sheet/contract/refusals/refusalCatalog.ts	product data (stays)
+sheet/contract/refusals/refusalContract.ts	product data (stays)
+sheet/contract/refusals/refusalOrder.ts	product data (stays)
+sheet/contract/refusals/refusalSentences.ts	product data (stays)
+sheet/contract/refusals/refusalsTypes.ts	registry types: to wow
+sheet/logic/agent/agent-access.ts	product data (stays)
+sheet/logic/agent/agent-access/accessFlow.ts	product data (stays)
+sheet/logic/agent/agent-access/agentAccessTypes.ts	product data (stays)
+sheet/logic/agent/agent-flow.ts	product data (stays)
+sheet/logic/agent/agent-flow/agentChecks.ts	product data (stays)
+sheet/logic/agent/agent-flow/agentCommands.ts	product data (stays)
+sheet/logic/agent/agent-flow/agentFlowTypes.ts	product data (stays)
+sheet/logic/approval/approval-logic.ts	product data (stays)
+sheet/logic/approval/approval-logic/approvalChips.ts	product data (stays)
+sheet/logic/approval/approval-logic/approvalLogicTypes.ts	product data (stays)
+sheet/logic/approval/approval-logic/barReaders.ts	product data (stays)
+sheet/logic/approval/approval-logic/barScenes.ts	product data (stays)
+sheet/logic/approval/approval-logic/chipCtas.ts	product data (stays)
+sheet/logic/approval/approval-logic/docMatrix.ts	product data (stays)
+sheet/logic/approval/approval-logic/languageChips.ts	product data (stays)
+sheet/logic/approval/approval-logic/managerMoves.ts	product data (stays)
+sheet/logic/approval/approval-logic/managerRow.ts	product data (stays)
+sheet/logic/approval/approval-logic/matrixJourney.ts	product data (stays)
+sheet/logic/approval/approval-logic/requirementRows.ts	product data (stays)
+sheet/logic/approval/approval-logic/requirementsCut.ts	product data (stays)
+sheet/logic/approval/approval-logic/roleChips.ts	product data (stays)
+sheet/logic/approval/approval-logic/roleMatrix.ts	product data (stays)
+sheet/logic/approval/approval-logic/rowFill.ts	product data (stays)
+sheet/logic/approval/approval-logic/sceneBuild.ts	product data (stays)
+sheet/logic/approval/approval-logic/sceneParity.ts	product data (stays)
+sheet/logic/approval/approval-logic/seatChip.ts	product data (stays)
+sheet/logic/approval/approval-logic/todoBuilt.ts	product data (stays)
+sheet/logic/approval/approval-logic/todoMoves.ts	product data (stays)
+sheet/logic/approval/approval-logic/todoPill.ts	product data (stays)
+sheet/logic/approval/approval-logic/todoRows.ts	product data (stays)
+sheet/logic/approval/approval-logic/todoSituations.ts	product data (stays)
+sheet/logic/approval/flow-check.ts	product data (stays)
+sheet/logic/approval/flow-check/flowEffects.ts	product data (stays)
+sheet/logic/approval/flow-check/flowMoves.ts	product data (stays)
+sheet/logic/approval/flow-check/flowTypes.ts	product data (stays)
+sheet/logic/approval/flow-check/flowViews.ts	product data (stays)
+sheet/logic/approval/flow-check/flowWalk.ts	product data (stays)
+sheet/logic/approval/gate-rules.ts	product data (stays)
+sheet/logic/approval/gate-rules/approverButton.ts	product data (stays)
+sheet/logic/approval/gate-rules/fourEyes.ts	product data (stays)
+sheet/logic/approval/gate-rules/gateCast.ts	product data (stays)
+sheet/logic/approval/gate-rules/gateConfirm.ts	product data (stays)
+sheet/logic/approval/gate-rules/gateDialog.ts	product data (stays)
+sheet/logic/approval/gate-rules/gateFold.ts	product data (stays)
+sheet/logic/approval/gate-rules/gateList.ts	product data (stays)
+sheet/logic/approval/gate-rules/gateNote.ts	product data (stays)
+sheet/logic/approval/gate-rules/gateNotices.ts	product data (stays)
+sheet/logic/approval/gate-rules/gateRights.ts	product data (stays)
+sheet/logic/approval/gate-rules/gateRoles.ts	product data (stays)
+sheet/logic/approval/gate-rules/gateRulesTypes.ts	product data (stays)
+sheet/logic/approval/gate-rules/gateSituations.ts	product data (stays)
+sheet/logic/approval/gate-rules/gateTokens.ts	product data (stays)
+sheet/logic/approval/gate-rules/gateWords.ts	product data (stays)
+sheet/logic/approval/gate-rules/manageRows.ts	product data (stays)
+sheet/logic/approval/gate-rules/manageWindow.ts	product data (stays)
+sheet/logic/approval/gate-rules/seatMenu.ts	product data (stays)
+sheet/logic/approval/role-combinations.ts	product data (stays)
+sheet/logic/approval/role-combinations/combinationChecks.ts	product data (stays)
+sheet/logic/approval/role-combinations/combinationFacts.ts	product data (stays)
+sheet/logic/approval/role-combinations/combinationRows.ts	product data (stays)
+sheet/logic/approval/role-combinations/combinationSituations.ts	product data (stays)
+sheet/logic/approval/role-combinations/combinationTypes.ts	product data (stays)
+sheet/logic/approval/role-combinations/messageRows.ts	product data (stays)
+sheet/logic/approval/scenes.ts	product data (stays)
+sheet/logic/approval/scenes/localeFacts.ts	product data (stays)
+sheet/logic/approval/scenes/sceneFacts.ts	product data (stays)
+sheet/logic/approval/scenes/sceneIndex.ts	product data (stays)
+sheet/logic/approval/scenes/sceneRows.ts	product data (stays)
+sheet/logic/approval/scenes/sceneTypes.ts	product data (stays)
+sheet/logic/approval/scenes/sceneView.ts	product data (stays)
+sheet/logic/approval/signatures.ts	product data (stays)
+sheet/logic/assembly/content-assembly.ts	product data (stays)
+sheet/logic/assembly/content-assembly/assemblyTypes.ts	product data (stays)
+sheet/logic/assembly/content-assembly/typeConfig.ts	product data (stays)
+sheet/logic/assembly/content-assembly/typePeople.ts	product data (stays)
+sheet/logic/assembly/content-assembly/typePools.ts	product data (stays)
+sheet/logic/assembly/content-assembly/typeRoles.ts	product data (stays)
+sheet/logic/assembly/content-assembly/typeTabs.ts	product data (stays)
+sheet/logic/assembly/content-check.ts	product data (stays)
+sheet/logic/assembly/content-check/checkRows.ts	product data (stays)
+sheet/logic/assembly/content-check/contractChecks.ts	product data (stays)
+sheet/logic/assembly/content-check/deliveryChecks.ts	product data (stays)
+sheet/logic/assembly/content-check/moduleChecks.ts	product data (stays)
+sheet/logic/assembly/content-check/peopleChecks.ts	product data (stays)
+sheet/logic/assembly/content-check/typeChecks.ts	product data (stays)
+sheet/logic/assembly/content-type-logic.ts	product data (stays)
+sheet/logic/assembly/content-type-logic/apiContract.ts	product data (stays)
+sheet/logic/assembly/content-type-logic/assemblyRows.ts	product data (stays)
+sheet/logic/assembly/content-type-logic/boardTypes.ts	product data (stays)
+sheet/logic/assembly/content-type-logic/contentTypeLogicTypes.ts	product data (stays)
+sheet/logic/assembly/content-type-logic/factHomes.ts	product data (stays)
+sheet/logic/assembly/content-type-logic/fileFlow.ts	product data (stays)
+sheet/logic/assembly/content-type-logic/lifecycle.ts	product data (stays)
+sheet/logic/assembly/content-type-logic/lifecycleRows.ts	product data (stays)
+sheet/logic/assembly/content-type-logic/moduleSummary.ts	product data (stays)
+sheet/logic/assembly/content-type-logic/partViews.ts	product data (stays)
+sheet/logic/assembly/content-type-logic/requirementHomes.ts	product data (stays)
+sheet/logic/assembly/content-type-logic/sheetReads.ts	product data (stays)
+sheet/logic/assembly/content-type-logic/typeAssembly.ts	product data (stays)
+sheet/logic/assembly/content-type-logic/typeChain.ts	product data (stays)
+sheet/logic/assembly/content-type-logic/typeMatrix.ts	product data (stays)
+sheet/logic/assembly/content-type-logic/typeModules.ts	product data (stays)
+sheet/logic/assembly/content-type-logic/typeParts.ts	product data (stays)
+sheet/logic/assembly/content-type-logic/typeRequirements.ts	product data (stays)
+sheet/logic/capabilities.ts	product data (stays)
+sheet/logic/capabilities/agentCapability.ts	product data (stays)
+sheet/logic/capabilities/approvalCapability.ts	product data (stays)
+sheet/logic/capabilities/assemblyCapability.ts	product data (stays)
+sheet/logic/capabilities/capabilityTypes.ts	registry types: to wow
+sheet/logic/capabilities/deliveryCapability.ts	product data (stays)
+sheet/logic/capabilities/documentCapability.ts	product data (stays)
+sheet/logic/capabilities/translationCapability.ts	product data (stays)
+sheet/logic/delivery/delivery-flow.ts	product data (stays)
+sheet/logic/document/block-rules.ts	product data (stays)
+sheet/logic/document/block-rules/blockFacts.ts	product data (stays)
+sheet/logic/document/block-rules/blockMenu.ts	product data (stays)
+sheet/logic/document/block-rules/blockMoves.ts	product data (stays)
+sheet/logic/document/block-rules/blockRun.ts	product data (stays)
+sheet/logic/document/block-rules/blockStates.ts	product data (stays)
+sheet/logic/document/block-rules/blockWords.ts	product data (stays)
+sheet/logic/document/threads.ts	product data (stays)
+sheet/logic/document/threads/emailThreads.ts	product data (stays)
+sheet/logic/document/threads/pushThreads.ts	product data (stays)
+sheet/logic/document/threads/threadReading.ts	product data (stays)
+sheet/logic/document/threads/threadsTypes.ts	product data (stays)
+sheet/logic/translation/translation-flow.ts	product data (stays)
+sheet/logic/translation/translation-flow/blockStatus.ts	product data (stays)
+sheet/logic/translation/translation-flow/flowMoves.ts	product data (stays)
+sheet/logic/translation/translation-flow/flowStatuses.ts	product data (stays)
+sheet/logic/translation/translation-flow/flowWalk.ts	product data (stays)
+sheet/logic/translation/translation-flow/languageStatus.ts	product data (stays)
+sheet/model/catalog.ts	product data (stays)
+sheet/model/catalog/campaignRows.ts	product data (stays)
+sheet/model/catalog/catalogCampaigns.ts	product data (stays)
+sheet/model/catalog/catalogFacts.ts	product data (stays)
+sheet/model/catalog/catalogRail.ts	product data (stays)
+sheet/model/catalog/catalogStates.ts	product data (stays)
+sheet/model/catalog/catalogTypeRows.ts	product data (stays)
+sheet/model/catalog/catalogTypes.ts	product data (stays)
+sheet/model/catalog/summerRows.ts	product data (stays)
+sheet/model/content-modules.ts	product data (stays)
+sheet/model/content-modules/contentModulesTypes.ts	product data (stays)
+sheet/model/content-modules/moduleFields.ts	product data (stays)
+sheet/model/content-modules/moduleRows.ts	product data (stays)
+sheet/model/content-modules/moduleVariants.ts	product data (stays)
+sheet/model/content-types.ts	product data (stays)
+sheet/model/content-types/channels.ts	product data (stays)
+sheet/model/content-types/contentTypesTypes.ts	product data (stays)
+sheet/model/content-types/destinations.ts	product data (stays)
+sheet/model/content-types/typeKinds.ts	product data (stays)
+sheet/model/content-types/typeModules.ts	product data (stays)
+sheet/model/content-types/typeTree.ts	product data (stays)
+sheet/model/directory.ts	product data (stays)
+sheet/model/directory/directoryTypes.ts	product data (stays)
+sheet/model/directory/people.ts	product data (stays)
+sheet/model/eagle-review.ts	product data (stays)
+sheet/model/eagle-review/board.ts	product data (stays)
+sheet/model/eagle-review/boardTree.ts	product data (stays)
+sheet/model/eagle-review/duties.ts	product data (stays)
+sheet/model/eagle-review/eagleReviewTypes.ts	product data (stays)
+sheet/model/eagle-review/kinds.ts	product data (stays)
+sheet/model/eagle-review/pointsOne.ts	product data (stays)
+sheet/model/eagle-review/pointsThree.ts	product data (stays)
+sheet/model/eagle-review/pointsTwo.ts	product data (stays)
+sheet/model/eagle-review/questions.ts	product data (stays)
+sheet/model/eagle-review/reviewOutcome.ts	product data (stays)
+sheet/model/field-kinds.ts	product data (stays)
+sheet/model/field-kinds/fieldKindsTypes.ts	product data (stays)
+sheet/model/field-kinds/fieldOptions.ts	product data (stays)
+sheet/model/field-kinds/fieldTypeScript.ts	product data (stays)
+sheet/model/field-kinds/kindRows.ts	product data (stays)
+sheet/model/languages.ts	product data (stays)
+sheet/project.ts	product data (stays)
+sheet/rules.ts	registry entry: machinery to wow, rows stay
+sheet/rules/architectureRules.ts	product data (stays)
+sheet/rules/domainRules.ts	product data (stays)
+sheet/rules/experienceRules.ts	product data (stays)
+sheet/rules/productRules.ts	product data (stays)
+sheet/rules/qualityRules.ts	product data (stays)
+sheet/samples/blocks.ts	product data (stays)
+sheet/samples/blocks/blockLocales.ts	product data (stays)
+sheet/samples/blocks/blockReads.ts	product data (stays)
+sheet/samples/blocks/blockRows.ts	product data (stays)
+sheet/samples/blocks/blockSpecs.ts	product data (stays)
+sheet/samples/blocks/blocksTypes.ts	product data (stays)
+sheet/samples/blocks/configRows.ts	product data (stays)
+sheet/samples/blocks/emailRows.ts	product data (stays)
+sheet/samples/blocks/localeRows.ts	product data (stays)
+sheet/samples/content-samples.ts	product data (stays)
+sheet/samples/content-samples/appGroups.ts	product data (stays)
+sheet/samples/content-samples/contentSamplesTypes.ts	product data (stays)
+sheet/samples/content-samples/webGroups.ts	product data (stays)
+sheet/samples/payloads.ts	product data (stays)
+sheet/samples/payloads/documentPayloads.ts	product data (stays)
+sheet/samples/payloads/localePayloads.ts	product data (stays)
+sheet/samples/payloads/payloadsTypes.ts	product data (stays)
+sheet/samples/payloads/reviewPayloads.ts	product data (stays)
+sheet/samples/payloads/runFacts.ts	product data (stays)
+sheet/samples/payloads/stepReading.ts	product data (stays)
+sheet/samples/projections.ts	product data (stays)
+sheet/samples/projections/blockProjections.ts	product data (stays)
+sheet/samples/projections/payloadReads.ts	product data (stays)
+sheet/samples/projections/signatureRows.ts	product data (stays)
+sheet/samples/projections/threadRows.ts	product data (stays)
+sheet/samples/sample-run.ts	product data (stays)
+sheet/samples/sample-run/runReads.ts	product data (stays)
+sheet/samples/sample-run/runSteps.ts	product data (stays)
+sheet/screens/content-list.ts	product data (stays)
+sheet/screens/content-list/contentListTypes.ts	product data (stays)
+sheet/screens/content-list/editorTabs.ts	product data (stays)
+sheet/screens/content-list/listPage.ts	product data (stays)
+sheet/screens/content-list/listRows.ts	product data (stays)
+sheet/screens/content-list/rowCore.ts	product data (stays)
+sheet/screens/content-list/rowState.ts	product data (stays)
+sheet/screens/content-list/rowStrings.ts	product data (stays)
+sheet/screens/screen-view.ts	product data (stays)
+sheet/screens/screen-view/blockRows.ts	product data (stays)
+sheet/screens/screen-view/blockThread.ts	product data (stays)
+sheet/screens/screen-view/editorView.ts	product data (stays)
+sheet/screens/screen-view/screenPanes.ts	product data (stays)
+sheet/screens/screen-view/screenViewTypes.ts	product data (stays)
+sheet/screens/screen-view/viewInputs.ts	product data (stays)
+sheet/screens/screen-view/viewParts.ts	product data (stays)
+sheet/screens/screen-view/viewTypes.ts	product data (stays)
+sheet/screens/wireframes.ts	product data (stays)
+sheet/screens/wireframes/screenContracts.ts	product data (stays)
+sheet/screens/wireframes/screenRows.ts	product data (stays)
+sheet/words/glossary.ts	registry entry: machinery to wow, rows stay
+sheet/words/glossary/accessTerms.ts	product data (stays)
+sheet/words/glossary/gateTerms.ts	product data (stays)
+sheet/words/glossary/glossaryTypes.ts	registry types: to wow
+sheet/words/glossary/modelTerms.ts	product data (stays)
+sheet/words/glossary/reviewTerms.ts	product data (stays)
+sheet/words/glossary/screenTerms.ts	product data (stays)
+sheet/words/glossary/stateTerms.ts	product data (stays)
+sheet/words/glossary/systemTerms.ts	product data (stays)
+sheet/words/glossary/testTerms.ts	product data (stays)
+sheet/words/messages-content.ts	product data (stays)
+sheet/words/messages.ts	registry entry: machinery to wow, rows stay
+sheet/words/messages/logWords.ts	product data (stays)
+sheet/words/messages/messageCells.ts	product data (stays)
+sheet/words/messages/messageChecks.ts	product data (stays)
+sheet/words/messages/messageUsage.ts	product data (stays)
+sheet/words/messages/messagesTypes.ts	registry types: to wow
+sheet/words/messages/modules.ts	product data (stays)
+sheet/words/messages/outcome.ts	product data (stays)
+sheet/words/messages/refusalOne.ts	product data (stays)
+sheet/words/messages/refusalTwo.ts	product data (stays)
+sheet/words/messages/refusals.ts	product data (stays)
+sheet/words/messages/rowsOne.ts	product data (stays)
+sheet/words/messages/rowsThree.ts	product data (stays)
+sheet/words/messages/rowsTwo.ts	product data (stays)
+sheet/words/messages/say.ts	product data (stays)
+sheet/words/messages/sayWord.ts	product data (stays)
+sheet/words/messages/screenFour.ts	product data (stays)
+sheet/words/messages/screenOne.ts	product data (stays)
+sheet/words/messages/screenThree.ts	product data (stays)
+sheet/words/messages/screenTwo.ts	product data (stays)
+sheet/words/messages/screenWords.ts	product data (stays)
+sheet/words/messages/situations.ts	product data (stays)
+sheet/words/messages/words.ts	product data (stays)
+tests/app/boardPage.test.tsx	wow, pure: copy
+tests/app/boardView.test.ts	wow, coupled: imports to @product
+tests/app/featurePage.test.tsx	wow, pure: copy
+tests/app/featureView.test.ts	wow, coupled: imports to @product
+tests/app/theme.test.ts	wow, coupled: imports to @product
+tests/app/ticketPanel.test.tsx	wow, coupled: imports to @product
+tests/architecture/aBlockIsWrittenOnce.test.ts	wow, pure: copy
+tests/architecture/aCitedRowExists.test.ts	wow, coupled: imports to @product
+tests/architecture/aClosedNotebookIsFrozen.test.ts	wow, coupled: imports to @product
+tests/architecture/aColourIsAPaletteRole.test.ts	wow, pure: copy
+tests/architecture/aConstantIsUpperCase.test.ts	wow, pure: copy
+tests/architecture/aFileNamesItsPurpose.test.ts	wow, pure: copy
+tests/architecture/aFileStatesItsJob.test.ts	wow, pure: copy
+tests/architecture/aGeneratedFileIsItsModule.test.ts	wow, pure: copy
+tests/architecture/aModuleReadsNothingAtLoad.test.ts	wow, pure: copy
+tests/architecture/aMoleculeComposesOneMolecule.test.ts	wow, pure: copy
+tests/architecture/aNameHasOneHome.test.ts	wow, pure: copy
+tests/architecture/aPartServesItsEntry.test.ts	wow, pure: copy
+tests/architecture/aPublishedPathHasOneSource.test.ts	wow, pure: copy
+tests/architecture/aReleaseRecordIsWhole.test.ts	wow, coupled: imports to @product
+tests/architecture/aRuleCarriesNoHistory.test.ts	wow, coupled: imports to @product
+tests/architecture/aSentenceIsWrittenOnce.test.ts	wow, coupled: imports to @product
+tests/architecture/aSkillSaysWhatAndWhen.test.ts	wow, pure: copy
+tests/architecture/aSpaceIsInThemeUnits.test.ts	wow, pure: copy
+tests/architecture/aTestLivesUnderTests.test.ts	wow, pure: copy
+tests/architecture/aToolIsAScript.test.ts	wow, pure: copy
+tests/architecture/anAtomComposesNothing.test.ts	wow, pure: copy
+tests/architecture/anExportIsRead.test.ts	wow, pure: copy
+tests/architecture/anImportNamesItsExtension.test.ts	wow, pure: copy
+tests/architecture/anImportTakesSomething.test.ts	wow, pure: copy
+tests/architecture/argumentsPastTwoAreOneObject.test.ts	wow, pure: copy
+tests/architecture/baseline.test.ts	wow, pure: copy
+tests/architecture/baseline.ts	wow, pure: copy
+tests/architecture/baselines/aConstantIsUpperCase.json	wow, pure: copy
+tests/architecture/commentsAreInvariants.test.ts	wow, pure: copy
+tests/architecture/components.ts	wow, pure: copy
+tests/architecture/dataIsReadonly.test.ts	wow, pure: copy
+tests/architecture/everyRuleHasAGate.test.ts	wow, pure: copy
+tests/architecture/everySkillIsShort.test.ts	wow, pure: copy
+tests/architecture/fileSyntax.ts	wow, pure: copy
+tests/architecture/noImportCycles.test.ts	wow, pure: copy
+tests/architecture/noTernaryChains.test.ts	wow, pure: copy
+tests/architecture/nothingIsRawHtmlOrCss.test.ts	wow, pure: copy
+tests/architecture/skills.ts	wow, pure: copy
+tests/architecture/theCodeNamesNoTicket.test.ts	wow, pure: copy
+tests/architecture/theDocsNameRealPaths.test.ts	wow, pure: copy
+tests/architecture/theWayOfWorkingNamesNoProduct.test.ts	wow, coupled: imports to @product
+tests/architecture/traces.ts	wow, pure: copy
+tests/architecture/tree.ts	wow, pure: copy
+tests/sheet/contentAssembly.test.ts	product test (stays)
+tests/sheet/deliveryFlow.test.ts	product test (stays)
+tests/sheet/epicTemplate.test.ts	product test (stays)
+tests/sheet/journeys.test.ts	product test (stays)
+tests/sheet/manageWindow.test.ts	product test (stays)
+tests/sheet/portContract.test.ts	product test (stays)
+tests/sheet/roleCombinations.test.ts	product test (stays)
+tests/sheet/translationFlow.test.ts	product test (stays)
+tools/apply-reports.ts	wow, pure: copy
+tools/build.ts	wow, pure: copy
+tools/build/sheetIcons.ts	wow, pure: copy
+tools/checks.ts	wow, pure: copy
+tools/checksGate.ts	wow, pure: copy
+tools/ds-scan.ts	wow, coupled: imports to @product
+tools/emit.ts	wow, pure: copy
+tools/layout.ts	wow, pure: copy
+tools/layout/emittedFiles.ts	wow, pure: copy
+tools/layout/moduleImports.ts	wow, pure: copy
+tools/lintEdited.ts	wow, pure: copy
+tools/new-epic.ts	wow, coupled: imports to @product
+tools/pack.ts	wow, pure: copy
+tools/pack/answerCheck.ts	wow, coupled: imports to @product
+tools/pack/expandFile.ts	wow, pure: copy
+tools/pack/expandPointer.ts	wow, coupled: imports to @product
+tools/pack/featureGates.ts	wow, coupled: imports to @product
+tools/pack/fileLines.ts	wow, pure: copy
+tools/pack/fileSections.ts	wow, pure: copy
+tools/pack/loadedFiles.ts	wow, pure: copy
+tools/pack/moduleTable.ts	wow, coupled: imports to @product
+tools/pack/packGates.ts	wow, coupled: imports to @product
+tools/pack/packSources.ts	wow, pure: copy
+tools/pack/packText.ts	wow, coupled: imports to @product
+tools/pack/selfCheck.ts	wow, coupled: imports to @product
+tools/pack/sheetSections.ts	wow, pure: copy
+tools/pack/tsBlocks.ts	wow, pure: copy
+tools/pack/tsSections.ts	wow, pure: copy
+tools/release-record.ts	wow, pure: copy
+tools/release-record/readModules.ts	wow, coupled: imports to @product
+tools/release-record/recordText.ts	wow, coupled: imports to @product
+tools/root.ts	wow, pure: copy
+tools/runKeepsTheTurn.ts	wow, pure: copy
+tools/spec-check.ts	wow, pure: copy
+tools/tokens.ts	wow, coupled: imports to @product
+tools/tokens/cssReads.ts	wow, pure: copy
+tools/tokens/tokenPrint.ts	wow, pure: copy
+tsconfig.json	root config: wow (product keeps its own name, scripts)
+vitest.config.mts	root config: wow (product keeps its own name, scripts)
+yarn.lock	root config: wow (product keeps its own name, scripts)
