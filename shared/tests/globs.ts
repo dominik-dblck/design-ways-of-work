@@ -24,7 +24,7 @@ const isSpelledAsOnDisk = (root: string, file: string): boolean => {
 
 // a product's tree is read by a glob that starts inside it, never by a broad one walking in
 const isEnteredBy = (glob: string, product: string): boolean =>
-  glob.startsWith(product.replace(/\*\*$/, ''));
+  glob.startsWith(product.replace(/\/?\*\*$/, '').replace(/\/?$/, '/'));
 
 // the files under a scope's root its globs name, as posix paths: the ignored folders aside
 const filesNamedBy = (

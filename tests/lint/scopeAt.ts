@@ -7,6 +7,7 @@ const scopeAt = (root: string, named: Partial<RepoScope> = {}): RepoScope => ({
   root,
   ignores: [],
   productTrees: [],
+  ruleFiles: [],
   production: [],
   generated: [],
   react: [],

@@ -219,3 +219,8 @@ mailing-automation: each line waits for its port (phase 9) and the PM's word. Ra
     intro, rows, outro })`; a reason both sides give is `why: { shared: key }`. A shared reason read by two of
     its rows in two files prints twice in its md, which its prose test counts (eagle-dev, 8 Nov: 0 today,
     each key read once a side).
+28. At its port (chunk 7b, every rule's gate): its scope's `ruleFiles` names its rule tables (its 18 md, the
+    README aside); its `everyRuleHasAGate` goes, the shared one reads the same (its measure, 8 Nov: 18 files,
+    181 rows, 259 gates, 0 short: test 208, review 33, ESLint 13, script 4, linter option 1). Its tests are
+    named by `testsOf` as they stand (`tests/**`, `**/__tests__/**`, `**/*.test.{ts,tsx}`), so its 18 under
+    `app/**/__tests__` and the one in `packages/` count. No baseline to start.

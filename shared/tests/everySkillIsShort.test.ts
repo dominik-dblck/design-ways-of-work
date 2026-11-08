@@ -8,6 +8,7 @@ import { describe, expect, it } from 'vitest';
 import { scope } from '../../scope.ts';
 import { heldToItsBaseline, heldToItsCount } from './baseline.ts';
 import { filesNamedBy, globsNamingNothing } from './globs.ts';
+import { linesIn, wordsIn } from './textSize.ts';
 
 // a skill is read whole when it loads; CLAUDE.md on every turn: both cost context in words
 const WHOLE_WORDS = 2000;
@@ -15,10 +16,6 @@ const EVERY_TURN_WORDS = 1000;
 // past this, a file read in part opens with what it holds, so a partial read sees its scope
 const CONTENTS_FROM = 100;
 
-const wordsIn = (text: string): number =>
-  text.split(/\s+/).filter(Boolean).length;
-const linesIn = (text: string): number =>
-  text.split('\n').length - (text.endsWith('\n') ? 1 : 0);
 const opensWithContents = (text: string): boolean =>
   /^## (.*)$/m.exec(text)?.[1]?.trim() === 'Contents';
 const textOf = (file: string): string =>

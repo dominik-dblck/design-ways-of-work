@@ -58,6 +58,8 @@ const scope: RepoScope = {
     ],
     prose: [],
   },
+  // no rule table of its own: the products' rule files, each checked in its product
+  ruleFiles: [],
 };
 
 export { scope };

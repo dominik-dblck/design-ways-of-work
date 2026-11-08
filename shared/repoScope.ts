@@ -53,6 +53,8 @@ interface RepoScope {
   readonly generators: readonly Generator[];
   readonly instructions: Instructions;
   readonly sentences: Sentences;
+  // the rule tables as printed (`| Rule | Gate | Exceptions | Why |`): each row names a gate that runs
+  readonly ruleFiles: readonly string[];
 }
 
 // the way of working's shared tests, which each side's runner includes beside its own

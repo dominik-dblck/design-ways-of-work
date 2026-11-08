@@ -19,6 +19,7 @@ for (const file of [
   'CLAUDE.md',
   'product/CLAUDE.md',
   'product/rules/a.ts',
+  'product-kit/b.tsx',
 ]) {
   fs.mkdirSync(path.dirname(path.join(root, file)), { recursive: true });
   fs.writeFileSync(path.join(root, file), '# a\n');
@@ -47,6 +48,17 @@ describe('a glob list names its files', () => {
       'CLAUDE.md',
       'product/rules/a.ts',
     ]);
+  });
+
+  it('a tree named without its `/**` holds its own folder alone, never a sibling sharing its start', () => {
+    expect(
+      filesNamedBy({ ...tree, productTrees: ['product'] }, [
+        'product*/**/*.{ts,tsx}',
+      ]),
+    ).toEqual(['product-kit/b.tsx']);
+    expect(
+      filesNamedBy({ ...tree, productTrees: ['product'] }, ['product/**/*.ts']),
+    ).toEqual(['product/rules/a.ts']);
   });
 
   it('a glob in the wrong case names nothing, on a disk that ignores case too', () => {

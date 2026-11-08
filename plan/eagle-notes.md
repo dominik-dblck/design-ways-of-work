@@ -225,3 +225,16 @@ for the port (phase 8) or the PM's word. Ranked: the first of each group is the 
     by a glob that starts inside it, never by a broad one walking in (`productTrees`, eagle-dev's hole; each
     branch seen red). Found, for later: `shared/rules` reads `RuleFile` from `design/docs/rules/ruleTypes.ts`,
     a shared file importing a product's; its home is `shared/rules`.
+39. Every rule's gate, shared (chunk 7b, third of four): `shared/tests/everyRuleHasAGate.test.ts` reads the
+    scope's `ruleFiles` (the tables as printed, `| Rule | Gate | Exceptions | Why |`); this side's own test
+    goes. What runs is read off the tree, never planted paths: ESLint's config for every file the scope's
+    production, react and test globs name (a rule on in one folder alone counts; an ignored file has none),
+    its linter options from the same configs, the tests' names (`x.test.ts` is `x`, and a gate may write
+    `x.test`), the package's scripts (`yarn x` is `x`), and `review`. An entry names the file and the gate,
+    never a number or a note, and a row by its rule's text: `{file} · {rule} · {gate}`, `{file} · {rule} · no
+    gate`, `{file} · over 200 lines`, so a listed file gaining a second dead row is red and a partial fix is
+    written (eagle-dev's K1). Each list is read on its own, so a `!` in one never takes another's files from
+    ESLint's union (K2); a test's name drops `.test` or `.test-d` alike on both sides (K3). Each of its 16
+    branches seen red. One `linesIn` for both
+    size tests (`shared/tests/textSize.ts`). A product's tree named without its `/**` holds its own folder
+    alone, never a sibling sharing its start (eagle-dev's J1, seen red).

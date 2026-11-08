@@ -101,6 +101,10 @@ messages read, the next part resumed. When the run is done: `CronDelete 1577e92f
 - 7b part 2b, the shared reasons' gate is a throw in `ruleFileFor`, run by every build: held where it can
   fail, its only check (eagle-dev: acceptable so). Undo: the function's first two lines.
 
+- 7b part 3, what runs is read off every file ESLint lints, not one per kind (eagle-dev: its planted path
+  missed a rule on for `packages/domain` alone; the union is 2532 files, 363 ms on its tree). Undo: a
+  sample per glob.
+
 ## Morning: for the PM
 
 - The five patterns beside SSoT and SRP (dependency inversion, ratchet, explicit over implicit, least privilege,
@@ -142,3 +146,15 @@ messages read, the next part resumed. When the run is done: `CronDelete 1577e92f
 - 7b, the rule files' near-copies the sentence test cannot see (the one-home and tests intros, the comments',
   constants' and styling openings): A, a shared opening each side extends (rewords both sides' text); B,
   exact copies alone, as tonight. Eagle-dev's view: B tonight, A a wording call, Dom's for its side.
+- 7b, a rule file is held at 200 lines, while a row can hold many words (the build side's tests.md: 1232
+  words in 68 lines), and if `docs/rules` joins the agent's on-demand reading, the skills' "past 100 lines,
+  Contents" reads the same files: one file, two size rules. Words, as the skills (D8)? Eagle-dev: not tonight.
+- 7b part 4 (eagle-dev's measure of its docs, its scope so Dom's): its README.md names 3 paths gone
+  (`app/components/organisms/UserProfile/`, `app/config/authConfig.ts`, `app/dashboard/page.tsx`): mend it, or
+  leave it out of the docs read? `knowledge/**` (89 source articles, 0 missing): in or out? Its pipeline md,
+  generated from our `ticket-pipeline.md`, name 1 path gone (`packages/domain/commands/createDocument.ts`,
+  `_shared.md` line 100): read them in its docs (eagle-dev: yes, nobody else can check them) with that one
+  listed until our source changes, which moves the digest its fixture pins (a re-pin: Dom's).
+- For our sheet later (eagle-dev's find): `app/styles/components.spec.json` names 8 wrappers the build side's
+  tree no longer holds (AgentToggle, NamePopover, PersonRow, RoleRow, SidebarRow, TodoPill; DocumentPage,
+  ScreenHeader): the spec to mend on our side, eagle-design untouched tonight.

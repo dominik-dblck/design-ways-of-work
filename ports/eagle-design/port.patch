@@ -1767,10 +1767,10 @@ index 9c7b0cf..ce1fef1 100644
 +export type { TrackFinding, TrackReading, TrackRow };
 diff --git a/scope.ts b/scope.ts
 new file mode 100644
-index 0000000..d5edebe
+index 0000000..930b21c
 --- /dev/null
 +++ b/scope.ts
-@@ -0,0 +1,129 @@
+@@ -0,0 +1,131 @@
 +// scope.ts · what the design project names once: its ESLint config, its shared tests and its tools read it
 +import type { RepoScope } from './shared/repoScope.ts';
 +import {
@@ -1876,6 +1876,8 @@ index 0000000..d5edebe
 +  // a skill is read whole when it loads, the rule files when a skill or CLAUDE.md sends a reader there
 +  // the process's prose: a sentence of it written once (its UI's have their home, sheet/words/messages.ts)
 +  sentences: { code: [], prose: ['CLAUDE.md', SKILLS, 'docs/rules/*.md'] },
++  // the rule tables, the folder's index aside
++  ruleFiles: ['docs/rules/*.md', '!docs/rules/README.md'],
 +  instructions: {
 +    skills: [SKILLS],
 +    whole: [SKILLS],
