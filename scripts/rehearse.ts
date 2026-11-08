@@ -9,14 +9,19 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const HERE = path.resolve(import.meta.dirname, '..');
-const SOURCE = path.resolve(process.argv[2] ?? path.join(HERE, '..', 'eagle-design'));
-const COPY = path.resolve(process.argv[3] ?? path.join(HERE, '.rehearsal', path.basename(SOURCE)));
+const SOURCE = path.resolve(
+  process.argv[2] ?? path.join(HERE, '..', 'eagle-design'),
+);
+const COPY = path.resolve(
+  process.argv[3] ?? path.join(HERE, '.rehearsal', path.basename(SOURCE)),
+);
 const DESIGN = path.join(HERE, 'design');
 const DEV = path.join(HERE, 'dev');
 const SHARED = path.join(HERE, 'shared');
 const PATCH = path.join(HERE, 'ports', path.basename(SOURCE), 'port.patch');
 const WOW_CATEGORY = /^(wow, |mixed check)/;
-const KEEP_LINKS = "NODE_OPTIONS='--preserve-symlinks --preserve-symlinks-main'";
+const KEEP_LINKS =
+  "NODE_OPTIONS='--preserve-symlinks --preserve-symlinks-main'";
 
 const inventory = fs
   .readFileSync(path.join(HERE, 'plan', 'inventory.tsv'), 'utf8')
@@ -24,19 +29,38 @@ const inventory = fs
   .slice(1)
   .filter(Boolean)
   .map((line) => line.split('\t'));
-const WOW = new Set(inventory.filter(([, category]) => WOW_CATEGORY.test(category ?? '')).map(([file]) => file ?? ''));
+const WOW = new Set(
+  inventory
+    .filter(([, category]) => WOW_CATEGORY.test(category ?? ''))
+    .map(([file]) => file ?? ''),
+);
 
 function filesUnder(folder: string): readonly string[] {
   if (!fs.existsSync(folder)) return [];
   return fs
     .readdirSync(folder, { recursive: true, withFileTypes: true })
     .filter((entry) => entry.isFile() && entry.name !== '.DS_Store')
-    .map((entry) => path.relative(folder, path.join(entry.parentPath, entry.name)));
+    .map((entry) =>
+      path.relative(folder, path.join(entry.parentPath, entry.name)),
+    );
 }
 
 function commit(message: string): void {
   execFileSync('git', ['add', '-A'], { cwd: COPY });
-  execFileSync('git', ['-c', 'user.name=rehearsal', '-c', 'user.email=rehearsal@local', 'commit', '-qm', message, '--no-verify'], { cwd: COPY });
+  execFileSync(
+    'git',
+    [
+      '-c',
+      'user.name=rehearsal',
+      '-c',
+      'user.email=rehearsal@local',
+      'commit',
+      '-qm',
+      message,
+      '--no-verify',
+    ],
+    { cwd: COPY },
+  );
 }
 
 function edit(file: string, change: (text: string) => string): void {
@@ -46,24 +70,36 @@ function edit(file: string, change: (text: string) => string): void {
 
 function configs(): void {
   edit('package.json', (text) => {
-    const json = JSON.parse(text) as { scripts: Record<string, string> };
-    for (const [name, script] of Object.entries(json.scripts))
-      json.scripts[name] = script.replaceAll('node tools/', `${KEEP_LINKS} node tools/`);
+    const json: Record<string, unknown> = Object(JSON.parse(text));
+    const scripts: Record<string, unknown> = Object(json.scripts);
+    for (const [name, script] of Object.entries(scripts))
+      scripts[name] = String(script).replaceAll(
+        'node tools/',
+        `${KEEP_LINKS} node tools/`,
+      );
     return `${JSON.stringify(json, null, 2)}\n`;
   });
   edit('tsconfig.json', (text) => {
-    const json = JSON.parse(text) as { compilerOptions: Record<string, unknown> };
-    json.compilerOptions.preserveSymlinks = true;
+    const json: Record<string, unknown> = Object(JSON.parse(text));
+    Reflect.set(Object(json.compilerOptions), 'preserveSymlinks', true);
     return `${JSON.stringify(json, null, 2)}\n`;
   });
   edit('vitest.config.mts', (text) =>
-    text.replace('export default defineConfig({\n', 'export default defineConfig({\n  resolve: { preserveSymlinks: true },\n'),
+    text.replace(
+      'export default defineConfig({\n',
+      'export default defineConfig({\n  resolve: { preserveSymlinks: true },\n',
+    ),
   );
 }
 
 function main(): void {
   fs.rmSync(COPY, { recursive: true, force: true });
-  const tracked = execFileSync('git', ['ls-files'], { cwd: SOURCE, encoding: 'utf8' }).split('\n').filter(Boolean);
+  const tracked = execFileSync('git', ['ls-files'], {
+    cwd: SOURCE,
+    encoding: 'utf8',
+  })
+    .split('\n')
+    .filter(Boolean);
   let copied = 0;
   let linked = 0;
   for (const file of tracked.filter((one) => !WOW.has(one))) {
@@ -72,21 +108,31 @@ function main(): void {
     fs.copyFileSync(path.join(SOURCE, file), target);
     copied += 1;
   }
-  for (const [from, at] of [[DESIGN, ''], [DEV, 'dev'], [SHARED, 'shared']] as const)
+  for (const [from, at] of [
+    [DESIGN, ''],
+    [DEV, 'dev'],
+    [SHARED, 'shared'],
+  ] as const)
     for (const file of filesUnder(from)) {
       const target = path.join(COPY, at, file);
       fs.mkdirSync(path.dirname(target), { recursive: true });
       fs.symlinkSync(path.join(from, file), target);
       linked += 1;
     }
-  fs.symlinkSync(path.join(SOURCE, 'node_modules'), path.join(COPY, 'node_modules'));
+  fs.symlinkSync(
+    path.join(HERE, 'node_modules'),
+    path.join(COPY, 'node_modules'),
+  );
   configs();
   execFileSync('git', ['init', '-q'], { cwd: COPY });
   commit('the product, design/ linked');
   execFileSync('git', ['tag', 'product'], { cwd: COPY });
   const patched = fs.existsSync(PATCH);
   if (patched) {
-    execFileSync('git', ['apply', '--whitespace=nowarn', PATCH], { cwd: COPY, stdio: 'inherit' });
+    execFileSync('git', ['apply', '--whitespace=nowarn', PATCH], {
+      cwd: COPY,
+      stdio: 'inherit',
+    });
     commit('the port');
   }
   console.log(

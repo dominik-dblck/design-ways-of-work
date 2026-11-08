@@ -3,7 +3,7 @@
 | phase | state | proof |
 |---|---|---|
 | 0 plan | done | `PLAN.md` v1.2, `plan/inventory.tsv` |
-| 1 scaffold | done, minimal | `package.json` (extract, rehearse, verify); no lint or tsc here yet: design/ compiles only inside a product |
+| 1 scaffold | done | its own packages (`yarn install`, the product's versions), tsconfig, eslint, prettier, husky; `yarn test` = tsc, lint and format of `scripts/`, then `verify`; the linked copy runs on this repository's packages |
 | 2 files | done | 371 files of the wow categories copied as they are at eagle-design 266822b |
 | 7 rehearsal | done for phase 2 | `yarn verify ../eagle-design`: build, checks, tsc, lint, test, spec-check, checks:gate, ds-scan, dist/ and every written file the same |
 
@@ -62,3 +62,13 @@ ds-scan out of buildReads, Measure's scan fixtures and package.json; the generat
 
 `plan/expected-differences.tsv` lists every output a decided change moves, with why; `yarn verify` fails on any
 other difference, and on a listed one that no longer differs.
+
+## What `yarn test` reaches, and what it cannot yet
+
+- `scripts/` is type-checked, linted and formatted here.
+- `design/`, `dev/` and `shared/` import a product's files (the coupled ones), so they are checked inside one:
+  `verify` links them into a copy of eagle-design and runs its tsc, lint, tests and checks on this repository's
+  packages. A product of its own here (`examples/sample-product`, phase 6) makes it stand alone, after phases 3–5
+  cut what the way of working reads of a product.
+- Root configs live here now too (`eslint.config.ts`, `.prettierrc`, `.nvmrc`); the port turns eagle-design's into
+  readers of these, so one config serves every repository.

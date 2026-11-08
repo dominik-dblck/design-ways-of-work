@@ -8,7 +8,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const HERE = path.resolve(import.meta.dirname, '..');
-const SOURCE = path.resolve(process.argv.slice(2).find((arg) => !arg.startsWith('--')) ?? path.join(HERE, '..', 'eagle-design'));
+const SOURCE = path.resolve(
+  process.argv.slice(2).find((arg) => !arg.startsWith('--')) ??
+    path.join(HERE, '..', 'eagle-design'),
+);
 const OUT = path.join(HERE, 'design');
 const WOW_CATEGORY = /^(wow, |mixed check)/;
 
@@ -19,12 +22,18 @@ function wowFiles(): ReadonlySet<string> {
     .slice(1)
     .filter(Boolean)
     .map((line) => line.split('\t'));
-  return new Set(rows.filter(([, category]) => WOW_CATEGORY.test(category ?? '')).map(([file]) => file ?? ''));
+  return new Set(
+    rows
+      .filter(([, category]) => WOW_CATEGORY.test(category ?? ''))
+      .map(([file]) => file ?? ''),
+  );
 }
 
 function main(): void {
   if (fs.existsSync(OUT) && !process.argv.includes('--again')) {
-    console.error('design/ exists and is the source now: edit it, or run with --again to overwrite it');
+    console.error(
+      'design/ exists and is the source now: edit it, or run with --again to overwrite it',
+    );
     process.exit(1);
   }
   const wow = wowFiles();

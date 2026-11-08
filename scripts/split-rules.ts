@@ -26,7 +26,13 @@ interface Printed {
   readonly outro: string;
 }
 
-type Split = readonly [file: string, home: string, design: string, dev: string, wording: string];
+type Split = readonly [
+  file: string,
+  home: string,
+  design: string,
+  dev: string,
+  wording: string,
+];
 
 const quoted = (text: string): string =>
   `'${text.replaceAll('\\', '\\\\').replaceAll("'", "\\'").replaceAll('\n', '\\n')}'`;
@@ -56,17 +62,31 @@ const rowLine = (row: Row): string =>
   `    { rule: ${quoted(row.rule)}, gate: ${quoted(row.gate)}, exceptions: ${quoted(row.exceptions)}, why: ${quoted(row.why)} },`;
 
 function sideFile(
-  { name, printed, own, side }: { readonly name: string; readonly printed: Printed; readonly own: readonly Row[]; readonly side: 'design' | 'build' },
+  {
+    name,
+    printed,
+    own,
+    side,
+  }: {
+    readonly name: string;
+    readonly printed: Printed;
+    readonly own: readonly Row[];
+    readonly side: 'design' | 'build';
+  },
   shared: boolean,
 ): string {
   const up = '../..';
-  const types = side === 'design' ? './ruleTypes.ts' : '../../docs/rules/ruleTypes.ts';
+  const types =
+    side === 'design' ? './ruleTypes.ts' : '../../docs/rules/ruleTypes.ts';
   return [
     '/**',
     ` * - \`rules\` · ${printed.title.toLowerCase()}: ${shared ? 'the shared rules, then this side’s own' : 'this side’s rules'}`,
     ' */',
     ...(shared
-      ? [`import { rowsFor } from '${up}/shared/rules/rowsFor.ts';`, `import { shared } from '${up}/shared/rules/${name}.ts';`]
+      ? [
+          `import { rowsFor } from '${up}/shared/rules/rowsFor.ts';`,
+          `import { shared } from '${up}/shared/rules/${name}.ts';`,
+        ]
       : []),
     `import type { RuleFile } from '${types}';`,
     '',
@@ -86,7 +106,14 @@ function sideFile(
   ].join('\n');
 }
 
-function sharedFile(title: string, pairs: readonly { readonly words: Row; readonly design: Row; readonly dev: Row }[]): string {
+function sharedFile(
+  title: string,
+  pairs: readonly {
+    readonly words: Row;
+    readonly design: Row;
+    readonly dev: Row;
+  }[],
+): string {
   return [
     '/**',
     ` * - \`shared\` · ${title.toLowerCase()}: the rules both sides keep, each side's gate beside it`,
@@ -119,19 +146,43 @@ function splitOne(file: string, splits: readonly Split[]): number {
     .filter(([, home]) => home === 'shared')
     .map(([, , one, other, wording]) => {
       const [designRow, devRow] = [at(design, one), at(dev, other)];
-      return { words: wording === 'design' ? designRow : devRow, design: designRow, dev: devRow };
+      return {
+        words: wording === 'design' ? designRow : devRow,
+        design: designRow,
+        dev: devRow,
+      };
     });
   const own = (home: string, printed: Printed, column: 2 | 3): readonly Row[] =>
-    splits.filter((split) => split[1] === home).map((split) => at(printed, split[column]));
-  if (pairs.length) fs.writeFileSync(path.join(SHARED, `${name}.ts`), sharedFile(design.title, pairs));
-  fs.writeFileSync(path.join(DESIGN, `${name}.ts`), sideFile({ name, printed: design, own: own('design', design, 2), side: 'design' }, pairs.length > 0));
-  fs.writeFileSync(path.join(DEV, `${name}.ts`), sideFile({ name, printed: dev, own: own('dev', dev, 3), side: 'build' }, pairs.length > 0));
+    splits
+      .filter((split) => split[1] === home)
+      .map((split) => at(printed, split[column]));
+  if (pairs.length)
+    fs.writeFileSync(
+      path.join(SHARED, `${name}.ts`),
+      sharedFile(design.title, pairs),
+    );
+  fs.writeFileSync(
+    path.join(DESIGN, `${name}.ts`),
+    sideFile(
+      { name, printed: design, own: own('design', design, 2), side: 'design' },
+      pairs.length > 0,
+    ),
+  );
+  fs.writeFileSync(
+    path.join(DEV, `${name}.ts`),
+    sideFile(
+      { name, printed: dev, own: own('dev', dev, 3), side: 'build' },
+      pairs.length > 0,
+    ),
+  );
   return pairs.length;
 }
 
 function main(): void {
   if (fs.existsSync(path.join(SHARED, 'rowsFor.ts'))) {
-    console.error('shared/rules/ exists: the split ran once; edit the rule files, never run it again');
+    console.error(
+      'shared/rules/ exists: the split ran once; edit the rule files, never run it again',
+    );
     process.exit(1);
   }
   fs.mkdirSync(SHARED, { recursive: true });
@@ -140,10 +191,17 @@ function main(): void {
     .split('\n')
     .slice(1)
     .filter(Boolean)
-    .map((line) => line.split('\t') as unknown as Split);
+    .map((line): Split => {
+      const [file = '', home = '', design = '', dev = '', wording = ''] =
+        line.split('\t');
+      return [file, home, design, dev, wording];
+    });
   let shared = 0;
   for (const file of [...new Set(splits.map(([one]) => one))])
-    shared += splitOne(file, splits.filter(([one]) => one === file));
+    shared += splitOne(
+      file,
+      splits.filter(([one]) => one === file),
+    );
   fs.writeFileSync(
     path.join(SHARED, 'sharedRuleTypes.ts'),
     [

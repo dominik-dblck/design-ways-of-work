@@ -1,0 +1,8 @@
+node_modules/
+.rehearsal/
+design/
+dev/
+shared/
+ports/
+plan/
+*.md

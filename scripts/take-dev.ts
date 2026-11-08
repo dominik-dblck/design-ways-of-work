@@ -8,7 +8,8 @@ import path from 'node:path';
 
 const HERE = path.resolve(import.meta.dirname, '..');
 const SOURCE = path.resolve(
-  process.argv.slice(2).find((arg) => !arg.startsWith('--')) ?? path.join(HERE, '..', 'mailing-automation'),
+  process.argv.slice(2).find((arg) => !arg.startsWith('--')) ??
+    path.join(HERE, '..', 'mailing-automation'),
 );
 const FROM = path.join(SOURCE, 'docs', 'rules');
 const TO = path.join(HERE, 'dev', 'rules');
@@ -65,11 +66,16 @@ function dataOf(name: string, text: string): string {
 }
 
 const ruleFiles = (): readonly string[] =>
-  fs.readdirSync(FROM).filter((file) => file.endsWith('.md') && file !== 'README.md').sort();
+  fs
+    .readdirSync(FROM)
+    .filter((file) => file.endsWith('.md') && file !== 'README.md')
+    .sort();
 
 function take(): void {
   if (fs.existsSync(TO)) {
-    console.error('dev/rules exists: this repository is the rules\' source now, never take them again');
+    console.error(
+      "dev/rules exists: this repository is the rules' source now, never take them again",
+    );
     process.exit(1);
   }
   fs.mkdirSync(TO, { recursive: true });
@@ -79,7 +85,9 @@ function take(): void {
     fs.writeFileSync(path.join(TO, `${name}.ts`), dataOf(name, text));
     fs.writeFileSync(path.join(TO, file), text);
   }
-  console.log(`dev/rules · ${ruleFiles().length} rule files taken from ${path.relative(HERE, FROM)}`);
+  console.log(
+    `dev/rules · ${ruleFiles().length} rule files taken from ${path.relative(HERE, FROM)}`,
+  );
 }
 
 take();

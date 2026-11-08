@@ -7,7 +7,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const HERE = path.resolve(import.meta.dirname, '..');
-const SOURCE = path.resolve(process.argv[2] ?? path.join(HERE, '..', 'mailing-automation'));
+const SOURCE = path.resolve(
+  process.argv[2] ?? path.join(HERE, '..', 'mailing-automation'),
+);
 const TO = path.join(HERE, 'dev', 'map.ts');
 
 // the build repository's own product: its routes, its screens' renderers, its domain's concepts
@@ -22,7 +24,8 @@ const PRODUCT_FOLDERS: readonly RegExp[] = [
 ];
 
 // a concept of the domain: the one line that stands for the folders cut under packages/domain/
-const DOMAIN_CONCEPT = '│   │   └── {concept}/              # One folder per concept · its decides, its rules, its __fixtures__';
+const DOMAIN_CONCEPT =
+  '│   │   └── {concept}/              # One folder per concept · its decides, its rules, its __fixtures__';
 
 interface TreeLine {
   readonly path: string;
@@ -46,12 +49,19 @@ function treeOf(text: string): readonly TreeLine[] {
     });
 }
 
-const quoted = (text: string): string => `'${text.replaceAll('\\', '\\\\').replaceAll("'", "\\'")}'`;
+const quoted = (text: string): string =>
+  `'${text.replaceAll('\\', '\\\\').replaceAll("'", "\\'")}'`;
 
 function main(): void {
-  const lines = treeOf(fs.readFileSync(path.join(SOURCE, 'docs', 'map.md'), 'utf8'))
+  const lines = treeOf(
+    fs.readFileSync(path.join(SOURCE, 'docs', 'map.md'), 'utf8'),
+  )
     .filter((line) => !PRODUCT_FOLDERS.some((one) => one.test(line.path)))
-    .flatMap((line) => (line.path === 'packages/domain/' ? [line.text, DOMAIN_CONCEPT] : [line.text]));
+    .flatMap((line) =>
+      line.path === 'packages/domain/'
+        ? [line.text, DOMAIN_CONCEPT]
+        : [line.text],
+    );
   const data = [
     '/**',
     " * - `directoryMap` · the build repository's folders, every product's: dev/map.md",
@@ -83,7 +93,9 @@ function main(): void {
     '',
   ].join('\n');
   fs.writeFileSync(TO, data);
-  console.log(`dev/map.ts · ${lines.length} folders of ${path.relative(HERE, SOURCE)}/docs/map.md`);
+  console.log(
+    `dev/map.ts · ${lines.length} folders of ${path.relative(HERE, SOURCE)}/docs/map.md`,
+  );
 }
 
 main();

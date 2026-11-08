@@ -8,17 +8,33 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const HERE = path.resolve(import.meta.dirname, '..');
-const PRODUCT = path.basename(path.resolve(process.argv[2] ?? path.join(HERE, '..', 'eagle-design')));
+const PRODUCT = path.basename(
+  path.resolve(process.argv[2] ?? path.join(HERE, '..', 'eagle-design')),
+);
 const COPY = path.join(HERE, '.rehearsal', PRODUCT);
 const PATCH = path.join(HERE, 'ports', PRODUCT, 'port.patch');
 
 execFileSync('git', ['add', '-A'], { cwd: COPY });
-const diff = execFileSync('git', ['diff', '--cached', '--binary', 'product', '--', '.', ':!guards/__snapshots__/guard-map.json'], {
-  cwd: COPY,
-  encoding: 'utf8',
-  maxBuffer: 1 << 28,
-});
+const diff = execFileSync(
+  'git',
+  [
+    'diff',
+    '--cached',
+    '--binary',
+    'product',
+    '--',
+    '.',
+    ':!guards/__snapshots__/guard-map.json',
+  ],
+  {
+    cwd: COPY,
+    encoding: 'utf8',
+    maxBuffer: 1 << 28,
+  },
+);
 fs.mkdirSync(path.dirname(PATCH), { recursive: true });
 fs.writeFileSync(PATCH, diff);
-const files = diff.split('\n').filter((line) => line.startsWith('diff --git')).length;
+const files = diff
+  .split('\n')
+  .filter((line) => line.startsWith('diff --git')).length;
 console.log(`ports/${PRODUCT}/port.patch · ${files} files`);
