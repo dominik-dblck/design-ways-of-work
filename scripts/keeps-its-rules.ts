@@ -52,7 +52,9 @@ function directives(): readonly string[] {
     },
   )
     .split('\n')
-    .filter((file) => A_SOURCE.test(file) && !file.startsWith(FIXTURES));
+    .filter((file) => A_SOURCE.test(file) && !file.startsWith(FIXTURES))
+    // the index lists a file deleted but not yet staged: only one on disk is read
+    .filter((file) => fs.existsSync(path.join(HERE, file)));
   return files.flatMap((file) => {
     const text = fs.readFileSync(path.join(HERE, file), 'utf8');
     return commentsOf(file, text)

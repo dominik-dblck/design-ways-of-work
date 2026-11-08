@@ -21,6 +21,12 @@ interface Instructions {
   readonly everyTurn: readonly string[];
 }
 
+// the files whose sentences are written once, by globs: code's strings, prose's lines
+interface Sentences {
+  readonly code: readonly string[];
+  readonly prose: readonly string[];
+}
+
 interface RepoScope {
   readonly root: string;
   readonly ignores: readonly string[];
@@ -44,6 +50,7 @@ interface RepoScope {
   readonly renderers: readonly Renderer[];
   readonly generators: readonly Generator[];
   readonly instructions: Instructions;
+  readonly sentences: Sentences;
 }
 
 // the way of working's shared tests, which each side's runner includes beside its own

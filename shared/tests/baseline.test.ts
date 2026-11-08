@@ -1,5 +1,6 @@
 /**
- * - `docs/rules/tests.md`: a scan's list starts once, only shrinks, and goes when it empties
+ * - `docs/rules/tests.md`
+ * - a scan's list starts once, only shrinks, and goes when it empties
  * - each step on a fresh folder, never the tree's lists
  */
 import fs from 'node:fs';
@@ -72,6 +73,19 @@ describe('a baseline starts once, only shrinks, and goes when it empties', () =>
       fixed: ['a.md · 9'],
     });
     expect(() => countDriftFrom(['a.md'], [])).toThrow('a counted entry');
+  });
+
+  it('a plain entry per reason: one reason fixed is written alone, the other kept', () => {
+    const folder = aFolder();
+    held({
+      folder,
+      offenders: ['x.md · no "Use when"', 'x.md · named y'],
+      asked: 'start:aScan',
+    });
+    held({ folder, offenders: ['x.md · no "Use when"'], asked: 'write' });
+    expect(JSON.parse(fs.readFileSync(LIST(folder), 'utf8'))).toEqual([
+      'x.md · no "Use when"',
+    ]);
   });
 
   it('a write records a counted entry that fell, and refuses one that rose', () => {

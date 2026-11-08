@@ -27,7 +27,7 @@ function shortfallOf(skill: Text): readonly string[] {
   if (description === undefined || description === '')
     return ['no description'];
   return [
-    description.length > LONGEST ? `${description.length} characters` : null,
+    description.length > LONGEST ? `over ${String(LONGEST)} characters` : null,
     A_WHEN.test(description) ? null : 'no "Use when"',
     name === path.posix.basename(path.posix.dirname(skill.path))
       ? null
@@ -47,7 +47,7 @@ describe('a skill says what it does and when to use it', () => {
     ).toEqual(['no "Use when"']);
     expect(
       shortfallOf(skill(`name: planted\ndescription: ${tooLong}`)),
-    ).toEqual([`${String(tooLong.length)} characters`]);
+    ).toEqual([`over ${String(LONGEST)} characters`]);
     expect(shortfallOf(skill('name: planted'))).toEqual(['no description']);
     expect(
       shortfallOf(skill('name: other\ndescription: Writes. Use when asked.')),
@@ -63,11 +63,10 @@ describe('a skill says what it does and when to use it', () => {
       globsNamingNothing(scope, skills),
       'a glob that names no skill',
     ).toEqual([]);
-    // an entry holds its reasons, so a listed skill that gains one is new
+    // an entry per reason: a reason gained is new, one fixed leaves the list alone
     const short = filesNamedBy(scope, skills).flatMap((file) => {
       const text = fs.readFileSync(path.join(scope.root, file), 'utf8');
-      const whys = shortfallOf({ path: file, text });
-      return whys.length === 0 ? [] : [`${file} · ${whys.join(', ')}`];
+      return shortfallOf({ path: file, text }).map((why) => `${file} · ${why}`);
     });
     expect(heldToItsBaseline('aSkillSaysWhatAndWhen', short)).toEqual({
       added: [],

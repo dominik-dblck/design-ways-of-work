@@ -83,6 +83,17 @@ messages read, the next part resumed. When the run is done: `CronDelete 1577e92f
 - 6g, "a way of working's file holds no suppression" is a script of its own (`keeps-its-rules.ts`, run by
   check:chunk), never part of verify: verify compares the product, this asks another question.
 
+- 7b, a lesson: `git stash` in this repository rewrites the files it touches, so 11 links to the copy broke;
+  port-save, then rehearse, mended them (`rehearse --check` clean). Never stash here.
+
+- 7b, 23:11: the verify past 30 minutes (usually 3) was slow, not stuck: its steps kept starting and ending,
+  the machine at load 7 with the antivirus scanning (XprotectService, Bitdefender). Left to run; the
+  heartbeat's 30 minutes means a step that stops moving.
+
+- 7b part 2, eagle-dev's H4' (5 headers over 80 in test code, `tests/lint/*`, a shared test): the shared
+  row says "a production file", tests its design exception, so they break no rule; wrapped in part 2b for
+  one tree, and whether the header rule reaches test code is on the morning list (both sides' scope).
+
 ## Morning: for the PM
 
 - The five patterns beside SSoT and SRP (dependency inversion, ratchet, explicit over implicit, least privilege,
@@ -115,3 +126,9 @@ messages read, the next part resumed. When the run is done: `CronDelete 1577e92f
   Contents (a release's change); C: leave them out, as today.
 - 7b, the build side's "ticket skills keep their pipeline's 100 lines" is held by nothing since D8: drop it,
   or a test of its own (its scope: Dom's).
+- 7b, the build side's own one-home row "A sentence the domain holds is read from the domain" keeps the why
+  "Two copies of a sentence are two places for it to differ.", a near-copy of the shared row's: a why of its
+  own (what the domain adds: one glossary the screens and the tests read), or none (its text: Dom's).
+- 7b, the header rule reaches production files alone (the shared responsibility row; tests the design
+  side's exception, so the build side's too at its port). Reach test code too (A: one rule, every file), or
+  keep tests out (B: as written)? A widens both sides' gate: Dom's for the build side.

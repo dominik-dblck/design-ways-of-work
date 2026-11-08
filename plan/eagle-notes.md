@@ -200,3 +200,16 @@ for the port (phase 8) or the PM's word. Ranked: the first of each group is the 
     may fall, never rise; a plain scan reads an entry whole. This side's two tests retire; the size row is
     shared. `shared/tests/globs.ts` is the one reading of a glob list with `!` (the generators' test reads it
     too): in the disk's case (a Mac echoes a glob's), the scope's ignored folders never read (eagle-dev).
+37. A sentence is written once, shared (chunk 7b, second of four): `shared/tests/aSentenceIsWrittenOnce.test.ts`
+    reads the scope's `sentences`, globs of code (its strings: the syntax tree's literals of 20 characters or
+    more, 6 words a sentence, a generated file aside) and of prose (lines and table cells, fences out, 8 words);
+    each sentence two files hold is counted by its copies (`heldToItsCount`), so a new copy is red and a file
+    moved changes nothing. This side's prose is `CLAUDE.md`, the skills and `docs/rules/*.md`, its code none
+    (a sentence a person sees has its home, `sheet/words/messages.ts`); the way of working's own code is held
+    too (0 found). This side keeps its own check as `aRuleIsNamedNeverCopied` (a rule's text, `plans.ts ·
+    RULES`, named, never copied). A skill's baseline entry is one per reason (a partial fix is written), and a
+    path's case is read step by step from its folders, so a link is no misspelling (eagle-dev's G1, G2).
+    A generated file is put aside where the copies are counted, under a case of its own, and a number that
+    leads a sentence stays its word (eagle-dev's H2, H3; each seen red). Its re-check: the build side's 13
+    found again (6 of 2, 3 of 3, 1 of 5, 3 of 7), the copy 0 over 22 files, the way of working 0 over 78.
+    Found by it, next (part 2b): 14 sentences the two sides' rule files and two pipeline skills write twice.

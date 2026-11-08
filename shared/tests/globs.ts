@@ -1,5 +1,6 @@
 /**
- * - `isNamedBy`, `filesNamedBy` · a path a list of globs names, a `!` glob not; the tree's
+ * - `isNamedBy` · a path a list of globs names, a `!` glob not
+ * - `filesNamedBy` · the tree's files a list names, as the disk spells them
  * - `globsNamingNothing` · a scope's glob that names no file: a typo checks nothing
  */
 import fs from 'node:fs';
@@ -13,10 +14,13 @@ const isNamedBy = (file: string, globs: readonly string[]): boolean =>
   globs.some((glob) => !glob.startsWith('!') && minimatch(file, glob)) &&
   !globs.some((glob) => glob.startsWith('!') && minimatch(file, glob.slice(1)));
 
-// a path as the disk spells it: a glob's case is echoed back by a filesystem that ignores case
-const isSpelledAsOnDisk = (root: string, file: string): boolean =>
-  fs.realpathSync.native(path.join(root, file)) ===
-  path.join(fs.realpathSync.native(root), file);
+// a path as each folder spells it: a disk that ignores case echoes a glob's, and a link resolves away
+const isSpelledAsOnDisk = (root: string, file: string): boolean => {
+  const steps = file.split(/[\\/]/);
+  return steps.every((step, at) =>
+    fs.readdirSync(path.join(root, ...steps.slice(0, at))).includes(step),
+  );
+};
 
 // the files under a scope's root its globs name, its ignored folders aside, as posix paths
 const filesNamedBy = (

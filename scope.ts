@@ -45,6 +45,16 @@ const scope: RepoScope = {
   generators: [],
   // no skill, and no instruction an agent loads: its sessions read the products'
   instructions: { skills: [], whole: [], onDemand: [], everyTurn: [] },
+  // its own code's strings: a rule's text, a check's finding, each written once
+  sentences: {
+    code: [
+      'scripts/**/*.ts',
+      'shared/**/*.ts',
+      'design-system/**/*.ts',
+      '!**/*.test.ts',
+    ],
+    prose: [],
+  },
 };
 
 export { scope };
