@@ -121,7 +121,19 @@
         the resolvers on the tsconfig's symlinks; 3 design tests retire, 2 rows to `shared/rules/components.ts`
         (`plan/eagle-notes.md` 24–26, `plan/dev-notes.md` 16) · eagle-dev's consult and cross-check taken
       - [ ] chunk 6: ls-lint, knip and tsc from one scope · 6a the rehearsal hard-linked, a real tree, its
-        links checked and its rewrites verified (`plan/eagle-notes.md` 27, `plan/dev-notes.md` 7) ✓ · 6b knip from the scope (`plan/eagle-notes.md` 28, `plan/dev-notes.md` 17) ✓ · 6c the file and component shapes · 6d one tsconfig base
+        links checked and its rewrites verified (`plan/eagle-notes.md` 27, `plan/dev-notes.md` 7) ✓ · 6b knip from the scope (`plan/eagle-notes.md` 28, `plan/dev-notes.md` 17) ✓ · 6c the file names, one wow rule (`plan/eagle-notes.md` 29) ✓ · 6d the component file shapes · 6e one
+        tsconfig base
+      - [ ] the build side's skills (PM, 8 Nov: architect and orchestrator unused): `dev/claude/skills` keeps what
+        the feature pipeline names (the `e2e` three, the `ticket*` written from `ticket-pipeline.md`, the
+        review command and the evaluations it reads); the discovery → plan → orchestration flow, `brainstorm`,
+        `create-mindmap` and `integrate-knowledge` go to `legacy/` · the UX audit split (PM, 8 Nov · B): the
+        feature run's arch-review scores each screen the epic draws (NH, GP, WCAG 2.2, evidence-backed, from
+        `ux-evaluation.md`; `ux-eval.md` stays the fast gate on the diff); `evaluate-app-ux` and
+        `evaluate-onboarding-ux` become one `evaluate-ux` for what a person brings (the analytics, the gates,
+        per-role scores, the report's history); the scoring procedure is written once and both read it ·
+        `commands/commit.md` stays, fitted to the repository (PM, 8 Nov · A) · what stays (the `e2e` three, the
+        review command, the evaluations, the patterns, `commit.md`) moves to TypeScript data and is generated, as
+        the design side's skills are (PM, 8 Nov)
       - [ ] one design system, `wow-design-system` (PM, 8 Nov): `design-system/deblock-guide.md` folded into it,
         one coherent system both products read, no product's own in it · after chunk 6
       - [ ] the shared tests read `scope.ts` (chunk 7), with the way of working's one baseline format

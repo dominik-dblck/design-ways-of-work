@@ -4,6 +4,7 @@
  */
 import { commentsAreInvariants } from './rules/commentsAreInvariants.ts';
 import { dataIsReadonly } from './rules/dataIsReadonly.ts';
+import { fileNamesItsPurpose } from './rules/fileNamesItsPurpose.ts';
 import { fileStatesItsJob } from './rules/fileStatesItsJob.ts';
 import { hooksNamedForTheirFile } from './rules/hooksNamedForTheirFile.ts';
 import { moleculesComposeOneMolecule } from './rules/moleculesComposeOneMolecule.ts';
@@ -32,6 +33,7 @@ const plugin = {
   rules: {
     'comments-are-invariants': commentsAreInvariants,
     'data-is-readonly': dataIsReadonly,
+    'file-names-its-purpose': fileNamesItsPurpose,
     'file-states-its-job': fileStatesItsJob,
     'hooks-named-for-their-file': hooksNamedForTheirFile,
     'molecules-compose-one-molecule': moleculesComposeOneMolecule,

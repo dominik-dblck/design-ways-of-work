@@ -5,6 +5,7 @@
  */
 import { ESLintUtils } from '@typescript-eslint/utils';
 import type { TSESLint } from '@typescript-eslint/utils';
+import { minimatch } from 'minimatch';
 import path from 'node:path';
 import ts from 'typescript';
 
@@ -38,8 +39,9 @@ function syntaxOf(context: Context): ts.SourceFile {
 const pathOf = (context: Context, file = context.filename): string =>
   path.relative(context.cwd, file).split(path.sep).join('/');
 
+// case kept on every platform: node's own matcher drops it on macOS and Windows
 const matchesAny = (file: string, globs: readonly string[]): boolean =>
-  globs.some((glob) => path.matchesGlob(file, glob));
+  globs.some((glob) => minimatch(file, glob));
 
 // the repository path a specifier names: the program's resolution, else a relative one by its folder
 function moduleOf(context: Context, specifier: string): string | null {

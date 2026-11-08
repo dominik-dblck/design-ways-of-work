@@ -20,6 +20,8 @@ const scopeAt = (root: string, named: Partial<RepoScope> = {}): RepoScope => ({
   tests: [],
   owners: {},
   starts: [],
+  names: [],
+  typesOnly: [],
   ...named,
 });
 

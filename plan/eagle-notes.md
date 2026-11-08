@@ -120,3 +120,10 @@ for the port (phase 8) or the PM's word. Ranked: the first of each group is the 
     skips a symlink): 20 formatted. Verify runs `format:check`, `lint:files` and `lint:exports`.
     `aToolIsAScript` retires; `anExportIsRead` keeps an entry's half, read by its global, a ticket's read list
     or the build side's list, which no tool reads.
+29. A file's name is one way-of-working rule (chunk 6c), `wow/file-names-its-purpose`: a drawer's name, a name
+    ending in a number, a `*Types` file holding a value and an `index.ts` holding code of its own are refused in
+    every repository; the scope's `names` give each side its patterns (here an entry kebab-case, a part camelCase
+    or its epic, neither `index`). On a real tree it finds the 14 parts named by a number, the list its test held;
+    they sit in `eslint-suppressions.json` until the product names each split by its job (a file's rename is the
+    product's content). `aFileNamesItsPurpose` retires with the port's baseline; this side has no baseline left,
+    so the shared tests row names a list by its family, `tests/architecture/baselines/{scan}.json`.

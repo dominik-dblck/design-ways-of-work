@@ -47,6 +47,10 @@ const pluginRules = (
   'wow/comments-are-invariants': 'error',
   'wow/data-is-readonly': 'error',
   'wow/file-states-its-job': ['error', { entries: scope.entries }],
+  'wow/file-names-its-purpose': [
+    'error',
+    { names: scope.names, typesOnly: scope.typesOnly },
+  ],
   'wow/one-home-per-name': [
     'error',
     {

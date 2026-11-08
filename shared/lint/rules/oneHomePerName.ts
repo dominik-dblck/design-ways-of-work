@@ -3,7 +3,6 @@
  * - an entry's API and a family's one name are its repository's to name
  */
 import { ESLintUtils } from '@typescript-eslint/utils';
-import path from 'node:path';
 import type ts from 'typescript';
 import { declaredNamesOf } from '../exportedNames.ts';
 import { createRule, matchesAny, pathOf } from './ruleKit.ts';
@@ -39,8 +38,7 @@ const countedIn = (
     (name) =>
       !scope.families.some(
         (family) =>
-          family.names.includes(name.text) &&
-          path.matchesGlob(file, family.files),
+          family.names.includes(name.text) && matchesAny(file, [family.files]),
       ),
   );
 

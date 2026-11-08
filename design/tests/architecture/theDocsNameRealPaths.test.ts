@@ -66,6 +66,7 @@ describe('the docs name real paths', () => {
           text: [
             'Read `sheet/model/directory.ts` first.',
             'Then `tools/layout.ts:56`, `sheet/logic/{capability}/` and `roadmaps/EXX/`.',
+            'A list is `tests/architecture/baselines/{scan}.json`.',
           ].join('\n'),
         },
         there,

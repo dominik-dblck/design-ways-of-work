@@ -28,6 +28,10 @@ const scope: RepoScope = {
   owners: {},
   // what runs with no script naming it: each script, each hook, the design system's face
   starts: ['scripts/*.ts', 'shared/hooks/*.ts', 'design-system/index.ts'],
+  // its file names are the convention's alone
+  names: [],
+  // a types file holds types alone, as the design side's (docs/rules/names.md)
+  typesOnly: ['**/*Types.ts'],
 };
 
 export { scope };

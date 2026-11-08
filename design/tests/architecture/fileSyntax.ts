@@ -1,11 +1,11 @@
 /**
- * - `syntaxOf`, `exportedValuesOf` · a source's tree and the values it exports
+ * - `exportedValuesOf` · the values a source exports, read off its tree
  */
 import ts from 'typescript';
 import { exportedNamesOf as namesOf } from '../../shared/lint/exportedNames.ts';
 import type { Source } from './tree.ts';
 
-export const syntaxOf = (source: Source): ts.SourceFile =>
+const syntaxOf = (source: Source): ts.SourceFile =>
   ts.createSourceFile(source.path, source.text, ts.ScriptTarget.Latest, true);
 
 /** The values a file exports by name · types are the vocabulary, and are not counted. */

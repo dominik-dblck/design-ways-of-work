@@ -110,4 +110,18 @@ mailing-automation: each line waits for its port (phase 9) and the PM's word. Ra
     duplicate exports (`e2e/theDesk.ts`, `replaySteps.ts`), two stryker packages unlisted, one unused
     (`@testing-library/jest-dom`). Its 172 unread types, 91 of them `{Name}Props` re-exported by barrels, ask a
     convention at its port: Props out of the barrels, or a barrel's types public.
-
+18. File names are one way-of-working rule (chunk 6c, `wow/file-names-its-purpose`), measured on the build side's
+    tree by eagle-dev (8 Nov, 1,656 files): no drawer and no busy index, as its own scans found; a name ending in
+    digits is a count unless the digits name a term (`sha256`, `base64`, `utf8`, `int32`, `md5`, `es2017`: its
+    `scripts/lib/sha256.ts` passes). A `*Types` file held to types alone is a scope's list (`typesOnly`), not a
+    convention: its types files hold a type and its zod schema side by side (11), two are the domain's noun
+    (`contentTypes.ts`, `blockTypes.ts`, constants) and two mix a value in (`logTypes.ts`' `emitted`,
+    `storeTypes.ts`' `RECORD_TABLES`); which it lists is its call at its port. Its suffix map is six `names` rows
+    (`utils/` Utils|Adapters, `constants/` Constants|Words, `types/` Types|Answers, `providers/` Provider,
+    `queries/` use…Query|Mutation, `app/api/` route|…Route); a helper inside a component, `{component}{Purpose}Utils`,
+    needs the folder in its stem: a `{component}` placeholder filled from the folder under `components/<tier>/`,
+    built at its port. Its own `theDocsNameRealPaths` reads `{scan}` as a placeholder before the reworded baseline
+    row lands there. Its cross-check (8 Nov): with `typesOnly: []` and the six rows, 0 hits over its 1,656 files,
+    its baseline's `[]`; every planted name caught, a content breach on its line; a term is read off the stem's
+    last camel word (`rules2`, `changed2`, `index2` are counts; `imageBase64` a term). `minimatch` against node's
+    `path.matchesGlob`, 62 globs × 3,798 files: two pairs differ, both node folding case under `__fixtures__/`.

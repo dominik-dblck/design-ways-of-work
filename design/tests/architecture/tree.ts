@@ -1,6 +1,6 @@
 /**
  * - `ROOT`, `textsUnder`, `homeTexts`, `productionSources` · the files scans read
- * - `isGenerated`, `isSheet`, `isEntry`, `entryOf` · a file's kind
+ * - `isGenerated`, `isEntry`, `entryOf` · a file's kind
  * - `importsOf` · the relative imports a source makes, resolved to repository paths
  */
 import fs from 'node:fs';
@@ -61,9 +61,6 @@ export function productionSources(): readonly Source[] {
 }
 
 /** A file of the sheet: an entry or a part of one, as `tools/layout.ts` places them. */
-export const isSheet = (file: string): boolean =>
-  isEntry(file) || entryOfPart(file) !== null;
-
 export { isEntry };
 
 /** The entry a part serves · null for an entry, a tool or a file outside the sheet. */

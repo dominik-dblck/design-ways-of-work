@@ -722,10 +722,10 @@ index 0000000..76eb993
 +| The way of working names no product: a blank repository spawned from its template, with an empty `scope.ts` and an empty rules file, passes every shared check from its first day.                                                                                                                                                                                                                                                                     | `theWayOfWorkingNamesNoProduct` · `review` | the spawn check comes with the template (phase 7)                  | What a product needs is its own; the way of working is the same for every product.                                      |
 diff --git a/eslint-suppressions.json b/eslint-suppressions.json
 new file mode 100644
-index 0000000..5a04f85
+index 0000000..2945932
 --- /dev/null
 +++ b/eslint-suppressions.json
-@@ -0,0 +1,541 @@
+@@ -0,0 +1,611 @@
 +{
 +  "app/components/organisms/BoardPage/components/DayBars.tsx": {
 +    "no-restricted-syntax": {
@@ -808,6 +808,16 @@ index 0000000..5a04f85
 +  "sheet/cases/test-cases/caseBaseline.ts": {
 +    "no-restricted-syntax": {
 +      "count": 6
++    }
++  },
++  "sheet/contract/block-model/settledFrom1.ts": {
++    "wow/file-names-its-purpose": {
++      "count": 1
++    }
++  },
++  "sheet/contract/block-model/settledFrom25.ts": {
++    "wow/file-names-its-purpose": {
++      "count": 1
 +    }
 +  },
 +  "sheet/contract/events.ts": {
@@ -1122,6 +1132,21 @@ index 0000000..5a04f85
 +      "count": 1
 +    }
 +  },
++  "sheet/model/eagle-review/pointsOne.ts": {
++    "wow/file-names-its-purpose": {
++      "count": 1
++    }
++  },
++  "sheet/model/eagle-review/pointsThree.ts": {
++    "wow/file-names-its-purpose": {
++      "count": 1
++    }
++  },
++  "sheet/model/eagle-review/pointsTwo.ts": {
++    "wow/file-names-its-purpose": {
++      "count": 1
++    }
++  },
 +  "sheet/samples/blocks/blockLocales.ts": {
 +    "no-restricted-syntax": {
 +      "count": 1
@@ -1256,9 +1281,54 @@ index 0000000..5a04f85
 +      "count": 1
 +    }
 +  },
++  "sheet/words/messages/refusalOne.ts": {
++    "wow/file-names-its-purpose": {
++      "count": 1
++    }
++  },
++  "sheet/words/messages/refusalTwo.ts": {
++    "wow/file-names-its-purpose": {
++      "count": 1
++    }
++  },
 +  "sheet/words/messages/refusals.ts": {
 +    "no-restricted-syntax": {
 +      "count": 2
++    }
++  },
++  "sheet/words/messages/rowsOne.ts": {
++    "wow/file-names-its-purpose": {
++      "count": 1
++    }
++  },
++  "sheet/words/messages/rowsThree.ts": {
++    "wow/file-names-its-purpose": {
++      "count": 1
++    }
++  },
++  "sheet/words/messages/rowsTwo.ts": {
++    "wow/file-names-its-purpose": {
++      "count": 1
++    }
++  },
++  "sheet/words/messages/screenFour.ts": {
++    "wow/file-names-its-purpose": {
++      "count": 1
++    }
++  },
++  "sheet/words/messages/screenOne.ts": {
++    "wow/file-names-its-purpose": {
++      "count": 1
++    }
++  },
++  "sheet/words/messages/screenThree.ts": {
++    "wow/file-names-its-purpose": {
++      "count": 1
++    }
++  },
++  "sheet/words/messages/screenTwo.ts": {
++    "wow/file-names-its-purpose": {
++      "count": 1
 +    }
 +  },
 +  "tests/sheet/roleCombinations.test.ts": {
@@ -1617,10 +1687,10 @@ similarity index 100%
 rename from app/styles/tokens.css
 rename to legacy/tokens.css
 diff --git a/package.json b/package.json
-index b0d8011..97635a0 100644
+index b0d8011..3f2caca 100644
 --- a/package.json
 +++ b/package.json
-@@ -12,33 +12,37 @@
+@@ -12,33 +12,38 @@
      "cut-pack": "node tools/build.ts && node tools/pack.ts",
      "apply-reports": "node tools/apply-reports.ts",
      "spec-check": "node tools/build.ts && node tools/spec-check.ts",
@@ -1663,6 +1733,7 @@ index b0d8011..97635a0 100644
 +    "knip": "6.44.2",
      "lucide-static": "1.69.0",
 -    "postcss": "8.5.28",
++    "minimatch": "10.2.6",
      "prettier": "3.9.6",
      "rolldown": "1.2.16",
      "typescript": "6.0.3",
@@ -1706,10 +1777,10 @@ index 9c7b0cf..ce1fef1 100644
 +export type { TrackFinding, TrackReading, TrackRow };
 diff --git a/scope.ts b/scope.ts
 new file mode 100644
-index 0000000..8118955
+index 0000000..6d187c6
 --- /dev/null
 +++ b/scope.ts
-@@ -0,0 +1,75 @@
+@@ -0,0 +1,93 @@
 +// scope.ts · what the design project names once: its ESLint config, its shared tests and its tools read it
 +import type { RepoScope } from './shared/repoScope.ts';
 +import {
@@ -1723,6 +1794,11 @@ index 0000000..8118955
 +// the modules' files, as tools/layout.ts places them: an entry's API and a part's values take their own case
 +const MODULE_FILES = filesOf().filter(
 +  (file) => file.endsWith('.ts') && !/\.(d|test)\.ts$/.test(file),
++);
++
++const ENTRIES = MODULE_FILES.filter(isEntry);
++const PARTS = MODULE_FILES.filter(
++  (file) => !isEntry(file) && entryOfPart(file) !== null,
 +);
 +
 +const scope: RepoScope = {
@@ -1741,10 +1817,8 @@ index 0000000..8118955
 +  // a file a tool writes is exempt from the size rules (docs/rules/size.md · generated files)
 +  generated: ['app/styles/tokens.ts'],
 +  react: ['app/**/*.tsx', 'app/components/**/*.ts'],
-+  entries: MODULE_FILES.filter(isEntry),
-+  parts: MODULE_FILES.filter(
-+    (file) => !isEntry(file) && entryOfPart(file) !== null,
-+  ),
++  entries: ENTRIES,
++  parts: PARTS,
 +  // a tally a scan fills as it runs, mutated by design
 +  mutable: {
 +    'guards/expected-files/packReads.ts': ['EndpointFacts'],
@@ -1781,6 +1855,21 @@ index 0000000..8118955
 +  starts: [
 +    ...filesOf().filter((file) => pageOf(file) !== null),
 +    ...emitted().map((one) => one.module),
++  ],
++  // a types file holds types alone (docs/rules/names.md)
++  typesOnly: ['**/*Types.ts'],
++  // a module's file takes its kind's case, and never `index` (docs/rules/names.md)
++  names: [
++    {
++      files: ENTRIES,
++      stem: '^(?!index$)[a-z][a-z0-9]*(?:-[a-z0-9]+)*$',
++      why: 'an entry is kebab-case (docs/rules/names.md).',
++    },
++    {
++      files: PARTS,
++      stem: '^(?!index$)(?:[a-z][A-Za-z0-9]*|E\\d{2}[A-Za-z]*)$',
++      why: 'a part is camelCase or its epic (docs/rules/names.md).',
++    },
 +  ],
 +};
 +
@@ -2122,28 +2211,6 @@ index 1e8082f..a84aa0c 100644
  
 -export type { GlossaryPoint, ScreenWord, ScreenWordRow, Term };
 +export type { GlossaryPoint, ScreenWordRow, Term };
-diff --git a/tests/architecture/baselines/aFileNamesItsPurpose.json b/tests/architecture/baselines/aFileNamesItsPurpose.json
-new file mode 100644
-index 0000000..7318aea
---- /dev/null
-+++ b/tests/architecture/baselines/aFileNamesItsPurpose.json
-@@ -0,0 +1,16 @@
-+[
-+  "sheet/contract/block-model/settledFrom1.ts \u00b7 a part named by a number",
-+  "sheet/contract/block-model/settledFrom25.ts \u00b7 a part named by a number",
-+  "sheet/model/eagle-review/pointsOne.ts \u00b7 a part named by a number",
-+  "sheet/model/eagle-review/pointsThree.ts \u00b7 a part named by a number",
-+  "sheet/model/eagle-review/pointsTwo.ts \u00b7 a part named by a number",
-+  "sheet/words/messages/refusalOne.ts \u00b7 a part named by a number",
-+  "sheet/words/messages/refusalTwo.ts \u00b7 a part named by a number",
-+  "sheet/words/messages/rowsOne.ts \u00b7 a part named by a number",
-+  "sheet/words/messages/rowsThree.ts \u00b7 a part named by a number",
-+  "sheet/words/messages/rowsTwo.ts \u00b7 a part named by a number",
-+  "sheet/words/messages/screenFour.ts \u00b7 a part named by a number",
-+  "sheet/words/messages/screenOne.ts \u00b7 a part named by a number",
-+  "sheet/words/messages/screenThree.ts \u00b7 a part named by a number",
-+  "sheet/words/messages/screenTwo.ts \u00b7 a part named by a number"
-+]
 diff --git a/tsconfig.json b/tsconfig.json
 index 453869a..73569ab 100644
 --- a/tsconfig.json
