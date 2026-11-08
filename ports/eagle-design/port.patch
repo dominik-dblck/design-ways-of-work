@@ -10,6 +10,16 @@ index d98f0c0..dd6c01e 100644
  - `guards/source-check.ts` · after every change `SourceCheck.ratchet` reads 0 (no kind of copy above its baseline; a retired `replaces` still in its file fails) · zero copies before a feature ticket is READY; `tools/pack.ts` refuses the pack. `rule:one-source-of-truth`
  
  ## The cut
+diff --git a/docs/process/new-project.md b/docs/process/new-project.md
+index 4ed4a71..a952839 100644
+--- a/docs/process/new-project.md
++++ b/docs/process/new-project.md
+@@ -43,4 +43,4 @@ again, and what is the product’s own is cut by hand. No tool writes the copy.
+ 
+ - `tools/`, `guards/` (the checks), `tests/architecture/`, the configs at the root.
+ - `docs/rules/`, `docs/skills/`, `docs/process/plans/` (the rules and the checklist), `docs/documents/`.
+-- `app/pages/`, `app/theme/`, `app/workspace/`, `roadmaps/templates.ts`, `public/lucide-icons/`.
++- `app/pages/`, `app/theme/`, `app/workspace/`, `roadmaps/templates.ts`.
 diff --git a/docs/process/ticket-pipeline.md b/docs/process/ticket-pipeline.md
 index db1e4a6..2b5d301 100644
 --- a/docs/process/ticket-pipeline.md

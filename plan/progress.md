@@ -27,7 +27,8 @@
         `SHEET_PAGE` and `isHistory` still filter page names; both are product facts that move to `product.ts`
       - the product keeps part d's two helpers (`legacyWorld.ts`, `pageShims.ts`): its list check runs the
         type page, a legacy page
-- [ ] every icon a source names is written from lucide-static; `public/lucide-icons` (hand copies) does not come here
+- [x] every icon a source names is written from lucide-static (21 today); `public/lucide-icons` (71 hand copies,
+      used only by the legacy pages) does not come here, and the port drops it from eagle
 - [ ] a third page, Wireframes, and its view in `app/workspace/`: a placeholder first (PM, 8 Nov)
 - [ ] `dev/` holds the build side's coding rules and skills (arch review, a component's structure…), taken from
       eagle-dev, and its folder structure, atomic design, product-agnostic

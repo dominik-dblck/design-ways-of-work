@@ -1,8 +1,8 @@
 difference	because
-output · yarn build	ds-scan.js no longer built: 69 scripts, not 70 · the .dc.html wireframes leave the way of working (PM, 8 Nov)
+output · yarn build	69 scripts, 365 files copied, 21 icons: ds-scan.js not built, the 71 icon copies gone · every icon a source names comes from lucide-static, and public/lucide-icons (hand copies for the legacy pages) is gone (PM, 8 Nov; D10)
 output · yarn checks	parts r and h (legacy pages run, their props), src holes, app mark and page scripts gone; the guard map reads modules only (56 files, 0 pages, 0 type-name branches in pages); design-scan-before-ready moved to the product's rules (32 checklist lines, 31 product rules) · the .dc.html wireframes leave the way of working (PM, 8 Nov)
 output · yarn test	143 tests: the Feature page's two drawing tests went with the frames · the .dc.html wireframes leave the way of working (PM, 8 Nov)
-output · yarn spec-check	it builds first: 69 scripts · the .dc.html wireframes leave the way of working (PM, 8 Nov)
+output · yarn spec-check	it builds first: the same build line · every icon a source names comes from lucide-static, and public/lucide-icons (hand copies for the legacy pages) is gone (PM, 8 Nov; D10)
 output · yarn ds-scan	the port drops the ds-scan script: it scanned only .dc.html · the .dc.html wireframes leave the way of working (PM, 8 Nov)
 dist · project/board-view.js	bundles the plans: one checklist rule fewer · the .dc.html wireframes leave the way of working (PM, 8 Nov)
 dist · project/board.js	bundles the plans: one checklist rule fewer · the .dc.html wireframes leave the way of working (PM, 8 Nov)
@@ -24,3 +24,5 @@ dist · project/ticket-pipeline.md	the recon reading table loses row 26 (ds-scan
 dist · project/tickets.js	bundles expected-files (ticketExpand) · the .dc.html wireframes leave the way of working (PM, 8 Nov)
 dist · project/scraps/guard-map.json	the guard map reads modules only · the .dc.html wireframes leave the way of working (PM, 8 Nov)
 written · guards/__snapshots__/guard-map.json	the guard map reads modules only; retaken at the port · the .dc.html wireframes leave the way of working (PM, 8 Nov)
+dist · project/lucide-icons/*	every icon a source names comes from lucide-static, and public/lucide-icons (hand copies for the legacy pages) is gone (PM, 8 Nov; D10)
+dist · project/new-project.md	the new-project guide no longer keeps public/lucide-icons · every icon a source names comes from lucide-static, and public/lucide-icons (hand copies for the legacy pages) is gone (PM, 8 Nov; D10)

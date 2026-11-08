@@ -74,7 +74,7 @@ const newProject: DocumentFile = {
         '',
         '- `tools/`, `guards/` (the checks), `tests/architecture/`, the configs at the root.',
         '- `docs/rules/`, `docs/skills/`, `docs/process/plans/` (the rules and the checklist), `docs/documents/`.',
-        '- `app/pages/`, `app/theme/`, `app/workspace/`, `roadmaps/templates.ts`, `public/lucide-icons/`.',
+        '- `app/pages/`, `app/theme/`, `app/workspace/`, `roadmaps/templates.ts`.',
         '',
       ],
     },

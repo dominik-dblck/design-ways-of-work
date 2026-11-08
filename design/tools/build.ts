@@ -7,7 +7,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { build } from 'rolldown';
 import { moduleEntries, moduleImports } from '../guards/source-check.ts';
-import { copySheetIcons } from './build/sheetIcons.ts';
+import { copyNamedIcons } from './build/namedIcons.ts';
 import { emittedTexts } from './emit.ts';
 import {
   entryOfModule,
@@ -155,7 +155,7 @@ async function emitFixtures(): Promise<void> {
 await emitFixtures();
 fs.rmSync(OUT, { recursive: true, force: true });
 const copied = copyFiles();
-const icons = copySheetIcons(OUT);
+const icons = copyNamedIcons(OUT);
 const scripts = filesOf().filter(isEntry);
 await Promise.all(scripts.map(bundle));
 const pages = filesOf().flatMap((file) => {

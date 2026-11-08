@@ -1,6 +1,6 @@
 /**
- * - `copySheetIcons` · each lucide icon the sheet names, written from the package
- * - at lucide-icons/<name>.svg over any copy there (D10); one it lacks fails
+ * - `copyNamedIcons` · each lucide icon a source names, written from the package
+ * - at lucide-icons/<name>.svg (D10); a name the package lacks fails the build
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -10,11 +10,11 @@ import { ROOT } from '../root.ts';
 const NAMED = /lucide-icons\/([a-z0-9-]+)\.svg/g;
 const PACKAGE = path.join(ROOT, 'node_modules', 'lucide-static', 'icons');
 
-// the icons the sheet's rows name, each once
+// the icons any source names, each once
 const namedIcons = (): ReadonlySet<string> =>
   new Set(
     filesOf()
-      .filter((file) => file.startsWith('sheet/') && file.endsWith('.ts'))
+      .filter((file) => /\.tsx?$/.test(file))
       .flatMap((file) =>
         [...fs.readFileSync(path.join(ROOT, file), 'utf8').matchAll(NAMED)].map(
           (found) => String(found[1]),
@@ -22,13 +22,13 @@ const namedIcons = (): ReadonlySet<string> =>
       ),
   );
 
-function copySheetIcons(out: string): number {
+function copyNamedIcons(out: string): number {
   const names = namedIcons();
   for (const name of names) {
     const from = path.join(PACKAGE, `${name}.svg`);
     if (!fs.existsSync(from))
       throw new Error(
-        `lucide-static has no ${name}.svg, which the sheet names`,
+        `lucide-static has no ${name}.svg, which a source names`,
       );
     const to = path.join(out, 'lucide-icons', `${name}.svg`);
     fs.mkdirSync(path.dirname(to), { recursive: true });
@@ -37,4 +37,4 @@ function copySheetIcons(out: string): number {
   return names.size;
 }
 
-export { copySheetIcons };
+export { copyNamedIcons };

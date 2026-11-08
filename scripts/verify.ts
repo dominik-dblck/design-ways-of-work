@@ -1,8 +1,7 @@
 /**
- * - `node scripts/verify.ts [product]` · phase 7: the product on design/ equals the product as it is
- * - a clone of the product (base) and a rehearsal copy (linked) run the same commands
- * - every output, every file they write and dist/ compared; a difference fails
- * - unless plan/expected-differences.tsv names it, with why; a row no longer met fails too
+ * - `node scripts/verify.ts [product]` · the product on design/ against the product as it is
+ * - a clone and a rehearsal copy run the same commands; outputs, dist/ and written files compared
+ * - a difference fails unless plan/expected-differences.tsv names it with why (* ends a prefix)
  */
 import { execFileSync, spawnSync } from 'node:child_process';
 import crypto from 'node:crypto';
@@ -101,9 +100,13 @@ function main(): void {
   ];
   fs.writeFileSync(path.join(RUNS, 'out', 'differences.txt'), `${found.join('\n')}\n`);
   const expected = expectedDifferences();
-  const unexplained = found.filter((line) => !expected.has(line));
-  const stale = [...expected.keys()].filter((line) => !found.includes(line));
-  for (const line of found) console.log(`  ${expected.has(line) ? 'EXPECTED' : 'DIFF'} · ${line}${expected.has(line) ? ` · ${expected.get(line)}` : ''}`);
+  const why = (line: string): string | undefined =>
+    [...expected].find(([row]) => (row.endsWith('*') ? line.startsWith(row.slice(0, -1)) : line === row))?.[1];
+  const unexplained = found.filter((line) => why(line) === undefined);
+  const stale = [...expected.keys()].filter((row) =>
+    row.endsWith('*') ? !found.some((line) => line.startsWith(row.slice(0, -1))) : !found.includes(row),
+  );
+  for (const line of found) console.log(`  ${why(line) === undefined ? 'DIFF' : 'EXPECTED'} · ${line}${why(line) === undefined ? '' : ` · ${why(line)}`}`);
   for (const line of stale) console.log(`  STALE · ${line} · listed as expected, and the same now`);
   const clean = unexplained.length === 0 && stale.length === 0;
   console.log(clean ? `ALL SAME · ${path.basename(SOURCE)} on design/, ${expected.size} differences expected` : `${unexplained.length} unexplained, ${stale.length} stale`);

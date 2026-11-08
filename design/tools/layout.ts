@@ -46,7 +46,6 @@ const FILE_HOMES: readonly (readonly [string, string])[] = [
   ['app/styles/__fixtures__', '_ds'],
   ['guards/__snapshots__', 'scraps'],
   ['public/assets', 'assets'],
-  ['public/lucide-icons', 'lucide-icons'],
   ['fixtures/data', ''],
   ['fixtures/packs', 'packs'],
   ['fixtures/screens', 'screens'],
