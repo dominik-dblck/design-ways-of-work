@@ -11,8 +11,6 @@ import { contentTypePart } from '../guards/checks/contentTypePart.ts';
 import { guardPart } from '../guards/checks/guardPart.ts';
 import { journeysPart } from '../guards/checks/journeysPart.ts';
 import { listPart } from '../guards/checks/listPart.ts';
-import { pagesPart } from '../guards/checks/pagesPart.ts';
-import { propsPart } from '../guards/checks/propsPart.ts';
 import { flowPart, rulesPart } from '../guards/checks/rulesParts.ts';
 import { sourceOf } from './layout.ts';
 import { sentencesPart } from '../guards/checks/sentencesPart.ts';
@@ -31,8 +29,6 @@ const PARTS: Readonly<
   c: contentTypePart,
   d: listPart,
   w: wireframesPart,
-  r: pagesPart,
-  h: propsPart,
 };
 
 function partText(part: string, mirror: Mirror): string {

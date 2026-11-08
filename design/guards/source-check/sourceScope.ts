@@ -1,7 +1,7 @@
 /**
  * - `MAP`, `homesOfRow`, `mapRowOf` · one row, one home: where each fact lives
  * - `SCOPE`, `HISTORY`, `isHistory` · the files the guard reads, the pages it skips
- * - `LOGIC_PAGE`, `SHEET_PAGE`, `RULES_PAGES`, `isCode` · pages by kind, code
+ * - `LOGIC_PAGE`, `SHEET_PAGE`, `isCode` · pages by kind, code
  */
 import type { MapRow } from './sourceCheckTypes.ts';
 
@@ -68,24 +68,12 @@ const SCOPE: readonly string[] = [
   'directory.js',
   'field-kinds.js',
   'screen-view.js',
-  'ApprovalBar.dc.html',
-  'ApprovalBarRoles.dc.html',
-  'ApprovalsPill.dc.html',
-  'ContextBar.dc.html',
-  'ManageApprovals.dc.html',
-  'ApproveOnBehalf.dc.html',
-  'WithdrawDialog.dc.html',
-  'DocumentRow.dc.html',
-  'EditorScreen.dc.html',
-  'BlockRow.dc.html',
-  'DiffPane.dc.html',
   'signatures.js',
   'projections.js',
   'shared-cases.js',
   'db-schema.js',
   'events.js',
   'wireframes.js',
-  'TypeLibrary.dc.html',
   'queries.js',
   'journeys.js',
 ];
@@ -94,9 +82,6 @@ const SCOPE: readonly string[] = [
 const HISTORY: readonly string[] = [];
 
 const LOGIC_PAGE = /^(rules-|Translation statuses)/;
-
-// the pages that read the rules to draw a screen, never the rules themselves
-const RULES_PAGES: readonly string[] = ['Content App Wireframe.dc.html'];
 
 // the design side's own pages: their words are the sheet's, never a screen's
 const SHEET_PAGE =
@@ -127,7 +112,6 @@ export {
   LOGIC_PAGE,
   MAP,
   mapRowOf,
-  RULES_PAGES,
   SCOPE,
   SHEET_PAGE,
 };

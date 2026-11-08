@@ -153,7 +153,6 @@ export const RECON_TEMPLATE: readonly DocumentSection[] = [
       '| 23  | every wireframe and screen that shows what the ticket builds is read against the spec; where the wireframe says more, the wireframe moves | {which wireframes, or "none shows this ticket"} |',
       '| 24  | the ticket carries why · today / after / unlocks / not / oneLine, product words, no paths | {yes / which line is missing} |',
       '| 25  | a PM change mid-build is a requirement: built, written up at stage end as REPLACE / WITH, in the sheet before the report closes | {taken as it happens, not here} |',
-      '| 26  | before a ticket touching a wireframe is READY, ds-scan.ts runs over every .dc.html and findings are zero or written into the ticket | {the run and its count, or "no wireframe touched"} |',
       '| …   | any line the file holds beyond these — the file is the count, this table follows it | |',
       '',
       '**And one the checklist does not ask.** Count the reading table against the criteria. A row the',

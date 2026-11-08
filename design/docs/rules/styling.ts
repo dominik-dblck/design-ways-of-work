@@ -9,24 +9,6 @@ const rules: RuleFile = {
     "\nThe look comes from the design system's\ntokens; a page names a role, never a value.\n",
   rows: [
     {
-      rule: 'In a `.dc.html` page a colour is a role token (`var(--fg-primary)`), never a hex or a ramp step, and it reads in both modes.',
-      gate: '`checks` (`ds-scan`)',
-      exceptions: 'the chrome a frame draws, marked inline',
-      why: 'A role follows the mode; a value is right in one of the two.',
-    },
-    {
-      rule: 'In a `.dc.html` page a height, a radius and a z-index are read from `tokens.css`, never typed.',
-      gate: '`checks` (`ds-scan`)',
-      exceptions: 'a file drawn before, until it is touched',
-      why: 'A step of a scale moves in one place.',
-    },
-    {
-      rule: "A contrast ratio is computed by one formula, `ds-scan`'s token graph.",
-      gate: '`review`',
-      exceptions: '—',
-      why: 'One formula, so two checks cannot disagree.',
-    },
-    {
       rule: 'In React code a colour is a palette role read through the theme: never a token variable, a typed value, a palette path on a `color` prop, nor `theme.palette` (the light value).',
       gate: '`aColourIsAPaletteRole`',
       exceptions: '—',

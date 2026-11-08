@@ -24,7 +24,6 @@ import {
   countLine,
   statesNamed,
 } from './feature-view/featureCombinations.ts';
-import { pagesOf, readOf } from './feature-view/featureLinks.ts';
 import { FEATURE_WORDS } from './feature-view/featureWords.ts';
 import type { FeatureTab, FeatureView } from './feature-view/featureTypes.ts';
 
@@ -47,6 +46,9 @@ function firstEpic(): string | null {
   return (all.find((one) => one.status !== 'done') ?? all.at(-1))?.epic ?? null;
 }
 
+const readOf = (ticket: ReturnType<typeof TICKETS>[number] | undefined): readonly string[] =>
+  ticket?.read ?? [];
+
 function featureOf(epic: string): FeatureView {
   const ticket = TICKETS().find((one) => one.id === `T-${epic}-00`);
   const read = readOf(ticket);
@@ -68,7 +70,6 @@ function featureOf(epic: string): FeatureView {
     docTypes: docTypesOf(epic),
     decisions: ticket ? (ticketOf(ticket.id)?.edgeSections ?? []) : [],
     notes: notesOf(epic),
-    ...pagesOf(read),
     combinations: combinationsOf(epic),
     statesNamed: statesNamed(epic),
   };

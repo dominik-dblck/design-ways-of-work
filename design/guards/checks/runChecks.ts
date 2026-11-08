@@ -7,7 +7,6 @@ import type { Mirror } from './checkWorld.ts';
 import * as CONTENT_CHECK from '../../sheet/logic/assembly/content-check.ts';
 import * as CONTENT_TYPE_LOGIC from '../../sheet/logic/assembly/content-type-logic.ts';
 import * as SOURCE_CHECK from '../source-check.ts';
-import * as TICKETS from '../../roadmaps/tickets.ts';
 
 type Guard = typeof SOURCE_CHECK;
 type Finding = ReturnType<Guard['scan']>[number];
@@ -102,7 +101,7 @@ function textsOf(
   );
 }
 
-// the scan over the guard's list, the layered files, every page and the components' spec
+// the scan over the guard's list, the layered files and the components' spec
 function guardFindings({
   mirror,
   guard,
@@ -114,17 +113,10 @@ function guardFindings({
   readonly files: Texts;
   readonly layered: Texts;
 }): readonly Finding[] {
-  const names = mirror.list();
   const spec = mirror.readOr('components.spec.json', null);
   const both = { ...files, ...layered };
   return [
     ...guard.scan(files),
-    ...guard.projectCheck(names, {}),
-    ...guard.componentsCheck(JSON.parse(mirror.read('components.spec.json')), {
-      names,
-      // a component its ticket built needs no drawing
-      built: doneOn,
-    }),
     ...guard.layersCheck(layered),
     ...guard.branchesCheck(both),
     ...guard.twiceCheck(both),
@@ -133,11 +125,9 @@ function guardFindings({
   ];
 }
 
-const doneOn = (ticket: string): boolean => TICKETS.status[ticket] === 'done';
-
 function guardRun(mirror: Mirror): GuardRun {
   const guard: Guard = SOURCE_CHECK;
-  const list = guard.readList(mirror.list());
+  const list = guard.readList();
   const files = textsOf(mirror, { files: list, fallback: '' });
   const layered = textsOf(mirror, {
     files: Object.keys(guard.layers),

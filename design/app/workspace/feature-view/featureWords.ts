@@ -13,8 +13,6 @@ const FEATURE_WORDS = {
     docTypes: 'Document types',
     decisions: 'Decisions',
     notes: 'Notebook',
-    components: 'Components',
-    screens: 'Screens',
     combinations: 'Combinations',
   },
   journeys: {
@@ -77,16 +75,6 @@ const FEATURE_WORDS = {
     label: 'Notebook',
     note: 'the reasoning behind the picks, ours only: never on a read list, never in a pack',
     none: 'No notebook · a closed epic’s stays as markdown, frozen',
-  },
-  components: {
-    label: 'Components',
-    note: 'the drawings its read list names in their states, each beside its spec row, and its logic pages; framed from their page until the build side’s package draws them',
-    open: 'Open the drawings on their own',
-  },
-  screens: {
-    label: 'Screens',
-    note: 'drawn, not yet a component: each moves into one, and the list shrinks as it does',
-    open: 'Open',
   },
   combinations: {
     label: 'Fact combinations',

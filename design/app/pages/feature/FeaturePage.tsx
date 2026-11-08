@@ -9,13 +9,11 @@ import { featureOf, firstEpic } from '../../workspace/feature-view.ts';
 import { ApiSection } from './ApiSection.tsx';
 import { CasesSection } from './CasesSection.tsx';
 import { CombinationsSection } from './CombinationsSection.tsx';
-import { ComponentsSection } from './ComponentsSection.tsx';
 import { DecisionsSection } from './DecisionsSection.tsx';
 import { FeatureHead } from './FeatureHead.tsx';
 import { FieldsSection } from './FieldsSection.tsx';
 import { JourneysSection } from './JourneysSection.tsx';
 import { NotesSection } from './NotesSection.tsx';
-import { ScreensSection } from './ScreensSection.tsx';
 import { SourceSection } from './SourceSection.tsx';
 
 function FeaturePage(): ReactElement {
@@ -32,8 +30,6 @@ function FeaturePage(): ReactElement {
         <FieldsSection view={view} />
         <DecisionsSection sections={view.decisions} />
         <NotesSection notes={view.notes} />
-        <ComponentsSection view={view} />
-        <ScreensSection rows={view.screens} />
         <CombinationsSection view={view} />
       </Stack>
     </Container>

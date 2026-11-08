@@ -3,7 +3,7 @@
  * - `targets`, `readList` · the files a requirement retires code in, a run's files
  */
 import { LAYERS } from './sourceLayers.ts';
-import { isHistory, SCOPE, SHEET_PAGE } from './sourceScope.ts';
+import { SCOPE } from './sourceScope.ts';
 import * as APPROVAL_LOGIC from '../../sheet/logic/approval/approval-logic.ts';
 
 type Requirement =
@@ -36,19 +36,13 @@ function targets(): readonly string[] {
   return [...new Set(files.filter((file) => !SCOPE.includes(file)))];
 }
 
-// the scope, every product page, every layered file and the words' home, each once
-function readList(names?: readonly string[]): readonly string[] {
+// the scope, every layered file and the words' home, each once
+function readList(): readonly string[] {
   return [
     ...new Set([
       ...SCOPE,
       ...targets(),
       ...Object.keys(LAYERS).filter((file) => file !== 'source-check.js'),
-      ...(names ?? []).filter(
-        (name) =>
-          /\.dc\.html$/.test(name) &&
-          !SHEET_PAGE.test(name) &&
-          !isHistory(name),
-      ),
       'messages.js',
     ]),
   ];

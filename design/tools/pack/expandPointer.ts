@@ -7,7 +7,7 @@ import { expandFile } from './expandFile.ts';
 import { buildPaths } from '../../sheet/project.ts';
 import type { Cut } from './fileLines.ts';
 import { namedLine } from './fileLines.ts';
-import { sha256, sheetDigest } from './packSources.ts';
+import { sheetDigest } from './packSources.ts';
 import * as JOURNEYS from '../../sheet/cases/journeys.ts';
 import * as RECEIPTS from '../../roadmaps/receipts.ts';
 import * as TICKETS from '../../roadmaps/tickets.ts';
@@ -79,27 +79,9 @@ function ticketLines(ref: string, cut: Cut): readonly string[] | null {
   return [...ticketHead(ticket), ...(named ? [...criteria, ''] : [])];
 }
 
-// pages too large to inline: each named with its size and digest
-function pagesLines(ref: string, cut: Cut): readonly string[] | null {
-  const listed = /^([\w ,]+?)\s*\.dc\.html\s*·\s*(.+)$/.exec(ref);
-  if (!listed?.[1]?.includes(',')) return null;
-  const pages = listed[1].split(/,\s*/).map((name) => `${name.trim()}.dc.html`);
-  return [
-    `_wireframes_ · ${listed[2]} · too large to inline; each named with its size and digest — the shape rows are in [plan] Components.dc.html`,
-    '',
-    ...pages.map((page) => {
-      const text = cut.reader.read(page);
-      return text === null
-        ? `- ${page} · not found here`
-        : `- ${page} · ${text.split('\n').length} lines · sha256 ${sha256(text).slice(0, 12)}…`;
-    }),
-    '',
-  ];
-}
-
 // a list of design files: each source named with its size and whole digest
 function filesLines(ref: string, cut: Cut): readonly string[] | null {
-  const name = String.raw`[\w.\/ -]+\.(?:dc\.html|ts|json|md|css)`;
+  const name = String.raw`[\w.\/ -]+\.(?:ts|json|md|css)`;
   if (!new RegExp(`^${name}(?:\\s*,\\s*${name})+$`).test(ref)) return null;
   const files = ref.split(/\s*,\s*/);
   return [
@@ -160,12 +142,11 @@ function otherLines(ref: string, cut: Cut): readonly string[] {
   if (/^packs\//.test(ref))
     return ['_this file_ · the pack you are reading', ''];
   const read =
-    pagesLines(ref, cut) ??
     filesLines(ref, cut) ??
     derivedLines(ref, cut) ??
     namedFileLines(ref, cut);
   if (read) return read;
-  if (/\.(?:ts|js|json|md|css|dc\.html)\b/.test(coreOf(ref)))
+  if (/\.(?:ts|js|json|md|css)\b/.test(coreOf(ref)))
     cut.miss(`${ref} · names a design file the pack cannot read`);
   return ['_pointer_ · not a file or a ticket; read as named', ''];
 }

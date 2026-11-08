@@ -1,0 +1,162 @@
+diff --git a/.claude/skills/design-pack/SKILL.md b/.claude/skills/design-pack/SKILL.md
+index d98f0c0..dd6c01e 100644
+--- a/.claude/skills/design-pack/SKILL.md
++++ b/.claude/skills/design-pack/SKILL.md
+@@ -29,7 +29,6 @@ One ticket in hand at a time (RULES). The pack is what the build side receives 
+ - `sheet/cases/test-cases.ts` + `sheet/cases/journeys.ts` · the test cases are generated from the rows, each with its reach (shown, guarded, api); the journeys are data, covers per step · `Journeys.check` empty before a feature ticket is READY (JR2–JR4) · refine-check’s rule:journeys-in-one-grammar still parses the old one-line journey grammar, until `sheet/cases/journeys.ts` holds it.
+ - `guards/spec-check.ts` · parts exist, tokens declared, no hex outside gate-dot, canon states or `skip`, wrapper paths follow the tier, `layout` on every molecule, an organism’s parts named after it.
+ - `tools/pack.ts` · verbatim, one path per basename, refuses a todo ticket with findings. Each section is cut from `{home}/{name}.ts` or one of its parts and carries that file's sha256; the pack is one file. A `whole` pointer travels whole, file by file. Every file a root loads, and every fixture the repository holds, travels with its digest (The files the roots load).
+-- `guards/ds-scan.ts` · zero over every wireframe before a ticket that touches one. `rule:design-scan-before-ready`
+ - `guards/source-check.ts` · after every change `SourceCheck.ratchet` reads 0 (no kind of copy above its baseline; a retired `replaces` still in its file fails) · zero copies before a feature ticket is READY; `tools/pack.ts` refuses the pack. `rule:one-source-of-truth`
+ 
+ ## The cut
+diff --git a/docs/process/ticket-pipeline.md b/docs/process/ticket-pipeline.md
+index db1e4a6..2b5d301 100644
+--- a/docs/process/ticket-pipeline.md
++++ b/docs/process/ticket-pipeline.md
+@@ -846,7 +846,6 @@ reported (rule:feature-run-never-stops) — or, under `reconStop`, a question.**
+ | 23  | every wireframe and screen that shows what the ticket builds is read against the spec; where the wireframe says more, the wireframe moves | {which wireframes, or "none shows this ticket"} |
+ | 24  | the ticket carries why · today / after / unlocks / not / oneLine, product words, no paths | {yes / which line is missing} |
+ | 25  | a PM change mid-build is a requirement: built, written up at stage end as REPLACE / WITH, in the sheet before the report closes | {taken as it happens, not here} |
+-| 26  | before a ticket touching a wireframe is READY, ds-scan.ts runs over every .dc.html and findings are zero or written into the ticket | {the run and its count, or "no wireframe touched"} |
+ | …   | any line the file holds beyond these — the file is the count, this table follows it | |
+ 
+ **And one the checklist does not ask.** Count the reading table against the criteria. A row the
+diff --git a/guards/checks/legacyWorld.ts b/guards/checks/legacyWorld.ts
+new file mode 100644
+index 0000000..1d37bad
+--- /dev/null
++++ b/guards/checks/legacyWorld.ts
+@@ -0,0 +1,48 @@
++/**
++ * - `legacyWorld` · a page's window, every bundle a legacy page reads run in it
++ * - the one place the checks run bundles: it leaves with the last legacy page
++ */
++import { loadAll, pageWorld } from './checkWorld.ts';
++import type { Mirror, World } from './checkWorld.ts';
++
++// a legacy page's inline script reads these globals: each bundle carries its own imports
++const PAGE_BUNDLES: readonly string[] = [
++  'glossary.js',
++  'messages.js',
++  'messages-content.js',
++  'languages.js',
++  'directory.js',
++  'gate-states.js',
++  'block-rules.js',
++  'content-types.js',
++  'content-modules.js',
++  'content-assembly.js',
++  'blocks.js',
++  'field-kinds.js',
++  'events.js',
++  'sample-run.js',
++  'commands.js',
++  'refusals.js',
++  'gate-rules.js',
++  'scenes.js',
++  'translation-flow.js',
++  'role-combinations.js',
++  'approval-logic.js',
++  'sheet-status.js',
++  'delivery-flow.js',
++  'content-check.js',
++  'content-type-logic.js',
++  'catalog.js',
++  'content-samples.js',
++  'content-list.js',
++  'screen-view.js',
++  'wireframes.js',
++];
++
++function legacyWorld(mirror: Mirror): World {
++  const world = pageWorld();
++  loadAll(world, { mirror, files: PAGE_BUNDLES });
++  return world;
++}
++
++export { legacyWorld };
+diff --git a/guards/checks/pageShims.ts b/guards/checks/pageShims.ts
+new file mode 100644
+index 0000000..4993b9c
+--- /dev/null
++++ b/guards/checks/pageShims.ts
+@@ -0,0 +1,21 @@
++/**
++ * - `ListLogic`, `LIST_REACT` · the base class and React the list logic reaches
++ */
++
++// the list's harness never redraws: its state is set before each read
++class ListLogic {
++  props: unknown;
++  constructor(props?: unknown) {
++    this.props = props || {};
++  }
++  setState(): void {
++    this.props = Object(this.props);
++  }
++  forceUpdate(): void {
++    this.props = Object(this.props);
++  }
++}
++
++const LIST_REACT = { createRef: (): object => ({}) };
++
++export { LIST_REACT, ListLogic };
+diff --git a/guards/measure/measureFiles.ts b/guards/measure/measureFiles.ts
+index 2f7db81..fe9d896 100644
+--- a/guards/measure/measureFiles.ts
++++ b/guards/measure/measureFiles.ts
+@@ -57,7 +57,7 @@ const FIXTURES: readonly string[] = [
+ // the theme, the pipeline and the scans: not the run's data, each copied with its own manifest
+ const THEME_FIXTURES: readonly string[] = ['tokens.css', designSystem];
+ const PIPELINE_FIXTURES: readonly string[] = ['ticket-pipeline.md'];
+-const SCAN_FIXTURES: readonly string[] = ['ds-scan.js', 'spec-check.js'];
++const SCAN_FIXTURES: readonly string[] = ['spec-check.js'];
+ 
+ // the fixtures in the one order that loads them, never restated by a reader
+ const FIXTURE_LOAD: readonly string[] = LOAD.filter((file) =>
+diff --git a/package.json b/package.json
+index de924c7..20bcf17 100644
+--- a/package.json
++++ b/package.json
+@@ -21,7 +21,6 @@
+     "prepare": "husky",
+     "checks:gate": "NODE_OPTIONS='--preserve-symlinks --preserve-symlinks-main' node tools/checksGate.ts",
+     "test:architecture": "vitest --run tests/architecture",
+-    "ds-scan": "NODE_OPTIONS='--preserve-symlinks --preserve-symlinks-main' node tools/build.ts && NODE_OPTIONS='--preserve-symlinks --preserve-symlinks-main' node tools/ds-scan.ts",
+     "new-epic": "NODE_OPTIONS='--preserve-symlinks --preserve-symlinks-main' node tools/new-epic.ts",
+     "release:record": "NODE_OPTIONS='--preserve-symlinks --preserve-symlinks-main' node tools/release-record.ts"
+   },
+diff --git a/sheet/project.ts b/sheet/project.ts
+index dbcf477..c22aa26 100644
+--- a/sheet/project.ts
++++ b/sheet/project.ts
+@@ -48,7 +48,6 @@ const buildReads: {
+     'app/workspace/feature-view.ts',
+     'app/workspace/sheet-status.ts',
+     'app/workspace/source-view.ts',
+-    'guards/ds-scan.ts',
+     'guards/expected-files.ts',
+     'guards/measure.ts',
+     'guards/refine-check.ts',
+diff --git a/sheet/rules/qualityRules.ts b/sheet/rules/qualityRules.ts
+index 212b847..337c4bf 100644
+--- a/sheet/rules/qualityRules.ts
++++ b/sheet/rules/qualityRules.ts
+@@ -13,6 +13,7 @@ const QUALITY: RuleSlot = {
+     { id: 'two-database-logins', says: 'Two logins to the database, never one. The application connects as content_app, which cannot UPDATE, DELETE or TRUNCATE the log; the migration runs as the owner, over a URL the application is never given.', why: 'One login that can SET ROLE can RESET ROLE, and a revoke it can undo proves nothing.' },
+     { id: 'uploads-never-overwrite', says: 'Files are never overwritten: every upload is a new object.', why: 'A version that was signed keeps pointing at the bytes it was signed on.' },
+     { id: 'one-statement-per-page', says: 'A list reads in one statement to the database per page, whatever the page holds, on snapshots the running build wrote. A snapshot an older build left is replayed and written back once, apart from the page and outside its count, so the first list after a deploy may cost more and every list after it costs one.', why: 'A stale snapshot replayed on the read path costs more than one statement a document, and a deploy step that rebuilds every snapshot is a step nobody asked for.' },
++  { id: 'design-scan-before-ready', says: 'Before a ticket that touches a wireframe is READY, ds-scan.js runs over every drawing and its findings are zero or written into the ticket. Each of its rules reads its scale from the tokens rather than from a list in the scan, so moving a token moves the rule, and the shape rule reports a shape three or more files draw and no row claims. The same rules run over the app’s components: one set of rules, two places that read it. An exemption is written in the scan, never in a script that calls it, and covers a marked range, not a whole file; the files out of scope are named in the scan with their reason. A sweep runs over the same list the rule claims, the count is read per file, and a file is read again after a sweep.', why: 'A value picked by eye drifts the day it is drawn, an exemption is where drift hides, and a sweep over the files a tool can open is not a sweep over the files the rule covers.' },
+   ],
+ };
+ 
+diff --git a/tests/architecture/baselines/aFileNamesItsPurpose.json b/tests/architecture/baselines/aFileNamesItsPurpose.json
+new file mode 100644
+index 0000000..cc4c2b3
+--- /dev/null
++++ b/tests/architecture/baselines/aFileNamesItsPurpose.json
+@@ -0,0 +1 @@
++["sheet/contract/block-model/settledFrom1.ts \u00b7 a part named by a number", "sheet/contract/block-model/settledFrom25.ts \u00b7 a part named by a number", "sheet/model/eagle-review/pointsOne.ts \u00b7 a part named by a number", "sheet/model/eagle-review/pointsThree.ts \u00b7 a part named by a number", "sheet/model/eagle-review/pointsTwo.ts \u00b7 a part named by a number", "sheet/words/messages/refusalOne.ts \u00b7 a part named by a number", "sheet/words/messages/refusalTwo.ts \u00b7 a part named by a number", "sheet/words/messages/rowsOne.ts \u00b7 a part named by a number", "sheet/words/messages/rowsThree.ts \u00b7 a part named by a number", "sheet/words/messages/rowsTwo.ts \u00b7 a part named by a number", "sheet/words/messages/screenFour.ts \u00b7 a part named by a number", "sheet/words/messages/screenOne.ts \u00b7 a part named by a number", "sheet/words/messages/screenThree.ts \u00b7 a part named by a number", "sheet/words/messages/screenTwo.ts \u00b7 a part named by a number"]
+\ No newline at end of file

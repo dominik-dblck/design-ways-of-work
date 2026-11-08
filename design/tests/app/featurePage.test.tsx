@@ -5,9 +5,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { renderToString } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
 import { CombinationsSection } from '../../app/pages/feature/CombinationsSection.tsx';
-import { ComponentsSection } from '../../app/pages/feature/ComponentsSection.tsx';
 import { FeaturePage } from '../../app/pages/feature/FeaturePage.tsx';
-import { ScreensSection } from '../../app/pages/feature/ScreensSection.tsx';
 import { theme } from '../../app/theme/theme.ts';
 import {
   featureOf,
@@ -30,22 +28,9 @@ describe('the Feature page', () => {
       expect(html).toContain(endpoint.title);
   });
 
-  it('frames the epic’s drawings from their own page', () => {
-    const html = renderToString(
-      <ThemeProvider theme={theme}>
-        <ComponentsSection view={featureOf('E14')} />
-      </ThemeProvider>,
-    );
-    expect(html).toContain('src="Feature drawings.dc.html?epic=E14"');
-  });
-
-  it('frames each screen, and asks before counting a combinations file', () => {
+  it('asks before counting a combinations file', () => {
     const drawn = (node: React.ReactElement): string =>
       renderToString(<ThemeProvider theme={theme}>{node}</ThemeProvider>);
-    const blocks = featureOf('E04');
-    expect(drawn(<ScreensSection rows={blocks.screens} />)).toContain(
-      'src="E04 Blocks UI spec.dc.html"',
-    );
     const translations = drawn(<CombinationsSection view={featureOf('E09')} />);
     expect(translations).toContain('role-combinations.js');
     expect(translations).toContain(words.combinations.count);

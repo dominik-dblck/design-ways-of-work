@@ -93,10 +93,7 @@ function reads(ticket: TicketRow, spec: ComponentsSpec): string[] {
       (row) =>
         row.ownedBy === ticket.id || (row.changedIn ?? []).includes(ticket.id),
     )
-    .flatMap((row) => [
-      `components.spec.json · ${row.id}`,
-      ...(row.live ? [`${row.live}.dc.html`] : []),
-    ]);
+    .map((row) => `components.spec.json · ${row.id}`);
   const all = [
     ...facts.ids,
     ...facts.keys.map((key) => `refusals.ts · ${key}`),

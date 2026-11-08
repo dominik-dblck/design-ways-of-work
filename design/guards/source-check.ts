@@ -1,6 +1,6 @@
 /**
  * - `codeScan`, `ownModules`, `twiceCheck`, `fileHeads` · copies
- * - `componentChecks`, `projectCheck`, `pageScripts`, `architecture` · the views
+ * - `contentCheck`, `architecture` · the content's findings, the view of it all
  * - `sourceLayers`, `requirementReads`, `ratchet`, `sourceScope` · layers, counts
  */
 export { architecture } from './source-check/architecture.ts';
@@ -10,14 +10,8 @@ export {
   MODULE_IMPORTS as moduleImports,
   ownModulesText,
 } from './source-check/ownModules.ts';
-export { componentsCheck, propsCheck } from './source-check/componentChecks.ts';
-export { projectCheck } from './source-check/projectCheck.ts';
 export { aboutCheck } from './source-check/fileHeads.ts';
-export {
-  contentCheck,
-  moduleNeeds,
-  pageScriptsCheck,
-} from './source-check/pageScripts.ts';
+export { contentCheck } from './source-check/contentFindings.ts';
 export {
   BASELINE as baseline,
   copies,

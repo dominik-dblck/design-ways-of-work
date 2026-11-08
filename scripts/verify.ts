@@ -99,6 +99,7 @@ function main(): void {
     ...differences('dist', hashes(path.join(BASE, 'dist')), hashes(path.join(LINKED, 'dist'))),
     ...differences('written', written(BASE), written(LINKED)),
   ];
+  fs.writeFileSync(path.join(RUNS, 'out', 'differences.txt'), `${found.join('\n')}\n`);
   const expected = expectedDifferences();
   const unexplained = found.filter((line) => !expected.has(line));
   const stale = [...expected.keys()].filter((line) => !found.includes(line));

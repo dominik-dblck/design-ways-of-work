@@ -72,10 +72,7 @@ describe('the Feature view', () => {
     expect(featureOf('E07').steps).toEqual([]);
   });
 
-  it('frames the screens its read list names, and names its combinations or the states without them', () => {
-    expect(featureOf('E04').screens.map((one) => one.href)).toEqual([
-      'E04 Blocks UI spec.dc.html',
-    ]);
+  it('names its combinations, or the states without them', () => {
     expect(featureOf('E09').combinations.map((one) => one.file)).toEqual([
       'role-combinations.js',
     ]);

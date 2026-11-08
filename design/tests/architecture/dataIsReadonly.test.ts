@@ -10,8 +10,6 @@ import type { Source } from './tree.ts';
 
 // a tally a scan fills as it runs, mutated by design
 const MUTABLE_BY_DESIGN: Readonly<Record<string, readonly string[]>> = {
-  'guards/ds-scan.ts': ['Tally'],
-  'guards/ds-scan/dsScanTypes.ts': ['Drift', 'ScanCounts'],
   'guards/expected-files/packReads.ts': ['EndpointFacts'],
   'sheet/samples/payloads/payloadsTypes.ts': ['WalkState'],
   'sheet/logic/approval/role-combinations/combinationRows.ts': ['ClassTally'],

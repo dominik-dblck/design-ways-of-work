@@ -1,7 +1,7 @@
 /**
  * - `node scripts/rehearse.ts [product] [copy]` · a port rehearsal on a copy, never the product
  * - copies the product's tracked files but the wow set; links each file of design/ in place
- * - ports/<product>/ lays over the copy what the port changes in the product itself
+ * - then applies ports/<product>/port.patch: what the port changes in the product itself
  * - its node runs keep the link's path (NODE_OPTIONS), so `..` still reaches the product
  */
 import { execFileSync } from 'node:child_process';
@@ -12,7 +12,7 @@ const HERE = path.resolve(import.meta.dirname, '..');
 const SOURCE = path.resolve(process.argv[2] ?? path.join(HERE, '..', 'eagle-design'));
 const COPY = path.resolve(process.argv[3] ?? path.join(HERE, '.rehearsal', path.basename(SOURCE)));
 const DESIGN = path.join(HERE, 'design');
-const PORT = path.join(HERE, 'ports', path.basename(SOURCE));
+const PATCH = path.join(HERE, 'ports', path.basename(SOURCE), 'port.patch');
 const WOW_CATEGORY = /^(wow, |mixed check)/;
 const KEEP_LINKS = "NODE_OPTIONS='--preserve-symlinks --preserve-symlinks-main'";
 
@@ -30,6 +30,11 @@ function filesUnder(folder: string): readonly string[] {
     .readdirSync(folder, { recursive: true, withFileTypes: true })
     .filter((entry) => entry.isFile() && entry.name !== '.DS_Store')
     .map((entry) => path.relative(folder, path.join(entry.parentPath, entry.name)));
+}
+
+function commit(message: string): void {
+  execFileSync('git', ['add', '-A'], { cwd: COPY });
+  execFileSync('git', ['-c', 'user.name=rehearsal', '-c', 'user.email=rehearsal@local', 'commit', '-qm', message, '--no-verify'], { cwd: COPY });
 }
 
 function edit(file: string, change: (text: string) => string): void {
@@ -59,18 +64,11 @@ function main(): void {
   const tracked = execFileSync('git', ['ls-files'], { cwd: SOURCE, encoding: 'utf8' }).split('\n').filter(Boolean);
   let copied = 0;
   let linked = 0;
-  let ported = 0;
   for (const file of tracked.filter((one) => !WOW.has(one))) {
     const target = path.join(COPY, file);
     fs.mkdirSync(path.dirname(target), { recursive: true });
     fs.copyFileSync(path.join(SOURCE, file), target);
     copied += 1;
-  }
-  for (const file of filesUnder(PORT)) {
-    const target = path.join(COPY, file);
-    fs.mkdirSync(path.dirname(target), { recursive: true });
-    fs.copyFileSync(path.join(PORT, file), target);
-    ported += 1;
   }
   for (const file of filesUnder(DESIGN)) {
     const target = path.join(COPY, file);
@@ -81,9 +79,16 @@ function main(): void {
   fs.symlinkSync(path.join(SOURCE, 'node_modules'), path.join(COPY, 'node_modules'));
   configs();
   execFileSync('git', ['init', '-q'], { cwd: COPY });
-  execFileSync('git', ['add', '-A'], { cwd: COPY });
-  execFileSync('git', ['-c', 'user.name=rehearsal', '-c', 'user.email=rehearsal@local', 'commit', '-qm', 'rehearsal', '--no-verify'], { cwd: COPY });
-  console.log(`${path.relative(HERE, COPY) || COPY} · ${copied} product files copied, ${ported} from the port, ${linked} files of design/ linked in place`);
+  commit('the product, design/ linked');
+  execFileSync('git', ['tag', 'product'], { cwd: COPY });
+  const patched = fs.existsSync(PATCH);
+  if (patched) {
+    execFileSync('git', ['apply', '--whitespace=nowarn', PATCH], { cwd: COPY, stdio: 'inherit' });
+    commit('the port');
+  }
+  console.log(
+    `${path.relative(HERE, COPY) || COPY} · ${copied} product files copied, ${linked} files of design/ linked in place, ${patched ? 'the port applied' : 'no port'}`,
+  );
 }
 
 main();

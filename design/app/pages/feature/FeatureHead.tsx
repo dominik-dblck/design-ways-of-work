@@ -25,8 +25,6 @@ function jumpsOf(view: FeatureView): readonly (readonly [string, string, number]
     ['fields', words.nav.fields, view.fieldKinds.length],
     ['decisions', words.nav.decisions, view.decisions.length],
     ['notes', words.nav.notes, view.notes?.sections.length ?? 0],
-    ['components', words.nav.components, view.components.length],
-    ['screens', words.nav.screens, view.screens.length],
     ['combinations', words.nav.combinations, view.combinations.length],
   ];
 }

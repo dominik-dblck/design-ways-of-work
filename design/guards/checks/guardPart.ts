@@ -1,5 +1,5 @@
 /**
- * - `guardPart` · part a: the guard's map and ratchet, the screens' keys, the pages,
+ * - `guardPart` · part a: the guard's map and ratchet, screens' keys, copied rules,
  * - the words' checks, the pools and Measure.run
  */
 import { capabilitiesLine } from './capabilitiesCheck.ts';
@@ -9,7 +9,7 @@ import { modesLine } from './modesCheck.ts';
 import { rulesLine } from './rulesCheck.ts';
 import type { Mirror } from './checkWorld.ts';
 import { measureLines } from './measureCheck.ts';
-import { pageTextLines } from './pageTexts.ts';
+import { copiedRulesLine } from './copiedRules.ts';
 import { poolsLine } from './parsePools.ts';
 import { guardRun } from './runChecks.ts';
 import type { GuardRun } from './runChecks.ts';
@@ -98,7 +98,7 @@ function guardPart(mirror: Mirror): readonly string[] {
       text: run.ratchet.length ? JSON.stringify(run.ratchet) : '0',
     }),
     screenKeysLine(mirror),
-    ...pageTextLines(mirror, run),
+    copiedRulesLine(mirror),
     capabilitiesLine(mirror),
     decisionsLine(),
     modesLine(mirror),

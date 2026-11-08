@@ -11,8 +11,7 @@ Each rule file is data (D21): `{concern}.ts` holds its rows, and `yarn build` wr
 hand-edited `.md`.
 
 Production code here is a hand-written `.ts` in a home of `tools/layout.ts` or under `tools/`, and a `.mjs` under `tools/`.
-A `.d.ts`, a test, a sheet file still in `.js` (the move to TypeScript, D12) and a `.dc.html` page are
-not; the sheet's own checks (`yarn checks`) read the pages.
+A `.d.ts`, a test and a sheet file still in `.js` (the move to TypeScript, D12) are not.
 
 The specification is data: a string of the sheet is its content and keeps its sources (a ticket id, an
 epic, a date, a decision). The rules below hold the code around that data, never the data's words.

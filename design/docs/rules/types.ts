@@ -73,8 +73,7 @@ const rules: RuleFile = {
     {
       rule: 'A file reads another module by import, typed by that module, never off `globalThis`: no file declares a global.',
       gate: '`review`',
-      exceptions:
-        'a legacy page reads the globals its classic bundles set, until it leaves (`guards/checks/legacyWorld.ts`)',
+      exceptions: '—',
       why: 'An import is the module itself, never undefined, and its type cannot drift from it.',
     },
     {

@@ -1,5 +1,5 @@
 /**
- * - `FeatureTab`, `FeatureView`, `LinkRow`, `CombinationView` · tab, view, links
+ * - `FeatureTab`, `FeatureView`, `CombinationView` · tab, view, combinations
  * - `JourneyCard`, `JourneyStepView`, `StepCover`, `CoverView`, `CoverLine` · walks
  * - `CaseGroup`, `CaseRow` · the test cases, grouped by endpoint
  */
@@ -76,12 +76,6 @@ interface CombinationView {
   readonly what: string;
 }
 
-interface LinkRow {
-  readonly label: string;
-  readonly href: string | null;
-  readonly note: string;
-}
-
 interface FeatureView {
   readonly epic: string;
   readonly title: string;
@@ -101,8 +95,6 @@ interface FeatureView {
   readonly fieldsCode: readonly CodeLine[];
   readonly docTypes: readonly DocTypeView[];
   readonly decisions: readonly Section[];
-  readonly screens: readonly LinkRow[];
-  readonly components: readonly LinkRow[];
   readonly combinations: readonly CombinationView[];
   readonly statesNamed: number;
 }
@@ -117,6 +109,5 @@ export type {
   FeatureView,
   JourneyCard,
   JourneyStepView,
-  LinkRow,
   StepCover,
 };

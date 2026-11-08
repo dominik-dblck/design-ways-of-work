@@ -34,3 +34,12 @@ for the port (phase 8) or the PM's word. Ranked: the first of each group is the 
 ## Small
 
 8. `tools/checksGate.ts` starts `node` by name, not `process.execPath`: it runs whatever node the PATH has.
+
+## Decided while extracting (PM, 8 Nov), to carry into eagle-design at the port
+
+9. The design system (tokens, the shared atomic components) lives in the way-of-working repository and every
+   repository loads it by script: D62 (eagle-dev's package owns it) changes. A decision row for eagle-design.
+10. eagle-dev's coding rules, skills and folder structure come to the way of working, and the design side's
+    pages follow them.
+11. ds-scan leaves `buildReads`: eagle-dev loads it and never calls it; its `dsScan` test runs an old JS copy
+    and can go with it.
