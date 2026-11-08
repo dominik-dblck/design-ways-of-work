@@ -12,15 +12,15 @@ import {
   stats,
   velocity,
 } from '../../../workspace/board-view.ts';
-import { BoardColumns } from './components/BoardColumns.tsx';
-import { KindLegend } from './components/KindLegend.tsx';
-import { NextUp } from './components/NextUp.tsx';
-import { OpenedPanel } from './components/OpenedPanel.tsx';
-import { OutsideAndOpen } from './components/OutsideAndOpen.tsx';
-import { PageHead } from './components/PageHead.tsx';
-import { StatRow } from './components/StatRow.tsx';
-import { useOpened } from './hooks/useOpened.ts';
-import { VelocityPanel } from './components/VelocityPanel.tsx';
+import { BoardPageBoardColumns } from './components/BoardPageBoardColumns.tsx';
+import { BoardPageKindLegend } from './components/BoardPageKindLegend.tsx';
+import { BoardPageNextUp } from './components/BoardPageNextUp.tsx';
+import { BoardPageOpenedPanel } from './components/BoardPageOpenedPanel.tsx';
+import { BoardPageOutsideAndOpen } from './components/BoardPageOutsideAndOpen.tsx';
+import { BoardPagePageHead } from './components/BoardPagePageHead.tsx';
+import { BoardPageStatRow } from './components/BoardPageStatRow.tsx';
+import { useBoardPageOpened } from './hooks/useBoardPageOpened.ts';
+import { BoardPageVelocityPanel } from './components/BoardPageVelocityPanel.tsx';
 
 function BoardPage(): ReactElement {
   const board = useMemo(
@@ -33,24 +33,24 @@ function BoardPage(): ReactElement {
     }),
     [],
   );
-  const opened = useOpened();
+  const opened = useBoardPageOpened();
   return (
     <Container maxWidth="xl" sx={{ py: 5.5 }}>
       <Stack spacing={4.5}>
-        <PageHead />
-        <StatRow stats={board.stats} />
-        <NextUp tickets={board.next} onTicket={opened.openTicket} />
-        <VelocityPanel pace={board.pace} />
-        <BoardColumns
+        <BoardPagePageHead />
+        <BoardPageStatRow stats={board.stats} />
+        <BoardPageNextUp tickets={board.next} onTicket={opened.openTicket} />
+        <BoardPageVelocityPanel pace={board.pace} />
+        <BoardPageBoardColumns
           ideas={board.ideas}
           columns={board.columns}
           onEpic={opened.openEpic}
           onIdea={opened.openIdea}
         />
-        <KindLegend />
-        <OutsideAndOpen />
+        <BoardPageKindLegend />
+        <BoardPageOutsideAndOpen />
       </Stack>
-      <OpenedPanel opened={opened} ideas={board.ideas} />
+      <BoardPageOpenedPanel opened={opened} ideas={board.ideas} />
     </Container>
   );
 }

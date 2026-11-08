@@ -69,7 +69,11 @@ const pluginRules = (
   'wow/file-states-its-job': ['error', { entries: scope.entries }],
   'wow/file-names-its-purpose': [
     'error',
-    { names: scope.names, typesOnly: scope.typesOnly },
+    {
+      names: scope.names,
+      typesOnly: scope.typesOnly,
+      components: scope.components,
+    },
   ],
   'wow/one-home-per-name': [
     'error',

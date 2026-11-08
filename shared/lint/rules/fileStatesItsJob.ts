@@ -5,11 +5,16 @@
 import path from 'node:path';
 import ts from 'typescript';
 import { exportedNamesOf } from '../exportedNames.ts';
-import { A_HEADER, bulletsOf, isGenerated, PROLOGUE } from '../header.ts';
+import {
+  A_HEADER,
+  bulletsOf,
+  isGenerated,
+  LONGEST_BULLET,
+  MOST_BULLETS,
+  PROLOGUE,
+} from '../header.ts';
 import { createRule, pathOf, syntaxOf } from './ruleKit.ts';
 
-const MOST_BULLETS = 3;
-const LONGEST_BULLET = 80;
 const MOST_EXPORTS = 15;
 const A_NAME = /`([A-Za-z_$][\w$]*)`/g;
 

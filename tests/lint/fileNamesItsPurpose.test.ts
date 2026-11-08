@@ -1,3 +1,4 @@
+import path from 'node:path';
 import { fileNamesItsPurpose } from '../../shared/lint/rules/fileNamesItsPurpose.ts';
 import { ruleTester } from './ruleTester.ts';
 
@@ -14,10 +15,14 @@ const NAMES = [
     why: 'a part is camelCase or its epic (docs/rules/names.md)',
   },
 ];
+// two component trees, as the build side keeps a mobile renderer's beside its app's
+const COMPONENTS = ['app/components', 'app/renderers/mobile/components'];
 const at = (filename: string, code = 'export const READ = 1;') => ({
   filename,
   code,
-  options: [{ names: NAMES, typesOnly: ['**/*Types.ts'] }] as const,
+  options: [
+    { names: NAMES, typesOnly: ['**/*Types.ts'], components: COMPONENTS },
+  ] as const,
 });
 
 ruleTester.run('file-names-its-purpose', fileNamesItsPurpose, {
@@ -62,9 +67,32 @@ ruleTester.run('file-names-its-purpose', fileNamesItsPurpose, {
     {
       name: 'a types file the scope does not keep to types, holding a schema',
       ...at('app/types/documentTypes.ts'),
-      options: [{ names: [], typesOnly: [] }] as const,
+      options: [{ names: [], typesOnly: [], components: [] }] as const,
     },
     { name: 'a component and its test', ...at('app/Board.test.tsx') },
+    ...[
+      'app/components/organisms/EditorScreen/components/state-views/EditorScreenReadyView.tsx',
+      'app/components/organisms/EditorScreen/EditorScreen.tsx',
+      'app/components/organisms/EditorScreen/__tests__/aLineTakesItsStep.test.tsx',
+      'docs/notes/molecules/Anything/parts/helper.ts',
+    ].map((file) => ({
+      name: `a part named for its component, its own file, its test, a tier outside the roots: \`${file}\``,
+      ...at(file),
+    })),
+    ...[
+      'app/components/organisms/BoardPage/utils/boardPageTonesUtils.ts',
+      'app/components/organisms/BoardPage/utils/boardPageRowAdapters.ts',
+      'app/components/organisms/Shelf/constants/shelfLabelWords.ts',
+      'app/components/organisms/Shelf/constants/shelfWords.ts',
+      'app/components/organisms/Shelf/constants/shelfConstants.ts',
+      'app/components/organisms/Shelf/types/shelfTypes.ts',
+      'app/components/organisms/Shelf/types/shelfAnswers.ts',
+      'app/components/organisms/Shelf/providers/ShelfProvider.tsx',
+      'app/components/organisms/Shelf/services/loadShelfService.ts',
+    ].map((file) => ({
+      name: `a drawer's file ends with its word, \`${path.posix.basename(file)}\``,
+      ...at(file, 'type Read = 1;\nexport type { Read };'),
+    })),
   ],
   invalid: [
     {
@@ -113,6 +141,39 @@ ruleTester.run('file-names-its-purpose', fileNamesItsPurpose, {
       ...at('sheet/words/plan-pages.ts'),
       errors: [{ messageId: 'named' }],
     },
+    ...[
+      [
+        'app/components/organisms/BoardPage/utils/boardPageTones.ts',
+        'no closing word',
+      ],
+      [
+        'app/components/organisms/BoardPage/utils/boardPageUtils.ts',
+        'no purpose before it',
+      ],
+      ['app/utils/Utils.ts', 'the word alone'],
+      ['app/components/organisms/Shelf/types/shelf.ts', 'no closing word'],
+      [
+        'app/components/organisms/Shelf/providers/ShelfState.tsx',
+        'a provider not called one',
+      ],
+      [
+        'app/components/organisms/Shelf/services/loadShelf.ts',
+        'a service not called one',
+      ],
+    ].map(([file = '', why = '']) => ({
+      name: `a drawer's file, ${why}: \`${path.posix.basename(file)}\``,
+      ...at(file),
+      errors: [{ messageId: 'closing' as const }],
+    })),
+    ...[
+      'app/components/molecules/Planted/components/Row.tsx',
+      'app/components/organisms/EditorScreen/components/state-views/ReadyView.tsx',
+      'app/renderers/mobile/components/organisms/MobileHome/hooks/useHome.ts',
+    ].map((file) => ({
+      name: `a part not named for its component, at any depth: \`${file}\``,
+      ...at(file),
+      errors: [{ messageId: 'unnamed' as const }],
+    })),
     {
       name: 'an entry in camelCase',
       ...at('sheet/planPages.ts'),

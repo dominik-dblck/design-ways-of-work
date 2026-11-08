@@ -1,8 +1,11 @@
 /**
  * - `A_HEADER`, `bulletsOf` · a file's opening bullets: its job in 1–3 lines
  * - `PROLOGUE`, `isGenerated` · what may stand above them; a file a tool writes
+ * - `MOST_BULLETS`, `LONGEST_BULLET` · how many bullets, and how long each
  */
 
+const MOST_BULLETS = 3;
+const LONGEST_BULLET = 80;
 const A_HEADER = /^\/\*\*\n((?:[^*]|\*(?!\/))*)\*\//;
 const A_BULLET = /^\s*\*\s+-\s+(.+)$/;
 // a shebang, then a directive (`'use client';`): the lines a header may sit under
@@ -24,4 +27,11 @@ const bulletsOf = (text: string): readonly string[] | null => {
     : null;
 };
 
-export { A_HEADER, bulletsOf, isGenerated, PROLOGUE };
+export {
+  A_HEADER,
+  bulletsOf,
+  isGenerated,
+  LONGEST_BULLET,
+  MOST_BULLETS,
+  PROLOGUE,
+};

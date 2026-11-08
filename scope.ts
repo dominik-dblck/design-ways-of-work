@@ -39,8 +39,6 @@ const scope: RepoScope = {
   typesOnly: ['**/*Types.ts'],
   // no component tree of its own: design-system's atoms come by script
   components: [],
-  // with no component tree, no folder shape to keep
-  componentShape: false,
   // and no renderer drawn inside it
   renderers: [],
   // no file it writes from a source of its own

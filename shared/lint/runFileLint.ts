@@ -12,7 +12,7 @@ import { componentFolders } from './componentFolders.ts';
 import { fileLintConfig } from './fileRules.ts';
 import type { FolderRules } from './fileRules.ts';
 
-// the repository's own folders, and the component shape when its scope keeps it
+// the repository's own folders, and every component tree's shape
 function configOf({
   scope,
   folders,
@@ -22,7 +22,7 @@ function configOf({
   readonly folders: Readonly<Record<string, FolderRules>>;
   readonly ignore: readonly string[];
 }): string {
-  const shaped = componentFolders(scope.componentShape ? scope.components : []);
+  const shaped = componentFolders(scope.components);
   return JSON.stringify(
     fileLintConfig({
       root: scope.root,

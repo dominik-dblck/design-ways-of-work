@@ -140,14 +140,15 @@
         the design side's skills are (PM, 8 Nov)
       - [ ] one design system, `wow-design-system` (PM, 8 Nov): `design-system/deblock-guide.md` folded into it,
         one coherent system both products read, no product's own in it · after chunk 6
-      - [ ] 6f the way of working's own organisms take the component shape (PM, 8 Nov: "organizm nie trzyma
+      - [x] 6f the way of working's own organisms take the component shape (PM, 8 Nov: "organizm nie trzyma
         struktury komponentów w WOW"): 48 parts of `design/app/components/organisms/` renamed by script to carry
         their organism's name; the `componentShape` switch leaves the scope, the shape held for every root
         (the PM: a part two organisms use stands alone in its tier; one organism's keeps its structure;
-        measured: none is used by two)
+        measured: none is used by two) · a part's name and a drawer's word held by ESLint from
+        `shared/lint/partNames.ts` (`plan/eagle-notes.md` 34, `plan/dev-notes.md` 23)
       - [ ] 6g what else breaks the structure, and why no lint caught it (the PM's audit, 8 Nov):
         the 2 breaches held in the way of working's own organisms (`DayBars.tsx` 27, `ScreenPlaceholder.tsx` 25,
-        a component writing a height) fixed, never suppressed · a way of working's file holds no suppression, a
+        a component writing a height) fixed, never suppressed (done in 6f, an aspect ratio each) · a way of working's file holds no suppression, a
         check in verify · the design side's own folders get ls-lint rules (its `lint-files.ts` passes
         `folders: {}`: app/pages, app/theme, app/workspace, tools/, guards/, tests/, docs/ unheld), written from
         `tools/layout.ts`'s homes, never a second list · `dev/claude` (75 files) held by the shared skill tests

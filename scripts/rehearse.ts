@@ -6,14 +6,19 @@
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
-import { HERE, linkedFiles, PRODUCT_REPO, repoAt } from './repos.ts';
+import {
+  HERE,
+  lastLinked,
+  linkedFiles,
+  linkedListOf,
+  PRODUCT_REPO,
+  repoAt,
+} from './repos.ts';
 
 const SOURCE = repoAt(PRODUCT_REPO);
 const COPY = repoAt(path.join(HERE, '.rehearsal', path.basename(SOURCE)), 1);
 const PATCH = path.join(HERE, 'ports', path.basename(SOURCE), 'port.patch');
 const WOW_CATEGORY = /^(wow, |mixed check)/;
-// what the last rehearsal linked, kept beside the copy's own history
-const LINKED_LIST = path.join(COPY, '.git', 'info', 'linked');
 
 const inventory = fs
   .readFileSync(path.join(HERE, 'plan', 'inventory.tsv'), 'utf8')
@@ -101,9 +106,7 @@ function applyPort(): boolean {
 // a link this repository replaced (a new file), a file it added, one it removed
 function staleLinks(): readonly string[] {
   const files = linkedFiles();
-  const kept = fs.existsSync(LINKED_LIST)
-    ? fs.readFileSync(LINKED_LIST, 'utf8').split('\n').filter(Boolean)
-    : [];
+  const kept = lastLinked(COPY);
   const now = new Set(files.map(([, at]) => at));
   const moved = files.flatMap(([here, at]) => {
     const there = path.join(COPY, at);
@@ -137,7 +140,7 @@ function main(): void {
   commit('the product, design/ linked');
   execFileSync('git', ['tag', 'product'], { cwd: COPY });
   fs.writeFileSync(
-    LINKED_LIST,
+    linkedListOf(COPY),
     `${linkedFiles()
       .map(([, at]) => at)
       .join('\n')}\n`,

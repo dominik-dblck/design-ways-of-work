@@ -4,7 +4,7 @@
 import { ThemeProvider } from '@mui/material/styles';
 import { renderToString } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
-import { CombinationsSection } from '../../app/components/organisms/FeaturePage/components/CombinationsSection.tsx';
+import { FeaturePageCombinationsSection } from '../../app/components/organisms/FeaturePage/components/FeaturePageCombinationsSection.tsx';
 import { FeaturePage } from '../../app/components/organisms/FeaturePage/index.ts';
 import { theme } from '../../app/theme/theme.ts';
 import {
@@ -31,12 +31,14 @@ describe('the Feature page', () => {
   it('asks before counting a combinations file', () => {
     const drawn = (node: React.ReactElement): string =>
       renderToString(<ThemeProvider theme={theme}>{node}</ThemeProvider>);
-    const translations = drawn(<CombinationsSection view={featureOf('E09')} />);
+    const translations = drawn(
+      <FeaturePageCombinationsSection view={featureOf('E09')} />,
+    );
     expect(translations).toContain('role-combinations.js');
     expect(translations).toContain(words.combinations.count);
     const approvals = featureOf('E06');
-    expect(drawn(<CombinationsSection view={approvals} />)).toContain(
-      words.combinations.missing(approvals.statesNamed, 'E06'),
-    );
+    expect(
+      drawn(<FeaturePageCombinationsSection view={approvals} />),
+    ).toContain(words.combinations.missing(approvals.statesNamed, 'E06'));
   });
 });

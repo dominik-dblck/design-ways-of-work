@@ -1,7 +1,7 @@
 /**
- * - `HERE`, `PRODUCT_REPO`, `BUILD_REPO` · this repository, the two it came from
- * - `repoAt` · the repository a script is handed: its nth bare argument, or default
+ * - `HERE`, `PRODUCT_REPO`, `BUILD_REPO`, `repoAt` · the repositories; one handed in
  * - `LINKED_HOMES`, `linkedFiles` · the folders a product links in place, each file
+ * - `linkedListOf`, `lastLinked` · what a copy's last rehearsal linked
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -42,4 +42,21 @@ const linkedFiles = (): readonly (readonly [string, string])[] =>
     ),
   );
 
-export { BUILD_REPO, HERE, LINKED_HOMES, linkedFiles, PRODUCT_REPO, repoAt };
+// what a copy's last rehearsal linked, kept beside the copy's own history
+const linkedListOf = (copy: string): string =>
+  path.join(copy, '.git', 'info', 'linked');
+const lastLinked = (copy: string): readonly string[] =>
+  fs.existsSync(linkedListOf(copy))
+    ? fs.readFileSync(linkedListOf(copy), 'utf8').split('\n').filter(Boolean)
+    : [];
+
+export {
+  BUILD_REPO,
+  HERE,
+  lastLinked,
+  LINKED_HOMES,
+  linkedFiles,
+  linkedListOf,
+  PRODUCT_REPO,
+  repoAt,
+};

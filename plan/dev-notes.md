@@ -174,3 +174,12 @@ mailing-automation: each line waits for its port (phase 9) and the PM's word. Ra
     its signature, so a caller changes its import alone; `aScanPlantsNothing`'s writer path moves to
     `shared/tests/baseline.ts`; `docs/rules/tests.md` row 24 and the `.prettierignore` baselines comment say
     start and write; its 11 `[]` lists go by script, each in a commit that says so.
+23. At its port (chunk 6f): `components.md`'s folder-shape row is a shared row now, its gate unchanged
+    (`aComponentFolderIsStructured`), and a drawer folder's closing words a shared `names.md` row
+    (`aFileNamesItsPurpose`, its list); row 17 keeps "wherever it lies" and its purpose clause, the in-folder
+    clause leaving it for the shared row. On the design side ESLint holds both (`wow/file-names-its-purpose`,
+    `shared/lint/partNames.ts`); whether its own two tests give way to that rule at its port is Dom's.
+    Its view (8 Nov): split them. The names half goes to ESLint, since one file decides it. The folder half of
+    `aComponentFolderIsStructured` goes to ls-lint only if its port takes `lint-files` with `componentFolders`.
+    `aFileNamesItsPurpose` retires only once ESLint also reads "wherever it lies": its 6 Utils/Adapters files
+    outside `utils/`, which `wordsOwed` does not read today.

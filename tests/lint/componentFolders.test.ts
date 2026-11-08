@@ -10,7 +10,7 @@ const RULES = componentFolders([
 const COMPONENTS = 'app/components';
 
 describe('a component folder has its shape', () => {
-  it('its file, its barrel, its parts named for it at any depth, its tests, a dotfile', () => {
+  it('its file, its barrel, its parts at any depth, its tests, a dotfile', () => {
     expect(
       lintedTree(
         [
@@ -31,7 +31,7 @@ describe('a component folder has its shape', () => {
     ).toEqual([]);
   });
 
-  it('a loose file, a stray folder, a part not named for it, an atom with parts, under either root', () => {
+  it('a loose file, a stray folder, an atom with parts, under either root', () => {
     expect(
       lintedTree(
         [
@@ -53,11 +53,9 @@ describe('a component folder has its shape', () => {
       `${COMPONENTS}/atoms/Dot/components`,
       `${COMPONENTS}/molecules/Planted/Extra`,
       `${COMPONENTS}/molecules/Planted/Extra`,
-      `${COMPONENTS}/molecules/Planted/components/Row.tsx`,
       `${COMPONENTS}/molecules/Planted/plantedWords.ts`,
       `${COMPONENTS}/molecules/Planted/queries`,
       `${COMPONENTS}/molecules/Planted/queries/plantedQuery.ts`,
-      `${COMPONENTS}/organisms/EditorScreen/components/state-views/ReadyView.tsx`,
       'app/renderers/mobile/components/organisms/MobileHome/homeWords.ts',
     ]);
   });

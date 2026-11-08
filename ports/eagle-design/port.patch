@@ -722,21 +722,11 @@ index 0000000..76eb993
 +| The way of working names no product: a blank repository spawned from its template, with an empty `scope.ts` and an empty rules file, passes every shared check from its first day.                                                                                                                                                                                                                                                                     | `theWayOfWorkingNamesNoProduct` · `review` | the spawn check comes with the template (phase 7)                  | What a product needs is its own; the way of working is the same for every product.                                      |
 diff --git a/eslint-suppressions.json b/eslint-suppressions.json
 new file mode 100644
-index 0000000..2945932
+index 0000000..0fad02c
 --- /dev/null
 +++ b/eslint-suppressions.json
-@@ -0,0 +1,611 @@
+@@ -0,0 +1,601 @@
 +{
-+  "app/components/organisms/BoardPage/components/DayBars.tsx": {
-+    "no-restricted-syntax": {
-+      "count": 1
-+    }
-+  },
-+  "app/components/organisms/WireframesPage/components/ScreenPlaceholder.tsx": {
-+    "no-restricted-syntax": {
-+      "count": 1
-+    }
-+  },
 +  "app/styles/gate-states.ts": {
 +    "no-restricted-syntax": {
 +      "count": 1
@@ -1777,10 +1767,10 @@ index 9c7b0cf..ce1fef1 100644
 +export type { TrackFinding, TrackReading, TrackRow };
 diff --git a/scope.ts b/scope.ts
 new file mode 100644
-index 0000000..5e4c66d
+index 0000000..10a9ca7
 --- /dev/null
 +++ b/scope.ts
-@@ -0,0 +1,117 @@
+@@ -0,0 +1,115 @@
 +// scope.ts · what the design project names once: its ESLint config, its shared tests and its tools read it
 +import type { RepoScope } from './shared/repoScope.ts';
 +import {
@@ -1858,8 +1848,6 @@ index 0000000..5e4c66d
 +  ],
 +  // the one component tree, its atomic tiers (docs/rules/components.md)
 +  components: ['app/components'],
-+  // its component folders keep no shape of prefixed parts: the build side's alone
-+  componentShape: false,
 +  // no renderer: no app drawn inside the app (docs/rules/components.md)
 +  renderers: [],
 +  // what the build writes from a module: the emitted JSON, rule files, skills, documents, tokens

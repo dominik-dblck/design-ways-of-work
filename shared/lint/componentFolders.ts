@@ -1,11 +1,13 @@
 /**
  * - `componentFolders` · ls-lint's rules for a component's folder, under each root
- * - its file and barrel at its root, its parts named for it in the shape's folders
+ * - `TIERS` · the atomic tiers, each a folder of components
+ * - its file and barrel at its root, its parts in the shape's folders
  */
 import type { FolderRules } from './fileRules.ts';
 
-const TIERS = '{atoms,molecules,organisms,templates}';
-const SHAPE = [
+const TIERS = ['atoms', 'molecules', 'organisms', 'templates'];
+const ANY_TIER = `{${TIERS.join(',')}}`;
+const SHAPE_FOLDERS = [
   'components',
   'hooks',
   'utils',
@@ -17,33 +19,33 @@ const SHAPE = [
 const NEVER = 'regex:a^';
 const NOTHING: FolderRules = { '.dir': NEVER, '.*': 'exists:0' };
 
-// a part carries its component's name, read `up` folders above the file
-const named = (up: number): FolderRules => ({
-  '.tsx': `regex:(?i).*\${${String(up)}}.*`,
-  '.ts': `regex:(?i).*\${${String(up)}}.*`,
+// a part's own name is ESLint's to read (`wow/file-names-its-purpose`): here any name, a source alone
+const A_PART: FolderRules = {
+  '.tsx': 'regex:.*',
+  '.ts': 'regex:.*',
   '.*': 'exists:0',
-});
+};
 
 // one root's folders: a component, a stray folder in it, an atom's parts, the shape's depths
 const foldersOf = (
   root: string,
 ): readonly (readonly [string, FolderRules])[] => {
-  const shape = `${root}/${TIERS}/*/{${SHAPE.join(',')}}`;
+  const shape = `${root}/${ANY_TIER}/*/{${SHAPE_FOLDERS.join(',')}}`;
   return [
     [
-      `${root}/${TIERS}/*`,
+      `${root}/${ANY_TIER}/*`,
       {
-        '.dir': `PascalCase | regex:${[...SHAPE, '__tests__'].join('|')}`,
+        '.dir': `PascalCase | regex:${[...SHAPE_FOLDERS, '__tests__'].join('|')}`,
         '.tsx': 'regex:${0}',
         '.ts': 'regex:index',
         '.*': 'exists:0',
       },
     ],
-    [`${root}/${TIERS}/*/[A-Z]*`, NOTHING],
-    [shape, { '.dir': 'kebab-case', ...named(1) }],
-    [`${shape}/*`, { '.dir': 'kebab-case', ...named(2) }],
-    [`${shape}/*/*`, named(3)],
-    [`${root}/${TIERS}/*/__tests__`, { '.*': 'regex:.*' }],
+    [`${root}/${ANY_TIER}/*/[A-Z]*`, NOTHING],
+    [shape, { '.dir': 'kebab-case', ...A_PART }],
+    [`${shape}/*`, { '.dir': 'kebab-case', ...A_PART }],
+    [`${shape}/*/*`, A_PART],
+    [`${root}/${ANY_TIER}/*/__tests__`, { '.*': 'regex:.*' }],
     // an atom has no parts: the later of two keys alike wins
     [`${root}/atoms/*/components`, NOTHING],
   ];
@@ -60,4 +62,4 @@ const componentFolders = (
   ignore: roots.flatMap((root) => [`${root}/*/__tests__`, `${root}/**/.*`]),
 });
 
-export { componentFolders };
+export { componentFolders, TIERS };

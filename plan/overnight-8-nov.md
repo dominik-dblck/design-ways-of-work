@@ -58,6 +58,24 @@ messages read, the next part resumed. When the run is done: `CronDelete 1577e92f
   height); (3) the design side's ls-lint gets `folders: {}`, so its own folders hold no layout rule; (4)
   `dev/claude`, 75 files no check reads in the way of working. Todos 6f and 6g in `plan/progress.md`.
 
+- 6f, the plain prefix (eagle-dev's consult): a part's name is `{Component}{its stem}`, never collapsed, so
+  `BoardPageBoardColumn` and `FeaturePageFeatureHead` stand; a collapse clashed (`ColumnsPanelColumns` →
+  `ColumnsPanel`) and cut words. Undo: rename.ts with a map of shorter names, a person's choice each.
+- 6f, a part's name moves from ls-lint to ESLint: one TypeScript function (`carriesItsName`,
+  `shared/lint/partNames.ts`) that the product's lint and the way of working's script both read, where an
+  ls-lint regex beside a script's copy was two homes and a shared export the product never reads (knip).
+  ls-lint keeps the folders. Undo: `named(n)` back in `componentFolders.ts`.
+- 6f, the two height suppressions (6g's first item) went now: the moves orphaned them. The day bars and the
+  screen frame take `aspectRatio` (5 / 1, 16 / 9) for a height. Undo: a theme size, if the PM wants one.
+- 6f, `port-save` leaves out a path the last rehearsal linked: after `move.ts` it saved the old names' edits
+  as product edits and the patch failed. Red proof: with the line 0 such files, without it 3.
+
+- 6f, eagle-dev's cross-check: the shared drawer-word row asked a purpose in `constants/` too, which fails
+  88 files of the build side (`{component}Constants`, `{component}Words`, its row 12) and none here. The
+  row asks a purpose in `utils/` alone, true on both sides; more is the PM's. Its build exceptions read
+  "—" (its list is empty). `componentOf` reads the scope's roots, never a tier folder anywhere. Undo:
+  `PURPOSED` in `shared/lint/partNames.ts`.
+
 ## Morning: for the PM
 
 - The five patterns beside SSoT and SRP (dependency inversion, ratchet, explicit over implicit, least privilege,
@@ -70,3 +88,7 @@ messages read, the next part resumed. When the run is done: `CronDelete 1577e92f
   20, tests 11, scripts 3, db 3, public 2, docs 2, .husky 1); no gate reads a file name's case. Its
   recommendation: scripts/, tests/ and e2e/ first (34 folders), then .claude/ and docs/, roadmaps/ and
   knowledge/ last. Question: which of them its ls-lint holds at its port, and in that order?
+- 6f, the long part names (`BoardPagePageHead`, `FeaturePageFeatureSteps`): keep them, or name each by hand
+  through rename.ts? And the two aspect ratios: a look to check on the page.
+- 6f, a purpose in a `constants/` file's name too (`approvalBarLabelWords`, not `approvalBarWords`)? Today
+  only in `utils/`; yes renames 88 build-side files by script, the build side recommends no.

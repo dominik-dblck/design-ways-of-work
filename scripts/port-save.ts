@@ -8,6 +8,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {
   HERE,
+  lastLinked,
   LINKED_HOMES,
   linkedFiles,
   PRODUCT_REPO,
@@ -32,6 +33,9 @@ const diff = execFileSync(
     ...LINKED_HOMES.flatMap(([, at]) => (at ? [`:!${at}`] : [])),
     // a linked file is this repository's: a write through its link is no port
     ...linkedFiles().map(([, at]) => `:!${at}`),
+    // one the last rehearsal linked, that design/ moved since: its old path is no port either
+    ...lastLinked(COPY).map((at) => `:!${at}`),
+    // one the last rehearsal linked, that design/ moved since: its old path is no port either
   ],
   {
     cwd: COPY,

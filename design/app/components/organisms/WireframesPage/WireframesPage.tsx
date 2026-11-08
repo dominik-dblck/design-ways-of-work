@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
 import { wireframesOf, wireframesWords as words } from '../../../workspace/wireframes-view.ts';
 import { SectionHead } from '../../atoms/SectionHead/index.ts';
-import { ScreenPlaceholder } from './components/ScreenPlaceholder.tsx';
+import { WireframesPageScreenPlaceholder } from './components/WireframesPageScreenPlaceholder.tsx';
 
 function WireframesPage(): ReactElement {
   return (
@@ -21,7 +21,7 @@ function WireframesPage(): ReactElement {
           <Stack key={group.track} spacing={1.5} id={group.track}>
             <SectionHead label={group.track} note={`${group.screens.length} · ${words.track}`} />
             {group.screens.map((screen) => (
-              <ScreenPlaceholder key={screen.id} screen={screen} />
+              <WireframesPageScreenPlaceholder key={screen.id} screen={screen} />
             ))}
           </Stack>
         ))}

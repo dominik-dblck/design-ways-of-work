@@ -5,6 +5,12 @@
 import path from 'node:path';
 import ts from 'typescript';
 import { createRule, matchesAny, pathOf, syntaxOf } from './ruleKit.ts';
+import {
+  carriesItsName,
+  componentOf,
+  DRAWERS,
+  wordsOwed,
+} from '../partNames.ts';
 
 // a scope's own pattern: the files it names, the stem they take, and why
 interface Named {
@@ -14,10 +20,13 @@ interface Named {
 }
 
 type Options = readonly [
-  { readonly names: readonly Named[]; readonly typesOnly: readonly string[] },
+  {
+    readonly names: readonly Named[];
+    readonly typesOnly: readonly string[];
+    readonly components: readonly string[];
+  },
 ];
 
-const DRAWERS = ['utils', 'helpers', 'common', 'shared'];
 const A_NUMBER =
   /(?:One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten|[a-z]\d+)$/;
 // a term whose digits are its name, never a split's count: `sha256`, `base64`, `utf8`, `es2017`
@@ -39,21 +48,32 @@ const isTypeOnly = (statement: ts.Statement): boolean =>
 const isAReExport = (statement: ts.Statement): boolean =>
   ts.isExportDeclaration(statement) && statement.moduleSpecifier !== undefined;
 
-type MessageId = 'drawer' | 'number' | 'types' | 'index' | 'named';
+type MessageId =
+  'drawer' | 'number' | 'types' | 'index' | 'named' | 'closing' | 'unnamed';
 type Breach = readonly [MessageId, Readonly<Record<string, string>>];
 
-// what a stem breaks: a drawer, a count, a scope's pattern
+// what a stem breaks: a drawer, a count, a part's name, a drawer's word, a scope's pattern
 function namedBreaches({
   file,
   stem,
   names,
+  components,
 }: {
   readonly file: string;
   readonly stem: string;
   readonly names: readonly Named[];
+  readonly components: readonly string[];
 }): readonly Breach[] {
+  const component = componentOf(file, components);
+  const owed = wordsOwed({ file, stem, component });
   return [
+    ...(component !== null && !carriesItsName(stem, component)
+      ? [['unnamed', { component }] as const]
+      : []),
     ...(DRAWERS.includes(stem) ? [['drawer', {}] as const] : []),
+    ...(owed.length > 0
+      ? [['closing', { words: owed.join(' or ') }] as const]
+      : []),
     ...(A_NUMBER.test(stem) && !endsInATerm(stem)
       ? [['number', {}] as const]
       : []),
@@ -108,6 +128,10 @@ const fileNamesItsPurpose = createRule<Options, MessageId>({
       index:
         'An `index.ts` re-exports its folder and holds nothing of its own (docs/rules/names.md).',
       named: '`{{stem}}` is not `{{pattern}}`: {{why}}',
+      unnamed:
+        "`{{stem}}` is a part of `{{component}}`: its name carries the component's (docs/rules/components.md).",
+      closing:
+        '`{{stem}}` sits in a drawer folder: its name ends with {{words}}, a purpose before it in utils/ (docs/rules/names.md).',
     },
     schema: [
       {
@@ -126,19 +150,25 @@ const fileNamesItsPurpose = createRule<Options, MessageId>({
             },
           },
           typesOnly: { type: 'array', items: { type: 'string' } },
+          components: { type: 'array', items: { type: 'string' } },
         },
         additionalProperties: false,
       },
     ],
   },
-  defaultOptions: [{ names: [], typesOnly: [] }],
-  create(context, [{ names, typesOnly }]) {
+  defaultOptions: [{ names: [], typesOnly: [], components: [] }],
+  create(context, [{ names, typesOnly, components }]) {
     const file = pathOf(context);
     const stem = path.posix.basename(file).replace(A_SOURCE, '');
     if (file.endsWith('.d.ts')) return {};
     return {
       Program(node) {
-        for (const [messageId, found] of namedBreaches({ file, stem, names }))
+        for (const [messageId, found] of namedBreaches({
+          file,
+          stem,
+          names,
+          components,
+        }))
           context.report({ node, messageId, data: { stem, ...found } });
         const syntax = syntaxOf(context);
         // a breach of what the file holds lands on the statement that breaks it

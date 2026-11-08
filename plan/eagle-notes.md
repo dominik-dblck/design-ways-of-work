@@ -165,3 +165,17 @@ for the port (phase 8) or the PM's word. Ranked: the first of each group is the 
     and a cleaned scan stays red on a new offender (the PM: removed, a note in history; eagle-dev's fix, explicit
     start). A list of anything but strings, or no JSON, is refused naming its scan. This side's `baseline.ts`
     and its test retire; `anExportIsRead` reads the shared one.
+34. The way of working's organisms keep the component shape (chunk 6f, the PM's catch): 48 parts in BoardPage,
+    FeaturePage and WireframesPage renamed and moved by script (`scripts/part-names.ts` writes the maps,
+    `plan/renames-chunk-6f.tsv`, `plan/moves/organism-parts.tsv`; `rename.ts`, `move.ts` apply them,
+    `wrap-headers.ts` cuts a header bullet the longer name pushed past 80). A part carries its component's
+    name as a plain prefix, never a collapsed one (`BoardPageBoardColumn`, eagle-dev: a collapse clashes and
+    cuts words); a hook `use{Component}…`, a service its verb first. `componentShape` leaves the scope: every
+    component tree keeps the shape. ls-lint holds a component's folders; ESLint `wow/file-names-its-purpose`
+    holds a part's name (`unnamed`) and a drawer folder's closing word (`closing`: utils `Utils`/`Adapters`,
+    constants `Constants`/`Words`, types `Types`/`Answers`, providers `Provider`, services `Service`, a purpose
+    before it in utils), both read from `shared/lint/partNames.ts`, which the script reads too; a part is
+    one under the scope's component roots alone (`components`, the rule's option), so a folder called
+    `molecules` elsewhere is no component (eagle-dev's probe).
+    The folder-shape row and the drawer-word row are shared now. The two height suppressions in its organisms
+    go: the day bars and the screen frame take an aspect ratio (5 / 1, 16 / 9), size following width.

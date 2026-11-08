@@ -33,7 +33,6 @@ interface RepoScope {
   readonly names: readonly Named[];
   readonly typesOnly: readonly string[];
   readonly components: readonly string[];
-  readonly componentShape: boolean;
   readonly renderers: readonly Renderer[];
   readonly generators: readonly Generator[];
 }

@@ -4,7 +4,7 @@
 import { ThemeProvider } from '@mui/material/styles';
 import { renderToString } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
-import { TicketPanel } from '../../app/components/organisms/BoardPage/components/TicketPanel.tsx';
+import { BoardPageTicketPanel } from '../../app/components/organisms/BoardPage/components/BoardPageTicketPanel.tsx';
 import { theme } from '../../app/theme/theme.ts';
 import { ticketDetailOf, words } from '../../app/workspace/board-view.ts';
 import { all as allTickets } from '../../roadmaps/tickets.ts';
@@ -16,7 +16,7 @@ describe('the ticket panel', () => {
     if (!ticket) throw new Error(`${id} did not open`);
     const html = renderToString(
       <ThemeProvider theme={theme}>
-        <TicketPanel ticket={ticket} onBack={() => undefined} />
+        <BoardPageTicketPanel ticket={ticket} onBack={() => undefined} />
       </ThemeProvider>,
     );
     expect(html).toContain(words.ticket.command);
