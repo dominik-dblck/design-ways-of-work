@@ -43,7 +43,7 @@ const knipConfig = (scope: RepoScope): KnipSettings => ({
     ...CONFIGS,
   ],
   project: [...scope.production, ...testsOf(scope), ...CONFIGS],
-  ignore: [...scope.ignores, ...scope.generated],
+  ignore: [...scope.ignores, ...scope.productTrees, ...scope.generated],
 });
 
 export { knipConfig };

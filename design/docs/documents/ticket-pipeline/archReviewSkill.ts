@@ -2,6 +2,7 @@
  * - `ARCH_REVIEW_SKILL` · `ticket-arch-review`: the diff read against the patterns
  */
 import type { DocumentSection } from '../documentTypes.ts';
+import { NO_STOP_OF_ITS_OWN } from './noStopOfItsOwn.ts';
 
 // prettier-ignore
 export const ARCH_REVIEW_SKILL: readonly DocumentSection[] = [
@@ -70,7 +71,7 @@ export const ARCH_REVIEW_SKILL: readonly DocumentSection[] = [
       '   re-layer moved gate-dot and the chip’s key, and the copy read 5 until the regression',
       '7. Hand the file to the calling mode; the report names it',
       '',
-      '**Stop.** None of its own — the calling mode decides. The file travels with the report: the code',
+      `${NO_STOP_OF_ITS_OWN} The file travels with the report: the code`,
       "differs from the first green by exactly what this step changed. The whole file is in the repository's",
       'language; a half-Polish table is two documents. `why: T-E01-10` — N18',
       '',

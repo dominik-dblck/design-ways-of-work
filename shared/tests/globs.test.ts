@@ -1,6 +1,6 @@
 /**
  * - a glob list names its files in the disk's case
- * - a `!` glob and an ignored folder aside
+ * - a `!` glob and an ignored folder aside; a product's tree by its own glob
  */
 import fs from 'node:fs';
 import os from 'node:os';
@@ -17,6 +17,8 @@ for (const file of [
   '.claude/skills/b/SKILL.md',
   'legacy/CLAUDE.md',
   'CLAUDE.md',
+  'product/CLAUDE.md',
+  'product/rules/a.ts',
 ]) {
   fs.mkdirSync(path.dirname(path.join(root, file)), { recursive: true });
   fs.writeFileSync(path.join(root, file), '# a\n');
@@ -29,7 +31,7 @@ fs.symlinkSync(
   path.join(root, 'elsewhere/c.md'),
   path.join(root, '.claude/skills/c/SKILL.md'),
 );
-const tree = { root, ignores: ['legacy/**'] };
+const tree = { root, ignores: ['legacy/**'], productTrees: ['product/**'] };
 
 describe('a glob list names its files', () => {
   it('names each file, a linked one too, a `!` glob taking one out, an ignored folder never read', () => {
@@ -37,6 +39,14 @@ describe('a glob list names its files', () => {
       filesNamedBy(tree, ['.claude/skills/*/SKILL.md', '!.claude/skills/b/**']),
     ).toEqual(['.claude/skills/a/SKILL.md', '.claude/skills/c/SKILL.md']);
     expect(filesNamedBy(tree, ['**/CLAUDE.md'])).toEqual(['CLAUDE.md']);
+  });
+
+  it('a product tree is read by a glob that starts inside it, never by a broad one', () => {
+    expect(filesNamedBy(tree, ['**/*.ts'])).toEqual([]);
+    expect(filesNamedBy(tree, ['product/**/*.ts', '**/CLAUDE.md'])).toEqual([
+      'CLAUDE.md',
+      'product/rules/a.ts',
+    ]);
   });
 
   it('a glob in the wrong case names nothing, on a disk that ignores case too', () => {

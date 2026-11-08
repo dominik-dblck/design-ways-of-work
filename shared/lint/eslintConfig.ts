@@ -142,7 +142,15 @@ const DISABLES: Linter.Config = {
 
 const eslintConfig = (scope: RepoScope): Linter.Config[] =>
   defineConfig(
-    { ignores: ['**/*.js', '**/*.mjs', '**/*.d.ts', ...scope.ignores] },
+    {
+      ignores: [
+        '**/*.js',
+        '**/*.mjs',
+        '**/*.d.ts',
+        ...scope.ignores,
+        ...scope.productTrees,
+      ],
+    },
     js.configs.recommended,
     ...tseslint.configs.recommended,
     WOW,

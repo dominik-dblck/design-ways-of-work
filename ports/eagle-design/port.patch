@@ -1767,10 +1767,10 @@ index 9c7b0cf..ce1fef1 100644
 +export type { TrackFinding, TrackReading, TrackRow };
 diff --git a/scope.ts b/scope.ts
 new file mode 100644
-index 0000000..bd40854
+index 0000000..d5edebe
 --- /dev/null
 +++ b/scope.ts
-@@ -0,0 +1,127 @@
+@@ -0,0 +1,129 @@
 +// scope.ts · what the design project names once: its ESLint config, its shared tests and its tools read it
 +import type { RepoScope } from './shared/repoScope.ts';
 +import {
@@ -1797,6 +1797,8 @@ index 0000000..bd40854
 +const scope: RepoScope = {
 +  root: import.meta.dirname,
 +  ignores: ['dist/**', 'node_modules/**', 'poc/**', '.artifact/**'],
++  // no product's tree held inside it
++  productTrees: [],
 +  production: [
 +    'sheet/**/*.ts',
 +    'roadmaps/**/*.ts',

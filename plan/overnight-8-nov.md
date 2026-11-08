@@ -94,6 +94,13 @@ messages read, the next part resumed. When the run is done: `CronDelete 1577e92f
   row says "a production file", tests its design exception, so they break no rule; wrapped in part 2b for
   one tree, and whether the header rule reaches test code is on the morning list (both sides' scope).
 
+- 7b part 2b, a product's tree (design/, dev/, shared/rules/) held in the way of working: skipped by its
+  lint and exports as before, read by a glob that starts inside it (`RepoScope.productTrees`). A broad glob
+  never walks in, so a check over `**/*.md` here never reads a product's facts (eagle-dev's hole). Undo:
+  the three back in `ignores`, wow's sentences without design/, dev/, shared/rules/.
+- 7b part 2b, the shared reasons' gate is a throw in `ruleFileFor`, run by every build: held where it can
+  fail, its only check (eagle-dev: acceptable so). Undo: the function's first two lines.
+
 ## Morning: for the PM
 
 - The five patterns beside SSoT and SRP (dependency inversion, ratchet, explicit over implicit, least privilege,
@@ -132,3 +139,6 @@ messages read, the next part resumed. When the run is done: `CronDelete 1577e92f
 - 7b, the header rule reaches production files alone (the shared responsibility row; tests the design
   side's exception, so the build side's too at its port). Reach test code too (A: one rule, every file), or
   keep tests out (B: as written)? A widens both sides' gate: Dom's for the build side.
+- 7b, the rule files' near-copies the sentence test cannot see (the one-home and tests intros, the comments',
+  constants' and styling openings): A, a shared opening each side extends (rewords both sides' text); B,
+  exact copies alone, as tonight. Eagle-dev's view: B tonight, A a wording call, Dom's for its side.

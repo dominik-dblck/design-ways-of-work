@@ -213,3 +213,15 @@ for the port (phase 8) or the PM's word. Ranked: the first of each group is the 
     leads a sentence stays its word (eagle-dev's H2, H3; each seen red). Its re-check: the build side's 13
     found again (6 of 2, 3 of 3, 1 of 5, 3 of 7), the copy 0 over 22 files, the way of working 0 over 78.
     Found by it, next (part 2b): 14 sentences the two sides' rule files and two pipeline skills write twice.
+38. The two sides' rule files share their words (chunk 7b, part 2b): `shared/rules/{concern}.ts` holds one
+    `shared` per concern, `{ title, opening, rows, whys }`, and `shared/rules/ruleFileFor.ts` makes a side's
+    `rules` from it: the title, the opening joined to the side's own intro in one paragraph, the shared rows
+    with the side's gate, then its own rows. A reason both sides give is named by its key
+    (`why: { shared: 'noCast' }`); the build throws when a side's rows name a shared reason nowhere, or write
+    one out in words (each seen red: a reason of its own words, an exact copy inline, which the sentence test
+    also counts `· 2`). The 13 rule sentences and the pipeline's stop line (`NO_STOP_OF_ITS_OWN`) have one
+    home; the rule files' markdown moved in whitespace only (6 files), `ticket-pipeline.md` byte for byte
+    (sha256 a8103e66…). The way of working's sentences now read both sides' trees: a product's tree is read
+    by a glob that starts inside it, never by a broad one walking in (`productTrees`, eagle-dev's hole; each
+    branch seen red). Found, for later: `shared/rules` reads `RuleFile` from `design/docs/rules/ruleTypes.ts`,
+    a shared file importing a product's; its home is `shared/rules`.

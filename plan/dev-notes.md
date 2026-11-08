@@ -213,3 +213,9 @@ mailing-automation: each line waits for its port (phase 9) and the PM's word. Ra
     goes (the syntax tree reads no comment). Its one-home row keeps "a sentence the domain holds is read from
     the domain" (`theWordsFollowTheGlossary`); the sentence-once half is shared. CLAUDE.md and `docs/*.md` in
     its prose: Dom's.
+27. At its port (chunk 7b, part 2b): its scope adds `productTrees: []` (a product's tree held inside a
+    repository, read only by a glob that starts inside it; the way of working's are design/, dev/ and
+    shared/rules/). Its rule files, once emitted (`dev/rules/*.ts`), are `ruleFileFor({ side: 'build', shared,
+    intro, rows, outro })`; a reason both sides give is `why: { shared: key }`. A shared reason read by two of
+    its rows in two files prints twice in its md, which its prose test counts (eagle-dev, 8 Nov: 0 today,
+    each key read once a side).

@@ -8,7 +8,7 @@ import path from 'node:path';
 import { minimatch } from 'minimatch';
 import type { RepoScope } from '../repoScope.ts';
 
-type Tree = Pick<RepoScope, 'root' | 'ignores'>;
+type Tree = Pick<RepoScope, 'root' | 'ignores' | 'productTrees'>;
 
 const isNamedBy = (file: string, globs: readonly string[]): boolean =>
   globs.some((glob) => !glob.startsWith('!') && minimatch(file, glob)) &&
@@ -22,18 +22,34 @@ const isSpelledAsOnDisk = (root: string, file: string): boolean => {
   );
 };
 
-// the files under a scope's root its globs name, its ignored folders aside, as posix paths
+// a product's tree is read by a glob that starts inside it, never by a broad one walking in
+const isEnteredBy = (glob: string, product: string): boolean =>
+  glob.startsWith(product.replace(/\*\*$/, ''));
+
+// the files under a scope's root its globs name, as posix paths: the ignored folders aside
 const filesNamedBy = (
   tree: Tree,
   globs: readonly string[],
 ): readonly string[] =>
-  fs
-    .globSync(
-      globs.filter((glob) => !glob.startsWith('!')),
-      { cwd: tree.root, exclude: tree.ignores },
-    )
-    .filter((file) => isSpelledAsOnDisk(tree.root, file))
-    .map((file) => file.split(path.sep).join('/'))
+  [
+    ...new Set(
+      globs
+        .filter((glob) => !glob.startsWith('!'))
+        .flatMap((glob) =>
+          fs.globSync(glob, {
+            cwd: tree.root,
+            exclude: [
+              ...tree.ignores,
+              ...tree.productTrees.filter(
+                (product) => !isEnteredBy(glob, product),
+              ),
+            ],
+          }),
+        )
+        .filter((file) => isSpelledAsOnDisk(tree.root, file))
+        .map((file) => file.split(path.sep).join('/')),
+    ),
+  ]
     .filter((file) => isNamedBy(file, globs))
     .sort();
 

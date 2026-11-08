@@ -1,6 +1,6 @@
 /**
- * - `ruleTester` · ESLint's RuleTester on vitest, each case's TypeScript parsed alone
- * - `typedTester`, `FIXTURES` · one on the fixtures' program, for a rule reading every file
+ * - `ruleTester` · ESLint's RuleTester on vitest, each case parsed alone
+ * - `typedTester`, `FIXTURES` · on the fixtures' one program, for a typed rule
  */
 import { RuleTester } from '@typescript-eslint/rule-tester';
 import path from 'node:path';

@@ -1,5 +1,6 @@
 /**
- * - `shapeTester`, `restrictedSyntax` · ESLint's RuleTester on vitest, TSX parsed, and the core rule
+ * - `shapeTester` · ESLint's RuleTester on vitest, TSX parsed
+ * - `restrictedSyntax` · the core rule the shapes feed
  * - `refusal` · the error a case expects, by a word of its shape's message
  */
 import { RuleTester } from 'eslint';

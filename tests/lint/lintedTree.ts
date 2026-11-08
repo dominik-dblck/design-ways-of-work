@@ -1,5 +1,5 @@
 /**
- * - `lintedTree` · ls-lint's findings on a tree of empty files, made and gone at once
+ * - `lintedTree` · ls-lint's findings on a tree of empty files it makes and removes
  */
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';

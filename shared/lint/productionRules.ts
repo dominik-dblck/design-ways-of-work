@@ -79,7 +79,7 @@ const pluginRules = (
     'error',
     {
       files: scope.production,
-      ignores: [...scope.ignores, ...ignores],
+      ignores: [...scope.ignores, ...scope.productTrees, ...ignores],
       entries: scope.entries,
       families: scope.families,
     },

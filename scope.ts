@@ -6,13 +6,12 @@ const scope: RepoScope = {
   ignores: [
     'node_modules/**',
     '.rehearsal/**',
-    'design/**',
-    'dev/**',
-    'shared/rules/**',
     'legacy/**',
     // the files a rule's tests read as a program, wrong on purpose
     'tests/lint/fixtures/**',
   ],
+  // the design side's tree, the build side's, and the rule files both read: each checked in its product
+  productTrees: ['design/**', 'dev/**', 'shared/rules/**'],
   production: ['scripts/**/*.ts', 'shared/**/*.ts', 'design-system/**/*.ts'],
   generated: [],
   react: [],
@@ -45,13 +44,17 @@ const scope: RepoScope = {
   generators: [],
   // no skill, and no instruction an agent loads: its sessions read the products'
   instructions: { skills: [], whole: [], onDemand: [], everyTurn: [] },
-  // its own code's strings: a rule's text, a check's finding, each written once
+  // its own code's strings and both sides' trees: a rule's text, a check's finding, each written once
   sentences: {
     code: [
       'scripts/**/*.ts',
       'shared/**/*.ts',
       'design-system/**/*.ts',
-      '!**/*.test.ts',
+      'shared/rules/**/*.ts',
+      'design/**/*.{ts,tsx}',
+      'dev/**/*.{ts,tsx}',
+      '!**/*.test.{ts,tsx}',
+      '!**/__fixtures__/**',
     ],
     prose: [],
   },

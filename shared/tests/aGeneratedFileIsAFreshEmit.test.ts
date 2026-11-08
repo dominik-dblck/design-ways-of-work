@@ -1,5 +1,6 @@
 /**
- * - each generator, run into a fresh folder, writes what the tree holds, byte for byte
+ * - each generator, run into a fresh folder
+ * - writes what the tree holds, byte for byte
  * - and only the files it owns, each of them: one it no longer writes is stale
  */
 import { spawnSync } from 'node:child_process';

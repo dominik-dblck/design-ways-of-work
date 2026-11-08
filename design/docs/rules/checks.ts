@@ -1,18 +1,16 @@
 /**
  * - `rules` · checks: the shared rules, then this side’s own
  */
-import { rowsFor } from '../../shared/rules/rowsFor.ts';
+import { ruleFileFor } from '../../shared/rules/ruleFileFor.ts';
 import { shared } from '../../shared/rules/checks.ts';
-import type { RuleFile } from './ruleTypes.ts';
 
 // prettier-ignore
-const rules: RuleFile = {
-  title: 'Checks',
-  intro: '\nWhich tool holds a rule, and what keeps the tools one system.\n',
-  rows: [
-    ...rowsFor('design', shared),
-  ],
+const rules = ruleFileFor({
+  side: 'design',
+  shared,
+  intro: '',
+  rows: [],
   outro: '',
-};
+});
 
 export { rules };

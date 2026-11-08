@@ -2,6 +2,7 @@
  * - `REGRESSION_SKILL` · `ticket-regression`: what the ticket may have broken
  */
 import type { DocumentSection } from '../documentTypes.ts';
+import { NO_STOP_OF_ITS_OWN } from './noStopOfItsOwn.ts';
 
 // prettier-ignore
 export const REGRESSION_SKILL: readonly DocumentSection[] = [
@@ -51,7 +52,7 @@ export const REGRESSION_SKILL: readonly DocumentSection[] = [
       '   - `## 4 · Beyond the suite (when the ticket moved a rendered value)` — the A/B shape',
       '6. Present: `{id} · regression · drift {n} · suite {n} red · touched {n} files, {n} re-ports`',
       '',
-      '**Stop.** None of its own — the calling mode decides. A non-zero section goes to the report with',
+      `${NO_STOP_OF_ITS_OWN} A non-zero section goes to the report with`,
       "the re-ports file: the design side applies it by script (`tools/apply-reports.ts`), and receipts are the design project's.",
       '',
       "The criteria §3 re-reads are the sheet's at the release's commit (`git cat-file blob <sha>:{path}`), never a cached copy. Check: the digests named in §1. `why: T-E06-13` — four cached shards were six days behind the sheet",

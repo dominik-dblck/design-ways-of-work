@@ -30,6 +30,8 @@ interface Sentences {
 interface RepoScope {
   readonly root: string;
   readonly ignores: readonly string[];
+  // the trees a product checks: held here, skipped by its lint and exports, read by a glob naming one
+  readonly productTrees: readonly string[];
   readonly production: readonly string[];
   readonly generated: readonly string[];
   readonly react: readonly string[];
