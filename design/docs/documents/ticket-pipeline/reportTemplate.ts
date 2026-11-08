@@ -1,10 +1,10 @@
 /**
- * - `PIPELINE_EIGHT` · ticket-pipeline.md, its part 8 of 8
+ * - `REPORT_TEMPLATE` · the report template, and what the old skill held
  */
 import type { DocumentSection } from '../documentTypes.ts';
 
 // prettier-ignore
-export const PIPELINE_EIGHT: readonly DocumentSection[] = [
+export const REPORT_TEMPLATE: readonly DocumentSection[] = [
   {
     heading: '# `roadmaps/templates/ticket-report.md`',
     lines: [

@@ -14,6 +14,12 @@ const rules: RuleFile = {
       why: 'A file past 200 lines holds a second job; the split is where that job gets its name (D13).',
     },
     {
+      rule: 'A split file is named by the job it holds, never by a number (`rowsTwo`, `part3`).',
+      gate: '`aFileNamesItsPurpose`',
+      exceptions: '—',
+      why: 'A number says where the file was cut, not what it holds; the reader opens every part to find one.',
+    },
+    {
       rule: 'A function holds at most 40 lines of code.',
       gate: 'ESLint `max-lines-per-function`',
       exceptions: 'tests',

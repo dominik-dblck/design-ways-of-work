@@ -1,10 +1,10 @@
 /**
- * - `PIPELINE_ONE` · ticket-pipeline.md, its part 1 of 8
+ * - `PIPELINE_OVERVIEW` · the opening: the modes, the sync before a ticket, the flow
  */
 import type { DocumentSection } from '../documentTypes.ts';
 
 // prettier-ignore
-export const PIPELINE_ONE: readonly DocumentSection[] = [
+export const PIPELINE_OVERVIEW: readonly DocumentSection[] = [
   {
     heading: '# Ticket pipeline · three modes, seven skills, two shared files',
     lines: [
@@ -98,82 +98,6 @@ export const PIPELINE_ONE: readonly DocumentSection[] = [
       'contract started over all three; the same ticket ended with 21 wrappers nobody calls.',
       '',
       '---',
-      '',
-    ],
-  },
-  {
-    heading: '# `.claude/skills/ticket/_shared.md`',
-    lines: [
-      '',
-      "Rules that hold at every stage. Every skill's first task is to read this file; a stage that writes or",
-      'reviews code then reads `ticket/_code.md`.',
-      '',
-    ],
-  },
-  {
-    heading: '## The repository never writes to the design project',
-    lines: [
-      '',
-      'The design project is the git repository `~/projects/eagle-design`, a file named by its path from its root, read at',
-      'the commit the design session names — `release <full sha>`, tagged `release-<yyyy-mm-dd>-<n>`, never HEAD;',
-      '`git rev-parse release-<…>^{commit}` must equal it, or the run stops. A file comes through',
-      '`yarn sheet:cache {file} --commit <sha>` (`cat-file blob <sha>:{file}`), a list or a size from `ls-tree`. Only read',
-      'commands run there (`cat-file`, `ls-tree`, `rev-parse`; `log` or `diff --stat` between two named shas); a',
-      "PreToolUse hook refuses the rest. The claude.ai artifact is the PM's render, not read here.",
-      "The design session is the project's one writer (rule:build-side-never-writes-spec): `status` and `RECEIPTS` are set there, from the",
-      'report. What has to change there is sent to it with `SendMessage`, never as a file; a decision only the PM',
-      'can take goes to the PM. `why:` D5, D6 (PM, 3 Nov)',
-      '',
-    ],
-  },
-  {
-    heading: '## How the sheet is read',
-    lines: [
-      '',
-      '0. **The pack first.** `fixtures/packs/{id}.md` on the design side is the ticket row, its edges, its',
-      "   dependencies' receipts and the whole checklist in one file, with the module digest of `roadmaps/tickets.ts`",
-      "   it was cut from (its entry and parts, as the release's record gives it). One read; when the record's digest",
-      "   differs, window the ticket's epic part, `roadmaps/EXX/EXXTickets.ts`, alone. A pack may come in",
-      '   parts (`fixtures/packs/{id}.2.md` on): the first names them all, and the run reads every one before recon.',
-      '   `.sheet-cache/` is gitignored, so each stage reads the pack at the named commit with',
-      '   `yarn sheet:cache fixtures/packs/{id}.md --commit <sha>` before `yarn ticket:read`, which exits 1 naming',
-      '   the file when it is missing. `why: T-E01-10`',
-      '1. **The section, never the file.** A read-list entry is `module · section`, the module named by its',
-      "   short name and found at its path in the pack's table, The modules. Price a file by its size in",
-      '   `ls-tree -l`, then window the saved copy. `why: T-E01-05`',
-      '2. **Never re-read what you hold.** A file is read at the named commit, then its sha256 is checked',
-      '   against the digest you hold: equal, take the disk copy; different, it is a newer sheet. At a newer named',
-      '   commit, `git rev-parse <sha>:{path}` gives the blob id: a stage stops only when a file it holds',
-      "   differs. Each stage opens by comparing the pack's digest with the one last sent; a mismatch stops.",
-      "   `tickets.ts` is its entry and its parts: a ticket's row is in its epic's part, `roadmaps/EXX/EXXTickets.ts`.",
-      '3. **A ticket is read with the script.** `yarn ticket:read {id} <file>` finds the row,',
-      '   prints `acceptance.length`, diffs criteria against the pack the run started from, exits 1 when',
-      '   the pack is behind. Nothing else reads the sheet. `why: T-E01-05` — rows are arrays, no `id:` key',
-      '4. **Zero is not a count.** Before a negative result becomes a finding, make the same query find',
-      '   something that must be there. `why: T-E01-05` — a blocker that did not exist reached a report',
-      '5. **The design project is read once per stage**, at one named commit, through `yarn sheet:cache`',
-      '   into `.sheet-cache/`; every later read takes the disk copy. One commit is one digest: no reader meets a',
-      '   newer sheet halfway through a run (PM, 25 Sep)',
-      '',
-    ],
-  },
-  {
-    heading: '## Every number is parsed, never read',
-    lines: [
-      '',
-      'A count a test or a contract depends on is extracted mechanically — `acceptance.length`, a parsed',
-      "JSON grouped by kind, a fixture's own length — and checked against the criterion's literal. Nothing",
-      'sent is a number read from prose or a sentence quoted from memory; both are asserted by containment',
-      'against the file first. `why: T-E00-05` — four stated numbers, four wrong',
-      '',
-    ],
-  },
-  {
-    heading: '## A question one side has the data for is answered there',
-    lines: [
-      '',
-      'A count over the tree, an import, a git log — if this repository holds it, the question is a',
-      'measurement made here, not sent. `why: T-E01-08` — F1 asked which files import Box; `grep` did',
       '',
     ],
   },

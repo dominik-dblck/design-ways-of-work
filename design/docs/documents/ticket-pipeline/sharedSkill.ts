@@ -1,10 +1,86 @@
 /**
- * - `PIPELINE_TWO` · ticket-pipeline.md, its part 2 of 8
+ * - `SHARED_SKILL` · `ticket/_shared.md`: what every ticket skill reads first
  */
 import type { DocumentSection } from '../documentTypes.ts';
 
 // prettier-ignore
-export const PIPELINE_TWO: readonly DocumentSection[] = [
+export const SHARED_SKILL: readonly DocumentSection[] = [
+  {
+    heading: '# `.claude/skills/ticket/_shared.md`',
+    lines: [
+      '',
+      "Rules that hold at every stage. Every skill's first task is to read this file; a stage that writes or",
+      'reviews code then reads `ticket/_code.md`.',
+      '',
+    ],
+  },
+  {
+    heading: '## The repository never writes to the design project',
+    lines: [
+      '',
+      'The design project is the git repository `~/projects/eagle-design`, a file named by its path from its root, read at',
+      'the commit the design session names — `release <full sha>`, tagged `release-<yyyy-mm-dd>-<n>`, never HEAD;',
+      '`git rev-parse release-<…>^{commit}` must equal it, or the run stops. A file comes through',
+      '`yarn sheet:cache {file} --commit <sha>` (`cat-file blob <sha>:{file}`), a list or a size from `ls-tree`. Only read',
+      'commands run there (`cat-file`, `ls-tree`, `rev-parse`; `log` or `diff --stat` between two named shas); a',
+      "PreToolUse hook refuses the rest. The claude.ai artifact is the PM's render, not read here.",
+      "The design session is the project's one writer (rule:build-side-never-writes-spec): `status` and `RECEIPTS` are set there, from the",
+      'report. What has to change there is sent to it with `SendMessage`, never as a file; a decision only the PM',
+      'can take goes to the PM. `why:` D5, D6 (PM, 3 Nov)',
+      '',
+    ],
+  },
+  {
+    heading: '## How the sheet is read',
+    lines: [
+      '',
+      '0. **The pack first.** `fixtures/packs/{id}.md` on the design side is the ticket row, its edges, its',
+      "   dependencies' receipts and the whole checklist in one file, with the module digest of `roadmaps/tickets.ts`",
+      "   it was cut from (its entry and parts, as the release's record gives it). One read; when the record's digest",
+      "   differs, window the ticket's epic part, `roadmaps/EXX/EXXTickets.ts`, alone. A pack may come in",
+      '   parts (`fixtures/packs/{id}.2.md` on): the first names them all, and the run reads every one before recon.',
+      '   `.sheet-cache/` is gitignored, so each stage reads the pack at the named commit with',
+      '   `yarn sheet:cache fixtures/packs/{id}.md --commit <sha>` before `yarn ticket:read`, which exits 1 naming',
+      '   the file when it is missing. `why: T-E01-10`',
+      '1. **The section, never the file.** A read-list entry is `module · section`, the module named by its',
+      "   short name and found at its path in the pack's table, The modules. Price a file by its size in",
+      '   `ls-tree -l`, then window the saved copy. `why: T-E01-05`',
+      '2. **Never re-read what you hold.** A file is read at the named commit, then its sha256 is checked',
+      '   against the digest you hold: equal, take the disk copy; different, it is a newer sheet. At a newer named',
+      '   commit, `git rev-parse <sha>:{path}` gives the blob id: a stage stops only when a file it holds',
+      "   differs. Each stage opens by comparing the pack's digest with the one last sent; a mismatch stops.",
+      "   `tickets.ts` is its entry and its parts: a ticket's row is in its epic's part, `roadmaps/EXX/EXXTickets.ts`.",
+      '3. **A ticket is read with the script.** `yarn ticket:read {id} <file>` finds the row,',
+      '   prints `acceptance.length`, diffs criteria against the pack the run started from, exits 1 when',
+      '   the pack is behind. Nothing else reads the sheet. `why: T-E01-05` — rows are arrays, no `id:` key',
+      '4. **Zero is not a count.** Before a negative result becomes a finding, make the same query find',
+      '   something that must be there. `why: T-E01-05` — a blocker that did not exist reached a report',
+      '5. **The design project is read once per stage**, at one named commit, through `yarn sheet:cache`',
+      '   into `.sheet-cache/`; every later read takes the disk copy. One commit is one digest: no reader meets a',
+      '   newer sheet halfway through a run (PM, 25 Sep)',
+      '',
+    ],
+  },
+  {
+    heading: '## Every number is parsed, never read',
+    lines: [
+      '',
+      'A count a test or a contract depends on is extracted mechanically — `acceptance.length`, a parsed',
+      "JSON grouped by kind, a fixture's own length — and checked against the criterion's literal. Nothing",
+      'sent is a number read from prose or a sentence quoted from memory; both are asserted by containment',
+      'against the file first. `why: T-E00-05` — four stated numbers, four wrong',
+      '',
+    ],
+  },
+  {
+    heading: '## A question one side has the data for is answered there',
+    lines: [
+      '',
+      'A count over the tree, an import, a git log — if this repository holds it, the question is a',
+      'measurement made here, not sent. `why: T-E01-08` — F1 asked which files import Box; `grep` did',
+      '',
+    ],
+  },
   {
     heading: '## The pack is verified before every stage',
     lines: [
@@ -108,67 +184,6 @@ export const PIPELINE_TWO: readonly DocumentSection[] = [
       'with a check somebody can verify, **If it goes the other way**. Then, when non-empty: **Narrowings**',
       '(decisions already taken, "say if wrong") and **Findings** (wrong in the sheet — one touching a',
       'landed ticket names it: it costs a re-port). "Cleaner" is not a check.',
-      '',
-      '---',
-      '',
-    ],
-  },
-  {
-    heading: '# `.claude/skills/ticket/_code.md`',
-    lines: [
-      '',
-      'Rules for writing and reviewing code and tests, read after `ticket/_shared.md` by feature, standard, fast,',
-      'arch-review, regression and report. Recon does not read it.',
-      '',
-    ],
-  },
-  {
-    heading: '## Tests',
-    lines: [
-      '',
-      "- **The test clause's kind decides when a test is red.** `test (domain)`, `(endpoint)` and `(architecture)`",
-      '  are written before the code and fail on their assertion first — not on an import or a type. `(app)` and',
-      '  `(browser)` are written after the code and run once against a planted fault. `(measured, date)` is no',
-      '  test: the report quotes the measurement. A test green before any code counts as red only through a control',
-      '  in the same test that fails on a planted input, and that red is quoted. `why: T-E01-06, T-E02-01`',
-      '- **An app or browser test is trusted once it has been red.** The fault — the id removed, the branch',
-      '  inverted — and the red are quoted in the report before the fault is taken out. `why: T-E01-06`',
-      "- **A criterion's worked example is measured before a test is written to it.** An example is an",
-      '  assertion. `why: T-E01-09`',
-      '- **A test over the shared database runs five times under `--sequence.shuffle`** before it is called',
-      '  green, and the runs are quoted in the report. `why: T-E02-04`',
-      '- **A test on a span or a range asserts both ends.** `why: T-E01-10`',
-      '- **An inverse is emitted by whatever performed the transform, never inferred from its output.** `why: T-E01-09`',
-      '- **A body schema is emitted, never written** (`tests/architecture/theBodiesAreEmitted.test.ts`). `why: T-E00-13`',
-      "- **A check that only a hook runs is not a check.** A fixture root's own verifier is called by a test in the",
-      '  suite (`tests/architecture/everyFixtureRootIsHeld.test.ts`). `why: T-E01-09` — recon F2: a verifier',
-      "  nothing in the suite ran ignored a row's path",
-      '',
-    ],
-  },
-  {
-    heading: '## Code',
-    lines: [
-      '',
-      '- **A name says what, never how many** (`tests/architecture/aNameSaysWhatNotHowMany.test.ts`). `why: T-E01-07`',
-      '- **A file a script generates goes into `.prettierignore` the moment it exists.** `why: T-E01-10`',
-      '- **No comment describes the stage** (`tests/architecture/commentsAreInvariants.test.ts`). `why: T-E00-08`',
-      '- **A value a delayed read refreshes has a settling state the screen reads**, and its test asserts the',
-      '  screen after the write lands and before the read. `why: T-E04-00` — Close without changes offered over four saved edits',
-      '',
-    ],
-  },
-  {
-    heading: '## Browser flows',
-    lines: [
-      '',
-      '- **A drag in the browser tier goes through `e2e/framework/dragging.ts`**',
-      '  (`tests/architecture/aDragGoesThroughTheFramework.test.ts`); a drag flow that stays green with its guard',
-      '  out leaves the catalogue. `why: T-E04-00` — J4, J7',
-      "- **A flow reads a refusal's sentence through `say(key, facts)`**",
-      "  (`tests/architecture/aFlowSaysARefusal.test.ts`). `why: T-E04-00` — Q21's `{document}`",
-      '- **When a ticket moves where a press lands, every flow that makes that press asserts the new landing.**',
-      '  `why: T-E04-00` — Create went to the editor and the copy flow kept checking the list',
       '',
       '---',
       '',

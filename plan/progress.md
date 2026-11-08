@@ -16,10 +16,20 @@
   `--preserve-symlinks --preserve-symlinks-main`.
 - `scripts/extract.ts` ran once: design/ is the source now, and a second run refuses.
 
-## Scope added by the PM (8 Nov), todo
+## Scope added by the PM (8 Nov)
 
 - [ ] the `.dc.html` wireframes leave the way of working: ds-scan, the Feature page's drawings and read-list links,
       the pack's wireframe pointers, source-check's page lists, the two styling rules, ticket-pipeline row 26
 - [ ] every icon a source names is written from lucide-static; `public/lucide-icons` (hand copies) does not come here
 - [ ] a third page, Wireframes: every screen together, drawn in React from the product's screens (the POC's way)
 - [ ] `dev/` holds the build side's folder structure, atomic design (atoms, molecules, organisms, templates, pages)
+- [x] no file named by a number: the documents' parts named by what they hold (15 pipeline parts, 2 api-convention
+      parts, agent-instructions in one file); `aFileNamesItsPurpose` refuses a number; size.md says why
+
+## The port folder
+
+`ports/eagle-design/` holds what the port changes in eagle-design itself; the rehearsal lays it over the copy.
+Today: the baseline of eagle's 14 numbered files.
+
+`plan/expected-differences.tsv` lists every output a decided change moves, with why; `yarn verify` fails on any
+other difference, and on a listed one that no longer differs.

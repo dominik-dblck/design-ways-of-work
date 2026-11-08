@@ -1,41 +1,10 @@
 /**
- * - `PIPELINE_FIVE` · ticket-pipeline.md, its part 5 of 8
+ * - `FEATURE_SKILL` · `ticket-feature`: one epic in one run
  */
 import type { DocumentSection } from '../documentTypes.ts';
 
 // prettier-ignore
-export const PIPELINE_FIVE: readonly DocumentSection[] = [
-  {
-    heading: '# `.claude/skills/ticket-fast/SKILL.md`',
-    lines: [
-      '',
-      '```',
-      'name: ticket-fast',
-      'description: Mode, 0–1 point. A small ticket, no recon. Build from the pack, then report. One stop, plus any question.',
-      '```',
-      '',
-      '**Purpose.** A token, a copy line, one field, a command generated off the sheet, a UI fix inside a',
-      'spec row that exists. The pack is the whole reading.',
-      '',
-      '**Input.** `{ticket-id}` with `track: fast` on its pack.',
-      '',
-      '**Tasks.**',
-      '',
-      '1. Read `ticket/_shared.md`, then `ticket/_code.md`',
-      '2. Branch as `ticket-recon` task 2, read the ticket with `yarn ticket:read`',
-      '3. **Build.** Tests for every criterion, each seen red once; the whole suite and every scan at zero.',
-      '   A clause the repository contradicts, or a criterion that reads two ways, stops here: write it as a',
-      '   question and the ticket moves to standard.',
-      "4. **Report.** `ticket-report`, with the criterion → test table as a section. **STOP** — merge waits for the design side's yes on the report.",
-      '',
-      '**Does not.** Write a recon or a contract table, or merge before the yes.',
-      '',
-      '**Stop.** After task 4, and on any question.',
-      '',
-      '---',
-      '',
-    ],
-  },
+export const FEATURE_SKILL: readonly DocumentSection[] = [
   {
     heading: '# `.claude/skills/ticket-feature/SKILL.md`',
     lines: [
@@ -144,19 +113,6 @@ export const PIPELINE_FIVE: readonly DocumentSection[] = [
       '**Rules.** Events and payload keys come from `events.ts`; a new one is decided like any gap and marked NEW EVENT in the snapshot, because the log',
       'keeps it forever. A pass reads, tests and writes its pass file; the main agent writes the stage documents and the',
       'report from them. Keep the context small: one aspect per pass, never two passes at once.',
-      '',
-      '---',
-      '',
-    ],
-  },
-  {
-    heading: '# Templates · `roadmaps/templates/`',
-    lines: [
-      '',
-      "One per document that leaves the repository. Each mirrors its skill's steps; a section the skill does",
-      'not ask for does not appear. Lessons are `why:` tags, never paragraphs.',
-      '',
-      'Five files, each its own section below, each a heading that is its path.',
       '',
       '---',
       '',

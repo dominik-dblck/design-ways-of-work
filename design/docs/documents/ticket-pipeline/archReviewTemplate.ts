@@ -1,0 +1,55 @@
+/**
+ * - `ARCH_REVIEW_TEMPLATE` · the arch-review template
+ */
+import type { DocumentSection } from '../documentTypes.ts';
+
+// prettier-ignore
+export const ARCH_REVIEW_TEMPLATE: readonly DocumentSection[] = [
+  {
+    heading: '# `roadmaps/templates/ticket-arch-review.md`',
+    lines: [
+      '',
+      '```markdown',
+      '# arch-review-{id} · {date}',
+      '',
+      '> against `feature/deblock-content` + working tree · {n} findings · {n} fix · {n} keep · {n} decided',
+      '',
+      '## Architecture Summary',
+      '- **Layers touched:**',
+      '- **Patterns loaded:**',
+      '- **Context gaps:**',
+      '',
+      '## Findings',
+      '### F1',
+      '- **Source:** `[{rule file} → {section}]`',
+      '- **Severity:** CRITICAL | HIGH | UNCERTAIN',
+      '- **File:** `path:line`',
+      '- **Rule:**',
+      '- **Why:**',
+      '- **Fix hint:**',
+      '',
+      '## Decision table',
+      '| # | What it is | How it is now | How it will be |',
+      '|---|---|---|---|',
+      '',
+      '{one line: which collapse into one change, which are decisions}',
+      '',
+      '## Disposition',
+      '| # | fix / keep / decided | why | Notes |',
+      '|---|---|---|---|',
+      '',
+      '## Decided',
+      '{one “did X because Y” each — or "none"}',
+      '',
+      '## Files changed by this stage',
+      '- `path` — which finding',
+      '',
+      '## Tests after',
+      '{n} green · ticket suite',
+      '```',
+      '',
+      '---',
+      '',
+    ],
+  },
+];

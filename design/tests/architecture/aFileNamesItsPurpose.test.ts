@@ -1,5 +1,6 @@
 /**
  * - `docs/rules/names.md`: an entry is kebab-case, a part camelCase or its epic, a types file types alone
+ * - `docs/rules/size.md`: a split names each job, never a number
  */
 import path from 'node:path';
 import ts from 'typescript';
@@ -12,6 +13,7 @@ import type { Source } from './tree.ts';
 const DRAWERS = ['utils', 'helpers', 'common', 'shared', 'index'];
 const AN_ENTRY = /^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/;
 const A_PART = /^(?:[a-z][A-Za-z0-9]*|E\d{2}[A-Za-z]*)$/;
+const A_NUMBER = /(?:One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten|[a-z]\d+)$/;
 
 const isTypeOnly = (statement: ts.Statement): boolean =>
   ts.isInterfaceDeclaration(statement) ||
@@ -29,6 +31,7 @@ function misnamed(source: Source): readonly string[] {
     found.push(
       `${source.path} · ${isEntry(source.path) ? 'an entry is kebab-case' : 'a part is camelCase or its epic'}`,
     );
+  if (A_NUMBER.test(name)) found.push(`${source.path} · a part named by a number`);
   if (name.endsWith('Types') && !syntaxOf(source).statements.every(isTypeOnly))
     found.push(`${source.path} · a types file holds a value`);
   return found;
@@ -54,6 +57,9 @@ describe('a file names its purpose', () => {
       }),
     ).toEqual([
       'docs/process/plans/plansTypes.ts · a types file holds a value',
+    ]);
+    expect(misnamed({ path: 'sheet/words/plans/rowsTwo.ts', text: '' })).toEqual([
+      'sheet/words/plans/rowsTwo.ts · a part named by a number',
     ]);
     expect(misnamed({ path: 'roadmaps/receipts/E04Run.ts', text: '' })).toEqual(
       [],

@@ -2,12 +2,12 @@
  * - `apiConvention` · api-convention.md as data, printed at its path byte for byte
  */
 import type { DocumentFile } from './documentTypes.ts';
-import { CONVENTION_ONE } from './api-convention/apiConventionOne.ts';
-import { CONVENTION_TWO } from './api-convention/apiConventionTwo.ts';
+import { ENDPOINT_CHECKS } from './api-convention/endpointChecks.ts';
+import { ENDPOINT_SHAPE } from './api-convention/endpointShape.ts';
 
 const apiConvention: DocumentFile = {
   path: 'sheet/contract/api-convention.md',
-  sections: [...CONVENTION_ONE, ...CONVENTION_TWO],
+  sections: [...ENDPOINT_SHAPE, ...ENDPOINT_CHECKS],
 };
 
 export { apiConvention };

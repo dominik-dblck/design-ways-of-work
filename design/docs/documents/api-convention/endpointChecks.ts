@@ -1,94 +1,10 @@
 /**
- * - `CONVENTION_ONE` · api-convention.md, its part 1 of 2
+ * - `ENDPOINT_CHECKS` · the checks on every request; what a contract states
  */
 import type { DocumentSection } from '../documentTypes.ts';
 
 // prettier-ignore
-export const CONVENTION_ONE: readonly DocumentSection[] = [
-  {
-    heading: '# api-convention.md · how every endpoint looks',
-    lines: [
-      '',
-      'One page, for both sides. Decided by the PM on 24 Sep where marked; everything else gathers what commands.ts,',
-      'queries.ts, rule:command-body-is-typed and T-E00-13 already say, so a contract can be checked against one place.',
-      '',
-    ],
-  },
-  {
-    heading: '## Routes',
-    lines: [
-      '',
-      '| What | Route | Example |',
-      '|---|---|---|',
-      '| A group (a record, no log) | REST on the record | `POST /api/groups` · `PATCH /api/groups/:id` · `DELETE /api/groups/:id` |',
-      '| A new document | `POST /api/documents` | CreateDocument |',
-      '| Any other document command | `POST /api/documents/:id/commands/<kebab-name>` | `…/commands/rename`, `…/commands/add-block` |',
-      '| A document read | `GET /api/documents/:id/<what>` | `/view`, `/history`, `/diff`, `/verify` |',
-      '| A list | `GET /api/<collection>?<filters>` | `GET /api/groups?page=2` |',
-      '| An asset (a record, no log) | REST on the record · the file as multipart | `POST /api/assets` · `DELETE /api/assets/:id` · `GET /api/assets` (AS2) |',
-      '',
-      '- One command, one route, one ticket. The route segment is the command in kebab case.',
-      '- A document is event-sourced, so every change is a named command, never a PATCH of fields.',
-      '  A group is a plain record, so it is REST.',
-      '- **PM, 24 Sep** · `:id` is one path segment, percent-encoded: a DocumentId holds a slash',
-      "  (`summer/mailing-standard` → `summer%2Fmailing-standard`), the same rule as the screen's address (T-E02-05 · E24).",
-      '- **PM, 24 Sep** · a list of documents is `GET /api/documents?…` (T-E03-08), not nested under a group,',
-      '  because search runs across every group.',
-      '',
-    ],
-  },
-  {
-    heading: '## Bodies and query strings',
-    lines: [
-      '',
-      '- A body is typed on its row: `field: Type · …`, the types from block-model.json. Prose has no route. (rule:command-body-is-typed)',
-      '- No fields: the row reads `—`, the body is `{}` or absent, and any field sent is 400. (rule:command-body-is-typed)',
-      '- The actor is never in a body, a query or a header: it is the session. (T-E00-11)',
-      '- A caller does not send a stream version. The exceptions state the version and hash they read:',
-      '  Approve and ApproveOnBehalf (a language gate’s too, since E09), ConfirmBlock, ConfirmBlockOnBehalf, and EditTranslation and DraftTranslation the source revision; WithdrawApproval',
-      '  states the version it saw signed (F4 · 8 Oct). (commands.ts · contract)',
-      '- An id for a new thing comes from the caller, so two clicks make one thing: GroupId, DocumentId,',
-      '  BlockId (nanoid, rule:short-random-block-ids), AssetId (the same recipe, AS5), MessageId, ProposalId. Same id twice = the same thing, not an error.',
-      '- **PM, 29 Sep** · every command that writes a document’s log carries `commandId: CommandId`, minted by the caller',
-      '  before it sends — the idempotency key: the same commandId again answers 200 and writes nothing, so a retry after',
-      '  a lost answer never acts twice, and every event one click writes carries it, so the history groups them. It leads',
-      '  the body and is the envelope’s, never the written type’s field. A group command writes a record, is idempotent by',
-      '  its id, and carries none. (CI1)',
-      "- Query params are typed on the query's row; unknown key 400, key twice 400, numbers digits only,",
-      '  a missing optional param takes its default. (queries.ts · contract)',
-      '',
-    ],
-  },
-  {
-    heading: '## Lists',
-    lines: [
-      '',
-      '- `?page=n`, 25 a page, answered with `page`, `pageSize`, `total`. No page = page 1. (T-E02-04)',
-      '- Newest change first unless the row says otherwise.',
-      '- **PM, 24 Sep** · every list follows this; a list that needs another order says why on its row.',
-      '',
-    ],
-  },
-  {
-    heading: '## Answers',
-    lines: [
-      '',
-      '| Status | Body | When |',
-      '|---|---|---|',
-      '| 200 | `{ ok: true, streamVersion, …result }` | done · a command on a log also answers the events it appended as `{ seq, key }`; a silent command answers `streamVersion: null` |',
-      "| 400 | `{ ok: false, kind: 'malformed', field, reason }` | the body or the query fails its schema |",
-      "| 403 | `{ ok: false, kind: 'forbidden', command, roles, line }` · `line` is the sentence of the command’s actor set — `actor.not_content_manager`, `actor.not_approver`, … — the line names the document’s type since T-E06-13 (T85, rule:refusal-per-actor-set) — so an API caller reads why as a person does (PM, 25 Sep · report T-E02-05 point 2) | none of the session's roles is in the command's `actor` — a person may hold several (RL1 · 29 Sep) |",
-      "| 404 | `{ ok: false, kind: 'missing', document \\| group \\| asset \\| block }` | what the path names does not exist |",
-      "| 409 | `{ ok: false, kind: 'rule', key, line, firedOn, streamVersion, fix }` | a rule refused it · `key` is a refusals.ts key · `asset.not_accepted` adds `validator` and `params`, G1’s shape, and its `line` is that validator’s sentence (AS4 · 29 Sep) | The params are typed as the validator’s in field-kinds.ts — mimeTypes string[], maxSize number — one Check variant per validator, as in the SILENT answer (T-E04-00 step 5).",
-      "| 500 | `{ ok: false, kind: 'error', id }` | a throw · the stack is in the server log under `id`, never on the wire |",
-      '',
-      '- Every query answers the stream version it read at, beside its data. (queries.ts · contract)',
-      "- A person reads `line`, never `reason` or `key`. A 400 on a person's input carries a sentence from",
-      '  block-model.json (T-E02-05 · E34, E41).',
-      '- Losing a race is not a refusal: the server reads again and redoes. (refusals.ts · contract)',
-      '',
-    ],
-  },
+export const ENDPOINT_CHECKS: readonly DocumentSection[] = [
   {
     heading: '## Checked on every request, in this order',
     lines: [
@@ -162,6 +78,24 @@ export const CONVENTION_ONE: readonly DocumentSection[] = [
       '10. **The same command twice** (the same commandId) → 200 `{ ok: true, streamVersion, replayed: true }` and nothing else, nothing',
       '    written — a retry after a lost answer. No answer is stored: the caller reads again, the editor its GetDocument.',
       '    streamVersion as the command’s kind answers it: a logged command the log’s head, a silent one null. (CI1, CI2 · PM, 29 Sep)',
+      '',
+    ],
+  },
+  {
+    heading: '## What a contract for one endpoint states',
+    lines: [
+      '',
+      "Descriptions, not code — how it is built is the build side's.",
+      '',
+      '- method + path · actor',
+      '- body or params, typed',
+      '- **validation per field**: which row of the table above, plus anything of its own (e.g. a name unique',
+      '  in its group, case aside)',
+      '- **edge cases of its own**, each with its answer (status + refusal key), beyond the nine above —',
+      '  e.g. a copy of a trashed document, a rename to the name it already has',
+      "- the 200's result · the events it emits",
+      '',
+      'Rules a type cannot say are checked by the design side against edges.ts, block-rules.ts and gate-rules.ts.',
       '',
     ],
   },

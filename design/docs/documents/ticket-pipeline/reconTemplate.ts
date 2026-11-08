@@ -1,10 +1,23 @@
 /**
- * - `PIPELINE_SIX` · ticket-pipeline.md, its part 6 of 8
+ * - `RECON_TEMPLATE` · the templates opened, and the recon template
  */
 import type { DocumentSection } from '../documentTypes.ts';
 
 // prettier-ignore
-export const PIPELINE_SIX: readonly DocumentSection[] = [
+export const RECON_TEMPLATE: readonly DocumentSection[] = [
+  {
+    heading: '# Templates · `roadmaps/templates/`',
+    lines: [
+      '',
+      "One per document that leaves the repository. Each mirrors its skill's steps; a section the skill does",
+      'not ask for does not appear. Lessons are `why:` tags, never paragraphs.',
+      '',
+      'Five files, each its own section below, each a heading that is its path.',
+      '',
+      '---',
+      '',
+    ],
+  },
   {
     heading: '# `roadmaps/templates/ticket-recon.md`',
     lines: [

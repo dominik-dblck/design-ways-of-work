@@ -1,6 +1,7 @@
 /**
  * - `node scripts/rehearse.ts [product] [copy]` · a port rehearsal on a copy, never the product
- * - copies the product's tracked files but the wow set; links each wow file back in place
+ * - copies the product's tracked files but the wow set; links each file of design/ in place
+ * - ports/<product>/ lays over the copy what the port changes in the product itself
  * - its node runs keep the link's path (NODE_OPTIONS), so `..` still reaches the product
  */
 import { execFileSync } from 'node:child_process';
@@ -10,6 +11,8 @@ import path from 'node:path';
 const HERE = path.resolve(import.meta.dirname, '..');
 const SOURCE = path.resolve(process.argv[2] ?? path.join(HERE, '..', 'eagle-design'));
 const COPY = path.resolve(process.argv[3] ?? path.join(HERE, '.rehearsal', path.basename(SOURCE)));
+const DESIGN = path.join(HERE, 'design');
+const PORT = path.join(HERE, 'ports', path.basename(SOURCE));
 const WOW_CATEGORY = /^(wow, |mixed check)/;
 const KEEP_LINKS = "NODE_OPTIONS='--preserve-symlinks --preserve-symlinks-main'";
 
@@ -20,6 +23,14 @@ const inventory = fs
   .filter(Boolean)
   .map((line) => line.split('\t'));
 const WOW = new Set(inventory.filter(([, category]) => WOW_CATEGORY.test(category ?? '')).map(([file]) => file ?? ''));
+
+function filesUnder(folder: string): readonly string[] {
+  if (!fs.existsSync(folder)) return [];
+  return fs
+    .readdirSync(folder, { recursive: true, withFileTypes: true })
+    .filter((entry) => entry.isFile() && entry.name !== '.DS_Store')
+    .map((entry) => path.relative(folder, path.join(entry.parentPath, entry.name)));
+}
 
 function edit(file: string, change: (text: string) => string): void {
   const at = path.join(COPY, file);
@@ -48,23 +59,31 @@ function main(): void {
   const tracked = execFileSync('git', ['ls-files'], { cwd: SOURCE, encoding: 'utf8' }).split('\n').filter(Boolean);
   let copied = 0;
   let linked = 0;
-  for (const file of tracked) {
+  let ported = 0;
+  for (const file of tracked.filter((one) => !WOW.has(one))) {
     const target = path.join(COPY, file);
     fs.mkdirSync(path.dirname(target), { recursive: true });
-    if (WOW.has(file)) {
-      fs.symlinkSync(path.join(HERE, 'design', file), target);
-      linked += 1;
-    } else {
-      fs.copyFileSync(path.join(SOURCE, file), target);
-      copied += 1;
-    }
+    fs.copyFileSync(path.join(SOURCE, file), target);
+    copied += 1;
+  }
+  for (const file of filesUnder(PORT)) {
+    const target = path.join(COPY, file);
+    fs.mkdirSync(path.dirname(target), { recursive: true });
+    fs.copyFileSync(path.join(PORT, file), target);
+    ported += 1;
+  }
+  for (const file of filesUnder(DESIGN)) {
+    const target = path.join(COPY, file);
+    fs.mkdirSync(path.dirname(target), { recursive: true });
+    fs.symlinkSync(path.join(DESIGN, file), target);
+    linked += 1;
   }
   fs.symlinkSync(path.join(SOURCE, 'node_modules'), path.join(COPY, 'node_modules'));
   configs();
   execFileSync('git', ['init', '-q'], { cwd: COPY });
   execFileSync('git', ['add', '-A'], { cwd: COPY });
   execFileSync('git', ['-c', 'user.name=rehearsal', '-c', 'user.email=rehearsal@local', 'commit', '-qm', 'rehearsal', '--no-verify'], { cwd: COPY });
-  console.log(`${path.relative(HERE, COPY) || COPY} · ${copied} product files copied, ${linked} wow files linked in place`);
+  console.log(`${path.relative(HERE, COPY) || COPY} · ${copied} product files copied, ${ported} from the port, ${linked} files of design/ linked in place`);
 }
 
 main();
