@@ -31,7 +31,8 @@
     "verify": "node scripts/verify.ts",
     "take-dev-map": "node scripts/takeDevMap.ts",
     "port-save": "node scripts/portSave.ts",
-    "take-dev-claude": "node scripts/takeDevClaude.ts"
+    "take-dev-claude": "node scripts/takeDevClaude.ts",
+    "backup": "zsh scripts/zipRepo.sh"
   },
   "packageManager": "yarn@1.22.22",
   "devDependencies": {
