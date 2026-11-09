@@ -236,6 +236,13 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
   emitter waits: which fields of each group count (the contract's, the components', the words') is agreed with the
   build side first, and the payloads are typed in the port; both go to the port ticket.
 
+- Eagle-dev's probe, 9 Nov, on Dom's go (81399a5, cbe6ab7, 4470cca, aa58888, a590ae6): nothing wrong; its cutter
+  takes the Contents with only the added lines (27, in `_shared.md` and the recon template), everySkillIsShort green;
+  one miss in the words rule: a label opening with an acronym (`CTA label`) failed the sentence test. Mended: the
+  first word capitalised or an acronym, one lowercase letter at least in the text (`HTTP GET` stays out); the
+  build side's count 19 → 22 in the same 6 files, the design side's 0. Its flags B and C read 392 and 454 on its
+  tree: the shared base waits for its port.
+
 ## Questions for the PM
 
 - The design side's 71 entries keep kebab names (`sheet-status.ts`): the artifact and the build side read them by

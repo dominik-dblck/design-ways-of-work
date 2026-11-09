@@ -10,12 +10,12 @@ import { createRule } from './ruleKit.ts';
 type Text = TSESTree.Literal | TSESTree.TemplateLiteral;
 type Node = TSESTree.Node;
 
-// a person's text reads as a sentence: its first word capitalised, the rest apart (`Preview settings`, `A template`)
+// a person's text reads as a sentence: its first word capitalised or an acronym, the rest apart, one lowercase at least
 const A_WORD = String.raw`[A-Za-z0-9]+(?:['’][a-z]+|-[a-z]{2,})*`;
 const APART = String.raw`(?:[ ,.:;!?·…()/]+${A_WORD})`;
 const FIRST = String.raw`[A-Z][a-z]+(?:['’][a-z]+|-[a-z]{2,})*`;
 const PERSON_TEXT = new RegExp(
-  String.raw`^(?:${FIRST}${APART}*|[A-Z]${APART}+)[ .!?…:]*$`,
+  String.raw`^(?=.*[a-z])(?:${FIRST}${APART}*|[A-Z]+${APART}+)[ .!?…:]*$`,
 );
 
 const COMPARED = new Set(['==', '===', '!=', '!==']);

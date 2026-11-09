@@ -66,6 +66,10 @@ ruleTester.run('words-live-in-a-words-file', wordsLiveInAWordsFile, {
       ],
       ["one capital: an axis's `'X'`", "export const AXIS = 'X';"],
       [
+        'capitals alone, no word in lowercase: `HTTP GET`',
+        "export const ASKED = 'HTTP GET';",
+      ],
+      [
         'a template with a hole and no space',
         'export const classOf = (name: string): string => `Mui${name}`;',
       ],
@@ -99,6 +103,11 @@ ruleTester.run('words-live-in-a-words-file', wordsLiveInAWordsFile, {
         'a sentence opening on one letter: `A template is never sent`',
         "export const HINT = 'A template is never sent';",
         1,
+      ],
+      [
+        'a label opening with an acronym: `CTA label`, `CTA link mode`',
+        "export const FIELDS = { cta: 'CTA label', mode: 'CTA link mode' };",
+        2,
       ],
       [
         'a sentence apart: `Not on a template · a template is never sent`',
