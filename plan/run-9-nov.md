@@ -17,6 +17,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 | 7 | P1 release | 5 | 5 |
 | 5 | e2e | 4 | 4 |
 | 6 | Port design | 0 | 6 |
+| 8 | E19 + backup | 3 | 3 |
 
 Stage 6, measured 9 Nov 17:20 (the PM holds it: start asked): 1 · links, how wow's files stand in eagle-design's git
 (the PM's decision, README · How a product uses it) and the script writing them, ~1 h · 2 · port.patch (144 files,
@@ -53,6 +54,9 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
 - 15:42 · stage 7 · 5 of 5 · main merged into restructure c4ed4d7, port rebased 1ec3346, verify ALL SAME
 - 16:22 · stage 5 · 3 of 4 · e2e gates: flows by the registry, roles, test ids, registry leaves, helpers (a03b90d..9df193a)
 - 17:01 · stage 5 · 4 of 4 · e2e skills from data, be2a135
+- 18:42 · stage 8 · 1 of 3 · T-E19-00 refined with the PM (C1-C15), releases 5 and 5.1, sent to eagle-dev
+- 18:42 · stage 8 · 2 of 3 · yarn backup in wow and eagle-design, restored in scratch, zips taken
+- 18:42 · stage 8 · 3 of 3 · port.patch re-saved on main of 9 Nov evening, chain green
 
 - 08:24 · stage 1 · 1 of 5 · the build side's skills to legacy/ (8bfcd8e)
 - 08:51 · stage 1 · 2 of 5 · 7g commitlint (d282df5)
