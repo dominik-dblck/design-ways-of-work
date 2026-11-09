@@ -2285,10 +2285,10 @@ similarity index 100%
 rename from app/styles/tokens.css
 rename to legacy/tokens.css
 diff --git a/package.json b/package.json
-index b0d8011..b750e99 100644
+index d82391f..e150e1d 100644
 --- a/package.json
 +++ b/package.json
-@@ -10,41 +10,61 @@
+@@ -10,42 +10,62 @@
      "build": "node tools/build.ts",
      "checks": "node tools/build.ts && DESIGN_SAVE=1 node tools/checks.ts",
      "cut-pack": "node tools/build.ts && node tools/pack.ts",
@@ -2312,7 +2312,7 @@ index b0d8011..b750e99 100644
 -    "test:architecture": "vitest --run tests/architecture",
 -    "ds-scan": "node tools/build.ts && node tools/ds-scan.ts",
 -    "new-epic": "node tools/new-epic.ts",
--    "release:record": "node tools/release-record.ts"
+-    "release:record": "node tools/release-record.ts",
 +    "test:architecture": "ESLINT_FLAGS=unstable_native_nodejs_ts_config vitest --run tests/architecture",
 +    "new-epic": "node tools/newEpic.ts",
 +    "release:record": "node tools/releaseRecord.ts",
@@ -2323,7 +2323,8 @@ index b0d8011..b750e99 100644
 +    "lint:commit": "commitlint",
 +    "check:chunk": "node shared/hooks/checkTier.ts commit",
 +    "check:feature": "node shared/hooks/checkTier.ts feature",
-+    "lint:exports": "knip --no-progress --no-config-hints"
++    "lint:exports": "knip --no-progress --no-config-hints",
+     "backup": "zsh tools/zipRepo.sh"
    },
    "devDependencies": {
 +    "@commitlint/cli": "21.2.4",
@@ -2415,7 +2416,7 @@ index 9c7b0cf..ce1fef1 100644
 +export type { TrackFinding, TrackReading, TrackRow };
 diff --git a/scope.ts b/scope.ts
 new file mode 100644
-index 0000000..0ebcdbf
+index 0000000..7157537
 --- /dev/null
 +++ b/scope.ts
 @@ -0,0 +1,403 @@
@@ -2814,8 +2815,8 @@ index 0000000..0ebcdbf
 +          'sheet/screens/screen-view/**',
 +          'sheet/logic/document/threads.ts',
 +        ],
-+        // the PM's own: a coined plural, a French verb quoted
-+        words: ['Skille', 'désabonner'],
++        // the PM's own: a coined plural, a French verb quoted, a word as typed
++        words: ['Skille', 'désabonner', 'otestowane'],
 +      },
 +    ],
 +  },
@@ -4060,7 +4061,7 @@ index 9950d1b..493162e 100644
    readonly states: readonly { readonly key: string; readonly label: string }[];
  }
 diff --git a/sheet/logic/assembly/content-type-logic/partViews.ts b/sheet/logic/assembly/content-type-logic/partViews.ts
-index 750d06e..2ead2c1 100644
+index e91aa99..697c921 100644
 --- a/sheet/logic/assembly/content-type-logic/partViews.ts
 +++ b/sheet/logic/assembly/content-type-logic/partViews.ts
 @@ -11,16 +11,16 @@ import * as CONTENT_MODULES from '../../../model/content-modules.ts';
@@ -4084,19 +4085,7 @@ index 750d06e..2ead2c1 100644
  }
  
  interface IdentityRow {
-@@ -137,9 +137,8 @@ function configView(part: AssemblyPart): PartView {
-   const fields = part.fields ?? [];
-   const accepts = part.accepts ?? [];
-   const known = CONTENT_MODULES.fields;
--  const accepted = accepts.length
--    ? accepts.join(', ') + (part.blocks ? ', stack' : '')
--    : '';
-+  const stack = part.blocks ? ', stack' : '';
-+  const accepted = accepts.length ? accepts.join(', ') + stack : '';
-   return {
-     key: part.key,
-     name: part.name,
-@@ -203,5 +202,4 @@ function partView(given: AssemblyPart | string, slug?: string): PartView {
+@@ -201,5 +201,4 @@ function partView(given: AssemblyPart | string, slug?: string): PartView {
    return offers ? withTimes(view, offers) : view;
  }
  
@@ -4396,7 +4385,7 @@ index 7696c6c..17332fe 100644
    readonly validators: readonly string[];
    readonly note?: string;
 diff --git a/sheet/model/field-kinds/kindRows.ts b/sheet/model/field-kinds/kindRows.ts
-index 2cef451..a96963a 100644
+index edac71d..f8bcfa7 100644
 --- a/sheet/model/field-kinds/kindRows.ts
 +++ b/sheet/model/field-kinds/kindRows.ts
 @@ -38,7 +38,7 @@ const FIELD_KINDS: readonly FieldKind[] = [
@@ -4737,7 +4726,7 @@ index 6586ba0..3a23e0a 100644
  
  // pane: what a screen shows with no document open · asked: when the approvers were pinged · thread: the window onto the block's argument
 diff --git a/sheet/screens/wireframes/screenRows.ts b/sheet/screens/wireframes/screenRows.ts
-index d3538cf..1eb51d8 100644
+index 1e70bb3..9aaa0ce 100644
 --- a/sheet/screens/wireframes/screenRows.ts
 +++ b/sheet/screens/wireframes/screenRows.ts
 @@ -191,4 +191,3 @@ const list = (track?: string): readonly Screen[] =>
