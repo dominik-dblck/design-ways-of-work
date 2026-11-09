@@ -32,6 +32,21 @@ product repositories (eagle-design through its port only, mailing-automation rea
 - 7g, eagle-dev's notes: merges pass (`defaultIgnores`); the pipeline's step 9 says its subject's 72 count the
   id and the tests count.
 
+- SonarJS's cost (eagle-dev's measure on its 2532 files): `no-redundant-assignments` 958 of 966 s of rule time,
+  0 found, already off with its measure; without it, 66 s wall (parse 13, rules 43). `deprecation` already off
+  (typescript-eslint's `no-deprecated` the one gate). The AWS family off in part 4: no AWS CDK code in a repository
+  of the way of working (`aws-restricted-ip-admin-access` 5.3 s). No single rule dominates after them: the split
+  is by file count, sonar with ESLint on the files a change touched at edit and commit, the tree at the feature end.
+- Part 4's shape: one tier map, shared (`shared/checkTiers.ts`): each check is a package script, run on the tree,
+  or on the files a change touched when it has a files form (ESLint, prettier, cspell). A repository's own checks
+  (the design side's architecture tests and checks gate; the way of working's rule tests, kept rules, verify) go in
+  its scope by tier. `check:chunk` runs the commit tier, `check:feature` the feature end (pre-push), each check
+  timed, the commit tier's total against its 3 min budget. `everyRuleHasAGate` counts a script only when a tier
+  runs it. A `spike/*` branch skips the commit tier and its push.
+
 ## Questions for the PM
 
-(none yet)
+- At the build side's port (eagle-dev's measure, 9 Nov): its 23 merges carry written subjects of 115–196
+  characters (`Merge T-E18-00 · …`), and commitlint lets through only git's own merge forms. From its port a merge
+  takes git's form with its summary in the body, or a written subject within 72: the PM's act (`git merge -F -`),
+  so the PM's word, asked at that port. Its history is untouched (commit-msg reads new commits only).

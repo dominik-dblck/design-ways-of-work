@@ -19,6 +19,7 @@
     "eslint.config.ts",
     "cspell.config.ts",
     "syncpack.config.ts",
+    "commitlint.config.ts",
     "knip.ts",
     "vitest.config.ts"
   ],

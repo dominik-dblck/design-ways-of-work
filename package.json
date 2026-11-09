@@ -14,6 +14,7 @@
     "lint:files": "node scripts/lint-files.ts",
     "lint:words": "cspell --no-progress --no-summary",
     "lint:deps": "syncpack lint",
+    "lint:commit": "commitlint",
     "lint:kept": "node scripts/keeps-its-rules.ts",
     "lint:copies": "jscpd --min-tokens 50 --format typescript --reporters console --no-tips --exit-code 1 scripts shared/hooks shared/lint design-system knip.ts",
     "lint:exports": "knip --no-progress --no-config-hints",
@@ -29,6 +30,8 @@
   },
   "packageManager": "yarn@1.22.22",
   "devDependencies": {
+    "@commitlint/cli": "21.2.4",
+    "@commitlint/types": "21.2.3",
     "@cspell/dict-pl_pl": "3.0.8",
     "@eslint-community/eslint-plugin-eslint-comments": "4.8.1",
     "@eslint/js": "10.0.1",
