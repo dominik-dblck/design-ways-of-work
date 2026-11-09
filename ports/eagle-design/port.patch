@@ -205,20 +205,6 @@ index f373714..5ecda4a 100644
  
  const ATOMS_CHECKBOX = [
    {
-diff --git a/app/styles/components.spec/moleculesBadgeDot.ts b/app/styles/components.spec/moleculesBadgeDot.ts
-index 24b762b..584f56d 100644
---- a/app/styles/components.spec/moleculesBadgeDot.ts
-+++ b/app/styles/components.spec/moleculesBadgeDot.ts
-@@ -11,7 +11,8 @@ const MOLECULES_BADGE_DOT = [
-     parts: [{ atom: 'badge', as: 'the dot' }, { molecule: 'hint-lines' }],
-     layout:
-       'hint [dot · ringed off what it sits on at a corner, small and plain inline]',
--    notes: 'a EpicBadge with a dot · CHANGED and EDITED on a row and on the config',
-+    notes:
-+      'a EpicBadge with a dot · CHANGED and EDITED on a row and on the config',
-     scope: 'global',
-     ownedBy: 'T-E06-00',
-     props:
 diff --git a/app/styles/gate-states.ts b/app/styles/gate-states.ts
 index 6d4ebd7..beacc45 100644
 --- a/app/styles/gate-states.ts
@@ -2831,10 +2817,35 @@ index 0000000..d9beb97
 +
 +export { scope };
 diff --git a/sheet/cases/journeys/typeJourneys.ts b/sheet/cases/journeys/typeJourneys.ts
-index 39fa30b..1744735 100644
+index 310ccd0..8128e52 100644
 --- a/sheet/cases/journeys/typeJourneys.ts
 +++ b/sheet/cases/journeys/typeJourneys.ts
-@@ -173,7 +173,7 @@ function journeyOf(read: Read): JourneyRow {
+@@ -103,13 +103,18 @@ function stepsOf(read: Read): readonly JourneyStep[] {
+   ];
+ }
+ 
+-function testOf({ type, kindName }: Read): string {
++// what Add offers: a kindless type any document of it, a template a blank, a kind its own and templates
++function addWordsOf({ type, kindName }: Read): string {
++  if (!type.kind)
++    return `From existing offering every document of the type, the copy in No group holding its source’s content`;
++  if (type.kind === 'template') return 'a blank draft in No group';
++  return `From existing offering ${kindName.toLowerCase()} and templates alone, the copy in No group holding the template’s content`;
++}
++
++function testOf(read: Read): string {
++  const { type } = read;
+   const template = type.kind === 'template';
+-  const add = !type.kind
+-    ? `From existing offering every document of the type, the copy in No group holding its source’s content`
+-    : template
+-      ? 'a blank draft in No group'
+-      : `From existing offering ${kindName.toLowerCase()} and templates alone, the copy in No group holding the template’s content`;
++  const add = addWordsOf(read);
+   const tabs = CONTENT_ASSEMBLY.tabsOf(type.slug).map(tabWord).join(', ');
+   const fields = (CONTENT_TYPES.fieldsOfType(type.slug) || []).join(', ');
+   const preview =
+@@ -133,7 +138,7 @@ function journeyOf(read: Read): JourneyRow {
      id: `J1-${read.type.slug}`,
      epic: 'E18',
      each: read.type.slug,
@@ -3860,7 +3871,7 @@ index fbf05b9..76ef74c 100644
      .filter((email) => !excluded.includes(email))
      .flatMap((email) => directory.personBySubject(email) ?? []);
 diff --git a/sheet/logic/assembly/content-check/moduleChecks.ts b/sheet/logic/assembly/content-check/moduleChecks.ts
-index 324ed33..2edd97a 100644
+index 626d904..02f506e 100644
 --- a/sheet/logic/assembly/content-check/moduleChecks.ts
 +++ b/sheet/logic/assembly/content-check/moduleChecks.ts
 @@ -43,7 +43,7 @@ function rowIssues(
@@ -4096,10 +4107,10 @@ index e7f0d16..372f36e 100644
 -export type { ModuleWords };
  export { configOf, firstOfEmail, gateWord, moduleWords, partCell };
 diff --git a/sheet/logic/assembly/content-type-logic/typeAssembly.ts b/sheet/logic/assembly/content-type-logic/typeAssembly.ts
-index 6101b65..6da483e 100644
+index 645ea03..546e067 100644
 --- a/sheet/logic/assembly/content-type-logic/typeAssembly.ts
 +++ b/sheet/logic/assembly/content-type-logic/typeAssembly.ts
-@@ -28,16 +28,16 @@ function narrowLine(
+@@ -29,16 +29,16 @@ function narrowLine(
    slug: string,
    [key, narrow]: readonly [string, Narrowing | undefined],
  ) {
@@ -4355,11 +4366,11 @@ index 7dfea0b..24476b8 100644
    Zone,
  };
 diff --git a/sheet/model/content-types/contentTypesTypes.ts b/sheet/model/content-types/contentTypesTypes.ts
-index 5c27aaa..dd1a55c 100644
+index 2241747..75a5978 100644
 --- a/sheet/model/content-types/contentTypesTypes.ts
 +++ b/sheet/model/content-types/contentTypesTypes.ts
-@@ -106,6 +106,4 @@ export type {
-   KindKey,
+@@ -163,6 +163,4 @@ export type {
+   NavGroup,
    Narrow,
    Placeholder,
 -  PlaceholderType,
@@ -4720,7 +4731,7 @@ index 6586ba0..3a23e0a 100644
  
  // pane: what a screen shows with no document open · asked: when the approvers were pinged · thread: the window onto the block's argument
 diff --git a/sheet/screens/wireframes/screenRows.ts b/sheet/screens/wireframes/screenRows.ts
-index a174fc9..c9d85ac 100644
+index 0ae423f..c0cc62b 100644
 --- a/sheet/screens/wireframes/screenRows.ts
 +++ b/sheet/screens/wireframes/screenRows.ts
 @@ -191,4 +191,3 @@ const list = (track?: string): readonly Screen[] =>

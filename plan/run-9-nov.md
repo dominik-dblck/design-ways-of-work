@@ -14,8 +14,11 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 | 2 | Rules | 10 | 10 |
 | 3 | Names | 6 | 6 |
 | 4 | Tools | 8 | 8 |
+| 7 | P1 release | 4 | 5 |
 | 5 | e2e | 2 | 4 |
 | 6 | Port design | 0 | 6 |
+
+Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed since its last merge) runs first: 1 · 4a rows + six copies committed on eagle-design main · 2 · 4a pushed, recorded, tagged, sent · 3 · 4b component facts + screens D1–D13 · 4 · 4b released and sent · 5 · main merged into restructure, the rehearsal applies its patch --3way.
 
 ## History
 - 09:38 · stage 2 · 9 of 10 · R1-R3 runner fixes: strict flags, NUL names, eslint --fix on files staged whole (38d402e)
@@ -36,6 +39,10 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 - 13:20 · stage 4 · 8 of 8 · scripts' test home: retired, mapTree, movePaths (task 8)
 - 13:51 · stage 5 · 1 of 4 · browser tier framework in shared/e2e, fitted to the rules (task 1)
 - 14:04 · stage 5 · 2 of 4 · scope browser tier, first four gates red and green (task 2)
+- 15:00 · stage 7 · 1 of 5 · 4a committed on main, 775a968
+- 15:03 · stage 7 · 2 of 5 · release 4 out, 81a1804, sent
+- 15:17 · stage 7 · 3 of 5 · 4.1 committed feb6056: spec merged, screens, edge 13
+- 15:19 · stage 7 · 4 of 5 · 4.1 released 09c0ab9, tag release-2026-11-09-2, sent
 
 - 08:24 · stage 1 · 1 of 5 · the build side's skills to legacy/ (8bfcd8e)
 - 08:51 · stage 1 · 2 of 5 · 7g commitlint (d282df5)
@@ -348,6 +355,45 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
   redraws intended); `closed()` found a glyph fault in its hand-drawn map instead (`packages/domain/` drawn └
   beside `store-postgres/`), which its paths-only `theMapIsTheTree` never saw; fixed on its side.
 
+- Stage 7, PM 9 Nov · A ("ok, tak zrobmy - daj eagle-dev co mu tam potrzeba", "wez je wszystkie od niego",
+  "nie tylko do tego featura ale do tego co zrobilismy w ostatnim merge"): P1's rows on eagle-design main, alone,
+  with every sheet-facing change of eagle-dev's merge 56a47d46. Release 4 (4a) out: 81a1804, tag
+  release-2026-11-09-1: P1 rows 1-5, eagle-dev's five (kind left out on in-app in commands, events, groups; pools
+  by slug; the seed's in-app kinds gone), the six copies (R6, patch f6b261a7…). My calls, no visible effect: a
+  kindless channel holds `row`, no `kinds`; T23b's guard passes an in-app type's own set (its one row), the
+  only valid reading once a channel has one row; the Delivery word stays the delivery kind's (no question:
+  the sheet held it); the in-app kinds' samples to legacy/samples-retired.md (D24); moduleFields.ts' two
+  adjacent comments one line each (our comment rule). 4b next: eagle-dev's patch 2 into components.spec.ts by
+  script, D1-D13's screen facts, E03 edge 13's pick moved (Show more cut). eagle-dev's F3 (the drag gate walks
+  e2e/framework) to the wow port: (b), its framework leaves for shared/e2e.
+
+- Stage 7 order, PM 9 Nov · A ("A zatem"): 4.1 (eagle-dev's patch 2 into components.spec.ts, the list and group
+  screens' lines, E03 edge 13, F4) and the one merge of main into restructure before wow resumes. Lost: B, wow
+  first: two merges, and a patch against a spec that keeps moving.
+
+- Release 4.1 (stage 7 tasks 3–4), 9 Nov: feb6056 + record 09c0ab9, tag release-2026-11-09-2; eagle-dev took it
+  (its three-way check clean, `yarn sheet:take` green) and settled P1 Point 1 with Dom (B: the list as built). eagle-dev's spec at P1 (patch 2) merged three
+  ways over a8304cf8 by script (`merge3.py`: rows by id, fields by key; one conflict, campaigns' notes, both
+  edits kept), written into the parts by AST position (`writeParts.mjs`), the emit equal to the merge. My calls,
+  no visible effect: badge and person-row back to `Badge` (55bde38's Board rename hit the spec, eagle-dev's F4);
+  `P1 · 9 Nov` in ownedBy/changedIn becomes `T-E18-00` (spec-check takes ticket ids; P1 refined E18's feature);
+  E03 edge 13 moves to a new d (P1's group page), the ListDocuments case keeps its `when` so its id holds, J9's
+  step drops "no Show more"; screens library and group take P1's lines, views 1a/1b retaken (the PM's word on
+  4.x's retakes). Todo, stage 6 or after: the wireframe drawings of 1a/1b still draw the list before P1 (cards,
+  band, the group page's card) — redrawn from the lines, a visible change, shown to the PM with it.
+
+- Stage 7 task 5, 9 Nov: main (releases 4, 4.1) merged into restructure, c4ed4d7, pushed. My calls, no visible
+  effect: E10's destinations take a kindless channel whole (`takes: { appBanner: true, bottomSheet: true }`,
+  typed by KindedChannelId and KindlessChannelId), destinationsOf's kind optional; the in-app rows' own `row`
+  carries destination eagleCore; E10's notebook carries P1 in (the Export's kind and topic a kinded type's alone,
+  open for the Export). Snapshots content type and wireframes retaken, each leaf checked three ways over b239529:
+  main's change or restructure's, nothing else. The port rebased by a merge in a plain clone (new product +
+  the port commit): one conflict, the EpicBadge line the port had reflowed, now Badge on the product; port.patch
+  145 → 144 files, applied clean by rehearse.ts, links held.
+  The rehearsal's lint caught my release-4 code: typeJourneys.ts' testOf nested a ternary (wow's
+  sonarjs/no-nested-conditional, not the product's rule); the port splits it into addWordsOf, the words the same.
+  verify: ALL SAME, 83 differences expected.
+
 ## Questions for the PM
 
 - The design side's 71 entries keep kebab names (`sheet-status.ts`): the artifact and the build side read them by
@@ -367,3 +413,15 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
   characters (`Merge T-E18-00 · …`), and commitlint lets through only git's own merge forms. From its port a merge
   takes git's form with its summary in the body, or a written subject within 72: the PM's act (`git merge -F -`),
   so the PM's word, asked at that port. Its history is untouched (commit-msg reads new commits only).
+
+- Stage 5 task 3, first gate: `wow/time-is-moved-not-waited` (c9cd155, its row 471183e): the wait shapes left
+  TEST_SHAPES for a rule of their own; `scope.namedWaits` ({file, name, why}) passes a wait whose declaration
+  stays in its file unexported; on tests and shared/e2e/. The first push of a669077..678b845 failed verify on my
+  own unfinished files in the tree (a rewrite of testShapes.ts mid-run): the pushed commits were green; never edit
+  the tree while a pre-push verify runs. Pushed 5861192..471183e, verify green; probe asked, none probed yet.
+- Eagle-dev QUESTION, 9 Nov (Dom wants P1 end to end now, relayed): when 7a's rows reach it, a P1 release alone,
+  KINDS_OF or a field. Answered: not written (stage 6 task 1), a P1 release alone is the PM's word (asked), and the
+  kindedness read off channels.ts's rows; my call for the row form at 7a: a kindless channel has no `kinds` field
+  (absent, never `{}`), presence the one fact, Channel a union as ContentType is (no visible effect, not the PM's).
+  7a touches 15 files; one, catalogRail.ts, is in the port's patch: rows on main now cost rehearse.ts a `--3way`.
+
