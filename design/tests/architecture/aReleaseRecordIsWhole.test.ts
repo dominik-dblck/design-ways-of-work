@@ -1,13 +1,14 @@
 /**
- * - a release record lists every module the build side reads with what they import
- * - and each file it reads whole that is no module, by its own digest
- * - from the tool on, `yarn release:record` writes it: each count matches its lines
+ * - a release record lists every module the build side reads, its imports too
+ * - and each file read whole by its digest; the tool writes it, counts its lines
+ * - a read file the take wrote is vendored as taken: one sha holds every read
  */
 import fs from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { ROOT } from './tree.ts';
 import { entryOfModule, importsOfEntry } from '../../tools/layout.ts';
+import { VENDOR, vendoredFiles } from '../../tools/build/vendored.ts';
 import { readModules } from '../../tools/releaseRecord/readModules.ts';
 import { MARK } from '../../tools/releaseRecord/recordText.ts';
 import * as PROJECT from '../../sheet/project.ts';
@@ -58,6 +59,17 @@ describe('a release record is whole', () => {
       notModules: [],
       filesMissing: [],
     });
+  });
+
+  it('each read file a take wrote has its vendored copy, byte for byte', () => {
+    const differ = vendoredFiles(ROOT).filter((file) => {
+      const copy = path.join(ROOT, VENDOR, file);
+      return (
+        !fs.existsSync(copy) ||
+        !fs.readFileSync(copy).equals(fs.readFileSync(path.join(ROOT, file)))
+      );
+    });
+    expect(differ).toEqual([]);
   });
 
   it('a section whose count says one number and lists another is found', () => {

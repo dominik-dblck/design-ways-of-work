@@ -16,7 +16,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 | 4 | Tools | 8 | 8 |
 | 7 | P1 release | 5 | 5 |
 | 5 | e2e | 4 | 4 |
-| 6 | Port design | 1 | 6 |
+| 6 | Port design | 2 | 6 |
 | 8 | E19 + backup | 3 | 3 |
 
 Stage 6, measured 9 Nov 17:20 (the PM holds it: start asked): 1 · links, how wow's files stand in eagle-design's git
@@ -58,6 +58,7 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
 - 18:42 · stage 8 · 2 of 3 · yarn backup in wow and eagle-design, restored in scratch, zips taken
 - 18:42 · stage 8 · 3 of 3 · port.patch re-saved on main of 9 Nov evening, chain green
 - 20:28 · stage 6 · 1 of 6 · take built in wow, product side lands with the patch
+- 21:10 · stage 6 · 2 of 6 · port branch on wow v0.1.4, feature tier green
 
 - 08:24 · stage 1 · 1 of 5 · the build side's skills to legacy/ (8bfcd8e)
 - 08:51 · stage 1 · 2 of 5 · 7g commitlint (d282df5)
@@ -531,6 +532,16 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
   ALL GREEN (diff), build, spec-check and the gate 0, ds-scan 1 as on main. guard-map.json left as main has it:
   its retake is task 5, the PM's word. The wiring is in port.patch (package.json, yarn.lock), so the branch is
   main less the WOW set plus the patch, rebuilt the same way whenever main moves.
+
+- Night · stage 6 task 3 built in wow, as agreed with eagle-dev: the build side runs two modules, measure and
+  spec-check (buildReads.modules cut to them). The build writes each file their imports reach that a take wrote
+  under vendor/wow/ at its own path (tools/build/vendored.ts, its generator tools/vendorInto.ts), so one commit
+  holds every read; the release record names a read file not vendored as taken; the build side looks a path up
+  and falls back to vendor/wow/<path>. The design system stays out: neither module reads it. app/styles/tokens.ts
+  gains faces (design-system/fonts.ts), so a reader of the theme needs no stylesheet for its fonts. takeRecord
+  reads git's folders off the files (gitdir, commondir), no child git: a generator runs under node --permission.
+  The fresh-emit test counts files only (a ** glob names folders too). On the copy: 27 of the 526 files the two
+  modules read are taken.
 
 ## Questions for the PM
 

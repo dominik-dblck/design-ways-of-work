@@ -1,11 +1,13 @@
 /**
  * - `MARK`, `recordSections` · where a record's digests start, and the digests
  * - `recordFaults` · each module or file line whose digest the tree no longer has
+ * - and each taken file read whose vendored copy is missing or differs
  */
 import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { readModules } from './readModules.ts';
+import { VENDOR, vendoredFiles } from '../build/vendored.ts';
 import { sheetDigest, sourceReader } from '../pack/packSources.ts';
 import { ROOT } from '../root.ts';
 import * as PROJECT from '../../sheet/project.ts';
@@ -83,7 +85,10 @@ function recordFaults(text: string): readonly string[] {
     ...listed.filter((entry) => !named.includes(entry)),
     ...PROJECT.buildReads.files.filter((file) => !filesNamed.includes(file)),
   ].map((entry) => `${entry} · not in the record`);
-  return [...missing, ...moduleFaults, ...fileFaults];
+  const unvendored = vendoredFiles(ROOT)
+    .filter((file) => digestOf(path.join(VENDOR, file)) !== digestOf(file))
+    .map((file) => `${file} · not vendored as taken: yarn build`);
+  return [...missing, ...moduleFaults, ...fileFaults, ...unvendored];
 }
 
 export { MARK, recordFaults, recordSections };

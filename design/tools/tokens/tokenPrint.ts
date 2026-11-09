@@ -1,5 +1,5 @@
 /**
- * - `tokensModule` · the system's and the product's tokens as one TypeScript module
+ * - `tokensModule` · the tokens, system's and product's, and the faces, one module
  * - every var() resolved at build, so a jsdom test can measure a colour
  * - an alias whose target the dark block flips stays an alias, to follow
  */
@@ -66,12 +66,30 @@ export type DarkToken = keyof typeof tokens.dark;
 export type Mode = keyof typeof tokens;
 `;
 
+type Face = Readonly<Record<string, string | number>>;
+
+// a face as one line: its fields in the order the system writes them
+const faceLine = (face: Face): string =>
+  `  { ${Object.entries(face)
+    .map(([key, held]) => `${key}: ${JSON.stringify(held)}`)
+    .join(', ')} },`;
+
+// the faces as the module's own export, in the order the system lists them
+const facesBlock = (faces: readonly Face[]): string => `
+/** Each face of the families · its file under the design system's \`fonts/\`. */
+export const faces = [
+${faces.map(faceLine).join('\n')}
+] as const;
+`;
+
 function tokensModule({
   light,
   dark,
+  faces,
 }: {
   readonly light: ReadonlyMap<string, string>;
   readonly dark: ReadonlyMap<string, string>;
+  readonly faces: readonly Face[];
 }): string {
   const flips = new Set(dark.keys());
   const block = (
@@ -103,7 +121,7 @@ ${block(dark, [dark, light])}
 export const TOKEN_NAMES: Record<keyof typeof tokens.light, string> = {
 ${names}
 };
-${FOOTER}`;
+${facesBlock(faces)}${FOOTER}`;
 }
 
 export { tokensModule };

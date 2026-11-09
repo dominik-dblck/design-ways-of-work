@@ -36,11 +36,12 @@ const filesUnder = (folder: string): readonly string[] =>
 const isOwnedBy = (file: string, { writes }: Generator): boolean =>
   isNamedBy(file, writes);
 
-// the tree's files a generator owns
+// the tree's files a generator owns: a folder a `**` names is none of them
 const ownedBy = (generator: Generator): readonly string[] =>
   generator.writes
     .filter((glob) => !glob.startsWith('!'))
     .flatMap((glob) => fs.globSync(glob, { cwd: scope.root }))
+    .filter((file) => fs.statSync(path.join(scope.root, file)).isFile())
     .filter((file) => isOwnedBy(file, generator));
 
 // one run into a fresh folder, allowed to write there alone: the tree holds unstaged work

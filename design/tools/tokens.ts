@@ -1,9 +1,10 @@
 /**
  * - `tokensText` · tokens.ts from design-system/ and product-tokens.ts (D22)
+ * - the faces too, so a reader of the theme needs no stylesheet for its fonts
  * - a name the system and the product both declare is refused, never overridden
  */
 import { productTokens } from '../app/styles/product-tokens.ts';
-import { designSystem, isToken } from '../design-system/index.ts';
+import { designSystem, fonts, isToken } from '../design-system/index.ts';
 import { tokensModule } from './tokens/tokenPrint.ts';
 
 function tokensText(): string {
@@ -21,6 +22,7 @@ function tokensText(): string {
         token.dark === undefined ? [] : [[token.name, token.dark] as const],
       ),
     ),
+    faces: fonts.map((face) => ({ ...face })),
   });
 }
 

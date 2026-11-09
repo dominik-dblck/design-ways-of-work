@@ -1,8 +1,10 @@
 /**
  * - `readModules` · every module the build side reads, with what they import
+ * - `readFiles` · every file of those modules, as the record digests them
  */
 import { execFileSync } from 'node:child_process';
 import { entryOfModule, importsOfEntry } from '../layout.ts';
+import { sourceReader } from '../pack/packSources.ts';
 import { ROOT } from '../root.ts';
 import * as PROJECT from '../../sheet/project.ts';
 
@@ -38,4 +40,13 @@ function readModules(): readonly string[] {
   return [...seen].sort();
 }
 
-export { readModules };
+// each module's entry and its parts, once
+function readFiles(): readonly string[] {
+  const reader = sourceReader();
+  const files = readModules().flatMap((entry) =>
+    reader.sourcesOf(entry).map((one) => one.path),
+  );
+  return [...new Set(files)].sort();
+}
+
+export { readFiles, readModules };

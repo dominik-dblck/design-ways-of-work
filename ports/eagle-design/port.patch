@@ -341,7 +341,7 @@ index 0000000..0c2aec9
 +
 +export { productTokens };
 diff --git a/app/styles/tokens.ts b/app/styles/tokens.ts
-index b83db18..7bccc2f 100644
+index b83db18..348e126 100644
 --- a/app/styles/tokens.ts
 +++ b/app/styles/tokens.ts
 @@ -1,7 +1,7 @@
@@ -830,7 +830,7 @@ index b83db18..7bccc2f 100644
    uiPaperBg: "--ui-paper-bg",
    uiPaperBorder: "--ui-paper-border",
    uiPaperPadMenu: "--ui-paper-pad-menu",
-@@ -614,6 +588,32 @@ export const TOKEN_NAMES: Record<keyof typeof tokens.light, string> = {
+@@ -614,8 +588,48 @@ export const TOKEN_NAMES: Record<keyof typeof tokens.light, string> = {
    uiZMenu: "--ui-z-menu",
    uiZOverlay: "--ui-z-overlay",
    uiZDialog: "--ui-z-dialog",
@@ -862,7 +862,23 @@ index b83db18..7bccc2f 100644
 +  washFinished: "--wash-finished",
  };
  
++/** Each face of the families · its file under the design system's `fonts/`. */
++export const faces = [
++  { family: "Basis Grotesque Pro", file: "fonts/BasisGrotesquePro-Light.ttf", format: "truetype", weight: 300, style: "normal", display: "swap" },
++  { family: "Basis Grotesque Pro", file: "fonts/BasisGrotesquePro-LightItalic.ttf", format: "truetype", weight: 300, style: "italic", display: "swap" },
++  { family: "Basis Grotesque Pro", file: "fonts/BasisGrotesquePro-Regular.ttf", format: "truetype", weight: 400, style: "normal", display: "swap" },
++  { family: "Basis Grotesque Pro", file: "fonts/BasisGrotesquePro-Italic.ttf", format: "truetype", weight: 400, style: "italic", display: "swap" },
++  { family: "Basis Grotesque Pro", file: "fonts/BasisGrotesquePro-Medium.ttf", format: "truetype", weight: 500, style: "normal", display: "swap" },
++  { family: "Basis Grotesque Pro", file: "fonts/BasisGrotesquePro-MediumItalic.ttf", format: "truetype", weight: 500, style: "italic", display: "swap" },
++  { family: "Basis Grotesque Pro", file: "fonts/BasisGrotesquePro-Bold.ttf", format: "truetype", weight: 700, style: "normal", display: "swap" },
++  { family: "Basis Grotesque Pro", file: "fonts/BasisGrotesquePro-BoldItalic.ttf", format: "truetype", weight: 700, style: "italic", display: "swap" },
++  { family: "Basis Grotesque Pro", file: "fonts/BasisGrotesquePro-Black.ttf", format: "truetype", weight: 900, style: "normal", display: "swap" },
++  { family: "Basis Grotesque Pro", file: "fonts/BasisGrotesquePro-BlackItalic.ttf", format: "truetype", weight: 900, style: "italic", display: "swap" },
++] as const;
++
  export type LightToken = keyof typeof tokens.light;
+ export type DarkToken = keyof typeof tokens.dark;
+ 
 diff --git a/commitlint.config.ts b/commitlint.config.ts
 new file mode 100644
 index 0000000..3bb0863
@@ -2449,10 +2465,10 @@ index 9c7b0cf..ce1fef1 100644
 +export type { TrackFinding, TrackReading, TrackRow };
 diff --git a/scope.ts b/scope.ts
 new file mode 100644
-index 0000000..d1bd4b2
+index 0000000..5e31844
 --- /dev/null
 +++ b/scope.ts
-@@ -0,0 +1,404 @@
+@@ -0,0 +1,417 @@
 +// scope.ts · what the design project names once: its ESLint config, its shared tests and its tools read it
 +import type { RepoScope } from './shared/repoScope.ts';
 +import {
@@ -2578,7 +2594,14 @@ index 0000000..d1bd4b2
 +  browser: {
 +    none: 'its app is for the PM and the team to look at; the build side runs the full suite (PM, 9 Nov)',
 +  },
-+  ignores: ['dist/**', 'node_modules/**', 'poc/**', '.artifact/**'],
++  // vendor/wow/ is the taken files as the take wrote them, checked where they are written
++  ignores: [
++    'dist/**',
++    'node_modules/**',
++    'poc/**',
++    '.artifact/**',
++    'vendor/**',
++  ],
 +  // the build side's .claude/, held for it: its scope reads the data, its product checks the tree
 +  productTrees: ['dev/claude/**'],
 +  production: [
@@ -2662,6 +2685,12 @@ index 0000000..d1bd4b2
 +        SKILLS,
 +        'app/styles/tokens.ts',
 +      ],
++    },
++    // the taken files the build side's modules read, copied so one commit holds every read
++    {
++      script: 'tools/vendorInto.ts',
++      args: [],
++      writes: ['vendor/wow/**'],
 +    },
 +  ],
 +  // its own checks beside the shared tiers: at a commit the architecture tests and the sheet's checks on a fresh
@@ -4432,7 +4461,7 @@ index edac71d..f8bcfa7 100644
  
      hint: '{types} · up to {max}',
 diff --git a/sheet/project.ts b/sheet/project.ts
-index dbcf477..5066d22 100644
+index dbcf477..3037935 100644
 --- a/sheet/project.ts
 +++ b/sheet/project.ts
 @@ -1,7 +1,7 @@
@@ -4455,28 +4484,36 @@ index dbcf477..5066d22 100644
  // what the build side reads: every module under these homes, these beside them, what they import, and these files whole
  const buildReads: {
    readonly homes: readonly string[];
-@@ -48,19 +44,13 @@ const buildReads: {
-     'app/workspace/feature-view.ts',
-     'app/workspace/sheet-status.ts',
-     'app/workspace/source-view.ts',
+@@ -42,25 +38,9 @@ const buildReads: {
+   readonly files: readonly string[];
+ } = {
+   homes: ['sheet/', 'app/styles/', 'docs/process/', 'roadmaps/'],
+-  modules: [
+-    'app/workspace/board-view.ts',
+-    'app/workspace/contract-view.ts',
+-    'app/workspace/feature-view.ts',
+-    'app/workspace/sheet-status.ts',
+-    'app/workspace/source-view.ts',
 -    'guards/ds-scan.ts',
-     'guards/expected-files.ts',
-     'guards/measure.ts',
-     'guards/refine-check.ts',
-     'guards/source-check.ts',
-     'guards/spec-check.ts',
-   ],
+-    'guards/expected-files.ts',
+-    'guards/measure.ts',
+-    'guards/refine-check.ts',
+-    'guards/source-check.ts',
+-    'guards/spec-check.ts',
+-  ],
 -  files: [
 -    'app/styles/__fixtures__/deblock-design-system-aaeeee33-53d5-4739-9d37-9f0cf8c1c5d5/colors_and_type.css',
 -    'app/styles/tokens.css',
 -    'docs/process/ticket-pipeline.md',
 -    'fixtures/data/block-model.json',
 -  ],
++  // the two it runs (eagle-dev, 9 Nov): their taken files ride along under vendor/wow/
++  modules: ['guards/measure.ts', 'guards/spec-check.ts'],
 +  files: ['docs/process/ticket-pipeline.md', 'fixtures/data/block-model.json'],
  };
  
  export {
-@@ -72,7 +62,6 @@ export {
+@@ -72,7 +52,6 @@ export {
    buildSide,
    company,
    designSession,
