@@ -552,6 +552,11 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
 - Night · v0.1.6 taken on the branch: its feature tier refused 'unvendored', a word of recordText.ts; the copy's
   commit tier reads the words of changed files only. Renamed staleCopies: v0.1.7. The lesson, whole: before a wow
   tag the copy runs its feature tier.
+- Night · the branch port/wow at a95cc34 (pushed) takes v0.1.7: vendor/wow/ 27 files tracked, tokens.ts with
+  faces, buildReads.modules the two. Its tree is the copy's but package.json, yarn.lock, husky's folder,
+  guard-map.json (main's, task 5) and vendor/, which its build writes from the take's record (the copy links and
+  never takes, so it has none). Feature tier green, checks ALL GREEN (diff), wow --check 514 files the tag's.
+  port.patch pins v0.1.7. eagle-dev told; asked whether any read of its own reaches a taken file outside the 27.
 
 ## Questions for the PM
 
