@@ -1,16 +1,8 @@
 /**
- * - `TEST_SHAPES` · what `no-restricted-syntax` refuses in a test, besides
- * - time waited out, a presence asserted another way, a deprecated matcher
+ * - `TEST_SHAPES` · what a test refuses beyond every file's shapes:
+ * - a presence asserted another way, a deprecated matcher
  */
 import type { Shape } from './shapes.ts';
-
-// a promise its timer settles: the executor hands `setTimeout` its settle, or a call of it; a deadline rejects
-const SETTLED_BY_A_TIMER =
-  "CallExpression[callee.name='setTimeout']:matches([arguments.0.type='Identifier'][arguments.0.name!=/^reject/], [arguments.0.body.type='CallExpression'][arguments.0.body.callee.name!=/^reject/])";
-const A_SLEEP = [
-  `NewExpression[callee.name='Promise'] > :function > ${SETTLED_BY_A_TIMER}`,
-  `NewExpression[callee.name='Promise'] > :function > BlockStatement > ExpressionStatement > ${SETTLED_BY_A_TIMER}`,
-];
 
 // a query that throws when nothing is drawn, so only `toBeTruthy()` reads it
 const A_QUERY = '/^(?:getBy|getAllBy|findBy|findAllBy)/';
@@ -24,15 +16,6 @@ const ASSERTED_ANOTHER_WAY = [
 ]);
 
 const TEST_SHAPES: readonly Shape[] = [
-  {
-    selector: [
-      ...A_SLEEP,
-      "CallExpression[callee.property.name='waitForTimeout']",
-      'ImportDeclaration[source.value=/^(?:node:)?timers\\/promises$/]',
-    ].join(', '),
-    message:
-      'A test moves time with fake timers (`vi.useFakeTimers`, `page.clock`), never waits it out (docs/rules/tests.md).',
-  },
   {
     selector: ASSERTED_ANOTHER_WAY.join(', '),
     message:

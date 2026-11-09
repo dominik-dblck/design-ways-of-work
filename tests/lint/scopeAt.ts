@@ -21,6 +21,7 @@ const scopeAt = (root: string, named: Partial<RepoScope> = {}): RepoScope => ({
   markup: [],
   barrels: [],
   tests: [],
+  namedWaits: [],
   owners: {},
   starts: [],
   names: [],

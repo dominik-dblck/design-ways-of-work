@@ -169,6 +169,13 @@ const testRules = (scope: RepoScope): Linter.Config[] => [
       'wow/no-mock-of-its-subject': 'error',
     },
   },
+  {
+    // the browser tier's framework runs inside tests: its time is moved as theirs is
+    files: [...testsOf(scope), 'shared/e2e/**'],
+    rules: {
+      'wow/time-is-moved-not-waited': ['error', { named: scope.namedWaits }],
+    },
+  },
 ];
 
 const DISABLES: Linter.Config = {

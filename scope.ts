@@ -30,6 +30,7 @@ const scope: RepoScope = {
   markup: [],
   barrels: [],
   tests: [],
+  namedWaits: [],
   owners: {},
   // what runs with no script naming it: each script, each hook, the design system's face, the baseline a product's tests read
   starts: [
