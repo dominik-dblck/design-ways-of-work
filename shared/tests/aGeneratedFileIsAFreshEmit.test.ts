@@ -2,6 +2,7 @@
  * - each generator, run into a fresh folder
  * - writes what the tree holds, byte for byte
  * - and only the files it owns, each of them: one it no longer writes is stale
+ * - one writer per file: two that write it disagree on its source
  */
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
@@ -106,6 +107,18 @@ describe('a generated file is a fresh emit', () => {
           .filter((file) => !written.includes(file))
           .map((file) => `${generator.script} · ${file} · no longer written`),
       ),
+    ).toEqual([]);
+  });
+
+  it('each file has one generator that writes it', () => {
+    const writers = new Map<string, readonly string[]>();
+    for (const { generator, written } of runs)
+      for (const file of written)
+        writers.set(file, [...(writers.get(file) ?? []), generator.script]);
+    expect(
+      [...writers]
+        .filter(([, by]) => by.length > 1)
+        .map(([file, by]) => `${file} · ${by.join(', ')}`),
     ).toEqual([]);
   });
 });

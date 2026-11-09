@@ -40,7 +40,9 @@ function wordsOf({
 }
 
 // a file a generator writes is spelled at its source; a `!` keeps one hand-written, after every glob
-function writtenOff(scope: RepoScope): CSpellUserSettings['overrides'] {
+function writtenOff(
+  scope: RepoScope,
+): NonNullable<CSpellUserSettings['overrides']> {
   const writes = scope.generators.flatMap((one) => one.writes);
   const kept = writes.filter((glob) => glob.startsWith('!'));
   return [
@@ -77,7 +79,7 @@ const cspellConfigOf = (scope: RepoScope): CSpellUserSettings => {
     enableGlobDot: true,
     useGitignore: true,
     overrides: [
-      ...(writtenOff(scope) ?? []),
+      ...writtenOff(scope),
       ...alsoIn.map((one) => ({
         filename: [...one.files],
         language: `en,en-GB,${one.language}`,

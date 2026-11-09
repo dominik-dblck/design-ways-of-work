@@ -51,11 +51,11 @@ function spellOne(file: string): readonly string[] {
     { cwd: ROOT, encoding: 'utf8' },
   );
   const found = (run.stdout ?? '').split('\n').filter(Boolean);
-  // a run that never spelled says why, never nothing (eagle-dev's F1)
+  // a run that never spelled says why, never nothing
   if (run.error) return [`cspell did not run: ${run.error.message}`];
   if (run.status !== 0 && !found.length)
     return [
-      `cspell did not run: ${(run.stderr ?? '').split('\n').find(Boolean) ?? `exit ${String(run.status)}`}`,
+      `cspell did not run: ${(run.stderr ?? '').split('\n').find(Boolean) ?? run.signal ?? `exit ${String(run.status)}`}`,
     ];
   return found;
 }
