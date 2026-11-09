@@ -17,6 +17,10 @@ afterAll(() => {
 });
 
 const TAKE = path.resolve(import.meta.dirname, '..', 'take');
+// a hook's git hands its children its own index and folder: each product here is a repository of its own
+const ENV = Object.fromEntries(
+  Object.entries(process.env).filter(([name]) => !name.startsWith('GIT_')),
+);
 
 const digests = (rows: readonly (readonly [string, string])[]) => new Map(rows);
 const plan = ({
@@ -107,7 +111,7 @@ function aProduct(): { readonly root: string; readonly source: string } {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'take-product-'));
   const source = fs.mkdtempSync(path.join(os.tmpdir(), 'take-source-'));
   made.push(root, source);
-  execFileSync('git', ['init', '-q'], { cwd: root });
+  execFileSync('git', ['init', '-q'], { cwd: root, env: ENV });
   fs.writeFileSync(
     path.join(root, 'package.json'),
     JSON.stringify({ name: 'product', wow: { takes: ['shared'] } }),
@@ -142,7 +146,7 @@ function take({
       source,
       ...(isCheck ? ['--check'] : []),
     ],
-    { cwd: root, encoding: 'utf8' },
+    { cwd: root, encoding: 'utf8', env: ENV },
   );
   return { status: ran.status, out: ran.stdout + ran.stderr };
 }
@@ -159,6 +163,7 @@ describe('a take run in a product', () => {
     const untracked = execFileSync('git', ['status', '--porcelain', '-uall'], {
       cwd: product.root,
       encoding: 'utf8',
+      env: ENV,
     });
     expect(untracked).toBe('?? package.json\n');
     expect(take({ ...product, isCheck: true }).status).toBe(0);
@@ -174,6 +179,46 @@ describe('a take run in a product', () => {
     expect(ran.status).not.toBe(0);
     expect(ran.out).toContain('nowhere is no home of the way of working');
     expect(fs.existsSync(path.join(product.root, 'shared'))).toBe(false);
+  });
+
+  it('keeps one record and one exclude block per worktree', () => {
+    const product = aProduct();
+    execFileSync(
+      'git',
+      [
+        '-c',
+        'user.name=take',
+        '-c',
+        'user.email=take@local',
+        'commit',
+        '-q',
+        '--allow-empty',
+        '-m',
+        'start',
+      ],
+      { cwd: product.root, env: ENV },
+    );
+    const trees = fs.mkdtempSync(path.join(os.tmpdir(), 'take-trees-'));
+    made.push(trees);
+    const other = path.join(trees, 'other');
+    execFileSync('git', ['worktree', 'add', '-q', other], {
+      cwd: product.root,
+      env: ENV,
+    });
+    fs.copyFileSync(
+      path.join(product.root, 'package.json'),
+      path.join(other, 'package.json'),
+    );
+    expect(take(product).status).toBe(0);
+    expect(take({ ...product, root: other }).status).toBe(0);
+    const git = path.join(product.root, '.git');
+    const exclude = fs.readFileSync(path.join(git, 'info', 'exclude'), 'utf8');
+    expect(exclude.match(/ · end$/gm)).toHaveLength(2);
+    expect(fs.existsSync(path.join(git, 'wow-taken'))).toBe(true);
+    expect(
+      fs.existsSync(path.join(git, 'worktrees', 'other', 'wow-taken')),
+    ).toBe(true);
+    expect(take(product).out).toContain('0 written, 0 removed');
   });
 
   it('changes nothing when run again', () => {

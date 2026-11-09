@@ -16,7 +16,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 | 4 | Tools | 8 | 8 |
 | 7 | P1 release | 5 | 5 |
 | 5 | e2e | 4 | 4 |
-| 6 | Port design | 0 | 6 |
+| 6 | Port design | 1 | 6 |
 | 8 | E19 + backup | 3 | 3 |
 
 Stage 6, measured 9 Nov 17:20 (the PM holds it: start asked): 1 · links, how wow's files stand in eagle-design's git
@@ -57,6 +57,7 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
 - 18:42 · stage 8 · 1 of 3 · T-E19-00 refined with the PM (C1-C15), releases 5 and 5.1, sent to eagle-dev
 - 18:42 · stage 8 · 2 of 3 · yarn backup in wow and eagle-design, restored in scratch, zips taken
 - 18:42 · stage 8 · 3 of 3 · port.patch re-saved on main of 9 Nov evening, chain green
+- 20:28 · stage 6 · 1 of 6 · take built in wow, product side lands with the patch
 
 - 08:24 · stage 1 · 1 of 5 · the build side's skills to legacy/ (8bfcd8e)
 - 08:51 · stage 1 · 2 of 5 · 7g commitlint (d282df5)
@@ -509,6 +510,16 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
   takes takeWow as an entry wherever shared/ is held. The copy's cspell: 'msys' (Batch's attribute) to the sheet's
   domain words, 'epicu' to the PM's own. Next: eagle-design's side (package.json's wow.takes, the dependency at a
   tag, postinstall), on a branch off main, with the tag cut when task 2 lands.
+
+- Night · the port's worktree took v0.1.0 (512 files written, git blind to them, --check green) and showed the
+  take wrote its record and exclude block in eagle-design's common .git/info: in a linked worktree git names the
+  common folder for info/. Fixed: the record per worktree (--git-dir), a named block per worktree in the one
+  exclude file; a test with two worktrees. The v0.1.0 block and record in eagle-design's .git moved out by hand
+  (the record kept in the scratchpad to migrate the port's worktree).
+- Night · mistake: v0.1.1 points at 42cec82, v0.1.0's commit. The fix's commit failed its pre-commit and the chain
+  went on to tag, because a pipe (| grep | tail) hid the commit's exit. Not deleted (nothing is), never used: the
+  fix is v0.1.2, and wow's package.json version now moves with the tag (0.1.2). Lesson: a commit is never piped
+  in a chain that tags or pushes after it.
 
 ## Questions for the PM
 
