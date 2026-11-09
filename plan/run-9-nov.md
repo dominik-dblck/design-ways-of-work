@@ -410,6 +410,14 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
   The copy's tier caught P1's `kinded` (release 4's types) unknown to the spelling: the port's scope.ts lists
   it among the sheet's words.
 
+- Stage 5 task 3, testIdsComeFromTheRegistry (mailing-automation's at 56a47d46, its regexes on code text): read
+  off TypeScript's tree instead (`shared/tests/testIds.ts`). A `data-testid` given a string or a template is
+  spelled in place; one given an expression is the registry's when each name it starts from (both branches of a
+  choice) is imported from `{registry}/`, or is `testId` its props declare, in the component or a file of the
+  folder it owns (`componentRoots`); a registry export holding a conditional is one build's. Walked over the
+  scope's production `.tsx` and the registry's files; skipped under `none`. Red and green on sources never put on
+  disk (`tests/browser/testIds.test.ts`, 6 cases, the original's controls each one).
+
 ## Questions for the PM
 
 - The design side's 71 entries keep kebab names (`sheet-status.ts`): the artifact and the build side read them by
