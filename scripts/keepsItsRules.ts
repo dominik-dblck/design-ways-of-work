@@ -1,5 +1,5 @@
 /**
- * - `node scripts/keeps-its-rules.ts [copy]` · the way of working keeps its rules
+ * - `node scripts/keepsItsRules.ts [copy]` · the way of working keeps its rules
  * - no directive in a file of its own, no suppression of one in a rehearsal copy
  */
 import { execFileSync } from 'node:child_process';

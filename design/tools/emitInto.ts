@@ -1,5 +1,5 @@
 /**
- * - `node tools/emit-into.ts --out <folder>` · each emitted text, under a folder
+ * - `node tools/emitInto.ts --out <folder>` · each emitted text, under a folder
  * - the generators' check mode: the shared test compares the folder with the tree
  */
 import fs from 'node:fs';

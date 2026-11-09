@@ -1,6 +1,6 @@
 /**
- * - `node tools/lint-files.ts` · no style, page or script file in the product
- * - `legacy/` and `poc/` aside until they retire; what the build writes is skipped
+ * - `node tools/lintFiles.ts` · case by kind; no style, page or script file
+ * - `legacy/` and `poc/` aside until they retire; what git ignores is skipped
  * - a folder no home of `tools/layout.ts` names, nor the repository's own, fails
  */
 import { scope } from '../scope.ts';
@@ -10,5 +10,5 @@ import { folderRules } from './layout/folderRules.ts';
 process.exitCode = runFileLint({
   scope,
   folders: folderRules(),
-  ignore: ['node_modules', 'dist', '.artifact', '.git', 'legacy', 'poc'],
+  ignore: ['.git', 'legacy', 'poc'],
 });

@@ -1,5 +1,5 @@
 /**
- * - `node tools/new-epic.ts EXX` · writes the parts an epic's folder lacks, listed
+ * - `node tools/newEpic.ts EXX` · writes the parts an epic's folder lacks, listed
  * - refuses an epic the backlog does not hold: its row is written there first
  */
 import fs from 'node:fs';

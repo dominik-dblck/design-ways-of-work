@@ -34,6 +34,18 @@ const scope: RepoScope = {
   ],
   // its file names are the convention's alone
   names: [],
+  nameCases: [
+    {
+      folders: ['shared/rules'],
+      kinds: { '.ts': 'kebab-case' },
+      why: "a rule file is named by its group's key, the key its markdown and its readers name (D29)",
+    },
+    {
+      folders: ['tests/lint/fixtures'],
+      kinds: { '.ts': 'PascalCase' },
+      why: "a rule's fixture copies a product's tree: a component's own file is PascalCase",
+    },
+  ],
   // a types file holds types alone, as the design side's (docs/rules/names.md)
   typesOnly: ['**/*Types.ts'],
   // no component tree of its own: design-system's atoms come by script
@@ -68,7 +80,7 @@ const scope: RepoScope = {
   // no rule table of its own: the products' rule files, each checked in its product
   ruleFiles: [],
   namedPaths: {
-    // PLAN.md out: the files it plans are to come; plan/ out: notes, naming what moved since
+    // plan/ out: its plan names files to come, its notes what moved since
     docs: ['README.md', 'design-system/**/*.md'],
     roots: [
       'scripts',

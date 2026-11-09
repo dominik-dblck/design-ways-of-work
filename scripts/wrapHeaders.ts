@@ -1,5 +1,5 @@
 /**
- * - `node scripts/wrap-headers.ts <file>...` · a bullet past its length, in two
+ * - `node scripts/wrapHeaders.ts <file>...` · a bullet past its length, in two
  * - cut at a clause: a colon first, then a comma; a header with no room is listed
  */
 import fs from 'node:fs';

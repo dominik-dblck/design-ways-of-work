@@ -1,6 +1,6 @@
 /**
  * - runs spec-check on the built project's files, the board read to check an owner
- * - `node tools/spec-check.ts` · a finding is printed and exits 1
+ * - `node tools/specCheck.ts` · a finding is printed and exits 1
  */
 import { errorMessageOf, mirrorAt } from '../guards/checks/checkWorld.ts';
 import { builtRoot } from './root.ts';

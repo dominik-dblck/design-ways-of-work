@@ -5,6 +5,7 @@
 import type { CheckTiers } from './checkTiers.ts';
 import type { Renderer } from './lint/componentLadders.ts';
 import type { Language } from './lint/cspellConfig.ts';
+import type { NameCase } from './lint/fileRules.ts';
 import type { Named } from './lint/rules/fileNamesItsPurpose.ts';
 import type { Family } from './lint/rules/oneHomePerName.ts';
 
@@ -71,6 +72,7 @@ interface RepoScope {
   readonly owners: Readonly<Record<string, string>>;
   readonly starts: readonly string[];
   readonly names: readonly Named[];
+  readonly nameCases: readonly NameCase[];
   readonly typesOnly: readonly string[];
   readonly components: readonly string[];
   readonly renderers: readonly Renderer[];

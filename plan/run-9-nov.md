@@ -12,7 +12,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 | stage | what | done | of |
 | 1 | Harness | 5 | 5 |
 | 2 | Rules | 10 | 10 |
-| 3 | Names | 0 | 6 |
+| 3 | Names | 0 | 7 |
 | 4 | Tools | 0 | 8 |
 | 5 | e2e | 0 | 4 |
 | 6 | Port design | 0 | 4 |
@@ -101,7 +101,34 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
   end reads no file list). Its measure: complexity 10 against cognitive 15 finds 0 in its production too, so the
   size row's build exception drops "its tree measured first".
 
+- Step 3 tasks 1–2, a file's case by its kind (PM 9 Nov, 6g A), with eagle-dev's read: `shared/lint/fileRules.ts`
+  holds the default for every folder, the root too (TypeScript camel, a view Pascal, markdown kebab, `README` `SKILL`
+  `CLAUDE` `AGENTS` as they are, a `_kebab` partial; each sub-kind listed, since ls-lint 2.3.2 reads `.test.ts` apart
+  from `.ts`); a folder ruling every kind itself (`.*`, the component shape) keeps its own. Exceptions named once,
+  `RepoScope.nameCases`, each with its why: wow's rule files (D29) and its fixtures; the design copy's entries (kebab,
+  71, published: renamed inside a release alone), its sources by key (rule groups, skills, documents), its records by
+  id (`E04Tickets.ts`, `feature-E04.md`, `T-E18-00.md`), its icons' released `SOURCE.md`. json, tsv, assets: task 4.
+- My call, logged: a source named by the key of what it holds or writes (a skill, a document) stands with the PM's
+  "a rule file by its key": the same reason, one case.
+- ls-lint walks the disk, not git (eagle-dev's point): `runFileLint` skips what git ignores, read at run time, so
+  `.gitignore` is its one home; the lint-files lists keep only what git tracks and the lint sets aside (`legacy/`,
+  `poc/`, a product's trees in the way of working). Red without it (`dist/`, `.artifact/` flagged), green with it.
+- 18 renames by script (`plan/moves/case-by-kind.tsv`): 9 scripts, 2 hooks, 6 product tools, `PLAN.md` →
+  `plan/README.md`. `scripts/move.ts` is the one mover (eagle-dev: no second home): rows from the root, any tree,
+  imports and exact paths after it; a doc follows a move only where its scope checks its paths
+  (`namedPaths.docs`), so notes and release records keep what they named. A first run rewrote the copy's notes
+  and `records/release-3-2.md`: undone, the mover fixed, run again.
+
 ## Questions for the PM
+
+- The design side's 71 entries keep kebab names (`sheet-status.ts`): the artifact and the build side read them by
+  path, so a rename goes inside a release. Rename them in the port's release (stage 6), or keep them as the named
+  exception? Held as the exception until the PM's word (eagle-dev: the build side's fixtures and skills follow a
+  release either way).
+  **PM 9 Nov · A**: "zmieniamy nazwy w wydaniu portu (etap 6) => unifikujemy repo". The 71 renamed by script in
+  step 3 (a task added: 7 of them), released with the port on the PM's word; the entries' exception goes.
+  My call: a folder holding one module's parts takes that module's name as it is (`sheetStatus/` beside
+  `sheetStatus.ts`), as a component's folder takes its component's: one name for one thing.
 
 - At the build side's port (eagle-dev's measure, 9 Nov): its 23 merges carry written subjects of 115–196
   characters (`Merge T-E18-00 · …`), and commitlint lets through only git's own merge forms. From its port a merge

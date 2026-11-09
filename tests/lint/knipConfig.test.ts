@@ -18,7 +18,7 @@ describe('knip from a scope', () => {
       'sheet/words.ts',
       'app/pages/*.tsx',
       'tools/keepsTheTurn.ts',
-      'shared/hooks/edit-check.ts',
+      'shared/hooks/editCheck.ts',
       'scripts/guard.ts',
       'tools/local.mts',
       '*.config.{ts,mts}',

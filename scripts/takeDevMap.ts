@@ -1,5 +1,5 @@
 /**
- * - `node scripts/take-dev-map.ts [build repo]` · its folder map, product cut out
+ * - `node scripts/takeDevMap.ts [build repo]` · its folder map, product cut out
  * - read from docs/map.md; a folder stays unless PRODUCT_FOLDERS or legacy/ holds it
  * - folders only: a file line is the product's, and its own map lists its files
  */
@@ -103,7 +103,7 @@ const mapModule = (lines: readonly string[]): string =>
     '      lines: [',
     "        '',",
     "        'Every build repository holds these folders; its own map adds its routes, its screens and its domain.',",
-    "        '`{name}/` stands for every folder at its level. Taken from eagle-dev by `scripts/take-dev-map.ts`.',",
+    "        '`{name}/` stands for every folder at its level. Taken from eagle-dev by `scripts/takeDevMap.ts`.',",
     "        '',",
     "        '```',",
     "        '{project}/',",

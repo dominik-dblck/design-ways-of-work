@@ -17,7 +17,7 @@ describe("a repository's folder rules", () => {
           'app/components/Mark.ts',
           'app/components/inner/lower.ts',
         ],
-        { folders: FOLDERS, ignore: [] },
+        { folders: FOLDERS, ignore: [], cases: [] },
       ),
     ).toEqual([
       'app/api/[id]/Bad_Name.ts',
@@ -31,6 +31,7 @@ describe("a repository's folder rules", () => {
       lintedTree(['app/x.ts', 'stray/y.ts', 'notes/z.md'], {
         folders: { '': { '.dir': 'regex:^(?:app|notes)$' }, ...FOLDERS },
         ignore: [],
+        cases: [],
       }),
     ).toEqual(['stray']);
   });
@@ -40,6 +41,7 @@ describe("a repository's folder rules", () => {
       lintedTree(['app/deep/look.css', 'notes/page.html', 'dist/bundle.js'], {
         folders: FOLDERS,
         ignore: ['dist'],
+        cases: [],
       }),
     ).toEqual(['app/deep', 'notes']);
   });
@@ -51,6 +53,7 @@ describe("a repository's folder rules", () => {
         {
           folders: FOLDERS,
           ignore: [],
+          cases: [],
         },
       ),
     ).toEqual(['.', 'tools']);
@@ -61,7 +64,66 @@ describe("a repository's folder rules", () => {
       lintedTree(['app/api/[id]/route.ts', 'app/api/i/route.ts'], {
         folders: { ...FOLDERS, 'app/api/*': { '.ts': 'exists:0' } },
         ignore: [],
+        cases: [],
       }),
     ).toEqual(['app/api/[id]', 'app/api/i']);
+  });
+  it("a file's case is its kind's, at the root and below: code camel, a view Pascal too, prose kebab, a fixed name, a partial", () => {
+    expect(
+      lintedTree(
+        [
+          'Bad-Root.ts',
+          'goodRoot.ts',
+          'notes/fine.ts',
+          'notes/not-fine.ts',
+          'notes/Card.tsx',
+          'notes/README.md',
+          'notes/_one-part.md',
+          'notes/Some_Doc.md',
+          'notes/aCase.test.ts',
+          'notes/A-Case.test.ts',
+        ],
+        { folders: {}, ignore: [], cases: [] },
+      ),
+    ).toEqual([
+      'Bad-Root.ts',
+      'notes/A-Case.test.ts',
+      'notes/Some_Doc.md',
+      'notes/not-fine.ts',
+    ]);
+  });
+
+  it("a scope's case adds its form where its folders hold it, or a kind of its own", () => {
+    expect(
+      lintedTree(
+        [
+          'rules/one-home.ts',
+          'other/one-home.ts',
+          'rules/aSwitch.off.test.ts',
+          'rules/A-Switch.off.test.ts',
+        ],
+        {
+          folders: {},
+          ignore: [],
+          cases: [
+            {
+              folders: ['rules'],
+              kinds: { '.ts': 'kebab-case', '.off.test.ts': 'camelCase' },
+              why: 'a rule file by its key',
+            },
+          ],
+        },
+      ),
+    ).toEqual(['other/one-home.ts', 'rules/A-Switch.off.test.ts']);
+  });
+
+  it('a folder that rules every kind itself keeps its own: the case adds no kind it bans', () => {
+    expect(
+      lintedTree(['shape/Card.tsx', 'shape/notes.md', 'free/notes.md'], {
+        folders: { shape: { '.tsx': 'PascalCase', '.*': 'exists:0' } },
+        ignore: [],
+        cases: [],
+      }),
+    ).toEqual(['shape']);
   });
 });

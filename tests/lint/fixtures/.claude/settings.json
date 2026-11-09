@@ -15,7 +15,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node shared/hooks/edit-check.ts && node tools/keepsTheTurn.ts"
+            "command": "node shared/hooks/editCheck.ts && node tools/keepsTheTurn.ts"
           }
         ]
       }

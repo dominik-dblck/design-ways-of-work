@@ -1,5 +1,5 @@
 /**
- * - `node scripts/take-dev-claude.ts [build repo]` · its skills, patterns, commands
+ * - `node scripts/takeDevClaude.ts [build repo]` · its skills, patterns, commands
  * - copied byte for byte into dev/claude/, the ticket skills and the retired aside
  * - prints each file's sha256, and the files that name its product
  */

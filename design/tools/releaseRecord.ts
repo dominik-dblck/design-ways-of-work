@@ -1,6 +1,6 @@
 /**
  * - writes a release record's digests below its head, then reads them back
- * - `node tools/release-record.ts 3.4` · records/release-3-4.md, its head first
+ * - `node tools/releaseRecord.ts 3.4` · records/release-3-4.md, its head first
  * - a digest the tree no longer has is a fault, exit 1
  */
 import fs from 'node:fs';

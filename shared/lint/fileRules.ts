@@ -1,7 +1,7 @@
 /**
- * - `fileLintConfig` · ls-lint's config: no style, page or script file in a folder
- * - `FolderRules` · a repository's naming of its folders, a key covering those below
- * - a folder gets its most specific key's rules, else the root's, keyed `''`
+ * - `fileLintConfig` · ls-lint's config: case by kind; no style, page or script
+ * - `FolderRules`, `NameCase` · a folder's rules by kind; a case a scope adds
+ * - a folder takes its most specific key's rules over its kind's case
  */
 import { minimatch } from 'minimatch';
 import fs from 'node:fs';
@@ -13,6 +13,13 @@ interface Banned {
 
 // an extension → its ls-lint rule, as `'.ts': 'kebab-case | camelCase'`
 type FolderRules = Readonly<Record<string, string>>;
+
+// a name's case beyond its kind's, where its folders hold it: each kind's form added, or a kind of its own
+interface NameCase {
+  readonly folders: readonly string[];
+  readonly kinds: FolderRules;
+  readonly why: string;
+}
 
 interface FileLintConfig {
   readonly ls: Readonly<Record<string, FolderRules | string>>;
@@ -36,6 +43,27 @@ const BANNED_EXTENSIONS: readonly Banned[] = [
   { extension: '.mjs', why: SCRIPTS },
   { extension: '.cjs', why: SCRIPTS },
 ];
+
+// a name a tool or an agent opens by its convention
+const FIXED = ['README', 'SKILL', 'CLAUDE', 'AGENTS'];
+const CODE = 'camelCase';
+const VIEW = 'camelCase | PascalCase';
+const PROSE = `kebab-case | regex:^_[a-z0-9]+(?:-[a-z0-9]+)*$ | regex:^(?:${FIXED.join('|')})$`;
+
+// ls-lint reads a kind from a name's first dot, and `.ts` holds no `.test.ts`: each is its own
+const CASE_BY_KIND: FolderRules = {
+  '.ts': CODE,
+  '.mts': CODE,
+  '.d.ts': CODE,
+  '.test.ts': CODE,
+  '.test-d.ts': CODE,
+  '.spec.ts': CODE,
+  '.config.ts': CODE,
+  '.config.mts': CODE,
+  '.tsx': VIEW,
+  '.test.tsx': VIEW,
+  '.md': PROSE,
+};
 
 const BANS: FolderRules = Object.fromEntries(
   BANNED_EXTENSIONS.map(({ extension }) => [extension, 'exists:0']),
@@ -85,27 +113,49 @@ function rulesOf(folder: string, folders: Folders): FolderRules {
   return rules;
 }
 
-// each folder keyed by its own path: ls-lint reads a key as a path before a glob
-const fileLintConfig = ({
-  root,
-  folders,
-  ignore,
-}: {
+// the kind's case, with the form of each scope's case covering the folder
+const caseOf = (folder: string, cases: readonly NameCase[]): FolderRules =>
+  cases
+    .filter((one) => one.folders.some((glob) => covers(glob, folder)))
+    .flatMap((one) => Object.entries(one.kinds))
+    .reduce<FolderRules>(
+      (rules, [kind, form]) => ({
+        ...rules,
+        [kind]: rules[kind] === undefined ? form : `${rules[kind]} | ${form}`,
+      }),
+      CASE_BY_KIND,
+    );
+
+interface Wanted {
   readonly root: string;
   readonly folders: Folders;
   readonly ignore: readonly string[];
-}): FileLintConfig => ({
+  readonly cases: readonly NameCase[];
+}
+
+// a folder that rules every kind (`.*`, a component's shape) keeps its own; any other its own over the case
+function ruled(folder: string, wanted: Wanted): FolderRules {
+  const own = rulesOf(folder, wanted.folders);
+  return {
+    ...(own['.*'] === undefined ? caseOf(folder, wanted.cases) : {}),
+    ...own,
+    ...bansIn(wanted.root, folder),
+  };
+}
+
+// each folder keyed by its own path: ls-lint reads a key as a path before a glob
+const fileLintConfig = (wanted: Wanted): FileLintConfig => ({
   ls: {
-    ...bansIn(root, ''),
+    ...ruled('', wanted),
     ...Object.fromEntries(
-      foldersUnder(root, ignore).map((folder) => [
+      foldersUnder(wanted.root, wanted.ignore).map((folder) => [
         folder,
-        { ...rulesOf(folder, folders), ...bansIn(root, folder) },
+        ruled(folder, wanted),
       ]),
     ),
   },
-  ignore,
+  ignore: wanted.ignore,
 });
 
 export { fileLintConfig };
-export type { FolderRules };
+export type { FolderRules, NameCase };

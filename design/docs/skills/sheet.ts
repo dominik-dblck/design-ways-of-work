@@ -52,7 +52,7 @@ const skill: SkillFile = {
         "`--snap` retakes a part's snapshot, only after the PM accepted the change it records (parts b, c and d hand their harness `'diff'` hard-coded: `--snap` does not reach them).",
         "The checks read the top folder of `dist/project/` only, as Claude Design's run_script did.",
         '`guards/__snapshots__/guard-map.json` is rewritten by every part a run (its time moves): commit and publish it only with a change that moves the map; otherwise `git checkout guards/__snapshots__/guard-map.json`.',
-        '`yarn spec-check` (`tools/spec-check.ts`) — `app/styles/components.spec.ts` holds together.',
+        '`yarn spec-check` (`tools/specCheck.ts`) — `app/styles/components.spec.ts` holds together.',
         'Every commit runs ESLint, tsc, the architecture tests and the checks (D23); a push runs every test.',
       ],
     },

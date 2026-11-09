@@ -1,9 +1,9 @@
 /**
  * - `runFileLint` · ls-lint over a repository, its config written from fileRules.ts
- * - a scope that keeps the component shape adds its folders' rules
+ * - a scope's name cases and component shape join; what git ignores is skipped
  * - JSON is YAML: the config lives in a temporary file for one run, never kept
  */
-import { spawnSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -11,6 +11,24 @@ import type { RepoScope } from '../repoScope.ts';
 import { componentFolders } from './componentFolders.ts';
 import { fileLintConfig } from './fileRules.ts';
 import type { FolderRules } from './fileRules.ts';
+
+// what git ignores, `.gitignore` its one home: a path as ls-lint reads a glob, its brackets literal
+const ignoredByGit = (root: string): readonly string[] =>
+  execFileSync(
+    'git',
+    [
+      'ls-files',
+      '-z',
+      '--others',
+      '--ignored',
+      '--exclude-standard',
+      '--directory',
+    ],
+    { cwd: root, encoding: 'utf8' },
+  )
+    .split('\0')
+    .filter((entry) => entry !== '')
+    .map((entry) => entry.replace(/\/$/, '').replace(/[[\]{}*?]/g, '\\$&'));
 
 // the repository's own folders, and every component tree's shape
 function configOf({
@@ -27,7 +45,8 @@ function configOf({
     fileLintConfig({
       root: scope.root,
       folders: { ...folders, ...shaped.folders },
-      ignore: [...ignore, ...shaped.ignore],
+      ignore: [...ignore, ...ignoredByGit(scope.root), ...shaped.ignore],
+      cases: scope.nameCases,
     }),
   );
 }

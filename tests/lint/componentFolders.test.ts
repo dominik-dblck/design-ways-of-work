@@ -26,7 +26,7 @@ describe('a component folder has its shape', () => {
           `${COMPONENTS}/organisms/__tests__/theTiers.test.ts`,
           'app/renderers/mobile/components/organisms/MobileHome/MobileHome.tsx',
         ],
-        RULES,
+        { ...RULES, cases: [] },
       ),
     ).toEqual([]);
   });
@@ -47,7 +47,7 @@ describe('a component folder has its shape', () => {
           `${COMPONENTS}/junk/stray.ts`,
           'app/renderers/mobile/components/organisms/MobileHome/homeWords.ts',
         ],
-        RULES,
+        { ...RULES, cases: [] },
       ),
     ).toEqual([
       `${COMPONENTS}/atoms/Dot/components`,

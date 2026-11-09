@@ -1,5 +1,5 @@
 /**
- * - `node scripts/part-names.ts <root>...` · parts named for their component
+ * - `node scripts/partNames.ts <root>...` · parts named for their component
  * - writes the rename and move maps of each part that lacks it; none once all hold
  * - a stem no name can mend is listed, never guessed: a drawer's, or no purpose
  */

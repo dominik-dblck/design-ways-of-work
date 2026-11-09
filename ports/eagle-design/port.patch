@@ -1,5 +1,5 @@
 diff --git a/.claude/settings.json b/.claude/settings.json
-index f85224d..9f7330a 100644
+index f85224d..9c9a65d 100644
 --- a/.claude/settings.json
 +++ b/.claude/settings.json
 @@ -6,9 +6,9 @@
@@ -7,7 +7,7 @@ index f85224d..9f7330a 100644
            {
              "type": "command",
 -            "command": "cd \"$CLAUDE_PROJECT_DIR\" && node tools/lintEdited.ts",
-+            "command": "cd \"$CLAUDE_PROJECT_DIR\" && ESLINT_FLAGS=unstable_native_nodejs_ts_config node shared/hooks/edit-check.ts",
++            "command": "cd \"$CLAUDE_PROJECT_DIR\" && ESLINT_FLAGS=unstable_native_nodejs_ts_config node shared/hooks/editCheck.ts",
              "timeout": 60,
 -            "statusMessage": "ESLint on the edited file"
 +            "statusMessage": "Prettier and ESLint on the edited file"
@@ -21,7 +21,7 @@ index f85224d..9f7330a 100644
 +          },
 +          {
 +            "type": "command",
-+            "command": "cd \"$CLAUDE_PROJECT_DIR\" && node shared/hooks/chunk-check.ts",
++            "command": "cd \"$CLAUDE_PROJECT_DIR\" && node shared/hooks/chunkCheck.ts",
 +            "timeout": 300,
 +            "statusMessage": "The commit tier's checks"
            }
@@ -57,7 +57,7 @@ index d98f0c0..dd6c01e 100644
  
  ## The cut
 diff --git a/.claude/skills/design-sheet/SKILL.md b/.claude/skills/design-sheet/SKILL.md
-index f72c4df..89c58c9 100644
+index f72c4df..e369723 100644
 --- a/.claude/skills/design-sheet/SKILL.md
 +++ b/.claude/skills/design-sheet/SKILL.md
 @@ -12,7 +12,7 @@ This repository is the source of truth (D5): the design project lives in the hom
@@ -69,11 +69,13 @@ index f72c4df..89c58c9 100644
  - An epic's folder `roadmaps/EXX/` holds the epic whole: its notebook and its parts of the board's entries (`EXXTickets.ts`, `EXXEdges.ts`, `EXX…Receipts.ts`, each serving the entry its name ends with). A new epic's folder is started by `yarn new-epic EXX` once its backlog row stands: it writes the parts the folder lacks from `roadmaps/templates.ts` and lists each in its entry.
  - How the app works is `sheet/logic/capabilities.ts` (D20): per capability what it decides, its states, rules, walk and examples, each a pointer `{file}.js · {export}`; checks part a holds every pointer to a live export.
  - `tools/` is this repository's tooling and is not published. `poc/` holds trials.
-@@ -37,4 +37,4 @@ This repository is the source of truth (D5): the design project lives in the hom
+@@ -36,5 +36,5 @@ This repository is the source of truth (D5): the design project lives in the hom
+ - `--snap` retakes a part's snapshot, only after the PM accepted the change it records (parts b, c and d hand their harness `'diff'` hard-coded: `--snap` does not reach them).
  - The checks read the top folder of `dist/project/` only, as Claude Design's run_script did.
  - `guards/__snapshots__/guard-map.json` is rewritten by every part a run (its time moves): commit and publish it only with a change that moves the map; otherwise `git checkout guards/__snapshots__/guard-map.json`.
- - `yarn spec-check` (`tools/spec-check.ts`) — `app/styles/components.spec.ts` holds together.
+-- `yarn spec-check` (`tools/spec-check.ts`) — `app/styles/components.spec.ts` holds together.
 -- Every commit runs ESLint, tsc, the architecture tests and the checks against the known fails (D23); a push runs every test.
++- `yarn spec-check` (`tools/specCheck.ts`) — `app/styles/components.spec.ts` holds together.
 +- Every commit runs ESLint, tsc, the architecture tests and the checks (D23); a push runs every test.
 diff --git a/.prettierignore b/.prettierignore
 index c3bb28b..af23fcc 100644
@@ -716,7 +718,7 @@ index 4ed4a71..89724d3 100644
 -- `app/pages/`, `app/theme/`, `app/workspace/`, `roadmaps/templates.ts`, `public/lucide-icons/`.
 +- `app/pages/`, `app/theme/`, `app/workspace/`, `roadmaps/templates.ts`.
 diff --git a/docs/process/ticket-pipeline.md b/docs/process/ticket-pipeline.md
-index db1e4a6..cea5055 100644
+index db1e4a6..c91aa4d 100644
 --- a/docs/process/ticket-pipeline.md
 +++ b/docs/process/ticket-pipeline.md
 @@ -18,8 +18,7 @@
@@ -738,6 +740,15 @@ index db1e4a6..cea5055 100644
    indexes match on the path (`tests/architecture/theDocsNameRealPaths.test.ts`). `why: T-E01-10`
  
  ## Decisions are written, design-side files compared
+@@ -455,7 +454,7 @@ behaviour that nobody tested and this ticket touched. `why: T-E01-05` — touche
+ 6. Present: `{id} · regression · drift {n} · suite {n} red · touched {n} files, {n} re-ports`
+ 
+ **Stop.** None of its own — the calling mode decides. A non-zero section goes to the report with
+-the re-ports file: the design side applies it by script (`tools/apply-reports.ts`), and receipts are the design project's.
++the re-ports file: the design side applies it by script (`tools/applyReports.ts`), and receipts are the design project's.
+ 
+ The criteria §3 re-reads are the sheet's at the release's commit (`git cat-file blob <sha>:{path}`), never a cached copy. Check: the digests named in §1. `why: T-E06-13` — four cached shards were six days behind the sheet
+ 
 @@ -521,7 +520,8 @@ commit, merge, push — each reversible on its own.
     - `## Commit` — branch, staged count, message
     Update `epic-notes.md`
@@ -1775,15 +1786,19 @@ similarity index 100%
 rename from app/styles/tokens.css
 rename to legacy/tokens.css
 diff --git a/package.json b/package.json
-index b0d8011..0446fd2 100644
+index b0d8011..b558635 100644
 --- a/package.json
 +++ b/package.json
-@@ -12,39 +12,56 @@
+@@ -10,41 +10,58 @@
+     "build": "node tools/build.ts",
+     "checks": "node tools/build.ts && DESIGN_SAVE=1 node tools/checks.ts",
      "cut-pack": "node tools/build.ts && node tools/pack.ts",
-     "apply-reports": "node tools/apply-reports.ts",
-     "spec-check": "node tools/build.ts && node tools/spec-check.ts",
+-    "apply-reports": "node tools/apply-reports.ts",
+-    "spec-check": "node tools/build.ts && node tools/spec-check.ts",
 -    "lint": "eslint .",
 -    "lint:fix": "eslint . --fix",
++    "apply-reports": "node tools/applyReports.ts",
++    "spec-check": "node tools/build.ts && node tools/specCheck.ts",
 +    "lint": "ESLINT_FLAGS=unstable_native_nodejs_ts_config eslint .",
 +    "lint:fix": "ESLINT_FLAGS=unstable_native_nodejs_ts_config eslint . --fix",
      "tsc": "tsc --noEmit",
@@ -1795,11 +1810,12 @@ index b0d8011..0446fd2 100644
      "checks:gate": "node tools/checksGate.ts",
 -    "test:architecture": "vitest --run tests/architecture",
 -    "ds-scan": "node tools/build.ts && node tools/ds-scan.ts",
-+    "test:architecture": "ESLINT_FLAGS=unstable_native_nodejs_ts_config vitest --run tests/architecture",
-     "new-epic": "node tools/new-epic.ts",
+-    "new-epic": "node tools/new-epic.ts",
 -    "release:record": "node tools/release-record.ts"
-+    "release:record": "node tools/release-record.ts",
-+    "lint:files": "node tools/lint-files.ts",
++    "test:architecture": "ESLINT_FLAGS=unstable_native_nodejs_ts_config vitest --run tests/architecture",
++    "new-epic": "node tools/newEpic.ts",
++    "release:record": "node tools/releaseRecord.ts",
++    "lint:files": "node tools/lintFiles.ts",
 +    "lint:words": "cspell --no-progress --no-summary",
 +    "lint:deps": "syncpack lint",
 +    "deps:dedupe": "node shared/lint/dedupe.ts",
@@ -1884,10 +1900,10 @@ index 9c7b0cf..ce1fef1 100644
 +export type { TrackFinding, TrackReading, TrackRow };
 diff --git a/scope.ts b/scope.ts
 new file mode 100644
-index 0000000..c838a5e
+index 0000000..5cf02bc
 --- /dev/null
 +++ b/scope.ts
-@@ -0,0 +1,315 @@
+@@ -0,0 +1,349 @@
 +// scope.ts · what the design project names once: its ESLint config, its shared tests and its tools read it
 +import type { RepoScope } from './shared/repoScope.ts';
 +import {
@@ -2069,7 +2085,7 @@ index 0000000..c838a5e
 +  // what the build writes from a module: the emitted JSON, rule files, skills, documents, tokens
 +  generators: [
 +    {
-+      script: 'tools/emit-into.ts',
++      script: 'tools/emitInto.ts',
 +      args: [],
 +      writes: [
 +        'fixtures/data/*.json',
@@ -2149,6 +2165,40 @@ index 0000000..c838a5e
 +      files: PARTS,
 +      stem: '^(?!index$)(?:[a-z][A-Za-z0-9]*|E\\d{2}[A-Za-z]*)$',
 +      why: 'a part is camelCase or its epic (docs/rules/names.md).',
++    },
++  ],
++  // a name beyond its kind's case, each by its why (shared/lint/fileRules.ts)
++  nameCases: [
++    {
++      folders: [
++        ...new Set(ENTRIES.map((file) => file.slice(0, file.lastIndexOf('/')))),
++      ],
++      kinds: { '.ts': 'kebab-case' },
++      why: "an entry is a module the artifact and the build side read by its path: renamed inside a release alone, on the PM's word",
++    },
++    {
++      folders: [
++        'docs/rules',
++        'docs/skills',
++        'docs/documents',
++        'dev/rules',
++        'shared/rules',
++      ],
++      kinds: { '.ts': 'kebab-case' },
++      why: 'a source is named by the key of what it holds or writes: a rule group (D29), a skill, a document',
++    },
++    {
++      folders: ['**'],
++      kinds: {
++        '.ts': 'regex:^E\\d{2}[A-Za-z0-9]*$',
++        '.md': 'regex:^(?:[a-z]+-)?E\\d{2}$ | regex:^T-E\\d{2}-\\d{2}$',
++      },
++      why: 'a record is named by its id: an epic (`E04Tickets.ts`, `feature-E04.md`), a ticket (`T-E18-00.md`)',
++    },
++    {
++      folders: ['public'],
++      kinds: { '.md': 'regex:^SOURCE$' },
++      why: "an asset folder's note of where each file came from, `SOURCE.md`, released by that path",
 +    },
 +  ],
 +  spelling: {

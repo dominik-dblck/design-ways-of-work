@@ -1,5 +1,5 @@
 /**
- * - `node tools/apply-reports.ts <file> [--write]` · a regression's re-ports, by row
+ * - `node tools/applyReports.ts <file> [--write]` · a regression's re-ports, by row
  * - each row found once in its ticket's entry of the tickets' or the edges' part
  * - dry by default: every row is checked, and nothing written until all pass
  */
@@ -108,7 +108,7 @@ function main(): void {
   const [file, flag] = process.argv.slice(2);
   if (!file)
     throw new Error(
-      'usage: node tools/apply-reports.ts <re-ports.json> [--write]',
+      'usage: node tools/applyReports.ts <re-ports.json> [--write]',
     );
   const reports: Reports = JSON.parse(fs.readFileSync(file, 'utf8'));
   if (!reports.rows?.length) throw new Error(`re-ports · no rows in ${file}`);

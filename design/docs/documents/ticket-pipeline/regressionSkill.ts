@@ -53,7 +53,7 @@ export const REGRESSION_SKILL: readonly DocumentSection[] = [
       '6. Present: `{id} · regression · drift {n} · suite {n} red · touched {n} files, {n} re-ports`',
       '',
       `${NO_STOP_OF_ITS_OWN} A non-zero section goes to the report with`,
-      "the re-ports file: the design side applies it by script (`tools/apply-reports.ts`), and receipts are the design project's.",
+      "the re-ports file: the design side applies it by script (`tools/applyReports.ts`), and receipts are the design project's.",
       '',
       "The criteria §3 re-reads are the sheet's at the release's commit (`git cat-file blob <sha>:{path}`), never a cached copy. Check: the digests named in §1. `why: T-E06-13` — four cached shards were six days behind the sheet",
       '',

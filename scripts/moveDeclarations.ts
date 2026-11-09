@@ -1,5 +1,5 @@
 /**
- * - `node scripts/move-declarations.ts <map.tsv> [root]` · a file's parts moved out
+ * - `node scripts/moveDeclarations.ts <map.tsv> [root]` · a file's parts moved out
  * - a row: a file, a name it declares, its new file, the new file's header bullet
  * - the imports a part reads follow it; its source imports it back where it reads it
  */
@@ -12,13 +12,8 @@ import {
   namesReadIn,
   statementOf,
 } from './declarations.ts';
-import {
-  importLines,
-  importPathOf,
-  needsOf,
-  targetText,
-} from './moved-text.ts';
-import type { Row } from './moved-text.ts';
+import { importLines, importPathOf, needsOf, targetText } from './movedText.ts';
+import type { Row } from './movedText.ts';
 import { mapRows } from './mapRows.ts';
 import { HERE, repoAt } from './repos.ts';
 

@@ -1,0 +1,19 @@
+# step 3 · a file named by its kind (PM 9 Nov, 6g A): from, to
+scripts/move-declarations.ts	scripts/moveDeclarations.ts
+scripts/moved-text.ts	scripts/movedText.ts
+scripts/keeps-its-rules.ts	scripts/keepsItsRules.ts
+scripts/part-names.ts	scripts/partNames.ts
+scripts/wrap-headers.ts	scripts/wrapHeaders.ts
+scripts/take-dev-claude.ts	scripts/takeDevClaude.ts
+scripts/take-dev-map.ts	scripts/takeDevMap.ts
+scripts/port-save.ts	scripts/portSave.ts
+scripts/lint-files.ts	scripts/lintFiles.ts
+shared/hooks/edit-check.ts	shared/hooks/editCheck.ts
+shared/hooks/chunk-check.ts	shared/hooks/chunkCheck.ts
+design/tools/apply-reports.ts	design/tools/applyReports.ts
+design/tools/emit-into.ts	design/tools/emitInto.ts
+design/tools/lint-files.ts	design/tools/lintFiles.ts
+design/tools/new-epic.ts	design/tools/newEpic.ts
+design/tools/release-record.ts	design/tools/releaseRecord.ts
+design/tools/spec-check.ts	design/tools/specCheck.ts
+PLAN.md	plan/README.md

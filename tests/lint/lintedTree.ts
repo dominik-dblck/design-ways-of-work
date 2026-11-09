@@ -6,7 +6,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { fileLintConfig } from '../../shared/lint/fileRules.ts';
-import type { FolderRules } from '../../shared/lint/fileRules.ts';
+import type { FolderRules, NameCase } from '../../shared/lint/fileRules.ts';
 
 const CLI = path.join(
   import.meta.dirname,
@@ -19,9 +19,11 @@ function lintedTree(
   {
     folders,
     ignore,
+    cases,
   }: {
     readonly folders: Readonly<Record<string, FolderRules>>;
     readonly ignore: readonly string[];
+    readonly cases: readonly NameCase[];
   },
 ): readonly string[] {
   const tree = fs.mkdtempSync(path.join(os.tmpdir(), 'linted-tree-'));
@@ -32,7 +34,7 @@ function lintedTree(
   const config = path.join(tree, 'ls-lint.yml');
   fs.writeFileSync(
     config,
-    JSON.stringify(fileLintConfig({ root: tree, folders, ignore })),
+    JSON.stringify(fileLintConfig({ root: tree, folders, ignore, cases })),
   );
   const run = spawnSync(
     process.execPath,

@@ -1,5 +1,5 @@
 /**
- * - `node scripts/port-save.ts [product]` · the rehearsal copy's own edits, saved
+ * - `node scripts/portSave.ts [product]` · the rehearsal copy's own edits, saved
  * - the diff from its `product` tag: product files only, every linked file aside
  * - written to ports/<product>/port.patch; one that no longer applies fails loudly
  */
