@@ -1,5 +1,5 @@
 /**
- * - every row of the scope's `ruleFiles` names a gate that runs
+ * - every row of the scope's `ruleFiles` names a gate that runs: a tier or a hook
  * - a rule file holds at most 200 lines; a known shortfall only shrinks
  */
 import { ESLint } from 'eslint';
@@ -9,6 +9,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { scope } from '../../scope.ts';
+import { COMMIT, FEATURE_END } from '../checkTiers.ts';
 import { testsOf } from '../repoScope.ts';
 import type { RepoScope } from '../repoScope.ts';
 import { heldToItsBaseline } from './baseline.ts';
@@ -104,6 +105,31 @@ function shortfallOf(table: Table, world: World): readonly string[] {
   return [...new Set([...gates, ...long])];
 }
 
+// a script a git hook runs by name: `yarn -s lint:commit` in `commit-msg`
+const A_HOOKED_SCRIPT = /\byarn (?:-s )?([\w:-]+)/g;
+
+// the scripts that run with no one typing them: each tier's, and each a git hook names; one a person types is no gate
+function scriptsThatRun(tree: RepoScope): readonly string[] {
+  const hooks = path.join(tree.root, '.husky');
+  const hooked = fs.existsSync(hooks)
+    ? fs
+        .readdirSync(hooks, { withFileTypes: true })
+        .filter((entry) => entry.isFile())
+        .flatMap((entry) => [
+          ...fs
+            .readFileSync(path.join(hooks, entry.name), 'utf8')
+            .matchAll(A_HOOKED_SCRIPT),
+        ])
+        .flatMap(([, script]) => (script === undefined ? [] : [script]))
+    : [];
+  return [
+    ...[...COMMIT, ...FEATURE_END].map((check) => check.script),
+    ...tree.checks.commit,
+    ...tree.checks.featureEnd,
+    ...hooked,
+  ];
+}
+
 const isOn = (setting: unknown): boolean => {
   const level: unknown = Array.isArray(setting) ? setting[0] : setting;
   return level !== 0 && level !== 'off' && level !== false;
@@ -149,7 +175,11 @@ async function worldOf(tree: RepoScope): Promise<World> {
         .filter((name) => A_TEST_SUFFIX.test(name))
         .map((name) => name.replace(A_TEST_SUFFIX, '')),
     ),
-    scripts: new Set(Object.keys(packageJson.scripts ?? {})),
+    scripts: new Set(
+      scriptsThatRun(tree).filter(
+        (script) => packageJson.scripts?.[script] !== undefined,
+      ),
+    ),
   };
 }
 
@@ -209,7 +239,7 @@ describe('every rule has a gate that runs', () => {
     expect(rowsOf('| Script | Command |\n| - | - |\n| a | b |')).toEqual([]);
   });
 
-  it('what runs is read off every file ESLint lints: a rule on in one folder, or for the tests alone, counts', async () => {
+  it('what runs is read off every file ESLint lints, and a script when a tier or a git hook runs it', async () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), 'wow-gates-'));
     const planted: Readonly<Record<string, string>> = {
       'eslint.config.mjs': [
@@ -221,7 +251,9 @@ describe('every rule has a gate that runs', () => {
         "  { files: ['tests/**/*.ts'], rules: { 'no-alert': 'error' } },",
         '];',
       ].join('\n'),
-      'package.json': '{ "scripts": { "check": "tsc" } }',
+      'package.json':
+        '{ "scripts": { "check": "x", "tsc": "x", "hooked": "x", "typed": "x" } }',
+      '.husky/commit-msg': 'yarn -s hooked --edit "$1"',
       'a.ts': '',
       'sub/b.ts': '',
       'ignored/d.ts': '',
@@ -241,12 +273,14 @@ describe('every rule has a gate that runs', () => {
         production: ['**/*.ts', '!tests/**'],
         react: [],
         tests: [],
+        checks: { commit: ['check'], featureEnd: [] },
       });
       expect(world).toEqual({
         eslintRules: new Set(['no-console', 'no-alert']),
         lintOptions: new Set(['reportUnusedDisableDirectives']),
         testNames: new Set(['c']),
-        scripts: new Set(['check']),
+        // `tsc` a tier's, `check` the scope's, `hooked` a hook's; `typed` only a person runs
+        scripts: new Set(['tsc', 'check', 'hooked']),
       });
     } finally {
       fs.rmSync(root, { recursive: true, force: true });

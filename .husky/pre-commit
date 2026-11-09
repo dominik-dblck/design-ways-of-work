@@ -1,3 +1,1 @@
-yarn -s format
-git update-index --again
-yarn -s check:chunk
+yarn -s check:chunk --staged --write

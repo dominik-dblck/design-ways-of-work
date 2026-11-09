@@ -42,6 +42,11 @@ const scope: RepoScope = {
   renderers: [],
   // no file it writes from a source of its own
   generators: [],
+  // its own checks beside the shared tiers: the copies, its rules' tests, the shared tests, its kept rules; the products' at the end
+  checks: {
+    commit: ['lint:copies', 'test:rules', 'test:shared', 'lint:kept'],
+    featureEnd: ['verify'],
+  },
   // no skill, and no instruction an agent loads: its sessions read the products'
   instructions: { skills: [], whole: [], onDemand: [], everyTurn: [] },
   // its own code's strings and both sides' trees: a rule's text, a check's finding, each written once

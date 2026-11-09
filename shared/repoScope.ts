@@ -2,6 +2,7 @@
  * - `RepoScope`, `Generator` · what a repository names once; a script that emits
  * - `testsOf`, `SHARED_TESTS` · the files read as tests; the way of working's own
  */
+import type { CheckTiers } from './checkTiers.ts';
 import type { Renderer } from './lint/componentLadders.ts';
 import type { Language } from './lint/cspellConfig.ts';
 import type { Named } from './lint/rules/fileNamesItsPurpose.ts';
@@ -74,6 +75,7 @@ interface RepoScope {
   readonly components: readonly string[];
   readonly renderers: readonly Renderer[];
   readonly generators: readonly Generator[];
+  readonly checks: CheckTiers;
   readonly instructions: Instructions;
   readonly sentences: Sentences;
   // the rule tables as printed (`| Rule | Gate | Exceptions | Why |`): each row names a gate that runs

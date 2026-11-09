@@ -54,6 +54,24 @@ product repositories (eagle-design through its port only, mailing-automation rea
   tsc 1.5, rule tests 3.4, shared tests 1.4); the design copy's tree: ESLint 22.5 s, tsc 3.7, cspell 3.3, prettier
   2.7, architecture tests 3.2, ls-lint 1.2, knip 1.0, syncpack 0.3.
 
+- Parts 4 and 5, the tiers and the spike lane: `shared/checkTiers.ts` (the map), `shared/hooks/checkTier.ts`
+  (the runner, each check timed), `RepoScope.checks` (a repository's own by tier), the hooks on both sides
+  (pre-commit the commit tier with `--write`, pre-merge-commit the commit tier, pre-push the feature end).
+  `everyRuleHasAGate` counts a script only when a tier or a git hook runs it: two design rows gated on `checks`,
+  which nothing ran, now name `checks:gate`, which the commit tier runs. SonarJS's AWS family off. Measured: the way
+  of working's commit 10.6 s; the design copy's commit 33 s, its feature end 64 s.
+- The build side's port (eagle-dev, 9 Nov): `deps:dedupe` on its lock moves zod 4.5.4 → 4.6.7 and @types/node
+  22 → 26 (for @types/pg): its full suite runs after it.
+
+- Parts 4–5, eagle-dev's probe (T1–T4): a pre-commit that formats re-staged what a person left unstaged
+  (`update-index --again`, the build side's hook today too): the commit tier reads the index (`--staged`), formats
+  and stages only a file staged whole, and checks a file staged in part as it stands; the working tree is the Stop
+  hook's. A fast-forward runs no hook: the spike row says the push checks its work. The budget one constant
+  (`COMMIT_BUDGET_SECONDS`), the Stop hooks' timeout 300 on both. A check that never started says why. Each proven
+  red in a scratch repository (partial staging kept, the budget line, a missing tool, the spike).
+- Step 2 measured: `sonarjs/no-nested-conditional` 19 on the design copy, 2 in the way of working (one fixed);
+  cognitive complexity at 15 and cyclomatic at 10 find 0 on both trees: the swap is free on the design side.
+
 ## Questions for the PM
 
 - At the build side's port (eagle-dev's measure, 9 Nov): its 23 merges carry written subjects of 115–196

@@ -59,9 +59,16 @@ const OFF_IN_TESTS: Readonly<Record<string, string>> = {
 const offOf = (table: Readonly<Record<string, string>>): Linter.RulesRecord =>
   Object.fromEntries(Object.keys(table).map((rule) => [rule, 'off']));
 
+// the AWS CDK's rules, read off the set: no code of a way of working's repository builds AWS infrastructure
+const AWS: Linter.RulesRecord = Object.fromEntries(
+  Object.keys(configs.recommended.rules ?? {})
+    .filter((rule) => rule.startsWith('sonarjs/aws-'))
+    .map((rule) => [rule, 'off']),
+);
+
 const SONAR: Linter.Config = {
   plugins: { sonarjs },
-  rules: { ...configs.recommended.rules, ...offOf(OFF) },
+  rules: { ...configs.recommended.rules, ...offOf(OFF), ...AWS },
 };
 
 const SONAR_IN_TESTS: Linter.RulesRecord = offOf(OFF_IN_TESTS);

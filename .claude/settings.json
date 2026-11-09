@@ -19,8 +19,8 @@
           {
             "type": "command",
             "command": "cd \"$CLAUDE_PROJECT_DIR\" && node shared/hooks/chunk-check.ts",
-            "timeout": 180,
-            "statusMessage": "The chunk's checks"
+            "timeout": 300,
+            "statusMessage": "The commit tier's checks"
           }
         ]
       }

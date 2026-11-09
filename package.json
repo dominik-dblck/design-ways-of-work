@@ -6,7 +6,8 @@
     "node": "22.23.1"
   },
   "scripts": {
-    "check:chunk": "yarn -s lint:files && yarn -s lint:words && yarn -s lint:deps && yarn -s format:check && yarn -s lint && yarn -s tsc && yarn -s lint:copies && yarn -s lint:exports && yarn -s test:rules && yarn -s test:shared && yarn -s lint:kept",
+    "check:chunk": "node shared/hooks/checkTier.ts commit",
+    "check:feature": "node shared/hooks/checkTier.ts feature",
     "test:rules": "vitest run tests/lint",
     "test:shared": "vitest run shared/tests",
     "tsc": "tsc --noEmit",
@@ -21,7 +22,7 @@
     "lint:exports": "knip --no-progress --no-config-hints",
     "format": "prettier --write . --log-level warn",
     "format:check": "prettier --check . --log-level warn",
-    "test": "yarn -s check:chunk && node scripts/verify.ts",
+    "test": "yarn -s check:feature",
     "prepare": "husky",
     "rehearse": "node scripts/rehearse.ts",
     "verify": "node scripts/verify.ts",
