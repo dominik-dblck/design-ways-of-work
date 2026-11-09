@@ -13,7 +13,7 @@ const TOKENS: ReadonlyMap<string, Token> = new Map(
 
 const REF = /\{(--[\w-]+)(?::(dark))?\}/g;
 const WHY = /^\{why:([^}]+)\}$/;
-const VAR = /^var\((--[\w-]+)\)$/;
+const VAR = /var\((--[\w-]+)\)/g;
 const HEAD =
   '<!-- Written by `node design-system/writeGuide.ts` from `design-system/guide.ts`: edit the data, never this file. -->';
 
@@ -23,12 +23,13 @@ function tokenOf(name: string): Token {
   return found;
 }
 
-// a token's value in its mode, through each `var()` it names
+// a token's value in its mode, each `var()` in it written out, a composite's too (`2px 2px 0 var(--x)`)
 function valueOf(name: string, isDark: boolean): string {
   const token = tokenOf(name);
   const written = isDark ? (token.dark ?? token.light) : token.light;
-  const named = VAR.exec(written)?.[1];
-  return named === undefined ? written : valueOf(named, isDark);
+  return written.replace(VAR, (_match: string, named: string) =>
+    valueOf(named, isDark),
+  );
 }
 
 const refsIn = (line: string): string =>

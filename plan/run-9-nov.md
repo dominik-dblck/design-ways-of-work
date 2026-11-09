@@ -337,6 +337,15 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
   comments blanked by TypeScript's scanner, so a line keeps its number), proven red and green on a tree of one
   screen (`tests/browser/`, 9 cases). No zod here: a catalogue is checked by a type guard.
 
+- Eagle-dev's third probe, 9 Nov (9ad168b, 7407976, c7fc4ad, 023332d, 5861192; Dom: a request from the design
+  side is done at once): the drag code logs the same events as its own, line for line, in Chromium; test.info()
+  reads each project's baseURL; the sync's four fixes hold on its data; 43 of 44 guide values match its tokens.
+  F2 mended: a component root is any `components/{tier}/X/X.tsx` (its renderer's tree too), and a file named as
+  its folder lands on that folder's barrel when the tree holds one (its providers), read after the move. N2
+  mended: a `var()` inside a composite value is written out (`--shadow-solid` · 2px 2px 0 #000000). N1 kept: a
+  leaf turned branch reads as the leaf gone and the branch come, each true. F1 asked back (QUESTION): the
+  emitted map holds folders alone, so a folder its files alone follow closes there; its domain line checked.
+
 ## Questions for the PM
 
 - The design side's 71 entries keep kebab names (`sheet-status.ts`): the artifact and the build side read them by

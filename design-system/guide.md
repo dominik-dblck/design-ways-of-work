@@ -91,7 +91,7 @@ Hairlines at 1px. Default `--bd-neutral` (#d9dce1). Container borders are softer
 - `--shadow-subtle` (0 3px 3px rgba(0,0,0,0.03)) · resting surfaces
 - `--shadow-card` (0 8px 6px rgba(0,0,0,0.10), 0 4px 4px rgba(0,0,0,0.15)) · lifted cards
 - `--shadow-intense` (0 8px 7px rgba(0,0,0,0.10), 0 3px 3px rgba(0,0,0,0.15)) · overlays
-- `--shadow-solid` (2px 2px 0 var(--dbk-black)) · marketing moments alone (pricing, CTA tiles), never in the app
+- `--shadow-solid` (2px 2px 0 #000000) · marketing moments alone (pricing, CTA tiles), never in the app
 - `--shadow-avatar` (0 6px 16px rgba(0,0,0,0.10), 0 2px 4px rgba(0,0,0,0.05)) · profile pictures
 
 ### Blur

@@ -7,6 +7,8 @@ import {
 } from '../../scripts/movePaths.ts';
 
 const ROOT = 'app/components/atoms/Chip/Chip.tsx';
+// no folder holds a barrel
+const NONE = (): boolean => false;
 
 describe("a moved file's imports and paths follow it", () => {
   it('an import of a moved file is written from the importer to where it now stands', () => {
@@ -15,6 +17,7 @@ describe("a moved file's imports and paths follow it", () => {
       importsMoved("import { one } from './one.ts';", {
         file: 'app/a/two.ts',
         moves,
+        isBarrelled: NONE,
       }),
     ).toBe("import { one } from '../b/one.ts';");
   });
@@ -25,27 +28,60 @@ describe("a moved file's imports and paths follow it", () => {
       importsMoved("export * from './one.ts';", {
         file: 'app/a/two.ts',
         moves,
+        isBarrelled: NONE,
       }),
     ).toBe("export * from '../../a/one.ts';");
   });
 
   it('an import neither side of which moved stands as written', () => {
     const text = "import { one } from './one.ts';";
-    expect(importsMoved(text, { file: 'app/a/two.ts', moves: new Map() })).toBe(
-      text,
-    );
+    expect(
+      importsMoved(text, {
+        file: 'app/a/two.ts',
+        moves: new Map(),
+        isBarrelled: NONE,
+      }),
+    ).toBe(text);
   });
 
   it('a component root is imported by its barrel, but from inside its folder', () => {
-    expect(landingOf(ROOT, 'app/pages/home.tsx')).toBe(
-      'app/components/atoms/Chip/index.ts',
-    );
-    expect(landingOf(ROOT, 'app/components/atoms/Chip/ChipParts.tsx')).toBe(
-      ROOT,
-    );
-    expect(landingOf('app/a/one.ts', 'app/pages/home.tsx')).toBe(
-      'app/a/one.ts',
-    );
+    expect(
+      landingOf(ROOT, { importer: 'app/pages/home.tsx', isBarrelled: NONE }),
+    ).toBe('app/components/atoms/Chip/index.ts');
+    expect(
+      landingOf(ROOT, {
+        importer: 'app/components/atoms/Chip/ChipParts.tsx',
+        isBarrelled: NONE,
+      }),
+    ).toBe(ROOT);
+    expect(
+      landingOf('app/a/one.ts', {
+        importer: 'app/pages/home.tsx',
+        isBarrelled: NONE,
+      }),
+    ).toBe('app/a/one.ts');
+  });
+
+  it("a root in a renderer's tree of tiers, and a folder's own barrel, are landed on too", () => {
+    expect(
+      landingOf('app/renderers/mobile/components/molecules/Row/Row.tsx', {
+        importer: 'app/pages/home.tsx',
+        isBarrelled: NONE,
+      }),
+    ).toBe('app/renderers/mobile/components/molecules/Row/index.ts');
+    const provider = 'app/providers/Session/Session.tsx';
+    expect(
+      landingOf(provider, {
+        importer: 'app/pages/home.tsx',
+        isBarrelled: () => true,
+      }),
+    ).toBe('app/providers/Session/index.ts');
+    expect(
+      landingOf(provider, {
+        importer: 'app/pages/home.tsx',
+        isBarrelled: NONE,
+      }),
+    ).toBe(provider);
   });
 
   it('an exact path follows its move, under design/ too, never a longer name holding it', () => {

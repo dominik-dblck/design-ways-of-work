@@ -100,7 +100,10 @@ function imported(file: string, tree: Tree): string {
     path.join(tree.root, moves.get(file) ?? file),
     'utf8',
   );
-  return importsMoved(text, { file, moves });
+  // a folder's barrel as the tree holds it once moved
+  const isBarrelled = (folder: string): boolean =>
+    fs.existsSync(path.join(tree.root, folder, 'index.ts'));
+  return importsMoved(text, { file, moves, isBarrelled });
 }
 
 // a folder its moves leave empty goes with them

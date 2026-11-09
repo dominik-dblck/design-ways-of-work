@@ -11,19 +11,35 @@ interface Move {
 
 const SPECIFIER =
   /(from\s+|import\s*\(\s*|import\s+|export\s+\*\s+from\s+)(['"])(\.{1,2}\/[^'"]+)\2/g;
+// a component's root in any tree of atomic tiers (docs/rules/components.md): app/, a renderer's, design/
 const A_ROOT =
-  /^(?:design\/)?app\/components\/(atoms|molecules|organisms|templates)\/([^/]+)\/\2\.tsx$/;
+  /^(?:.+\/)?components\/(atoms|molecules|organisms|templates)\/([^/]+)\/\2\.tsx$/;
+// a file named as its folder, which a barrel beside it may face for
+const NAMED_FOR_ITS_FOLDER = /(?:^|\/)([^/]+)\/\1\.tsx$/;
 
 const escaped = (text: string): string =>
   text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 const isARoot = (file: string): boolean => A_ROOT.test(file);
 
-// where an import of a moved root lands: the barrel, unless the importer sits in the component's own folder
-function landingOf(target: string, importer: string): string {
-  if (!A_ROOT.test(target)) return target;
+// where a folder's barrel stands, read off the tree after the move
+type Barrelled = (folder: string) => boolean;
+
+// an import of a root, or of a file its folder's barrel faces for, lands on the barrel, unless from inside
+function landingOf(
+  target: string,
+  {
+    importer,
+    isBarrelled,
+  }: { readonly importer: string; readonly isBarrelled: Barrelled },
+): string {
   const folder = path.posix.dirname(target);
-  return importer.startsWith(`${folder}/`) ? target : `${folder}/index.ts`;
+  const isFaced =
+    A_ROOT.test(target) ||
+    (NAMED_FOR_ITS_FOLDER.test(target) && isBarrelled(folder));
+  return !isFaced || importer.startsWith(`${folder}/`)
+    ? target
+    : `${folder}/index.ts`;
 }
 
 // a file's relative imports written again from where it now stands, to where each target now stands
@@ -32,7 +48,12 @@ function importsMoved(
   {
     file,
     moves,
-  }: { readonly file: string; readonly moves: ReadonlyMap<string, string> },
+    isBarrelled,
+  }: {
+    readonly file: string;
+    readonly moves: ReadonlyMap<string, string>;
+    readonly isBarrelled: Barrelled;
+  },
 ): string {
   const now = moves.get(file) ?? file;
   return text.replace(
@@ -45,7 +66,7 @@ function importsMoved(
       if (moved === target && now === file) return whole;
       const relative = path.posix.relative(
         path.posix.dirname(now),
-        landingOf(moved, now),
+        landingOf(moved, { importer: now, isBarrelled }),
       );
       return `${lead}${quote}${relative.startsWith('.') ? relative : `./${relative}`}${quote}`;
     },

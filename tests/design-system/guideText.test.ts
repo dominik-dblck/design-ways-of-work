@@ -23,6 +23,12 @@ describe('the guide names each value by its token', () => {
     expect(text).toMatch(/`--bg-subtle` \(#[0-9a-f]{6} dark\)/);
   });
 
+  it('writes a `var()` inside a composite value out too', () => {
+    expect(guideText(guideOf(['{--shadow-solid}']))).toMatch(
+      /`--shadow-solid` \(2px 2px 0 #[0-9a-f]{3,6}\)/,
+    );
+  });
+
   it('lists the tokens a `{why:}` names, each with its value and its use', () => {
     expect(guideText(guideOf(['{why:--r-pill,--shadow-card}']))).toContain(
       '- `--r-pill` (999px) · primary CTAs\n- `--shadow-card` (',
