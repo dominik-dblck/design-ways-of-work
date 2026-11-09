@@ -9,7 +9,7 @@ import {
   MARK,
   recordFaults,
   recordSections,
-} from './release-record/recordText.ts';
+} from './releaseRecord/recordText.ts';
 import { ROOT } from './root.ts';
 
 function main(): number {

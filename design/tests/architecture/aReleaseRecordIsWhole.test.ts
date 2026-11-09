@@ -8,8 +8,8 @@ import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { ROOT } from './tree.ts';
 import { entryOfModule, importsOfEntry } from '../../tools/layout.ts';
-import { readModules } from '../../tools/release-record/readModules.ts';
-import { MARK } from '../../tools/release-record/recordText.ts';
+import { readModules } from '../../tools/releaseRecord/readModules.ts';
+import { MARK } from '../../tools/releaseRecord/recordText.ts';
 import * as PROJECT from '../../sheet/project.ts';
 
 // the records written before the tool, by hand or by a script outside the repository

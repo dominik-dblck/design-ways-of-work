@@ -17,7 +17,6 @@ interface Move {
   readonly to: string;
 }
 
-// a tree's text files, read before the moves; the moves by its own paths
 interface Tree {
   readonly root: string;
   readonly files: readonly string[];
@@ -124,7 +123,6 @@ function rewritten(tree: Tree): number {
   return texts.filter(([, before, after]) => before !== after).length;
 }
 
-// a name with its folder unsaid
 const bareNames = (tree: Tree): readonly string[] =>
   tree.files.flatMap((file) => {
     const at = tree.moves.find((move) => move.from === file)?.to ?? file;
@@ -144,8 +142,35 @@ const barrelOf = (root: string): string => {
   return `/**\n * - \`${name}\` · its face, read from outside its folder\n */\nexport { ${name} } from './${name}.tsx';\n`;
 };
 
+// a folder its moves leave empty goes with them
+function movedByGit(moves: readonly Move[]): void {
+  for (const { from, to } of moves) {
+    fs.mkdirSync(path.dirname(path.join(HERE, to)), { recursive: true });
+    execFileSync('git', ['mv', from, to], { cwd: HERE });
+    const left = path.dirname(path.join(HERE, from));
+    if (fs.readdirSync(left).length === 0) fs.rmdirSync(left);
+  }
+}
+
+// a folder's row moves each file in it; a module's row, its parts' folder of its name too
+function expanded(rows: readonly Move[]): readonly Move[] {
+  const files = execFileSync('git', ['ls-files', '-z'], {
+    cwd: HERE,
+    encoding: 'utf8',
+  }).split('\0');
+  return rows.flatMap(({ from, to }) => {
+    const [was, is] = [from.replace(CODE, ''), to.replace(CODE, '')];
+    const inside = files
+      .filter((file) => file.startsWith(`${was}/`))
+      .map((file) => ({ from: file, to: `${is}${file.slice(was.length)}` }));
+    return CODE.test(from) ? [{ from, to }, ...inside] : inside;
+  });
+}
+
 async function main(): Promise<void> {
-  const moves = mapRows(MAP).map(([from = '', to = '']) => ({ from, to }));
+  const moves = expanded(
+    mapRows(MAP).map(([from = '', to = '']) => ({ from, to })),
+  );
   const linked = new Set(lastLinked(COPY));
   const here: Tree = { root: HERE, files: await followed(HERE), moves };
   const there: Tree = {
@@ -155,10 +180,7 @@ async function main(): Promise<void> {
       : [],
     moves: inProduct(moves),
   };
-  for (const { from, to } of moves) {
-    fs.mkdirSync(path.dirname(path.join(HERE, to)), { recursive: true });
-    execFileSync('git', ['mv', from, to], { cwd: HERE });
-  }
+  movedByGit(moves);
   // a linked file names another by its product's path; this repository's own, by its own
   const isLinked = (file: string): boolean =>
     LINKED_HOMES.some(([home]) => file.startsWith(`${home}/`));

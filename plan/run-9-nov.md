@@ -12,7 +12,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 | stage | what | done | of |
 | 1 | Harness | 5 | 5 |
 | 2 | Rules | 10 | 10 |
-| 3 | Names | 4 | 6 |
+| 3 | Names | 5 | 6 |
 | 4 | Tools | 0 | 8 |
 | 5 | e2e | 0 | 4 |
 | 6 | Port design | 0 | 5 |
@@ -24,6 +24,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 - 10:10 · stage 3 · 2 of 7 · 18 renames by the one mover (facc5a5)
 - 10:16 · stage 3 · 3 of 6 · folder case by kind; a module's folder by its name (task 3)
 - 10:21 · stage 3 · 4 of 6 · data, tables, assets by kind (task 4)
+- 10:25 · stage 3 · 5 of 6 · part names B: repeats rule, 5 parts renamed (task 5)
 
 - 08:24 · stage 1 · 1 of 5 · the build side's skills to legacy/ (8bfcd8e)
 - 08:51 · stage 1 · 2 of 5 · 7g commitlint (d282df5)
@@ -141,6 +142,12 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
   (`plan/moves/part-files-b.tsv`): BoardPageHead, BoardPageColumns, BoardPageColumn, FeaturePageHead, FeaturePageSteps.
   The mover rewrote the rule test's example paths (product paths in the way of working's own tests): a product's
   path now follows a move in the linked homes alone; the examples restored, the test red on them again.
+
+- eagle-dev's F1 (probe of facc5a5, f2c1eea): `tools/release-record/` stayed beside the renamed `releaseRecord.ts`, and
+  the folder default (kebab) disagreed with "a module's folder takes its name". Both its proposals taken: a shared
+  rule (a folder beside a module of its name, case aside, takes the module's name as it is: red on that folder,
+  the design side's own entry-folder rule gone into it) and the mover (a folder's row moves its files; a module's
+  row moves its parts' folder of its name). Fixed by the mover (`plan/moves/release-record-folder.tsv`).
 
 ## Questions for the PM
 

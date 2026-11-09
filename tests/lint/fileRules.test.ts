@@ -165,4 +165,18 @@ describe("a repository's folder rules", () => {
       ),
     ).toEqual(['data/bad-data.json', 'img/Logo_Mark.svg', 'plan/A_Map.tsv']);
   });
+  it("a folder beside a module of its name holds its parts and takes the module's name as it is", () => {
+    expect(
+      lintedTree(
+        [
+          'tools/releaseRecord.ts',
+          'tools/release-record/recordText.ts',
+          'tools/build.ts',
+          'tools/build/bundle.ts',
+          'tools/other-thing/note.ts',
+        ],
+        { folders: {}, ignore: [], cases: [] },
+      ),
+    ).toEqual(['tools/release-record']);
+  });
 });

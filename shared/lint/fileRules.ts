@@ -87,7 +87,6 @@ type Folders = Readonly<Record<string, FolderRules>>;
 const covers = (key: string, folder: string): boolean =>
   minimatch(folder, key) || minimatch(folder, `${key}/**`);
 
-// every folder of the tree, an ignored one and all below it left out
 function foldersUnder(root: string, ignore: readonly string[]): string[] {
   const walk = (at: string): string[] =>
     fs
@@ -112,6 +111,22 @@ function bansIn(root: string, folder: string): FolderRules {
     ...BANS,
     ...Object.fromEntries(found.map((extension) => [extension, 'exists:0'])),
   };
+}
+
+const A_MODULE = /\.(?:ts|tsx|mts)$/;
+const loose = (name: string): string => name.toLowerCase().replace(/[-_]/g, '');
+
+// a folder beside a module of its name holds that module's parts: it takes the module's name as it is
+function moduleNamed(root: string, folder: string): FolderRules {
+  const name = path.posix.basename(folder);
+  const module = fs
+    .readdirSync(path.join(root, path.posix.dirname(folder)))
+    .filter((file) => A_MODULE.test(file))
+    .map((file) => file.replace(A_MODULE, ''))
+    .find((stem) => loose(stem) === loose(name));
+  return folder === '' || module === undefined
+    ? {}
+    : { '.dir': `regex:^${module.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$` };
 }
 
 // the most specific key covering a folder, the later of two alike, else the root's; the bans always
@@ -150,7 +165,9 @@ interface Wanted {
 function ruled(folder: string, wanted: Wanted): FolderRules {
   const own = rulesOf(folder, wanted.folders);
   return {
-    ...(own['.*'] === undefined ? caseOf(folder, wanted.cases) : {}),
+    ...(own['.*'] === undefined
+      ? { ...caseOf(folder, wanted.cases), ...moduleNamed(wanted.root, folder) }
+      : {}),
     ...own,
     ...bansIn(wanted.root, folder),
   };
