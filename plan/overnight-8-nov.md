@@ -153,6 +153,12 @@ messages read, the next part resumed. When the run is done: `CronDelete 1577e92f
   where it stands (`onPurpose`), never a word (N2); another language's own coinings only in its files. No
   regex literal left unspelled: three regex fragments rewritten as whole words, same matches (N3). Three files
   of translation samples (fr, de, it, es, pt) left out with their reason: no dictionary of theirs is bundled.
+- 7e part 1, 05:41: the push's hook verify found one test of the copy timed out (`roleCombinations`, "Test
+  timed out", load high), the commit's own verify ALL SAME before it: a slow run, not a change; pushed again,
+  the hook run whole, never skipped.
+- 7e part 1, eagle-dev's cross-check of 9bb81ec: the edit hook says "cspell did not run: …" when cspell
+  cannot run (a config error, the package missing), never nothing (F1, seen red on a word in two homes); a
+  `!` of one generator wins over a broader glob of the next, every off glob first (F2, a test of two).
 ## Morning: for the PM
 
 - The five patterns beside SSoT and SRP (dependency inversion, ratchet, explicit over implicit, least privilege,

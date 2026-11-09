@@ -50,7 +50,14 @@ function spellOne(file: string): readonly string[] {
     ['--no-progress', '--no-summary', '--no-must-find-files', '--file', file],
     { cwd: ROOT, encoding: 'utf8' },
   );
-  return (run.stdout ?? '').split('\n').filter(Boolean);
+  const found = (run.stdout ?? '').split('\n').filter(Boolean);
+  // a run that never spelled says why, never nothing (eagle-dev's F1)
+  if (run.error) return [`cspell did not run: ${run.error.message}`];
+  if (run.status !== 0 && !found.length)
+    return [
+      `cspell did not run: ${(run.stderr ?? '').split('\n').find(Boolean) ?? `exit ${String(run.status)}`}`,
+    ];
+  return found;
 }
 
 const titled = (title: string, lines: readonly string[]): readonly string[] =>

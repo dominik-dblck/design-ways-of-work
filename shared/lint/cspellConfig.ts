@@ -39,14 +39,17 @@ function wordsOf({
   ];
 }
 
-// a file a generator writes is spelled at its source; a `!` among its globs keeps a file hand-written
-const writtenOff = (scope: RepoScope): CSpellUserSettings['overrides'] =>
-  scope.generators
-    .flatMap((one) => one.writes)
-    .map((glob) => ({
-      filename: glob.replace(/^!/, ''),
-      enabled: glob.startsWith('!'),
-    }));
+// a file a generator writes is spelled at its source; a `!` keeps one hand-written, after every glob
+function writtenOff(scope: RepoScope): CSpellUserSettings['overrides'] {
+  const writes = scope.generators.flatMap((one) => one.writes);
+  const kept = writes.filter((glob) => glob.startsWith('!'));
+  return [
+    ...writes
+      .filter((glob) => !kept.includes(glob))
+      .map((glob) => ({ filename: glob, enabled: false })),
+    ...kept.map((glob) => ({ filename: glob.slice(1), enabled: true })),
+  ];
+}
 
 const cspellConfigOf = (scope: RepoScope): CSpellUserSettings => {
   const { files, onPurpose, alsoIn } = scope.spelling;

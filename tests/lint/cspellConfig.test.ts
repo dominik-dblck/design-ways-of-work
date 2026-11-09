@@ -52,6 +52,25 @@ describe("cspell's config", () => {
     ]);
   });
 
+  it('keeps a `!` of one generator over a broader glob of the next', () => {
+    const generators = [
+      {
+        script: 'tools/a.ts',
+        args: [],
+        writes: ['docs/rules/*.md', '!docs/rules/README.md'],
+      },
+      { script: 'tools/b.ts', args: [], writes: ['docs/**/*.md'] },
+    ];
+    expect(
+      cspellConfigOf(scopeAt('/repo', { ...spelling({}), generators }))
+        .overrides,
+    ).toEqual([
+      { filename: 'docs/rules/*.md', enabled: false },
+      { filename: 'docs/**/*.md', enabled: false },
+      { filename: 'docs/rules/README.md', enabled: true },
+    ]);
+  });
+
   it('leaves a text misspelt on purpose out where it stands, and nowhere else', () => {
     expect(
       cspellConfigOf(
