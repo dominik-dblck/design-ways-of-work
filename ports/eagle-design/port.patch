@@ -2680,9 +2680,20 @@ index b402053..48eeff3 100644
      else if (CLOSERS.includes(char)) depth = Math.max(0, depth - 1);
      if (depth === 0 && sentence.startsWith(SEPARATOR, index)) {
 diff --git a/sheet/cases/test-cases/testCasesTypes.ts b/sheet/cases/test-cases/testCasesTypes.ts
-index 046504b..ecc740e 100644
+index 046504b..d6f6510 100644
 --- a/sheet/cases/test-cases/testCasesTypes.ts
 +++ b/sheet/cases/test-cases/testCasesTypes.ts
+@@ -84,8 +84,8 @@ interface CaseSpec {
+   readonly name: string;
+   readonly when: string;
+   readonly then: string;
+-  readonly source?: string;
+-  readonly reach?: string | null;
++  readonly source?: string | undefined;
++  readonly reach?: string | null | undefined;
+ }
+ 
+ interface Reader {
 @@ -100,10 +100,8 @@ interface Journey {
  export type {
    BaselineCase,
@@ -2738,9 +2749,18 @@ index bb5f421..851d889 100644
 -export type { QueryCase, QueryCounts, QueryParam, QueryRow, Store, StoreKey };
 +export type { QueryCase, QueryCounts, QueryRow, Store, StoreKey };
 diff --git a/sheet/contract/refusals/refusalSentences.ts b/sheet/contract/refusals/refusalSentences.ts
-index e47c059..946470a 100644
+index e47c059..1fd37de 100644
 --- a/sheet/contract/refusals/refusalSentences.ts
 +++ b/sheet/contract/refusals/refusalSentences.ts
+@@ -8,7 +8,7 @@ import * as MESSAGES from '../../words/messages.ts';
+ interface Draft {
+   readonly key: string;
+   readonly text: string;
+-  readonly fills?: RefusalFills | null;
++  readonly fills?: RefusalFills | null | undefined;
+ }
+ 
+ const GENERIC_WORDS: Readonly<Record<string, string | undefined>> = {
 @@ -19,7 +19,7 @@ const GENERIC_WORDS: Readonly<Record<string, string | undefined>> = {
  
  // a line for one reader or one case; a file the field does not take reads its validator's sentence
@@ -2790,9 +2810,36 @@ index 4141744..0e1574f 100644
    OtherAgent,
    SignInStep,
 diff --git a/sheet/logic/approval/approval-logic/approvalLogicTypes.ts b/sheet/logic/approval/approval-logic/approvalLogicTypes.ts
-index 533de98..b578abe 100644
+index 533de98..7d3caa0 100644
 --- a/sheet/logic/approval/approval-logic/approvalLogicTypes.ts
 +++ b/sheet/logic/approval/approval-logic/approvalLogicTypes.ts
+@@ -108,7 +108,7 @@ interface Cta {
+   readonly label: string;
+   readonly tone: string;
+   readonly why: string;
+-  readonly situation?: string;
++  readonly situation?: string | undefined;
+   readonly target?: string;
+   readonly holds?: boolean;
+   readonly menu?: readonly (MenuRow | Readonly<Record<string, string>>)[];
+@@ -130,7 +130,7 @@ interface RoleChip {
+ // ctas 'one' or 'all' · rules 'play' or 'sheet' · here: the view the reader is on
+ interface ChipOptions {
+   readonly ctas?: string;
+-  readonly rules?: string;
++  readonly rules?: string | undefined;
+   readonly gateInLabel?: boolean;
+   readonly here?: string;
+   readonly showOthers?: boolean;
+@@ -146,7 +146,7 @@ interface TodoRow {
+   readonly label?: string;
+   readonly who?: string;
+   readonly people?: readonly string[];
+-  readonly kind?: string;
++  readonly kind?: string | undefined;
+   readonly move?: string;
+   readonly note?: string;
+   readonly grey?: boolean;
 @@ -167,7 +167,6 @@ export type {
    BarScene,
    ChipOptions,
@@ -2802,7 +2849,7 @@ index 533de98..b578abe 100644
    PlayView,
    Requirement,
 diff --git a/sheet/logic/approval/approval-logic/chipCtas.ts b/sheet/logic/approval/approval-logic/chipCtas.ts
-index dc4cd92..b55c8a2 100644
+index dc4cd92..a4eda26 100644
 --- a/sheet/logic/approval/approval-logic/chipCtas.ts
 +++ b/sheet/logic/approval/approval-logic/chipCtas.ts
 @@ -20,9 +20,10 @@ const idsOf = (
@@ -2819,8 +2866,26 @@ index dc4cd92..b55c8a2 100644
  
  const ASSIGNED = new Set(['waiting', 'ok', 'proxy', 'stale', 'heldSigned']);
  
+@@ -70,7 +71,7 @@ interface CtaAt {
+   readonly options: ChipOptions;
+   readonly version: unknown;
+   readonly gate: string;
+-  readonly mine?: string;
++  readonly mine?: string | undefined;
+ }
+ 
+ const stripGate = (label: string, options: ChipOptions): string =>
+@@ -141,7 +142,7 @@ const CLAIM = ctaOf({
+ // the rules' button read through the play rules: what a button becomes, and the claim a pool reads
+ interface PlayAt {
+   readonly rules: Rules;
+-  readonly ruleSet?: string;
++  readonly ruleSet?: string | undefined;
+   readonly signedByOther: boolean;
+   readonly ctasOf: (button: Button) => readonly Cta[];
+   readonly claim: Cta;
 diff --git a/sheet/logic/approval/approval-logic/docMatrix.ts b/sheet/logic/approval/approval-logic/docMatrix.ts
-index 651dcda..4d03b82 100644
+index 651dcda..5448d57 100644
 --- a/sheet/logic/approval/approval-logic/docMatrix.ts
 +++ b/sheet/logic/approval/approval-logic/docMatrix.ts
 @@ -68,12 +68,10 @@ function peopleCell(
@@ -2840,6 +2905,40 @@ index 651dcda..4d03b82 100644
    return cellOf(
      !frozen && state.version !== 'draft' && !editing && unsigned,
      why,
+@@ -125,7 +123,7 @@ function peopleCells(
+     flags,
+   }: {
+     readonly menu: readonly MenuRow[];
+-    readonly ruleSet?: string;
++    readonly ruleSet?: string | undefined;
+     readonly flags: Flags;
+   },
+ ): readonly Cell[] {
+@@ -144,7 +142,10 @@ function cellsOf(
+   {
+     menu,
+     ruleSet,
+-  }: { readonly menu: readonly MenuRow[]; readonly ruleSet?: string },
++  }: {
++    readonly menu: readonly MenuRow[];
++    readonly ruleSet?: string | undefined;
++  },
+ ): readonly Cell[] {
+   const row = (id: string): MenuRow | undefined =>
+     menu.find((one) => one.id === id);
+diff --git a/sheet/logic/approval/approval-logic/managerMoves.ts b/sheet/logic/approval/approval-logic/managerMoves.ts
+index b713e7d..3bc1be2 100644
+--- a/sheet/logic/approval/approval-logic/managerMoves.ts
++++ b/sheet/logic/approval/approval-logic/managerMoves.ts
+@@ -91,7 +91,7 @@ function cmLine(moves: Moves, name: string): string {
+ }
+ 
+ function cmMatrix(): readonly {
+-  readonly label?: string;
++  readonly label?: string | undefined;
+   readonly m: Moves;
+   readonly line: string;
+ }[] {
 diff --git a/sheet/logic/approval/approval-logic/matrixJourney.ts b/sheet/logic/approval/approval-logic/matrixJourney.ts
 index 876fe17..dbee7c3 100644
 --- a/sheet/logic/approval/approval-logic/matrixJourney.ts
@@ -2874,6 +2973,49 @@ index 876fe17..dbee7c3 100644
    // prettier-ignore
    return [
      ['A new document', 'Content manager', 'Edit content', doc('New', 'EDIT CONTENT')],
+diff --git a/sheet/logic/approval/approval-logic/roleMatrix.ts b/sheet/logic/approval/approval-logic/roleMatrix.ts
+index d2e28bb..f535890 100644
+--- a/sheet/logic/approval/approval-logic/roleMatrix.ts
++++ b/sheet/logic/approval/approval-logic/roleMatrix.ts
+@@ -69,7 +69,7 @@ function ctasFor(
+     rules: ruleSet,
+   }: {
+     readonly signedByOther: boolean;
+-    readonly rules?: string;
++    readonly rules?: string | undefined;
+   },
+ ): readonly Cta[] {
+   const claim = ctaOf({
+@@ -147,10 +147,12 @@ function offViewOf(
+   return !ctas.length || onlyBack || state.signedByOther ? '' : `Go to ${view}`;
+ }
+ 
+-function stateRow(
+-  state: RoleState,
+-  { head, ruleSet }: { readonly head: Head; readonly ruleSet?: string },
+-) {
++interface StateRowAt {
++  readonly head: Head;
++  readonly ruleSet?: string | undefined;
++}
++
++function stateRow(state: RoleState, { head, ruleSet }: StateRowAt) {
+   const [, gate, lang, view] = head;
+   const input = {
+     version: 'v2',
+diff --git a/sheet/logic/approval/approval-logic/rowFill.ts b/sheet/logic/approval/approval-logic/rowFill.ts
+index 54b79a0..bbf0d80 100644
+--- a/sheet/logic/approval/approval-logic/rowFill.ts
++++ b/sheet/logic/approval/approval-logic/rowFill.ts
+@@ -30,7 +30,7 @@ function countFor(
+ 
+ interface RowAt {
+   readonly row: TodoRow;
+-  readonly gate?: Gate;
++  readonly gate?: Gate | undefined;
+   readonly situation?: string;
+ }
+ 
 diff --git a/sheet/logic/approval/approval-logic/seatChip.ts b/sheet/logic/approval/approval-logic/seatChip.ts
 index 328e4b8..d250024 100644
 --- a/sheet/logic/approval/approval-logic/seatChip.ts
@@ -2911,6 +3053,22 @@ index 089bf8f..99f7a29 100644
  
 -export type { Built };
  export { todoRowsOf, orderedRows };
+diff --git a/sheet/logic/approval/approval-logic/todoMoves.ts b/sheet/logic/approval/approval-logic/todoMoves.ts
+index 4babe9c..26708bc 100644
+--- a/sheet/logic/approval/approval-logic/todoMoves.ts
++++ b/sheet/logic/approval/approval-logic/todoMoves.ts
+@@ -20,7 +20,10 @@ const SITUATION_MOVES: Readonly<Record<string, string | undefined>> = {
+ // Approve greyed with a claim beside it: the grey reason is the news, the claim a footnote
+ function greyedMove(
+   ctas: readonly Cta[],
+-  { version, claim }: { readonly version: string; readonly claim?: Cta },
++  {
++    version,
++    claim,
++  }: { readonly version: string; readonly claim?: Cta | undefined },
+ ): TodoMove {
+   const greyed = ctas.find(
+     (one) => one.tone === 'disabled' && one.id !== 'takeover',
 diff --git a/sheet/logic/approval/approval-logic/todoPill.ts b/sheet/logic/approval/approval-logic/todoPill.ts
 index a0a5108..b31475f 100644
 --- a/sheet/logic/approval/approval-logic/todoPill.ts
@@ -2924,10 +3082,32 @@ index a0a5108..b31475f 100644
      who: person ? (String(person.name).split(' ')[0] ?? '') : '',
      people: [holder],
      kind: 'wait',
+diff --git a/sheet/logic/approval/approval-logic/todoRows.ts b/sheet/logic/approval/approval-logic/todoRows.ts
+index fed58a5..277a97f 100644
+--- a/sheet/logic/approval/approval-logic/todoRows.ts
++++ b/sheet/logic/approval/approval-logic/todoRows.ts
+@@ -17,7 +17,7 @@ type LocaleFact = ReturnType<(typeof SCENES)['localeFactsOf']>[number];
+ interface TodoAt {
+   readonly scene: PlayScene;
+   readonly rules: Rules;
+-  readonly ruleSet?: string;
++  readonly ruleSet?: string | undefined;
+   readonly forMe: boolean;
+   readonly lent: readonly string[];
+ }
 diff --git a/sheet/logic/approval/flow-check/flowEffects.ts b/sheet/logic/approval/flow-check/flowEffects.ts
-index 5527324..b4a2935 100644
+index 5527324..674947d 100644
 --- a/sheet/logic/approval/flow-check/flowEffects.ts
 +++ b/sheet/logic/approval/flow-check/flowEffects.ts
+@@ -47,7 +47,7 @@ function signedFor(
+     seat,
+     holder,
+   }: {
+-    readonly by?: string;
++    readonly by?: string | undefined;
+     readonly seat: string;
+     readonly holder: string | null;
+   },
 @@ -104,10 +104,10 @@ function signedOf(gate: FlowGate): string {
  // one key per state: two states with one key are one state
  function encode(state: FlowState): string {
@@ -2942,6 +3122,21 @@ index 5527324..b4a2935 100644
      return `${gate.holder || '-'}:${signedOf(gate)}${own}`;
    });
    return `${state.cut}${state.draft}|${state.seat}|${state.author}|${gates.join(',')}`;
+diff --git a/sheet/logic/approval/flow-check/flowTypes.ts b/sheet/logic/approval/flow-check/flowTypes.ts
+index d6dcc96..452ad4a 100644
+--- a/sheet/logic/approval/flow-check/flowTypes.ts
++++ b/sheet/logic/approval/flow-check/flowTypes.ts
+@@ -31,8 +31,8 @@ interface FlowState {
+ }
+ 
+ interface FlowPress {
+-  readonly by?: string;
+-  readonly to?: string | null;
++  readonly by?: string | undefined;
++  readonly to?: string | null | undefined;
+   readonly gate?: string;
+   readonly lang?: string;
+   readonly how?: string;
 diff --git a/sheet/logic/approval/flow-check/flowViews.ts b/sheet/logic/approval/flow-check/flowViews.ts
 index a31b5c6..e611379 100644
 --- a/sheet/logic/approval/flow-check/flowViews.ts
@@ -2955,6 +3150,36 @@ index a31b5c6..e611379 100644
    return GATE_RULES.stateChip(view) === (label || 'ready');
  }
  
+diff --git a/sheet/logic/approval/gate-rules/approverButton.ts b/sheet/logic/approval/gate-rules/approverButton.ts
+index 0c45231..f722752 100644
+--- a/sheet/logic/approval/gate-rules/approverButton.ts
++++ b/sheet/logic/approval/gate-rules/approverButton.ts
+@@ -16,9 +16,9 @@ interface Approver {
+   readonly version?: unknown;
+   readonly trashed?: boolean;
+   readonly sent?: boolean;
+-  readonly mine?: string;
+-  readonly heldByOther?: boolean;
+-  readonly signedByOther?: boolean;
++  readonly mine?: string | undefined;
++  readonly heldByOther?: boolean | undefined;
++  readonly signedByOther?: boolean | undefined;
+   readonly draftOpen?: boolean;
+   readonly draftChanged?: boolean;
+   readonly openChanges?: number;
+diff --git a/sheet/logic/approval/gate-rules/gateConfirm.ts b/sheet/logic/approval/gate-rules/gateConfirm.ts
+index c8802c4..c14bd5c 100644
+--- a/sheet/logic/approval/gate-rules/gateConfirm.ts
++++ b/sheet/logic/approval/gate-rules/gateConfirm.ts
+@@ -111,7 +111,7 @@ interface Confirm {
+ interface Window {
+   readonly words: readonly [string, string];
+   readonly shape: Pick<Confirm, 'tone' | 'icon' | 'reason'>;
+-  readonly ask?: Ask;
++  readonly ask?: Ask | undefined;
+ }
+ 
+ function ctaOf(
 diff --git a/sheet/logic/approval/gate-rules/gateDialog.ts b/sheet/logic/approval/gate-rules/gateDialog.ts
 index f913540..4ba6ddf 100644
 --- a/sheet/logic/approval/gate-rules/gateDialog.ts
@@ -2965,6 +3190,19 @@ index f913540..4ba6ddf 100644
  export { dialogModes, dialogRow };
 -export type { DialogRow, Probe };
 +export type { Probe };
+diff --git a/sheet/logic/approval/gate-rules/gateFold.ts b/sheet/logic/approval/gate-rules/gateFold.ts
+index dc51b34..6ae9f11 100644
+--- a/sheet/logic/approval/gate-rules/gateFold.ts
++++ b/sheet/logic/approval/gate-rules/gateFold.ts
+@@ -116,7 +116,7 @@ interface ListDocument {
+   }[];
+   readonly state?: string;
+   readonly deletedAt?: unknown;
+-  readonly draftOpen?: boolean;
++  readonly draftOpen?: boolean | undefined;
+   readonly author?: PersonId;
+ }
+ 
 diff --git a/sheet/logic/approval/gate-rules/gateNote.ts b/sheet/logic/approval/gate-rules/gateNote.ts
 index 98c770b..b02fb9b 100644
 --- a/sheet/logic/approval/gate-rules/gateNote.ts
@@ -3007,18 +3245,86 @@ index 9121b59..4bf5c3b 100644
  export { NOTICE, noticeFill, noticeFor, outcomeOf };
 -export type { Outcome };
 diff --git a/sheet/logic/approval/gate-rules/gateRoles.ts b/sheet/logic/approval/gate-rules/gateRoles.ts
-index e5cf68f..ec0fd86 100644
+index e5cf68f..09e6071 100644
 --- a/sheet/logic/approval/gate-rules/gateRoles.ts
 +++ b/sheet/logic/approval/gate-rules/gateRoles.ts
+@@ -20,13 +20,13 @@ interface ReaderRole {
+   readonly mine: string;
+   readonly heldByOther?: boolean;
+   readonly signedByOther?: boolean;
+-  readonly signer?: string | null;
++  readonly signer?: string | null | undefined;
+   readonly noText?: boolean;
+ }
+ 
+ interface Reader {
+   readonly viewer?: string | null;
+-  readonly pools?: Pools;
++  readonly pools?: Pools | undefined;
+ }
+ 
+ function idOf(entry: PoolEntry | null): string | undefined {
 @@ -134,4 +134,3 @@ function stateChip(bar: Bar): string {
  }
  
  export { localeRoleOf, roleOf, stateChip };
 -export type { ReaderRole };
 diff --git a/sheet/logic/approval/gate-rules/gateRulesTypes.ts b/sheet/logic/approval/gate-rules/gateRulesTypes.ts
-index 0a5a1e6..1cba970 100644
+index 0a5a1e6..1dd4173 100644
 --- a/sheet/logic/approval/gate-rules/gateRulesTypes.ts
 +++ b/sheet/logic/approval/gate-rules/gateRulesTypes.ts
+@@ -7,7 +7,7 @@ import type * as DIRECTORY from '../../../model/directory.ts';
+ type PersonTuple = ReturnType<(typeof DIRECTORY)['tuple']>;
+ 
+ interface BarSignature {
+-  readonly by?: string | null;
++  readonly by?: string | null | undefined;
+   readonly at?: string | null;
+   readonly version?: number | string | null;
+   readonly kind?: string;
+@@ -25,7 +25,7 @@ interface Lapsed {
+ // GetDocument's gate: who holds it, the signature on it, what voided it
+ interface BarFact {
+   readonly key: string;
+-  readonly holder?: string | null;
++  readonly holder?: string | null | undefined;
+   readonly assignedAt?: string | null;
+   readonly signature?: BarSignature | null;
+   readonly lapsed?: Lapsed | null;
+@@ -46,7 +46,7 @@ interface BarGate extends BarFact {
+ // a language's fact as Scenes writes it: its text and its staleness read as yes or no
+ interface LanguageFact {
+   readonly key: string;
+-  readonly holder?: string | null;
++  readonly holder?: string | null | undefined;
+   readonly text?: unknown;
+   readonly stale?: unknown;
+   readonly signature?: Pick<BarSignature, 'by' | 'kind' | 'onBehalfOf'> | null;
+@@ -58,20 +58,20 @@ type Pools = Readonly<Record<string, readonly PoolEntry[] | undefined>>;
+ 
+ // what the bar is handed: the document's facts and the reader beside them
+ interface Bar {
+-  readonly gates?: readonly BarGate[];
+-  readonly version?: string | number | null;
++  readonly gates?: readonly BarGate[] | undefined;
++  readonly version?: string | number | null | undefined;
+   readonly trashed?: boolean;
+   readonly sent?: boolean;
+   readonly seat?: boolean;
+   readonly seatPool?: boolean;
+-  readonly seatHolder?: string;
++  readonly seatHolder?: string | undefined;
+   readonly draftOpen?: boolean;
+   readonly draftChanged?: boolean;
+   readonly checksFailing?: number;
+   readonly openProposals?: number;
+   readonly openChanges?: number;
+   readonly myProposals?: number;
+-  readonly author?: string | null;
++  readonly author?: string | null | undefined;
+   readonly viewerId?: string;
+   readonly me?: PersonTuple;
+   readonly meId?: string;
 @@ -136,7 +136,6 @@ export type {
    Button,
    BarGate,
@@ -3028,9 +3334,55 @@ index 0a5a1e6..1cba970 100644
    ManageAsk,
    ManageGate,
 diff --git a/sheet/logic/approval/gate-rules/gateSituations.ts b/sheet/logic/approval/gate-rules/gateSituations.ts
-index 206228f..e59642c 100644
+index 206228f..22772af 100644
 --- a/sheet/logic/approval/gate-rules/gateSituations.ts
 +++ b/sheet/logic/approval/gate-rules/gateSituations.ts
+@@ -46,9 +46,9 @@ function documentSituationOf(facts?: DocumentFacts | null): string | null {
+ interface LanguageFacts {
+   readonly text?: string | null;
+   readonly missing?: readonly string[] | null;
+-  readonly unconfirmed?: unknown;
+-  readonly failing?: unknown;
+-  readonly agent?: unknown;
++  readonly unconfirmed?: unknown | undefined;
++  readonly failing?: unknown | undefined;
++  readonly agent?: unknown | undefined;
+ }
+ 
+ interface Situation {
+@@ -96,9 +96,9 @@ function approvalSituation(gate: BarFact, pools: Pools | undefined): string {
+ }
+ 
+ interface GateAsk {
+-  readonly language?: LanguageFacts | null;
++  readonly language?: LanguageFacts | null | undefined;
+   readonly me?: unknown;
+-  readonly pools?: Pools;
++  readonly pools?: Pools | undefined;
+ }
+ 
+ // a node without text first, then a signature, a lapse, the language's text, the holder
+@@ -151,7 +151,7 @@ function progressSituationOf(
+ }
+ 
+ interface Todo {
+-  readonly doc?: DocumentFacts | null;
++  readonly doc?: DocumentFacts | null | undefined;
+   readonly cm?: boolean;
+   readonly as?: string;
+   readonly inCharge?: boolean;
+@@ -159,9 +159,9 @@ interface Todo {
+   readonly gates?: readonly BarGate[];
+   readonly author?: unknown;
+   readonly gate?: BarFact;
+-  readonly lang?: LanguageFacts | null;
++  readonly lang?: LanguageFacts | null | undefined;
+   readonly me?: unknown;
+-  readonly pools?: Pools;
++  readonly pools?: Pools | undefined;
+ }
+ 
+ // the content manager's own line: the document's, else where the gates stand
 @@ -195,4 +195,3 @@ export {
    progressSituationOf,
    todoSituationOf,
@@ -3082,9 +3434,18 @@ index f3ba36f..a359f20 100644
  }
  
 diff --git a/sheet/logic/approval/gate-rules/manageRows.ts b/sheet/logic/approval/gate-rules/manageRows.ts
-index ed25ae2..08a2b9b 100644
+index ed25ae2..3ca7d9b 100644
 --- a/sheet/logic/approval/gate-rules/manageRows.ts
 +++ b/sheet/logic/approval/gate-rules/manageRows.ts
+@@ -18,7 +18,7 @@ type Cells = Pick<ManageRow, 'live' | 'verb' | 'moves' | 'reason' | 'takeBack'>;
+ 
+ interface Context {
+   readonly noEyes: boolean;
+-  readonly viewer?: string;
++  readonly viewer?: string | undefined;
+   readonly own: ReadonlySet<string>;
+ }
+ 
 @@ -121,7 +121,8 @@ function behalfCells(
    const reason = /\{signer\}/.test(said)
      ? said.replace('{signer}', signerOf(base, probe))
@@ -3188,6 +3549,59 @@ index a04ce6c..e69f448 100644
    SentenceRow,
    RoleRow,
  };
+diff --git a/sheet/logic/approval/scenes/sceneTypes.ts b/sheet/logic/approval/scenes/sceneTypes.ts
+index a08ee76..c679f4f 100644
+--- a/sheet/logic/approval/scenes/sceneTypes.ts
++++ b/sheet/logic/approval/scenes/sceneTypes.ts
+@@ -35,14 +35,14 @@ interface SceneFacts {
+ 
+ // who the reader is to their own gate, as the state names it
+ interface SceneRole {
+-  readonly mine?: string;
++  readonly mine?: string | undefined;
+   readonly lang?: string;
+   readonly assigned?: boolean;
+-  readonly heldByOther?: boolean;
++  readonly heldByOther?: boolean | undefined;
+   readonly signedByOther?: boolean;
+-  readonly signer?: string | null;
+-  readonly myProposals?: number;
+-  readonly unconfirmedBlocks?: number;
++  readonly signer?: string | null | undefined;
++  readonly myProposals?: number | undefined;
++  readonly unconfirmedBlocks?: number | undefined;
+ }
+ 
+ // line tokens: f not asked, w waiting, s signed, p signed on behalf, x voided
+@@ -51,9 +51,9 @@ interface Scene {
+   readonly me?: string;
+   readonly holder?: string | null;
+   readonly gate?: string;
+-  readonly type?: string;
++  readonly type?: string | undefined;
+   readonly gatesOf?: readonly string[];
+-  readonly line?: string;
++  readonly line?: string | undefined;
+   readonly facts?: SceneFacts;
+   readonly role?: SceneRole;
+   readonly seat?: boolean;
+@@ -118,11 +118,11 @@ interface LocaleFact {
+ }
+ 
+ interface BarView {
+-  readonly code?: string;
+-  readonly title?: string;
+-  readonly short?: string;
+-  readonly means?: string;
+-  readonly line?: string;
++  readonly code?: string | undefined;
++  readonly title?: string | undefined;
++  readonly short?: string | undefined;
++  readonly means?: string | undefined;
++  readonly line?: string | undefined;
+   readonly me: PersonTuple;
+   readonly holder: PersonTuple | null | undefined;
+   readonly viewer: string;
 diff --git a/sheet/logic/approval/scenes/sceneView.ts b/sheet/logic/approval/scenes/sceneView.ts
 index ddf5fca..d08554d 100644
 --- a/sheet/logic/approval/scenes/sceneView.ts
@@ -3293,10 +3707,107 @@ index 8b45a2b..8f8932c 100644
      if (!exclude) return [];
      const team = variants.find((one) => one.role === role);
      if (!team) return [`${role} excludes from no team`];
+diff --git a/sheet/logic/assembly/content-type-logic/assemblyRows.ts b/sheet/logic/assembly/content-type-logic/assemblyRows.ts
+index 721e184..9534c1c 100644
+--- a/sheet/logic/assembly/content-type-logic/assemblyRows.ts
++++ b/sheet/logic/assembly/content-type-logic/assemblyRows.ts
+@@ -13,15 +13,15 @@ type Variant = Modules['variants'][number];
+ interface AssemblyPart {
+   readonly key: string;
+   readonly slot: string;
+-  readonly name?: string;
+-  readonly fields?: readonly string[];
++  readonly name?: string | undefined;
++  readonly fields?: readonly string[] | undefined;
+   readonly limits?: Variant['limits'];
+-  readonly accepts?: readonly string[];
+-  readonly minBlocks?: number;
+-  readonly blocks?: boolean;
+-  readonly role?: string;
+-  readonly tab?: string;
+-  readonly note?: string;
++  readonly accepts?: readonly string[] | undefined;
++  readonly minBlocks?: number | undefined;
++  readonly blocks?: boolean | undefined;
++  readonly role?: string | undefined;
++  readonly tab?: string | undefined;
++  readonly note?: string | undefined;
+ }
+ 
+ // what is still to define on a type, a word of the view
+@@ -32,7 +32,7 @@ const TYPE_DEFINE: Readonly<Record<string, string | undefined>> = {
+ // the modules, their variants and the tabs are content-modules.ts': the view words them
+ const assemblyTabs = (): readonly {
+   readonly key: string;
+-  readonly core?: true;
++  readonly core?: true | undefined;
+ }[] =>
+   CONTENT_MODULES.tabs.map((tab) => ({
+     key: moduleWords().tabs[tab.key] || tab.key,
 diff --git a/sheet/logic/assembly/content-type-logic/boardTypes.ts b/sheet/logic/assembly/content-type-logic/boardTypes.ts
-index 4334fc9..2d8abca 100644
+index 4334fc9..14c0f17 100644
 --- a/sheet/logic/assembly/content-type-logic/boardTypes.ts
 +++ b/sheet/logic/assembly/content-type-logic/boardTypes.ts
+@@ -54,20 +54,20 @@ interface ApiContract {
+ 
+ interface AssemblySlot {
+   readonly key: string;
+-  readonly name?: string;
+-  readonly question?: string;
++  readonly name?: string | undefined;
++  readonly question?: string | undefined;
+   readonly count: string;
+   readonly group: string;
+-  readonly shared?: true;
+-  readonly always?: true;
++  readonly shared?: true | undefined;
++  readonly always?: true | undefined;
+ }
+ 
+ interface AssemblyType {
+   readonly slug: string;
+   readonly parts: readonly string[];
+   readonly narrow?: Narrow;
+-  readonly define?: string;
+-  readonly own?: readonly string[];
++  readonly define?: string | undefined;
++  readonly own?: readonly string[] | undefined;
+ }
+ 
+ interface FieldLine {
+@@ -78,10 +78,10 @@ interface FieldLine {
+ interface Assembled {
+   readonly slug: string;
+   readonly name: string;
+-  readonly category?: string;
++  readonly category?: string | undefined;
+   readonly built: boolean;
+   readonly define: string;
+-  readonly parts: readonly { readonly slot?: string }[];
++  readonly parts: readonly { readonly slot?: string | undefined }[];
+   readonly partKeys: readonly string[];
+   readonly own: readonly FieldLine[];
+   readonly parity: unknown;
+@@ -95,7 +95,7 @@ interface Assembled {
+ 
+ interface PartUsage {
+   readonly key: string;
+-  readonly name?: string;
++  readonly name?: string | undefined;
+   readonly slot: string;
+   readonly shared: boolean;
+   readonly by: readonly string[];
+@@ -122,8 +122,8 @@ interface TypeChecks {
+ }
+ 
+ interface Badge {
+-  readonly label: string;
+-  readonly bg: string;
++  readonly label: string | undefined;
++  readonly bg: string | undefined;
+ }
+ 
+ interface Link {
 @@ -188,14 +188,10 @@ export type {
    AssemblyType,
    Badge,
@@ -3329,10 +3840,46 @@ index 0eec080..007fd98 100644
      inside ? ` · reads ${inside.join(', ')}` : '',
    ].join('');
    return {
+diff --git a/sheet/logic/assembly/content-type-logic/lifecycle.ts b/sheet/logic/assembly/content-type-logic/lifecycle.ts
+index 9950d1b..493162e 100644
+--- a/sheet/logic/assembly/content-type-logic/lifecycle.ts
++++ b/sheet/logic/assembly/content-type-logic/lifecycle.ts
+@@ -61,8 +61,8 @@ const stateWord = (kind: string, state: string): string =>
+ 
+ interface KindRow {
+   readonly key: string;
+-  readonly name?: string;
+-  readonly who?: string;
++  readonly name?: string | undefined;
++  readonly who?: string | undefined;
+   readonly flow: string;
+   readonly states: readonly { readonly key: string; readonly label: string }[];
+ }
 diff --git a/sheet/logic/assembly/content-type-logic/partViews.ts b/sheet/logic/assembly/content-type-logic/partViews.ts
-index 750d06e..f06cb0f 100644
+index 750d06e..2ead2c1 100644
 --- a/sheet/logic/assembly/content-type-logic/partViews.ts
 +++ b/sheet/logic/assembly/content-type-logic/partViews.ts
+@@ -11,16 +11,16 @@ import * as CONTENT_MODULES from '../../../model/content-modules.ts';
+ import * as LANGUAGES from '../../../model/languages.ts';
+ 
+ interface PartView {
+-  readonly key?: string;
+-  readonly name?: string;
+-  readonly slot?: string;
++  readonly key?: string | undefined;
++  readonly name?: string | undefined;
++  readonly slot?: string | undefined;
+   readonly fields: readonly unknown[];
+   readonly blocks: string;
+   readonly limits: string;
+   readonly note: string;
+   readonly tab: string;
+   readonly summary: string;
+-  readonly reads?: boolean;
++  readonly reads?: boolean | undefined;
+ }
+ 
+ interface IdentityRow {
 @@ -137,9 +137,8 @@ function configView(part: AssemblyPart): PartView {
    const fields = part.fields ?? [];
    const accepts = part.accepts ?? [];
@@ -3386,6 +3933,34 @@ index 6101b65..6da483e 100644
    };
  }
  
+diff --git a/sheet/logic/assembly/content-type-logic/typeModules.ts b/sheet/logic/assembly/content-type-logic/typeModules.ts
+index da90f6b..08a8121 100644
+--- a/sheet/logic/assembly/content-type-logic/typeModules.ts
++++ b/sheet/logic/assembly/content-type-logic/typeModules.ts
+@@ -46,9 +46,9 @@ function moduleStanding(key: string): {
+ // the package a type's delivery hands over · none without a delivery
+ interface Exported {
+   readonly contract: string;
+-  readonly name?: string;
+-  readonly sub?: string;
+-  readonly title?: string;
++  readonly name?: string | undefined;
++  readonly sub?: string | undefined;
++  readonly title?: string | undefined;
+ }
+ 
+ function exportOf(slug: string): Exported | null {
+@@ -77,8 +77,8 @@ function slotOff(slug: string, key: string): string | undefined {
+ 
+ const zones = (): readonly {
+   readonly key: string;
+-  readonly name?: string;
+-  readonly question?: string;
++  readonly name?: string | undefined;
++  readonly question?: string | undefined;
+ }[] =>
+   CONTENT_MODULES.zones.map((key) => {
+     const words = moduleWords().zones[key] ?? {};
 diff --git a/sheet/logic/capabilities/capabilityTypes.ts b/sheet/logic/capabilities/capabilityTypes.ts
 index 0831fce..860e07a 100644
 --- a/sheet/logic/capabilities/capabilityTypes.ts
@@ -3396,6 +3971,32 @@ index 0831fce..860e07a 100644
  
 -export type { Capability, CapabilityStep };
 +export type { Capability };
+diff --git a/sheet/logic/document/block-rules/blockFacts.ts b/sheet/logic/document/block-rules/blockFacts.ts
+index 6ff55eb..bf9976e 100644
+--- a/sheet/logic/document/block-rules/blockFacts.ts
++++ b/sheet/logic/document/block-rules/blockFacts.ts
+@@ -29,7 +29,7 @@ interface Facts {
+   readonly sent: boolean;
+   readonly role: string;
+   readonly me: string;
+-  readonly since?: number | null;
++  readonly since?: number | null | undefined;
+ }
+ 
+ // a proposal sent holds the block · an unsaved draft is only ever mine, and holds nothing
+diff --git a/sheet/logic/document/block-rules/blockMenu.ts b/sheet/logic/document/block-rules/blockMenu.ts
+index 1a0cae7..0bdc50f 100644
+--- a/sheet/logic/document/block-rules/blockMenu.ts
++++ b/sheet/logic/document/block-rules/blockMenu.ts
+@@ -19,7 +19,7 @@ const row = (
+     tone,
+     reason,
+   }: {
+-    readonly label?: string;
++    readonly label?: string | undefined;
+     readonly tone?: string;
+     readonly reason?: string;
+   },
 diff --git a/sheet/logic/document/block-rules/blockWords.ts b/sheet/logic/document/block-rules/blockWords.ts
 index 23a715f..18976f7 100644
 --- a/sheet/logic/document/block-rules/blockWords.ts
@@ -3458,8 +4059,60 @@ index 9a40d3b..0a00f68 100644
    };
  }
  
+diff --git a/sheet/logic/document/threads/threadsTypes.ts b/sheet/logic/document/threads/threadsTypes.ts
+index df696d5..0cd0a98 100644
+--- a/sheet/logic/document/threads/threadsTypes.ts
++++ b/sheet/logic/document/threads/threadsTypes.ts
+@@ -71,12 +71,12 @@ interface ThreadWindow {
+   // null keeps what every language shares, a code or a list adds those, 'all' keeps every one
+   readonly loc?: string | readonly string[] | null;
+   // the screen's moment, an exclusive bound, and where the window opens
+-  readonly upto?: string;
+-  readonly before?: string;
+-  readonly from?: string;
++  readonly upto?: string | undefined;
++  readonly before?: string | undefined;
++  readonly from?: string | undefined;
+   // the kinds not drawn
+   readonly skip?: readonly string[];
+-  readonly openFrom?: string;
++  readonly openFrom?: string | undefined;
+ }
+ 
+ export type { ResolvedEntry, ThreadEntry, ThreadWindow };
+diff --git a/sheet/logic/translation/translation-flow/languageStatus.ts b/sheet/logic/translation/translation-flow/languageStatus.ts
+index 249d814..b6152a0 100644
+--- a/sheet/logic/translation/translation-flow/languageStatus.ts
++++ b/sheet/logic/translation/translation-flow/languageStatus.ts
+@@ -3,16 +3,19 @@
+  */
+ import * as GATE_RULES from '../../approval/gate-rules.ts';
+ interface StatusFacts {
+-  readonly text?: string | null;
++  readonly text?: string | null | undefined;
+   readonly missing?: boolean;
+   readonly inDocument?: boolean;
+   readonly gate?: {
+-    readonly signature?: {
+-      readonly by?: string | null;
+-      readonly kind?: string;
+-      readonly onBehalfOf?: string | null;
+-    } | null;
+-    readonly lapsed?: { readonly why: string } | null;
++    readonly signature?:
++      | {
++          readonly by?: string | null | undefined;
++          readonly kind?: string;
++          readonly onBehalfOf?: string | null;
++        }
++      | null
++      | undefined;
++    readonly lapsed?: { readonly why: string } | null | undefined;
+   };
+ }
+ 
 diff --git a/sheet/model/catalog/catalogRail.ts b/sheet/model/catalog/catalogRail.ts
-index 4aa3a99..ccfb8c4 100644
+index 4aa3a99..2c67908 100644
 --- a/sheet/model/catalog/catalogRail.ts
 +++ b/sheet/model/catalog/catalogRail.ts
 @@ -55,7 +55,7 @@ const railRowOf =
@@ -3471,6 +4124,15 @@ index 4aa3a99..ccfb8c4 100644
      return {
        id: one.id,
        slug: one.slug,
+@@ -77,7 +77,7 @@ function rail({
+ }: {
+   readonly campaign: string;
+   readonly slug?: string | null;
+-  readonly at?: string;
++  readonly at?: string | undefined;
+ }): readonly RailRow[] {
+   const found = campaignOf(campaign);
+   if (!found) return [];
 diff --git a/sheet/model/catalog/catalogTypeRows.ts b/sheet/model/catalog/catalogTypeRows.ts
 index 36a3860..2422ae5 100644
 --- a/sheet/model/catalog/catalogTypeRows.ts
@@ -3516,6 +4178,19 @@ index 5c27aaa..dd1a55c 100644
 -  PlaceholderType,
 -  TypeLanguages,
  };
+diff --git a/sheet/model/field-kinds/fieldKindsTypes.ts b/sheet/model/field-kinds/fieldKindsTypes.ts
+index 7696c6c..17332fe 100644
+--- a/sheet/model/field-kinds/fieldKindsTypes.ts
++++ b/sheet/model/field-kinds/fieldKindsTypes.ts
+@@ -39,7 +39,7 @@ interface FieldKind {
+     readonly mimeTypes: readonly string[];
+     readonly maxSize: number;
+   };
+-  readonly says?: string | Readonly<Record<string, string>>;
++  readonly says?: string | Readonly<Record<string, string>> | undefined;
+   readonly hint?: string;
+   readonly validators: readonly string[];
+   readonly note?: string;
 diff --git a/sheet/model/field-kinds/kindRows.ts b/sheet/model/field-kinds/kindRows.ts
 index 2cef451..a96963a 100644
 --- a/sheet/model/field-kinds/kindRows.ts
@@ -3716,6 +4391,37 @@ index 0273ccb..f7bfa48 100644
    const what = step.what.toLowerCase();
    let best: readonly [number, string] | null = null;
    for (const [label, id] of LABELS) {
+diff --git a/sheet/screens/content-list/contentListTypes.ts b/sheet/screens/content-list/contentListTypes.ts
+index 05c44e1..12e7cb6 100644
+--- a/sheet/screens/content-list/contentListTypes.ts
++++ b/sheet/screens/content-list/contentListTypes.ts
+@@ -66,12 +66,12 @@ interface ListRow extends StateChips, RowCore {
+   readonly type: string;
+   readonly fold: Fold | null;
+   readonly sent: boolean;
+-  readonly time?: string;
+-  readonly date?: string;
++  readonly time?: string | undefined;
++  readonly date?: string | undefined;
+   readonly agent: boolean;
+   readonly live: boolean;
+   readonly trashed: boolean;
+-  readonly daysLeft?: number;
++  readonly daysLeft?: number | undefined;
+   readonly titleInk: string;
+   readonly id: string;
+   readonly docState: string;
+@@ -92,8 +92,8 @@ interface GroupCard {
+   readonly readyLabel?: string;
+   readonly readyInk?: string;
+   readonly readyWash?: string;
+-  readonly time?: string;
+-  readonly date?: string;
++  readonly time?: string | undefined;
++  readonly date?: string | undefined;
+   readonly open: boolean;
+   readonly chevTurn: string;
+   readonly rows: readonly ListRow[];
 diff --git a/sheet/screens/content-list/editorTabs.ts b/sheet/screens/content-list/editorTabs.ts
 index cb76bd9..8aa64a2 100644
 --- a/sheet/screens/content-list/editorTabs.ts
@@ -3729,6 +4435,19 @@ index cb76bd9..8aa64a2 100644
      (key) => names[key]?.name || key,
    );
  }
+diff --git a/sheet/screens/content-list/listRows.ts b/sheet/screens/content-list/listRows.ts
+index 60390de..ff831ba 100644
+--- a/sheet/screens/content-list/listRows.ts
++++ b/sheet/screens/content-list/listRows.ts
+@@ -49,7 +49,7 @@ function chipsOf(document: RowDocument, slug: string): StateChips {
+ interface RowAt {
+   readonly group: { readonly title: string };
+   readonly slug: string;
+-  readonly limited?: boolean;
++  readonly limited?: boolean | undefined;
+ }
+ 
+ // the same strings for every type
 diff --git a/sheet/screens/content-list/rowState.ts b/sheet/screens/content-list/rowState.ts
 index 0a95ee5..04f7352 100644
 --- a/sheet/screens/content-list/rowState.ts
@@ -3753,9 +4472,18 @@ index 23c3596..243ff48 100644
  
  export type { CatalogDocument };
 diff --git a/sheet/screens/screen-view/blockRows.ts b/sheet/screens/screen-view/blockRows.ts
-index 89863c4..a1d9f28 100644
+index 89863c4..5793136 100644
 --- a/sheet/screens/screen-view/blockRows.ts
 +++ b/sheet/screens/screen-view/blockRows.ts
+@@ -57,7 +57,7 @@ function shownOf(block: ScreenBlock, version: Moment): Revision | null {
+ 
+ interface RowAt {
+   readonly version: Moment;
+-  readonly focus?: string;
++  readonly focus?: string | undefined;
+   readonly gaps: Gaps;
+   readonly since: unknown;
+ }
 @@ -200,7 +200,6 @@ function autosavedAt(rows: readonly BlockRow[]): string | null {
    return latest;
  }
@@ -3764,6 +4492,19 @@ index 89863c4..a1d9f28 100644
  export {
    autosavedAt,
    blockRow,
+diff --git a/sheet/screens/screen-view/screenPanes.ts b/sheet/screens/screen-view/screenPanes.ts
+index e1d0d02..7119e41 100644
+--- a/sheet/screens/screen-view/screenPanes.ts
++++ b/sheet/screens/screen-view/screenPanes.ts
+@@ -21,7 +21,7 @@ type Slots = ReturnType<Rules['fromLine']>;
+ // the config is not in the block order: it counts neither the position nor the total
+ function panelOf(
+   rows: readonly BlockRow[],
+-  { focus, gaps }: { readonly focus?: string; readonly gaps: Gaps },
++  { focus, gaps }: { readonly focus?: string | undefined; readonly gaps: Gaps },
+ ): Panel | null {
+   const row = lastOf(rows, (one) => one.id === focus);
+   if (!row) {
 diff --git a/sheet/screens/screen-view/viewInputs.ts b/sheet/screens/screen-view/viewInputs.ts
 index ff8398a..d2edf73 100644
 --- a/sheet/screens/screen-view/viewInputs.ts
@@ -3936,10 +4677,10 @@ index 0000000..983795d
 +
 +export default SYNCPACK;
 diff --git a/tsconfig.json b/tsconfig.json
-index 453869a..e8f43dc 100644
+index 453869a..929a020 100644
 --- a/tsconfig.json
 +++ b/tsconfig.json
-@@ -1,18 +1,14 @@
+@@ -1,18 +1,15 @@
  {
 +  "extends": "./shared/tsconfig.base.json",
    "compilerOptions": {
@@ -3957,11 +4698,12 @@ index 453869a..e8f43dc 100644
      "types": ["node", "vitest/globals"],
 -    "jsx": "react-jsx"
 +    "jsx": "react-jsx",
-+    "noUncheckedIndexedAccess": true
++    "noUncheckedIndexedAccess": true,
++    "exactOptionalPropertyTypes": true
    },
    "include": [
      "sheet/**/*.ts",
-@@ -25,7 +21,10 @@
+@@ -25,7 +22,10 @@
      "tests/**/*.ts",
      "tests/**/*.tsx",
      "*.config.ts",

@@ -13,7 +13,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 | 1 | Harness | 5 | 5 |
 | 2 | Rules | 10 | 10 |
 | 3 | Names | 6 | 6 |
-| 4 | Tools | 3 | 8 |
+| 4 | Tools | 4 | 8 |
 | 5 | e2e | 0 | 4 |
 | 6 | Port design | 0 | 5 |
 
@@ -29,6 +29,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 - 11:02 · stage 4 · 1 of 8 · words rule: a person's text in its words file (task 1)
 - 11:19 · stage 4 · 2 of 8 · Contents for long documents and their cut sections (task 2)
 - 11:36 · stage 4 · 3 of 8 · flag B: index signatures, 108 to 27 payload (task 3)
+- 11:50 · stage 4 · 4 of 8 · flag C: reads past an end, 41 to 0, flag on (task 4)
 
 - 08:24 · stage 1 · 1 of 5 · the build side's skills to legacy/ (8bfcd8e)
 - 08:51 · stage 1 · 2 of 5 · 7g commitlint (d282df5)
@@ -214,6 +215,16 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
   reads 0 too (877 measured 8 Nov). 4 more published modules print differently, listed.
 - Eagle-dev, 9 Nov: the probe of the 4 pushed commits is held until Dom says go in its own chat (there Dom set
   product first, the way of working at the sync). The design side commits on, and pushes nothing until the probe.
+
+- Step 4 task 5, flag D (`exactOptionalPropertyTypes`), 93 on the design side (88 measured 8 Nov, 5 more from flag
+  C's honest reads): TypeScript's own fix covers 7 of them (`codefix.ts` now takes several codes); the rest by
+  `scripts/optionalUndefined.ts`, which walks each error from its value to the optional property the value may
+  leave undefined (nested, in arrays, through a `return`), reading the declared types (the checker's own adds the
+  flag's missing type to any optional one), and writes `?: T | undefined` there: 104 declarations in five passes,
+  93 → 0, the flag on in the design side's tsconfig. Call: each keeps today's meaning (before the flag `?: T` was
+  `T | undefined`), so no reader moves; every optional property no value leaves undefined is now held strict, and
+  a new one is. Open: a widened property every producer always sets could be required instead, a reading of 104
+  declarations, for the port ticket's review. Types only: the published modules print the same.
 
 ## Questions for the PM
 

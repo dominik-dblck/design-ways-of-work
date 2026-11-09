@@ -31,7 +31,7 @@ function nodeOf(
     counts,
   }: {
     readonly drawn: DrawnFiles;
-    readonly counts?: ReadonlyMap<string, number>;
+    readonly counts?: ReadonlyMap<string, number> | undefined;
   },
 ): FileNode {
   const { file } = base;

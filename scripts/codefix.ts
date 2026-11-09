@@ -1,6 +1,6 @@
 /**
- * - `node scripts/codefix.ts <repo> <code> [--flag <option>] [--keep <regex>]`
- * - each error of one code fixed as TypeScript's own codefix writes it, in place
+ * - `node scripts/codefix.ts <repo> <codes> [--flag <option>] [--keep <regex>]`
+ * - each error of the codes (`4111` or `2375,2379`) fixed by TypeScript's own fix
  * - `--keep`: an access whose object's text it matches stays, listed for later
  */
 import fs from 'node:fs';
@@ -13,9 +13,9 @@ const { values, positionals } = parseArgs({
   allowPositionals: true,
   options: { flag: { type: 'string' }, keep: { type: 'string' } },
 });
-const [repo = '', code = ''] = positionals;
+const [repo = '', codes = ''] = positionals;
 const ROOT = path.resolve(repo);
-const CODE = Number(code);
+const CODES = codes.split(',').map(Number);
 const KEEP = values.keep === undefined ? null : new RegExp(values.keep);
 const PREFERENCES: ts.UserPreferences = { quotePreference: 'single' };
 
@@ -37,7 +37,7 @@ function objectAt(file: ts.SourceFile, start: number): string {
 
 const errors = program
   .getSemanticDiagnostics()
-  .filter((one) => one.code === CODE && one.file !== undefined);
+  .filter((one) => CODES.includes(one.code) && one.file !== undefined);
 const isKept = (one: ts.Diagnostic): boolean =>
   one.file !== undefined &&
   KEEP?.test(objectAt(one.file, one.start ?? 0)) === true;
@@ -49,7 +49,7 @@ const fixesOf = (one: ts.Diagnostic): readonly ts.FileTextChanges[] =>
       one.file?.fileName ?? '',
       one.start ?? 0,
       (one.start ?? 0) + (one.length ?? 0),
-      [CODE],
+      [one.code],
       ts.getDefaultFormatCodeSettings(),
       PREFERENCES,
     )
