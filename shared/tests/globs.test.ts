@@ -6,7 +6,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { afterAll, describe, expect, it } from 'vitest';
-import { filesNamedBy, globsNamingNothing } from './globs.ts';
+import { filesNamedBy, globsNamingNothing, isOnDisk } from './globs.ts';
 
 const root = fs.mkdtempSync(path.join(os.tmpdir(), 'wow-globs-'));
 afterAll(() => {
@@ -59,6 +59,14 @@ describe('a glob list names its files', () => {
     expect(
       filesNamedBy({ ...tree, productTrees: ['product'] }, ['product/**/*.ts']),
     ).toEqual(['product/rules/a.ts']);
+  });
+
+  it('a path is on disk as the disk spells it, a folder with its closing slash too', () => {
+    expect(isOnDisk(root, 'CLAUDE.md')).toBe(true);
+    expect(isOnDisk(root, '.claude/skills/')).toBe(true);
+    expect(isOnDisk(root, 'claude.md')).toBe(false);
+    expect(isOnDisk(root, '.claude/Skills/a/SKILL.md')).toBe(false);
+    expect(isOnDisk(root, 'missing/x.md')).toBe(false);
   });
 
   it('a glob in the wrong case names nothing, on a disk that ignores case too', () => {

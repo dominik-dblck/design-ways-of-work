@@ -224,3 +224,9 @@ mailing-automation: each line waits for its port (phase 9) and the PM's word. Ra
     181 rows, 259 gates, 0 short: test 208, review 33, ESLint 13, script 4, linter option 1). Its tests are
     named by `testsOf` as they stand (`tests/**`, `**/__tests__/**`, `**/*.test.{ts,tsx}`), so its 18 under
     `app/**/__tests__` and the one in `packages/` count. No baseline to start.
+29. At its port (chunk 7b, the docs' paths): its scope's `namedPaths` (its measure, 8 Nov): docs
+    `.claude/**/*.md`, `docs/**/*.md`, CLAUDE.md, minus `.claude/__fixtures__/**` and a rendered doc; roots
+    app, packages, tests, e2e, scripts, .claude, docs, roadmaps, db, knowledge, ux-evaluations (200 more paths,
+    0 missing). Open, Dom's: README.md (3 paths gone), `knowledge/**` (source articles), its pipeline md (1
+    path gone, mended in our ticket-pipeline source, a re-pin). Its test goes; `@/` and `@domain/` aliases are
+    never read as paths; `[...nextauth]` is a real folder.

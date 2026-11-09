@@ -21,6 +21,12 @@ interface Instructions {
   readonly everyTurn: readonly string[];
 }
 
+// the docs whose backticked paths exist, by globs, and the top folders such a path starts with
+interface NamedPaths {
+  readonly docs: readonly string[];
+  readonly roots: readonly string[];
+}
+
 // the files whose sentences are written once, by globs: code's strings, prose's lines
 interface Sentences {
   readonly code: readonly string[];
@@ -55,6 +61,7 @@ interface RepoScope {
   readonly sentences: Sentences;
   // the rule tables as printed (`| Rule | Gate | Exceptions | Why |`): each row names a gate that runs
   readonly ruleFiles: readonly string[];
+  readonly namedPaths: NamedPaths;
 }
 
 // the way of working's shared tests, which each side's runner includes beside its own

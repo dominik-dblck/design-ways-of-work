@@ -238,3 +238,14 @@ for the port (phase 8) or the PM's word. Ranked: the first of each group is the 
     branches seen red. One `linesIn` for both
     size tests (`shared/tests/textSize.ts`). A product's tree named without its `/**` holds its own folder
     alone, never a sibling sharing its start (eagle-dev's J1, seen red).
+40. The docs name real paths, shared (chunk 7b, last of four): `shared/tests/theDocsNameRealPaths.test.ts`
+    reads the scope's `namedPaths`: `docs` (globs, each `!` with its reason in scope.ts: an archive, a log,
+    generated output, another repository's paths) and `roots` (the top folders a backticked path starts
+    with). A path not there is listed `{doc} · {path}`; a placeholder (`{x}`, `*`, `<x>`, `…`, `...`), a
+    line or a range (`:3–5`), an anchor, closing punctuation and a pointer's ` · export` are no part of it,
+    and a catch-all's `[...name]` is a real folder, a route group's `(name)` keeps its `)`. A path is there
+    as the disk spells it, step by step (`isOnDisk`, one home with the globs', eagle-dev's L1), so a doc's
+    wrong case is missing on a Mac too. Each of its 12 branches seen red. This side: 23 docs, 53
+    paths, 0 missing (`EXX` measured as no placeholder it needs). Its bundle check is this product's own
+    fact, so it stays this side's test, `theProcessNamesNoBundle` (its row's gate renamed). The way of
+    working reads README.md and the design system's guide; PLAN.md (files to come) and plan/ (notes) are out.

@@ -1,6 +1,6 @@
 /**
  * - `isNamedBy` · a path a list of globs names, a `!` glob not
- * - `filesNamedBy` · the tree's files a list names, as the disk spells them
+ * - `filesNamedBy`, `isOnDisk` · the files a list names, a path, as the disk spells them
  * - `globsNamingNothing` · a scope's glob that names no file: a typo checks nothing
  */
 import fs from 'node:fs';
@@ -16,7 +16,7 @@ const isNamedBy = (file: string, globs: readonly string[]): boolean =>
 
 // a path as each folder spells it: a disk that ignores case echoes a glob's, and a link resolves away
 const isSpelledAsOnDisk = (root: string, file: string): boolean => {
-  const steps = file.split(/[\\/]/);
+  const steps = file.split(/[\\/]/).filter((step) => step !== '');
   return steps.every((step, at) =>
     fs.readdirSync(path.join(root, ...steps.slice(0, at))).includes(step),
   );
@@ -61,4 +61,8 @@ const globsNamingNothing = (
     (glob) => !glob.startsWith('!') && filesNamedBy(tree, [glob]).length === 0,
   );
 
-export { filesNamedBy, globsNamingNothing, isNamedBy };
+// a path there, a folder's too, spelled in each step as the disk spells it
+const isOnDisk = (root: string, file: string): boolean =>
+  fs.existsSync(path.join(root, file)) && isSpelledAsOnDisk(root, file);
+
+export { filesNamedBy, globsNamingNothing, isNamedBy, isOnDisk };

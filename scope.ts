@@ -60,6 +60,21 @@ const scope: RepoScope = {
   },
   // no rule table of its own: the products' rule files, each checked in its product
   ruleFiles: [],
+  namedPaths: {
+    // PLAN.md out: the files it plans are to come; plan/ out: notes, naming what moved since
+    docs: ['README.md', 'design-system/**/*.md'],
+    roots: [
+      'scripts',
+      'shared',
+      'design-system',
+      'tests',
+      'ports',
+      'plan',
+      'design',
+      'dev',
+      'legacy',
+    ],
+  },
 };
 
 export { scope };

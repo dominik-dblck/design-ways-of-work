@@ -105,6 +105,9 @@ messages read, the next part resumed. When the run is done: `CronDelete 1577e92f
   missed a rule on for `packages/domain` alone; the union is 2532 files, 363 ms on its tree). Undo: a
   sample per glob.
 
+- 7b part 4, 02:11: the verify past 30 minutes again, one step 17 minutes, then the next started: slow (load
+  5.5), not stuck, left to run, as at 23:11.
+
 ## Morning: for the PM
 
 - The five patterns beside SSoT and SRP (dependency inversion, ratchet, explicit over implicit, least privilege,
