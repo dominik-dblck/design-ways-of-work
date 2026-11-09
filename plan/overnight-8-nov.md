@@ -159,6 +159,21 @@ messages read, the next part resumed. When the run is done: `CronDelete 1577e92f
 - 7e part 1, eagle-dev's cross-check of 9bb81ec: the edit hook says "cspell did not run: …" when cspell
   cannot run (a config error, the package missing), never nothing (F1, seen red on a word in two homes); a
   `!` of one generator wins over a broader glob of the next, every off glob first (F2, a test of two).
+- G1 follow-up (d056737): the edit hook's comment names no author; eagle-dev's trace "a finding by its author"
+  not added (one false hit on the copy, a journey id after a possessive); its question "one writer per file?"
+  was open: aGeneratedFileIsAFreshEmit now holds it (red on a generator written twice).
+- 7f syncpack: the config takes no scope (syncpack's default source is the package manager's word: the root and
+  its declared workspaces; legacy/ is declared by none); one version per name named, not left to a default.
+  PEERS is the way of working's list (its checks' tools); eagle-dev's read added Vitest and typescript-eslint's
+  scope. The test found `@typescript-eslint/types` and `tsconfig-utils` twice on both trees: merged into 8.70.0
+  by a script on the lockfile (`npx yarn-deduplicate` refused as outside code); yarn keeps it (`--frozen-lockfile`).
+- 7f, the copy's node_modules is a link to this repository's: a `yarn add` in the copy installs the copy's set
+  into it (ls-lint, jscpd, rule-tester gone); restored by `yarn install` here. From now: after a `yarn add` in
+  the copy, `yarn install` here before any check.
+- 7f, the first verify: 2 unexplained (`docs/rules/checks.md`, `dev/rules/checks.md`), the copy's rule docs not
+  yet written from the two new rows: `yarn build` in the copy, port-save, verify again whole. A new rule row
+  takes that step before its verify.
+
 ## Morning: for the PM
 
 - The five patterns beside SSoT and SRP (dependency inversion, ratchet, explicit over implicit, least privilege,
@@ -226,3 +241,5 @@ messages read, the next part resumed. When the run is done: `CronDelete 1577e92f
   working's list tonight, and part 2's flagWords would flag the product's name in the way of working's files.
   A: the design system is a product tree, spelled and flagged in its product · B: it stays the way of working's,
   its brand words kept and the brand left out of the names flagged (eagle-dev's ask 3 asks the same).
+- 7f, the build side's 36 caret ranges (eagle-dev's measure: each resolves to one lockfile entry): A pin each to
+  the version its lock resolves, by script at its port, no installed package moving · B its rule stays `review`.

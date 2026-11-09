@@ -268,3 +268,10 @@ for the port (phase 8) or the PM's word. Ranked: the first of each group is the 
     samples (localeRows, runFacts, screenThree) wait for their languages' dictionaries. Later here, so the
     reviewed ids go to zero: export GROUP_OF, the board tree's, the payloads' and the cases' ids for scope.ts to
     read, and rename the abbreviations (vnum, wspx, chev, appr) to names that say their purpose.
+43. syncpack (chunk 7f): every dependency pinned to one exact version (`lint:deps`, `shared/lint/syncpackConfig.ts`
+    through the root `syncpack.config.ts`), and the tools the checks load through another (ESLint, TypeScript, Vitest,
+    typescript-eslint and every package of its scope) one version in the lockfile (`aCheckToolResolvesOnce`). This
+    side held `@typescript-eslint/types` and `tsconfig-utils` at 8.70.0 and 8.72.1 (a plugin's caret, resolved
+    later): merged into 8.70.0, the pinned family's, by a script on the lockfile, and yarn keeps it as merged. Its
+    lockfile now matches its package.json (cspell, sonarjs, boundaries and syncpack were in the one, missing from
+    the other): the port carries it, and `yarn install --frozen-lockfile` passes on it.

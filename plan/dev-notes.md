@@ -240,3 +240,9 @@ mailing-automation: each line waits for its port (phase 9) and the PM's word. Ra
     Its words from data: the glossary through the sheet fixture's `uiRows()`, the seed's persona names and
     catalog ids, the deeplink catalog's ids; a reviewed list of its API words and coinages. One slip for Dom:
     `packages/domain/blocks/sameField.ts:2,26` "two datas of a node".
+32. At its port (chunk 7f, syncpack, eagle-dev's measure 9 Nov): its 36 caret ranges each resolve to one lockfile
+    entry (36 of 36): pinned to those versions by a script reading the lock, no installed package moves (Dom's
+    word: A pin, B hold the rule `review`; syncpack has no baseline, so B would be a second mechanism). Its peers
+    are one copy each today (typescript 6.0.3, eslint 10.10.0, vitest 5.0.0, typescript-eslint's family 8.70.0).
+    Two duplicates of its own, not the checks': `@types/node` 22.20.2 beside 26.5.0 (@types/pg's `*`), zod 4.6.7
+    beside 4.5.4 (Stryker's mutation-server-protocol).

@@ -18,6 +18,7 @@
     "tests/**/*.ts",
     "eslint.config.ts",
     "cspell.config.ts",
+    "syncpack.config.ts",
     "knip.ts",
     "vitest.config.ts"
   ],
