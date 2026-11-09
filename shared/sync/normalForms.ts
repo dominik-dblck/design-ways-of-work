@@ -9,12 +9,29 @@ type FormKind = 'shape' | 'tokens' | 'words';
 
 const HEX = /^#([0-9a-f]{3}|[0-9a-f]{6})$/i;
 const PX = /^(-?\d+(?:\.\d+)?)px$/;
+const RGB = /^(rgba?)\(([^)]*)\)$/i;
+const NUMBER = /^-?[\d.]+$/;
 
-// a colour lowercased in six digits, a length in px a number; any other value as it is
+// `rgba(0, 0, 0, 0.80)` as `rgba(0,0,0,0.8)`: no spaces, each number its shortest
+function rgbValue([name = '', parts = '']: readonly string[]): string {
+  const numbers = parts
+    .split(',')
+    .map((part) => part.trim())
+    .map((part) =>
+      NUMBER.test(part) && Number.isFinite(Number(part))
+        ? String(Number(part))
+        : part,
+    );
+  return `${name.toLowerCase()}(${numbers.join(',')})`;
+}
+
+// a colour lowercased in six digits or its rgb written one way, a length in px a number
 function tokenValue(written: string): string | number {
   const hex = HEX.exec(written)?.[1];
   if (hex !== undefined)
     return `#${(hex.length === 3 ? [...hex].map((digit) => digit + digit).join('') : hex).toLowerCase()}`;
+  const rgb = RGB.exec(written.trim());
+  if (rgb !== null) return rgbValue(rgb.slice(1));
   const px = PX.exec(written)?.[1];
   return px === undefined ? written : Number(px);
 }
@@ -41,10 +58,10 @@ function formOf(kind: FormKind, given: unknown): unknown {
   );
 }
 
-// a group one side lacks digests as null
+// a group one side lacks digests as no text, which no form's JSON is, so never as null's
 const digestOf = (form: unknown): string =>
   createHash('sha256')
-    .update(JSON.stringify(form) ?? 'null')
+    .update(form === undefined ? '' : JSON.stringify(form))
     .digest('hex');
 
 export { digestOf, formOf };

@@ -9,11 +9,17 @@ type Forms = Readonly<Record<string, unknown>>;
 type Side = 'design' | 'build' | 'both';
 
 interface MovedRow {
-  readonly path: string;
+  readonly path: readonly string[];
   readonly agreed: unknown;
   readonly release: unknown;
   readonly ours: unknown;
   readonly moved: Side;
+}
+
+// a leaf, its path beside it, so the map's key (the path in JSON) is never read back
+interface Leaf {
+  readonly path: readonly string[];
+  readonly form: unknown;
 }
 
 interface GroupMove {
@@ -21,16 +27,24 @@ interface GroupMove {
   readonly rows: readonly MovedRow[];
 }
 
-// a form's leaves by path, an object's by key and an array's by place: `Approve.body.0`
-function leavesOf(form: unknown, at = ''): ReadonlyMap<string, unknown> {
-  if (typeof form !== 'object' || form === null) return new Map([[at, form]]);
-  const entries = Array.isArray(form)
-    ? form.map((one: unknown, index) => [String(index), one] as const)
-    : Object.entries(form);
+// an object's parts by key, an array's by place, anything else none
+function partsOf(form: unknown): readonly (readonly [string, unknown])[] {
+  if (typeof form !== 'object' || form === null) return [];
+  if (Array.isArray(form))
+    return form.map((one: unknown, index) => [String(index), one] as const);
+  return Object.entries(form);
+}
+
+// a form's leaves, an empty one a leaf; keyed by path in JSON, so `kind.unknown` stays one key
+function leavesOf(
+  form: unknown,
+  at: readonly string[] = [],
+): ReadonlyMap<string, Leaf> {
+  const entries = partsOf(form);
+  if (entries.length === 0)
+    return new Map([[JSON.stringify(at), { path: at, form }]]);
   return new Map(
-    entries.flatMap(([key, one]) => [
-      ...leavesOf(one, at === '' ? key : `${at}.${key}`),
-    ]),
+    entries.flatMap(([key, one]) => [...leavesOf(one, [...at, key])]),
   );
 }
 
@@ -54,12 +68,11 @@ function rowsOf(
       [agreed, release, ours].flatMap((leaves) => [...(leaves?.keys() ?? [])]),
     ),
   ].sort();
-  return paths.flatMap((path) => {
-    const atPath = {
-      agreed: agreed?.get(path),
-      release: release?.get(path),
-      ours: ours?.get(path),
-    };
+  return paths.flatMap((key) => {
+    const leaves = [agreed, release, ours].map((side) => side?.get(key));
+    const path = leaves.find((leaf) => leaf !== undefined)?.path ?? [];
+    const [atAgreed, atRelease, atOurs] = leaves.map((leaf) => leaf?.form);
+    const atPath = { agreed: atAgreed, release: atRelease, ours: atOurs };
     return same(atPath.release, atPath.agreed) &&
       same(atPath.ours, atPath.agreed)
       ? []

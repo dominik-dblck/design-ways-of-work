@@ -49,6 +49,12 @@ function formsIn(file: string | undefined): Readonly<Record<string, unknown>> {
 const cell = (shown: unknown): string =>
   shown === undefined ? '—' : JSON.stringify(shown).replaceAll('|', '\\|');
 
+// a path's keys apart, so a key holding a dot reads as one; the group's root named
+const pathCell = (path: readonly string[]): string =>
+  path.length === 0
+    ? '(the group)'
+    : path.map((key) => `\`${key}\``).join(' · ');
+
 const tableOf = ({ group, rows }: GroupMove): string =>
   [
     `## ${group}`,
@@ -57,7 +63,7 @@ const tableOf = ({ group, rows }: GroupMove): string =>
     '| ---- | ------ | ------- | ---- | ----- |',
     ...rows.map(
       (row) =>
-        `| ${row.path} | ${cell(row.agreed)} | ${cell(row.release)} | ${cell(row.ours)} | ${row.moved} |`,
+        `| ${pathCell(row.path)} | ${cell(row.agreed)} | ${cell(row.release)} | ${cell(row.ours)} | ${row.moved} |`,
     ),
   ].join('\n');
 

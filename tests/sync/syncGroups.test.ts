@@ -26,6 +26,16 @@ describe('a group in one form, both sides alike', () => {
     });
   });
 
+  it('writes an rgb colour without spaces, each number its shortest', () => {
+    expect(
+      formOf('tokens', { a: 'rgba(0, 0, 0, 0.80)', b: 'RGB( 28 ,208, 186 )' }),
+    ).toEqual({ a: 'rgba(0,0,0,0.8)', b: 'rgb(28,208,186)' });
+  });
+
+  it('digests a group one side lacks apart from a group written null', () => {
+    expect(digestOf(undefined)).not.toBe(digestOf(null));
+  });
+
   it("writes a word's whitespace one space, its quotes kept", () => {
     expect(formOf('words', { a: '  Coming \n soon ', b: '“Draft”' })).toEqual({
       a: 'Coming soon',
@@ -48,9 +58,9 @@ describe('a group moved since the agreed form', () => {
       {
         group: 'tokens',
         rows: [
-          { path: 'gap', agreed: 8, release: 12, ours: 10, moved: 'both' },
+          { path: ['gap'], agreed: 8, release: 12, ours: 10, moved: 'both' },
           {
-            path: 'primary',
+            path: ['primary'],
             agreed: '#1cd0ba',
             release: '#000000',
             ours: '#1cd0ba',
@@ -73,11 +83,56 @@ describe('a group moved since the agreed form', () => {
         group: 'payloads',
         rows: [
           {
-            path: 'a',
+            path: ['a'],
             agreed: undefined,
             release: undefined,
             ours: 1,
             moved: 'build',
+          },
+        ],
+      },
+    ]);
+  });
+  it('keeps a key holding a dot one key: `kind.unknown` apart from `kind` › `unknown`', () => {
+    const agreed = {
+      refusals: { 'kind.unknown': 'a', kind: { unknown: 'b' } },
+    };
+    const ours = {
+      refusals: { 'kind.unknown': 'a', kind: { unknown: 'c' } },
+    };
+    expect(movedGroups({ agreed, release: agreed, ours })).toEqual([
+      {
+        group: 'refusals',
+        rows: [
+          {
+            path: ['kind', 'unknown'],
+            agreed: 'b',
+            release: 'b',
+            ours: 'c',
+            moved: 'build',
+          },
+        ],
+      },
+    ]);
+  });
+
+  it('reads an empty object or list as a leaf: a group written empty is a row', () => {
+    expect(
+      movedGroups({
+        agreed: AGREED,
+        release: { ...AGREED, payloads: {} },
+        ours: { ...AGREED, payloads: [] },
+      }),
+    ).toEqual([
+      {
+        group: 'payloads',
+        rows: [
+          {
+            path: [],
+            agreed: undefined,
+            release: {},
+            ours: [],
+            moved: 'both',
           },
         ],
       },

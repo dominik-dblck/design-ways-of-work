@@ -13,7 +13,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 | 1 | Harness | 5 | 5 |
 | 2 | Rules | 10 | 10 |
 | 3 | Names | 6 | 6 |
-| 4 | Tools | 5 | 8 |
+| 4 | Tools | 6 | 8 |
 | 5 | e2e | 0 | 4 |
 | 6 | Port design | 0 | 5 |
 
@@ -31,6 +31,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 - 11:36 · stage 4 · 3 of 8 · flag B: index signatures, 108 to 27 payload (task 3)
 - 11:50 · stage 4 · 4 of 8 · flag C: reads past an end, 41 to 0, flag on (task 4)
 - 12:00 · stage 4 · 5 of 8 · flag D: optional properties, 93 to 0, flag on (task 5)
+- 12:25 · stage 4 · 6 of 8 · sync:groups shared core; words acronym miss mended (task 6)
 
 - 08:24 · stage 1 · 1 of 5 · the build side's skills to legacy/ (8bfcd8e)
 - 08:51 · stage 1 · 2 of 5 · 7g commitlint (d282df5)
@@ -242,6 +243,19 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
   first word capitalised or an acronym, one lowercase letter at least in the text (`HTTP GET` stays out); the
   build side's count 19 → 22 in the same 6 files, the design side's 0. Its flags B and C read 392 and 454 on its
   tree: the shared base waits for its port.
+
+- The PM, 9 Nov · B: the design side pushes when its own checks are green; eagle-dev probes the pushed commits in
+  batches, when the product leaves it time, and its findings land as commits after. (09e6bcd and da6d7f8 went out
+  before its probe, against what the design side had said: asked for at its next pass.)
+
+- Eagle-dev's second probe, 9 Nov (b9fc613, 09e6bcd, da6d7f8): four findings, each mended with its test.
+  The words rule's acronym branch took `GET /api/groups` for a sentence: an acronym is now followed by one space
+  and a word. The sync core: a key holding a dot (`kind.unknown`) ran into its path, now a path is its keys; an
+  empty `{}` or `[]` had no leaf and a moved group showed no row, now it is a leaf; a group one side lacks
+  digested as null, now as no text; `rgba(0, 0, 0, 0.80)` is written `rgba(0,0,0,0.8)`. Arrays compare by place
+  (a moved item reads as each place after it changed): kept, said here. Flag D on its tree reads 375: it would
+  widen only the optionals a value passes through and list the rest by hand; the design side's 104 take the
+  same review at the port (stage 6), each `?: T | undefined` read again as required or optional.
 
 ## Questions for the PM
 

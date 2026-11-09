@@ -70,6 +70,10 @@ ruleTester.run('words-live-in-a-words-file', wordsLiveInAWordsFile, {
         "export const ASKED = 'HTTP GET';",
       ],
       [
+        'an acronym and a path after it: `GET /api/groups`',
+        "export const ROUTE = 'GET /api/groups';",
+      ],
+      [
         'a template with a hole and no space',
         'export const classOf = (name: string): string => `Mui${name}`;',
       ],
