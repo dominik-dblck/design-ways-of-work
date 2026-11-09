@@ -80,13 +80,13 @@ function pageWorld(): World {
     addEventListener() {},
     location: { pathname: '/' },
   };
-  world.window = world;
+  world['window'] = world;
   return world;
 }
 
 function bareWorld(): World {
   const world: World = { document: { querySelectorAll: () => [] } };
-  world.window = world;
+  world['window'] = world;
   return world;
 }
 

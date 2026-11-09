@@ -21,10 +21,6 @@ const OPEN: readonly (readonly [string, string])[] = [
     'two facts: Checkbox and Radio name the same tokens unchecked, the shared choice is the tokens',
   ],
   [
-    'sheet/logic/approval/gate-rules/gateWords.ts · sheet/logic/document/block-rules/blockWords.ts',
-    'two entries that cannot share a part until the pages import modules',
-  ],
-  [
     'sheet/model/catalog/campaignRows.ts · sheet/model/catalog/summerRows.ts',
     'two facts: two sample campaigns, alike by chance',
   ],

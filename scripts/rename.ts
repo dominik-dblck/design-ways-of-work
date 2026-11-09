@@ -7,6 +7,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import ts from 'typescript';
 import { mapRows } from './mapRows.ts';
+import { serviceOf } from './languageService.ts';
 import { HERE, repoAt } from './repos.ts';
 
 interface Row {
@@ -24,13 +25,6 @@ const rows: readonly Row[] = mapRows(MAP).map(([at = '', name = '']) => {
   return { file, line: Number(row), column: Number(column), name };
 });
 
-const parsed = ts.getParsedCommandLineOfConfigFile(
-  path.join(COPY, 'tsconfig.json'),
-  {},
-  { ...ts.sys, onUnRecoverableConfigFileDiagnostic: () => undefined },
-);
-if (parsed === undefined) throw new Error(`no tsconfig.json in ${COPY}`);
-
 interface Edit {
   readonly start: number;
   readonly length: number;
@@ -44,20 +38,7 @@ interface Planned {
   readonly headers: readonly string[];
 }
 
-const service = ts.createLanguageService({
-  getCompilationSettings: () => parsed.options,
-  getScriptFileNames: () => parsed.fileNames,
-  getScriptVersion: () => '0',
-  getScriptSnapshot: (file) =>
-    fs.existsSync(file)
-      ? ts.ScriptSnapshot.fromString(fs.readFileSync(file, 'utf8'))
-      : undefined,
-  getCurrentDirectory: () => COPY,
-  getDefaultLibFileName: ts.getDefaultLibFilePath,
-  fileExists: ts.sys.fileExists,
-  readFile: ts.sys.readFile,
-  readDirectory: ts.sys.readDirectory,
-});
+const service = serviceOf(COPY);
 const program = service.getProgram();
 if (program === undefined) throw new Error(`no program in ${COPY}`);
 const checker = program.getTypeChecker();

@@ -8,6 +8,6 @@ const ROOT = path.resolve(import.meta.dirname, '..');
 const BUILT = path.join(ROOT, 'dist', 'project');
 
 const builtRoot = (): string =>
-  path.resolve(process.env.DESIGN_MIRROR || BUILT);
+  path.resolve(process.env['DESIGN_MIRROR'] || BUILT);
 
 export { BUILT, builtRoot, ROOT };

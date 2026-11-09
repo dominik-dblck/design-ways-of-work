@@ -23,9 +23,9 @@ function stats(): readonly Stat[] {
     },
     {
       ...words.tickets,
-      value: `${tickets.done ?? 0} / ${tickets.total ?? 0}`,
+      value: `${tickets['done'] ?? 0} / ${tickets['total'] ?? 0}`,
     },
-    { ...words.ready, value: String(tickets.ready ?? 0) },
+    { ...words.ready, value: String(tickets['ready'] ?? 0) },
   ];
 }
 

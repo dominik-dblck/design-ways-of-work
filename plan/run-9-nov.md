@@ -13,7 +13,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 | 1 | Harness | 5 | 5 |
 | 2 | Rules | 10 | 10 |
 | 3 | Names | 6 | 6 |
-| 4 | Tools | 1 | 8 |
+| 4 | Tools | 2 | 8 |
 | 5 | e2e | 0 | 4 |
 | 6 | Port design | 0 | 5 |
 
@@ -27,6 +27,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 - 10:25 · stage 3 · 5 of 6 · part names B: repeats rule, 5 parts renamed (task 5)
 - 10:49 · stage 3 · 6 of 6 · prettier tables and ignores from the scope (task 6)
 - 11:02 · stage 4 · 1 of 8 · words rule: a person's text in its words file (task 1)
+- 11:19 · stage 4 · 2 of 8 · Contents for long documents and their cut sections (task 2)
 
 - 08:24 · stage 1 · 1 of 5 · the build side's skills to legacy/ (8bfcd8e)
 - 08:51 · stage 1 · 2 of 5 · 7g commitlint (d282df5)
@@ -191,6 +192,15 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
   whole on the build side, the Contents rule is the on-demand files'. api-convention gets one. Both documents join the design side's `onDemand`, so the
   shared `aLongFileOpensWithContents` holds them. A rule file's md stays a table (40 lines at most today): the
   same test holds it past 100, its source held at 200 by `max-lines`. The release and its 2 re-pins: the PM's go.
+
+- Step 4 task 3, flag B (`noPropertyAccessFromIndexSignature`, eagle-dev's order): the word records typed by their
+  keys, `liveWords` written once (a part of messages.ts, read by gate-rules and block-rules through it, a Proxy
+  typed by its names and by a key a table holds: no assertion), the open pair in `aBlockIsWrittenOnce` closed;
+  then TypeScript's own codefix by `scripts/codefix.ts` (generic: a code, a flag, a `--keep` regex on the object
+  read; one error TypeScript reports twice written once, a defect its first run had, 3 lines mended by exact
+  replacement). 108 → 27, all the event payload's (`payload.…`, `payloadOf(…)`), kept for its typing in the port
+  (PM 9 Nov · A), where the flag goes into the design side's tsconfig at 0. `scripts/languageService.ts` is
+  rename's and codefix's one service. 27 published modules print differently, listed.
 
 ## Questions for the PM
 

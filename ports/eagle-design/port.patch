@@ -219,6 +219,19 @@ index 24b762b..584f56d 100644
      scope: 'global',
      ownedBy: 'T-E06-00',
      props:
+diff --git a/app/styles/gate-states.ts b/app/styles/gate-states.ts
+index 6d4ebd7..c36b986 100644
+--- a/app/styles/gate-states.ts
++++ b/app/styles/gate-states.ts
+@@ -109,7 +109,7 @@ const DELIVERY = {
+   scheduled: { ink: 'var(--o-500)', wash: 'var(--o-50)' },
+   sent: { ink: 'var(--st-ready-fg)', wash: 'var(--st-ready-bg)' },
+ };
+-const lookOf = (state: string): GateLook => STATES[state] ?? STATES.none;
++const lookOf = (state: string): GateLook => STATES[state] ?? STATES['none'];
+ 
+ const color = (state: string): string => lookOf(state).color;
+ 
 diff --git a/app/styles/product-tokens.ts b/app/styles/product-tokens.ts
 new file mode 100644
 index 0000000..0c2aec9
@@ -1807,6 +1820,48 @@ index 0000000..1d37bad
 +}
 +
 +export { legacyWorld };
+diff --git a/guards/checks/listPart.ts b/guards/checks/listPart.ts
+index bc7ca82..0808df7 100644
+--- a/guards/checks/listPart.ts
++++ b/guards/checks/listPart.ts
+@@ -64,14 +64,17 @@ function listShots(
+     for (const type of category.types) {
+       shots.set(
+         type.slug,
+-        stripped({ shown: values({ pick: type.slug, route: 'browse' }).shown }),
++        stripped({
++          shown: values({ pick: type.slug, route: 'browse' })['shown'],
++        }),
+       );
+       for (const group of CONTENT_SAMPLES.groups(type.slug) || [])
+         shots.set(
+           `${type.slug}|${group.id}`,
+           stripped({
+-            flat: values({ pick: type.slug, group: group.id, route: 'browse' })
+-              .flat,
++            flat: values({ pick: type.slug, group: group.id, route: 'browse' })[
++              'flat'
++            ],
+           }),
+         );
+     }
+@@ -88,14 +91,14 @@ function harnessLog(mirror: Mirror): readonly string[] {
+   const was = Object.fromEntries(
+     Object.entries(before).map(([key, one]) => [
+       key,
+-      one.cats ? { shown: one.shown } : one,
++      one['cats'] ? { shown: one['shown'] } : one,
+     ]),
+   );
+   const moved = Object.keys(was).filter(
+     (key) => JSON.stringify(was[key]) !== JSON.stringify(shots[key]),
+   );
+   const sample: unknown = Object(
+-    Object(Object(Object(shots.email).shown)[0]).rows,
++    Object(Object(Object(shots['email']).shown)[0]).rows,
+   )[0];
+   return [
+     `keys ${Object.keys(was).length} · moved ${moved.length}`,
 diff --git a/guards/checks/measureCheck.ts b/guards/checks/measureCheck.ts
 index 1b6f9d6..1e58b2a 100644
 --- a/guards/checks/measureCheck.ts
@@ -1899,6 +1954,19 @@ index ecaa74c..db5eb2c 100644
    }
  }
  
+diff --git a/guards/checks/sentenceSurfaces.ts b/guards/checks/sentenceSurfaces.ts
+index a36b1a4..baf0513 100644
+--- a/guards/checks/sentenceSurfaces.ts
++++ b/guards/checks/sentenceSurfaces.ts
+@@ -69,7 +69,7 @@ function rowSurfaces(): Surfaces {
+   const campaigns = CATALOG.campaigns;
+   return Object.fromEntries(
+     campaigns.flatMap((campaign) =>
+-      (campaign.messages || campaign.documents || []).map((document) => [
++      (campaign.messages || campaign['documents'] || []).map((document) => [
+         `row ${String(document.id || document.slug)}`,
+         surface(() => [
+           CONTENT_LIST.pill(document),
 diff --git a/guards/measure/measureFiles.ts b/guards/measure/measureFiles.ts
 index 2f7db81..fe9cfad 100644
 --- a/guards/measure/measureFiles.ts
@@ -1923,6 +1991,19 @@ index 2f7db81..fe9cfad 100644
  
  // the fixtures in the one order that loads them, never restated by a reader
  const FIXTURE_LOAD: readonly string[] = LOAD.filter((file) =>
+diff --git a/guards/measure/measureRun.ts b/guards/measure/measureRun.ts
+index 3a8dbce..fc59ce8 100644
+--- a/guards/measure/measureRun.ts
++++ b/guards/measure/measureRun.ts
+@@ -72,7 +72,7 @@ function blockFacts(): Projected['blocks'] {
+ 
+ // against the record as written, never the view that resolves and sorts it
+ function signatureFacts(): Projected['signatures'] {
+-  const written = (SIGNATURES.all.email ?? []).map((row) => ({
++  const written = (SIGNATURES.all['email'] ?? []).map((row) => ({
+     who: row.who,
+     act: row.act,
+     version: row.version,
 diff --git a/knip.config.ts b/knip.config.ts
 new file mode 100644
 index 0000000..b1a971a
@@ -2576,6 +2657,30 @@ index bb5f421..851d889 100644
  
 -export type { QueryCase, QueryCounts, QueryParam, QueryRow, Store, StoreKey };
 +export type { QueryCase, QueryCounts, QueryRow, Store, StoreKey };
+diff --git a/sheet/contract/refusals/refusalSentences.ts b/sheet/contract/refusals/refusalSentences.ts
+index e47c059..946470a 100644
+--- a/sheet/contract/refusals/refusalSentences.ts
++++ b/sheet/contract/refusals/refusalSentences.ts
+@@ -19,7 +19,7 @@ const GENERIC_WORDS: Readonly<Record<string, string | undefined>> = {
+ 
+ // a line for one reader or one case; a file the field does not take reads its validator's sentence
+ function variantOf({ key, text, fills }: Draft): string {
+-  const variant = fills?.variant;
++  const variant = fills?.['variant'];
+   if (!variant) return text;
+   const name = String(variant);
+   const words = wordsOf(key);
+@@ -44,8 +44,8 @@ function emptyOf({ key, text, fills }: Draft): string {
+ // a count of 1 reads the line's one variant, as every screen line does
+ function countOf(text: string, fills?: RefusalFills | null): string {
+   const fill = MESSAGES.fill;
+-  if (!fills || Number(fills.count) !== 1 || !fill) return text;
+-  return fill(text, { count: fills.count }) ?? text;
++  if (!fills || Number(fills['count']) !== 1 || !fill) return text;
++  return fill(text, { count: fills['count'] }) ?? text;
+ }
+ 
+ // a template with nothing to fill it is a bug, never a fallback: it would print braces at somebody
 diff --git a/sheet/logic/agent/agent-access/agentAccessTypes.ts b/sheet/logic/agent/agent-access/agentAccessTypes.ts
 index 4141744..0e1574f 100644
 --- a/sheet/logic/agent/agent-access/agentAccessTypes.ts
@@ -2639,10 +2744,53 @@ index 651dcda..4d03b82 100644
    return cellOf(
      !frozen && state.version !== 'draft' && !editing && unsigned,
      why,
+diff --git a/sheet/logic/approval/approval-logic/matrixJourney.ts b/sheet/logic/approval/approval-logic/matrixJourney.ts
+index 876fe17..9b75594 100644
+--- a/sheet/logic/approval/approval-logic/matrixJourney.ts
++++ b/sheet/logic/approval/approval-logic/matrixJourney.ts
+@@ -44,17 +44,17 @@ function roleLive(
+ ): boolean {
+   let at = -1;
+   return roles.some((row) => {
+-    if (row.isHead) {
++    if (row['isHead']) {
+       at += 1;
+       return false;
+     }
+     const ctas: readonly {
+       readonly live?: boolean;
+       readonly label?: string;
+-    }[] = Array.isArray(row.ctas) ? row.ctas : [];
++    }[] = Array.isArray(row['ctas']) ? row['ctas'] : [];
+     return (
+       at === group &&
+-      row.label === label &&
++      row['label'] === label &&
+       ctas.some((one) => one.live && String(one.label).startsWith(word))
+     );
+   });
+@@ -84,7 +84,7 @@ function steps(
+     roleLive(reads, { group: 0, label, word });
+   const reviewer = (label: string, word: string): boolean =>
+     roleLive(reads, { group: 1, label, word });
+-  const behalf = MESSAGES.labels.behalf;
++  const behalf = MESSAGES.labels['behalf'];
+   // prettier-ignore
+   return [
+     ['A new document', 'Content manager', 'Edit content', doc('New', 'EDIT CONTENT')],
 diff --git a/sheet/logic/approval/approval-logic/seatChip.ts b/sheet/logic/approval/approval-logic/seatChip.ts
-index 328e4b8..9d5ed2e 100644
+index 328e4b8..d250024 100644
 --- a/sheet/logic/approval/approval-logic/seatChip.ts
 +++ b/sheet/logic/approval/approval-logic/seatChip.ts
+@@ -42,7 +42,7 @@ function playMenu(
+     row.id === 'send'
+       ? {
+           ...row,
+-          label: labels[facts.out || 'send'] || labels.send || row.label,
++          label: labels[facts.out || 'send'] || labels['send'] || row.label,
+         }
+       : row,
+   );
 @@ -132,11 +132,12 @@ function seatChip(at: ChipAt): RoleChip | null {
    const menu = menuOf(at, { seatHolder, holds });
    const live = menu.some((row) => row.tone === 'live' || row.tone === 'on');
@@ -2667,6 +2815,19 @@ index 089bf8f..99f7a29 100644
  
 -export type { Built };
  export { todoRowsOf, orderedRows };
+diff --git a/sheet/logic/approval/approval-logic/todoPill.ts b/sheet/logic/approval/approval-logic/todoPill.ts
+index a0a5108..b31475f 100644
+--- a/sheet/logic/approval/approval-logic/todoPill.ts
++++ b/sheet/logic/approval/approval-logic/todoPill.ts
+@@ -134,7 +134,7 @@ function managerFirst(
+   const manager: TodoRow = {
+     isHead: false,
+     key: 'CM',
+-    label: rules.gateName.CM || 'Content manager',
++    label: rules.gateName['CM'] || 'Content manager',
+     who: person ? (String(person.name).split(' ')[0] ?? '') : '',
+     people: [holder],
+     kind: 'wait',
 diff --git a/sheet/logic/approval/flow-check/flowEffects.ts b/sheet/logic/approval/flow-check/flowEffects.ts
 index 5527324..b4a2935 100644
 --- a/sheet/logic/approval/flow-check/flowEffects.ts
@@ -2685,6 +2846,19 @@ index 5527324..b4a2935 100644
      return `${gate.holder || '-'}:${signedOf(gate)}${own}`;
    });
    return `${state.cut}${state.draft}|${state.seat}|${state.author}|${gates.join(',')}`;
+diff --git a/sheet/logic/approval/flow-check/flowViews.ts b/sheet/logic/approval/flow-check/flowViews.ts
+index a31b5c6..e611379 100644
+--- a/sheet/logic/approval/flow-check/flowViews.ts
++++ b/sheet/logic/approval/flow-check/flowViews.ts
+@@ -198,7 +198,7 @@ function isReady({ walk, state }: FlowAt): boolean {
+       kind: 'cm',
+     },
+   );
+-  const label = CATALOG.states.ready?.label;
++  const label = CATALOG.states['ready']?.label;
+   return GATE_RULES.stateChip(view) === (label || 'ready');
+ }
+ 
 diff --git a/sheet/logic/approval/gate-rules/gateDialog.ts b/sheet/logic/approval/gate-rules/gateDialog.ts
 index f913540..4ba6ddf 100644
 --- a/sheet/logic/approval/gate-rules/gateDialog.ts
@@ -2766,6 +2940,51 @@ index 206228f..e59642c 100644
    todoSituationOf,
  };
 -export type { LanguageFacts };
+diff --git a/sheet/logic/approval/gate-rules/gateWords.ts b/sheet/logic/approval/gate-rules/gateWords.ts
+index f3ba36f..a359f20 100644
+--- a/sheet/logic/approval/gate-rules/gateWords.ts
++++ b/sheet/logic/approval/gate-rules/gateWords.ts
+@@ -12,21 +12,7 @@ function messages(): Messages {
+   return MESSAGES;
+ }
+ 
+-// each word read at the call off messages.ts, never copied here
+-function wordsOf(
+-  keys: Readonly<Record<string, string>>,
+-  read: (key: string) => string,
+-): Readonly<Record<string, string>> {
+-  const words: Record<string, string> = {};
+-  for (const [name, key] of Object.entries(keys))
+-    Object.defineProperty(words, name, {
+-      enumerable: true,
+-      get: () => read(key),
+-    });
+-  return words;
+-}
+-
+-const BAR_LABEL = wordsOf(
++const BAR_LABEL = MESSAGES.liveWords(
+   Object.fromEntries(
+     [
+       'seat',
+@@ -46,7 +32,7 @@ const BAR_LABEL = wordsOf(
+ );
+ 
+ // a greyed reason is its refusal's line
+-const BAR_WHY = wordsOf(
++const BAR_WHY = MESSAGES.liveWords(
+   {
+     trashed: 'document.trashed',
+     checks: 'version.checks_failing',
+@@ -122,7 +108,7 @@ function joinNames(list: readonly string[]): string {
+ // the content manager's form, for his menu: the languages named
+ function notWrittenLine(keys?: readonly string[]): string {
+   const line =
+-    messages().refusal('locale.not_all_written').variants?.inCharge ?? '';
++    messages().refusal('locale.not_all_written').variants?.['inCharge'] ?? '';
+   return line.replace('{languages}', joinNames((keys ?? []).map(nameOf)));
+ }
+ 
 diff --git a/sheet/logic/approval/gate-rules/manageRows.ts b/sheet/logic/approval/gate-rules/manageRows.ts
 index ed25ae2..08a2b9b 100644
 --- a/sheet/logic/approval/gate-rules/manageRows.ts
@@ -2791,6 +3010,33 @@ index ed25ae2..08a2b9b 100644
      live,
      moves: ask.control === 'radio',
      reason,
+diff --git a/sheet/logic/approval/gate-rules/manageWindow.ts b/sheet/logic/approval/gate-rules/manageWindow.ts
+index 26d0ef1..59b0b78 100644
+--- a/sheet/logic/approval/gate-rules/manageWindow.ts
++++ b/sheet/logic/approval/gate-rules/manageWindow.ts
+@@ -45,10 +45,10 @@ function ctaOf(
+   const { labels } = words;
+   if (behalf) {
+     if (tally.signs)
+-      return words.fill(labels.windowApprove, { count: tally.signs }) ?? '';
++      return words.fill(labels['windowApprove'], { count: tally.signs }) ?? '';
+     return allSigned
+-      ? labels.windowNothingToApprove
+-      : labels.windowNothingSelected;
++      ? labels['windowNothingToApprove']
++      : labels['windowNothingSelected'];
+   }
+   const parts = [
+     tally.asks ? `Assign ${tally.asks}` : '',
+@@ -57,7 +57,7 @@ function ctaOf(
+   const said = parts.filter(Boolean).join(' · ');
+   return said
+     ? said.charAt(0).toUpperCase() + said.slice(1)
+-    : labels.windowNobodySelected;
++    : labels['windowNobodySelected'];
+ }
+ 
+ // your own gates are signed from the bar: the window neither asks you nor stands in for you
 diff --git a/sheet/logic/approval/role-combinations/combinationFacts.ts b/sheet/logic/approval/role-combinations/combinationFacts.ts
 index bbde459..6ccbdb6 100644
 --- a/sheet/logic/approval/role-combinations/combinationFacts.ts
@@ -2841,6 +3087,98 @@ index a04ce6c..e69f448 100644
    SentenceRow,
    RoleRow,
  };
+diff --git a/sheet/logic/assembly/content-assembly/typeConfig.ts b/sheet/logic/assembly/content-assembly/typeConfig.ts
+index ea4abcc..66d74ab 100644
+--- a/sheet/logic/assembly/content-assembly/typeConfig.ts
++++ b/sheet/logic/assembly/content-assembly/typeConfig.ts
+@@ -47,7 +47,7 @@ function componentsOf(row: TypeRow): Components {
+ 
+ // the viewports a type is read on: its components' narrowing, both when it names none
+ const viewportsOf = (row: TypeRow): readonly string[] =>
+-  row.narrow?.components?.viewports ?? ['desktop', 'mobile'];
++  row.narrow?.['components']?.['viewports'] ?? ['desktop', 'mobile'];
+ 
+ // a type's words are its channel's config, every kind alike
+ function wordsOf(row: TypeRow): Pick<Config, 'label' | 'name'> {
+diff --git a/sheet/logic/assembly/content-assembly/typePeople.ts b/sheet/logic/assembly/content-assembly/typePeople.ts
+index 566bbe3..bc5fa38 100644
+--- a/sheet/logic/assembly/content-assembly/typePeople.ts
++++ b/sheet/logic/assembly/content-assembly/typePeople.ts
+@@ -24,7 +24,7 @@ function peopleOf(row: PeopleRow): People {
+       )
+       .map((variant) => {
+         const role = variant.role ?? '';
+-        const excluded = row.narrow?.[role]?.exclude ?? [];
++        const excluded = row.narrow?.[role]?.['exclude'] ?? [];
+         return [
+           role,
+           teamOf(variant).filter((email) => !excluded.includes(email)),
+@@ -48,7 +48,7 @@ function rosterErrors(
+         .filter((email) => directory && !directory.personBySubject(email))
+         .map((email) => `${email} signs in as nobody`),
+     ),
+-    ...(people.CM?.length ? [] : ['nobody is its content manager']),
++    ...(people['CM']?.length ? [] : ['nobody is its content manager']),
+     ...gates
+       .filter((key) => !people[key]?.length)
+       .map((key) => `${key} has nobody in its pool`),
+@@ -80,7 +80,7 @@ function peopleErrors(
+   const listed = gates ?? [];
+   const errors = [...rosterErrors(listed, own), ...twiceErrors(listed, own)];
+   if (errors.length) return errors;
+-  return (own.CM ?? [])
++  return (own['CM'] ?? [])
+     .filter(
+       (author) =>
+         !listed.some((key) =>
+diff --git a/sheet/logic/assembly/content-assembly/typePools.ts b/sheet/logic/assembly/content-assembly/typePools.ts
+index fbf05b9..76ef74c 100644
+--- a/sheet/logic/assembly/content-assembly/typePools.ts
++++ b/sheet/logic/assembly/content-assembly/typePools.ts
+@@ -40,7 +40,7 @@ function poolOf(role: string, slug: string | undefined): readonly Holder[] {
+   const variants = (row.modules ?? []).flatMap(
+     (key) => modules.variant(key) ?? [],
+   );
+-  const excluded = row.narrow?.[role]?.exclude ?? [];
++  const excluded = row.narrow?.[role]?.['exclude'] ?? [];
+   return emailsOf(role, variants)
+     .filter((email) => !excluded.includes(email))
+     .flatMap((email) => directory.personBySubject(email) ?? []);
+diff --git a/sheet/logic/assembly/content-check/moduleChecks.ts b/sheet/logic/assembly/content-check/moduleChecks.ts
+index 324ed33..2edd97a 100644
+--- a/sheet/logic/assembly/content-check/moduleChecks.ts
++++ b/sheet/logic/assembly/content-check/moduleChecks.ts
+@@ -43,7 +43,7 @@ function rowIssues(
+       .filter((role) => held(role) !== 1)
+       .map((role) => `${role} held by ${held(role)} teams, takes 1`),
+     ...Object.entries(type.narrow ?? {})
+-      .filter(([role, narrow]) => narrow.exclude && !held(role))
++      .filter(([role, narrow]) => narrow['exclude'] && !held(role))
+       .map(([role]) => `${role} excludes from no team`),
+   ].map((line) => `${type.slug} · ${line}`);
+ }
+@@ -101,7 +101,7 @@ function triggerIssues(
+   modules: Modules,
+ ): readonly string[] {
+   return rows.flatMap((type) => {
+-    const triggers = type.narrow?.how?.triggers ?? [];
++    const triggers = type.narrow?.['how']?.['triggers'] ?? [];
+     const how = variantsOf(type).find((one) => one.module === 'how');
+     return [
+       ...triggers
+diff --git a/sheet/logic/assembly/content-check/typeChecks.ts b/sheet/logic/assembly/content-check/typeChecks.ts
+index 8b45a2b..8f8932c 100644
+--- a/sheet/logic/assembly/content-check/typeChecks.ts
++++ b/sheet/logic/assembly/content-check/typeChecks.ts
+@@ -40,7 +40,7 @@ function excludeIssues(
+   variants: readonly Variant[],
+ ): readonly string[] {
+   return Object.entries(type.narrow ?? {}).flatMap(([role, narrow]) => {
+-    const exclude = narrow.exclude;
++    const exclude = narrow['exclude'];
+     if (!exclude) return [];
+     const team = variants.find((one) => one.role === role);
+     if (!team) return [`${role} excludes from no team`];
 diff --git a/sheet/logic/assembly/content-type-logic/boardTypes.ts b/sheet/logic/assembly/content-type-logic/boardTypes.ts
 index 4334fc9..2d8abca 100644
 --- a/sheet/logic/assembly/content-type-logic/boardTypes.ts
@@ -2909,6 +3247,31 @@ index e7f0d16..372f36e 100644
  
 -export type { ModuleWords };
  export { configOf, firstOfEmail, gateWord, moduleWords, partCell };
+diff --git a/sheet/logic/assembly/content-type-logic/typeAssembly.ts b/sheet/logic/assembly/content-type-logic/typeAssembly.ts
+index 6101b65..6da483e 100644
+--- a/sheet/logic/assembly/content-type-logic/typeAssembly.ts
++++ b/sheet/logic/assembly/content-type-logic/typeAssembly.ts
+@@ -28,16 +28,16 @@ function narrowLine(
+   slug: string,
+   [key, narrow]: readonly [string, Narrowing | undefined],
+ ) {
+-  if (narrow?.viewports)
++  if (narrow?.['viewports'])
+     return {
+       name: `${key} · viewports`,
+-      line: `${narrow.viewports.join(', ')} alone (T35)`,
++      line: `${narrow['viewports'].join(', ')} alone (T35)`,
+     };
+-  if (narrow?.triggers)
++  if (narrow?.['triggers'])
+     return { name: 'delivery · triggers', line: typeTriggers(slug).join(', ') };
+   return {
+     name: `${key} · excludes`,
+-    line: (narrow?.exclude ?? []).map(firstOfEmail).join(', '),
++    line: (narrow?.['exclude'] ?? []).map(firstOfEmail).join(', '),
+   };
+ }
+ 
 diff --git a/sheet/logic/capabilities/capabilityTypes.ts b/sheet/logic/capabilities/capabilityTypes.ts
 index 0831fce..860e07a 100644
 --- a/sheet/logic/capabilities/capabilityTypes.ts
@@ -2919,6 +3282,78 @@ index 0831fce..860e07a 100644
  
 -export type { Capability, CapabilityStep };
 +export type { Capability };
+diff --git a/sheet/logic/document/block-rules/blockWords.ts b/sheet/logic/document/block-rules/blockWords.ts
+index 23a715f..18976f7 100644
+--- a/sheet/logic/document/block-rules/blockWords.ts
++++ b/sheet/logic/document/block-rules/blockWords.ts
+@@ -12,29 +12,15 @@ const refusalsOf = (): Messages => {
+   return MESSAGES;
+ };
+ 
+-// each word read at the call off messages.ts, never copied here
+-function wordsOf(
+-  keys: Readonly<Record<string, string>>,
+-  read: (key: string) => string,
+-): Readonly<Record<string, string>> {
+-  const words: Record<string, string> = {};
+-  for (const [name, key] of Object.entries(keys))
+-    Object.defineProperty(words, name, {
+-      enumerable: true,
+-      get: () => read(key),
+-    });
+-  return words;
+-}
+-
+ // prettier-ignore
+-const BLOCK_LABEL = wordsOf(
++const BLOCK_LABEL = MESSAGES.liveWords(
+   { edit: 'blockEdit', done: 'blockDone', propose: 'blockPropose', update: 'blockUpdate', withdraw: 'blockWithdraw', comment: 'blockComment', history: 'blockHistory' },
+   (key) => labelsOf().label(key),
+ );
+ 
+ // five of these lines are copied into mailing-automation's refusals: a correction here is a re-port there
+ // prettier-ignore
+-const BLOCK_WHY = wordsOf(
++const BLOCK_WHY = MESSAGES.liveWords(
+   { sent: 'document.sent', bulk: 'block.in_bulk_edit', waiting: 'block.proposal_pending', noRights: 'actor.cannot_edit_source' },
+   (key) => refusalsOf().refusal(key).line,
+ );
+diff --git a/sheet/model/catalog/catalogRail.ts b/sheet/model/catalog/catalogRail.ts
+index 4aa3a99..ccfb8c4 100644
+--- a/sheet/model/catalog/catalogRail.ts
++++ b/sheet/model/catalog/catalogRail.ts
+@@ -55,7 +55,7 @@ const railRowOf =
+   (opened: Opened) =>
+   (one: Message): RailRow => {
+     const state = stateOf(one, opened);
+-    const shown = STATE[state] ?? STATE.draft;
++    const shown = STATE[state] ?? STATE['draft'];
+     return {
+       id: one.id,
+       slug: one.slug,
+diff --git a/sheet/model/catalog/catalogTypeRows.ts b/sheet/model/catalog/catalogTypeRows.ts
+index 36a3860..2422ae5 100644
+--- a/sheet/model/catalog/catalogTypeRows.ts
++++ b/sheet/model/catalog/catalogTypeRows.ts
+@@ -27,14 +27,14 @@ function rowOf({
+   const languages = type.languages?.on ?? type.languages?.offered ?? [];
+   return {
+     slug: type.slug,
+-    name: words.noun || type.name,
+-    article: words.article || 'a',
+-    plural: words.plural || type.name,
++    name: words['noun'] || type.name,
++    article: words['article'] || 'a',
++    plural: words['plural'] || type.name,
+     live: Boolean(type.built),
+     icon: category.channel ? category.icon : type.icon,
+     countProp: COUNT_PROP[type.slug],
+     langs: ['EN', ...languages],
+-    namePlaceholder: words.namePlaceholder,
++    namePlaceholder: words['namePlaceholder'],
+   };
+ }
+ 
 diff --git a/sheet/model/content-modules/contentModulesTypes.ts b/sheet/model/content-modules/contentModulesTypes.ts
 index 7dfea0b..24476b8 100644
 --- a/sheet/model/content-modules/contentModulesTypes.ts
@@ -2941,6 +3376,19 @@ index 5c27aaa..dd1a55c 100644
 -  PlaceholderType,
 -  TypeLanguages,
  };
+diff --git a/sheet/model/field-kinds/kindRows.ts b/sheet/model/field-kinds/kindRows.ts
+index 2cef451..b0327ce 100644
+--- a/sheet/model/field-kinds/kindRows.ts
++++ b/sheet/model/field-kinds/kindRows.ts
+@@ -38,7 +38,7 @@ const FIELD_KINDS: readonly FieldKind[] = [
+     },
+ 
+     get says(): FieldKind['says'] {
+-      return MESSAGES.validators.image.says;
++      return MESSAGES.validators['image'].says;
+     },
+ 
+     hint: '{types} · up to {max}',
 diff --git a/sheet/project.ts b/sheet/project.ts
 index dbcf477..5066d22 100644
 --- a/sheet/project.ts
@@ -3016,6 +3464,19 @@ index f786eda..678b89d 100644
  
 -export type { Handler, LoggedEvent, OpenThread, Payload, Step, WalkState };
 +export type { Handler, LoggedEvent, Payload, Step, WalkState };
+diff --git a/sheet/screens/content-list/editorTabs.ts b/sheet/screens/content-list/editorTabs.ts
+index cb76bd9..8aa64a2 100644
+--- a/sheet/screens/content-list/editorTabs.ts
++++ b/sheet/screens/content-list/editorTabs.ts
+@@ -35,7 +35,7 @@ function triggersOf(slug: string): readonly string[] {
+   const names: Readonly<
+     Record<string, { readonly name?: string } | undefined>
+   > = moduleWords().triggers ?? {};
+-  return (row?.narrow?.how?.triggers ?? []).map(
++  return (row?.narrow?.['how']?.['triggers'] ?? []).map(
+     (key) => names[key]?.name || key,
+   );
+ }
 diff --git a/sheet/screens/content-list/rowState.ts b/sheet/screens/content-list/rowState.ts
 index 0a95ee5..04f7352 100644
 --- a/sheet/screens/content-list/rowState.ts
@@ -3026,6 +3487,19 @@ index 0a95ee5..04f7352 100644
  
 -export type { Versioned };
  export { barOf, stateOf };
+diff --git a/sheet/screens/content-list/rowStrings.ts b/sheet/screens/content-list/rowStrings.ts
+index 23c3596..243ff48 100644
+--- a/sheet/screens/content-list/rowStrings.ts
++++ b/sheet/screens/content-list/rowStrings.ts
+@@ -110,7 +110,7 @@ function chip(document: {
+   const states: Readonly<
+     Record<string, Catalog['states'][string] | undefined>
+   > = CATALOG.states;
+-  return states[document.state] || states.draft;
++  return states[document.state] || states['draft'];
+ }
+ 
+ export type { CatalogDocument };
 diff --git a/sheet/screens/screen-view/blockRows.ts b/sheet/screens/screen-view/blockRows.ts
 index 89863c4..a1d9f28 100644
 --- a/sheet/screens/screen-view/blockRows.ts
@@ -3048,6 +3522,23 @@ index ff8398a..d2edf73 100644
  
 -export type { ViewInputs };
  export { focusOf, messageOf, personOf, rowsOf, baselineOf, versionRowOf };
+diff --git a/sheet/screens/wireframes/screenContracts.ts b/sheet/screens/wireframes/screenContracts.ts
+index 6586ba0..3a23e0a 100644
+--- a/sheet/screens/wireframes/screenContracts.ts
++++ b/sheet/screens/wireframes/screenContracts.ts
+@@ -43,8 +43,10 @@ interface Written {
+ 
+ // the sample's own words, read off blocks.ts: hero's second revision
+ function heroDraft(): string {
+-  const revision = BLOCKS.byId.hero?.revisions.find((one) => one.id === 'r2');
+-  return revision ? String(revision.data.text) : '';
++  const revision = BLOCKS.byId['hero']?.revisions.find(
++    (one) => one.id === 'r2',
++  );
++  return revision ? String(revision.data['text']) : '';
+ }
+ 
+ // pane: what a screen shows with no document open · asked: when the approvers were pinged · thread: the window onto the block's argument
 diff --git a/sheet/screens/wireframes/screenRows.ts b/sheet/screens/wireframes/screenRows.ts
 index a174fc9..c9d85ac 100644
 --- a/sheet/screens/wireframes/screenRows.ts
@@ -3067,6 +3558,105 @@ index 1e8082f..a84aa0c 100644
  
 -export type { GlossaryPoint, ScreenWord, ScreenWordRow, Term };
 +export type { GlossaryPoint, ScreenWordRow, Term };
+diff --git a/sheet/words/messages.ts b/sheet/words/messages.ts
+index dfd8012..5228135 100644
+--- a/sheet/words/messages.ts
++++ b/sheet/words/messages.ts
+@@ -1,7 +1,7 @@
+ /**
+  * - `situations`, `outcome`, `refusals` · State, Move, Outcome, one sentence each
+- * - `say`, `words`, `screenWords`, `logWords`, `modules` · the cells a screen reads
+- * - `messageCells`, `messageChecks`, `messageUsage`, `sayWord` · lines, rules, a key
++ * - `say`, `words`, `screenWords`, `logWords`, `modules`, `sayWord` · cells, keys
++ * - `messageCells`, `messageChecks`, `messageUsage`, `liveWords` · lines, rules
+  */
+ import {
+   ACTOR_WORDS,
+@@ -10,6 +10,7 @@ import {
+   LOG,
+   VALIDATOR_WORD_KEYS,
+ } from './messages/logWords.ts';
++import { liveWords } from './messages/liveWords.ts';
+ import { cells } from './messages/messageCells.ts';
+ import {
+   check,
+@@ -59,6 +60,7 @@ export {
+   LABEL as labels,
+   label,
+   sayWord,
++  liveWords,
+   HOVER as hovers,
+   SCREEN as screen,
+   REFUSAL as refusals,
+diff --git a/sheet/words/messages/liveWords.ts b/sheet/words/messages/liveWords.ts
+new file mode 100644
+index 0000000..79f1884
+--- /dev/null
++++ b/sheet/words/messages/liveWords.ts
+@@ -0,0 +1,21 @@
++/**
++ * - `liveWords` · words by name, each read off messages.ts at the call
++ */
++
++// a word by its name, sure; by a key a table holds, maybe none
++type LiveWords<Name extends string> = Readonly<Record<Name, string>> &
++  Readonly<Partial<Record<string, string>>>;
++
++// a name's word is its key's, read when it is read: a message edited shows at once, never copied
++const liveWords = <Name extends string>(
++  keys: Readonly<Record<Name, string>>,
++  read: (key: string) => string,
++): LiveWords<Name> =>
++  new Proxy(keys, {
++    get: (target, name): unknown =>
++      typeof name === 'string' && Object.hasOwn(target, name)
++        ? read(String(Reflect.get(target, name)))
++        : undefined,
++  });
++
++export { liveWords };
+diff --git a/sheet/words/messages/outcome.ts b/sheet/words/messages/outcome.ts
+index b7c8465..11473b7 100644
+--- a/sheet/words/messages/outcome.ts
++++ b/sheet/words/messages/outcome.ts
+@@ -21,13 +21,13 @@ const OUTCOME = {
+     body: 'It waits for {holder} again. Your reason is shown with it.',
+   },
+   createVersionDrops: {
+-    title: LABEL.draftNew + '?',
++    title: LABEL['draftNew'] + '?',
+     body: '{names} will need to approve version {n} again. This cannot be undone.',
+     none: 'Nobody has approved {version}, so no approval is lost. This cannot be undone.',
+   },
+   // the send · Send to Batch reads Send
+   discardChanges: {
+-    title: LABEL.draftDiscard + '?',
++    title: LABEL['draftDiscard'] + '?',
+     body: 'All blocks go back to {version}. Approvals stay.',
+   },
+   assignedToYou: { notice: '{gate} is yours now' },
+diff --git a/sheet/words/messages/refusals.ts b/sheet/words/messages/refusals.ts
+index 0b0192e..298df37 100644
+--- a/sheet/words/messages/refusals.ts
++++ b/sheet/words/messages/refusals.ts
+@@ -21,7 +21,7 @@ function refusal(key: string): Refusal {
+ // a line whose count is 1 reads its one variant, built off the refusals, never typed twice
+ const ONE: Readonly<Record<string, string>> = Object.fromEntries(
+   Object.values(REFUSAL).flatMap((row) =>
+-    row.variants?.one ? [[row.line, row.variants.one]] : [],
++    row.variants?.['one'] ? [[row.line, row.variants['one']]] : [],
+   ),
+ );
+ 
+@@ -30,7 +30,7 @@ function fill(
+   data?: Fills | null,
+ ): string | null {
+   const one =
+-    line != null && data && Number(data.count) === 1
++    line != null && data && Number(data['count']) === 1
+       ? ONE[String(line)]
+       : undefined;
+   const text = one || line;
 diff --git a/syncpack.config.ts b/syncpack.config.ts
 new file mode 100644
 index 0000000..983795d

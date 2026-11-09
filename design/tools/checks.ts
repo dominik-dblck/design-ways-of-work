@@ -59,7 +59,7 @@ function mirrorOf(mode: string): Mirror | null {
     console.error(`no built project at ${root} · run yarn build first`);
     return null;
   }
-  const copyTo = process.env.DESIGN_SAVE ? sourceOf : null;
+  const copyTo = process.env['DESIGN_SAVE'] ? sourceOf : null;
   return mirrorAt(root, { mode, copyTo });
 }
 

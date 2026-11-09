@@ -136,7 +136,7 @@ const heldToItsBaseline = (scan: string, offenders: readonly string[]): Drift =>
     folder: path.join(scope.root, BASELINES),
     scan,
     offenders,
-    asked: process.env.BASELINES,
+    asked: process.env['BASELINES'],
     counted: false,
   });
 
@@ -149,7 +149,7 @@ const heldToItsCount = (
     folder: path.join(scope.root, BASELINES),
     scan,
     offenders: [...counts].map(([key, count]) => `${key} · ${String(count)}`),
-    asked: process.env.BASELINES,
+    asked: process.env['BASELINES'],
     counted: true,
   });
 
