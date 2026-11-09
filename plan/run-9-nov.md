@@ -14,7 +14,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 | 2 | Rules | 10 | 10 |
 | 3 | Names | 6 | 6 |
 | 4 | Tools | 8 | 8 |
-| 7 | P1 release | 4 | 5 |
+| 7 | P1 release | 5 | 5 |
 | 5 | e2e | 2 | 4 |
 | 6 | Port design | 0 | 6 |
 
@@ -43,6 +43,7 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
 - 15:03 · stage 7 · 2 of 5 · release 4 out, 81a1804, sent
 - 15:17 · stage 7 · 3 of 5 · 4.1 committed feb6056: spec merged, screens, edge 13
 - 15:19 · stage 7 · 4 of 5 · 4.1 released 09c0ab9, tag release-2026-11-09-2, sent
+- 15:42 · stage 7 · 5 of 5 · main merged into restructure c4ed4d7, port rebased 1ec3346, verify ALL SAME
 
 - 08:24 · stage 1 · 1 of 5 · the build side's skills to legacy/ (8bfcd8e)
 - 08:51 · stage 1 · 2 of 5 · 7g commitlint (d282df5)
@@ -393,6 +394,13 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
   The rehearsal's lint caught my release-4 code: typeJourneys.ts' testOf nested a ternary (wow's
   sonarjs/no-nested-conditional, not the product's rule); the port splits it into addWordsOf, the words the same.
   verify: ALL SAME, 83 differences expected.
+
+- Stage 5 task 3, half 1 of the registry gate: a flow reaches an element by its registry id alone. ESLint
+  `no-restricted-syntax` on a browser tier's flows (`{screensRoot}/**/*.ts`, its registry aside), `FLOW_SHAPES`
+  (`flowShapes.ts`: getByRole/Text/Label/Placeholder, a `locator` handed a string); the flows' list carries
+  every file's and a test's shapes (one rule key a file), and their time moved. `restricted` and `testRules`
+  left eslintConfig.ts (at 200 lines) for files of their own. The rule's row in tests.ts. My call, no visible
+  effect: the shapes' name `FLOW_SHAPES`, as `E2E_…` is the production rule's test switch.
 
 ## Questions for the PM
 

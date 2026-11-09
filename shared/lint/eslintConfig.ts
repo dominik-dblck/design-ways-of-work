@@ -18,10 +18,10 @@ import type { RepoScope } from '../repoScope.ts';
 import { componentTiers } from './componentTiers.ts';
 import { resolutionOf } from './resolution.ts';
 import { MARKUP_SHAPES, REACT_SHAPES } from './reactShapes.ts';
-import { ENTRY_SHAPES, PART_SHAPES, SHAPES } from './shapes.ts';
-import type { Shape } from './shapes.ts';
-import { SONAR, SONAR_IN_TESTS } from './sonarRules.ts';
-import { TEST_SHAPES } from './testShapes.ts';
+import { restricted } from './restricted.ts';
+import { ENTRY_SHAPES, PART_SHAPES } from './shapes.ts';
+import { SONAR } from './sonarRules.ts';
+import { testRules } from './testRules.ts';
 import { wowPlugin } from './wowPlugin.ts';
 
 const TYPES: Linter.RulesRecord = {
@@ -90,13 +90,6 @@ const sourceRules = (root: string): Linter.Config => ({
   },
 });
 
-// the shapes every file refuses, and those its kind refuses besides
-const restricted = (
-  ...kinds: readonly (readonly Shape[])[]
-): Linter.RulesRecord => ({
-  'no-restricted-syntax': ['error', ...SHAPES, ...kinds.flat()],
-});
-
 // React code, entries and parts are three sets no file is in twice; markup takes a key of its own
 const scopedRules = (scope: RepoScope): Linter.Config[] =>
   [
@@ -149,34 +142,6 @@ const tableRules = (scope: RepoScope): readonly Linter.Config[] => {
         },
       ];
 };
-
-const testRules = (scope: RepoScope): Linter.Config[] => [
-  {
-    files: ['**/*.test-d.ts'],
-    rules: {
-      '@typescript-eslint/ban-ts-comment': [
-        'error',
-        { 'ts-expect-error': 'allow-with-description' },
-      ],
-    },
-  },
-  {
-    files: [...testsOf(scope)],
-    rules: {
-      ...restricted(TEST_SHAPES),
-      ...SONAR_IN_TESTS,
-      '@typescript-eslint/consistent-type-assertions': 'off',
-      'wow/no-mock-of-its-subject': 'error',
-    },
-  },
-  {
-    // the browser tier's framework runs inside tests: its time is moved as theirs is
-    files: [...testsOf(scope), 'shared/e2e/**'],
-    rules: {
-      'wow/time-is-moved-not-waited': ['error', { named: scope.namedWaits }],
-    },
-  },
-];
 
 const DISABLES: Linter.Config = {
   linterOptions: { reportUnusedDisableDirectives: 'error' },
