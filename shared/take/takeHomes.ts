@@ -1,6 +1,6 @@
 /**
  * - `HOMES` · each home of the way of working and where it lands in a product
- * - `filesOfHomes` · each file of the homes named: [in wow, in the product]
+ * - `filesOfHomes` · each file of the homes given: [in wow, in the product]
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -23,24 +23,19 @@ function filesUnder(folder: string): readonly string[] {
     );
 }
 
-// a home wow does not have is a mistake in the product's list, so the take stops on it
+// each home given as [its folder in wow, its folder in the product]
 function filesOfHomes({
   source,
   homes,
 }: {
   readonly source: string;
-  readonly homes: readonly string[];
+  readonly homes: readonly (readonly [string, string])[];
 }): readonly (readonly [string, string])[] {
-  return homes.flatMap((home) => {
-    const at = HOMES[home];
-    if (at === undefined)
-      throw new Error(
-        `${home} is no home of the way of working: ${Object.keys(HOMES).join(', ')}`,
-      );
-    return filesUnder(path.join(source, home)).map(
+  return homes.flatMap(([home, at]) =>
+    filesUnder(path.join(source, home)).map(
       (file) => [path.join(source, home, file), path.join(at, file)] as const,
-    );
-  });
+    ),
+  );
 }
 
 export { filesOfHomes, HOMES };

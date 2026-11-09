@@ -23,7 +23,7 @@ const LINKED_HOMES: readonly (readonly [string, string])[] =
 
 // each file a product links, [its path here, its path in the product]
 const linkedFiles = (): readonly (readonly [string, string])[] =>
-  filesOfHomes({ source: HERE, homes: Object.keys(HOMES) });
+  filesOfHomes({ source: HERE, homes: LINKED_HOMES });
 
 // what a copy's last rehearsal linked, kept beside the copy's own history
 const linkedListOf = (copy: string): string =>

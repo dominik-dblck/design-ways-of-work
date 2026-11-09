@@ -7,7 +7,7 @@ import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
-import { filesOfHomes } from './takeHomes.ts';
+import { filesOfHomes, HOMES } from './takeHomes.ts';
 import { planTake } from './takePlan.ts';
 import type { Plan } from './takePlan.ts';
 import { takenFiles, writeExclude, writeRecord } from './takeRecord.ts';
@@ -28,15 +28,22 @@ const digestOf = (file: string): string | undefined =>
     ? createHash('sha256').update(fs.readFileSync(file)).digest('hex')
     : undefined;
 
-// the product names what it takes: nothing by default
-function homesTaken(): readonly string[] {
+// the product names what it takes, nothing by default; a home wow lacks is a mistake in its list
+function homesTaken(): readonly (readonly [string, string])[] {
   const wow = Object(readJson(path.join(ROOT, 'package.json')).wow);
   const takes: unknown = wow.takes;
   if (!Array.isArray(takes) || takes.length === 0)
     throw new Error(
       'package.json · wow.takes names no home of the way of working',
     );
-  return takes.map(String);
+  return takes.map(String).map((home) => {
+    const at = HOMES[home];
+    if (at === undefined)
+      throw new Error(
+        `package.json · wow.takes · ${home} is no home of the way of working: ${Object.keys(HOMES).join(', ')}`,
+      );
+    return [home, at] as const;
+  });
 }
 
 // git's names with -z: split on NUL, never quoted

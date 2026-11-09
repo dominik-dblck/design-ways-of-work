@@ -164,6 +164,18 @@ describe('a take run in a product', () => {
     expect(take({ ...product, isCheck: true }).status).toBe(0);
   });
 
+  it('stops on a home the way of working does not have, writing nothing', () => {
+    const product = aProduct();
+    fs.writeFileSync(
+      path.join(product.root, 'package.json'),
+      JSON.stringify({ name: 'product', wow: { takes: ['nowhere'] } }),
+    );
+    const ran = take(product);
+    expect(ran.status).not.toBe(0);
+    expect(ran.out).toContain('nowhere is no home of the way of working');
+    expect(fs.existsSync(path.join(product.root, 'shared'))).toBe(false);
+  });
+
   it('changes nothing when run again', () => {
     const product = aProduct();
     take(product);
