@@ -15,12 +15,22 @@ const OWN_FOLDERS = [
   'design-system',
   'notes',
 ];
-const ANY_NAME: FolderRules = { '.dir': 'regex:.*' };
+// free below: its folders and files take their kind's case (shared/lint/fileRules.ts)
+const ANY_NAME: FolderRules = {};
 
 const parentOf = (folder: string): string =>
   folder.includes('/') ? folder.slice(0, folder.lastIndexOf('/')) : '';
 const escaped = (name: string): string =>
   name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+// an entry's folder holds its parts and takes its entry's name as it is; below it, the case
+const entryFolders = (
+  entries: readonly string[],
+): readonly (readonly [string, FolderRules])[] =>
+  entries.flatMap((folder) => [
+    [folder, { '.dir': `regex:^${escaped(path.posix.basename(folder))}$` }],
+    [`${folder}/*`, ANY_NAME],
+  ]);
 
 // a home that bundles names its folders, its child homes and its entries'; any other home is free below
 function folderRules(): Readonly<Record<string, FolderRules>> {
@@ -58,7 +68,10 @@ function folderRules(): Readonly<Record<string, FolderRules>> {
         '.dir': `regex:^(?:${[...(folder === '' ? [] : [path.posix.basename(folder)]), ...childrenOf(folder)].map(escaped).join('|')})$`,
       },
     ]),
-    ...free.map((folder) => [folder, ANY_NAME]),
+    ...free
+      .filter((folder) => !entries.includes(folder))
+      .map((folder) => [folder, ANY_NAME]),
+    ...entryFolders(entries),
   ]);
 }
 

@@ -12,14 +12,16 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 | stage | what | done | of |
 | 1 | Harness | 5 | 5 |
 | 2 | Rules | 10 | 10 |
-| 3 | Names | 0 | 7 |
+| 3 | Names | 2 | 6 |
 | 4 | Tools | 0 | 8 |
 | 5 | e2e | 0 | 4 |
-| 6 | Port design | 0 | 4 |
+| 6 | Port design | 0 | 5 |
 
 ## History
 - 09:38 · stage 2 · 9 of 10 · R1-R3 runner fixes: strict flags, NUL names, eslint --fix on files staged whole (38d402e)
 - 09:38 · stage 2 · 10 of 10 · step 2 verified ALL SAME, 50 expected; committed 38d402e
+- 10:10 · stage 3 · 1 of 7 · file case by kind, nameCases, git's ignores (facc5a5)
+- 10:10 · stage 3 · 2 of 7 · 18 renames by the one mover (facc5a5)
 
 - 08:24 · stage 1 · 1 of 5 · the build side's skills to legacy/ (8bfcd8e)
 - 08:51 · stage 1 · 2 of 5 · 7g commitlint (d282df5)
@@ -119,6 +121,12 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
   (`namedPaths.docs`), so notes and release records keep what they named. A first run rewrote the copy's notes
   and `records/release-3-2.md`: undone, the mover fixed, run again.
 
+- Step 3 task 3, a folder's case by its kind: kebab-case in the default, a tool's own by its convention (`.claude`,
+  `__tests__`); a folder holding a module's parts takes its module's name (a component's PascalCase, held by the
+  component shape; an entry's, held by the design side's folder rules: its name, and the case below it); a
+  framework's names (Next's `[id]`) are a product's case (eagle-dev), the shared tests pass one. The copy: its
+  records' folders by id (`E04`, `T-E18-00`).
+
 ## Questions for the PM
 
 - The design side's 71 entries keep kebab names (`sheet-status.ts`): the artifact and the build side read them by
@@ -126,7 +134,11 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
   exception? Held as the exception until the PM's word (eagle-dev: the build side's fixtures and skills follow a
   release either way).
   **PM 9 Nov · A**: "zmieniamy nazwy w wydaniu portu (etap 6) => unifikujemy repo". The 71 renamed by script in
-  step 3 (a task added: 7 of them), released with the port on the PM's word; the entries' exception goes.
+  step 6 (a task added there: 5 of them), inside the port's release on the PM's word; the entries' exception goes
+  then. Why step 6, not 3: the names sit in a guard snapshot (`content-type-snapshot.json`, its retake the PM's
+  word, given with the release) and in frozen notebooks and decisions, which keep what they named; the rename
+  rewrites the live pointers alone (capabilities, the source map, imports, skills, configs), each `X.ts`, `X.js`
+  and `X/` of a renamed entry.
   My call: a folder holding one module's parts takes that module's name as it is (`sheetStatus/` beside
   `sheetStatus.ts`), as a component's folder takes its component's: one name for one thing.
 

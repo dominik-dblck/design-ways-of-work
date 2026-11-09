@@ -44,14 +44,16 @@ const BANNED_EXTENSIONS: readonly Banned[] = [
   { extension: '.cjs', why: SCRIPTS },
 ];
 
-// a name a tool or an agent opens by its convention
+// a name a tool or an agent opens by its convention, a file's (`README`) or a folder's (`.claude`, `__tests__`)
 const FIXED = ['README', 'SKILL', 'CLAUDE', 'AGENTS'];
 const CODE = 'camelCase';
 const VIEW = 'camelCase | PascalCase';
 const PROSE = `kebab-case | regex:^_[a-z0-9]+(?:-[a-z0-9]+)*$ | regex:^(?:${FIXED.join('|')})$`;
+const FOLDER = 'kebab-case | regex:^\\.[a-z]+$ | regex:^__[a-z]+__$';
 
 // ls-lint reads a kind from a name's first dot, and `.ts` holds no `.test.ts`: each is its own
 const CASE_BY_KIND: FolderRules = {
+  '.dir': FOLDER,
   '.ts': CODE,
   '.mts': CODE,
   '.d.ts': CODE,

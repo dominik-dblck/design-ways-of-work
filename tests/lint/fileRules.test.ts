@@ -1,6 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import { lintedTree } from './lintedTree.ts';
 
+// a framework's folder names are a product's case: Next's route segment
+const ROUTE = {
+  folders: ['app/api'],
+  kinds: { '.dir': 'regex:^\\[[a-z]+\\]$' },
+  why: 'a route segment, as Next names it',
+};
+
 const FOLDERS = {
   app: { '.ts': 'camelCase' },
   'app/components': { '.ts': 'PascalCase' },
@@ -17,7 +24,7 @@ describe("a repository's folder rules", () => {
           'app/components/Mark.ts',
           'app/components/inner/lower.ts',
         ],
-        { folders: FOLDERS, ignore: [], cases: [] },
+        { folders: FOLDERS, ignore: [], cases: [ROUTE] },
       ),
     ).toEqual([
       'app/api/[id]/Bad_Name.ts',
@@ -64,7 +71,7 @@ describe("a repository's folder rules", () => {
       lintedTree(['app/api/[id]/route.ts', 'app/api/i/route.ts'], {
         folders: { ...FOLDERS, 'app/api/*': { '.ts': 'exists:0' } },
         ignore: [],
-        cases: [],
+        cases: [ROUTE],
       }),
     ).toEqual(['app/api/[id]', 'app/api/i']);
   });
@@ -125,5 +132,19 @@ describe("a repository's folder rules", () => {
         cases: [],
       }),
     ).toEqual(['shape']);
+  });
+  it("a folder is kebab-case, a tool's own folder named by its convention", () => {
+    expect(
+      lintedTree(
+        [
+          'good-one/a.ts',
+          'Bad_Dir/a.ts',
+          'E04/a.ts',
+          '.claude/notes.md',
+          '__tests__/aCase.test.ts',
+        ],
+        { folders: {}, ignore: [], cases: [] },
+      ),
+    ).toEqual(['Bad_Dir', 'E04']);
   });
 });

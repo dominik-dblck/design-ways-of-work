@@ -42,8 +42,8 @@ const scope: RepoScope = {
     },
     {
       folders: ['tests/lint/fixtures'],
-      kinds: { '.ts': 'PascalCase' },
-      why: "a rule's fixture copies a product's tree: a component's own file is PascalCase",
+      kinds: { '.dir': 'PascalCase', '.ts': 'PascalCase' },
+      why: "a rule's fixture copies a product's tree: a component's folder and own file are PascalCase",
     },
   ],
   // a types file holds types alone, as the design side's (docs/rules/names.md)
