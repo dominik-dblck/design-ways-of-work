@@ -10,7 +10,7 @@
     "check:feature": "node shared/hooks/checkTier.ts feature",
     "test:rules": "vitest run tests/lint",
     "test:shared": "vitest run shared/tests",
-    "test:tools": "vitest run tests/sync tests/design-system",
+    "test:tools": "vitest run tests/sync tests/design-system tests/scripts",
     "sync:groups": "node shared/sync/syncGroups.ts",
     "tsc": "tsc --noEmit",
     "lint": "eslint .",

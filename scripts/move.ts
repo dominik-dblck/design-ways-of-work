@@ -10,12 +10,15 @@ import { pathToFileURL } from 'node:url';
 import type { RepoScope } from '../shared/repoScope.ts';
 import { isNamedBy } from '../shared/tests/globs.ts';
 import { mapRows } from './mapRows.ts';
+import {
+  barrelOf,
+  escaped,
+  importsMoved,
+  isARoot,
+  mentioned,
+} from './movePaths.ts';
+import type { Move } from './movePaths.ts';
 import { HERE, lastLinked, LINKED_HOMES, repoAt } from './repos.ts';
-
-interface Move {
-  readonly from: string;
-  readonly to: string;
-}
 
 interface Tree {
   readonly root: string;
@@ -30,13 +33,6 @@ const KEPT = /^(plan|legacy|ports)\//;
 const TEXT = /\.(ts|tsx|mts|md|json|yml|yaml|tsv|txt)$/;
 const CODE = /\.(ts|tsx|mts)$/;
 const PROSE = /\.md$/;
-const SPECIFIER =
-  /(from\s+|import\s*\(\s*|import\s+|export\s+\*\s+from\s+)(['"])(\.{1,2}\/[^'"]+)\2/g;
-const A_ROOT =
-  /^(?:design\/)?app\/components\/(atoms|molecules|organisms|templates)\/([^/]+)\/\2\.tsx$/;
-
-const escaped = (text: string): string =>
-  text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 const hasScope = (loaded: unknown): loaded is { readonly scope: RepoScope } =>
   typeof loaded === 'object' && loaded !== null && 'scope' in loaded;
@@ -66,46 +62,6 @@ const inProduct = (moves: readonly Move[]): readonly Move[] =>
       path.posix.join(home[1], file.slice(home[0].length + 1));
     return [{ from: at(from), to: at(to) }];
   });
-
-// where an import of a moved root lands: the barrel, unless the importer sits in the component's own folder
-function landingOf(target: string, importer: string): string {
-  if (!A_ROOT.test(target)) return target;
-  const folder = path.posix.dirname(target);
-  return importer.startsWith(`${folder}/`) ? target : `${folder}/index.ts`;
-}
-
-// a relative import of a moved file, or from one, written again from where each now stands
-function imported(file: string, tree: Tree): string {
-  const moves = new Map(tree.moves.map(({ from, to }) => [from, to]));
-  const now = moves.get(file) ?? file;
-  const text = fs.readFileSync(path.join(tree.root, now), 'utf8');
-  return text.replace(
-    SPECIFIER,
-    (whole, lead: string, quote: string, spec: string) => {
-      const target = path.posix.normalize(
-        path.posix.join(path.posix.dirname(file), spec),
-      );
-      const moved = moves.get(target) ?? target;
-      if (moved === target && now === file) return whole;
-      const relative = path.posix.relative(
-        path.posix.dirname(now),
-        landingOf(moved, now),
-      );
-      return `${lead}${quote}${relative.startsWith('.') ? relative : `./${relative}`}${quote}`;
-    },
-  );
-}
-
-// an exact path, never a longer name holding it: `tools/a.ts` in `design/tools/a.ts` is the same file
-const mentioned = (text: string, moves: readonly Move[]): string =>
-  moves.reduce(
-    (now, { from, to }) =>
-      now.replace(
-        new RegExp(`(?<![\\w.-])${escaped(from)}(?![\\w-])`, 'g'),
-        to,
-      ),
-    text,
-  );
 
 // each file read and written where it now stands; the count of those changed
 function rewritten(tree: Tree): number {
@@ -137,10 +93,15 @@ const bareNames = (tree: Tree): readonly string[] =>
       );
   });
 
-const barrelOf = (root: string): string => {
-  const name = path.posix.basename(root, '.tsx');
-  return `/**\n * - \`${name}\` · its face, read from outside its folder\n */\nexport { ${name} } from './${name}.tsx';\n`;
-};
+// a relative import of a moved file, or from one, written again from where each now stands
+function imported(file: string, tree: Tree): string {
+  const moves = new Map(tree.moves.map(({ from, to }) => [from, to]));
+  const text = fs.readFileSync(
+    path.join(tree.root, moves.get(file) ?? file),
+    'utf8',
+  );
+  return importsMoved(text, { file, moves });
+}
 
 // a folder its moves leave empty goes with them
 function movedByGit(moves: readonly Move[]): void {
@@ -192,7 +153,7 @@ async function main(): Promise<void> {
     }) +
     rewritten({ ...here, files: here.files.filter((file) => !isLinked(file)) });
   const copied = rewritten(there);
-  const roots = moves.map(({ to }) => to).filter((to) => A_ROOT.test(to));
+  const roots = moves.map(({ to }) => to).filter(isARoot);
   for (const root of roots)
     fs.writeFileSync(
       path.join(HERE, path.posix.dirname(root), 'index.ts'),

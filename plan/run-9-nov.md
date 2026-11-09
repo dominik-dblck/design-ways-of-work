@@ -13,7 +13,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 | 1 | Harness | 5 | 5 |
 | 2 | Rules | 10 | 10 |
 | 3 | Names | 6 | 6 |
-| 4 | Tools | 7 | 8 |
+| 4 | Tools | 8 | 8 |
 | 5 | e2e | 0 | 4 |
 | 6 | Port design | 0 | 6 |
 
@@ -33,6 +33,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 - 12:00 · stage 4 · 5 of 8 · flag D: optional properties, 93 to 0, flag on (task 5)
 - 12:25 · stage 4 · 6 of 8 · sync:groups shared core; words acronym miss mended (task 6)
 - 13:17 · stage 4 · 7 of 8 · design system guide as TS data, guide.md generated (task 7)
+- 13:20 · stage 4 · 8 of 8 · scripts' test home: retired, mapTree, movePaths (task 8)
 
 - 08:24 · stage 1 · 1 of 5 · the build side's skills to legacy/ (8bfcd8e)
 - 08:51 · stage 1 · 2 of 5 · 7g commitlint (d282df5)
@@ -298,6 +299,13 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
   Two places the guide's words and the tokens differed, settled by the tokens (the code reads them; no one sees
   a change): small tags 8px (`--r-xs`, "badges, small tags"), where the guide said 12px; the guide's 150–250ms for
   state changes kept as written beside `--motion-in` 320ms, an entrance's, not the same move.
+
+- Stage 4 task 8, the scripts' test home: `tests/scripts/`, run by `test:tools`. `isRetired`'s eight cases (a
+  retired skill by its folder, its files, one it never held; a retired file; a kept skill, a kept file; a folder
+  no skill names; a path outside `.claude/`) against legacy/ as it is. `closed()` and `treeOf` moved out of
+  `takeDevMap.ts` into `scripts/mapTree.ts`, their cases eagle-dev named: a cut last sibling, a cut middle one, a
+  cut after a folder with children. `move.ts`'s pure parts into `scripts/movePaths.ts` (imports written again,
+  exact paths, a root's landing and barrel), six cases; its runner keeps the files and git.
 
 ## Questions for the PM
 
