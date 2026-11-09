@@ -1,7 +1,7 @@
 /**
  * - `knipConfig` · knip from a scope: a file, an export or a type nobody reads
  * - its entries: the scope's, what it starts from, its generators, its hooks' runs
- * - `BROWSER_FACE` · the browser tier's files a product's flows import
+ * - and the browser tier's face, the files of `shared/e2e/` a product's flows import
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -64,4 +64,4 @@ const knipConfig = (scope: RepoScope): KnipSettings => ({
   ignore: [...scope.ignores, ...scope.productTrees, ...scope.generated],
 });
 
-export { BROWSER_FACE, knipConfig };
+export { knipConfig };
