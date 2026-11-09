@@ -544,3 +544,9 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
 - So the port waits on three morning words: links (task 1), legacy pages (task 4), and then the port's release with
   its snapshots (tasks 5, 6). Task 3 (`vendor/wow/`) is built once task 1 is answered: under B the links are not
   tracked, and the record's sources (`git ls-files`) must count them.
+- **PM, 9 Nov night, the list answered:** 1 · release 5.2 now (A, done: 0a5b672, tag release-2026-11-09-5) ·
+  2 · the email preview's version picker reads any version: E19 adds GetDocument ?version=N (A) · 3 · an asset
+  public under its unguessable key in E19's run, the repo's S3 bucket for tests, the target bucket later by its
+  address in the environment (A) · 4 · wow's files in eagle-design written by a script from a pinned wow tag and
+  ignored by its git (B) · 5 · the rename rewrites the 34 legacy pages' script paths (A) · 6 · R6 already on the
+  sheet since release 4: closed, no decision · 7 · release 5.3 mine once every check passes (A).
