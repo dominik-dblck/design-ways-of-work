@@ -13,7 +13,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 | 1 | Harness | 5 | 5 |
 | 2 | Rules | 10 | 10 |
 | 3 | Names | 6 | 6 |
-| 4 | Tools | 4 | 8 |
+| 4 | Tools | 5 | 8 |
 | 5 | e2e | 0 | 4 |
 | 6 | Port design | 0 | 5 |
 
@@ -30,6 +30,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 - 11:19 · stage 4 · 2 of 8 · Contents for long documents and their cut sections (task 2)
 - 11:36 · stage 4 · 3 of 8 · flag B: index signatures, 108 to 27 payload (task 3)
 - 11:50 · stage 4 · 4 of 8 · flag C: reads past an end, 41 to 0, flag on (task 4)
+- 12:00 · stage 4 · 5 of 8 · flag D: optional properties, 93 to 0, flag on (task 5)
 
 - 08:24 · stage 1 · 1 of 5 · the build side's skills to legacy/ (8bfcd8e)
 - 08:51 · stage 1 · 2 of 5 · 7g commitlint (d282df5)
@@ -225,6 +226,15 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
   `T | undefined`), so no reader moves; every optional property no value leaves undefined is now held strict, and
   a new one is. Open: a widened property every producer always sets could be required instead, a reading of 104
   declarations, for the port ticket's review. Types only: the published modules print the same.
+
+- Step 4 task 6, `sync:groups` (S0): its shared core in `shared/sync/` (a group's normal form: a shape's keys sorted,
+  a token's colour six lowercase digits and its px a number, a word's whitespace one space, quotes kept; its sha256;
+  the three forms compared leaf by leaf, each moved leaf with the side that moved it; `sync:groups` reads three
+  files of each group's data and kind and computes the forms itself, once for both sides, a table a group, never
+  refusing; the design side's package names the script, so knip reads its files), its tests (`tests/sync`, `test:tools` in the commit
+  tier), and its row in `shared/rules/checks.ts` (`review` on both sides until the ports). The design side's forms
+  emitter waits: which fields of each group count (the contract's, the components', the words') is agreed with the
+  build side first, and the payloads are typed in the port; both go to the port ticket.
 
 ## Questions for the PM
 

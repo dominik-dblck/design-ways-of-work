@@ -65,9 +65,15 @@ const scope: RepoScope = {
       writes: ['.prettierrc.json', '.prettierignore'],
     },
   ],
-  // its own checks beside the shared tiers: the copies, its rules' tests, the shared tests, its kept rules; the products' at the end
+  // its own checks beside the shared tiers: the copies, its rules' tests, the shared tests, its tools' tests, its kept rules; the products' at the end
   checks: {
-    commit: ['lint:copies', 'test:rules', 'test:shared', 'lint:kept'],
+    commit: [
+      'lint:copies',
+      'test:rules',
+      'test:shared',
+      'test:tools',
+      'lint:kept',
+    ],
     featureEnd: ['verify'],
   },
   // no file of its own runs code it built

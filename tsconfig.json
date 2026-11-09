@@ -11,6 +11,7 @@
     "scripts/**/*.ts",
     "shared/hooks/**/*.ts",
     "shared/lint/**/*.ts",
+    "shared/sync/**/*.ts",
     "shared/repoScope.ts",
     "shared/tests/**/*.ts",
     "scope.ts",
