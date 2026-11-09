@@ -15,8 +15,15 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 | 3 | Names | 6 | 6 |
 | 4 | Tools | 8 | 8 |
 | 7 | P1 release | 5 | 5 |
-| 5 | e2e | 3 | 4 |
+| 5 | e2e | 4 | 4 |
 | 6 | Port design | 0 | 6 |
+
+Stage 6, measured 9 Nov 17:20 (the PM holds it: start asked): 1 · links, how wow's files stand in eagle-design's git
+(the PM's decision, README · How a product uses it) and the script writing them, ~1 h · 2 · port.patch (144 files,
++4006 -723) on eagle-design main, one commit per step, ~1 h · 3 · `vendor/wow/`: the build writes the closure the
+build side reads, digested in the record; `buildReads.modules` cut to its four, ~2-3 h (not built yet) · 4 · the 71
+renames by the mover, ~1 h · 5 · snapshots retaken (guard-map, content-type), the PM's word · 6 · the port's release,
+the PM's word, ~0.5 h; eagle-dev's three lines of `sheetReads.ts` and its take, ~1 h of its own. Mine ~5-7 h.
 
 Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed since its last merge) runs first: 1 · 4a rows + six copies committed on eagle-design main · 2 · 4a pushed, recorded, tagged, sent · 3 · 4b component facts + screens D1–D13 · 4 · 4b released and sent · 5 · main merged into restructure, the rehearsal applies its patch --3way.
 
@@ -45,6 +52,7 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
 - 15:19 · stage 7 · 4 of 5 · 4.1 released 09c0ab9, tag release-2026-11-09-2, sent
 - 15:42 · stage 7 · 5 of 5 · main merged into restructure c4ed4d7, port rebased 1ec3346, verify ALL SAME
 - 16:22 · stage 5 · 3 of 4 · e2e gates: flows by the registry, roles, test ids, registry leaves, helpers (a03b90d..9df193a)
+- 17:01 · stage 5 · 4 of 4 · e2e skills from data, be2a135
 
 - 08:24 · stage 1 · 1 of 5 · the build side's skills to legacy/ (8bfcd8e)
 - 08:51 · stage 1 · 2 of 5 · 7g commitlint (d282df5)
