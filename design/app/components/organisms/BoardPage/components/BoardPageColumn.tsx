@@ -1,24 +1,24 @@
 /**
- * - `BoardPageBoardColumn` · one column
+ * - `BoardPageColumn` · one column
  * - its label, its count, its line, and the cards in it
  */
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import type { ReactElement, ReactNode } from 'react';
 
-interface BoardPageBoardColumnProps {
+interface BoardPageColumnProps {
   readonly label: string;
   readonly note: string;
   readonly count: number;
   readonly children: ReactNode;
 }
 
-function BoardPageBoardColumn({
+function BoardPageColumn({
   label,
   note,
   count,
   children,
-}: BoardPageBoardColumnProps): ReactElement {
+}: BoardPageColumnProps): ReactElement {
   return (
     <Stack spacing={1.5} sx={{ minWidth: 0 }}>
       <Stack spacing={0.25}>
@@ -34,4 +34,4 @@ function BoardPageBoardColumn({
   );
 }
 
-export { BoardPageBoardColumn };
+export { BoardPageColumn };

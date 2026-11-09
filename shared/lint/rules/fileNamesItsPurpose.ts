@@ -9,6 +9,7 @@ import {
   carriesItsName,
   componentOf,
   DRAWERS,
+  repeatedWord,
   wordsOwed,
 } from '../partNames.ts';
 
@@ -49,7 +50,14 @@ const isAReExport = (statement: ts.Statement): boolean =>
   ts.isExportDeclaration(statement) && statement.moduleSpecifier !== undefined;
 
 type MessageId =
-  'drawer' | 'number' | 'types' | 'index' | 'named' | 'closing' | 'unnamed';
+  | 'drawer'
+  | 'number'
+  | 'types'
+  | 'index'
+  | 'named'
+  | 'closing'
+  | 'unnamed'
+  | 'repeats';
 type Breach = readonly [MessageId, Readonly<Record<string, string>>];
 
 // what a stem breaks: a drawer, a count, a part's name, a drawer's word, a scope's pattern
@@ -66,9 +74,13 @@ function namedBreaches({
 }): readonly Breach[] {
   const component = componentOf(file, components);
   const owed = wordsOwed({ file, stem, component });
+  const word = component === null ? null : repeatedWord(stem, component);
   return [
     ...(component !== null && !carriesItsName(stem, component)
       ? [['unnamed', { component }] as const]
+      : []),
+    ...(component !== null && word !== null
+      ? [['repeats', { component, word }] as const]
       : []),
     ...(DRAWERS.includes(stem) ? [['drawer', {}] as const] : []),
     ...(owed.length > 0
@@ -130,6 +142,8 @@ const fileNamesItsPurpose = createRule<Options, MessageId>({
       named: '`{{stem}}` is not `{{pattern}}`: {{why}}',
       unnamed:
         "`{{stem}}` is a part of `{{component}}`: its name carries the component's (docs/rules/components.md).",
+      repeats:
+        '`{{stem}}` says `{{word}}` again after `{{component}}`: name the part by what it holds (docs/rules/components.md).',
       closing:
         '`{{stem}}` sits in a drawer folder: its name ends with {{words}}, a purpose before it in utils/ (docs/rules/names.md).',
     },

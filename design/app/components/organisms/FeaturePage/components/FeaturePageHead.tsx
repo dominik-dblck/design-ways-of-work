@@ -1,5 +1,5 @@
 /**
- * - `FeaturePageFeatureHead` · eyebrow, title, what the page is
+ * - `FeaturePageHead` · eyebrow, title, what the page is
  * - tabs, steps and jumps
  */
 import Chip from '@mui/material/Chip';
@@ -10,15 +10,15 @@ import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
 import { features, featureWords as words } from '../../../../workspace/feature-view.ts';
 import type { FeatureView } from '../../../../workspace/feature-view.ts';
-import { FeaturePageFeatureSteps } from './FeaturePageFeatureSteps.tsx';
-import { jumpsOf } from '../utils/featurePageFeatureHeadJumpUtils.ts';
+import { FeaturePageSteps } from './FeaturePageSteps.tsx';
+import { jumpsOf } from '../utils/featurePageHeadJumpUtils.ts';
 
-interface FeaturePageFeatureHeadProps {
+interface FeaturePageHeadProps {
   readonly view: FeatureView;
   readonly onEpic: (epic: string) => void;
 }
 
-function FeaturePageFeatureHead({ view, onEpic }: FeaturePageFeatureHeadProps): ReactElement {
+function FeaturePageHead({ view, onEpic }: FeaturePageHeadProps): ReactElement {
   return (
     <Stack spacing={1.5}>
       <Typography variant="overline" color="textSecondary">{words.eyebrow}</Typography>
@@ -29,7 +29,7 @@ function FeaturePageFeatureHead({ view, onEpic }: FeaturePageFeatureHeadProps): 
           <Tab key={tab.epic} value={tab.epic} label={tab.label} />
         ))}
       </Tabs>
-      <FeaturePageFeatureSteps steps={view.steps} />
+      <FeaturePageSteps steps={view.steps} />
       <Stack direction="row" spacing={1} useFlexGap sx={{ flexWrap: 'wrap' }}>
         {jumpsOf(view).map(([anchor, label, count]) => (
           <Chip key={anchor} component="a" href={`#${anchor}`} clickable variant="outlined" label={`${label} · ${count}`} />
@@ -39,4 +39,4 @@ function FeaturePageFeatureHead({ view, onEpic }: FeaturePageFeatureHeadProps): 
   );
 }
 
-export { FeaturePageFeatureHead };
+export { FeaturePageHead };

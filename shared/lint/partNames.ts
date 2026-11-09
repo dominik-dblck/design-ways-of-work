@@ -1,5 +1,5 @@
 /**
- * - `componentOf`, `carriesItsName` · the component a part serves; its name in it
+ * - `componentOf`, `carriesItsName`, `repeatedWord` · a part's component, its name
  * - `DRAWERS`, `wordsOwed` · a name that says where; a drawer folder's closing words
  */
 import path from 'node:path';
@@ -34,6 +34,17 @@ function componentOf(
 const carriesItsName = (stem: string, component: string): boolean =>
   stem.toLowerCase().includes(component.toLowerCase());
 
+// the word a part's own name opens with when its component's name holds it: `Page` in `BoardPagePageHead`
+function repeatedWord(stem: string, component: string): string | null {
+  const at = stem.toLowerCase().indexOf(component.toLowerCase());
+  if (at < 0) return null;
+  const own = stem.slice(at + component.length);
+  const first = /^[A-Z][a-z0-9]*/.exec(own)?.[0];
+  return first !== undefined && component.split(/(?=[A-Z])/).includes(first)
+    ? first
+    : null;
+}
+
 // the words a stem owes its folder: none when it ends with one, after a purpose where one is due
 function wordsOwed({
   file,
@@ -57,4 +68,4 @@ function wordsOwed({
   return isHeld ? [] : words;
 }
 
-export { carriesItsName, componentOf, DRAWERS, wordsOwed };
+export { carriesItsName, componentOf, repeatedWord, DRAWERS, wordsOwed };

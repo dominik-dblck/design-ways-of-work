@@ -135,6 +135,13 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
   snake_case), a check's snapshot its check's key, a module written as JSON its module's name until the port's
   release. SQL is the build side's, at its port (by migration order).
 
+- Step 3 task 5, part names B: `wow/file-names-its-purpose` refuses a part whose own name opens with a word of its
+  component's (`repeats`, every word, on hooks, utils and constants too; "name the part by what it holds", eagle-dev's
+  wording). Red on exactly the 7 files; 8 names by rename.ts (`plan/moves/part-names-b.tsv`), 7 files by move.ts
+  (`plan/moves/part-files-b.tsv`): BoardPageHead, BoardPageColumns, BoardPageColumn, FeaturePageHead, FeaturePageSteps.
+  The mover rewrote the rule test's example paths (product paths in the way of working's own tests): a product's
+  path now follows a move in the linked homes alone; the examples restored, the test red on them again.
+
 ## Questions for the PM
 
 - The design side's 71 entries keep kebab names (`sheet-status.ts`): the artifact and the build side read them by

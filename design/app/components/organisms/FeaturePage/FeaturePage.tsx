@@ -10,7 +10,7 @@ import { FeaturePageApiSection } from './components/FeaturePageApiSection.tsx';
 import { FeaturePageCasesSection } from './components/FeaturePageCasesSection.tsx';
 import { FeaturePageCombinationsSection } from './components/FeaturePageCombinationsSection.tsx';
 import { FeaturePageDecisionsSection } from './components/FeaturePageDecisionsSection.tsx';
-import { FeaturePageFeatureHead } from './components/FeaturePageFeatureHead.tsx';
+import { FeaturePageHead } from './components/FeaturePageHead.tsx';
 import { FeaturePageFieldsSection } from './components/FeaturePageFieldsSection.tsx';
 import { FeaturePageJourneysSection } from './components/FeaturePageJourneysSection.tsx';
 import { FeaturePageNotesSection } from './components/FeaturePageNotesSection.tsx';
@@ -23,7 +23,7 @@ function FeaturePage(): ReactElement {
     <Container maxWidth="xl" sx={{ py: 4 }}>
       <Stack spacing={4}>
         <FeaturePageSourceSection />
-        <FeaturePageFeatureHead view={view} onEpic={setEpic} />
+        <FeaturePageHead view={view} onEpic={setEpic} />
         <FeaturePageJourneysSection view={view} />
         <FeaturePageApiSection endpoints={view.endpoints} />
         <FeaturePageCasesSection key={view.epic} groups={view.caseGroups} kinds={view.caseKinds} />

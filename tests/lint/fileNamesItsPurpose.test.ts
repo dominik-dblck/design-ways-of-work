@@ -27,6 +27,13 @@ const at = (filename: string, code = 'export const READ = 1;') => ({
 
 ruleTester.run('file-names-its-purpose', fileNamesItsPurpose, {
   valid: [
+    ...[
+      'app/components/organisms/BoardPage/components/BoardPageHead.tsx',
+      'app/components/organisms/FeaturePage/utils/featurePageHeadJumpUtils.ts',
+    ].map((file) => ({
+      name: `a part named by what it holds: \`${path.posix.basename(file)}\``,
+      ...at(file),
+    })),
     { name: 'an entry, kebab-case', ...at('sheet/plan-pages.ts') },
     { name: 'a part, camelCase', ...at('sheet/words/rowsOfPlans.ts') },
     { name: "a part, its epic's", ...at('roadmaps/E04/E04Run.ts') },
@@ -173,6 +180,16 @@ ruleTester.run('file-names-its-purpose', fileNamesItsPurpose, {
       name: `a part not named for its component, at any depth: \`${file}\``,
       ...at(file),
       errors: [{ messageId: 'unnamed' as const }],
+    })),
+    ...[
+      'app/components/organisms/BoardPage/components/BoardPagePageHead.tsx',
+      'app/components/organisms/BoardPage/components/BoardPageBoardColumns.tsx',
+      'app/components/organisms/FeaturePage/constants/featurePageFeatureStepsConstants.ts',
+      'app/components/organisms/FeaturePage/hooks/useFeaturePageFeatureJump.ts',
+    ].map((file) => ({
+      name: `a part's own name opening with a word of its component's: \`${path.posix.basename(file)}\``,
+      ...at(file),
+      errors: [{ messageId: 'repeats' as const }],
     })),
     {
       name: 'an entry in camelCase',

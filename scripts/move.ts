@@ -159,8 +159,16 @@ async function main(): Promise<void> {
     fs.mkdirSync(path.dirname(path.join(HERE, to)), { recursive: true });
     execFileSync('git', ['mv', from, to], { cwd: HERE });
   }
-  // a linked file names another by its product's path, here too
-  const changed = rewritten({ ...here, moves: [...moves, ...there.moves] });
+  // a linked file names another by its product's path; this repository's own, by its own
+  const isLinked = (file: string): boolean =>
+    LINKED_HOMES.some(([home]) => file.startsWith(`${home}/`));
+  const changed =
+    rewritten({
+      ...here,
+      files: here.files.filter(isLinked),
+      moves: [...moves, ...there.moves],
+    }) +
+    rewritten({ ...here, files: here.files.filter((file) => !isLinked(file)) });
   const copied = rewritten(there);
   const roots = moves.map(({ to }) => to).filter((to) => A_ROOT.test(to));
   for (const root of roots)

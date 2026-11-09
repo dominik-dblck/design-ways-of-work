@@ -12,12 +12,12 @@ import {
   stats,
   velocity,
 } from '../../../workspace/board-view.ts';
-import { BoardPageBoardColumns } from './components/BoardPageBoardColumns.tsx';
+import { BoardPageColumns } from './components/BoardPageColumns.tsx';
 import { BoardPageKindLegend } from './components/BoardPageKindLegend.tsx';
 import { BoardPageNextUp } from './components/BoardPageNextUp.tsx';
 import { BoardPageOpenedPanel } from './components/BoardPageOpenedPanel.tsx';
 import { BoardPageOutsideAndOpen } from './components/BoardPageOutsideAndOpen.tsx';
-import { BoardPagePageHead } from './components/BoardPagePageHead.tsx';
+import { BoardPageHead } from './components/BoardPageHead.tsx';
 import { BoardPageStatRow } from './components/BoardPageStatRow.tsx';
 import { useBoardPageOpened } from './hooks/useBoardPageOpened.ts';
 import { BoardPageVelocityPanel } from './components/BoardPageVelocityPanel.tsx';
@@ -37,11 +37,11 @@ function BoardPage(): ReactElement {
   return (
     <Container maxWidth="xl" sx={{ py: 5.5 }}>
       <Stack spacing={4.5}>
-        <BoardPagePageHead />
+        <BoardPageHead />
         <BoardPageStatRow stats={board.stats} />
         <BoardPageNextUp tickets={board.next} onTicket={opened.openTicket} />
         <BoardPageVelocityPanel pace={board.pace} />
-        <BoardPageBoardColumns
+        <BoardPageColumns
           ideas={board.ideas}
           columns={board.columns}
           onEpic={opened.openEpic}
