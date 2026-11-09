@@ -534,3 +534,13 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
 - Morning · release 5.2: c3 corrected (2e2860f); eagle-dev builds to the corrected text already.
 - Morning, visible: from E19's merge the chips read READY TO PUBLISH and PUBLISHED (E10's model rides release 5.1,
   D6), before Publish exists. The merge is the PM's word anyway; said here so it is no surprise.
+- Morning · stage 6 task 4, measured 9 Nov evening on the rehearsal: of the 71 entries, 36 carry a kebab name, all
+  product files, with 29 part folders beside them and `fixtures/data/block-model.json`; 333 live files name them
+  (the mover rewrites those), 20 records and frozen notes keep the old names (history). 34 legacy pages
+  (`legacy/*.dc.html`) load their bundles by the old name (`gate-rules.js`) and part r runs them. A · the mover
+  rewrites the legacy pages' script paths too (a live pointer; their drawings untouched) · B · the build also writes
+  each renamed bundle under its old name for the legacy pages alone (legacy byte-frozen; two names per bundle in
+  dist). My pick A: one name per bundle (SSoT); a page's script path is a pointer, not its history.
+- So the port waits on three morning words: links (task 1), legacy pages (task 4), and then the port's release with
+  its snapshots (tasks 5, 6). Task 3 (`vendor/wow/`) is built once task 1 is answered: under B the links are not
+  tracked, and the record's sources (`git ls-files`) must count them.
