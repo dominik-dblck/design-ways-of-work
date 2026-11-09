@@ -418,6 +418,15 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
   scope's production `.tsx` and the registry's files; skipped under `none`. Red and green on sources never put on
   disk (`tests/browser/testIds.test.ts`, 6 cases, the original's controls each one).
 
+- Stage 5 task 3, every registry id rendered and read (the second half of mailing-automation's
+  e2eReachesByTheRegistry, regexes on code text): read off TypeScript's tree (`shared/tests/registryLeaves.ts`),
+  the convention named once in `shared/e2e/theRegistry.ts` (`{screen}TestIds`) and the framework's README. My
+  call, tighter than the original, no visible effect: a leaf spelled covers itself alone; only a group spelled
+  whole (passed, not an alias's own line) covers its leaves. The original added every prefix of a spelled path
+  to the read set, so one id read covered its siblings, against its own control (`planted.a.b` read,
+  `planted.a.c` unread). At the build side's port this may find ids the old gate let pass: told to eagle-dev.
+  Red and green on sources never put on disk (5 cases).
+
 ## Questions for the PM
 
 - The design side's 71 entries keep kebab names (`sheet-status.ts`): the artifact and the build side read them by

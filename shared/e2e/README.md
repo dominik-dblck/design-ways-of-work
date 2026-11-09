@@ -17,6 +17,12 @@ stable id, the catalogue key **is** the id, and the ids and the array are derive
 **`theCoverageRegistry`** records what ran and prints the table: every flow of the screen, covered
 or not.
 
+**`theRegistry`** names the registry's convention: each module under the product's `registry` exports
+`{screen}TestIds`, frozen objects whose leaves are `testid-…` strings. The registry is the one place a selector
+is spelled: a component reads its id from it or forwards the `testId` its props declare, and a flow reaches an
+element by `getByTestId(ids.…)` alone. Every id is rendered by the product's code and read by a test or a flow,
+by its path, an alias, a registry helper, or its group passed whole.
+
 **`clicking`, `waiting`, `asserting`** are the interactions. `clickWithFallback` is the one
 that earns its keep: a click Playwright refuses with `intercepts pointer events` or `element is not
 enabled` is pressed once more a second later, as a person would — the pointer moved off first, so an
