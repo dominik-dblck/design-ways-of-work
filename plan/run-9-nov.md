@@ -13,7 +13,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 | 1 | Harness | 5 | 5 |
 | 2 | Rules | 10 | 10 |
 | 3 | Names | 6 | 6 |
-| 4 | Tools | 0 | 8 |
+| 4 | Tools | 1 | 8 |
 | 5 | e2e | 0 | 4 |
 | 6 | Port design | 0 | 5 |
 
@@ -26,6 +26,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 - 10:21 · stage 3 · 4 of 6 · data, tables, assets by kind (task 4)
 - 10:25 · stage 3 · 5 of 6 · part names B: repeats rule, 5 parts renamed (task 5)
 - 10:49 · stage 3 · 6 of 6 · prettier tables and ignores from the scope (task 6)
+- 11:02 · stage 4 · 1 of 8 · words rule: a person's text in its words file (task 1)
 
 - 08:24 · stage 1 · 1 of 5 · the build side's skills to legacy/ (8bfcd8e)
 - 08:51 · stage 1 · 2 of 5 · 7g commitlint (d282df5)
@@ -179,6 +180,17 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
   Measured read only, typed by each tree's tsconfig: the build side 19 words in 6 files (its 14 exports and the 5 a
   name-keyed gate missed: `Create` in an adapter, `Compare with …`), no false one in 945 files; the design side 0.
   Its build gate `copyLivesInAWordsFile` stays until its port, the row says so.
+
+- Step 4 task 1's push refused by verify: the row's string in double quotes, which the design side's prettier
+  (its rule tables at full width) prints single; formatted in place, carried by task 2's commit, never an amend.
+- Step 4 task 2, Contents (settled 9 Nov, D and B, point 5): `design/tools/emit/documentContents.ts` opens a
+  document past 100 lines with `## Contents` above its first `##` (its opening's headings, then its parts: a
+  heading after a rule), and each section the build side cuts (a path heading to the next rule) past 100 lines with
+  its own, `##` alone so the cutter is untouched. The pipeline gets one (17 parts) and two cut ones (`_shared.md`,
+  the recon template); `ticket-feature` runs 107 lines with no `##` (bold leads), nothing to list: a skill is read
+  whole on the build side, the Contents rule is the on-demand files'. api-convention gets one. Both documents join the design side's `onDemand`, so the
+  shared `aLongFileOpensWithContents` holds them. A rule file's md stays a table (40 lines at most today): the
+  same test holds it past 100, its source held at 200 by `max-lines`. The release and its 2 re-pins: the PM's go.
 
 ## Questions for the PM
 

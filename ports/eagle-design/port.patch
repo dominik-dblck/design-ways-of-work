@@ -850,7 +850,7 @@ index 4ed4a71..89724d3 100644
 -- `app/pages/`, `app/theme/`, `app/workspace/`, `roadmaps/templates.ts`, `public/lucide-icons/`.
 +- `app/pages/`, `app/theme/`, `app/workspace/`, `roadmaps/templates.ts`.
 diff --git a/docs/process/ticket-pipeline.md b/docs/process/ticket-pipeline.md
-index db1e4a6..90fa51e 100644
+index db1e4a6..99c5fd8 100644
 --- a/docs/process/ticket-pipeline.md
 +++ b/docs/process/ticket-pipeline.md
 @@ -18,8 +18,7 @@
@@ -863,7 +863,57 @@ index db1e4a6..90fa51e 100644
  live once, in `_shared.md`, and every skill's first task is to read it; the rules for writing and reviewing
  code live once, in `_code.md`. History lives in the ticket's
  own documents; a skill carries a lesson only as a one-line rule tagged `why: {ticket-id}`. This source never
-@@ -183,7 +182,7 @@ database or a test run
+@@ -39,6 +38,26 @@ spells a retired command: the old actions are described by name, never as `/tick
+   ticket-report/SKILL.md       block
+ ```
+ 
++## Contents
++
++- Sync · before every ticket
++- The flow
++- `.claude/skills/ticket/_shared.md`
++- `.claude/skills/ticket/_code.md`
++- `.claude/skills/ticket-recon/SKILL.md`
++- `.claude/skills/ticket-arch-review/SKILL.md`
++- `.claude/skills/ticket-regression/SKILL.md`
++- `.claude/skills/ticket-report/SKILL.md`
++- `.claude/skills/ticket-standard/SKILL.md`
++- `.claude/skills/ticket-fast/SKILL.md`
++- `.claude/skills/ticket-feature/SKILL.md`
++- Templates · `roadmaps/templates/`
++- `roadmaps/templates/ticket-recon.md`
++- `roadmaps/templates/ticket-contract-snapshot.md`
++- `roadmaps/templates/ticket-arch-review.md`
++- `roadmaps/templates/ticket-regression.md`
++- `roadmaps/templates/ticket-report.md`
++
+ ## Sync · before every ticket
+ 
+ Lessons from ticket N land in this file after N's report and reach the repository before N+1's
+@@ -87,6 +106,22 @@ contract started over all three; the same ticket ended with 21 wrappers nobody c
+ Rules that hold at every stage. Every skill's first task is to read this file; a stage that writes or
+ reviews code then reads `ticket/_code.md`.
+ 
++## Contents
++
++- The repository never writes to the design project
++- How the sheet is read
++- Every number is parsed, never read
++- A question one side has the data for is answered there
++- The pack is verified before every stage
++- The line between the two sides
++- When something does not work, say so
++- A note is the current truth, never a chronicle
++- No document repeats another
++- One pass at a time
++- Spellings that hold everywhere
++- Decisions are written, design-side files compared
++- The message shape
++
+ ## The repository never writes to the design project
+ 
+ The design project is the git repository `~/projects/eagle-design`, a file named by its path from its root, read at
+@@ -183,7 +218,7 @@ database or a test run
  
  - **A story quote is verbatim from backlog.ts.** If the story does not describe the ticket, quote it
    and add "placed here by the PM" — never paraphrase in a blockquote. `why: T-E01-10`
@@ -872,7 +922,7 @@ index db1e4a6..90fa51e 100644
    indexes match on the path (`tests/architecture/theDocsNameRealPaths.test.ts`). `why: T-E01-10`
  
  ## Decisions are written, design-side files compared
-@@ -238,7 +237,7 @@ arch-review, regression and report. Recon does not read it.
+@@ -238,7 +273,7 @@ arch-review, regression and report. Recon does not read it.
  ## Code
  
  - **A name says what, never how many** (`tests/architecture/aNameSaysWhatNotHowMany.test.ts`). `why: T-E01-07`
@@ -881,7 +931,7 @@ index db1e4a6..90fa51e 100644
  - **No comment describes the stage** (`tests/architecture/commentsAreInvariants.test.ts`). `why: T-E00-08`
  - **A value a delayed read refreshes has a settling state the screen reads**, and its test asserts the
    screen after the write lands and before the read. `why: T-E04-00` — Close without changes offered over four saved edits
-@@ -455,7 +454,7 @@ behaviour that nobody tested and this ticket touched. `why: T-E01-05` — touche
+@@ -455,7 +490,7 @@ behaviour that nobody tested and this ticket touched. `why: T-E01-05` — touche
  6. Present: `{id} · regression · drift {n} · suite {n} red · touched {n} files, {n} re-ports`
  
  **Stop.** None of its own — the calling mode decides. A non-zero section goes to the report with
@@ -890,7 +940,7 @@ index db1e4a6..90fa51e 100644
  
  The criteria §3 re-reads are the sheet's at the release's commit (`git cat-file blob <sha>:{path}`), never a cached copy. Check: the digests named in §1. `why: T-E06-13` — four cached shards were six days behind the sheet
  
-@@ -521,7 +520,8 @@ commit, merge, push — each reversible on its own.
+@@ -521,7 +556,8 @@ commit, merge, push — each reversible on its own.
     - `## Commit` — branch, staged count, message
     Update `epic-notes.md`
  9. `git add -A`, show what is staged, present the commit message
@@ -900,7 +950,25 @@ index db1e4a6..90fa51e 100644
     a test the report names and the commit leaves out is a criterion with no test in the tree.
     `why: T-E01-06` — c3's endpoint test was named and left unstaged. Repo-wide changes — skills, docs, patterns
     — ride with this ticket
-@@ -846,7 +846,6 @@ reported (rule:feature-run-never-stops) — or, under `reconStop`, a question.**
+@@ -726,6 +762,17 @@ Five files, each its own section below, each a heading that is its path.
+ > Not a contract: no criterion transcribed, no test named, no line coded. Written for a reader who
+ > cannot see this repository — lines quoted with paths, every question priced in code.
+ 
++## Contents
++
++- The reading
++- What the repository already holds
++- What has been measured
++- Questions
++- Narrowings
++- Findings
++- What this ticket does not do
++- What the checklist asks
++
+ ## The reading
+ 
+ One row per thing the ticket builds. **S** = the sentence or line the criteria point at ·
+@@ -846,7 +893,6 @@ reported (rule:feature-run-never-stops) — or, under `reconStop`, a question.**
  | 23  | every wireframe and screen that shows what the ticket builds is read against the spec; where the wireframe says more, the wireframe moves | {which wireframes, or "none shows this ticket"} |
  | 24  | the ticket carries why · today / after / unlocks / not / oneLine, product words, no paths | {yes / which line is missing} |
  | 25  | a PM change mid-build is a requirement: built, written up at stage end as REPLACE / WITH, in the sheet before the report closes | {taken as it happens, not here} |
@@ -2042,10 +2110,10 @@ index 9c7b0cf..ce1fef1 100644
 +export type { TrackFinding, TrackReading, TrackRow };
 diff --git a/scope.ts b/scope.ts
 new file mode 100644
-index 0000000..1f34423
+index 0000000..081d7d8
 --- /dev/null
 +++ b/scope.ts
-@@ -0,0 +1,389 @@
+@@ -0,0 +1,394 @@
 +// scope.ts · what the design project names once: its ESLint config, its shared tests and its tools read it
 +import type { RepoScope } from './shared/repoScope.ts';
 +import {
@@ -2319,7 +2387,12 @@ index 0000000..1f34423
 +  instructions: {
 +    skills: [SKILLS],
 +    whole: [SKILLS],
-+    onDemand: ['docs/rules/*.md'],
++    // the rules, and the long documents the build side reads in part
++    onDemand: [
++      'docs/rules/*.md',
++      'docs/process/ticket-pipeline.md',
++      'sheet/contract/api-convention.md',
++    ],
 +    everyTurn: ['CLAUDE.md'],
 +  },
 +  // a types file holds types alone (docs/rules/names.md)
@@ -2460,6 +2533,29 @@ index 046504b..ecc740e 100644
    EndpointGroup,
    EndpointRow,
    Journey,
+diff --git a/sheet/contract/api-convention.md b/sheet/contract/api-convention.md
+index 00b3a29..2a5574a 100644
+--- a/sheet/contract/api-convention.md
++++ b/sheet/contract/api-convention.md
+@@ -3,6 +3,18 @@
+ One page, for both sides. Decided by the PM on 24 Sep where marked; everything else gathers what commands.ts,
+ queries.ts, rule:command-body-is-typed and T-E00-13 already say, so a contract can be checked against one place.
+ 
++## Contents
++
++- Routes
++- Bodies and query strings
++- Lists
++- Answers
++- Checked on every request, in this order
++- Validation by kind of field
++- The order of the answers
++- Edge cases every endpoint answers
++- What a contract for one endpoint states
++
+ ## Routes
+ 
+ | What | Route | Example |
 diff --git a/sheet/contract/commands/commandsTypes.ts b/sheet/contract/commands/commandsTypes.ts
 index 6a594a8..93ac037 100644
 --- a/sheet/contract/commands/commandsTypes.ts

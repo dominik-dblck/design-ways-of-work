@@ -6,6 +6,7 @@ import path from 'node:path';
 import type { DocumentFile } from '../docs/documents/documentTypes.ts';
 import type { RuleFile } from '../docs/rules/ruleTypes.ts';
 import type { SkillFile } from '../docs/skills/skillTypes.ts';
+import { withContents } from './emit/documentContents.ts';
 import { emitted, ROOT } from './layout.ts';
 import { tokensText } from './tokens.ts';
 import type { Emitted } from './layout.ts';
@@ -86,15 +87,17 @@ const isDocumentFile = (loaded: unknown): loaded is DocumentFile =>
   typeof Reflect.get(loaded, 'path') === 'string' &&
   Array.isArray(Reflect.get(loaded, 'sections'));
 
-// a document's sections joined by newlines, each heading line above its own
+// a document's sections joined by newlines, each heading line above its own; a long one's contents above
 const documentMarkdown = (file: DocumentFile): string =>
-  file.sections
-    .flatMap((section) =>
-      section.heading === null
-        ? section.lines
-        : [section.heading, ...section.lines],
-    )
-    .join('\n');
+  withContents(
+    file.sections
+      .flatMap((section) =>
+        section.heading === null
+          ? section.lines
+          : [section.heading, ...section.lines],
+      )
+      .join('\n'),
+  );
 
 function printed(one: Emitted, exported: unknown): string {
   if (one.print === 'json') return `${JSON.stringify(exported, null, 2)}\n`;
