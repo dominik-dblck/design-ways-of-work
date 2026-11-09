@@ -3,12 +3,14 @@ import { knipConfig } from '../../shared/lint/knipConfig.ts';
 import { FIXTURES } from './ruleTester.ts';
 import { scopeAt } from './scopeAt.ts';
 
-// the entries less the browser tier's face, which every scope's knip holds alike
+const SKILLS_WRITER = 'shared/skills/writeE2eSkills.ts';
+
+// the entries less the browser tier's face and its skills' writer, which every scope's knip holds alike
 const beyondTheFace = (
   entries: string | readonly string[] | undefined,
 ): readonly string[] =>
   (typeof entries === 'string' ? [entries] : (entries ?? [])).filter(
-    (entry) => !entry.startsWith('shared/e2e/'),
+    (entry) => !entry.startsWith('shared/e2e/') && entry !== SKILLS_WRITER,
   );
 
 describe('knip from a scope', () => {
@@ -38,12 +40,13 @@ describe('knip from a scope', () => {
     expect(config.ignore).toEqual(['dist/**', 'app/tokens.ts']);
   });
 
-  it("the browser tier's face is an entry of every scope, its own parts not", () => {
+  it("the browser tier's face and its skills' writer are entries of every scope, its own parts not", () => {
     const { entry } = knipConfig(scopeAt('/nowhere'));
     expect(entry).toEqual(
       expect.arrayContaining([
         'shared/e2e/runCategorisedTests.ts',
         'shared/e2e/theScreenSuite.ts',
+        SKILLS_WRITER,
       ]),
     );
     expect(entry).not.toContain('shared/e2e/dragHold.ts');

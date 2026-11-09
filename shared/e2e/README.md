@@ -46,3 +46,9 @@ flow at `{screensRoot}/{screen}/journeys/{whatThePersonDoes}.spec.ts`, its title
 `J6 · TR removes a block after v3 and restores it` in `removesAndRestores.spec.ts`. The product's data names
 a flow by its id and the repository names the file, so no file is named `J{n}.spec.ts`: a folder of
 `J1` to `J12` says nothing about what each one walks.
+
+**The two skills, e2e-discovery and e2e-category,** are written by `node shared/skills/writeE2eSkills.ts` from
+`shared/skills/e2e/` and the scope's browser tier into its `skill.folder`, with `_shared.md`, the rules both
+read first. The product names no path twice: its screens, registry, roles, command and probe come off the tier,
+and its own rules (`skill.rules`) number on after the shared twelve. A line of its own goes after a shared step,
+`{page}.{step}`, or closes a page's input, `{page}.input`. Each file says it is written: edit the data, never the file.

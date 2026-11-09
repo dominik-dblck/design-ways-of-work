@@ -13,6 +13,7 @@
     "shared/lint/**/*.ts",
     "shared/sync/**/*.ts",
     "shared/e2e/**/*.ts",
+    "shared/skills/**/*.ts",
     "shared/repoScope.ts",
     "shared/tests/**/*.ts",
     "scope.ts",

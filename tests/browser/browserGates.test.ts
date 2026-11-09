@@ -27,6 +27,9 @@ const AT: Tier = {
     componentRoots: [],
     roles: [],
     exemptions: [],
+    command: 'yarn e2e',
+    healthPath: '/api/health',
+    skill: { folder: '.claude/skills', rules: [], after: {} },
   },
 };
 const STATUS = statusOf(AT, 'aScreen') ?? '';

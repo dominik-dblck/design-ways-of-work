@@ -35,7 +35,7 @@ function hookRuns(root: string): readonly string[] {
 // knip's settings as an object: its config may also be a function, which a scope never is
 type KnipSettings = Exclude<KnipConfig, (...args: readonly never[]) => unknown>;
 
-// the browser tier's face, what a product's flows import: an entry wherever shared/ is held
+// the browser tier's face, what a product's flows import, and its skills' writer: an entry wherever shared/ is held
 const BROWSER_FACE = [
   'asserting',
   'clicking',
@@ -49,7 +49,9 @@ const BROWSER_FACE = [
   'theRuntime',
   'theScreenSuite',
   'waiting',
-].map((name) => `shared/e2e/${name}.ts`);
+]
+  .map((name) => `shared/e2e/${name}.ts`)
+  .concat('shared/skills/writeE2eSkills.ts');
 
 const knipConfig = (scope: RepoScope): KnipSettings => ({
   entry: [

@@ -12,6 +12,9 @@ const TIER = {
   componentRoots: [],
   roles: [],
   exemptions: [],
+  command: 'yarn e2e',
+  healthPath: '/api/health',
+  skill: { folder: '.claude/skills', rules: [], after: {} },
 };
 
 // the blocks whose list refuses an element reached but by the registry

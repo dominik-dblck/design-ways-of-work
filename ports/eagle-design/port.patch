@@ -78,10 +78,10 @@ index f72c4df..e369723 100644
 +- `yarn spec-check` (`tools/specCheck.ts`) — `app/styles/components.spec.ts` holds together.
 +- Every commit runs ESLint, tsc, the architecture tests and the checks (D23); a push runs every test.
 diff --git a/.prettierignore b/.prettierignore
-index c3bb28b..28518a0 100644
+index c3bb28b..3797459 100644
 --- a/.prettierignore
 +++ b/.prettierignore
-@@ -1,25 +1,33 @@
+@@ -1,25 +1,35 @@
 -dist
 -node_modules
 -.artifact
@@ -111,6 +111,8 @@ index c3bb28b..28518a0 100644
 +node_modules/
 +poc/
 +.artifact/
++# a product's tree, formatted in its product
++dev/claude/
 +# a file a tool writes keeps the tool's layout
 +app/styles/tokens.ts
 +.prettierrc.json
@@ -2413,7 +2415,7 @@ index 9c7b0cf..ce1fef1 100644
 +export type { TrackFinding, TrackReading, TrackRow };
 diff --git a/scope.ts b/scope.ts
 new file mode 100644
-index 0000000..54a4c6d
+index 0000000..0ebcdbf
 --- /dev/null
 +++ b/scope.ts
 @@ -0,0 +1,403 @@
@@ -2542,8 +2544,8 @@ index 0000000..54a4c6d
 +    none: 'its app is for the PM and the team to look at; the build side runs the full suite (PM, 9 Nov)',
 +  },
 +  ignores: ['dist/**', 'node_modules/**', 'poc/**', '.artifact/**'],
-+  // no product's tree held inside it
-+  productTrees: [],
++  // the build side's .claude/, held for it: its scope reads the data, its product checks the tree
++  productTrees: ['dev/claude/**'],
 +  production: [
 +    'sheet/**/*.ts',
 +    'roadmaps/**/*.ts',
@@ -4735,7 +4737,7 @@ index 6586ba0..3a23e0a 100644
  
  // pane: what a screen shows with no document open · asked: when the approvers were pinged · thread: the window onto the block's argument
 diff --git a/sheet/screens/wireframes/screenRows.ts b/sheet/screens/wireframes/screenRows.ts
-index 0ae423f..c0cc62b 100644
+index d3538cf..1eb51d8 100644
 --- a/sheet/screens/wireframes/screenRows.ts
 +++ b/sheet/screens/wireframes/screenRows.ts
 @@ -191,4 +191,3 @@ const list = (track?: string): readonly Screen[] =>

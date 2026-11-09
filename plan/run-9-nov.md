@@ -15,7 +15,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 | 3 | Names | 6 | 6 |
 | 4 | Tools | 8 | 8 |
 | 7 | P1 release | 5 | 5 |
-| 5 | e2e | 2 | 4 |
+| 5 | e2e | 3 | 4 |
 | 6 | Port design | 0 | 6 |
 
 Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed since its last merge) runs first: 1 · 4a rows + six copies committed on eagle-design main · 2 · 4a pushed, recorded, tagged, sent · 3 · 4b component facts + screens D1–D13 · 4 · 4b released and sent · 5 · main merged into restructure, the rehearsal applies its patch --3way.
@@ -44,6 +44,7 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
 - 15:17 · stage 7 · 3 of 5 · 4.1 committed feb6056: spec merged, screens, edge 13
 - 15:19 · stage 7 · 4 of 5 · 4.1 released 09c0ab9, tag release-2026-11-09-2, sent
 - 15:42 · stage 7 · 5 of 5 · main merged into restructure c4ed4d7, port rebased 1ec3346, verify ALL SAME
+- 16:22 · stage 5 · 3 of 4 · e2e gates: flows by the registry, roles, test ids, registry leaves, helpers (a03b90d..9df193a)
 
 - 08:24 · stage 1 · 1 of 5 · the build side's skills to legacy/ (8bfcd8e)
 - 08:51 · stage 1 · 2 of 5 · 7g commitlint (d282df5)
@@ -467,3 +468,24 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
   (absent, never `{}`), presence the one fact, Channel a union as ContentType is (no visible effect, not the PM's).
   7a touches 15 files; one, catalogRail.ts, is in the port's patch: rows on main now cost rehearse.ts a `--3way`.
 
+- Stage 7 closed: release 4.1 (feb6056, record 09c0ab9, tag release-2026-11-09-2) taken by eagle-dev. Its library
+  line was wrong for In-app ("none on a type with no kind"): fixed on main as the nav cards (6caf5cc, views 1a/1b
+  retaken, the PM's word on 4.1's retake), not released, rides the next release; merged into restructure (5582ad5,
+  the snapshot moved 1a/1b only), the port rebased (1ec3346) and rehearsed clean on it.
+- Eagle-dev's C10, answered from the sheet: QueryParamOf yes, no spec impact · navPlaceOf throws, yes · NavCard is
+  already a union on the sheet, it takes it · `place: 'list' | 'ownPage'`, its words, in its next spec patch · the
+  word is "nav card". Its patch (folder-row, folder-list, choice-card-group's note) comes with a sha256 and rides
+  the next release on the PM's word.
+- Stage 5 task 4 · B (eagle-dev's answer): the e2e skills are written from TS data, `shared/skills/e2e/` the shared
+  half, the scope's browser tier the names (never repeated in the data), `skill` the product's half: its folder,
+  its rules numbered on after the shared twelve, a line after a shared step (`{page}.{step}`) or closing an input
+  (`{page}.input`, my call: the build side's roster line belongs in Input, not after a step). A token nothing gives,
+  a rule key twice or a line at no step throws. Its condition: mailing-automation's `.claude/skills/e2e` stays hand
+  edited until its port; the dev half's data, `dev/claude/skills/e2e/e2eSkillPart.ts`, imports nothing (my call:
+  `dev/claude/` sits one folder deeper here than `.claude/` there, so an import would break on one side; the
+  scope that reads it checks its shape). The writer is a generator (`--out`, as the formatter's): once a product
+  names it in `scope.generators` with its three files, `aGeneratedFileIsAFreshEmit` holds them.
+  My calls on the way: a token cites a skill's rule or step as `{{ruleNumber:key}}` / `{{stepNumber:key}}`, never
+  `{{rule:key}}`, since `rule:{key}` is the citation of a rules row (`aCitedRowExists` read it as one); the writer is
+  an entry of every scope's knip beside the browser tier's face; the port's scope holds `dev/claude/**` as a product
+  tree (the build side's `.claude/`, checked in its product), `dev/rules` and `dev/map` staying its own emits.
