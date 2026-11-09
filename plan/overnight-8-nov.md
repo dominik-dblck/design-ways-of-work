@@ -32,6 +32,9 @@ przypominaj sobie nasze zasady, SRP SSoT i wszystkie zasady projektowe ktore wyp
 A session cron every 10 minutes (job `1577e92f`, PM 8 Nov): a stuck verify or test is killed and re-run, eagle-dev's
 messages read, the next part resumed. When the run is done: `CronDelete 1577e92f` (the PM's word), then a last line here.
 
+The run closed 9 Nov, 07:40: every part of the order 7c → 8 done or waiting on the PM's morning list; the last
+push 992046c; `CronDelete 1577e92f` done.
+
 ## Calls (what · why · how to undo)
 
 - eagle-dev's limits for the night (its message, 8 Nov): read-only in design-ways-of-work, the copy and
@@ -182,6 +185,10 @@ messages read, the next part resumed. When the run is done: `CronDelete 1577e92f
 - Flags, part A: eagle-dev's read asked a gate before the 42 fixes, so `!` is refused in the shared config (0 on
   both trees; red on one added to each). Types row 17 says a side's tsconfig adds its environment alone: a flag
   held at 0 before the base takes it is that row's named exception, until when, never a second floor.
+
+- Flags part A, 07:10: the push's hook verify ran 27 minutes under load (ALL SAME), and GitHub never closed the
+  receive-pack held open meanwhile (main still 9b78be9 ten minutes on): the push killed and run again, the hook
+  whole, never skipped.
 
 ## Morning: for the PM
 
