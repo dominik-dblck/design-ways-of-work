@@ -13,7 +13,7 @@ const scope: RepoScope = {
   // the design side's tree, the build side's, and the rule files both read: each checked in its product
   productTrees: ['design/**', 'dev/**', 'shared/rules/**'],
   production: ['scripts/**/*.ts', 'shared/**/*.ts', 'design-system/**/*.ts'],
-  generated: [],
+  generated: ['design-system/guide.md'],
   react: [],
   entries: [],
   parts: [],
@@ -63,6 +63,11 @@ const scope: RepoScope = {
       script: 'shared/lint/writeFormatterFiles.ts',
       args: [],
       writes: ['.prettierrc.json', '.prettierignore'],
+    },
+    {
+      script: 'design-system/writeGuide.ts',
+      args: [],
+      writes: ['design-system/guide.md'],
     },
   ],
   // its own checks beside the shared tiers: the copies, its rules' tests, the shared tests, its tools' tests, its kept rules; the products' at the end

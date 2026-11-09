@@ -13,9 +13,9 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 | 1 | Harness | 5 | 5 |
 | 2 | Rules | 10 | 10 |
 | 3 | Names | 6 | 6 |
-| 4 | Tools | 6 | 8 |
+| 4 | Tools | 7 | 8 |
 | 5 | e2e | 0 | 4 |
-| 6 | Port design | 0 | 5 |
+| 6 | Port design | 0 | 6 |
 
 ## History
 - 09:38 · stage 2 · 9 of 10 · R1-R3 runner fixes: strict flags, NUL names, eslint --fix on files staged whole (38d402e)
@@ -32,6 +32,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 - 11:50 · stage 4 · 4 of 8 · flag C: reads past an end, 41 to 0, flag on (task 4)
 - 12:00 · stage 4 · 5 of 8 · flag D: optional properties, 93 to 0, flag on (task 5)
 - 12:25 · stage 4 · 6 of 8 · sync:groups shared core; words acronym miss mended (task 6)
+- 13:17 · stage 4 · 7 of 8 · design system guide as TS data, guide.md generated (task 7)
 
 - 08:24 · stage 1 · 1 of 5 · the build side's skills to legacy/ (8bfcd8e)
 - 08:51 · stage 1 · 2 of 5 · 7g commitlint (d282df5)
@@ -256,6 +257,47 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
   (a moved item reads as each place after it changed): kept, said here. Flag D on its tree reads 375: it would
   widen only the optionals a value passes through and list the rest by hand; the design side's 104 take the
   same review at the port (stage 6), each `?: T | undefined` read again as required or optional.
+
+- Eagle-dev's P1 consult, 9 Nov (Dom's in-app routes, relayed): answered with the sheet's facts alone (six rows
+  that move with its 7a; `kind.unknown` already the refusal; addressOf and category ours). Its Q1–Q4 came as its
+  relay, not the PM's word here: asked of the PM first, then the design rows one at a time (ContentType's kind
+  as a union or optional, In-app as a CATEGORIES layer and addressOf's first segment, one delivery order per
+  in-app row, a placeholder refused for not being built, a kindless type's copy sources).
+  **PM 9 Nov · A**: "tak potwierdzam": Q1–Q4 are the PM's. The rows are written in the design copy and reach
+  eagle-dev with the port's release (7a); next, the first design row, ContentType's kind.
+  **P1 row 1 · B, PM 9 Nov ("B zatem")**: ContentType a union by channel: a channel with kinds gives rows a
+  required `kind`, one without gives `kind?: never`, a placeholder its own member; which channel is which read off
+  channels.ts's table. Lost: A, `kind?:` as today: the fact held by data and tests alone, an old event's kind could
+  land on an in-app row and compile. Same shape as eagle-dev's 7b TypeRow.
+  **P1 row 2 · B, PM 9 Nov**: the nav's groups a table of their own beside PLACEHOLDERS (typeKinds.ts), in their
+  shape with channel ids: In-app `path: 'in-app'`, its cards `bottomSheet → bottom-sheets`, `appBanner →
+  banners`; Email and Push groups of one channel; channels.ts holds no nav fact; a test holds each channel in one
+  group; addressOf writes `/{group}/{card}`. Lost: A, a `nav` field on each channel row: the nav in two homes and
+  channels.ts holding the model and the menu.
+  **P1 row 3 · no question (PM 9 Nov: "co to ma za znaczenie teraz skoro ani nie mamy audience ani
+  segments?")**: Audience and Segments are not built (their shape is E10's), so an in-app row's order shows
+  nothing today. My call: the in-app rows keep the order written today on their lists (SEGMENTS_FIRST), no value
+  moves; E10 3f sets the in-app audience when it is built. I asked a point with no effect: a point is put to the
+  PM only when someone sees it change.
+  **P1 row 5 · no question**: derived from Q2 ("from an existing one"): a kindless type's copy sources are the
+  documents of its own type; the kinds' copiesInto stays for Email and Push.
+  **P1 row 4 · A, PM 9 Nov**: the API takes a channel's id alone; a placeholder lives in the nav (`nav: false`)
+  and reads as `400 type.unknown`; typeKnown's words widen, one case added (a placeholder's slug). The E18 edge on
+  17 moves from kind.unknown to type.unknown. Lost: B, a new `type.notBuilt`: a requirement no one asked for.
+  My call: the five rows are one task of stage 6, its first (the port's release carries them, and they move
+  `content-type-snapshot.json`, whose retake is the PM's word there); eagle-dev gets the picks now, so its 7b
+  takes the same shape, and its steps 1–6 (about 7 h) run on today's model meanwhile.
+
+- Stage 4 task 7, wow-design-system: the Deblock guide is the design system's data, `design-system/guide.ts`
+  (its voice and its foundations, two parts), each value it names a token, `{--x}` or `{--x:dark}`, written out
+  with its value by `guideText`; `design-system/guide.md` is written by `writeGuide.ts`, a generator of the scope
+  (its freshness the shared test's), with `## Contents`. The shadows' uses moved onto their tokens'
+  `why` (elevation.ts), so the guide's radii and shadows lists are the tokens' own. Dropped as the export's process:
+  Sources, Index, Caveats, Copied assets, Ready to iterate. The old file to `legacy/design-system/` (D24), on both
+  sides; the copy's artifact publishes it from there as legacy/ is (one expected difference, 83).
+  Two places the guide's words and the tokens differed, settled by the tokens (the code reads them; no one sees
+  a change): small tags 8px (`--r-xs`, "badges, small tags"), where the guide said 12px; the guide's 150–250ms for
+  state changes kept as written beside `--motion-in` 320ms, an entrance's, not the same move.
 
 ## Questions for the PM
 
