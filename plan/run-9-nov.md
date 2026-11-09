@@ -460,6 +460,16 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
 - Proposed to eagle-dev, agent-facing: rule:feature-run-never-stops gains "consults eagle-design by message, never
   waits" for every feature run; settled in its recon, written on the sheet after.
 
+- Port, 9 Nov evening: main moved under port.patch (E19, releases 5 and 5.1, yarn backup) and wow's push failed
+  verify. Re-saved by script: partViews.ts keeps main's line (Stack gone), package.json is the patch on its old base
+  plus main's backup script (JSON), atomsText.ts formatted by wow's prettier (C10's rows came wrapped for
+  eagle-design's), the scope's PM words gain 'otestowane' (C15's quote, as typed). Verify green (1d50616). Lesson:
+  any commit on eagle-design main can move the patch; verify before every wow push, and no eagle-design edit while
+  wow's verify runs (it copies the product's tree).
+- answers-T-E19-00 (eagle-dev's first questions, not waiting): E10's model rides the release (D6, one sha), model
+  only; its three payloads agree with deliveryEvents.ts's prose; c3 was wrong on the sheet (a Stack is 400
+  malformed once it leaves BlockType) and is corrected on main (2e2860f), its release the PM's word.
+
 ## Questions for the PM
 
 - The design side's 71 entries keep kebab names (`sheet-status.ts`): the artifact and the build side read them by
@@ -516,3 +526,11 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
 - Morning, 10 Nov: R6 (three spec changes the PM made in the repo's copies, parked to 9 Nov) is still open: the app
   banner's bannerConfig, the bottom sheet's verticalSpacing gone (Box read as Layout landed with E19 C1). Releases
   5 and 5.1 left it out; eagle-dev's digest gate stays red on it until a release carries it.
+- Morning, 10 Nov · stage 6 task 1 (the plan's README, "decided at the port with the PM"): how wow's files stand
+  in eagle-design's git. A · committed links to a sibling checkout (visible in git; wow's version unpinned; a clone
+  needs wow beside it) · B · written by a script from a pinned wow tag (`yarn wow`, postinstall) and ignored (the
+  product's sha names wow's version; nothing of wow in its history). My pick B: it is the PM's 8 Nov A ("take wow
+  by version, a tag"). Task 2 (the patch on main) waits on it; tasks 3 and 4 go on in the rehearsal.
+- Morning · release 5.2: c3 corrected (2e2860f); eagle-dev builds to the corrected text already.
+- Morning, visible: from E19's merge the chips read READY TO PUBLISH and PUBLISHED (E10's model rides release 5.1,
+  D6), before Publish exists. The merge is the PM's word anyway; said here so it is no surprise.
