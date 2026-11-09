@@ -44,6 +44,16 @@ product repositories (eagle-design through its port only, mailing-automation rea
   timed, the commit tier's total against its 3 min budget. `everyRuleHasAGate` counts a script only when a tier
   runs it. A `spike/*` branch skips the commit tier and its push.
 
+- Part 3, yarn-deduplicate (eagle-dev's probe): `highest` alone never merges an exact pin beside a caret, the very
+  split 7f found; the fixer `shared/lint/dedupe.ts` runs highest for every name, then the fewest versions on the
+  check tools alone (their scopes, then their names: the package ANDs its filters), read from `PEERS`, now one home
+  `shared/lint/checkTools.ts` the test imports too. Red on b56f17d's lock: highest lists regexpp only; the three
+  passes list the typescript-eslint family's merge onto 8.70.0, the night's hand merge. Library API, so knip sees
+  the package.
+- Timings, the tier map's numbers (9 Nov, this machine): the way of working's whole check:chunk ~16 s (ESLint 4.8,
+  tsc 1.5, rule tests 3.4, shared tests 1.4); the design copy's tree: ESLint 22.5 s, tsc 3.7, cspell 3.3, prettier
+  2.7, architecture tests 3.2, ls-lint 1.2, knip 1.0, syncpack 0.3.
+
 ## Questions for the PM
 
 - At the build side's port (eagle-dev's measure, 9 Nov): its 23 merges carry written subjects of 115–196

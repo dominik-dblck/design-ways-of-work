@@ -7,20 +7,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { scope } from '../../scope.ts';
-
-// a tool by its package's name; `family`, an npm scope whose packages it releases at its version
-interface Peer {
-  readonly name: string;
-  readonly family?: string;
-}
-
-// the tools the checks load through another: ESLint's plugins, the shared tests' runner, the typed rules' compiler
-const PEERS: readonly Peer[] = [
-  { name: 'eslint' },
-  { name: 'typescript' },
-  { name: 'vitest' },
-  { name: 'typescript-eslint', family: '@typescript-eslint/' },
-];
+import { PEERS } from '../lint/checkTools.ts';
+import type { Peer } from '../lint/checkTools.ts';
 
 const YARN_V1 = '# yarn lockfile v1';
 
@@ -71,7 +59,7 @@ describe('a check tool resolves once', () => {
     expect(lockfile.split('\n').slice(0, 3)).toContain(YARN_V1);
   });
 
-  it('each peer the checks load resolves to one version', () => {
+  it('each peer the checks load resolves to one version (`yarn deps:dedupe` merges a second)', () => {
     expect(
       PEERS.map((peer) => ({
         name: peer.name,
