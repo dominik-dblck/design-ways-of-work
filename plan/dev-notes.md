@@ -246,3 +246,6 @@ mailing-automation: each line waits for its port (phase 9) and the PM's word. Ra
     are one copy each today (typescript 6.0.3, eslint 10.10.0, vitest 5.0.0, typescript-eslint's family 8.70.0).
     Two duplicates of its own, not the checks': `@types/node` 22.20.2 beside 26.5.0 (@types/pg's `*`), zod 4.6.7
     beside 4.5.4 (Stryker's mutation-server-protocol).
+33. At its port (the stricter flags, 9 Nov): `no-non-null-assertion` on in the shared config, its 13 `!` (all in
+    tests, 4 files) narrowed or held in `eslint-suppressions.json`. The flags at its pace (877, 379, 399), each
+    into its own tsconfig once it reads 0 (types row 17's exception), the base taking it once both sides do.

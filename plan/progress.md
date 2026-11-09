@@ -117,6 +117,9 @@
       - [ ] the stricter flags, into `shared/tsconfig.base.json` each once both sides read 0 (measured 8 Nov):
         `noUncheckedIndexedAccess` design 44, dev 877 · `exactOptionalPropertyTypes` design 88, dev 379 ·
         `noPropertyAccessFromIndexSignature` design 107, dev 399; a mechanical fix by script
+        - [x] A: a `!` refused (shared ESLint), the tsconfig exception named (types row 17) (`plan/eagle-notes.md` 44)
+        - [ ] B the word records typed by their keys, the rest by TypeScript's codefix · C the 42 by reading ·
+          D the 88 by their declarations · ⏸ the event payload's type (the PM's)
       - [x] eagle-dev's criterion and its consistency points, before chunk 5 (PM, 8 Nov · A): 8 rows in
         `shared/rules/checks.ts`; the scope is one `scope.ts` a repository, `RepoScope` in `shared/repoScope.ts`
       - [x] chunk 5: boundaries and the molecule count on one element map · the tiers, the barrel and a context

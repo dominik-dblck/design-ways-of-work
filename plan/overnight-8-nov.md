@@ -179,6 +179,10 @@ messages read, the next part resumed. When the run is done: `CronDelete 1577e92f
   with an alias added to the copy's lockfile, green once removed). Its question, the merge script outside the
   repository, goes to the PM (morning list).
 
+- Flags, part A: eagle-dev's read asked a gate before the 42 fixes, so `!` is refused in the shared config (0 on
+  both trees; red on one added to each). Types row 17 says a side's tsconfig adds its environment alone: a flag
+  held at 0 before the base takes it is that row's named exception, until when, never a second floor.
+
 ## Morning: for the PM
 
 - The five patterns beside SSoT and SRP (dependency inversion, ratchet, explicit over implicit, least privilege,
@@ -268,3 +272,6 @@ messages read, the next part resumed. When the run is done: `CronDelete 1577e92f
   side's own port of its framework (its code: one home for the base URL, its trace `on-first-retry` with
   `retries: 0` recording none): when, and in which run. Settled by the rules with eagle-dev, for your read:
   aFlowSaysARefusal stays the product's (its message API), aHelperServesTwoTiers joins the tests' group.
+- Flags, the event payload (25 of the design side's 108 index-signature reads): A typed per event key now, a
+  contract change in the types export the build side reads (a release) · B TypeScript's codefix to brackets now,
+  the typing with the next contract change.

@@ -50,6 +50,7 @@ const TYPES: Linter.RulesRecord = {
     'error',
     { assertionStyle: 'never' },
   ],
+  '@typescript-eslint/no-non-null-assertion': 'error',
   '@typescript-eslint/ban-ts-comment': ['error', { 'ts-expect-error': true }],
   'id-length': ['error', { min: 2, exceptions: ['_'], properties: 'never' }],
 };

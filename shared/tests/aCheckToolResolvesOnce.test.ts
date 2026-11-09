@@ -25,10 +25,11 @@ const PEERS: readonly Peer[] = [
 const YARN_V1 = '# yarn lockfile v1';
 
 // a specifier's package name: `typescript@^6` is `typescript`, `@types/node@*` is `@types/node`
-// an alias names the package it installs: `old@npm:typescript@5` is `typescript`
+// an alias names the package it installs: `old@npm:typescript@5` is `typescript`; one with no range is whole
 function nameOf(specifier: string): string {
   const installs = specifier.split('@npm:').at(-1) ?? specifier;
-  return installs.slice(0, installs.lastIndexOf('@'));
+  const range = installs.lastIndexOf('@');
+  return range > 0 ? installs.slice(0, range) : installs;
 }
 
 // each name a yarn v1 lockfile holds, with its versions: an entry is its specifiers, then `version "…"`

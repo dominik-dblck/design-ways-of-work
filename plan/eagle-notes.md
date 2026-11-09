@@ -275,3 +275,11 @@ for the port (phase 8) or the PM's word. Ranked: the first of each group is the 
     later): merged into 8.70.0, the pinned family's, by a script on the lockfile, and yarn keeps it as merged. Its
     lockfile now matches its package.json (cspell, sonarjs, boundaries and syncpack were in the one, missing from
     the other): the port carries it, and `yarn install --frozen-lockfile` passes on it.
+44. The stricter flags, this side (9 Nov): a `!` is refused (`no-non-null-assertion`, 0 here), and a flag this side
+    reads 0 on goes into its own tsconfig until the base takes it (types row 17's named exception). Measured:
+    noUncheckedIndexedAccess 42, exactOptionalPropertyTypes 88, noPropertyAccessFromIndexSignature 108. Next, in
+    eagle-dev's order: the word records typed by their keys (BAR_WHY, BLOCK_LABEL, BLOCK_WHY; `wordsOf` written
+    twice, in gateWords.ts and blockWords.ts, to one home), TypeScript's codefix for the rest of the 108, then the
+    42 by reading each, then the 88 by their dozen declarations (required, a union, or `?: T | undefined` with its
+    reason). The event payload (25 of the 108) is `EventPayload` in the types export: typed per key is a contract
+    change, the PM's.
