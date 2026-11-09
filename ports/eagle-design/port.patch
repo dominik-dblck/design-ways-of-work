@@ -207,6 +207,20 @@ index f373714..5ecda4a 100644
  
  const ATOMS_CHECKBOX = [
    {
+diff --git a/app/styles/components.spec/atomsText.ts b/app/styles/components.spec/atomsText.ts
+index 0d5aaa4..2162515 100644
+--- a/app/styles/components.spec/atomsText.ts
++++ b/app/styles/components.spec/atomsText.ts
+@@ -111,8 +111,7 @@ const ATOMS_TEXT = [
+     own: { gap: 8 },
+     live: null,
+     fingerprints: [],
+-    wireframe:
+-      'NewDocumentDialog (START FROM) · the list’s nav cards (P1, D1)',
++    wireframe: 'NewDocumentDialog (START FROM) · the list’s nav cards (P1, D1)',
+     notes:
+       'a radio group of choice cards side by side, laid out and named, nothing more: each card is its own choice · the new-document dialog’s Start from and the list’s nav cards over the groups both draw it (P1 · 9 Nov)',
+     layout: 'row · gap 8 · role radiogroup · [choice-card ×]',
 diff --git a/app/styles/gate-states.ts b/app/styles/gate-states.ts
 index 6d4ebd7..beacc45 100644
 --- a/app/styles/gate-states.ts
