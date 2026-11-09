@@ -1,6 +1,6 @@
 /**
  * - `node scripts/take-dev-claude.ts [build repo]` · its skills, patterns, commands
- * - copied byte for byte into dev/claude/, the ticket skills aside (the pipeline's)
+ * - copied byte for byte into dev/claude/, the ticket skills and the retired aside
  * - prints each file's sha256, and the files that name its product
  */
 import { execFileSync } from 'node:child_process';
@@ -8,6 +8,7 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { BUILD_REPO, HERE, repoAt } from './repos.ts';
+import { isRetired } from './retired.ts';
 
 const SOURCE = repoAt(BUILD_REPO);
 const TO = path.join(HERE, 'dev', 'claude');
@@ -20,7 +21,12 @@ const files = execFileSync('git', ['ls-files', '.claude'], {
   encoding: 'utf8',
 })
   .split('\n')
-  .filter((file) => TAKEN.test(file) && !WRITTEN_FROM_THE_PIPELINE.test(file));
+  .filter(
+    (file) =>
+      TAKEN.test(file) &&
+      !WRITTEN_FROM_THE_PIPELINE.test(file) &&
+      !isRetired(file),
+  );
 fs.rmSync(TO, { recursive: true, force: true });
 const naming: string[] = [];
 for (const file of files) {

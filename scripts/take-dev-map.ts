@@ -1,11 +1,12 @@
 /**
  * - `node scripts/take-dev-map.ts [build repo]` · its folder map, product cut out
- * - read from docs/map.md; a folder stays unless PRODUCT_FOLDERS names it or above
+ * - read from docs/map.md; a folder stays unless PRODUCT_FOLDERS or legacy/ holds it
  * - folders only: a file line is the product's, and its own map lists its files
  */
 import fs from 'node:fs';
 import path from 'node:path';
 import { BUILD_REPO, HERE, repoAt } from './repos.ts';
+import { isRetired } from './retired.ts';
 import { quoted } from './tsLiteral.ts';
 
 const SOURCE = repoAt(BUILD_REPO);
@@ -48,15 +49,43 @@ function treeOf(text: string): readonly TreeLine[] {
     });
 }
 
+// a line's depth: its name's column, four characters a level
+const depthOf = (text: string): number =>
+  Math.floor(text.search(/[^│├└─\s]/) / 4);
+
+// a cut leaves a folder last of its siblings: its branch closes, and the bar below it ends
+function closed(lines: readonly TreeLine[]): readonly TreeLine[] {
+  const depths = lines.map((line) => depthOf(line.text));
+  const texts = lines.map((line) => [...line.text]);
+  depths.forEach((depth, at) => {
+    const next = depths.findIndex((one, index) => index > at && one <= depth);
+    const end = next < 0 ? depths.length : next;
+    const isLast = end === depths.length || (depths[end] ?? 0) < depth;
+    const column = (depth - 1) * 4;
+    texts[at]?.splice(column, 1, isLast ? '└' : '├');
+    texts
+      .slice(at + 1, end)
+      .forEach((below) => below.splice(column, 1, isLast ? ' ' : '│'));
+  });
+  return lines.map((line, at) => ({
+    ...line,
+    text: texts[at]?.join('') ?? line.text,
+  }));
+}
+
 // the folders of the build repository's map, its product's cut and its domain named by concept
 const mapLines = (): readonly string[] =>
-  treeOf(fs.readFileSync(path.join(SOURCE, 'docs', 'map.md'), 'utf8'))
-    .filter((line) => !PRODUCT_FOLDERS.some((one) => one.test(line.path)))
-    .flatMap((line) =>
-      line.path === 'packages/domain/'
-        ? [line.text, DOMAIN_CONCEPT]
-        : [line.text],
-    );
+  closed(
+    treeOf(fs.readFileSync(path.join(SOURCE, 'docs', 'map.md'), 'utf8')).filter(
+      (line) =>
+        !PRODUCT_FOLDERS.some((one) => one.test(line.path)) &&
+        !isRetired(line.path),
+    ),
+  ).flatMap((line) =>
+    line.path === 'packages/domain/'
+      ? [line.text, DOMAIN_CONCEPT]
+      : [line.text],
+  );
 
 const mapModule = (lines: readonly string[]): string =>
   [

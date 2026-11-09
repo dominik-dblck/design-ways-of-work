@@ -406,3 +406,16 @@ eagle-dev and reported; the PM answers what moves the product, a release, the bu
   The base read there says two cases alone (the build side's value taken: the spec behind; a third value: both
   behind); a filed row carries only a row decided back to the spec, its decision by its `docs/process/decisions.ts`
   id, never its text. Both JSONs written from TypeScript by the design side's build (D21).
+- **The PM via eagle-dev, 9 Nov** ("celem jest szybki development"; "development ma być szybki ale trzymać
+  harness"): checks in three tiers, one map in the shared scope, the same on both sides · edit: the written file
+  alone, ESLint with sonar (its slow rule off, named in the map with its measure), cspell, ~1-2 s · commit
+  (`check:chunk`, the Stop hook, pre-commit): lint without sonar's tree-wide run, sonar on the staged files (a file a
+  script wrote never passed the edit hook), tsc, prettier, the shared tests, a budget of ~1-3 min; a gate that
+  pushes past it moves a tier · feature end (the build side's ticket-report verify; the design side's pre-push, verify
+  full and fresh): sonar tree-wide, e2e, `sync:groups`. No gate dropped, only its moment moves:
+  `everyRuleHasAGate` counts a gate some tier runs. The port in small green tickets beside product work (the design
+  side's one ticket, a commit per chunk). A `spike/*` branch: no Stop hook, no commit tier, the edit hook formats and
+  never refuses; nothing merges without the commit and feature-end tiers. The build side's skills to `legacy/`
+  (PM, 8 Nov) held by eagle-dev until the PM confirms it.
+- **The build side's skills, the PM, 9 Nov · A**: moved now in the way of working's copy (`dev/claude/skills` to
+  `legacy/`), in the build side's tree in its port ticket; the template carries no unused skill from today.
