@@ -14,7 +14,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 | 2 | Rules | 10 | 10 |
 | 3 | Names | 6 | 6 |
 | 4 | Tools | 8 | 8 |
-| 5 | e2e | 0 | 4 |
+| 5 | e2e | 2 | 4 |
 | 6 | Port design | 0 | 6 |
 
 ## History
@@ -34,6 +34,8 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 - 12:25 · stage 4 · 6 of 8 · sync:groups shared core; words acronym miss mended (task 6)
 - 13:17 · stage 4 · 7 of 8 · design system guide as TS data, guide.md generated (task 7)
 - 13:20 · stage 4 · 8 of 8 · scripts' test home: retired, mapTree, movePaths (task 8)
+- 13:51 · stage 5 · 1 of 4 · browser tier framework in shared/e2e, fitted to the rules (task 1)
+- 14:04 · stage 5 · 2 of 4 · scope browser tier, first four gates red and green (task 2)
 
 - 08:24 · stage 1 · 1 of 5 · the build side's skills to legacy/ (8bfcd8e)
 - 08:51 · stage 1 · 2 of 5 · 7g commitlint (d282df5)
@@ -324,6 +326,16 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
   held (`knipConfig.ts · BROWSER_FACE`); `@playwright/test` 1.63.0 exact in the way of working and in the design
   side (types only, its lockfile entries by script): a repository typechecks `shared/` whole, so it names what
   `shared/` imports, a browser tier or none.
+
+- Stage 5 task 2, the scope's browser tier: `browser: BrowserTier | { none: why }` (`shared/browserTypes.ts`), its
+  paths named by the product (screensRoot, statusRoot, registry, templates, componentRoots, roles, exemptions),
+  none fixed by the way of working; the way of working says none (it holds the framework, a product runs it),
+  the design side none with the PM's reason (Q2 A). First gates as shared tests on it, each skipped under the
+  `none` sentence, never passing silently: theBrowserTierIsPortable (inverted: shared/e2e imports node,
+  Playwright and itself), aDragGoesThroughTheFramework, everyPathIsWalked, theStatusFileHolds; their logic in
+  `shared/tests/browserGates.ts` beside the readers (`browserScreens.ts`, `statusFile.ts`, `codeText.ts`, the
+  comments blanked by TypeScript's scanner, so a line keeps its number), proven red and green on a tree of one
+  screen (`tests/browser/`, 9 cases). No zod here: a catalogue is checked by a type guard.
 
 ## Questions for the PM
 

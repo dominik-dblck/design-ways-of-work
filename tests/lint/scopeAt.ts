@@ -42,6 +42,7 @@ const scopeAt = (root: string, named: Partial<RepoScope> = {}): RepoScope => ({
     onPurpose: [],
     alsoIn: [],
   },
+  browser: { none: 'a test scope' },
   ...named,
 });
 

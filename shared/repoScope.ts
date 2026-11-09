@@ -2,6 +2,7 @@
  * - `RepoScope`, `Generator` · what a repository names once; a script that emits
  * - `testsOf`, `SHARED_TESTS` · the files read as tests; the way of working's own
  */
+import type { Browser } from './browserTypes.ts';
 import type { CheckTiers } from './checkTiers.ts';
 import type { Renderer } from './lint/componentLadders.ts';
 import type { Language } from './lint/cspellConfig.ts';
@@ -87,6 +88,7 @@ interface RepoScope {
   readonly ruleFiles: readonly string[];
   readonly namedPaths: NamedPaths;
   readonly spelling: Spelling;
+  readonly browser: Browser;
 }
 
 // the way of working's shared tests, which each side's runner includes beside its own

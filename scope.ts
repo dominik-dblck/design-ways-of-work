@@ -3,12 +3,18 @@ import type { RepoScope } from './shared/repoScope.ts';
 
 const scope: RepoScope = {
   root: import.meta.dirname,
+  // it holds the browser tier's framework and gates; a product runs them
+  browser: {
+    none: 'the way of working holds the framework, shared/e2e/, and a product runs it',
+  },
   ignores: [
     'node_modules/**',
     '.rehearsal/**',
     'legacy/**',
     // the files a rule's tests read as a program, wrong on purpose
     'tests/lint/fixtures/**',
+    // a browser tier of one screen, its gates' tests read
+    'tests/browser/fixtures/**',
   ],
   // the design side's tree, the build side's, and the rule files both read: each checked in its product
   productTrees: ['design/**', 'dev/**', 'shared/rules/**'],
@@ -49,6 +55,11 @@ const scope: RepoScope = {
       folders: ['tests/lint/fixtures'],
       kinds: { '.dir': 'PascalCase', '.ts': 'PascalCase' },
       why: "a rule's fixture copies a product's tree: a component's folder and own file are PascalCase",
+    },
+    {
+      folders: ['tests/browser/fixtures'],
+      kinds: { '.dir': 'camelCase', '.md': 'regex:^[a-z][A-Za-z]+-status$' },
+      why: "a browser tier's fixture copies a product's tree: a screen's folder is its catalogue's camelCase name, its status `{screen}-status.md`",
     },
   ],
   // a types file holds types alone, as the design side's (docs/rules/names.md)

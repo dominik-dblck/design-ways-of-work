@@ -2427,10 +2427,10 @@ index 9c7b0cf..ce1fef1 100644
 +export type { TrackFinding, TrackReading, TrackRow };
 diff --git a/scope.ts b/scope.ts
 new file mode 100644
-index 0000000..081d7d8
+index 0000000..6f670d1
 --- /dev/null
 +++ b/scope.ts
-@@ -0,0 +1,394 @@
+@@ -0,0 +1,398 @@
 +// scope.ts · what the design project names once: its ESLint config, its shared tests and its tools read it
 +import type { RepoScope } from './shared/repoScope.ts';
 +import {
@@ -2550,6 +2550,10 @@ index 0000000..081d7d8
 +
 +const scope: RepoScope = {
 +  root: import.meta.dirname,
++  // no browser tier (PM, 9 Nov · Q2 A): held by its lints, tsc and branded types
++  browser: {
++    none: 'its app is for the PM and the team to look at; the build side runs the full suite (PM, 9 Nov)',
++  },
 +  ignores: ['dist/**', 'node_modules/**', 'poc/**', '.artifact/**'],
 +  // no product's tree held inside it
 +  productTrees: [],

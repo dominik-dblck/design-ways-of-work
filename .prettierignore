@@ -3,6 +3,7 @@ node_modules/
 .rehearsal/
 legacy/
 tests/lint/fixtures/
+tests/browser/fixtures/
 # a product's tree, formatted in its product
 design/
 dev/
