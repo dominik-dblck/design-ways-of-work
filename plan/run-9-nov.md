@@ -307,6 +307,24 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
   cut after a folder with children. `move.ts`'s pure parts into `scripts/movePaths.ts` (imports written again,
   exact paths, a root's landing and barrel), six cases; its runner keeps the files and git.
 
+- Stage 5 task 1, the browser tier's framework into `shared/e2e/` (Q1 A, Q2 A, Q3 B): copied by script from
+  mailing-automation `e2e/framework` at 56a47d46, read only, then fitted to the way of working's rules (68 lint
+  and 12 tsc errors to 0). Its face changes for the build side's port, each named here so its port rewrites by
+  script: `resolveRuntime()` → `runtimeOf(testInfo.project.use.baseURL)`, the address's one home the product's
+  `playwright.config.ts`, no env and no default (rule: production reads no `E2E_…`); `runCategorisedTests` takes
+  `healthPath` and `reportingProject` (were `/api/health`, `chromium`), `options` gone; its hooks read
+  `test.info()`, so no empty pattern needs a suppression; `theAppAnswers` a file of its own; `expectUrl(page,
+  { url, timeout })`; `journeysKept({ categories, only, except })`; `journeysRunApart({ screensRoot, screen })`,
+  its root the product's (was `process.cwd()/e2e`), read without a regex; `createCoverageRegistry` a closure, no
+  class (erasable syntax only); `flowIdsOf` and `flowDataOf` without a type assertion (a type guard checks each
+  key reads back as itself); `FLOW_PATHS` in `flowPaths.ts`; `dragging` split in three (`dragPointer`,
+  `dragHold`, `dragging`), its calls past two values one object. Its README's framework half beside it, composed
+  by script; the product half (identity, one mode, theTierIsReady, what is not here) stays the build side's.
+  My call: the framework's face (the 12 files a product's flows import) is a knip entry wherever `shared/` is
+  held (`knipConfig.ts · BROWSER_FACE`); `@playwright/test` 1.63.0 exact in the way of working and in the design
+  side (types only, its lockfile entries by script): a repository typechecks `shared/` whole, so it names what
+  `shared/` imports, a browser tier or none.
+
 ## Questions for the PM
 
 - The design side's 71 entries keep kebab names (`sheet-status.ts`): the artifact and the build side read them by

@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { knipConfig } from '../../shared/lint/knipConfig.ts';
+import { BROWSER_FACE, knipConfig } from '../../shared/lint/knipConfig.ts';
 import { FIXTURES } from './ruleTester.ts';
 import { scopeAt } from './scopeAt.ts';
 
 describe('knip from a scope', () => {
-  it("its entries are the scope's, what it starts from, and each file a hook runs, in either settings, once", () => {
+  it("its entries are the scope's, the browser tier's face, what it starts from, each file a hook runs, once", () => {
     const config = knipConfig(
       scopeAt(FIXTURES, {
         entries: ['sheet/words.ts'],
@@ -16,6 +16,7 @@ describe('knip from a scope', () => {
     );
     expect(config.entry).toEqual([
       'sheet/words.ts',
+      ...BROWSER_FACE,
       'app/pages/*.tsx',
       'tools/keepsTheTurn.ts',
       'shared/hooks/editCheck.ts',
@@ -32,6 +33,7 @@ describe('knip from a scope', () => {
 
   it('a repository with no Claude Code settings has no hook entries', () => {
     expect(knipConfig(scopeAt('/nowhere')).entry).toEqual([
+      ...BROWSER_FACE,
       '*.config.{ts,mts}',
       'scope.ts',
     ]);

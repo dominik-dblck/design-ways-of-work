@@ -1,6 +1,7 @@
 /**
  * - `knipConfig` · knip from a scope: a file, an export or a type nobody reads
  * - its entries: the scope's, what it starts from, its generators, its hooks' runs
+ * - `BROWSER_FACE` · the browser tier's files a product's flows import
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -34,9 +35,26 @@ function hookRuns(root: string): readonly string[] {
 // knip's settings as an object: its config may also be a function, which a scope never is
 type KnipSettings = Exclude<KnipConfig, (...args: readonly never[]) => unknown>;
 
+// the browser tier's face, what a product's flows import: an entry wherever shared/ is held
+const BROWSER_FACE = [
+  'asserting',
+  'clicking',
+  'colours',
+  'dragging',
+  'flowPaths',
+  'runCategorisedTests',
+  'theDefinitions',
+  'theFlowCatalog',
+  'theFlowShapes',
+  'theRuntime',
+  'theScreenSuite',
+  'waiting',
+].map((name) => `shared/e2e/${name}.ts`);
+
 const knipConfig = (scope: RepoScope): KnipSettings => ({
   entry: [
     ...scope.entries,
+    ...BROWSER_FACE,
     ...scope.starts,
     ...scope.generators.map(({ script }) => script),
     ...hookRuns(scope.root),
@@ -46,4 +64,4 @@ const knipConfig = (scope: RepoScope): KnipSettings => ({
   ignore: [...scope.ignores, ...scope.productTrees, ...scope.generated],
 });
 
-export { knipConfig };
+export { BROWSER_FACE, knipConfig };
