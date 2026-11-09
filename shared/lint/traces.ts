@@ -8,11 +8,11 @@ const AN_EPIC = /(?<![\w#-])E\d{2}(?!\d)/g;
 const TRACES: readonly (readonly [string, RegExp])[] = [
   ['a date', new RegExp(`\\b\\d{1,2} (?:${MONTHS})\\b`)],
   ['a ticket', /\bT-E\d{2}-\d{2}\b/],
-  ['a criterion', /\bcriteri(?:on|a) \d|\bc\d{1,2}[a-z]? ·/i],
+  ['a criterion', /\b(?:criterion|criteria) \d|\bc\d{1,2}[a-z]? ·/i],
   ['a decision', /\(PM\b|\bPM, \d/],
   [
     'a stage',
-    /\b(?:RED|GREEN)\b|\b(?:recon|contract|review|snapshot|regression)\b[^\n]{0,12}?\b[QFNDC]\d+\b/,
+    /\b(?:RED|GREEN)\b|\b(?:recon|contract|review|snapshot|regression)\b[^\n]{0,12}?\b(?:Q|F|N|D|C)\d+\b/,
   ],
   [
     'a row, an edge or a finding',

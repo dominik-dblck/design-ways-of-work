@@ -234,3 +234,9 @@ mailing-automation: each line waits for its port (phase 9) and the PM's word. Ra
     the shared OFF table with it; its measure (8 Nov): about 27 findings to mend or hold, 30 deprecated calls
     for `no-deprecated`. Sonar's typed rules want typescript `>=5 <6.1.0`: its typescript pinned exactly, one
     in the lockfile (7f syncpack holds it). Both rows' build gates stay `review` until then.
+31. At its port (chunk 7e, cspell, eagle-dev's measure 8 Nov): its scope's `spelling.files` its screen copy
+    (`app/**/constants/*Words.ts`), its prose md (CLAUDE.md, docs/**, .claude/**, minus fixtures, the pipeline's
+    generated skills and its two rendered docs, which go to `generated`) and its production code; `alsoIn` [].
+    Its words from data: the glossary through the sheet fixture's `uiRows()`, the seed's persona names and
+    catalog ids, the deeplink catalog's ids; a reviewed list of its API words and coinages. One slip for Dom:
+    `packages/domain/blocks/sameField.ts:2,26` "two datas of a node".

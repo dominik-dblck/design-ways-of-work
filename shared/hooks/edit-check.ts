@@ -1,8 +1,9 @@
 /**
- * - a Claude Code PostToolUse hook: a file just written is formatted and fixed
+ * - a Claude Code PostToolUse hook: a file written is formatted, fixed, spelled
  * - what stays wrong goes back to the agent as context; it never blocks the edit
  * - each tool's own ignore decides its scope, in whichever repository it runs
  */
+import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { ESLint } from 'eslint';
@@ -42,16 +43,32 @@ async function lintOne(file: string): Promise<readonly string[]> {
   );
 }
 
+// cspell on the file when its scope spells it: each word no dictionary holds, where it stands
+function spellOne(file: string): readonly string[] {
+  const run = spawnSync(
+    path.join(ROOT, 'node_modules/.bin/cspell'),
+    ['--no-progress', '--no-summary', '--no-must-find-files', '--file', file],
+    { cwd: ROOT, encoding: 'utf8' },
+  );
+  return (run.stdout ?? '').split('\n').filter(Boolean);
+}
+
+const titled = (title: string, lines: readonly string[]): readonly string[] =>
+  lines.length ? [`${title}:`, ...lines] : [];
+
 const file = editedFile(fs.readFileSync(0, 'utf8'));
 if (file) {
   await formatOne(file);
-  const found = await lintOne(file);
-  if (found.length)
+  const said = [
+    ...titled('ESLint, after fixes', await lintOne(file)),
+    ...titled('cspell', spellOne(file)),
+  ];
+  if (said.length)
     console.log(
       JSON.stringify({
         hookSpecificOutput: {
           hookEventName: 'PostToolUse',
-          additionalContext: `ESLint, after fixes:\n${found.join('\n')}`,
+          additionalContext: said.join('\n'),
         },
       }),
     );

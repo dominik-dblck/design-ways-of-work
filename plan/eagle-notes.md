@@ -258,3 +258,13 @@ for the port (phase 8) or the PM's word. Ranked: the first of each group is the 
     `pointerResolve.ts` (3), `ticketExpand.ts`, `caseText.ts`, `chipCtas.ts`, `roleMatrix.ts`, `todoMoves.ts`,
     `catalogRail.ts` (the same rewrites), `listPart.ts`'s `new Function` (as `checkWorld`), and
     `gate-states.ts`'s `substr` (`slice`). The sheet skill's commit line names no known fails.
+42. cspell (chunk 7e, part 1): this side spells its production code and every markdown file, its tests not yet.
+    Its words: `computed`, the people's names and the catalog's ids from its data (scope.ts), and `reviewed`,
+    `SHEET_WORDS`, about 75: the domain's (deeplink, preheader, winback…), coinages, tools it names, and ids its
+    code holds that no export lists (appr, lholder, summsht, vnum…). Two examples misspelt on purpose are left
+    out where they stand (`onPurpose`), never words: a real "amout" elsewhere is found. Polish is spelled in the
+    files that quote the PM or speak to them (docs/process, roadmaps, the pipeline docs, runKeepsTheTurn, the
+    screen view, threads.ts), the PM's own coinings (Skille, a French verb) only there; the three translation
+    samples (localeRows, runFacts, screenThree) wait for their languages' dictionaries. Later here, so the
+    reviewed ids go to zero: export GROUP_OF, the board tree's, the payloads' and the cases' ids for scope.ts to
+    read, and rename the abbreviations (vnum, wspx, chev, appr) to names that say their purpose.

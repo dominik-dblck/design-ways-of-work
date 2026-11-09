@@ -139,6 +139,20 @@ messages read, the next part resumed. When the run is done: `CronDelete 1577e92f
   Seen red. Two shared rows: sonar's set less its OFF table (checks), no deprecated API (types). The
   deprecated API's allow is exact: `builtinRules` from ESLint's own `use-at-your-own-risk.d.ts` (eagle-dev's
   M4; seen red). The cost reason of `no-redundant-assignments` says how it was measured (M5).
+- 7e part 1, cspell from the scope: `shared/lint/cspellConfig.ts` (en and en-GB, code's dictionaries), a root
+  `cspell.config.ts` in each repository, `lint:words` in check:chunk, the edit hook spelling the edited file.
+  What it leaves out is shared policy, read off the scope: its ignores, product trees, generated files, a
+  generator's writes (spelled at their source; a `!` among them stays spelled, by ordered overrides since cspell's
+  ignorePaths take no `!`) and its tests (eagle-dev: until data names their people and translations' words).
+  A word has one home: the way of working's list or the product's, the config refusing one in both (eagle-dev's
+  ask 1). Another language only in the files the scope names (`alsoIn`): this product quotes the PM and its
+  screen view writes to them in Polish. Undo: drop `lint:words` from check:chunk.
+- 7e part 1, the product's words: `computed` from its data in scope.ts (its people's names, its catalog's ids)
+  and `reviewed` (`SHEET_WORDS`), ids its code holds that no export lists among them. A reviewed word the way
+  of working holds throws; a computed one is taken once (eagle-dev's N1). Text misspelt on purpose is left out
+  where it stands (`onPurpose`), never a word (N2); another language's own coinings only in its files. No
+  regex literal left unspelled: three regex fragments rewritten as whole words, same matches (N3). Three files
+  of translation samples (fr, de, it, es, pt) left out with their reason: no dictionary of theirs is bundled.
 ## Morning: for the PM
 
 - The five patterns beside SSoT and SRP (dependency inversion, ratchet, explicit over implicit, least privilege,
@@ -202,3 +216,7 @@ messages read, the next part resumed. When the run is done: `CronDelete 1577e92f
   eagle-dev calls it a dodge) · B: both keep `new Function`, `code-eval` off for the runner files the scope
   names with the reason "a runner exists to run the product's own built bundle", an exemption carved out of
   "wow takes none" (eagle-dev's pick) · C: `code-eval` off everywhere (the build side's server loses it).
+- 7e, the design system names its brand (Deblock, its fonts, its regulators): its words sit in the way of
+  working's list tonight, and part 2's flagWords would flag the product's name in the way of working's files.
+  A: the design system is a product tree, spelled and flagged in its product · B: it stays the way of working's,
+  its brand words kept and the brand left out of the names flagged (eagle-dev's ask 3 asks the same).

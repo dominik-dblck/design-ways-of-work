@@ -156,7 +156,7 @@
         (`plan/eagle-notes.md` 35, `plan/dev-notes.md` 24)
       - [ ] chunk 7, seven parts: 7a the generators' check mode, the first shared test (`plan/eagle-notes.md` 32,
         `plan/dev-notes.md` 21) ✓ · 7b the tests both sides wrote twice, shared on the scope (the skills ✓ `plan/eagle-notes.md` 36, f8838e2, a
-        sentence once ✓ `plan/eagle-notes.md` 37, b8cba0a, the rule files' shared words ✓ 38, fdfc801, every rule's gate ✓ 39, 1fc1dc7, the docs' paths ✓ 40) ✓ · 7c one baseline format (`plan/eagle-notes.md` 33, `plan/dev-notes.md` 22) ✓ · 7d sonarjs (`plan/eagle-notes.md` 41, `plan/dev-notes.md` 30) ✓ · 7e cspell ·
+        sentence once ✓ `plan/eagle-notes.md` 37, b8cba0a, the rule files' shared words ✓ 38, fdfc801, every rule's gate ✓ 39, 1fc1dc7, the docs' paths ✓ 40) ✓ · 7c one baseline format (`plan/eagle-notes.md` 33, `plan/dev-notes.md` 22) ✓ · 7d sonarjs (`plan/eagle-notes.md` 41, `plan/dev-notes.md` 30, b56f17d) ✓ · 7e cspell (part 1, the spelling ✓ `plan/eagle-notes.md` 42, `plan/dev-notes.md` 31; part 2, product names flagged in the way of working's files and one shared id test, waits on the PM's design-system call) ·
         7f syncpack · 7g commitlint
       - [ ] the shared tests read `scope.ts` (chunk 7), with the way of working's one baseline format
       - [ ] the spawn check: a blank repository from the template green on every shared check (phase 7)

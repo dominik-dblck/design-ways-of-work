@@ -55,7 +55,7 @@ function statusMap(at: LineAt): readonly SourceFinding[] {
 // a function that works out a status; a flag decides none
 function statusFunction(at: LineAt): readonly SourceFinding[] {
   const found =
-    /\b(?:function\s+(\w*[Ss]tatus\w*)\s*\(|(?:const|var|let)\s+(\w*[Ss]tatus\w*)\s*=\s*(?:function\b|\([^)]*\)\s*=>|\w+\s*=>))/.exec(
+    /\b(?:function\s+(\w*(?:Status|status)\w*)\s*\(|(?:const|var|let)\s+(\w*(?:Status|status)\w*)\s*=\s*(?:function\b|\([^)]*\)\s*=>|\w+\s*=>))/.exec(
       at.line,
     );
   if (!found || STATUS_HOMES.includes(at.file)) return [];

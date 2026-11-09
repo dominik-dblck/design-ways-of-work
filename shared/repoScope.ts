@@ -3,6 +3,7 @@
  * - `testsOf`, `SHARED_TESTS` · the files read as tests; the way of working's own
  */
 import type { Renderer } from './lint/componentLadders.ts';
+import type { Language } from './lint/cspellConfig.ts';
 import type { Named } from './lint/rules/fileNamesItsPurpose.ts';
 import type { Family } from './lint/rules/oneHomePerName.ts';
 
@@ -31,6 +32,22 @@ interface NamedPaths {
 interface Sentences {
   readonly code: readonly string[];
   readonly prose: readonly string[];
+}
+
+// a language some files are also written in (the PM's words, quoted, or a view for them), and its words no dictionary holds
+interface AlsoIn {
+  readonly language: Language;
+  readonly files: readonly string[];
+  readonly words: readonly string[];
+}
+
+// what cspell spells, by globs, and the words it takes: computed, reviewed, misspelt on purpose, another language's
+interface Spelling {
+  readonly files: readonly string[];
+  readonly computed: readonly string[];
+  readonly reviewed: readonly string[];
+  readonly onPurpose: readonly RegExp[];
+  readonly alsoIn: readonly AlsoIn[];
 }
 
 interface RepoScope {
@@ -62,6 +79,7 @@ interface RepoScope {
   // the rule tables as printed (`| Rule | Gate | Exceptions | Why |`): each row names a gate that runs
   readonly ruleFiles: readonly string[];
   readonly namedPaths: NamedPaths;
+  readonly spelling: Spelling;
 }
 
 // the way of working's shared tests, which each side's runner includes beside its own

@@ -17,6 +17,7 @@
     "design-system/**/*.ts",
     "tests/**/*.ts",
     "eslint.config.ts",
+    "cspell.config.ts",
     "knip.ts",
     "vitest.config.ts"
   ],

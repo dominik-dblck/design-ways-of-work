@@ -75,6 +75,18 @@ const scope: RepoScope = {
       'legacy',
     ],
   },
+  spelling: {
+    files: [
+      '**/*.{ts,tsx,md}',
+      // notes about the products, in their words, and the PM's own, quoted in Polish
+      '!plan/**',
+    ],
+    // none: the way of working's own words are WOW_WORDS, in every repository
+    computed: [],
+    reviewed: [],
+    onPurpose: [],
+    alsoIn: [],
+  },
 };
 
 export { scope };

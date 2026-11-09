@@ -6,12 +6,13 @@
     "node": "22.23.1"
   },
   "scripts": {
-    "check:chunk": "yarn -s lint:files && yarn -s format:check && yarn -s lint && yarn -s tsc && yarn -s lint:copies && yarn -s lint:exports && yarn -s test:rules && yarn -s test:shared && yarn -s lint:kept",
+    "check:chunk": "yarn -s lint:files && yarn -s lint:words && yarn -s format:check && yarn -s lint && yarn -s tsc && yarn -s lint:copies && yarn -s lint:exports && yarn -s test:rules && yarn -s test:shared && yarn -s lint:kept",
     "test:rules": "vitest run tests/lint",
     "test:shared": "vitest run shared/tests",
     "tsc": "tsc --noEmit",
     "lint": "eslint .",
     "lint:files": "node scripts/lint-files.ts",
+    "lint:words": "cspell --no-progress --no-summary",
     "lint:kept": "node scripts/keeps-its-rules.ts",
     "lint:copies": "jscpd --min-tokens 50 --format typescript --reporters console --no-tips --exit-code 1 scripts shared/hooks shared/lint design-system knip.ts",
     "lint:exports": "knip --no-progress --no-config-hints",
@@ -27,6 +28,7 @@
   },
   "packageManager": "yarn@1.22.22",
   "devDependencies": {
+    "@cspell/dict-pl_pl": "3.0.8",
     "@eslint-community/eslint-plugin-eslint-comments": "4.8.1",
     "@eslint/js": "10.0.1",
     "@ls-lint/ls-lint": "2.3.2",
@@ -36,6 +38,7 @@
     "@types/react-dom": "19.2.7",
     "@typescript-eslint/rule-tester": "8.70.0",
     "@typescript-eslint/utils": "8.70.0",
+    "cspell": "10.4.0",
     "eslint": "10.10.0",
     "eslint-import-resolver-typescript": "4.4.5",
     "eslint-plugin-boundaries": "7.3.0",

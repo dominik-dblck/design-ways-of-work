@@ -30,6 +30,13 @@ const scopeAt = (root: string, named: Partial<RepoScope> = {}): RepoScope => ({
   generators: [],
   instructions: { skills: [], whole: [], onDemand: [], everyTurn: [] },
   sentences: { code: [], prose: [] },
+  spelling: {
+    files: [],
+    computed: [],
+    reviewed: [],
+    onPurpose: [],
+    alsoIn: [],
+  },
   ...named,
 });
 

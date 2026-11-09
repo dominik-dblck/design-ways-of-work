@@ -673,6 +673,17 @@ index b83db18..7bccc2f 100644
  };
  
  export type LightToken = keyof typeof tokens.light;
+diff --git a/cspell.config.ts b/cspell.config.ts
+new file mode 100644
+index 0000000..068dfcd
+--- /dev/null
++++ b/cspell.config.ts
+@@ -0,0 +1,5 @@
++// cspell.config.ts · cspell's config over the design project, from its scope
++import { cspellConfigOf } from './shared/lint/cspellConfig.ts';
++import { scope } from './scope.ts';
++
++export default cspellConfigOf(scope);
 diff --git a/docs/process/new-project.md b/docs/process/new-project.md
 index 4ed4a71..89724d3 100644
 --- a/docs/process/new-project.md
@@ -708,25 +719,26 @@ index db1e4a6..2b5d301 100644
  **And one the checklist does not ask.** Count the reading table against the criteria. A row the
 diff --git a/docs/rules/checks.md b/docs/rules/checks.md
 new file mode 100644
-index 0000000..ae79470
+index 0000000..ec9f876
 --- /dev/null
 +++ b/docs/rules/checks.md
-@@ -0,0 +1,15 @@
+@@ -0,0 +1,16 @@
 +# Checks
 +
 +Which tool holds a rule, and what keeps the tools one system.
 +
-+| Rule                                                                                                                                                                                                                                                                                                                                                                                                                                                   | Gate                                       | Exceptions                                                         | Why                                                                                                                                       |
-+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------ | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
-+| A rule is held by the tool that reads its kind of fact: what one TypeScript file shows by ESLint (a rule or a shape of the way of working's plugin, reported as the code is written); what needs many files, running code or a file that is not TypeScript by a test, shared when the rule is; a file's name or path by ls-lint, an unused export or file by knip, a guarantee of the language by tsc, a generated file by its generator's check mode. | `review`                                   | —                                                                  | A rule reported where the code is written is fixed in the same place; each kind of fact has the one tool that reads it.                   |
-+| A rule across files is an ESLint rule only when it indexes the program once (`wow/one-home-per-name`); any other is a shared test.                                                                                                                                                                                                                                                                                                                     | `review`                                   | —                                                                  | ESLint reads one file at a time; an index built once a run is the one read across files it holds cheaply.                                 |
-+| A rule is one row naming its one gate, in `shared/rules/` when it is generic and in the product's rules when not; a rule moving between gates names until when.                                                                                                                                                                                                                                                                                        | `everyRuleHasAGate`                        | —                                                                  | Two gates for one rule drift apart, and a rule with none holds nothing.                                                                   |
-+| A repository names its code once, in its `scope.ts` (a `RepoScope`): its ESLint config, its shared tests and its tools read that one file, and a field holds one list for one job.                                                                                                                                                                                                                                                                     | `tsc` · `review`                           | —                                                                  | A list written twice drifts, and lint and a test then disagree on what a file is.                                                         |
-+| A tool takes its exceptions one way, the same in every repository: ESLint a directive with its reason (`comments.md`) or `eslint-suppressions.json`, a test the way of working's one baseline (`tests.md`); never a list a check invents for itself.                                                                                                                                                                                                   | ESLint `require-description` · `review`    | —                                                                  | What is let through is found in one place, in every repository.                                                                           |
-+| A lint rule or shape of the way of working is proven by its RuleTester cases, those that must fire and those that must pass, one for each case of the test it replaced.                                                                                                                                                                                                                                                                                | `review`                                   | the way of working's own `test:rules` runs them, in its repository | A gate never seen red is no gate.                                                                                                         |
-+| A finding says in one sentence what a person writes instead, names its rule file (`(docs/rules/names.md)`), and points at what it fired on.                                                                                                                                                                                                                                                                                                            | `review`                                   | the way of working's own `test:rules` reads each message           | The fix is made where the finding is read.                                                                                                |
-+| Code meets SonarJS's recommended rules too, less those `shared/lint/sonarRules.ts` turns off, each with its reason: `OFF` everywhere, `OFF_IN_TESTS` in tests.                                                                                                                                                                                                                                                                                         | ESLint `sonarjs/*`                         | —                                                                  | It reads what a reviewer misses: a regular expression that backtracks, a value written and never read, a collection that is always empty. |
-+| The way of working names no product: a blank repository spawned from its template, with an empty `scope.ts` and an empty rules file, passes every shared check from its first day.                                                                                                                                                                                                                                                                     | `theWayOfWorkingNamesNoProduct` · `review` | the spawn check comes with the template (phase 7)                  | What a product needs is its own; the way of working is the same for every product.                                                        |
++| Rule                                                                                                                                                                                                                                                                                                                                                                                                                                                   | Gate                                       | Exceptions                                                                                               | Why                                                                                                                                       |
++| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------ | -------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
++| A rule is held by the tool that reads its kind of fact: what one TypeScript file shows by ESLint (a rule or a shape of the way of working's plugin, reported as the code is written); what needs many files, running code or a file that is not TypeScript by a test, shared when the rule is; a file's name or path by ls-lint, an unused export or file by knip, a guarantee of the language by tsc, a generated file by its generator's check mode. | `review`                                   | —                                                                                                        | A rule reported where the code is written is fixed in the same place; each kind of fact has the one tool that reads it.                   |
++| A rule across files is an ESLint rule only when it indexes the program once (`wow/one-home-per-name`); any other is a shared test.                                                                                                                                                                                                                                                                                                                     | `review`                                   | —                                                                                                        | ESLint reads one file at a time; an index built once a run is the one read across files it holds cheaply.                                 |
++| A rule is one row naming its one gate, in `shared/rules/` when it is generic and in the product's rules when not; a rule moving between gates names until when.                                                                                                                                                                                                                                                                                        | `everyRuleHasAGate`                        | —                                                                                                        | Two gates for one rule drift apart, and a rule with none holds nothing.                                                                   |
++| A repository names its code once, in its `scope.ts` (a `RepoScope`): its ESLint config, its shared tests and its tools read that one file, and a field holds one list for one job.                                                                                                                                                                                                                                                                     | `tsc` · `review`                           | —                                                                                                        | A list written twice drifts, and lint and a test then disagree on what a file is.                                                         |
++| A tool takes its exceptions one way, the same in every repository: ESLint a directive with its reason (`comments.md`) or `eslint-suppressions.json`, a test the way of working's one baseline (`tests.md`); never a list a check invents for itself.                                                                                                                                                                                                   | ESLint `require-description` · `review`    | —                                                                                                        | What is let through is found in one place, in every repository.                                                                           |
++| A lint rule or shape of the way of working is proven by its RuleTester cases, those that must fire and those that must pass, one for each case of the test it replaced.                                                                                                                                                                                                                                                                                | `review`                                   | the way of working's own `test:rules` runs them, in its repository                                       | A gate never seen red is no gate.                                                                                                         |
++| A finding says in one sentence what a person writes instead, names its rule file (`(docs/rules/names.md)`), and points at what it fired on.                                                                                                                                                                                                                                                                                                            | `review`                                   | the way of working's own `test:rules` reads each message                                                 | The fix is made where the finding is read.                                                                                                |
++| Code meets SonarJS's recommended rules too, less those `shared/lint/sonarRules.ts` turns off, each with its reason: `OFF` everywhere, `OFF_IN_TESTS` in tests.                                                                                                                                                                                                                                                                                         | ESLint `sonarjs/*`                         | —                                                                                                        | It reads what a reviewer misses: a regular expression that backtracks, a value written and never read, a collection that is always empty. |
++| Every word the scope's `spelling` names is spelled (cspell, `en` and `en-GB`, another language only in the files it names); a word no dictionary holds has one home: the way of working's (`shared/lint/wowWords.ts`) or the product's, built from its data where data names it, never an inline directive.                                                                                                                                            | `lint:words` · `theSpellingNamesFiles`     | a test, until data names its people and its translations' words; a generated file, spelled at its source | A misspelt word on a screen is found as it is typed, not when someone reads it there.                                                     |
++| The way of working names no product: a blank repository spawned from its template, with an empty `scope.ts` and an empty rules file, passes every shared check from its first day.                                                                                                                                                                                                                                                                     | `theWayOfWorkingNamesNoProduct` · `review` | the spawn check comes with the template (phase 7)                                                        | What a product needs is its own; the way of working is the same for every product.                                                        |
 diff --git a/eslint-suppressions.json b/eslint-suppressions.json
 new file mode 100644
 index 0000000..a264935
@@ -1719,10 +1731,10 @@ similarity index 100%
 rename from app/styles/tokens.css
 rename to legacy/tokens.css
 diff --git a/package.json b/package.json
-index b0d8011..eec4eaa 100644
+index b0d8011..e4005c9 100644
 --- a/package.json
 +++ b/package.json
-@@ -12,33 +12,39 @@
+@@ -12,33 +12,42 @@
      "cut-pack": "node tools/build.ts && node tools/pack.ts",
      "apply-reports": "node tools/apply-reports.ts",
      "spec-check": "node tools/build.ts && node tools/spec-check.ts",
@@ -1744,16 +1756,19 @@ index b0d8011..eec4eaa 100644
 -    "release:record": "node tools/release-record.ts"
 +    "release:record": "node tools/release-record.ts",
 +    "lint:files": "node tools/lint-files.ts",
-+    "check:chunk": "yarn -s lint:files && yarn -s format:check && yarn -s lint && yarn -s tsc && yarn -s lint:exports",
++    "lint:words": "cspell --no-progress --no-summary",
++    "check:chunk": "yarn -s lint:files && yarn -s lint:words && yarn -s format:check && yarn -s lint && yarn -s tsc && yarn -s lint:exports",
 +    "lint:exports": "knip --no-progress --no-config-hints"
    },
    "devDependencies": {
++    "@cspell/dict-pl_pl": "3.0.8",
      "@eslint-community/eslint-plugin-eslint-comments": "4.8.1",
      "@eslint/js": "10.0.1",
 -    "@testing-library/react": "16.3.3",
      "@types/node": "26.5.0",
      "@types/react": "19.2.18",
      "@types/react-dom": "19.2.7",
++    "cspell": "10.4.0",
      "eslint": "10.10.0",
 +    "eslint-import-resolver-typescript": "4.4.5",
 +    "eslint-plugin-boundaries": "7.3.0",
@@ -1810,12 +1825,17 @@ index 9c7b0cf..ce1fef1 100644
 +export type { TrackFinding, TrackReading, TrackRow };
 diff --git a/scope.ts b/scope.ts
 new file mode 100644
-index 0000000..5286b80
+index 0000000..8a64af7
 --- /dev/null
 +++ b/scope.ts
-@@ -0,0 +1,159 @@
+@@ -0,0 +1,302 @@
 +// scope.ts · what the design project names once: its ESLint config, its shared tests and its tools read it
 +import type { RepoScope } from './shared/repoScope.ts';
++import {
++  BY_DOCUMENT_ID,
++  CAMPAIGNS,
++} from './sheet/model/catalog/catalogCampaigns.ts';
++import { PEOPLE } from './sheet/model/directory/people.ts';
 +import {
 +  emitted,
 +  entryOfPart,
@@ -1836,6 +1856,95 @@ index 0000000..5286b80
 +
 +// each skill, which the build writes from docs/skills/
 +const SKILLS = '.claude/skills/*/SKILL.md';
++
++// the words a name or an id holds: its runs of letters
++const lettersOf = (texts: readonly string[]): readonly string[] => [
++  ...new Set(texts.flatMap((text) => text.match(/\p{L}+/gu) ?? [])),
++];
++
++// the sheet's own words that no dictionary holds and no exported data names, reviewed
++const SHEET_WORDS: readonly string[] = [
++  // its channels' parts and its domain's words
++  'deeplink',
++  'deeplinks',
++  'inapp',
++  'lendable',
++  'preheader',
++  'repliable',
++  'Stablecoins',
++  'takeback',
++  'transactionals',
++  'winback',
++  // its coinages
++  'alikes',
++  'askable',
++  'authorless',
++  'bodyless',
++  'overengineered',
++  'overengineering',
++  'pressable',
++  'recomputations',
++  'retheme',
++  'unbrands',
++  'unhomed',
++  'unscanned',
++  'unskipped',
++  'upcaster',
++  // the ids, keys and abbreviations its code holds that no export lists: each to be computed or renamed
++  'appr',
++  'bulkedit',
++  'chev',
++  'chnspsh',
++  'copyinto',
++  'createdocument',
++  'dblck',
++  'EPUSH',
++  'fvar',
++  'gvar',
++  'lholder',
++  'LISTDOCUMENTS',
++  'LISTGROUPS',
++  'Lqei',
++  'lrev',
++  'minblocks',
++  'Onbehalfof',
++  'refrpsh',
++  'removedblocks',
++  'reqs',
++  'summbnr',
++  'summpsh',
++  'summsht',
++  'testgroups',
++  'TYPELIBRARY',
++  'usedin',
++  'userev',
++  'vnum',
++  'wspx',
++  // the tools, libraries and standards it names, as they spell themselves
++  'authjs',
++  'btrim',
++  'Contentful',
++  'destructures',
++  'emailtooltester',
++  'ISTQB',
++  'Knak',
++  'memoises',
++  'Michroma',
++  'multiset',
++  'nextauth',
++  'notistack',
++  'pilcrow',
++  'PKCE',
++  'refetches',
++  'seqs',
++  'serialiser',
++  'SQLSTATE',
++  'SSOT',
++  'timestamptz',
++  'WCAG',
++  'Webflow',
++  'xact',
++];
 +
 +const scope: RepoScope = {
 +  root: import.meta.dirname,
@@ -1970,6 +2079,55 @@ index 0000000..5286b80
 +      why: 'a part is camelCase or its epic (docs/rules/names.md).',
 +    },
 +  ],
++  spelling: {
++    files: [
++      'sheet/**/*.ts',
++      'roadmaps/**/*.ts',
++      'docs/**/*.ts',
++      'guards/**/*.ts',
++      'app/**/*.{ts,tsx}',
++      'tools/**/*.ts',
++      'shared/**/*.ts',
++      '**/*.md',
++      // an archive, a log, a trial: their words are history
++      '!records/**',
++      '!legacy/**',
++      '!notes/**',
++      // the build side's tree, spelled in its product, in its words
++      '!dev/**',
++      // what tools wrote and the record keeps: packs as cut, data as emitted
++      '!fixtures/**',
++      // a sample in the languages a document is translated to: no dictionary of theirs is bundled
++      '!sheet/samples/blocks/localeRows.ts',
++      '!sheet/samples/payloads/runFacts.ts',
++      '!sheet/words/messages/screenThree.ts',
++    ],
++    // the people's names and the catalog's ids, from the sheet's data
++    computed: lettersOf([
++      ...PEOPLE.map((person) => person.name),
++      ...CAMPAIGNS.map((campaign) => campaign.id),
++      ...Object.keys(BY_DOCUMENT_ID),
++    ]),
++    reviewed: SHEET_WORDS,
++    // an example misspelt on purpose: a field Data lacks, a planted row the generator must stop
++    onPurpose: [/\{amout\} is not in Data/g, /typing page as Pagee/g],
++    // the PM's words, quoted as said: decisions, plans and notebooks, and the run's progress words
++    alsoIn: [
++      {
++        language: 'pl',
++        files: [
++          'docs/process/**',
++          'roadmaps/**',
++          'docs/documents/ticket-pipeline/**',
++          'tools/runKeepsTheTurn.ts',
++          'sheet/screens/screen-view/**',
++          'sheet/logic/document/threads.ts',
++        ],
++        // the PM's own: a coined plural, a French verb quoted
++        words: ['Skille', 'désabonner'],
++      },
++    ],
++  },
 +};
 +
 +export { scope };
