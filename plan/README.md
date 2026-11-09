@@ -42,15 +42,20 @@ design-ways-of-work/
 ## How a product uses it
 
 - Every file here keeps the path a product reads it at: `design/tools/build.ts` is the product's `tools/build.ts`.
-- A product links each of them back in place, and runs node with `--preserve-symlinks --preserve-symlinks-main`
-  (tsconfig `preserveSymlinks`, vitest `resolve.preserveSymlinks`, rolldown `resolve.symlinks: false`): a linked
-  file's `../sheet/...` reaches the product's sheet, and `ROOT` is the product's root, unchanged.
-- So no import is rewritten and no home path moves. Phase 2 proved it on eagle-design: `yarn verify` runs build,
-  checks, tsc, lint, the tests, spec-check and the gate on a linked copy and on a clone, and every output is the same.
+- A product takes them at a tag (the PM, 9 Nov night · B): this repository is a git dependency pinned to a tag
+  (`design-ways-of-work: git+ssh://…#vX.Y.Z`, the lock holding its sha), and the install's `postinstall` runs
+  `shared/take/takeWow.ts` from a copy of its folder (node strips no type under node_modules). It writes the homes
+  the product's `package.json · wow.takes` names onto the product's paths, records them per worktree and hides them
+  from git in `.git/info/exclude`: nothing of wow enters a product's history. A file edited since the take, or the
+  product's own in its place, stops the take whole; `yarn wow --check` says whether the files are the tag's.
+- The product lists every package its tree runs, the taken files' included (`@ls-lint/ls-lint` for `lint:files`),
+  at the versions this repository pins; knip runs with `--no-gitignore`, since it reads `.git/info/exclude` and
+  would not see the taken files it is here to check.
+- So no import is rewritten and no home path moves. Phase 2 proved it on eagle-design with links: `yarn verify`
+  runs build, checks, tsc, lint, the tests, spec-check and the gate on a linked copy and on a clone, and every
+  output is the same; the port's worktree, taken at v0.1.2, matched that copy byte for byte.
 - What this repository reads of a product is what its files import today (the coupled files): phases 3 to 5 cut it
   down to the registries' named exports and `product.ts`, so a second product needs only those.
-- How the links stand in a product's git (committed links, or written by a script and ignored) is decided at the
-  port (phase 8), with the PM.
 
 ## The release still reads one repository at one sha
 

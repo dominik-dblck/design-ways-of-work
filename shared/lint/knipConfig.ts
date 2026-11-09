@@ -64,6 +64,8 @@ const knipConfig = (scope: RepoScope): KnipSettings => ({
   ],
   project: [...scope.production, ...testsOf(scope), ...CONFIGS],
   ignore: [...scope.ignores, ...scope.productTrees, ...scope.generated],
+  // the way of working itself: a product's install takes it by path, no import names it
+  ignoreDependencies: ['design-ways-of-work'],
 });
 
 export { knipConfig };
