@@ -24,12 +24,14 @@ function stringEnd(line: string, from: number): number {
 // a line's brackets, its strings and its trailing comment aside
 function depthOf(line: string): number {
   let depth = 0;
-  for (let at = 0; at < line.length; at += 1) {
+  let at = 0;
+  while (at < line.length) {
     const char = line[at] ?? '';
     if (char === '/' && line[at + 1] === '/') break;
     if (QUOTES.includes(char)) at = stringEnd(line, at);
     else
       depth += Number(OPENERS.includes(char)) - Number(CLOSERS.includes(char));
+    at += 1;
   }
   return depth;
 }

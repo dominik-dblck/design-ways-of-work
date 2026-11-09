@@ -9,7 +9,7 @@ const ROUTE_LINE = '§';
 
 // a drafted type sits in ⟦…⟧ and is cut like any other code, each piece marked a draft
 const PIECE =
-  /(⟦[^⟧]*⟧)|('(?:[^'\\]|\\.)*'|"(?:[^"\\]|\\.)*")|(\/\/.*$|\/\*\*.*$|^\s*\*.*$)|\b(type|const|as|true|false|null|number|string|boolean|unknown|never|extends|in)\b|\b(ToType)\b|\b([A-Z][A-Za-z0-9]*)\b|(\b\d+\b)|([^'"⟦/A-Za-z0-9]+|[a-z_][A-Za-z0-9_]*|\/)/g;
+  /((?<!⟦)⟦[^⟧]*⟧)|('(?:[^'\\]|\\.)*'|"(?:[^"\\]|\\.)*")|(\/\/.*|\/\*\*.*|^\s*\*.*)|\b(type|const|as|true|false|null|number|string|boolean|unknown|never|extends|in)\b|\b(ToType)\b|\b([A-Z][A-Za-z0-9]*)\b|(\b\d+\b)|([^'"⟦/A-Za-z0-9]+|[a-z_][A-Za-z0-9_]*|\/)/g;
 
 // the group a piece matched after the draft's, in the order the pattern lists them
 const KINDS: readonly TokenKind[] = [
@@ -76,7 +76,7 @@ function step(at: Layout, { char, next, last, pad }: Around): Layout {
     };
   if (char === '}' && last !== '{')
     return {
-      out: at.line.trim() ? [...at.out, at.line.replace(/\s+$/, '')] : at.out,
+      out: at.line.trim() ? [...at.out, at.line.trimEnd()] : at.out,
       depth: at.depth - 1,
       line: `${indent(at.depth - 1)}}`,
       skip: false,

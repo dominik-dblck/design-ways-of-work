@@ -17,7 +17,7 @@ function exportedAs(entry: Source): ReadonlyMap<string, string> {
   const named = new Map<string, string>();
   for (const block of entry.text.matchAll(/export\s*\{([^}]*)\}/g))
     for (const one of String(block[1]).split(',')) {
-      const [local, shown] = one.trim().split(/\s+as\s+/);
+      const [local, shown] = one.trim().split(/(?<!\s)\s+as\s+/);
       if (local) named.set(shown ?? local, local);
     }
   return named;

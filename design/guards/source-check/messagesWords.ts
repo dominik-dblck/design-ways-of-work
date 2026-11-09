@@ -24,7 +24,7 @@ function typedTwice(src: string): readonly SourceFinding[] {
     if (/^\s*\/\//.test(line)) return [];
     return [...line.matchAll(/'((?:[^'\\\n]|\\.)*)'|"((?:[^"\\\n]|\\.)*)"/g)]
       .map((match) => String(match[1] ?? match[2]))
-      .filter((text) => /[A-Za-z]{2,} [A-Za-z]/.test(text))
+      .filter((text) => /(?<![A-Za-z])[A-Za-z]{2,} [A-Za-z]/.test(text))
       .flatMap((text) => {
         const key = normalized(text);
         const at = first.get(key);
@@ -76,12 +76,15 @@ function keyTokens(src: string): readonly KeyToken[] {
   const brace = (char: string): void => {
     if (char === '{') {
       depth += 1;
-      stack.push((opened += 1));
+      opened += 1;
+      stack.push(opened);
     }
     if (char !== '}') return;
     depth -= 1;
     stack.pop();
-    if (!stack.length) stack.push((opened += 1));
+    if (stack.length) return;
+    opened += 1;
+    stack.push(opened);
   };
   let at = 0;
   while (at < src.length) {

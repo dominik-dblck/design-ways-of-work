@@ -19,7 +19,7 @@ import {
 } from './layout.ts';
 import type { Page } from './layout.ts';
 import { BUILT } from './root.ts';
-import { A_HEADER } from '../shared/lint/header.ts';
+import { headerOf } from '../shared/lint/header.ts';
 
 const OUT = BUILT;
 
@@ -29,7 +29,7 @@ const FIRST_LINE_NAME = /^(\/\/ [\w.-]+)\.ts\b/;
 // the bundle drops comments, and the header is what source-check reads of every file
 function bannerOf(file: string): string {
   const text = fs.readFileSync(file, 'utf8');
-  const header = A_HEADER.exec(text)?.[0];
+  const header = headerOf(text)?.whole;
   if (header !== undefined) return header;
   const head = LEADING_COMMENTS.exec(text)?.[0] ?? '';
   return head.replace(FIRST_LINE_NAME, '$1.js').trimEnd();

@@ -7,7 +7,7 @@ import path from 'node:path';
 
 // an import or a re-export with a relative path, `import type` and `export type` marked
 const AN_IMPORT =
-  /^\s*(?:import|export)\s+(type\s+)?(?:[^'";]*?\s+from\s+)?['"](\.[^'"]+\.ts)['"]/gm;
+  /^[ \t]*(?:import|export)\s(type\s)?(?:[^'";]*\sfrom\s)?['"](\.[^'"]+\.ts)['"]/gm;
 
 // each entry the module's files import, its own aside, in path order
 function importedEntries(

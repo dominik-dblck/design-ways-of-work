@@ -137,7 +137,7 @@ function sentencesInCode(
     const kind = kindOf(at.file, { key, decl: at.decl });
     if (
       text.length < 12 ||
-      !/[A-Za-z]+ [A-Za-z]+ [A-Za-z]+/.test(text) ||
+      !/(?<![A-Za-z])[A-Za-z]+ [A-Za-z]+ [A-Za-z]+/.test(text) ||
       /\.(js|ts)\b|:\/\/|var\(|\{\{|^[a-z-]+\.[a-z_.]+$|[;=]|\bfunction\b/.test(
         text,
       )

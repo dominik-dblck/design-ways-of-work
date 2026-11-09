@@ -72,7 +72,7 @@ function boundBy(one: ts.ImportDeclaration): readonly Bound[] {
     ? one.moduleSpecifier.text
     : '';
   const clause = one.importClause;
-  const isTypeOnly = clause?.isTypeOnly === true;
+  const isTypeOnly = clause?.phaseModifier === ts.SyntaxKind.TypeKeyword;
   const named = clause?.namedBindings;
   const as = (local: ts.Identifier, imported: string): Bound => ({
     local: local.text,

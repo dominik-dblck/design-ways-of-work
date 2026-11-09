@@ -19,7 +19,8 @@ const REPO = new RegExp(
 // a row of a sheet file travels verbatim too, with its file's digest
 const ROW_KINDS = /^(command|query|refusal|event|term|target)$/;
 
-const coreOf = (ref: string): string => String(ref.split(/\s+—\s+/)[0]).trim();
+const coreOf = (ref: string): string =>
+  String(ref.split(/(?<!\s)\s+—\s+/)[0]).trim();
 
 // the sheet's own reading of the pointer: a row's title and body
 function resolvedLines(ref: string): readonly string[] | null {
@@ -67,7 +68,7 @@ function ticketLines(ref: string, cut: Cut): readonly string[] | null {
   if (!ticket) return null;
   const named = /·\s*(c\d+(?:\s*,\s*c\d+)*)\s*$/.exec(coreOf(ref))?.[1];
   const criteria = (named ?? '')
-    .split(/\s*,\s*/)
+    .split(/(?<!\s)\s*,\s*/)
     .filter(Boolean)
     .flatMap((name) =>
       criterionLine((ticket.acceptance || [])[Number(name.slice(1)) - 1], {
@@ -83,7 +84,7 @@ function ticketLines(ref: string, cut: Cut): readonly string[] | null {
 function filesLines(ref: string, cut: Cut): readonly string[] | null {
   const name = String.raw`[\w.\/ -]+\.(?:ts|json|md|css)`;
   if (!new RegExp(`^${name}(?:\\s*,\\s*${name})+$`).test(ref)) return null;
-  const files = ref.split(/\s*,\s*/);
+  const files = ref.split(/(?<!\s)\s*,\s*/);
   return [
     `_files_ · ${files.length} · each named with its size and whole digest — fetch and check it`,
     '',

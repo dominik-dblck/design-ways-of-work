@@ -6,8 +6,8 @@ import path from 'node:path';
 import ts from 'typescript';
 import { exportedNamesOf } from '../exportedNames.ts';
 import {
-  A_HEADER,
   bulletsOf,
+  headerOf,
   isGenerated,
   LONGEST_BULLET,
   MOST_BULLETS,
@@ -82,7 +82,8 @@ function shortfallOf(
   const named = bullets.flatMap((bullet) =>
     [...bullet.matchAll(A_NAME)].flatMap(([, name]) => name ?? []),
   );
-  const body = file.text.replace(PROLOGUE, '').replace(A_HEADER, '');
+  const unprefaced = file.text.replace(PROLOGUE, '');
+  const body = unprefaced.slice(headerOf(unprefaced)?.whole.length ?? 0);
   const inBody = (name: string): boolean =>
     new RegExp(`\\b${name.replace('$', '\\$')}\\b`).test(body);
   return [

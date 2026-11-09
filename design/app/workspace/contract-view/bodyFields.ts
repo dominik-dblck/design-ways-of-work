@@ -35,7 +35,8 @@ function commandField(part: string): BodyField {
 
 function commandFields(body: string): Fields {
   const text = body.trim();
-  const fields = text === '—' ? [] : text.split(/\s+·\s+/).map(commandField);
+  const fields =
+    text === '—' ? [] : text.split(/(?<!\s)\s+·\s+/).map(commandField);
   return { state: stateOf(fields), fields };
 }
 
@@ -56,7 +57,7 @@ function unionOf(head: string): string {
       .map((one) => `'${one}'`)
       .join(' | ')} | Lang`;
   if (parts.every((one) => GATES.includes(one))) return 'Gate';
-  return parts.map((one) => `'${one.replace(/\s.*$/, '')}'`).join(' | ');
+  return parts.map((one) => `'${one.replace(/(?<!\s)\s.*$/, '')}'`).join(' | ');
 }
 
 // a param's prose, `person id · …` or `a | b`, read as the type it drafts to
@@ -68,7 +69,7 @@ function draftOf(prose: string): string | null {
 }
 
 function queryField([name, prose]: Param): BodyField {
-  const typed = /^(\w+\??)\s*:\s*(.+)$/.exec(prose);
+  const typed = /^(\w+\??)\s*:\s*(\S.*)$/.exec(prose);
   if (typed) return [typed[1] ?? name, typed[2] ?? UNTYPED];
   const draft = draftOf(prose);
   if (!draft) return [name, UNTYPED];

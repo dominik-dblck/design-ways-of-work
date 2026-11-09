@@ -25,7 +25,7 @@ interface Sayings {
 function chipsOf(catalog: unknown): ReadonlyMap<string, string> {
   const chips = new Map<string, string>();
   for (const match of String(catalog || '').matchAll(
-    /(\w+): \{ label: '([^']+)'/g,
+    /\b(\w+): \{ label: '([^']+)'/g,
   ))
     chips.set(String(match[2]), String(match[1]));
   return chips;
@@ -45,7 +45,7 @@ function sayingsOf(
     if (/\{\}/.test(key) && head.split(' ').length >= 3) starts.set(head, path);
     if (!/\{\w+\}/.test(text)) continue;
     for (const part of text.split(/\{\w+\}/)) {
-      const bare = part.replace(/^[\s·—:,]+|[\s·—:,]+$/g, '');
+      const bare = part.replace(/^[\s·—:,]+|(?<![\s·—:,])[\s·—:,]+$/g, '');
       if (/^[A-Za-z]+( [A-Za-z’]+)+$/.test(bare)) segments.set(bare, path);
     }
   }
@@ -55,7 +55,7 @@ function sayingsOf(
 // a text, a title, an alt, a placeholder or an aria-label, however short
 function shownTexts(line: string): readonly string[] {
   return [
-    ...(line.match(/>([^<>{}]*[A-Za-z][^<>{}]*)</g) ?? []).map((text) =>
+    ...(line.match(/>([^<>{}A-Za-z]*[A-Za-z][^<>{}]*)</g) ?? []).map((text) =>
       text.slice(1, -1),
     ),
     ...[
@@ -77,16 +77,22 @@ function copiedLiteral(literal: string, sayings: Sayings): string | null {
 
 // a template text with holes that is a line's words, or starts like one
 function copiedTemplate(text: string, sayings: Sayings): readonly string[] {
-  const key = normalized(text.replace(/\{\{[^}]*\}\}/g, '{}'));
+  const key = normalized(text.replace(/(?<!\{)\{\{[^}]*\}\}/g, '{}'));
   const whole = sayings.whole.get(key);
-  if (/[a-z]{2,} [a-z]/.test(key) && whole)
+  if (/(?<![a-z])[a-z]{2,} [a-z]/.test(key) && whole)
     return [`${text.trim()} · ${whole}`];
   return [...sayings.starts]
     .filter(
       ([start]) =>
-        key.indexOf(start) === 0 && /[a-z]{3,} [a-z]{3,}/.test(start),
+        key.indexOf(start) === 0 && /(?<![a-z])[a-z]{3,} [a-z]{3,}/.test(start),
     )
     .map(([, path]) => `${text.trim()} · starts like ${path}`);
+}
+
+// an element's text that holds a {{…}} fill
+function holdsATemplate(text: string): boolean {
+  const opens = text.indexOf('{{');
+  return opens >= 0 && text.includes('}}', opens + 2);
 }
 
 function lineCopies(
@@ -105,13 +111,13 @@ function lineCopies(
       return said ? [['sentence copied', said] as const] : [];
     },
   );
-  const templates = (
-    line.match(/>([^<>]*\{\{[^<>]*\}\}[^<>]*)</g) ?? []
-  ).flatMap((text) =>
-    copiedTemplate(text.slice(1, -1), sayings).map(
-      (said) => ['sentence copied', said] as const,
-    ),
-  );
+  const templates = (line.match(/>[^<>]*</g) ?? [])
+    .filter(holdsATemplate)
+    .flatMap((text) =>
+      copiedTemplate(text.slice(1, -1), sayings).map(
+        (said) => ['sentence copied', said] as const,
+      ),
+    );
   return [...banned, ...literals, ...templates];
 }
 

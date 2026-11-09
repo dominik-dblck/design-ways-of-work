@@ -3,7 +3,7 @@
  * - `branchesCheck`, `codeLines` · a rule or a view branching on a type's name
  * - `exampleRow`, `readable` · a test's example row, the files a copy is read in
  */
-import { isHistory, SHEET_PAGE } from './sourceScope.ts';
+import { SHEET_PAGE } from './sourceScope.ts';
 import type {
   FileReads,
   SourceFinding,
@@ -74,7 +74,7 @@ const NAMED = /\b(?:root|window|globalThis)\.([A-Z]\w*)/g;
 function codeLines(text: unknown): readonly string[] {
   return String(text)
     .split('\n')
-    .map((line) => (/^\s*\/\//.test(line) ? '' : line.replace(/\/\/.*$/, '')));
+    .map((line) => (/^\s*\/\//.test(line) ? '' : line.replace(/\/\/.*/, '')));
 }
 
 const globalIn = (found: string): string =>
@@ -146,9 +146,7 @@ function branchesCheck(texts: Texts): readonly SourceFinding[] {
     (file) =>
       texts[file] != null &&
       ((LAYERS[file] ?? 0) >= 5 ||
-        (/\.dc\.html$/.test(file) &&
-          !SHEET_PAGE.test(file) &&
-          !isHistory(file))),
+        (/\.dc\.html$/.test(file) && !SHEET_PAGE.test(file))),
   );
   return files.flatMap((file) =>
     codeLines(texts[file]).flatMap((line, index) =>
@@ -186,7 +184,6 @@ function readable(texts: Texts): readonly string[] {
     (file) =>
       texts[file] != null &&
       file !== 'source-check.js' &&
-      !isHistory(file) &&
       !SHEET_PAGE.test(file),
   );
 }

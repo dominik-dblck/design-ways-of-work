@@ -124,9 +124,9 @@ function kindOf(
 
 // a string's key: the property it is set on, the call it is handed to, else where it stands
 function stringKeyOf(before: string): string {
-  const key = /(\w+)\s*:\s*$/.exec(before)?.[1];
+  const key = /\b(\w+)\s*:\s*$/.exec(before)?.[1];
   if (key) return key;
-  const call = /(\w+)\s*\(\s*$/.exec(before);
+  const call = /\b(\w+)\s*\(\s*$/.exec(before);
   if (call) return `call(${String(call[1])})`;
   if (/\[\s*$|,\s*$|^\s*$/.test(before)) return 'array';
   if (/return\s*$|\?\s*$|:\s*$/.test(before)) return 'expr';

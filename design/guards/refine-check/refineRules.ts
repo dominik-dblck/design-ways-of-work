@@ -31,6 +31,6 @@ export const NOTEBOOK =
 export const PATH = /\b(app|scripts|tests|packages|docs|\.claude)\/[\w.<>/-]+/;
 
 export function testClause(criterion: string): string {
-  const parts = criterion.split(/\btest\s*(?:\([^)]*\))?\s*:/i);
+  const parts = criterion.split(/\btest(?:\s*\([^)]*\))?\s*:/i);
   return parts.length > 1 ? parts.slice(1).join(' ') : '';
 }

@@ -6,7 +6,7 @@ interface Export {
   readonly value: string;
 }
 
-const BUNDLED = /^\s*exports\.[A-Za-z_$][\w$]*\s*=\s*[^;]*;/gm;
+const BUNDLED = /^[ \t]*exports\.[A-Za-z_$][\w$]*\s*=[^;]*;/gm;
 const OPENED = /\b(?:root|window|globalThis)\.[A-Z]\w*\s*=\s*\{/;
 
 // past a string from its quote, or a comment to its line's end; -1 when the comment never ends
@@ -61,7 +61,7 @@ function exportsOf(text: string): readonly Export[] {
   const bundled = text.match(BUNDLED);
   if (bundled)
     return bundled.map((line) => {
-      const found = /exports\.([A-Za-z_$][\w$]*)\s*=\s*([^;]*);/.exec(line);
+      const found = /exports\.([A-Za-z_$][\w$]*)\s*=([^;]*);/.exec(line);
       return { name: String(found?.[1]), value: String(found?.[2]).trim() };
     });
   const opened = OPENED.exec(text);

@@ -20,6 +20,7 @@ import { resolutionOf } from './resolution.ts';
 import { MARKUP_SHAPES, REACT_SHAPES } from './reactShapes.ts';
 import { ENTRY_SHAPES, PART_SHAPES, SHAPES } from './shapes.ts';
 import type { Shape } from './shapes.ts';
+import { SONAR, SONAR_IN_TESTS } from './sonarRules.ts';
 import { TEST_SHAPES } from './testShapes.ts';
 import { wowPlugin } from './wowPlugin.ts';
 
@@ -30,6 +31,19 @@ const TYPES: Linter.RulesRecord = {
   ],
   '@typescript-eslint/switch-exhaustiveness-check': 'error',
   '@typescript-eslint/no-floating-promises': 'error',
+  // ESLint's `builtinRules` alone: the one door to a core rule's module, marked deprecated with no successor
+  '@typescript-eslint/no-deprecated': [
+    'error',
+    {
+      allow: [
+        {
+          from: 'file',
+          path: 'node_modules/eslint/lib/types/use-at-your-own-risk.d.ts',
+          name: 'builtinRules',
+        },
+      ],
+    },
+  ],
   '@typescript-eslint/explicit-module-boundary-types': 'error',
   '@typescript-eslint/consistent-type-imports': 'error',
   '@typescript-eslint/consistent-type-assertions': [
@@ -128,6 +142,7 @@ const testRules = (scope: RepoScope): Linter.Config[] => [
     files: [...testsOf(scope)],
     rules: {
       ...restricted(TEST_SHAPES),
+      ...SONAR_IN_TESTS,
       '@typescript-eslint/consistent-type-assertions': 'off',
       'wow/no-mock-of-its-subject': 'error',
     },
@@ -155,6 +170,7 @@ const eslintConfig = (scope: RepoScope): Linter.Config[] =>
     ...tseslint.configs.recommended,
     WOW,
     sourceRules(scope.root),
+    { ...SONAR, files: ['**/*.{ts,tsx}'] },
     ...scopedRules(scope),
     ...testRules(scope),
     ...productionRules(scope),

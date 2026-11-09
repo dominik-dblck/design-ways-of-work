@@ -230,3 +230,7 @@ mailing-automation: each line waits for its port (phase 9) and the PM's word. Ra
     0 missing). Open, Dom's: README.md (3 paths gone), `knowledge/**` (source articles), its pipeline md (1
     path gone, mended in our ticket-pipeline source, a re-pin). Its test goes; `@/` and `@domain/` aliases are
     never read as paths; `[...nextauth]` is a real folder.
+30. At its port (chunk 7d, SonarJS): `eslint-plugin-sonarjs` 4.2.2 exact joins its `package.json` (Dom's word),
+    the shared OFF table with it; its measure (8 Nov): about 27 findings to mend or hold, 30 deprecated calls
+    for `no-deprecated`. Sonar's typed rules want typescript `>=5 <6.1.0`: its typescript pinned exactly, one
+    in the lockfile (7f syncpack holds it). Both rows' build gates stay `review` until then.

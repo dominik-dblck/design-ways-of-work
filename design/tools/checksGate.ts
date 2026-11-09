@@ -1,11 +1,8 @@
 /**
  * - `node tools/checksGate.ts` · the checks on a fresh build, nothing written back
- * - exits 1 on a FAIL line no known fail starts, or on a part that threw
+ * - exits 1 on any FAIL line, or on a part that threw
  */
 import { execFileSync } from 'node:child_process';
-
-// a fail the PM holds open, matched by its start
-const KNOWN_FAILS: readonly string[] = [];
 
 function checksOutput(): string {
   execFileSync('node', ['tools/build.ts'], { stdio: 'ignore' });
@@ -17,16 +14,13 @@ function checksOutput(): string {
   }
 }
 
-function newFails(output: string): readonly string[] {
-  return output
-    .split('\n')
-    .filter((line) => line.startsWith('FAIL'))
-    .filter((line) => !KNOWN_FAILS.some((known) => line.startsWith(known)));
+function failsIn(output: string): readonly string[] {
+  return output.split('\n').filter((line) => line.startsWith('FAIL'));
 }
 
-const fails = newFails(checksOutput());
+const fails = failsIn(checksOutput());
 if (fails.length) {
-  console.error(`checks · ${fails.length} new FAIL\n${fails.join('\n')}`);
+  console.error(`checks · ${fails.length} FAIL\n${fails.join('\n')}`);
   process.exit(1);
 }
-console.log('checks · nothing failed beyond the known fails');
+console.log('checks · nothing failed');

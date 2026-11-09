@@ -67,7 +67,7 @@ function readsFails(ticket: Ticket): readonly string[] {
   )
     return [];
   const heads = (ticket.read || []).map((ref) =>
-    String(ref.split(/\s+—\s+/)[0]).trim(),
+    String(ref.split(/(?<!\s)\s+—\s+/)[0]).trim(),
   );
   const lack = expected
     .reads(ticket, spec)

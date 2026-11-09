@@ -249,3 +249,12 @@ for the port (phase 8) or the PM's word. Ranked: the first of each group is the 
     paths, 0 missing (`EXX` measured as no placeholder it needs). Its bundle check is this product's own
     fact, so it stays this side's test, `theProcessNamesNoBundle` (its row's gate renamed). The way of
     working reads README.md and the design system's guide; PLAN.md (files to come) and plan/ (notes) are out.
+41. SonarJS (chunk 7d): its recommended set less one OFF table, each rule off with its reason
+    (`shared/lint/sonarRules.ts`), and `@typescript-eslint/no-deprecated` (`builtinRules` allowed). The design
+    side's code met it in code: 35 regexes linear with the same matches, a loop, two nested assignments, a sort;
+    the checks' world runs a bundle by `vm.compileFunction` until the PM rules on `code-eval` (morning list);
+    `HISTORY` and the gate's `KNOWN_FAILS` gone (empty, the 7c answer; a check's fail held open would start a
+    7c baseline, never `eslint-suppressions.json`, which holds ESLint's alone). This side's own 11 are held in `eslint-suppressions.json` until mended here: the regexes in
+    `pointerResolve.ts` (3), `ticketExpand.ts`, `caseText.ts`, `chipCtas.ts`, `roleMatrix.ts`, `todoMoves.ts`,
+    `catalogRail.ts` (the same rewrites), `listPart.ts`'s `new Function` (as `checkWorld`), and
+    `gate-states.ts`'s `substr` (`slice`). The sheet skill's commit line names no known fails.

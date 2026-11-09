@@ -38,7 +38,7 @@ describe('the board view', () => {
 
   it('the cards hold every ticket once, and the numbers count them', () => {
     const held = cards.flatMap((card) => card.tickets.map((one) => one.id));
-    expect(held.sort()).toEqual(
+    expect([...held].sort()).toEqual(
       allTickets()
         .map((one) => one.id)
         .sort(),

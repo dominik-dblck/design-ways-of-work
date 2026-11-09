@@ -78,8 +78,8 @@ function plainLines(
 // the terms a pointer asks for: a short id is a term, never dropped
 const termsOf = (want: string): readonly string[] =>
   want
-    .replace(/\s*\([^)]*\)/g, '')
-    .split(/\s+and\s+|,\s*|\s·\s/)
+    .replace(/(?<![\s(])\s*\([^)]*\)/g, '')
+    .split(/(?<!\s)\s+and\s+|,\s*|\s·\s/)
     .map((term) => term.replace(/^the\s+/i, '').trim())
     .filter((term) => term.length > 3 || /[\dA-Z]/.test(term));
 

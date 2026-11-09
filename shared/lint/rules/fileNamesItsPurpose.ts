@@ -42,7 +42,7 @@ const isTypeOnly = (statement: ts.Statement): boolean =>
   ts.isInterfaceDeclaration(statement) ||
   ts.isTypeAliasDeclaration(statement) ||
   (ts.isImportDeclaration(statement) &&
-    statement.importClause?.isTypeOnly === true) ||
+    statement.importClause?.phaseModifier === ts.SyntaxKind.TypeKeyword) ||
   (ts.isExportDeclaration(statement) && statement.isTypeOnly);
 
 const isAReExport = (statement: ts.Statement): boolean =>

@@ -29,8 +29,8 @@ const COMMANDS: readonly (readonly string[])[] = [
 const EXPECTED_FILE = path.join(HERE, 'plan', 'expected-differences.tsv');
 const TIMING = [
   / · \d+ s$/gm,
-  /^\s*(Start at|Duration) .*$/gm,
-  /\d+(\.\d+)?m?s\b/g,
+  /^[ \t]*(?:Start at|Duration) .*$/gm,
+  /\b\d+(?:\.\d+)?m?s\b/g,
 ];
 
 type Run = {

@@ -57,15 +57,17 @@ function startFails(
   { expanded, cut }: { readonly expanded: string; readonly cut: Cut },
 ): readonly string[] {
   return (ticket.read || []).flatMap((ref) => {
-    const core = String(ref.split(/\s+—\s+/)[0]);
-    const sources = cut.reader.sourcesOf(String(core.split(/\s+·\s+/)[0]));
+    const core = String(ref.split(/(?<!\s)\s+—\s+/)[0]);
+    const sources = cut.reader.sourcesOf(
+      String(core.split(/(?<!\s)\s+·\s+/)[0]),
+    );
     const want = core
-      .split(/\s+·\s+/)
+      .split(/(?<!\s)\s+·\s+/)
       .slice(1)
       .join(' · ')
-      .replace(/\s*\([^)]*\)/g, '');
+      .replace(/(?<![\s(])\s*\([^)]*\)/g, '');
     const terms = want
-      .split(/\s+and\s+|,\s*|\s·\s/)
+      .split(/(?<!\s)\s+and\s+|,\s*|\s·\s/)
       .map((one) => one.replace(/^the\s+/i, '').trim())
       .filter(Boolean)
       .flatMap((term) => [term, declaredName(sources, term) ?? []].flat());

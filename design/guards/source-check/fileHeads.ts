@@ -2,7 +2,6 @@
  * - `fileHeadOf`, `aboutOf` · a file's header: bullets, answers and holds, sentence
  * - `aboutCheck` · a file that does not say what it is, in one to three short lines
  */
-import { isHistory } from './sourceScope.ts';
 import type { FileHead, SourceFinding, Texts } from './sourceCheckTypes.ts';
 
 const BLANK: FileHead = { about: '', answers: '', answersCount: 0, holds: [] };
@@ -38,7 +37,7 @@ function bulletHead(lines: readonly string[], first: number): FileHead {
     at < lines.length && !/^\s*\*\//.test(lines[at] ?? '');
     at++
   ) {
-    const bullet = /^\s*\*\s+-\s+(.+)$/.exec(lines[at] ?? '');
+    const bullet = /^\s*\*\s+-\s+(\S.*)$/.exec(lines[at] ?? '');
     if (bullet) holds.push(String(bullet[1]).trim());
   }
   return { ...BLANK, holds, bullets: true, about: holds[0] ?? '' };
@@ -50,7 +49,7 @@ function commentHead(lines: readonly string[], first: number): FileHead {
   let answersCount = 0;
   const holds: string[] = [];
   for (let at = first + 1; at < lines.length; at++) {
-    const said = /^\/\/\s*(answers|holds):\s*(.+)$/.exec(
+    const said = /^\/\/\s*(answers|holds):\s*(\S.*)$/.exec(
       (lines[at] ?? '').trim(),
     );
     if (!said) break;
@@ -132,12 +131,7 @@ function headFaults(head: FileHead): readonly string[] {
 
 function aboutCheck(texts: Texts): readonly SourceFinding[] {
   return Object.keys(texts)
-    .filter(
-      (file) =>
-        texts[file] != null &&
-        /\.(json|dc\.html)$/.test(file) &&
-        !isHistory(file),
-    )
+    .filter((file) => texts[file] != null && /\.(json|dc\.html)$/.test(file))
     .flatMap((file) =>
       headFaults(fileHeadOf(file, texts[file])).map((why) => ({
         kind: 'file without a sentence',

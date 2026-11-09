@@ -67,12 +67,15 @@ interface Gate {
   readonly token: string;
 }
 
-// whether the gate a segment names runs in the world: an ESLint rule, a linter option, a script, a test
+// whether a segment's gate runs in the world: an ESLint rule or a plugin's (`plugin/*`), an option, a script, a test
 function holds({ segment, token }: Gate, world: World): boolean {
   if (token === 'review') return true;
   if (segment.trim().startsWith('ESLint'))
     return [...world.eslintRules].some(
-      (rule) => rule === token || rule.endsWith(`/${token}`),
+      (rule) =>
+        rule === token ||
+        rule.endsWith(`/${token}`) ||
+        (token.endsWith('/*') && rule.startsWith(token.slice(0, -1))),
     );
   if (token.includes(': '))
     return world.lintOptions.has(token.split(':')[0] ?? '');

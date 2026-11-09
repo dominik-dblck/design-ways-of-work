@@ -5,8 +5,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {
-  A_HEADER,
   bulletsOf,
+  headerOf,
   LONGEST_BULLET,
   MOST_BULLETS,
   PROLOGUE,
@@ -58,9 +58,11 @@ const verdicts = files.map((file) => {
   }
   const prologue = PROLOGUE.exec(text)?.[0] ?? '';
   const header = `/**\n${lines.map((line) => ` * - ${line}`).join('\n')}\n */`;
+  const rest = text.slice(prologue.length);
+  const old = headerOf(rest)?.whole ?? '';
   fs.writeFileSync(
     path.resolve(file),
-    `${prologue}${text.slice(prologue.length).replace(A_HEADER, header)}`,
+    `${prologue}${header}${rest.slice(old.length)}`,
   );
   return 'wrapped';
 });

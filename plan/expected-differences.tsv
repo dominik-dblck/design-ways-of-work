@@ -41,3 +41,5 @@ output · yarn lint:files	the port adds the file lint: no style, page or script 
 exit · yarn lint:files · 1 → 0	the port adds the file lint: no style, page or script file, ls-lint's config written from the shared rules · the checks as tools (PM, 8 Nov · A)
 output · yarn lint:exports	the port adds knip from the scope: no file, export or type unread, its pages, emitted modules and hooks' runs its entries · chunk 6 (PM, 8 Nov · C)
 exit · yarn lint:exports · 1 → 0	the port adds knip from the scope: no file, export or type unread, its pages, emitted modules and hooks' runs its entries · chunk 6 (PM, 8 Nov · C)
+output · yarn checks:gate	the gate prints no known fails: it holds no list of them, an empty list goes (PM, 7c); a check's fail held open would start a 7c baseline · the checks as tools (PM, 8 Nov: sonarjs)
+dist · project/contract-view.js	its code meets SonarJS: linear regular expressions with the same matches (bodyFields, codeTokens), a trailing space cut by trimEnd · the checks as tools (PM, 8 Nov: sonarjs)
