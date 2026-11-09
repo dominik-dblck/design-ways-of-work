@@ -445,6 +445,17 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
   Its control in the gate's file, always run. Task 3 closes: half 1 (flows by the registry), the roles, the test
   ids, the registry's leaves, the helpers; F3's gate fix lands with the build side's port.
 
+- E19 (eagle-design, 9 Nov evening), my calls beside the PM's picks (the picks are in `roadmaps/E19/E19Notes.ts`):
+  criterion 10 from the second pass over E10's notebook (point 4: one engine, the preview in the browser and the
+  hand-over on the server), the renderer's own version (E10 3d) left to E10 · five reader clauses of the checklist
+  written (grep, snapshot, verbatim, scans, wireframe), block-library's row naming the drawing's Stack as Section ·
+  criterion 15 (subject as title, preheader padded) from FD4 and legacy's preheaderBlock · the code pointer names
+  both legacies' files without extensions, which the pack would try to read as design files · undo: each is one
+  criterion and its edge, or one row. Releases 5 (f803bdc) and 5.1 (12bde50, tag release-2026-11-09-4) and the
+  send were the PM's word; start-T-E19-00 sent 9 Nov evening, no reconStop, the run consults by message.
+- Proposed to eagle-dev, agent-facing: rule:feature-run-never-stops gains "consults eagle-design by message, never
+  waits" for every feature run; settled in its recon, written on the sheet after.
+
 ## Questions for the PM
 
 - The design side's 71 entries keep kebab names (`sheet-status.ts`): the artifact and the build side read them by
@@ -497,3 +508,7 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
   `{{rule:key}}`, since `rule:{key}` is the citation of a rules row (`aCitedRowExists` read it as one); the writer is
   an entry of every scope's knip beside the browser tier's face; the port's scope holds `dev/claude/**` as a product
   tree (the build side's `.claude/`, checked in its product), `dev/rules` and `dev/map` staying its own emits.
+
+- Morning, 10 Nov: R6 (three spec changes the PM made in the repo's copies, parked to 9 Nov) is still open: the app
+  banner's bannerConfig, the bottom sheet's verticalSpacing gone (Box read as Layout landed with E19 C1). Releases
+  5 and 5.1 left it out; eagle-dev's digest gate stays red on it until a release carries it.
