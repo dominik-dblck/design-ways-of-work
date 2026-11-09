@@ -11,13 +11,15 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 
 | stage | what | done | of |
 | 1 | Harness | 5 | 5 |
-| 2 | Rules | 8 | 10 |
+| 2 | Rules | 10 | 10 |
 | 3 | Names | 0 | 6 |
 | 4 | Tools | 0 | 8 |
 | 5 | e2e | 0 | 4 |
 | 6 | Port design | 0 | 4 |
 
 ## History
+- 09:38 · stage 2 · 9 of 10 · R1-R3 runner fixes: strict flags, NUL names, eslint --fix on files staged whole (38d402e)
+- 09:38 · stage 2 · 10 of 10 · step 2 verified ALL SAME, 50 expected; committed 38d402e
 
 - 08:24 · stage 1 · 1 of 5 · the build side's skills to legacy/ (8bfcd8e)
 - 08:51 · stage 1 · 2 of 5 · 7g commitlint (d282df5)
@@ -92,6 +94,12 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
   red in a scratch repository (partial staging kept, the budget line, a missing tool, the spike).
 - Step 2 measured: `sonarjs/no-nested-conditional` 19 on the design copy, 2 in the way of working (one fixed);
   cognitive complexity at 15 and cyclomatic at 10 find 0 on both trees: the swap is free on the design side.
+
+- Step 2, eagle-dev's probe of 38d402e (S1–S3): the commit tier's `--write` ran prettier before `eslint --fix`, so
+  a fix (a template from a concatenation) left layout format:check refused: ESLint first, prettier last, then
+  staged (lint-staged's order), red then green in a scratch repository. `feature --staged` exits 2 (the feature
+  end reads no file list). Its measure: complexity 10 against cognitive 15 finds 0 in its production too, so the
+  size row's build exception drops "its tree measured first".
 
 ## Questions for the PM
 

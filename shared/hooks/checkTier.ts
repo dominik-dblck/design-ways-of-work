@@ -1,5 +1,5 @@
 /**
- * - `node shared/hooks/checkTier.ts commit|feature [--staged [--write]]` · timed
+ * - `node shared/hooks/checkTier.ts commit [--staged [--write]] | feature` · timed
  * - commit: the changed files (staged, or the working tree's) and cheap tree checks
  * - a `spike/*` branch runs neither: a merge commit or the push checks its work
  */
@@ -74,17 +74,12 @@ function commandOf(
   return bin === undefined ? [] : [path.join(BIN, bin), ...args];
 }
 
-// a staged file formatted and staged again, only when it is staged whole: a part left out stays out
+// a file staged whole is fixed, formatted last (a fix leaves layout prettier settles), staged again; a part stays out
 function written(staged: readonly string[]): void {
   const partly = new Set(listed(git(['diff', '--name-only', '-z'])));
   const whole = staged.filter((file) => !partly.has(file));
   const left = staged.filter((file) => partly.has(file));
   if (whole.length) {
-    spawnSync(
-      path.join(BIN, 'prettier'),
-      ['--write', '--ignore-unknown', '--log-level', 'warn', ...whole],
-      { cwd: ROOT },
-    );
     const typescript = whole.filter((file) => TYPESCRIPT.test(file));
     if (typescript.length)
       spawnSync(
@@ -92,6 +87,11 @@ function written(staged: readonly string[]): void {
         ['--fix', '--no-warn-ignored', ...typescript],
         { cwd: ROOT },
       );
+    spawnSync(
+      path.join(BIN, 'prettier'),
+      ['--write', '--ignore-unknown', '--log-level', 'warn', ...whole],
+      { cwd: ROOT },
+    );
     git(['add', '--', ...whole]);
   }
   if (left.length)
@@ -107,9 +107,10 @@ const isWrite = flags.includes('--write');
 if (
   !TIERS.has(tier) ||
   flags.some((flag) => !FLAGS.has(flag)) ||
-  (isWrite && !isStaged)
+  (isWrite && !isStaged) ||
+  (isStaged && tier !== 'commit')
 ) {
-  console.error('checkTier: commit|feature [--staged [--write]]');
+  console.error('checkTier: commit [--staged [--write]] | feature');
   process.exit(2);
 }
 const branch = git(['rev-parse', '--abbrev-ref', 'HEAD']).trim();
