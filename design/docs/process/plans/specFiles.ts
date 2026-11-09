@@ -9,8 +9,7 @@ import type { FileRow, ContextRead, CombinationFile } from './plansTypes.ts';
 export const SPEC: readonly FileRow[] = [
   {
     file: 'glossary.js',
-    holds:
-      'one name per idea, every decided mechanic, the open questions · and its screen words (ui), the single source of truth for both (UV1 · PM, 18 Oct)',
+    holds: 'one name per idea, every decided mechanic, the open questions · and its screen words (ui), the single source of truth for both (UV1 · PM, 18 Oct)',
   },
   {
     file: 'block-model.json',
@@ -18,58 +17,47 @@ export const SPEC: readonly FileRow[] = [
   },
   {
     file: 'events.js',
-    holds:
-      '45 event types by key, who produces each, who it pings · and the 96-step run that is the acceptance test (counted 2026-10-16)',
+    holds: '45 event types by key, who produces each, who it pings · and the 96-step run that is the acceptance test (counted 2026-10-16)',
   },
   {
     file: 'commands.js',
-    holds:
-      '43 commands · route, body, the rules that refuse it, the events it appends',
+    holds: '43 commands · route, body, the rules that refuse it, the events it appends',
   },
   {
     file: 'refusals.js',
-    holds:
-      'every way a command can be refused · the key, its order and its note · its sentence and its fix are messages.js’ (MS2)',
+    holds: 'every way a command can be refused · the key, its order and its note · its sentence and its fix are messages.js’ (MS2)',
   },
   {
     file: 'messages.js',
-    holds:
-      'every sentence a person sees: State, Move (× five readers), Outcome, and every refusal’s line and fix · the one place (MS1, MS2 · PM, 18 Oct)',
+    holds: 'every sentence a person sees: State, Move (× five readers), Outcome, and every refusal’s line and fix · the one place (MS1, MS2 · PM, 18 Oct)',
   },
   {
     file: 'queries.js',
-    holds:
-      '7 queries · route, params, the store each one reads, the response shape',
+    holds: '7 queries · route, params, the store each one reads, the response shape',
   },
   {
     file: 'directory.js',
-    holds:
-      'who exists, their roles and languages · pools derive from this · copied into the domain as data at T-E00-12, the way refusals.js is at T-E00-10',
+    holds: 'who exists, their roles and languages · pools derive from this · copied into the domain as data at T-E00-12, the way refusals.js is at T-E00-10',
   },
   {
     file: 'projections.js',
-    holds:
-      'the three projections T-E00-11 asserts · from Payloads.all() to the shape blocks.js, signatures.js and threads.js hold · copied as a fixture and ported once',
+    holds: 'the three projections T-E00-11 asserts · from Payloads.all() to the shape blocks.js, signatures.js and threads.js hold · copied as a fixture and ported once',
   },
   {
     file: 'measure.js',
-    holds:
-      'one measurement, one way · Measure.run() loads nothing and counts everything a criterion quotes about the sheet, with every module in Measure.load order · “measured <date>” means this',
+    holds: 'one measurement, one way · Measure.run() loads nothing and counts everything a criterion quotes about the sheet, with every module in Measure.load order · “measured <date>” means this',
   },
   {
     file: 'payloads.js',
-    holds:
-      'the payload of every step of the run · one function over events.js · RUN plus a FACTS table, 99 entries typed to their key · what T-E00-11 seeds from',
+    holds: 'the payload of every step of the run · one function over events.js · RUN plus a FACTS table, 99 entries typed to their key · what T-E00-11 seeds from',
   },
   {
     file: 'gate-rules.js',
-    holds:
-      'the action rules and their reason strings · 41 documented states as fixtures',
+    holds: 'the action rules and their reason strings · 41 documented states as fixtures',
   },
   {
     file: 'block-rules.js',
-    holds:
-      'what a block shows and what may be done to it · 9 situations as fixtures',
+    holds: 'what a block shows and what may be done to it · 9 situations as fixtures',
   },
   { file: 'gate-states.js', holds: 'the legend for every gate dot' },
   {
@@ -78,29 +66,24 @@ export const SPEC: readonly FileRow[] = [
   },
   {
     file: 'edges.js',
-    holds:
-      'one decision tree per case a criterion does not name · loaded before tickets.js',
+    holds: 'one decision tree per case a criterion does not name · loaded before tickets.js',
   },
   {
     file: 'receipts.js',
-    holds:
-      'what a closed ticket reported, and the caveats it left · loaded before tickets.js',
+    holds: 'what a closed ticket reported, and the caveats it left · loaded before tickets.js',
   },
   {
     file: 'tickets.js',
-    holds:
-      'the tickets, their tests, and the one hand-written field: status · reads the two above',
+    holds: 'the tickets, their tests, and the one hand-written field: status · reads the two above',
   },
   { file: 'plans.js', holds: 'this file · the map of the rest' },
   {
     file: 'agent-instructions.md',
-    holds:
-      'read first in the repo · what to read, what never to write, and the one shape a report back takes',
+    holds: 'read first in the repo · what to read, what never to write, and the one shape a report back takes',
   },
   {
     file: 'db-schema.js',
-    holds:
-      'the tables and their columns · the ten criteria behind Postgres, their tally and the answer (db-schema.js · rows, tally, answer, oneLine), and what would flip them',
+    holds: 'the tables and their columns · the ten criteria behind Postgres, their tally and the answer (db-schema.js · rows, tally, answer, oneLine), and what would flip them',
   },
 ];
 

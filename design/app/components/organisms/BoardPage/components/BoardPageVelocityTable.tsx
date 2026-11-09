@@ -15,7 +15,9 @@ interface BoardPageVelocityTableProps {
   readonly days: readonly VelocityDay[];
 }
 
-function BoardPageVelocityTable({ days }: BoardPageVelocityTableProps): ReactElement {
+function BoardPageVelocityTable({
+  days,
+}: BoardPageVelocityTableProps): ReactElement {
   const { velocity } = words;
   return (
     <Table size="small">

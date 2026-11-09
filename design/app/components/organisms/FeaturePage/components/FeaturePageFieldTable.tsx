@@ -17,10 +17,15 @@ interface FeaturePageFieldTableProps {
   readonly fields: readonly FieldRowView[];
 }
 
-function FeaturePageFieldTable({ title, fields }: FeaturePageFieldTableProps): ReactElement {
+function FeaturePageFieldTable({
+  title,
+  fields,
+}: FeaturePageFieldTableProps): ReactElement {
   return (
     <TableContainer component={Paper} variant="outlined">
-      <Typography variant="subtitle2" sx={{ px: 2, pt: 1.5 }}>{title}</Typography>
+      <Typography variant="subtitle2" sx={{ px: 2, pt: 1.5 }}>
+        {title}
+      </Typography>
       <Table size="small">
         <TableBody>
           {fields.map((field) => (

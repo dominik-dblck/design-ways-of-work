@@ -3,7 +3,6 @@
  */
 import type { DocumentSection } from '../documentTypes.ts';
 
-// prettier-ignore
 export const ENDPOINT_SHAPE: readonly DocumentSection[] = [
   {
     heading: '# api-convention.md · how every endpoint looks',

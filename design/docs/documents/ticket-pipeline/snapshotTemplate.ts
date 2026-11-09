@@ -3,7 +3,6 @@
  */
 import type { DocumentSection } from '../documentTypes.ts';
 
-// prettier-ignore
 export const SNAPSHOT_TEMPLATE: readonly DocumentSection[] = [
   {
     heading: '# `roadmaps/templates/ticket-contract-snapshot.md`',

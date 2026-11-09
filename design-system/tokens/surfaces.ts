@@ -3,7 +3,6 @@
  */
 import type { TokenGroup } from '../designTypes.ts';
 
-// prettier-ignore
 const surfaces: readonly TokenGroup[] = [
   {
     title: 'FLOATING SURFACES · one paper, three papers',

@@ -14,7 +14,10 @@ interface BoardPageStatTileProps {
 
 function BoardPageStatTile({ stat }: BoardPageStatTileProps): ReactElement {
   return (
-    <Paper variant="outlined" sx={{ p: 2.5, borderRadius: radiusOf('uiRContainer'), flex: 1 }}>
+    <Paper
+      variant="outlined"
+      sx={{ p: 2.5, borderRadius: radiusOf('uiRContainer'), flex: 1 }}
+    >
       <Typography variant="overline" color="textSecondary" component="div">
         {stat.label}
       </Typography>

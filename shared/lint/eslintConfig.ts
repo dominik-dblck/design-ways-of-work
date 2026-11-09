@@ -129,6 +129,27 @@ const MARKUP: Linter.RulesRecord = {
 
 const AT_LOAD: Linter.RulesRecord = { 'wow/reads-nothing-at-load': 'error' };
 
+// a table's rows print at full width (shared/lint/prettierConfig.ts): code in one would never wrap
+const tableRules = (scope: RepoScope): readonly Linter.Config[] => {
+  const files = scope.tables.filter((glob) => !glob.startsWith('!'));
+  const ignores = scope.tables
+    .filter((glob) => glob.startsWith('!'))
+    .map((glob) => glob.slice(1));
+  const selector =
+    'FunctionDeclaration, FunctionExpression, ArrowFunctionExpression, ClassDeclaration';
+  const message =
+    "A table's file holds data alone: its rows print at full width, so its code moves to a file of its own (docs/rules/checks.md).";
+  return files.length === 0
+    ? []
+    : [
+        {
+          files,
+          ignores,
+          rules: { 'wow/table-syntax': ['error', { selector, message }] },
+        },
+      ];
+};
+
 const testRules = (scope: RepoScope): Linter.Config[] => [
   {
     files: ['**/*.test-d.ts'],
@@ -185,6 +206,7 @@ const eslintConfig = (scope: RepoScope): Linter.Config[] =>
     { ...SONAR, files: ['**/*.{ts,tsx}'] },
     ...runsCodeRules(scope),
     ...scopedRules(scope),
+    ...tableRules(scope),
     ...testRules(scope),
     ...productionRules(scope),
     {

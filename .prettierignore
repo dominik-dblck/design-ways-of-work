@@ -1,9 +1,18 @@
+# what the lint leaves aside
 node_modules/
 .rehearsal/
+legacy/
+tests/lint/fixtures/
+# a product's tree, formatted in its product
 design/
 dev/
 shared/rules/
-ports/
-legacy/
+# a file a tool writes keeps the tool's layout
+.prettierrc.json
+.prettierignore
+# prose keeps the layout its writer gave it
+**/*.md
+# a run's notes and maps, as written
 plan/
-*.md
+# a port, as its script writes it
+ports/

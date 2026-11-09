@@ -7,7 +7,6 @@ import type { RuleRow } from './plansTypes.ts';
 import type { PrincipleKey } from './principleRules.ts';
 
 // each line: a rule of refinement in general words, and the cost it avoids (D27)
-// prettier-ignore
 export const TICKET_CHECKLIST = [
   { id: 'one-criterion-one-test', says: 'Every criterion is one test. If a test would have to cover two, they are one criterion; if a criterion needs two tests, it is two criteria.', why: 'A receipt counts tests against criteria, and it cannot be checked when the two do not match one to one.' },
   { id: 'expected-side-from-criterion', says: 'Every roster the tests stand on (names, counts, fields) is written in the criterion, not left to be read off the code. An assertion’s expected side comes from the criterion, never from the module under test, and that holds for a review’s fix hint as much as for a test: a hint that says “assert X against TABLE[X]” is a hint nothing can check.', why: 'A test that asks the module what it exports proves the module agrees with itself.' },
@@ -47,12 +46,7 @@ export const TICKET_CHECKLIST = [
 export type ChecklistKey = (typeof TICKET_CHECKLIST)[number]['id'];
 
 // the rules of other groups read before READY, cited by key and never copied (D34)
-export const CHECKLIST_CITES = [
-  'criterion-says-what-file-holds',
-  'grep-the-old-sentence',
-  'one-source-of-truth',
-  'one-responsibility',
-] as const satisfies readonly (DesignKey | PrincipleKey)[];
+export const CHECKLIST_CITES = ['criterion-says-what-file-holds', 'grep-the-old-sentence', 'one-source-of-truth', 'one-responsibility'] as const satisfies readonly (DesignKey | PrincipleKey)[];
 
 // a key read before READY: a checklist line’s, or a rule the checklist cites
 export type ReadyKey = ChecklistKey | (typeof CHECKLIST_CITES)[number];

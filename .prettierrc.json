@@ -1,0 +1,22 @@
+{
+  "printWidth": 80,
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "bracketSpacing": true,
+  "overrides": [
+    {
+      "files": [
+        "design-system/tokens/*.ts",
+        "design-system/elements.ts",
+        "design-system/fonts.ts"
+      ],
+      "excludeFiles": [],
+      "options": {
+        "printWidth": 10000
+      }
+    }
+  ]
+}

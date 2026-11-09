@@ -5,7 +5,10 @@ import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
-import { wireframesOf, wireframesWords as words } from '../../../workspace/wireframes-view.ts';
+import {
+  wireframesOf,
+  wireframesWords as words,
+} from '../../../workspace/wireframes-view.ts';
 import { SectionHead } from '../../atoms/SectionHead/index.ts';
 import { WireframesPageScreenPlaceholder } from './components/WireframesPageScreenPlaceholder.tsx';
 
@@ -15,13 +18,21 @@ function WireframesPage(): ReactElement {
       <Stack spacing={4}>
         <Stack spacing={1}>
           <Typography variant="overline">{words.eyebrow}</Typography>
-          <Typography variant="body2" color="textSecondary">{words.intro}</Typography>
+          <Typography variant="body2" color="textSecondary">
+            {words.intro}
+          </Typography>
         </Stack>
         {wireframesOf().map((group) => (
           <Stack key={group.track} spacing={1.5} id={group.track}>
-            <SectionHead label={group.track} note={`${group.screens.length} · ${words.track}`} />
+            <SectionHead
+              label={group.track}
+              note={`${group.screens.length} · ${words.track}`}
+            />
             {group.screens.map((screen) => (
-              <WireframesPageScreenPlaceholder key={screen.id} screen={screen} />
+              <WireframesPageScreenPlaceholder
+                key={screen.id}
+                screen={screen}
+              />
             ))}
           </Stack>
         ))}

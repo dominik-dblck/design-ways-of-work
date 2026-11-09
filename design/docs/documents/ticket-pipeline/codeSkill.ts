@@ -3,7 +3,6 @@
  */
 import type { DocumentSection } from '../documentTypes.ts';
 
-// prettier-ignore
 export const CODE_SKILL: readonly DocumentSection[] = [
   {
     heading: '# `.claude/skills/ticket/_code.md`',
@@ -43,7 +42,7 @@ export const CODE_SKILL: readonly DocumentSection[] = [
     lines: [
       '',
       '- **A name says what, never how many** (`tests/architecture/aNameSaysWhatNotHowMany.test.ts`). `why: T-E01-07`',
-      '- **A file a script generates goes into `.prettierignore` the moment it exists.** `why: T-E01-10`',
+      '- **A file a script generates goes into `scope.generated` the moment it exists.** `why: T-E01-10`',
       '- **No comment describes the stage** (`tests/architecture/commentsAreInvariants.test.ts`). `why: T-E00-08`',
       '- **A value a delayed read refreshes has a settling state the screen reads**, and its test asserts the',
       '  screen after the write lands and before the read. `why: T-E04-00` — Close without changes offered over four saved edits',

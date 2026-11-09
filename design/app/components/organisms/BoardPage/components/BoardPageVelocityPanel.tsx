@@ -21,7 +21,9 @@ interface BoardPageVelocityPanelProps {
   readonly pace: Velocity;
 }
 
-function BoardPageVelocityPanel({ pace }: BoardPageVelocityPanelProps): ReactElement {
+function BoardPageVelocityPanel({
+  pace,
+}: BoardPageVelocityPanelProps): ReactElement {
   const [isTableShown, setTableShown] = useState(false);
   const { velocity } = words;
   const of = (key: 'tickets' | 'criteria') =>
@@ -29,7 +31,10 @@ function BoardPageVelocityPanel({ pace }: BoardPageVelocityPanelProps): ReactEle
   return (
     <Stack spacing={1.5}>
       <SectionHead label={velocity.label} note={velocity.note} />
-      <Paper variant="outlined" sx={{ borderRadius: radiusOf('uiRContainer'), p: 2.5 }}>
+      <Paper
+        variant="outlined"
+        sx={{ borderRadius: radiusOf('uiRContainer'), p: 2.5 }}
+      >
         <Stack spacing={2}>
           <Typography variant="body2">{pace.summary}</Typography>
           <Box

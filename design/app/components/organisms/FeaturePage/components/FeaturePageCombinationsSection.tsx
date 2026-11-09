@@ -10,14 +10,23 @@ import type { FeatureView } from '../../../../workspace/feature-view.ts';
 import { SectionHead } from '../../../atoms/SectionHead/index.ts';
 import { FeaturePageCombinationFileItem } from './FeaturePageCombinationFileItem.tsx';
 
-function FeaturePageCombinationsSection({ view }: { readonly view: FeatureView }): ReactElement | null {
+function FeaturePageCombinationsSection({
+  view,
+}: {
+  readonly view: FeatureView;
+}): ReactElement | null {
   const isMissing = !view.combinations.length && view.statesNamed > 0;
   if (!view.combinations.length && !isMissing) return null;
   return (
     <Stack spacing={1.5} id="combinations">
-      <SectionHead label={words.combinations.label} note={words.combinations.note} />
+      <SectionHead
+        label={words.combinations.label}
+        note={words.combinations.note}
+      />
       {isMissing ? (
-        <Typography variant="body2" color="error">{words.combinations.missing(view.statesNamed, view.epic)}</Typography>
+        <Typography variant="body2" color="error">
+          {words.combinations.missing(view.statesNamed, view.epic)}
+        </Typography>
       ) : null}
       {view.combinations.map((one) => (
         <FeaturePageCombinationFileItem key={one.file} one={one} />

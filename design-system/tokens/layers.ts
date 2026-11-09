@@ -3,7 +3,6 @@
  */
 import type { TokenGroup } from '../designTypes.ts';
 
-// prettier-ignore
 const layers: readonly TokenGroup[] = [
   {
     title: 'Z-INDEX · a scale, not a number somebody picked',

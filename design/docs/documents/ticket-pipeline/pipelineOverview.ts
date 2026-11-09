@@ -3,7 +3,6 @@
  */
 import type { DocumentSection } from '../documentTypes.ts';
 
-// prettier-ignore
 export const PIPELINE_OVERVIEW: readonly DocumentSection[] = [
   {
     heading: '# Ticket pipeline · three modes, seven skills, two shared files',

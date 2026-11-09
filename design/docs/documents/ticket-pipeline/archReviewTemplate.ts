@@ -3,7 +3,6 @@
  */
 import type { DocumentSection } from '../documentTypes.ts';
 
-// prettier-ignore
 export const ARCH_REVIEW_TEMPLATE: readonly DocumentSection[] = [
   {
     heading: '# `roadmaps/templates/ticket-arch-review.md`',

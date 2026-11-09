@@ -3,7 +3,6 @@
  */
 import type { TokenGroup } from '../designTypes.ts';
 
-// prettier-ignore
 const elevation: readonly TokenGroup[] = [
   {
     title: 'ELEVATION',

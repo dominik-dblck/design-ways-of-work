@@ -57,8 +57,14 @@ const scope: RepoScope = {
   components: [],
   // and no renderer drawn inside it
   renderers: [],
-  // no file it writes from a source of its own
-  generators: [],
+  // prettier's two files, from this scope
+  generators: [
+    {
+      script: 'shared/lint/writeFormatterFiles.ts',
+      args: [],
+      writes: ['.prettierrc.json', '.prettierignore'],
+    },
+  ],
   // its own checks beside the shared tiers: the copies, its rules' tests, the shared tests, its kept rules; the products' at the end
   checks: {
     commit: ['lint:copies', 'test:rules', 'test:shared', 'lint:kept'],
@@ -66,6 +72,17 @@ const scope: RepoScope = {
   },
   // no file of its own runs code it built
   runsCode: {},
+  // the design system's tables: a row one line however long (shared/lint/prettierConfig.ts)
+  tables: [
+    'design-system/tokens/*.ts',
+    'design-system/elements.ts',
+    'design-system/fonts.ts',
+  ],
+  unformatted: {
+    '**/*.md': 'prose keeps the layout its writer gave it',
+    'plan/**': "a run's notes and maps, as written",
+    'ports/**': 'a port, as its script writes it',
+  },
   // no skill, and no instruction an agent loads: its sessions read the products'
   instructions: { skills: [], whole: [], onDemand: [], everyTurn: [] },
   // its own code's strings and both sides' trees: a rule's text, a check's finding, each written once

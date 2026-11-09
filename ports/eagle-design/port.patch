@@ -78,15 +78,147 @@ index f72c4df..e369723 100644
 +- `yarn spec-check` (`tools/specCheck.ts`) — `app/styles/components.spec.ts` holds together.
 +- Every commit runs ESLint, tsc, the architecture tests and the checks (D23); a push runs every test.
 diff --git a/.prettierignore b/.prettierignore
-index c3bb28b..af23fcc 100644
+index c3bb28b..28518a0 100644
 --- a/.prettierignore
 +++ b/.prettierignore
-@@ -23,3 +23,5 @@ tools/**/*.mjs
- .claude
- # a file a tool writes keeps the tool's layout: tools/tokens.ts writes it
+@@ -1,25 +1,33 @@
+-dist
+-node_modules
+-.artifact
+-poc
+-# the sheet's files not yet in TypeScript, its pages, docs and data keep their own layout
+-sheet/**/*.*
+-roadmaps/**/*.*
+-docs/**/*.*
+-guards/**/*.*
+-app/**/*.*
+-public/**/*.*
+-fixtures/**/*.*
+-records/**/*.*
+-legacy/**/*.*
+-!sheet/**/*.ts
+-!roadmaps/**/*.ts
+-!docs/**/*.ts
+-!guards/**/*.ts
+-!app/**/*.ts
+-# the docs keep their own layout · the tooling still in .mjs moves to TypeScript file by file
+-**/*.md
+-tools/**/*.mjs
+-.claude
+-# a file a tool writes keeps the tool's layout: tools/tokens.ts writes it
++# what the lint leaves aside
++dist/
++node_modules/
++poc/
++.artifact/
++# a file a tool writes keeps the tool's layout
++app/styles/tokens.ts
++.prettierrc.json
++.prettierignore
++fixtures/data/*.json
++docs/rules/*.md
++dev/rules/*.md
++dev/map.md
++docs/process/*.md
++sheet/contract/*.md
++.claude/skills/*/SKILL.md
  app/styles/tokens.ts
-+# ESLint writes its known fails: eslint --suppress-rule, --prune-suppressions
++# prose keeps the layout its writer gave it
++**/*.md
++# kept as it was (D24)
++legacy/
++# a release's record, as it was written
++records/
++# packs as cut, data as emitted, screens as taken
++fixtures/
++# assets as their source gives them
++public/
++# a check's snapshot, as its check writes it
++guards/__snapshots__/
++# a session's settings, and the skills the build writes
++.claude/
++# ESLint writes its known fails (`--suppress-rule`, `--prune-suppressions`)
 +eslint-suppressions.json
+diff --git a/.prettierrc b/.prettierrc
+deleted file mode 100644
+index 31a4c50..0000000
+--- a/.prettierrc
++++ /dev/null
+@@ -1,9 +0,0 @@
+-{
+-  "printWidth": 80,
+-  "tabWidth": 2,
+-  "useTabs": false,
+-  "semi": true,
+-  "singleQuote": true,
+-  "trailingComma": "all",
+-  "bracketSpacing": true
+-}
+diff --git a/.prettierrc.json b/.prettierrc.json
+new file mode 100644
+index 0000000..0444bec
+--- /dev/null
++++ b/.prettierrc.json
+@@ -0,0 +1,29 @@
++{
++  "printWidth": 80,
++  "tabWidth": 2,
++  "useTabs": false,
++  "semi": true,
++  "singleQuote": true,
++  "trailingComma": "all",
++  "bracketSpacing": true,
++  "overrides": [
++    {
++      "files": [
++        "docs/rules/*.ts",
++        "dev/rules/*.ts",
++        "shared/rules/*.ts",
++        "docs/process/plans/*.ts",
++        "design-system/tokens/*.ts",
++        "design-system/elements.ts",
++        "design-system/fonts.ts",
++        "app/workspace/board-view/boardWords.ts"
++      ],
++      "excludeFiles": [
++        "shared/rules/ruleFileFor.ts"
++      ],
++      "options": {
++        "printWidth": 10000
++      }
++    }
++  ]
++}
+diff --git a/app/styles/components.spec/atomsCheckbox.ts b/app/styles/components.spec/atomsCheckbox.ts
+index f373714..5ecda4a 100644
+--- a/app/styles/components.spec/atomsCheckbox.ts
++++ b/app/styles/components.spec/atomsCheckbox.ts
+@@ -3,7 +3,10 @@
+  * - from checkbox to radio, in its order
+  */
+ // the one check mark every checked state draws, its tint the state's own
+-const CHECK_MARK = { icon: 'lucide-icons/check', size: '--ui-mark-badge' } as const;
++const CHECK_MARK = {
++  icon: 'lucide-icons/check',
++  size: '--ui-mark-badge',
++} as const;
+ 
+ const ATOMS_CHECKBOX = [
+   {
+diff --git a/app/styles/components.spec/moleculesBadgeDot.ts b/app/styles/components.spec/moleculesBadgeDot.ts
+index 24b762b..584f56d 100644
+--- a/app/styles/components.spec/moleculesBadgeDot.ts
++++ b/app/styles/components.spec/moleculesBadgeDot.ts
+@@ -11,7 +11,8 @@ const MOLECULES_BADGE_DOT = [
+     parts: [{ atom: 'badge', as: 'the dot' }, { molecule: 'hint-lines' }],
+     layout:
+       'hint [dot · ringed off what it sits on at a corner, small and plain inline]',
+-    notes: 'a EpicBadge with a dot · CHANGED and EDITED on a row and on the config',
++    notes:
++      'a EpicBadge with a dot · CHANGED and EDITED on a row and on the config',
+     scope: 'global',
+     ownedBy: 'T-E06-00',
+     props:
 diff --git a/app/styles/product-tokens.ts b/app/styles/product-tokens.ts
 new file mode 100644
 index 0000000..0c2aec9
@@ -718,7 +850,7 @@ index 4ed4a71..89724d3 100644
 -- `app/pages/`, `app/theme/`, `app/workspace/`, `roadmaps/templates.ts`, `public/lucide-icons/`.
 +- `app/pages/`, `app/theme/`, `app/workspace/`, `roadmaps/templates.ts`.
 diff --git a/docs/process/ticket-pipeline.md b/docs/process/ticket-pipeline.md
-index db1e4a6..c91aa4d 100644
+index db1e4a6..90fa51e 100644
 --- a/docs/process/ticket-pipeline.md
 +++ b/docs/process/ticket-pipeline.md
 @@ -18,8 +18,7 @@
@@ -740,6 +872,15 @@ index db1e4a6..c91aa4d 100644
    indexes match on the path (`tests/architecture/theDocsNameRealPaths.test.ts`). `why: T-E01-10`
  
  ## Decisions are written, design-side files compared
+@@ -238,7 +237,7 @@ arch-review, regression and report. Recon does not read it.
+ ## Code
+ 
+ - **A name says what, never how many** (`tests/architecture/aNameSaysWhatNotHowMany.test.ts`). `why: T-E01-07`
+-- **A file a script generates goes into `.prettierignore` the moment it exists.** `why: T-E01-10`
++- **A file a script generates goes into `scope.generated` the moment it exists.** `why: T-E01-10`
+ - **No comment describes the stage** (`tests/architecture/commentsAreInvariants.test.ts`). `why: T-E00-08`
+ - **A value a delayed read refreshes has a settling state the screen reads**, and its test asserts the
+   screen after the write lands and before the read. `why: T-E04-00` — Close without changes offered over four saved edits
 @@ -455,7 +454,7 @@ behaviour that nobody tested and this ticket touched. `why: T-E01-05` — touche
  6. Present: `{id} · regression · drift {n} · suite {n} red · touched {n} files, {n} re-ports`
  
@@ -769,7 +910,7 @@ index db1e4a6..c91aa4d 100644
  **And one the checklist does not ask.** Count the reading table against the criteria. A row the
 diff --git a/docs/rules/checks.md b/docs/rules/checks.md
 new file mode 100644
-index 0000000..813631b
+index 0000000..2c1015c
 --- /dev/null
 +++ b/docs/rules/checks.md
 @@ -0,0 +1,24 @@
@@ -783,7 +924,7 @@ index 0000000..813631b
 +| A rule across files is an ESLint rule only when it indexes the program once (`wow/one-home-per-name`); any other is a shared test.                                                                                                                                                                                                                                                                                                                                                                                                                                | `review`                                              | —                                                                                                         | ESLint reads one file at a time; an index built once a run is the one read across files it holds cheaply.                                 |
 +| A rule is one row naming its one gate, in `shared/rules/` when it is generic and in the product's rules when not; a rule moving between gates names until when.                                                                                                                                                                                                                                                                                                                                                                                                   | `everyRuleHasAGate`                                   | —                                                                                                         | Two gates for one rule drift apart, and a rule with none holds nothing.                                                                   |
 +| A repository names its code once, in its `scope.ts` (a `RepoScope`): its ESLint config, its shared tests and its tools read that one file, and a field holds one list for one job.                                                                                                                                                                                                                                                                                                                                                                                | `tsc` · `review`                                      | —                                                                                                         | A list written twice drifts, and lint and a test then disagree on what a file is.                                                         |
-+| A tool takes its exceptions one way, the same in every repository: ESLint a directive with its reason (`comments.md`) or `eslint-suppressions.json`, a test the way of working's one baseline (`tests.md`); never a list a check invents for itself.                                                                                                                                                                                                                                                                                                              | ESLint `require-description` · `review`               | —                                                                                                         | What is let through is found in one place, in every repository.                                                                           |
++| A tool takes its exceptions one way, the same in every repository: ESLint a directive with its reason (`comments.md`) or `eslint-suppressions.json`, a test the way of working's one baseline (`tests.md`), prettier the scope's `tables` (a row one line, its file data alone) and `unformatted` (each with its why), written into `.prettierrc.json` and `.prettierignore` by `format:files`; never a list a check invents for itself, and never a `// prettier-ignore`.                                                                                        | ESLint `require-description` · `review`               | —                                                                                                         | What is let through is found in one place, in every repository.                                                                           |
 +| A lint rule or shape of the way of working is proven by its RuleTester cases, those that must fire and those that must pass, one for each case of the test it replaced.                                                                                                                                                                                                                                                                                                                                                                                           | `review`                                              | the way of working's own `test:rules` runs them, in its repository                                        | A gate never seen red is no gate.                                                                                                         |
 +| A finding says in one sentence what a person writes instead, names its rule file (`(docs/rules/names.md)`), and points at what it fired on.                                                                                                                                                                                                                                                                                                                                                                                                                       | `review`                                              | the way of working's own `test:rules` reads each message                                                  | The fix is made where the finding is read.                                                                                                |
 +| Code meets SonarJS's recommended rules too, less those `shared/lint/sonarRules.ts` turns off, each with its reason: `OFF` everywhere, `OFF_IN_TESTS` in tests.                                                                                                                                                                                                                                                                                                                                                                                                    | ESLint `sonarjs/*`                                    | `code-eval` in a file that runs code the project built, each named in the scope's `runsCode` with its why | It reads what a reviewer misses: a regular expression that backtracks, a value written and never read, a collection that is always empty. |
@@ -1786,10 +1927,10 @@ similarity index 100%
 rename from app/styles/tokens.css
 rename to legacy/tokens.css
 diff --git a/package.json b/package.json
-index b0d8011..b558635 100644
+index b0d8011..c530723 100644
 --- a/package.json
 +++ b/package.json
-@@ -10,41 +10,58 @@
+@@ -10,41 +10,59 @@
      "build": "node tools/build.ts",
      "checks": "node tools/build.ts && DESIGN_SAVE=1 node tools/checks.ts",
      "cut-pack": "node tools/build.ts && node tools/pack.ts",
@@ -1805,6 +1946,7 @@ index b0d8011..b558635 100644
      "format": "prettier --write . --log-level warn",
      "format:check": "prettier --check .",
 -    "test": "vitest --run",
++    "format:files": "node shared/lint/writeFormatterFiles.ts --out .",
 +    "test": "ESLINT_FLAGS=unstable_native_nodejs_ts_config vitest --run",
      "prepare": "husky",
      "checks:gate": "node tools/checksGate.ts",
@@ -1900,10 +2042,10 @@ index 9c7b0cf..ce1fef1 100644
 +export type { TrackFinding, TrackReading, TrackRow };
 diff --git a/scope.ts b/scope.ts
 new file mode 100644
-index 0000000..e1e81b0
+index 0000000..1f34423
 --- /dev/null
 +++ b/scope.ts
-@@ -0,0 +1,361 @@
+@@ -0,0 +1,389 @@
 +// scope.ts · what the design project names once: its ESLint config, its shared tests and its tools read it
 +import type { RepoScope } from './shared/repoScope.ts';
 +import {
@@ -2085,6 +2227,11 @@ index 0000000..e1e81b0
 +  // what the build writes from a module: the emitted JSON, rule files, skills, documents, tokens
 +  generators: [
 +    {
++      script: 'shared/lint/writeFormatterFiles.ts',
++      args: [],
++      writes: ['.prettierrc.json', '.prettierignore'],
++    },
++    {
 +      script: 'tools/emitInto.ts',
 +      args: [],
 +      writes: [
@@ -2112,6 +2259,29 @@ index 0000000..e1e81b0
 +      'a bundle the build wrote, run in the world a page gives it',
 +    'guards/checks/listPart.ts':
 +      "the list page's own script, run to read what it draws",
++  },
++  // the tables whose rows are objects (rules, plans, tokens, words): a row one line however long (shared/lint/prettierConfig.ts)
++  tables: [
++    'docs/rules/*.ts',
++    'dev/rules/*.ts',
++    'shared/rules/*.ts',
++    '!shared/rules/ruleFileFor.ts',
++    'docs/process/plans/*.ts',
++    'design-system/tokens/*.ts',
++    'design-system/elements.ts',
++    'design-system/fonts.ts',
++    'app/workspace/board-view/boardWords.ts',
++  ],
++  unformatted: {
++    '**/*.md': 'prose keeps the layout its writer gave it',
++    'legacy/**': 'kept as it was (D24)',
++    'records/**': "a release's record, as it was written",
++    'fixtures/**': 'packs as cut, data as emitted, screens as taken',
++    'public/**': 'assets as their source gives them',
++    'guards/__snapshots__/**': "a check's snapshot, as its check writes it",
++    '.claude/**': "a session's settings, and the skills the build writes",
++    'eslint-suppressions.json':
++      'ESLint writes its known fails (`--suppress-rule`, `--prune-suppressions`)',
 +  },
 +  // a skill is read whole when it loads, the rule files when a skill or CLAUDE.md sends a reader there
 +  // the process's prose: a sentence of it written once (its UI's have their home, sheet/words/messages.ts)

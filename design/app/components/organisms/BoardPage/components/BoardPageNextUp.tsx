@@ -18,15 +18,25 @@ interface BoardPageNextUpProps {
   readonly onTicket: (id: string) => void;
 }
 
-function BoardPageNextUp({ tickets, onTicket }: BoardPageNextUpProps): ReactElement {
+function BoardPageNextUp({
+  tickets,
+  onTicket,
+}: BoardPageNextUpProps): ReactElement {
   return (
     <Stack spacing={1.5}>
       <SectionHead {...words.nextUp} />
-      <Paper variant="outlined" sx={{ borderRadius: radiusOf('uiRContainer'), p: 1 }}>
+      <Paper
+        variant="outlined"
+        sx={{ borderRadius: radiusOf('uiRContainer'), p: 1 }}
+      >
         {tickets.length ? (
           <List dense disablePadding>
             {tickets.map((ticket) => (
-              <BoardPageTicketRow key={ticket.id} ticket={ticket} onOpen={onTicket} />
+              <BoardPageTicketRow
+                key={ticket.id}
+                ticket={ticket}
+                onOpen={onTicket}
+              />
             ))}
           </List>
         ) : (

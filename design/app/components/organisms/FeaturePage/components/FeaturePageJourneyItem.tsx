@@ -12,16 +12,26 @@ import { featureWords as words } from '../../../../workspace/feature-view.ts';
 import type { JourneyCard } from '../../../../workspace/feature-view.ts';
 import { FeaturePageJourneyStepItem } from './FeaturePageJourneyStepItem.tsx';
 
-function FeaturePageJourneyItem({ journey }: { readonly journey: JourneyCard }): ReactElement {
+function FeaturePageJourneyItem({
+  journey,
+}: {
+  readonly journey: JourneyCard;
+}): ReactElement {
   return (
-    <Accordion variant="outlined" disableGutters slotProps={{ transition: { unmountOnExit: true } }}>
+    <Accordion
+      variant="outlined"
+      disableGutters
+      slotProps={{ transition: { unmountOnExit: true } }}
+    >
       <AccordionSummary>
         <Stack spacing={0.25}>
           <Typography variant="overline" color="textSecondary">
             {`${journey.id} · ${journey.who} · ${journey.steps.length} steps`}
           </Typography>
           <Typography variant="subtitle1">{journey.goal}</Typography>
-          <Typography variant="caption" color="textSecondary">{journey.covers}</Typography>
+          <Typography variant="caption" color="textSecondary">
+            {journey.covers}
+          </Typography>
         </Stack>
       </AccordionSummary>
       <AccordionDetails>
@@ -30,7 +40,11 @@ function FeaturePageJourneyItem({ journey }: { readonly journey: JourneyCard }):
             <FeaturePageJourneyStepItem key={step.n} step={step} />
           ))}
           <Typography variant="body2">
-            <Typography component="span" variant="overline" color="textSecondary">{`${words.journeys.test} · `}</Typography>
+            <Typography
+              component="span"
+              variant="overline"
+              color="textSecondary"
+            >{`${words.journeys.test} · `}</Typography>
             {journey.test}
           </Typography>
         </Stack>

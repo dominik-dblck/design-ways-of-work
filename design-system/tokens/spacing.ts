@@ -3,7 +3,6 @@
  */
 import type { TokenGroup } from '../designTypes.ts';
 
-// prettier-ignore
 const spacing: readonly TokenGroup[] = [
   {
     title: 'SPACING (4pt grid)',

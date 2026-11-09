@@ -12,7 +12,11 @@ import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
 import type { FieldKindView } from '../../../../workspace/feature-view.ts';
 
-function FeaturePageFieldKindTable({ kinds }: { readonly kinds: readonly FieldKindView[] }): ReactElement {
+function FeaturePageFieldKindTable({
+  kinds,
+}: {
+  readonly kinds: readonly FieldKindView[];
+}): ReactElement {
   return (
     <TableContainer component={Paper} variant="outlined">
       <Table size="small">
@@ -27,7 +31,9 @@ function FeaturePageFieldKindTable({ kinds }: { readonly kinds: readonly FieldKi
               <TableCell>{kind.always}</TableCell>
               <TableCell>
                 {kind.validators.map((line) => (
-                  <Typography key={line} variant="body2">{line}</Typography>
+                  <Typography key={line} variant="body2">
+                    {line}
+                  </Typography>
                 ))}
               </TableCell>
             </TableRow>

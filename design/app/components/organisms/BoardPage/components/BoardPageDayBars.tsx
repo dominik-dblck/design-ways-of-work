@@ -13,7 +13,10 @@ interface BoardPageDayBarsProps {
   readonly days: readonly { readonly day: string; readonly value: number }[];
 }
 
-function BoardPageDayBars({ label, days }: BoardPageDayBarsProps): ReactElement {
+function BoardPageDayBars({
+  label,
+  days,
+}: BoardPageDayBarsProps): ReactElement {
   const peak = Math.max(1, ...days.map((one) => one.value));
   return (
     <Stack spacing={1} sx={{ minWidth: 0 }}>
@@ -31,7 +34,12 @@ function BoardPageDayBars({ label, days }: BoardPageDayBarsProps): ReactElement 
         }}
       >
         {days.map((one) => (
-          <BoardPageDayBar key={one.day} day={one.day} count={one.value} peak={peak} />
+          <BoardPageDayBar
+            key={one.day}
+            day={one.day}
+            count={one.value}
+            peak={peak}
+          />
         ))}
       </Box>
       <Stack direction="row" sx={{ justifyContent: 'space-between' }}>

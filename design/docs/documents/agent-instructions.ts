@@ -3,7 +3,6 @@
  */
 import type { DocumentFile, DocumentSection } from './documentTypes.ts';
 
-// prettier-ignore
 const SECTIONS: readonly DocumentSection[] = [
   {
     heading: '# Instructions for the agent building this',

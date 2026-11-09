@@ -22,6 +22,7 @@
     "lint:exports": "knip --no-progress --no-config-hints",
     "format": "prettier --write . --log-level warn",
     "format:check": "prettier --check . --log-level warn",
+    "format:files": "node shared/lint/writeFormatterFiles.ts --out .",
     "test": "yarn -s check:feature",
     "prepare": "husky",
     "rehearse": "node scripts/rehearse.ts",

@@ -2,7 +2,6 @@
  * - `BOARD_WORDS` · every word the Board page shows that no row of the sheet holds
  */
 
-// prettier-ignore
 const BOARD_WORDS = {
   eyebrow: 'BOARD · WHAT GETS BUILT, IN ITS ORDER',
   title: 'Board',
@@ -26,9 +25,14 @@ const BOARD_WORDS = {
   ticket: { criteria: 'DONE MEANS', read: 'READ FIRST', edges: 'EDGES', waits: 'WAITS ON', caveats: 'CAVEATS', flags: 'RECEIPT FLAGS', story: 'STORY', command: 'THE COMMAND', refusals: 'REFUSALS', siblings: 'SAME STORY', why: 'WHY', emits: 'emits', pings: 'pings', nothing: 'nothing', nobody: 'nobody', on: 'on criterion', pmDecides: 'open · the PM decides', contractOwes: 'open · the contract owes it' },
   why: { today: 'today', after: 'after', unlocks: 'unlocks', not: 'not', replaced: 'replaced', dsScan: 'ds-scan' },
   velocity: {
-    label: 'VELOCITY', note: 'done per working day, off the receipts',
-    tickets: 'TICKETS DONE PER DAY', criteria: 'CRITERIA DONE PER DAY',
-    day: 'Day', show: 'Show the numbers', hide: 'Hide the numbers', none: 'No receipt yet.',
+    label: 'VELOCITY',
+    note: 'done per working day, off the receipts',
+    tickets: 'TICKETS DONE PER DAY',
+    criteria: 'CRITERIA DONE PER DAY',
+    day: 'Day',
+    show: 'Show the numbers',
+    hide: 'Hide the numbers',
+    none: 'No receipt yet.',
   },
   tags: { after: 'after', none: 'no dependency', port: 'port', code: 'ported code', screens: 'screens' },
   back: 'Back to the epic',

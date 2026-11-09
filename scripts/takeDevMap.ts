@@ -5,6 +5,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import * as prettier from 'prettier';
 import { BUILD_REPO, HERE, repoAt } from './repos.ts';
 import { isRetired } from './retired.ts';
 import { quoted } from './tsLiteral.ts';
@@ -94,7 +95,6 @@ const mapModule = (lines: readonly string[]): string =>
     ' */',
     "import type { DocumentFile } from '../docs/documents/documentTypes.ts';",
     '',
-    '// prettier-ignore',
     'const directoryMap: DocumentFile = {',
     "  path: 'dev/map.md',",
     '  sections: [',
@@ -119,12 +119,17 @@ const mapModule = (lines: readonly string[]): string =>
     '',
   ].join('\n');
 
-function main(): void {
+// written as prettier lays it out, so a take that finds no change writes none
+async function main(): Promise<void> {
   const lines = mapLines();
-  fs.writeFileSync(TO, mapModule(lines));
+  const options = await prettier.resolveConfig(TO);
+  fs.writeFileSync(
+    TO,
+    await prettier.format(mapModule(lines), { ...options, filepath: TO }),
+  );
   console.log(
     `dev/map.ts · ${lines.length} folders of ${path.relative(HERE, SOURCE)}/docs/map.md`,
   );
 }
 
-main();
+await main();

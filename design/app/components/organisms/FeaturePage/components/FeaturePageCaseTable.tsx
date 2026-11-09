@@ -14,10 +14,17 @@ import type { ReactElement } from 'react';
 import { featureWords as words } from '../../../../workspace/feature-view.ts';
 import type { CaseGroup } from '../../../../workspace/feature-view.ts';
 
-function FeaturePageCaseTable({ group }: { readonly group: CaseGroup }): ReactElement {
+function FeaturePageCaseTable({
+  group,
+}: {
+  readonly group: CaseGroup;
+}): ReactElement {
   return (
     <TableContainer component={Paper} variant="outlined">
-      <Typography variant="subtitle2" sx={{ px: 2, pt: 1.5 }}>{`${group.endpoint} · ${group.route}`}</Typography>
+      <Typography
+        variant="subtitle2"
+        sx={{ px: 2, pt: 1.5 }}
+      >{`${group.endpoint} · ${group.route}`}</Typography>
       <Table size="small">
         <TableBody>
           {group.cases.map((one) => (
@@ -30,7 +37,14 @@ function FeaturePageCaseTable({ group }: { readonly group: CaseGroup }): ReactEl
               <TableCell>{one.then}</TableCell>
               <TableCell>
                 {one.reach}
-                {one.compound ? <Chip size="small" color="warning" label={words.cases.compound} sx={{ ml: 1 }} /> : null}
+                {one.compound ? (
+                  <Chip
+                    size="small"
+                    color="warning"
+                    label={words.cases.compound}
+                    sx={{ ml: 1 }}
+                  />
+                ) : null}
               </TableCell>
             </TableRow>
           ))}

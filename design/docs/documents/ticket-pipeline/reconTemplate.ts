@@ -3,7 +3,6 @@
  */
 import type { DocumentSection } from '../documentTypes.ts';
 
-// prettier-ignore
 export const RECON_TEMPLATE: readonly DocumentSection[] = [
   {
     heading: '# Templates · `roadmaps/templates/`',

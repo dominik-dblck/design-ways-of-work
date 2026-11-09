@@ -3,7 +3,6 @@
  */
 import type { DocumentSection } from '../documentTypes.ts';
 
-// prettier-ignore
 export const ENDPOINT_CHECKS: readonly DocumentSection[] = [
   {
     heading: '## Checked on every request, in this order',

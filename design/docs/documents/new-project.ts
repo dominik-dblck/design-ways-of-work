@@ -3,7 +3,6 @@
  */
 import type { DocumentFile } from './documentTypes.ts';
 
-// prettier-ignore
 const newProject: DocumentFile = {
   path: 'docs/process/new-project.md',
   sections: [

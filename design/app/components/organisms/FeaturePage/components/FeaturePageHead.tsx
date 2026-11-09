@@ -8,7 +8,10 @@ import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
-import { features, featureWords as words } from '../../../../workspace/feature-view.ts';
+import {
+  features,
+  featureWords as words,
+} from '../../../../workspace/feature-view.ts';
 import type { FeatureView } from '../../../../workspace/feature-view.ts';
 import { FeaturePageSteps } from './FeaturePageSteps.tsx';
 import { jumpsOf } from '../utils/featurePageHeadJumpUtils.ts';
@@ -21,10 +24,20 @@ interface FeaturePageHeadProps {
 function FeaturePageHead({ view, onEpic }: FeaturePageHeadProps): ReactElement {
   return (
     <Stack spacing={1.5}>
-      <Typography variant="overline" color="textSecondary">{words.eyebrow}</Typography>
-      <Typography variant="h3" component="h1">{view.title}</Typography>
-      <Typography variant="body1" color="textSecondary" sx={{ maxWidth: 760 }}>{words.intro}</Typography>
-      <Tabs value={view.epic} onChange={(_, epic: string) => onEpic(epic)} variant="scrollable">
+      <Typography variant="overline" color="textSecondary">
+        {words.eyebrow}
+      </Typography>
+      <Typography variant="h3" component="h1">
+        {view.title}
+      </Typography>
+      <Typography variant="body1" color="textSecondary" sx={{ maxWidth: 760 }}>
+        {words.intro}
+      </Typography>
+      <Tabs
+        value={view.epic}
+        onChange={(_, epic: string) => onEpic(epic)}
+        variant="scrollable"
+      >
         {features().map((tab) => (
           <Tab key={tab.epic} value={tab.epic} label={tab.label} />
         ))}
@@ -32,7 +45,14 @@ function FeaturePageHead({ view, onEpic }: FeaturePageHeadProps): ReactElement {
       <FeaturePageSteps steps={view.steps} />
       <Stack direction="row" spacing={1} useFlexGap sx={{ flexWrap: 'wrap' }}>
         {jumpsOf(view).map(([anchor, label, count]) => (
-          <Chip key={anchor} component="a" href={`#${anchor}`} clickable variant="outlined" label={`${label} · ${count}`} />
+          <Chip
+            key={anchor}
+            component="a"
+            href={`#${anchor}`}
+            clickable
+            variant="outlined"
+            label={`${label} · ${count}`}
+          />
         ))}
       </Stack>
     </Stack>

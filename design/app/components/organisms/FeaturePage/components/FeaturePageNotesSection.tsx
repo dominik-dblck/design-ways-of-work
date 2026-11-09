@@ -11,16 +11,24 @@ import type { FeatureView } from '../../../../workspace/feature-view.ts';
 import { SectionHead } from '../../../atoms/SectionHead/index.ts';
 import { TitledList } from '../../../atoms/TitledList/index.ts';
 
-function FeaturePageNotesSection({ notes }: { readonly notes: FeatureView['notes'] }): ReactElement {
+function FeaturePageNotesSection({
+  notes,
+}: {
+  readonly notes: FeatureView['notes'];
+}): ReactElement {
   return (
     <Stack spacing={1.5} id="notes">
       <SectionHead label={words.notes.label} note={words.notes.note} />
       {notes === null ? (
-        <Typography variant="body2" color="textSecondary">{words.notes.none}</Typography>
+        <Typography variant="body2" color="textSecondary">
+          {words.notes.none}
+        </Typography>
       ) : (
         <>
           {notes.lede.map((line) => (
-            <Typography key={line} variant="body2" color="textSecondary">{line}</Typography>
+            <Typography key={line} variant="body2" color="textSecondary">
+              {line}
+            </Typography>
           ))}
           {notes.sections.map((section) => (
             <Paper key={section.title} variant="outlined" sx={{ p: 2 }}>

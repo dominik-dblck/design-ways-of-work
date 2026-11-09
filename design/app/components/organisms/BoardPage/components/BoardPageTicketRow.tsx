@@ -16,11 +16,18 @@ interface BoardPageTicketRowProps {
   readonly onOpen: (id: string) => void;
 }
 
-function BoardPageTicketRow({ ticket, onOpen }: BoardPageTicketRowProps): ReactElement {
+function BoardPageTicketRow({
+  ticket,
+  onOpen,
+}: BoardPageTicketRowProps): ReactElement {
   return (
     <ListItemButton
       onClick={() => onOpen(ticket.id)}
-      sx={{ gap: 1.5, alignItems: 'baseline', borderRadius: radiusOf('uiRControl') }}
+      sx={{
+        gap: 1.5,
+        alignItems: 'baseline',
+        borderRadius: radiusOf('uiRControl'),
+      }}
     >
       <Typography variant="overline" sx={{ flex: 'none' }}>
         {ticket.id}

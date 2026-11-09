@@ -11,7 +11,9 @@ interface BoardPageTicketEdgesProps {
   readonly ticket: TicketDetail;
 }
 
-function BoardPageTicketEdges({ ticket }: BoardPageTicketEdgesProps): ReactElement | null {
+function BoardPageTicketEdges({
+  ticket,
+}: BoardPageTicketEdgesProps): ReactElement | null {
   if (ticket.edgeSections.length === 0) return null;
   return (
     <>

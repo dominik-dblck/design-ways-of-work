@@ -17,7 +17,10 @@ interface BoardPageEpicTileProps {
   readonly onOpen: (id: string) => void;
 }
 
-function BoardPageEpicTile({ epic, onOpen }: BoardPageEpicTileProps): ReactElement {
+function BoardPageEpicTile({
+  epic,
+  onOpen,
+}: BoardPageEpicTileProps): ReactElement {
   const total = epic.tickets.length;
   const part = total ? (100 * epic.doneCount) / total : 0;
   return (

@@ -3,7 +3,6 @@
  */
 import type { TokenGroup } from '../designTypes.ts';
 
-// prettier-ignore
 const motion: readonly TokenGroup[] = [
   {
     title: 'MOTION · the DS’s ease-in-out, an entrance and the step between its parts (PM, 23 Oct)',

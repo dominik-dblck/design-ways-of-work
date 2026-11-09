@@ -3,7 +3,6 @@
  */
 import type { DocumentSection } from '../documentTypes.ts';
 
-// prettier-ignore
 export const SHARED_SKILL: readonly DocumentSection[] = [
   {
     heading: '# `.claude/skills/ticket/_shared.md`',

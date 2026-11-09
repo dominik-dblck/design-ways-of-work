@@ -26,7 +26,11 @@ function FeaturePage(): ReactElement {
         <FeaturePageHead view={view} onEpic={setEpic} />
         <FeaturePageJourneysSection view={view} />
         <FeaturePageApiSection endpoints={view.endpoints} />
-        <FeaturePageCasesSection key={view.epic} groups={view.caseGroups} kinds={view.caseKinds} />
+        <FeaturePageCasesSection
+          key={view.epic}
+          groups={view.caseGroups}
+          kinds={view.caseKinds}
+        />
         <FeaturePageFieldsSection view={view} />
         <FeaturePageDecisionsSection sections={view.decisions} />
         <FeaturePageNotesSection notes={view.notes} />

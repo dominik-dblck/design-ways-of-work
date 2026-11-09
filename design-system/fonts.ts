@@ -3,10 +3,8 @@
  */
 import type { FontFace } from './designTypes.ts';
 
-const fontsNote =
-  'Basis Grotesque Pro — primary brand family.\nUploaded as .ttf into /fonts.';
+const fontsNote = 'Basis Grotesque Pro — primary brand family.\nUploaded as .ttf into /fonts.';
 
-// prettier-ignore
 const fonts: readonly FontFace[] = [
   { family: 'Basis Grotesque Pro', file: 'fonts/BasisGrotesquePro-Light.ttf', format: 'truetype', weight: 300, style: 'normal', display: 'swap' },
   { family: 'Basis Grotesque Pro', file: 'fonts/BasisGrotesquePro-LightItalic.ttf', format: 'truetype', weight: 300, style: 'italic', display: 'swap' },

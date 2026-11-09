@@ -6,7 +6,11 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Drawer from '@mui/material/Drawer';
 import type { ReactElement } from 'react';
-import { epicOf, ticketDetailOf, words } from '../../../../workspace/board-view.ts';
+import {
+  epicOf,
+  ticketDetailOf,
+  words,
+} from '../../../../workspace/board-view.ts';
 import type { IdeaCard } from '../../../../workspace/board-view.ts';
 import { BoardPageEpicPanel } from './BoardPageEpicPanel.tsx';
 import { BoardPageIdeaPanel } from './BoardPageIdeaPanel.tsx';
@@ -18,7 +22,10 @@ interface BoardPageOpenedPanelProps {
   readonly ideas: readonly IdeaCard[];
 }
 
-function BoardPageOpenedPanel({ opened, ideas }: BoardPageOpenedPanelProps): ReactElement {
+function BoardPageOpenedPanel({
+  opened,
+  ideas,
+}: BoardPageOpenedPanelProps): ReactElement {
   const idea = ideas.find((one) => one.id === opened.ideaId) ?? null;
   const epic = opened.epicId ? epicOf(opened.epicId) : null;
   const ticket = opened.ticketId ? ticketDetailOf(opened.ticketId) : null;
@@ -34,7 +41,10 @@ function BoardPageOpenedPanel({ opened, ideas }: BoardPageOpenedPanelProps): Rea
         </Button>
         {idea ? <BoardPageIdeaPanel idea={idea} /> : null}
         {epic && ticket ? (
-          <BoardPageTicketPanel ticket={ticket} onBack={() => opened.showTicket(null)} />
+          <BoardPageTicketPanel
+            ticket={ticket}
+            onBack={() => opened.showTicket(null)}
+          />
         ) : null}
         {epic && !ticket ? (
           <BoardPageEpicPanel epic={epic} onTicket={opened.showTicket} />

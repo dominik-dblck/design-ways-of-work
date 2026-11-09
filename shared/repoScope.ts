@@ -79,6 +79,8 @@ interface RepoScope {
   readonly generators: readonly Generator[];
   readonly checks: CheckTiers;
   readonly runsCode: Readonly<Record<string, string>>;
+  readonly tables: readonly string[];
+  readonly unformatted: Readonly<Record<string, string>>;
   readonly instructions: Instructions;
   readonly sentences: Sentences;
   // the rule tables as printed (`| Rule | Gate | Exceptions | Why |`): each row names a gate that runs

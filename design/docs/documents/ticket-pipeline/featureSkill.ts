@@ -3,7 +3,6 @@
  */
 import type { DocumentSection } from '../documentTypes.ts';
 
-// prettier-ignore
 export const FEATURE_SKILL: readonly DocumentSection[] = [
   {
     heading: '# `.claude/skills/ticket-feature/SKILL.md`',

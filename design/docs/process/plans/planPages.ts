@@ -12,7 +12,6 @@ export const PLANS: readonly PlanPage[] = [
     status: 'current',
     audience: 'both',
     reads: ['board.js'],
-    purpose:
-      'One card per epic, in the column its tickets stand in, the ideas before them, and the context pack an agent needs to start a ticket.',
+    purpose: 'One card per epic, in the column its tickets stand in, the ideas before them, and the context pack an agent needs to start a ticket.',
   },
 ];

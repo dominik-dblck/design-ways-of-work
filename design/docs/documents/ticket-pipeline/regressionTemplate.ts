@@ -3,7 +3,6 @@
  */
 import type { DocumentSection } from '../documentTypes.ts';
 
-// prettier-ignore
 export const REGRESSION_TEMPLATE: readonly DocumentSection[] = [
   {
     heading: '# `roadmaps/templates/ticket-regression.md`',

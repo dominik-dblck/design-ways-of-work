@@ -4,7 +4,6 @@
 import type { DocumentSection } from '../documentTypes.ts';
 import { NO_STOP_OF_ITS_OWN } from './noStopOfItsOwn.ts';
 
-// prettier-ignore
 export const REGRESSION_SKILL: readonly DocumentSection[] = [
   {
     heading: '# `.claude/skills/ticket-regression/SKILL.md`',

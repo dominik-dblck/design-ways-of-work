@@ -18,7 +18,10 @@ interface BoardPageTicketPanelProps {
   readonly onBack: () => void;
 }
 
-function BoardPageTicketPanel({ ticket, onBack }: BoardPageTicketPanelProps): ReactElement {
+function BoardPageTicketPanel({
+  ticket,
+  onBack,
+}: BoardPageTicketPanelProps): ReactElement {
   const read = (reading: TicketDetail['reading']): readonly string[] =>
     reading.map((one) => `${one.title} — ${one.body}`);
   return (

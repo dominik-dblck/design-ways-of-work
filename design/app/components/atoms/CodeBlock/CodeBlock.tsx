@@ -24,8 +24,11 @@ function CodeBlock({ lines }: CodeBlockProps): ReactElement {
                 <Box
                   key={index}
                   component="span"
-                  sx={{ color: INK[piece.kind], fontWeight: weightOf(piece),
-                    textDecoration: piece.draft ? "underline dotted" : "none" }}
+                  sx={{
+                    color: INK[piece.kind],
+                    fontWeight: weightOf(piece),
+                    textDecoration: piece.draft ? 'underline dotted' : 'none',
+                  }}
                 >
                   {piece.text}
                 </Box>

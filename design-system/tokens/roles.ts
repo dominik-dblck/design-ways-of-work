@@ -3,7 +3,6 @@
  */
 import type { TokenGroup } from '../designTypes.ts';
 
-// prettier-ignore
 const roles: readonly TokenGroup[] = [
   {
     title: 'SEMANTIC TOKENS — LIGHT MODE',

@@ -5,7 +5,6 @@
 import type { RuleRow } from './plansTypes.ts';
 
 // each row: the rule in general words, and one sentence of the cost it avoids (D27)
-// prettier-ignore
 export const DELIVERY_RULES = [
   { id: 'done-when-tests-green', says: 'A ticket is done when its acceptance tests are green. The tests are written first and named on the ticket.', why: 'A done no test proves is an opinion, and a test written after the code proves what the code does, not what was asked.' },
   { id: 'contract-before-first-test', says: 'The contract is written before the first test: one row per acceptance criterion, the criterion quoted verbatim, the test that will prove it and the file it lives in. It is reported, and the build waits until it is read.', why: 'The specification’s contradictions surface there while they are still text; none would fail a test, and all would be frozen into code.' },

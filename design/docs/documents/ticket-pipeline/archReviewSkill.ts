@@ -4,7 +4,6 @@
 import type { DocumentSection } from '../documentTypes.ts';
 import { NO_STOP_OF_ITS_OWN } from './noStopOfItsOwn.ts';
 
-// prettier-ignore
 export const ARCH_REVIEW_SKILL: readonly DocumentSection[] = [
   {
     heading: '# `.claude/skills/ticket-arch-review/SKILL.md`',

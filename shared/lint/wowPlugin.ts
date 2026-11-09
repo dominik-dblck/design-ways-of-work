@@ -1,6 +1,6 @@
 /**
  * - `wowPlugin` · the way of working's own ESLint rules, where no plugin has one
- * - and `no-restricted-syntax` again: `production-syntax`, `markup-syntax`
+ * - and `no-restricted-syntax` again: production's, markup's and a table's syntax
  */
 import { commentsAreInvariants } from './rules/commentsAreInvariants.ts';
 import { dataIsReadonly } from './rules/dataIsReadonly.ts';
@@ -46,6 +46,7 @@ const plugin = {
     'one-home-per-name': oneHomePerName,
     'parts-serve-their-entry': partsServeTheirEntry,
     'markup-syntax': restrictedSyntax,
+    'table-syntax': restrictedSyntax,
     'production-syntax': restrictedSyntax,
     'reads-nothing-at-load': readsNothingAtLoad,
     're-exports-in-barrels': reExportsInBarrels,

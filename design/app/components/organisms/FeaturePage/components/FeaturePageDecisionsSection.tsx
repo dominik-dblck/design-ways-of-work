@@ -11,12 +11,18 @@ import type { Section } from '../../../../workspace/board-view.ts';
 import { SectionHead } from '../../../atoms/SectionHead/index.ts';
 import { TitledList } from '../../../atoms/TitledList/index.ts';
 
-function FeaturePageDecisionsSection({ sections }: { readonly sections: readonly Section[] }): ReactElement {
+function FeaturePageDecisionsSection({
+  sections,
+}: {
+  readonly sections: readonly Section[];
+}): ReactElement {
   return (
     <Stack spacing={1.5} id="decisions">
       <SectionHead label={words.decisions.label} note={words.decisions.note} />
       {sections.length === 0 ? (
-        <Typography variant="body2" color="textSecondary">{words.nothing}</Typography>
+        <Typography variant="body2" color="textSecondary">
+          {words.nothing}
+        </Typography>
       ) : (
         sections.map((section) => (
           <Paper key={section.label} variant="outlined" sx={{ p: 2 }}>

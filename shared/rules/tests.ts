@@ -3,7 +3,6 @@
  */
 import type { SharedRules } from './sharedRuleTypes.ts';
 
-// prettier-ignore
 const shared: SharedRules<'pathIsTier'> = {
   title: 'Tests',
   opening: 'A test sits where its project reads it and proves something that can fail.',
@@ -14,7 +13,7 @@ const shared: SharedRules<'pathIsTier'> = {
     { rule: 'A skipped test names what it waits on.', why: 'A skip without its reason becomes permanent.', design: { gate: '`aTestLivesUnderTests`', exceptions: '—' }, build: { gate: '`theSeventhTier` (the `postgres` tiers) · `review`', exceptions: '—' } },
     { rule: 'Production reads no test switch.', why: 'A branch only a test takes ships untested in the other direction.', design: { gate: 'ESLint `wow/production-syntax` (a test switch)', exceptions: '—' }, build: { gate: '`noTestOnlyBranchInProduction`', exceptions: '—' } },
     { rule: 'A drawn element is asserted present one way, `expect(getBy…(…)).toBeTruthy()`.', why: 'A `getBy` already throws when nothing is drawn; `toBeDefined` and `not.toBeNull` beside it are one fact in three spellings.', design: { gate: 'ESLint `no-restricted-syntax` (a presence)', exceptions: '—' }, build: { gate: '`aPresenceIsReadOneWay`', exceptions: 'a `queryBy…` asserted with a message, which names what is missing instead of throwing' } },
-    { rule: 'Time is moved with fake timers (`vi.useFakeTimers`, `page.clock`), never waited out.', why: 'A wait is slow and still flaky; a moved clock is neither.', design: { gate: 'ESLint `no-restricted-syntax` (a wait)', exceptions: '—' }, build: { gate: '`timeIsMovedNotWaited`', exceptions: 'a race against a real database (`deleteAssetRoute`\'s `aWhile`, the store contract\'s `holding`)' } },
+    { rule: 'Time is moved with fake timers (`vi.useFakeTimers`, `page.clock`), never waited out.', why: 'A wait is slow and still flaky; a moved clock is neither.', design: { gate: 'ESLint `no-restricted-syntax` (a wait)', exceptions: '—' }, build: { gate: '`timeIsMovedNotWaited`', exceptions: "a race against a real database (`deleteAssetRoute`'s `aWhile`, the store contract's `holding`)" } },
   ],
   whys: {
     pathIsTier: 'The place of a file is its tier, so a test cannot quietly run somewhere else.',

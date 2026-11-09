@@ -15,19 +15,22 @@ interface BoardPageIdeaTileProps {
   readonly onOpen: (id: string) => void;
 }
 
-function BoardPageIdeaTile({ idea, onOpen }: BoardPageIdeaTileProps): ReactElement {
+function BoardPageIdeaTile({
+  idea,
+  onOpen,
+}: BoardPageIdeaTileProps): ReactElement {
   return (
     <Card variant="outlined" sx={{ borderRadius: radiusOf('uiRContainer') }}>
       <CardActionArea onClick={() => onOpen(idea.id)} sx={{ p: 2 }}>
-      <Stack spacing={0.75}>
-        <Typography variant="overline" color="textSecondary">
-          {`${idea.id} · ${idea.status}`}
-        </Typography>
-        <Typography variant="subtitle1">{idea.title}</Typography>
-        <Typography variant="body2" color="textSecondary">
-          {idea.line}
-        </Typography>
-      </Stack>
+        <Stack spacing={0.75}>
+          <Typography variant="overline" color="textSecondary">
+            {`${idea.id} · ${idea.status}`}
+          </Typography>
+          <Typography variant="subtitle1">{idea.title}</Typography>
+          <Typography variant="body2" color="textSecondary">
+            {idea.line}
+          </Typography>
+        </Stack>
       </CardActionArea>
     </Card>
   );

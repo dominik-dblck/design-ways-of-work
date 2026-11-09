@@ -3,7 +3,6 @@
  */
 import type { DocumentSection } from '../documentTypes.ts';
 
-// prettier-ignore
 export const FAST_SKILL: readonly DocumentSection[] = [
   {
     heading: '# `.claude/skills/ticket-fast/SKILL.md`',

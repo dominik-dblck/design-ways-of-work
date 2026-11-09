@@ -4,7 +4,6 @@
 import { ruleFileFor } from '../../shared/rules/ruleFileFor.ts';
 import { shared } from '../../shared/rules/functions.ts';
 
-// prettier-ignore
 const rules = ruleFileFor({
   side: 'build',
   shared,

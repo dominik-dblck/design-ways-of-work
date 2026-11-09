@@ -149,6 +149,22 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
   the design side's own entry-folder rule gone into it) and the mover (a folder's row moves its files; a module's
   row moves its parts' folder of its name). Fixed by the mover (`plan/moves/release-record-folder.tsv`).
 
+- Step 3 task 6, prettier tables B with eagle-dev's three inputs: `RepoScope.tables` (files whose rows are objects:
+  rule groups, plans, tokens, words; `!` globs allowed) print at a 10000 width, a row one line, the rows array still
+  broken (measured); a document's or a map's string arrays stay at 80, one string a line (a wide width joined them:
+  measured, taken out). `wow/table-syntax` keeps a table's file data alone. `RepoScope.unformatted` (glob → why)
+  with the ignores, product trees and generated files make `.prettierignore`; one generator,
+  `shared/lint/writeFormatterFiles.ts`, writes it and `.prettierrc.json` (plain JSON, every reader's), fresh-emit
+  tested. 84 `// prettier-ignore` removed by script, takeDevMap's emitted one too (its map now written as prettier
+  lays it out: a re-take writes nothing). `.prettierrc` renamed in place to `.prettierrc.json` (the design side's
+  `legacy/` is a published home: a config moved there reached the artifact, verify caught it). The design copy's
+  37 component files under `app/` had never been formatted (its old ignore held all of `app/` but `.ts`): formatted
+  by prettier, 5 components past 40 lines split into parts named by what they hold (BoardPagePortGrid,
+  BoardPageEpicHead, FeaturePageKindChips, FeaturePageCombinationTitle, FeaturePageFieldOption).
+- Relayed by eagle-dev, 9 Nov, as Dom's: prototypes are built in the build repository on a `spike/*` branch, the
+  design side keeps no copy of the app and turns a prototype report into tickets in a release. Taken as input for
+  the template's planning (O18); to be heard in the PM's own words before it changes a plan.
+
 ## Questions for the PM
 
 - The design side's 71 entries keep kebab names (`sheet-status.ts`): the artifact and the build side read them by

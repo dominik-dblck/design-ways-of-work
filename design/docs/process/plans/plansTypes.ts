@@ -47,8 +47,7 @@ interface RuleRow {
 
 // a slot a product fills (D30): the question it answers, the homes that already hold it, its rules
 interface RuleSlot {
-  readonly slot:
-    'domain' | 'product' | 'experience' | 'architecture' | 'quality';
+  readonly slot: 'domain' | 'product' | 'experience' | 'architecture' | 'quality';
   readonly asks: string;
   readonly homes: readonly string[];
   readonly rows: readonly RuleRow[];
@@ -73,13 +72,4 @@ interface DriftDecision {
   readonly where: string;
 }
 
-export type {
-  RuleRow,
-  RuleSlot,
-  CombinationFile,
-  ContextRead,
-  DriftDecision,
-  FileRow,
-  Guard,
-  PlanPage,
-};
+export type { RuleRow, RuleSlot, CombinationFile, ContextRead, DriftDecision, FileRow, Guard, PlanPage };

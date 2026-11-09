@@ -15,13 +15,17 @@ interface FeaturePageJourneysSectionProps {
   readonly view: FeatureView;
 }
 
-function FeaturePageJourneysSection({ view }: FeaturePageJourneysSectionProps): ReactElement {
+function FeaturePageJourneysSection({
+  view,
+}: FeaturePageJourneysSectionProps): ReactElement {
   return (
     <Stack spacing={1.5} id="journeys">
       <SectionHead {...words.journeys} />
       {view.cover ? <FeaturePageCoverPanel cover={view.cover} /> : null}
       {view.journeys.length === 0 ? (
-        <Typography variant="body2" color="textSecondary">{words.journeys.none}</Typography>
+        <Typography variant="body2" color="textSecondary">
+          {words.journeys.none}
+        </Typography>
       ) : (
         <Stack spacing={1}>
           {view.journeys.map((journey) => (

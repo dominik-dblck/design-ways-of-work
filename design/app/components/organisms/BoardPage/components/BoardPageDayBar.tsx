@@ -13,7 +13,11 @@ interface BoardPageDayBarProps {
   readonly peak: number;
 }
 
-function BoardPageDayBar({ day, count, peak }: BoardPageDayBarProps): ReactElement {
+function BoardPageDayBar({
+  day,
+  count,
+  peak,
+}: BoardPageDayBarProps): ReactElement {
   return (
     <Tooltip title={`${day} · ${count.toFixed(1)}`} placement="top">
       <Box sx={{ flex: 1, height: '100%', display: 'flex' }}>

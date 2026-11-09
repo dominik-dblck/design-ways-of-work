@@ -2,13 +2,13 @@
  * - `BoardPageEpicPanel` · one epic opened
  * - what it is, its acceptance, stories and tickets
  */
-import Chip from '@mui/material/Chip';
 import List from '@mui/material/List';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
 import { words } from '../../../../workspace/board-view.ts';
 import type { EpicCard } from '../../../../workspace/board-view.ts';
+import { BoardPageEpicHead } from './BoardPageEpicHead.tsx';
 import { BoardPageTicketRow } from './BoardPageTicketRow.tsx';
 import { TitledList } from '../../../atoms/TitledList/index.ts';
 
@@ -17,24 +17,16 @@ interface BoardPageEpicPanelProps {
   readonly onTicket: (id: string) => void;
 }
 
-function BoardPageEpicPanel({ epic, onTicket }: BoardPageEpicPanelProps): ReactElement {
+function BoardPageEpicPanel({
+  epic,
+  onTicket,
+}: BoardPageEpicPanelProps): ReactElement {
   const stories = epic.stories.map(
     (story) => `${story.id} · ${story.title} — ${story.criterion}`,
   );
   return (
     <Stack spacing={2.5}>
-      <Stack spacing={0.75}>
-        <Typography variant="overline">{epic.id}</Typography>
-        <Typography variant="h5">{epic.name}</Typography>
-        <Typography variant="body2" color="textSecondary">
-          {epic.sub}
-        </Typography>
-        <Stack direction="row" spacing={0.5} useFlexGap sx={{ flexWrap: 'wrap' }}>
-          {epic.tags.map((tag) => (
-            <Chip key={tag} size="small" variant="outlined" label={tag} />
-          ))}
-        </Stack>
-      </Stack>
+      <BoardPageEpicHead epic={epic} />
       <TitledList label={words.epic.acceptance} lines={[epic.done]} />
       <Stack spacing={0.5}>
         <Typography variant="overline" color="textSecondary" component="h3">
@@ -42,7 +34,11 @@ function BoardPageEpicPanel({ epic, onTicket }: BoardPageEpicPanelProps): ReactE
         </Typography>
         <List dense disablePadding>
           {epic.tickets.map((ticket) => (
-            <BoardPageTicketRow key={ticket.id} ticket={ticket} onOpen={onTicket} />
+            <BoardPageTicketRow
+              key={ticket.id}
+              ticket={ticket}
+              onOpen={onTicket}
+            />
           ))}
         </List>
       </Stack>
