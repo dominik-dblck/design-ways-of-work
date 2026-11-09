@@ -5,6 +5,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { filesOfHomes, HOMES } from '../shared/take/takeHomes.ts';
 
 const HERE = path.resolve(import.meta.dirname, '..');
 const PRODUCT_REPO = path.join(HERE, '..', 'eagle-design');
@@ -16,31 +17,13 @@ const repoAt = (fallback: string, at = 0): string =>
       fallback,
   );
 
-// [folder here, folder in the product]: design/ lands on the product's own paths
-const LINKED_HOMES: readonly (readonly [string, string])[] = [
-  ['design', ''],
-  ['dev', 'dev'],
-  ['shared', 'shared'],
-  ['design-system', 'design-system'],
-];
-
-function filesUnder(folder: string): readonly string[] {
-  if (!fs.existsSync(folder)) return [];
-  return fs
-    .readdirSync(folder, { recursive: true, withFileTypes: true })
-    .filter((entry) => entry.isFile() && entry.name !== '.DS_Store')
-    .map((entry) =>
-      path.relative(folder, path.join(entry.parentPath, entry.name)),
-    );
-}
+// [folder here, folder in the product]: the take's own map, every home
+const LINKED_HOMES: readonly (readonly [string, string])[] =
+  Object.entries(HOMES);
 
 // each file a product links, [its path here, its path in the product]
 const linkedFiles = (): readonly (readonly [string, string])[] =>
-  LINKED_HOMES.flatMap(([home, at]) =>
-    filesUnder(path.join(HERE, home)).map(
-      (file) => [path.join(HERE, home, file), path.join(at, file)] as const,
-    ),
-  );
+  filesOfHomes({ source: HERE, homes: Object.keys(HOMES) });
 
 // what a copy's last rehearsal linked, kept beside the copy's own history
 const linkedListOf = (copy: string): string =>

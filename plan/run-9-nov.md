@@ -494,6 +494,22 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
   takes dev/ and shared/; its condition: the take is idempotent and refuses, never overwrites, a file edited since
   the take (the install stops with the path); its tree.ts reads the record into NOT_OURS at its port.
 
+- Night · snapshot-T-E19-00 read and approved. The sheet caught up: ?version=vN (VersionTag), an older version
+  keeps the document's own facts (seat among them) and no languages, the api convention's 404 names version
+  (product and wow's endpointShape.ts alike), the e2e criterion names J1 to J6.
+- Night · C17 taken out by the PM in eagle-dev's chat ("na razie pomińmy ten bucket", "ogarniemy to w innym
+  epicu", "na razie wszystko robimy u nas w edytorze"): c17 goes, the picker's criterion 18 becomes 17, R7 open
+  again; eagle-dev reverted its c17 work (route behind the session, cache private). Main moved, pack re-cut, the
+  release held for the PM.
+
+- Night · stage 6 task 1 built in wow: shared/take/ (takeHomes: the homes' map, now repos.ts's too, one map;
+  takePlan: write, keep, remove or refuse from the tag's, the record's and the disk's digests; takeRecord:
+  .git/info/wow-taken and the exclude block; takeWow: the run, --check, --from). A test, 8 cases, red on a take that
+  overwrites an edited file (mutation tried). wow's package.json gains version 0.1.0 (yarn 1 needs one); knip
+  takes takeWow as an entry wherever shared/ is held. The copy's cspell: 'msys' (Batch's attribute) to the sheet's
+  domain words, 'epicu' to the PM's own. Next: eagle-design's side (package.json's wow.takes, the dependency at a
+  tag, postinstall), on a branch off main, with the tag cut when task 2 lands.
+
 ## Questions for the PM
 
 - The design side's 71 entries keep kebab names (`sheet-status.ts`): the artifact and the build side read them by
@@ -574,6 +590,8 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
   address in the environment (A) · 4 · wow's files in eagle-design written by a script from a pinned wow tag and
   ignored by its git (B) · 5 · the rename rewrites the 34 legacy pages' script paths (A) · 6 · R6 already on the
   sheet since release 4: closed, no decision · 7 · release 5.3 mine once every check passes (A).
-- **Morning, 10 Nov · c17's bucket:** eagle-dev found no S3 in the repository; the bucket on the sheet is read as
-  legacy/config/cdn.json's, deblock-blog under crm/ (the blog's production bucket, fronted by cdn1.deblock.com),
-  test assets written there through aws login. Confirm, or name another bucket.
+- **Morning, 10 Nov · the bucket's epic:** C17 is out of E19 by your word; R7 (public asset files, U3) is open
+  for "another epic". Proposed: E10, where Publish hands an email's HTML to Batch and Postmark and its images must
+  load in a reader's client. A · E10 · B · an epic of its own.
+- **Morning, 10 Nov · release 5.3.2:** main holds the snapshot's catch-up and C17's withdrawal, pack re-cut, checks
+  green; eagle-dev builds to it already. Release it? A · now · B · with E19's report.

@@ -2430,10 +2430,10 @@ index 9c7b0cf..ce1fef1 100644
 +export type { TrackFinding, TrackReading, TrackRow };
 diff --git a/scope.ts b/scope.ts
 new file mode 100644
-index 0000000..7157537
+index 0000000..d1bd4b2
 --- /dev/null
 +++ b/scope.ts
-@@ -0,0 +1,403 @@
+@@ -0,0 +1,404 @@
 +// scope.ts · what the design project names once: its ESLint config, its shared tests and its tools read it
 +import type { RepoScope } from './shared/repoScope.ts';
 +import {
@@ -2475,6 +2475,7 @@ index 0000000..7157537
 +  'inapp',
 +  'kinded',
 +  'lendable',
++  'msys',
 +  'preheader',
 +  'repliable',
 +  'Stablecoins',
@@ -2830,7 +2831,7 @@ index 0000000..7157537
 +          'sheet/logic/document/threads.ts',
 +        ],
 +        // the PM's own: a coined plural, a French verb quoted, a word as typed
-+        words: ['Skille', 'désabonner', 'otestowane'],
++        words: ['Skille', 'désabonner', 'otestowane', 'epicu'],
 +      },
 +    ],
 +  },
@@ -2925,7 +2926,7 @@ index 046504b..d6f6510 100644
    EndpointRow,
    Journey,
 diff --git a/sheet/contract/api-convention.md b/sheet/contract/api-convention.md
-index 00b3a29..2a5574a 100644
+index 8acfb1d..f2733ff 100644
 --- a/sheet/contract/api-convention.md
 +++ b/sheet/contract/api-convention.md
 @@ -3,6 +3,18 @@

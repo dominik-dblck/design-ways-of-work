@@ -14,6 +14,7 @@
     "shared/sync/**/*.ts",
     "shared/e2e/**/*.ts",
     "shared/skills/**/*.ts",
+    "shared/take/**/*.ts",
     "shared/repoScope.ts",
     "shared/tests/**/*.ts",
     "scope.ts",
