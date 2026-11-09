@@ -78,10 +78,10 @@ index f72c4df..e369723 100644
 +- `yarn spec-check` (`tools/specCheck.ts`) — `app/styles/components.spec.ts` holds together.
 +- Every commit runs ESLint, tsc, the architecture tests and the checks (D23); a push runs every test.
 diff --git a/.prettierignore b/.prettierignore
-index c3bb28b..3797459 100644
+index c3bb28b..872aa26 100644
 --- a/.prettierignore
 +++ b/.prettierignore
-@@ -1,25 +1,35 @@
+@@ -1,25 +1,37 @@
 -dist
 -node_modules
 -.artifact
@@ -111,6 +111,7 @@ index c3bb28b..3797459 100644
 +node_modules/
 +poc/
 +.artifact/
++vendor/
 +# a product's tree, formatted in its product
 +dev/claude/
 +# a file a tool writes keeps the tool's layout
@@ -125,6 +126,7 @@ index c3bb28b..3797459 100644
 +sheet/contract/*.md
 +.claude/skills/*/SKILL.md
  app/styles/tokens.ts
++vendor/wow/
 +# prose keeps the layout its writer gave it
 +**/*.md
 +# kept as it was (D24)
@@ -4461,7 +4463,7 @@ index edac71d..f8bcfa7 100644
  
      hint: '{types} · up to {max}',
 diff --git a/sheet/project.ts b/sheet/project.ts
-index dbcf477..3037935 100644
+index dbcf477..2fd0aaa 100644
 --- a/sheet/project.ts
 +++ b/sheet/project.ts
 @@ -1,7 +1,7 @@
@@ -4507,7 +4509,7 @@ index dbcf477..3037935 100644
 -    'docs/process/ticket-pipeline.md',
 -    'fixtures/data/block-model.json',
 -  ],
-+  // the two it runs (eagle-dev, 9 Nov): their taken files ride along under vendor/wow/
++  // the two the build side runs: their taken files ride along under vendor/wow/
 +  modules: ['guards/measure.ts', 'guards/spec-check.ts'],
 +  files: ['docs/process/ticket-pipeline.md', 'fixtures/data/block-model.json'],
  };

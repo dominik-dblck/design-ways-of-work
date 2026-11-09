@@ -1,7 +1,6 @@
 /**
  * - `HOMES` · each home of the way of working and where it lands in a product
  * - `filesOfHomes` · each file of the homes given: [in wow, in the product]
- * - `filesUnder` · each file under a folder, from it; a missing folder holds none
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -39,4 +38,4 @@ function filesOfHomes({
   );
 }
 
-export { filesOfHomes, filesUnder, HOMES };
+export { filesOfHomes, HOMES };

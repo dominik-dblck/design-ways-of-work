@@ -2,33 +2,24 @@
  * - `readModules` · every module the build side reads, with what they import
  * - `readFiles` · every file of those modules, as the record digests them
  */
-import { execFileSync } from 'node:child_process';
 import { entryOfModule, importsOfEntry } from '../layout.ts';
 import { sourceReader } from '../pack/packSources.ts';
+import { filesOfHomes } from '../../shared/take/takeHomes.ts';
 import { ROOT } from '../root.ts';
 import * as PROJECT from '../../sheet/project.ts';
 
-// the tracked sources: a file outside git never enters a record
-function trackedSources(): readonly string[] {
-  return execFileSync('git', ['ls-files', '*.ts'], {
-    cwd: ROOT,
-    encoding: 'utf8',
-  })
-    .split('\n')
-    .filter(Boolean);
-}
+// the sources under the homes, the product's and the taken alike, read off the disk: no child git, so a generator reads them
+const homeSources = (homes: readonly string[]): readonly string[] =>
+  filesOfHomes({ source: ROOT, homes: homes.map((home) => [home, home]) })
+    .map(([, file]) => file)
+    .filter((file) => file.endsWith('.ts'));
 
 // a module's entry, a module that emits a file included
 const isModule = (file: string): boolean => entryOfModule(file) === file;
 
 function readModules(): readonly string[] {
   const { homes, modules } = PROJECT.buildReads;
-  const start = [
-    ...trackedSources().filter(
-      (file) => homes.some((home) => file.startsWith(home)) && isModule(file),
-    ),
-    ...modules,
-  ];
+  const start = [...homeSources(homes).filter(isModule), ...modules];
   const seen = new Set(start);
   const queue = [...seen];
   for (let at = 0; at < queue.length; at += 1)

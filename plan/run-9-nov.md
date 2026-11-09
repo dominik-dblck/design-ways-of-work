@@ -542,6 +542,13 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
   reads git's folders off the files (gitdir, commondir), no child git: a generator runs under node --permission.
   The fresh-emit test counts files only (a ** glob names folders too). On the copy: 27 of the 526 files the two
   modules read are taken.
+- Night · mistake: v0.1.5 (ee372db) is a local tag on a commit whose push verify refused, never pushed, not
+  moved, never used: the fix is v0.1.6. The copy's yarn test failed: the generator listed the sources by git
+  ls-files, a child process node --permission forbids; its yarn lint failed on a comment naming a date; and wow's
+  knip called an export only design/ used unused. Fixed: the sources under the homes are read off the disk, the
+  taken files with the product's (git ls-files would miss them on the branch, where they are untracked), the read
+  set the same, 67 modules and 526 files. Lesson: before a wow tag, the copy runs yarn lint and yarn test whole,
+  not its commit tier alone.
 
 ## Questions for the PM
 

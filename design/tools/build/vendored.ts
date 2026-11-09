@@ -5,7 +5,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
-import { filesUnder } from '../../shared/take/takeHomes.ts';
+import { filesOfHomes } from '../../shared/take/takeHomes.ts';
 import { takenFiles } from '../../shared/take/takeRecord.ts';
 import { readFiles } from '../releaseRecord/readModules.ts';
 
@@ -41,8 +41,11 @@ function writeVendored({
     fs.writeFileSync(to, bytes);
   }
   const kept = new Set(files);
-  for (const file of filesUnder(path.join(out, VENDOR)))
-    if (!kept.has(file)) fs.rmSync(path.join(out, VENDOR, file));
+  for (const [held, file] of filesOfHomes({
+    source: out,
+    homes: [[VENDOR, '']],
+  }))
+    if (!kept.has(file)) fs.rmSync(held);
   removeEmpty(path.join(out, VENDOR));
   return files.length;
 }
