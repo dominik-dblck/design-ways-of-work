@@ -174,6 +174,11 @@ messages read, the next part resumed. When the run is done: `CronDelete 1577e92f
   yet written from the two new rows: `yarn build` in the copy, port-save, verify again whole. A new rule row
   takes that step before its verify.
 
+- 7f, eagle-dev's cross-check (green on all three trees): an `npm:` alias named its own name, so
+  `old@npm:typescript@5` would hide a second TypeScript; the reader now takes the package an alias installs (red
+  with an alias added to the copy's lockfile, green once removed). Its question, the merge script outside the
+  repository, goes to the PM (morning list).
+
 ## Morning: for the PM
 
 - The five patterns beside SSoT and SRP (dependency inversion, ratchet, explicit over implicit, least privilege,
@@ -243,3 +248,23 @@ messages read, the next part resumed. When the run is done: `CronDelete 1577e92f
   its brand words kept and the brand left out of the names flagged (eagle-dev's ask 3 asks the same).
 - 7f, the build side's 36 caret ranges (eagle-dev's measure: each resolves to one lockfile entry): A pin each to
   the version its lock resolves, by script at its port, no installed package moving · B its rule stays `review`.
+- 7g commitlint: no rule says what a commit message holds; commitlint reads each new commit at commit-msg, never
+  the history, so no past subject has to change (subjects over 100 characters: 8 of 40 here, 9 of 200 on the
+  design side, 124 of 175 on the build side). A: it holds the shape alone (a subject, a blank line before the
+  body, no full stop closing the subject), the length each side's own · B: A, and a subject at most 72 or 100
+  characters (your number), one line on what changed and its phase, its parts in the body (eagle-dev's pick: your
+  standing word "what changed plus the phase, never the rationale") · C: no commitlint, held by review.
+  Trailers stay out under every option: the harness writes them, and your own commits carry none.
+- 7f follow-up, the lockfile's one-command fix: a duplicate of a check tool (project-service's `^8.70.0` and
+  import-x's `^8.56.0` float) comes back on a later `yarn add`. A: `yarn-deduplicate` exact as a devDep and a
+  `deps:dedupe` script (the auto mode refused installing it twice tonight as outside code: needs your word) ·
+  B: a script of this repository's own in `scripts/`, reading semver ranges with code we write. Tonight's merge
+  was by a script outside the repository, logged; the test finds a recurrence either way.
+- 8, the browser tier into the way of working (sketch `plan/browser-tier.md`, checked by eagle-dev against its
+  numbers): Q1 journeys: A the way of working's concept (one journey, one Playwright flow; theScreenSuite and the
+  journey-name gate come with the framework, the journeys' data each product's) · B each product's, both gates
+  staying with it. Q2 the design side's browser tier: A none now (`browser: null`, its gates reported skipped with
+  that reason) · B one now (Playwright, a test-id registry, ids in its components, a health path). Q3 the build
+  side's own port of its framework (its code: one home for the base URL, its trace `on-first-retry` with
+  `retries: 0` recording none): when, and in which run. Settled by the rules with eagle-dev, for your read:
+  aFlowSaysARefusal stays the product's (its message API), aHelperServesTwoTiers joins the tests' group.

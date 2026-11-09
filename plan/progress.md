@@ -166,6 +166,7 @@
 - [ ] the e2e framework comes to the way of working whole (PM, 8 Nov): eagle-dev's e2e skills (`e2e`,
       `e2e-category`, `e2e-discovery`), `e2e/framework/` (13 files) and the test-id registry, the journeys staying
       each product's; its 11 gates become shared tests
+      - sketch `plan/browser-tier.md` (eagle-dev's inventory and check, 9 Nov) · ⏸ the PM's Q1 journeys, Q2 the design side's tier
 - [x] no file named by a number: the documents' parts named by what they hold (15 pipeline parts, 2 api-convention
       parts, agent-instructions in one file); `aFileNamesItsPurpose` refuses a number; size.md says why
 
