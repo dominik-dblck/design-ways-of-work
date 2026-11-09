@@ -42,7 +42,10 @@ describe('knip from a scope', () => {
       expect.arrayContaining(['sheet/**/*.ts', 'tests/**', 'scope.ts']),
     );
     expect(config.ignore).toEqual(['dist/**', 'app/tokens.ts']);
-    expect(config.ignoreDependencies).toEqual(['design-ways-of-work']);
+    expect(config.ignoreDependencies).toEqual([
+      'design-ways-of-work',
+      '@ls-lint/ls-lint',
+    ]);
   });
 
   it("the browser tier's face, its skills' writer and the take are entries of every scope, its own parts not", () => {
