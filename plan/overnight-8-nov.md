@@ -192,8 +192,22 @@ push 992046c; `CronDelete 1577e92f` done.
 
 ## Morning: for the PM
 
+PM 9 Nov: the harness's own points (how agents read, code rules, conventions) are settled by eagle-design and
+eagle-dev and reported; the PM answers what moves the product, a release, the build side's scope or code.
+
+
 - The five patterns beside SSoT and SRP (dependency inversion, ratchet, explicit over implicit, least privilege,
   one-way dependencies) ran as the night's checklist (PM, 8 Nov · A): rows in `shared/rules`, with gates, or not?
+  **PM 9 Nov · A**: rows only where a pattern has none (least privilege, explicit over implicit), in
+  `shared/rules/checks.ts` with their gates; the refine table names all seven by row key; agreed with eagle-dev.
+  Agreed rows (eagle-dev's read, 9 Nov): a generator writes its own files alone, under `--permission` to its
+  `--out` (`aGeneratedFileIsAFreshEmit`) · a check writes only the outputs its scope names, each with its why
+  (a build-info file, a report folder, the test database it resets), none read by another check (`review` until a
+  stamp test: a run, then nothing newer outside the named outputs; wow names none) · nothing happens by default: a
+  generator names its files, a baseline starts by its own act, a scope field has no default, and a script's flag
+  choosing where it writes or what it reaches (`--out`, `--for`) is required (`tsc` · `baseline`; the flag clause
+  `review` until a scan). The build side meets at its port: 5 generators off `--permission`, 2 `--out` and 1
+  `--for` defaults, its tsc's build-info, its test database.
 
 - 6g, the build side's own holes (its count, read-only, HEAD 2f0aab95; its scope, so Dom's): 0 entries in its
   ESLint suppressions; 10 inline `eslint-disable` (app 6, packages 3, `e2e/framework/runCategorisedTests.ts:120`
@@ -202,24 +216,60 @@ push 992046c; `CronDelete 1577e92f` done.
   20, tests 11, scripts 3, db 3, public 2, docs 2, .husky 1); no gate reads a file name's case. Its
   recommendation: scripts/, tests/ and e2e/ first (34 folders), then .claude/ and docs/, roadmaps/ and
   knowledge/ last. Question: which of them its ls-lint holds at its port, and in that order?
+  **PM 9 Nov · A**: all at its port in one move (the kind rule of decision 3 needs no folder list: its few
+  renames by script, the exceptions named once). Asked of eagle-dev.
 - 6f, the long part names (`BoardPagePageHead`, `FeaturePageFeatureSteps`): keep them, or name each by hand
   through rename.ts? And the two aspect ratios: a look to check on the page.
+  **PM 9 Nov · B**: the 5 renamed by rename.ts (BoardPageHead, BoardPageColumns, BoardPageColumn, FeaturePageHead,
+  FeaturePageSteps); `wow/file-names-its-purpose` refuses a part's own name opening with a word of its
+  component's name. Asked of eagle-dev.
+  eagle-dev's read (9 Nov): every word of the component's name, not its last alone (4 of the 5 repeat its
+  first); the same check on the part's hooks, utils and constants (`featurePageFeatureStepsConstants.ts` moves
+  with its part, one name for one thing); its message says "name the part by what it holds", never offers the
+  drop, since a part whose own name is the repeated word alone would collapse into its component. The build
+  side renames 3 at its port, one (`ColumnsPanelColumns`) by a new word Dom picks (eagle-dev: `ColumnsPanelGrid`).
 - 6f, a purpose in a `constants/` file's name too (`approvalBarLabelWords`, not `approvalBarWords`)? Today
   only in `utils/`; yes renames 88 build-side files by script, the build side recommends no.
+  **PM 9 Nov · B**: a purpose in `utils/` alone (measured drift small; a purpose word checks no content). The
+  drift seen, a person's text in a `…Constants` file, is its own point at the list's end: "a text a person
+  reads lives in a `Words` file".
 - 6g, the shared checks row says "a file's name or path by ls-lint", while a name's pattern is ESLint's
   (`file-names-its-purpose`: a scope's `names`, a drawer, now a part's name, one file deciding each). Reword
   the row (A: a folder and a path by ls-lint, a file's name by ESLint), or move the names to ls-lint (B)?
+  **PM 9 Nov · A**: the row says it as the code does: a folder, a path and a file's case by ls-lint; a name's
+  pattern (its purpose, its prefix, its drawer's suffix) by ESLint.
 - 6g, a file's case outside the homes that bundle is held by nothing (tools/, tests/, app/pages, docs/rules,
   dev/: measured, mixed kebab, lower and camel), and assets keep their source's names (`ic_de_color_flag.svg`).
   A rule for them is a new convention: the PM's.
+  **PM 9 Nov · A**: case by the file's kind, one rule everywhere: `.ts`/`.tsx` camel (a component Pascal), `.md`
+  kebab, fixed names from one list (README, SKILL, CLAUDE, index); named exceptions: a record by its id, a source
+  from outside (an asset, an article) by its source's name, a rule file by its key (D29). Asked of eagle-dev.
+  eagle-dev's read (9 Nov): the build side renames 16 (e2e 13 `-flows` files, 3 UPPER md in .claude), the rest
+  named exceptions; a partial a skill includes is `_{kebab}.md`; a record is "a record in the work trail, by its
+  id or key" (revisions `.2.md`, `{screen}-status.md`, the trail's scripts); the kind is what follows the stem's
+  first dot. Still to say: json (like ts or like md), sql (numbered by migration order), png/svg/fonts (an
+  asset at its source's name or kebab), folder-name case (a map column, or nowhere). Correction: the copy holds
+  52 kebab `.ts`, not 18 (sheet 25, app 8, tools 6, docs 6, guards 4, shared 3); sheet's 25 are published
+  names the build side takes by path: a named exception, or renamed inside a release with its take: the PM's.
 - 6g, `// prettier-ignore` (eagle-dev's count: 93 in 90 of the way of working's files, the tokens' and the rule
   tables' aligned rows) is an exemption from a rule it keeps, the format. A: a shape the formatter keeps, no
   comment; B: one override in the prettier config, its one home; C: `keeps-its-rules` names ESLint and
   TypeScript alone, and says so. 0 of istanbul, c8, v8, Stryker or knip tags.
+  **PM 9 Nov · B**: one exception, in the prettier config built from the scope's `tables` globs (a wide
+  `printWidth` there); the 93 comments removed by script. Asked of eagle-dev.
+  eagle-dev's read (9 Nov): 0 directives of its own (78 in fixtures, byte copies of ours, inert); its
+  `.prettierrc` would shadow a root `prettier.config.ts`, so at its port it goes, its values into the shared
+  config; prettier reads ignores only from `.prettierignore`, so that file is written from the scope's
+  `ignores` and `generated` with their whys (by the rules: a repository names its code once, in scope.ts),
+  never a hand list; our token tables' printing moves its `tokens.ts` copy in the same release take.
 - 7b, this side's `onDemand` names `docs/rules/*.md` alone; its CLAUDE.md and skills also send a reader to
   `docs/process/ticket-pipeline.md` (1035 lines, no Contents) and `sheet/contract/api-convention.md` (137),
   both generated and released. A: list them, a 2-entry list started; B: their generator opens them with
   Contents (a release's change); C: leave them out, as today.
+  **Settled 9 Nov by eagle-design and eagle-dev (the PM: "to jest dla was")**: D, B and one step: the documents'
+  generator opens every document past 100 lines with `## Contents`, and every cut section past 100 lines with
+  its own (the recon template, 140); `##` alone, no "# `path`" line, so the build side's cutter is untouched;
+  a release and its 2 re-pins on the PM's go.
 - 7b, the build side's "ticket skills keep their pipeline's 100 lines" is held by nothing since D8: drop it,
   or a test of its own (its scope: Dom's).
 - 7b, the build side's own one-home row "A sentence the domain holds is read from the domain" keeps the why
@@ -257,6 +307,8 @@ push 992046c; `CronDelete 1577e92f` done.
   working's list tonight, and part 2's flagWords would flag the product's name in the way of working's files.
   A: the design system is a product tree, spelled and flagged in its product · B: it stays the way of working's,
   its brand words kept and the brand left out of the names flagged (eagle-dev's ask 3 asks the same).
+  **PM 9 Nov · B**: the design system stays the way of working's; a product's own custom part extends it in the
+  product.
 - 7f, the build side's 36 caret ranges (eagle-dev's measure: each resolves to one lockfile entry): A pin each to
   the version its lock resolves, by script at its port, no installed package moving · B its rule stays `review`.
 - 7g commitlint: no rule says what a commit message holds; commitlint reads each new commit at commit-msg, never
@@ -266,19 +318,91 @@ push 992046c; `CronDelete 1577e92f` done.
   characters (your number), one line on what changed and its phase, its parts in the body (eagle-dev's pick: your
   standing word "what changed plus the phase, never the rationale") · C: no commitlint, held by review.
   Trailers stay out under every option: the harness writes them, and your own commits carry none.
+  **PM 9 Nov · A**: a free subject of at most 72 characters, no full stop, a blank line before the body.
 - 7f follow-up, the lockfile's one-command fix: a duplicate of a check tool (project-service's `^8.70.0` and
   import-x's `^8.56.0` float) comes back on a later `yarn add`. A: `yarn-deduplicate` exact as a devDep and a
   `deps:dedupe` script (the auto mode refused installing it twice tonight as outside code: needs your word) ·
   B: a script of this repository's own in `scripts/`, reading semver ranges with code we write. Tonight's merge
   was by a script outside the repository, logged; the test finds a recurrence either way.
+  **PM 9 Nov · A**: `yarn-deduplicate` exact as a devDep, a `deps:dedupe` script; the PM's word given for it.
 - 8, the browser tier into the way of working (sketch `plan/browser-tier.md`, checked by eagle-dev against its
   numbers): Q1 journeys: A the way of working's concept (one journey, one Playwright flow; theScreenSuite and the
   journey-name gate come with the framework, the journeys' data each product's) · B each product's, both gates
   staying with it. Q2 the design side's browser tier: A none now (`browser: null`, its gates reported skipped with
   that reason) · B one now (Playwright, a test-id registry, ids in its components, a health path). Q3 the build
   side's own port of its framework (its code: one home for the base URL, its trace `on-first-retry` with
+  **PM 9 Nov · Q1 A**: journeys are the way of working's concept (shape, check, JR rows, theScreenSuite, the
+  name gate), their data each product's through the scope; asked of eagle-dev whether it backs it.
+  eagle-dev backs it (9 Nov), on three conditions, agreed: a journey is known by (epic, id), never a bare id
+  (E14 J4 and E18 J4 both land on its type library today); the runner and the check read the journeys' data,
+  never a spec's text, every journey of a built epic one flow, every flow a journey of the data, an unbuilt
+  epic's journeys read "not yet" (E14's 6 run nowhere today, and nothing says so); a step's `where` carries a
+  screen key from the product's screens list, so a journey may cross screens and journeys live under a root
+  of their own. The states split: the check (every state walked, none unknown, a seed where a walk starts) is
+  the way of working's, the codes (02a, SA1) and the WALKED stamp the product's; its DONE specs become that
+  generic "states walked" flow. Measured: 44 journeys in the data, 42 specs on its side.
+  **PM 9 Nov · Q2 A**: the design side has no browser tier (`browser: null`, its reason: its app is for the PM
+  and the team to look at; the build side runs the full suite). The design side stays data-driven, held by
+  its lints, tsc and branded types.
+  **PM 9 Nov · Q3 B**: the build side switches with its whole port; first a ticket ports the way of working into
+  eagle-design, then one ports it into eagle-dev. Until then a change to its framework goes to the way of working
+  first.
+  **PM 9 Nov**, nothing mixed: the build side moves only in its own port ticket, on its release sha till then.
   `retries: 0` recording none): when, and in which run. Settled by the rules with eagle-dev, for your read:
   aFlowSaysARefusal stays the product's (its message API), aHelperServesTwoTiers joins the tests' group.
 - Flags, the event payload (25 of the design side's 108 index-signature reads): A typed per event key now, a
   contract change in the types export the build side reads (a release) · B TypeScript's codefix to brackets now,
   the typing with the next contract change.
+  **PM 9 Nov · A**: the payload's shape as typed data in the design side's contract, one per event key (about
+  48, branded fields beside the `carries` prose); `EventPayload` a union by key. With a design–dev sync: the
+  build side may change a shape during its run, and its report carries every shape it changed, which the
+  design side writes into the contract, so the spec is the source again when the run closes (its mechanism
+  settled with eagle-dev).
+- Added 9 Nov (from decision 6): a text a person reads lives in a `Words` file, never in a `…Constants` one
+  (the build side: up to 30 `…Constants` files export `…LABEL`/`…TITLE`/`…HINT` names, some of them styles):
+  a rule and its gate, or not.
+  eagle-dev's measure: 14 exports of a person's text in 6 of its 153 `…Constants` files; keyed on the export's
+  name a gate flags 60 that are fine and misses 5, so it reads content: a person's string literal in a file
+  of a component root other than `…Words`, by syntax tree, styles skipped. All 14 escape the glossary test and
+  cspell's screen copy today (both read `*Words.ts` alone).
+- Decision 3, the 25 published `sheet/` files in kebab: **PM 9 Nov · B**, renamed by rename.ts in eagle-design's
+  port ticket with every reference, carried by its release; the build side takes the new paths in its own port.
+- **PM 9 Nov, the design–dev sync** (from the payload pick, widened to the components and the design system): the
+  build side works as it needs; each group of data both sides share (the event payloads' shapes, the components'
+  spec, the design system's tokens and components, and the like) has a digest computed the same way on both
+  sides; when a run's work is done, the groups whose digests moved are diffed between the sides, and each
+  difference is synced by a decision (taken into the spec, or put back on the build side), recorded. Its groups
+  and mechanism settled with eagle-dev.
+  The PM's bound: the sync is one step at a feature's end, never a sync after every change; the build side may
+  still ask the design side mid-run, and the two settle points as they go, but a question never blocks: the
+  build side keeps building on its own call while it waits, the answer folds in, the end's sync reconciles.
+  When it syncs is the two sessions' call (the PM: "to już co wam wygodniej"): at a feature's end by default,
+  mid-run when that is easier, never blocking the work.
+- **Settled 9 Nov by eagle-design and eagle-dev (the harness, the PM's split)**:
+  S0 the sync: six groups (event payloads, commands/queries/refusals, the block model, components, tokens, words),
+  each a normal form (sorted JSON: payloads key → field → type, optional, nullable, a brand by its name; tokens
+  hex lowercased six digits, px as numbers; words whitespace normalised, quotes kept) and its sha256; three-way:
+  the base (the last agreed form, `roadmaps/sync/agreed.json` on the design side, written when answer-cc files
+  the decisions, released with the spec), the release at the build side's sha, and the build side's code; the
+  build side's ticket-report end step runs `sync:groups` and reports the moved groups, a table each (key, field,
+  base, release, ours, which side moved); it reports, never refuses.
+  1 the ticket skills' 100-line clause dropped · 2 the build side's domain row gets a why of its own · 3 the
+  header rule leaves tests out (a test's describe title is its home; its 9 headers go at its port) · 4 one shared
+  opening per rule file, each side extending it · 5 the rule file's source 200 lines, its emitted md Contents past
+  100 · 6 its README's 3 paths mended at its port, knowledge/ out of the docs read, the pipeline's one dead path
+  fixed in our source · 7 sonar's `no-nested-conditional`, the row saying what it holds: "no conditional nested in
+  another: a nested choice is an early return or a lookup table" (its count: 26, 14 in production) · 8 sonar's
+  cognitive complexity replaces cyclomatic, at 15, both trees measured before the swap · 9 code-eval: `new
+  Function` in the two runners, their exemption named in the scope with its reason; checkWorld back off vm ·
+  10 json camel · 11 sql: "a migration by its order" · 12 our own assets kebab, a vendor's or design source's at
+  its name · 13 folder case by kind (component Pascal, others kebab or one word; exceptions: a route segment,
+  `__x__`, an id including `S\d{2}E\d{2}`, a source's folder); its 18 camel folders renamed in its e2e port
+  ticket, their keys from a list, not the folder · 14 its 36 carets pinned at its port by script · 15 a person's
+  text lives in a Words file: a wow ESLint rule reading content, built against its 14 true and 60 false, CSS
+  selectors a negative case.
+  S0's gap (eagle-dev): a row filed on day 1 read as new on its next report, its base still at the old release.
+  Closed: answer-cc's block names `sync <sha>`, the commit holding the filing; `sync:groups` reads the agreed and
+  filed forms at the newest sha an answer named, the spec at the release sha (D6: it reads only a sha we name).
+  The base read there says two cases alone (the build side's value taken: the spec behind; a third value: both
+  behind); a filed row carries only a row decided back to the spec, its decision by its `docs/process/decisions.ts`
+  id, never its text. Both JSONs written from TypeScript by the design side's build (D21).
