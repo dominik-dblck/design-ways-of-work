@@ -343,8 +343,10 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
   F2 mended: a component root is any `components/{tier}/X/X.tsx` (its renderer's tree too), and a file named as
   its folder lands on that folder's barrel when the tree holds one (its providers), read after the move. N2
   mended: a `var()` inside a composite value is written out (`--shadow-solid` · 2px 2px 0 #000000). N1 kept: a
-  leaf turned branch reads as the leaf gone and the branch come, each true. F1 asked back (QUESTION): the
-  emitted map holds folders alone, so a folder its files alone follow closes there; its domain line checked.
+  leaf turned branch reads as the leaf gone and the branch come, each true. F1 asked back (QUESTION), withdrawn
+  by eagle-dev: the emitted map holds folders alone, so a folder its files alone follow closes there (the 37
+  redraws intended); `closed()` found a glyph fault in its hand-drawn map instead (`packages/domain/` drawn └
+  beside `store-postgres/`), which its paths-only `theMapIsTheTree` never saw; fixed on its side.
 
 ## Questions for the PM
 
