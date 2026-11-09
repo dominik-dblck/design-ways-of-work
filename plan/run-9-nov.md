@@ -427,6 +427,15 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
   `planted.a.c` unread). At the build side's port this may find ids the old gate let pass: told to eagle-dev.
   Red and green on sources never put on disk (5 cases).
 
+- Stage 5 task 3, aHelperServesTwoTiers (mailing-automation's at 56a47d46: zod over its vitest config, `@/` by
+  hand): the tests' own group in the scope, `helpers: { root, tiers, exemptions } | { none: why }`
+  (`shared/testTiers.ts`), the tiers computed by the product's scope through `tiersOf(vitestConfig)` (type
+  guards, no zod) plus its browser tier's root; an import resolved as the repository's tsconfig resolves it
+  (`ts.resolveModuleName`), so an alias needs no rule of ours. The way of working and the design side say none
+  (one tier each). The row stays the build side's (`dev/rules/tests.ts`, its paths); the shared gate holds it.
+  Its control in the gate's file, always run. Task 3 closes: half 1 (flows by the registry), the roles, the test
+  ids, the registry's leaves, the helpers; F3's gate fix lands with the build side's port.
+
 ## Questions for the PM
 
 - The design side's 71 entries keep kebab names (`sheet-status.ts`): the artifact and the build side read them by

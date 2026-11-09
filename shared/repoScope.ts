@@ -10,6 +10,7 @@ import type { NameCase } from './lint/fileRules.ts';
 import type { Named } from './lint/rules/fileNamesItsPurpose.ts';
 import type { Family } from './lint/rules/oneHomePerName.ts';
 import type { NamedWait } from './lint/rules/timeIsMovedNotWaited.ts';
+import type { Helpers } from './testTiers.ts';
 
 // a script writing what it generates under `--out <folder>`; `writes` globs what it owns, `!` not
 interface Generator {
@@ -72,6 +73,7 @@ interface RepoScope {
   readonly barrels: readonly string[];
   readonly tests: readonly string[];
   readonly namedWaits: readonly NamedWait[];
+  readonly helpers: Helpers;
   readonly owners: Readonly<Record<string, string>>;
   readonly starts: readonly string[];
   readonly names: readonly Named[];

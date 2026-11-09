@@ -31,6 +31,8 @@ const scope: RepoScope = {
   barrels: [],
   tests: [],
   namedWaits: [],
+  // its tests run under one vitest config, a tier alone
+  helpers: { none: 'its tests are one tier: no helper of theirs serves two' },
   owners: {},
   // what runs with no script naming it: each script, each hook, the design system's face, the baseline a product's tests read
   starts: [
