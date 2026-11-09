@@ -521,6 +521,17 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
   fix is v0.1.2, and wow's package.json version now moves with the tag (0.1.2). Lesson: a commit is never piped
   in a chain that tags or pushes after it.
 
+- Night · stage 6 task 2 on eagle-design's branch port/wow (a worktree, ../eagle-design-port, off main 8e031ff):
+  the 371 files of the WOW set leave its git, port.patch applies, package.json takes wow at a tag (wow.takes: design,
+  dev, shared, design-system; postinstall yarn -s wow). Its tree matched the rehearsal copy byte for byte but
+  package.json, yarn.lock and husky's own folder. Two things the copy could not show, its node_modules being wow's:
+  the product lacked @ls-lint/ls-lint (lint:files), and knip reads .git/info/exclude, so it saw none of the taken
+  files and called ten product checks unused. Fixed: ls-lint listed, knip --no-gitignore, knip ignores the wow
+  package and ls-lint (both run by path): wow 0.1.3, 0.1.4. On v0.1.4 the branch's feature tier is green, checks
+  ALL GREEN (diff), build, spec-check and the gate 0, ds-scan 1 as on main. guard-map.json left as main has it:
+  its retake is task 5, the PM's word. The wiring is in port.patch (package.json, yarn.lock), so the branch is
+  main less the WOW set plus the patch, rebuilt the same way whenever main moves.
+
 ## Questions for the PM
 
 - The design side's 71 entries keep kebab names (`sheet-status.ts`): the artifact and the build side read them by
