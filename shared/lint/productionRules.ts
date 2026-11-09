@@ -1,6 +1,6 @@
 /**
  * - `productionRules` · production's own rules: size, the plugin's, its shapes
- * - a words table, a brand: each refused outside its home
+ * - a words table, a brand, a word a person reads: each refused outside its home
  */
 import type { Linter } from 'eslint';
 import {
@@ -93,6 +93,24 @@ const pluginRules = (
   ...componentRules(scope),
 });
 
+// a component's files other than its words: a word a person reads is never there
+const wordsRules = (
+  scope: RepoScope,
+  ignores: readonly string[],
+): Linter.Config[] =>
+  scope.components.length === 0
+    ? []
+    : [
+        {
+          files: homes(
+            scope,
+            scope.components.map((root) => `${root}/**`),
+          ).map((both) => [...both]),
+          ignores: [...ignores, WORDS_FILES, ...scope.words],
+          rules: { 'wow/words-live-in-a-words-file': 'error' },
+        },
+      ];
+
 // a type a scan fills as it runs is named, mutable by design
 const productionRules = (scope: RepoScope): Linter.Config[] => {
   const ignores = [...testsOf(scope), ...scope.generated];
@@ -119,6 +137,7 @@ const productionRules = (scope: RepoScope): Linter.Config[] => {
         files: one.files.map((both) => [...both]),
         ignores,
       })),
+    ...wordsRules(scope, ignores),
     ...Object.entries(scope.mutable).map(([file, mutable]): Linter.Config => ({
       files: [file],
       rules: { 'wow/data-is-readonly': ['error', { mutable }] },

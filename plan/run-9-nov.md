@@ -12,7 +12,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 | stage | what | done | of |
 | 1 | Harness | 5 | 5 |
 | 2 | Rules | 10 | 10 |
-| 3 | Names | 5 | 6 |
+| 3 | Names | 6 | 6 |
 | 4 | Tools | 0 | 8 |
 | 5 | e2e | 0 | 4 |
 | 6 | Port design | 0 | 5 |
@@ -25,6 +25,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 - 10:16 · stage 3 · 3 of 6 · folder case by kind; a module's folder by its name (task 3)
 - 10:21 · stage 3 · 4 of 6 · data, tables, assets by kind (task 4)
 - 10:25 · stage 3 · 5 of 6 · part names B: repeats rule, 5 parts renamed (task 5)
+- 10:49 · stage 3 · 6 of 6 · prettier tables and ignores from the scope (task 6)
 
 - 08:24 · stage 1 · 1 of 5 · the build side's skills to legacy/ (8bfcd8e)
 - 08:51 · stage 1 · 2 of 5 · 7g commitlint (d282df5)
@@ -164,6 +165,20 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 - Relayed by eagle-dev, 9 Nov, as Dom's: prototypes are built in the build repository on a `spike/*` branch, the
   design side keeps no copy of the app and turns a prototype report into tickets in a release. Taken as input for
   the template's planning (O18); to be heard in the PM's own words before it changes a plan.
+
+- Relayed by eagle-dev, 9 Nov, as Dom's: the design side no longer waits for eagle-dev's probe before a push; it
+  sets the way of working's rules for both sides and pushes when its own checks are green; eagle-dev cross-checks
+  every pushed commit in one pass at the sync, and takes the rules into its tree then (it works the product on
+  `feature/vibe-09-11-2026` meanwhile). Taken: it drops a wait and asks nothing new of the run.
+
+- Step 4 task 1, the words rule (point 15): `wow/words-live-in-a-words-file` reads content by syntax tree, in a
+  component root's files but its words files: a string in sentence case (`Preview settings`, `A template is never
+  sent`, a template's text with its holes) is a word; a key is not (compared, a case, a map's key, a set's member,
+  a list looked up, a property's own name, a value its type closes to named strings, a command's name), nor a style
+  (an object `sx`, `style`, `…_SX`, `…Styles` names, or a `csstype` type), nor markup's own (`wow/markup-syntax`).
+  Measured read only, typed by each tree's tsconfig: the build side 19 words in 6 files (its 14 exports and the 5 a
+  name-keyed gate missed: `Create` in an adapter, `Compare with …`), no false one in 945 files; the design side 0.
+  Its build gate `copyLivesInAWordsFile` stays until its port, the row says so.
 
 ## Questions for the PM
 

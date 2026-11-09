@@ -17,6 +17,7 @@ import { partsServeTheirEntry } from './rules/partsServeTheirEntry.ts';
 import { readsNothingAtLoad } from './rules/readsNothingAtLoad.ts';
 import { reExportsInBarrels } from './rules/reExportsInBarrels.ts';
 import { rendererStandsAlone } from './rules/rendererStandsAlone.ts';
+import { wordsLiveInAWordsFile } from './rules/wordsLiveInAWordsFile.ts';
 import type { Rule } from 'eslint';
 import { builtinRules } from 'eslint/use-at-your-own-risk';
 import type { CompatiblePlugin } from 'typescript-eslint';
@@ -51,6 +52,7 @@ const plugin = {
     'reads-nothing-at-load': readsNothingAtLoad,
     're-exports-in-barrels': reExportsInBarrels,
     'renderer-stands-alone': rendererStandsAlone,
+    'words-live-in-a-words-file': wordsLiveInAWordsFile,
   },
 };
 
