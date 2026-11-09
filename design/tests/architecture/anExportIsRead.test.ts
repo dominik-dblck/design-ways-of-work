@@ -126,7 +126,7 @@ function namesImported(source: Source, target: string): readonly string[] {
             name
               .replace(/^\s*type\s+/, '')
               .trim()
-              .split(/\s+as\s+/)[0],
+              .split(/\s+as\s+/)[0] ?? '',
         )
         .filter(Boolean);
     });
@@ -164,7 +164,7 @@ function unreadIn(
     named === null
       ? []
       : readers.flatMap((reader) =>
-          [...reader.text.matchAll(named)].flatMap(([, names]) =>
+          [...reader.text.matchAll(named)].flatMap(([, names = '']) =>
             names.split(', ').map((name) => name.toLowerCase()),
           ),
         ),

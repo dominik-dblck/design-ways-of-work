@@ -32,8 +32,9 @@ function modelTypesOf(texts: readonly string[]): string[] {
     }
   };
   texts.forEach(scan);
-  for (let index = 0; index < queue.length; index += 1) {
-    scan([byName.get(queue[index])?.src ?? []].flat().join(' '));
+  // a name found on the way is read in its turn: the loop sees the queue grow
+  for (const name of queue) {
+    scan([byName.get(name)?.src ?? []].flat().join(' '));
   }
   return queue;
 }

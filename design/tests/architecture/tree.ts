@@ -88,7 +88,7 @@ export function importsOf(source: Source): readonly Import[] {
   const known = importsRead.get(source);
   if (known) return known;
   const found = [...source.text.matchAll(AN_IMPORT)].flatMap((match) => {
-    const specifier = match[3];
+    const specifier = match[3] ?? '';
     if (!specifier.startsWith('.')) return [];
     const to = path.posix.normalize(
       path.posix.join(path.posix.dirname(source.path), specifier),

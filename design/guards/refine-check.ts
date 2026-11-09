@@ -75,8 +75,8 @@ function findingsOf(
 
 function run(id: string): Finding[] {
   const ticket = ticketOf(TICKETS, id);
-  const fold = FOLDED.exec(ticket.acceptance[0] || '');
-  if (fold) return foldedFindings(TICKETS, fold[1]);
+  const fold = FOLDED.exec(ticket.acceptance[0] || '')?.[1];
+  if (fold !== undefined) return foldedFindings(TICKETS, fold);
   return findingsOf(ticket, EDGES.byTicket[id] ?? []);
 }
 

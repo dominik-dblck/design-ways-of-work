@@ -94,7 +94,9 @@ function cutAll(ids: readonly string[], run: Run): readonly string[] {
 
 // the digests hold at the release's commit: what is not committed yet goes with the pack
 function uncommitted(): string {
-  const tops = [...new Set(homes().map((home) => home.source.split('/')[0]))];
+  const tops = [
+    ...new Set(homes().map((home) => home.source.split('/')[0] ?? home.source)),
+  ];
   const root = tops.join(', ');
   let said: string;
   try {

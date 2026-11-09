@@ -13,7 +13,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 | 1 | Harness | 5 | 5 |
 | 2 | Rules | 10 | 10 |
 | 3 | Names | 6 | 6 |
-| 4 | Tools | 2 | 8 |
+| 4 | Tools | 3 | 8 |
 | 5 | e2e | 0 | 4 |
 | 6 | Port design | 0 | 5 |
 
@@ -28,6 +28,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 - 10:49 · stage 3 · 6 of 6 · prettier tables and ignores from the scope (task 6)
 - 11:02 · stage 4 · 1 of 8 · words rule: a person's text in its words file (task 1)
 - 11:19 · stage 4 · 2 of 8 · Contents for long documents and their cut sections (task 2)
+- 11:36 · stage 4 · 3 of 8 · flag B: index signatures, 108 to 27 payload (task 3)
 
 - 08:24 · stage 1 · 1 of 5 · the build side's skills to legacy/ (8bfcd8e)
 - 08:51 · stage 1 · 2 of 5 · 7g commitlint (d282df5)
@@ -201,6 +202,18 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
   replacement). 108 → 27, all the event payload's (`payload.…`, `payloadOf(…)`), kept for its typing in the port
   (PM 9 Nov · A), where the flag goes into the design side's tsconfig at 0. `scripts/languageService.ts` is
   rename's and codefix's one service. 27 published modules print differently, listed.
+
+- The PM, 9 Nov ("a czemu nie prosisz go o weryfikacje?"): the relayed no-probe rule taken back; eagle-dev asked to
+  probe 81399a5, cbe6ab7, 4470cca, aa58888 by commit, its findings in before the next push.
+
+- Step 4 task 4, flag C (`noUncheckedIndexedAccess`), the 41 read one by one and mended by one script of exact
+  replacements: a queue walked by `for…of` (it sees the queue grow), a character by `charAt`, a label by
+  `label(key)` (it throws on a key it lacks), a regex group by `?.[1]` and a check of it, a block's key by
+  `placeAt` (none past either end), a kept key by `need`, `?? ''` only where the value always stands (a first word
+  of a split). 41 → 0: the flag is on in the design side's tsconfig; the shared base takes it when the build side
+  reads 0 too (877 measured 8 Nov). 4 more published modules print differently, listed.
+- Eagle-dev, 9 Nov: the probe of the 4 pushed commits is held until Dom says go in its own chat (there Dom set
+  product first, the way of working at the sync). The design side commits on, and pushes nothing until the probe.
 
 ## Questions for the PM
 

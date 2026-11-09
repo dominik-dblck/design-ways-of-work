@@ -220,15 +220,56 @@ index 24b762b..584f56d 100644
      ownedBy: 'T-E06-00',
      props:
 diff --git a/app/styles/gate-states.ts b/app/styles/gate-states.ts
-index 6d4ebd7..c36b986 100644
+index 6d4ebd7..beacc45 100644
 --- a/app/styles/gate-states.ts
 +++ b/app/styles/gate-states.ts
-@@ -109,7 +109,7 @@ const DELIVERY = {
+@@ -15,6 +15,7 @@ const AMBER = '#f8c223';
+ const RED = '#ea5f5f';
+ const TEAL = '#1cd0ba';
+ const PENDING = 'lucide-icons/clock.svg';
++const NONE: GateLook = { color: GREY, icon: PENDING };
+ 
+ // one legend for every gate dot in the app: a component that paints a gate reads it here
+ const STATES: Readonly<Record<string, GateLook>> = {
+@@ -30,7 +31,7 @@ const STATES: Readonly<Record<string, GateLook>> = {
+   // nobody holds it and it waits: in review · the grey face says nobody is assigned
+   pool: { color: AMBER, icon: PENDING },
+   // nothing to approve yet: no text
+-  none: { color: GREY, icon: PENDING },
++  none: NONE,
+   // something is missing: a required field left empty, a node with no text in a language
+   missing: { color: RED, icon: 'lucide-icons/triangle-alert.svg' },
+   empty: { color: RED, icon: 'lucide-icons/triangle-alert.svg' },
+@@ -42,11 +43,11 @@ function relLum(hex: string): number {
+     short.length === 3
+       ? [...short].map((digit) => digit + digit).join('')
+       : short;
+-  const [red, green, blue] = [0, 2, 4].map((index) => {
++  const channel = (index: number): number => {
+     const value = parseInt(full.substr(index, 2), 16) / 255;
+     return value <= 0.03928 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+-  });
+-  return 0.2126 * red + 0.7152 * green + 0.0722 * blue;
++  };
++  return 0.2126 * channel(0) + 0.7152 * channel(2) + 0.0722 * channel(4);
+ }
+ 
+ function contrast(left: string, right: string): number {
+@@ -60,7 +61,7 @@ function legendWord(key: string, word: 'title' | 'means'): string {
+   const words: Readonly<
+     Record<string, { readonly title: string; readonly means: string }>
+   > = MESSAGES.legendWords;
+-  return words[key][word];
++  return words[key]?.[word] ?? '';
+ }
+ 
+ const LEGEND = ['ok', 'warn', 'missing', 'none'].map((key) => ({
+@@ -109,7 +110,7 @@ const DELIVERY = {
    scheduled: { ink: 'var(--o-500)', wash: 'var(--o-50)' },
    sent: { ink: 'var(--st-ready-fg)', wash: 'var(--st-ready-bg)' },
  };
 -const lookOf = (state: string): GateLook => STATES[state] ?? STATES.none;
-+const lookOf = (state: string): GateLook => STATES[state] ?? STATES['none'];
++const lookOf = (state: string): GateLook => STATES[state] ?? NONE;
  
  const color = (state: string): string => lookOf(state).color;
  
@@ -2151,6 +2192,19 @@ index b0d8011..c530723 100644
    },
    "dependencies": {
      "@emotion/react": "11.14.0",
+diff --git a/roadmaps/backlog.ts b/roadmaps/backlog.ts
+index c4872a5..fc20cbf 100644
+--- a/roadmaps/backlog.ts
++++ b/roadmaps/backlog.ts
+@@ -25,7 +25,7 @@ const ROWS: readonly EpicRow[] = [
+ function epicOf(row: EpicRow): Epic {
+   const id =
+     row.num === '—'
+-      ? `E${row.name.split(' ')[0].toUpperCase()}`
++      ? `E${(row.name.split(' ')[0] ?? '').toUpperCase()}`
+       : `E${row.num}`;
+   const stories = row.stories.map(([title, criterion], index) => ({
+     id: `${id}-S${index + 1}`,
 diff --git a/roadmaps/backlog/backlogTypes.ts b/roadmaps/backlog/backlogTypes.ts
 index 1adcf09..f3210c8 100644
 --- a/roadmaps/backlog/backlogTypes.ts
@@ -2589,6 +2643,19 @@ index 0000000..081d7d8
 +};
 +
 +export { scope };
+diff --git a/sheet/cases/journeys/typeJourneys.ts b/sheet/cases/journeys/typeJourneys.ts
+index 39fa30b..1744735 100644
+--- a/sheet/cases/journeys/typeJourneys.ts
++++ b/sheet/cases/journeys/typeJourneys.ts
+@@ -173,7 +173,7 @@ function journeyOf(read: Read): JourneyRow {
+     id: `J1-${read.type.slug}`,
+     epic: 'E18',
+     each: read.type.slug,
+-    who: [cms.includes('TR') ? 'TR' : cms[0]],
++    who: cms.includes('TR') ? ['TR'] : cms.slice(0, 1),
+     goal: `walks one ${read.where} document from its creation to ${stateWord('ready')}`,
+     steps: stepsOf(read),
+     test: testOf(read),
 diff --git a/sheet/cases/shared-cases/sharedCasesTypes.ts b/sheet/cases/shared-cases/sharedCasesTypes.ts
 index ac3a049..88d3fd9 100644
 --- a/sheet/cases/shared-cases/sharedCasesTypes.ts
@@ -2599,6 +2666,19 @@ index ac3a049..88d3fd9 100644
  
 -export type { Applies, CaseEndpoint, SharedCase };
 +export type { Applies, SharedCase };
+diff --git a/sheet/cases/test-cases/caseText.ts b/sheet/cases/test-cases/caseText.ts
+index b402053..48eeff3 100644
+--- a/sheet/cases/test-cases/caseText.ts
++++ b/sheet/cases/test-cases/caseText.ts
+@@ -39,7 +39,7 @@ function topParts(text: unknown): string[] {
+   let depth = 0;
+   let current = '';
+   for (let index = 0; index < sentence.length; index += 1) {
+-    const char = sentence[index];
++    const char = sentence.charAt(index);
+     if (OPENERS.includes(char)) depth += 1;
+     else if (CLOSERS.includes(char)) depth = Math.max(0, depth - 1);
+     if (depth === 0 && sentence.startsWith(SEPARATOR, index)) {
 diff --git a/sheet/cases/test-cases/testCasesTypes.ts b/sheet/cases/test-cases/testCasesTypes.ts
 index 046504b..ecc740e 100644
 --- a/sheet/cases/test-cases/testCasesTypes.ts
@@ -2681,6 +2761,22 @@ index e47c059..946470a 100644
  }
  
  // a template with nothing to fill it is a bug, never a fallback: it would print braces at somebody
+diff --git a/sheet/logic/agent/agent-access.ts b/sheet/logic/agent/agent-access.ts
+index a674047..ccc7a49 100644
+--- a/sheet/logic/agent/agent-access.ts
++++ b/sheet/logic/agent/agent-access.ts
+@@ -26,8 +26,9 @@ function reachFrom(
+ ): Set<string> {
+   const seen = new Set<string>();
+   const queue = [from];
+-  for (let index = 0; index < queue.length; index += 1) {
+-    for (const to of next.get(queue[index]) ?? []) {
++  // a node reached on the way is walked in its turn: the loop sees the queue grow
++  for (const at of queue) {
++    for (const to of next.get(at) ?? []) {
+       if (!seen.has(to)) {
+         seen.add(to);
+         queue.push(to);
 diff --git a/sheet/logic/agent/agent-access/agentAccessTypes.ts b/sheet/logic/agent/agent-access/agentAccessTypes.ts
 index 4141744..0e1574f 100644
 --- a/sheet/logic/agent/agent-access/agentAccessTypes.ts
@@ -2745,7 +2841,7 @@ index 651dcda..4d03b82 100644
      !frozen && state.version !== 'draft' && !editing && unsigned,
      why,
 diff --git a/sheet/logic/approval/approval-logic/matrixJourney.ts b/sheet/logic/approval/approval-logic/matrixJourney.ts
-index 876fe17..9b75594 100644
+index 876fe17..dbee7c3 100644
 --- a/sheet/logic/approval/approval-logic/matrixJourney.ts
 +++ b/sheet/logic/approval/approval-logic/matrixJourney.ts
 @@ -44,17 +44,17 @@ function roleLive(
@@ -2774,7 +2870,7 @@ index 876fe17..9b75594 100644
    const reviewer = (label: string, word: string): boolean =>
      roleLive(reads, { group: 1, label, word });
 -  const behalf = MESSAGES.labels.behalf;
-+  const behalf = MESSAGES.labels['behalf'];
++  const behalf = MESSAGES.label('behalf');
    // prettier-ignore
    return [
      ['A new document', 'Content manager', 'Edit content', doc('New', 'EDIT CONTENT')],
@@ -3011,29 +3107,34 @@ index ed25ae2..08a2b9b 100644
      moves: ask.control === 'radio',
      reason,
 diff --git a/sheet/logic/approval/gate-rules/manageWindow.ts b/sheet/logic/approval/gate-rules/manageWindow.ts
-index 26d0ef1..59b0b78 100644
+index 26d0ef1..5967a18 100644
 --- a/sheet/logic/approval/gate-rules/manageWindow.ts
 +++ b/sheet/logic/approval/gate-rules/manageWindow.ts
-@@ -45,10 +45,10 @@ function ctaOf(
-   const { labels } = words;
+@@ -42,13 +42,14 @@ function ctaOf(
+   { behalf, allSigned }: { behalf: boolean; allSigned: boolean },
+ ): string {
+   const words = messages();
+-  const { labels } = words;
    if (behalf) {
      if (tally.signs)
 -      return words.fill(labels.windowApprove, { count: tally.signs }) ?? '';
-+      return words.fill(labels['windowApprove'], { count: tally.signs }) ?? '';
++      return (
++        words.fill(words.label('windowApprove'), { count: tally.signs }) ?? ''
++      );
      return allSigned
 -      ? labels.windowNothingToApprove
 -      : labels.windowNothingSelected;
-+      ? labels['windowNothingToApprove']
-+      : labels['windowNothingSelected'];
++      ? words.label('windowNothingToApprove')
++      : words.label('windowNothingSelected');
    }
    const parts = [
      tally.asks ? `Assign ${tally.asks}` : '',
-@@ -57,7 +57,7 @@ function ctaOf(
+@@ -57,7 +58,7 @@ function ctaOf(
    const said = parts.filter(Boolean).join(' · ');
    return said
      ? said.charAt(0).toUpperCase() + said.slice(1)
 -    : labels.windowNobodySelected;
-+    : labels['windowNobodySelected'];
++    : words.label('windowNobodySelected');
  }
  
  // your own gates are signed from the bar: the window neither asks you nor stands in for you
@@ -3087,6 +3188,19 @@ index a04ce6c..e69f448 100644
    SentenceRow,
    RoleRow,
  };
+diff --git a/sheet/logic/approval/scenes/sceneView.ts b/sheet/logic/approval/scenes/sceneView.ts
+index ddf5fca..d08554d 100644
+--- a/sheet/logic/approval/scenes/sceneView.ts
++++ b/sheet/logic/approval/scenes/sceneView.ts
+@@ -50,7 +50,7 @@ function roleWordsOf(
+     heldByOther: role.heldByOther === true,
+     myProposals: role.myProposals || 0,
+     signer,
+-    signerName: signer ? String(signer[0]).split(' ')[0] : '',
++    signerName: signer ? (String(signer[0]).split(' ')[0] ?? '') : '',
+   };
+ }
+ 
 diff --git a/sheet/logic/assembly/content-assembly/typeConfig.ts b/sheet/logic/assembly/content-assembly/typeConfig.ts
 index ea4abcc..66d74ab 100644
 --- a/sheet/logic/assembly/content-assembly/typeConfig.ts
@@ -3318,6 +3432,32 @@ index 23a715f..18976f7 100644
    { sent: 'document.sent', bulk: 'block.in_bulk_edit', waiting: 'block.proposal_pending', noRights: 'actor.cannot_edit_source' },
    (key) => refusalsOf().refusal(key).line,
  );
+diff --git a/sheet/logic/document/threads.ts b/sheet/logic/document/threads.ts
+index 9a40d3b..0a00f68 100644
+--- a/sheet/logic/document/threads.ts
++++ b/sheet/logic/document/threads.ts
+@@ -82,8 +82,8 @@ function blocks(): string[] {
+ 
+ // every version a thread names that its register does not hold: empty when the threads and blocks.ts agree
+ function gaps(): ThreadGap[] {
+-  return Object.keys(THREADS).flatMap((block) =>
+-    ordered(block, THREADS[block])
++  return Object.entries(THREADS).flatMap(([block, thread]) =>
++    ordered(block, thread)
+       .filter((entry) => entry.unregistered)
+       .map((entry) => {
+         const version = 'v' in entry ? entry.v : '';
+@@ -106,8 +106,8 @@ function summary(block: string): ThreadSummary {
+     block,
+     total: list.length,
+     kinds,
+-    first: list.length ? (list[0].at ?? null) : null,
+-    last: list.length ? (list[list.length - 1].at ?? null) : null,
++    first: list[0]?.at ?? null,
++    last: list.at(-1)?.at ?? null,
+   };
+ }
+ 
 diff --git a/sheet/model/catalog/catalogRail.ts b/sheet/model/catalog/catalogRail.ts
 index 4aa3a99..ccfb8c4 100644
 --- a/sheet/model/catalog/catalogRail.ts
@@ -3377,7 +3517,7 @@ index 5c27aaa..dd1a55c 100644
 -  TypeLanguages,
  };
 diff --git a/sheet/model/field-kinds/kindRows.ts b/sheet/model/field-kinds/kindRows.ts
-index 2cef451..b0327ce 100644
+index 2cef451..a96963a 100644
 --- a/sheet/model/field-kinds/kindRows.ts
 +++ b/sheet/model/field-kinds/kindRows.ts
 @@ -38,7 +38,7 @@ const FIELD_KINDS: readonly FieldKind[] = [
@@ -3385,7 +3525,7 @@ index 2cef451..b0327ce 100644
  
      get says(): FieldKind['says'] {
 -      return MESSAGES.validators.image.says;
-+      return MESSAGES.validators['image'].says;
++      return MESSAGES.validators['image']?.says ?? '';
      },
  
      hint: '{types} · up to {max}',
@@ -3454,6 +3594,90 @@ index 212b847..337c4bf 100644
    ],
  };
  
+diff --git a/sheet/samples/content-samples.ts b/sheet/samples/content-samples.ts
+index d75950b..548daf5 100644
+--- a/sheet/samples/content-samples.ts
++++ b/sheet/samples/content-samples.ts
+@@ -97,7 +97,8 @@ function sampleDocument(at: {
+   const day = new Date(2026, 9, 14 - back);
+   const hour = 9 + ((drawn * 7) % 9);
+   const minute = (drawn * 13) % 60;
+-  const state = STATES[(drawn * 3 + at.groupIndex) % STATES.length];
++  const state =
++    STATES[(drawn * 3 + at.groupIndex) % STATES.length] ?? STATES[0];
+   const id = `${at.slug}/${at.groupIndex}/${at.docIndex}`;
+   return {
+     id,
+@@ -128,7 +129,7 @@ function sampleGroups(slug: string, slugIndex: number): SampleGroup[] {
+         id: `${slug}/${groupIndex}`,
+         campaign: typeof head === 'string' ? null : head.campaign,
+         docs,
+-        at: docs[0].at,
++        at: docs[0]?.at ?? 0,
+         get title() {
+           return titleOf(head);
+         },
+diff --git a/sheet/samples/payloads/documentPayloads.ts b/sheet/samples/payloads/documentPayloads.ts
+index 67f5692..ef3fea0 100644
+--- a/sheet/samples/payloads/documentPayloads.ts
++++ b/sheet/samples/payloads/documentPayloads.ts
+@@ -13,15 +13,18 @@ import {
+ } from './stepReading.ts';
+ import * as CONTENT_TYPES from '../../model/content-types.ts';
+ 
++// the key of the block at an index, none past either end
++const placeAt = ({ order, pos }: WalkState, index: number): string | null => {
++  const id = order[index];
++  return id === undefined ? null : (pos[id] ?? null);
++};
++
+ // a copy lands in the source's order; the bullet list goes after the paragraph · flat, placed by a fractional key between its neighbours
+ function blockAdded(step: Step, state: WalkState): Payload {
+   const block = need(blockOf(step), { step, what: 'block id' });
+   const { order, pos } = state;
+   const at = step.n <= 7 ? order.length : order.indexOf('paragraph') + 1;
+-  const key = between(
+-    at ? pos[order[at - 1]] : null,
+-    at < order.length ? pos[order[at]] : null,
+-  );
++  const key = between(at ? placeAt(state, at - 1) : null, placeAt(state, at));
+   order.splice(at, 0, block);
+   pos[block] = key;
+   state.revCount += 1;
+@@ -41,7 +44,8 @@ function blockAdded(step: Step, state: WalkState): Payload {
+ function blockRestored(step: Step, state: WalkState): Payload {
+   const block = need(blockOf(step), { step, what: 'block id' });
+   const { order, pos } = state;
+-  const back = order.findIndex((id) => pos[id] > pos[block]);
++  const kept = need(pos[block], { step, what: 'its kept key' });
++  const back = order.findIndex((id) => (pos[id] ?? '') > kept);
+   order.splice(back < 0 ? order.length : back, 0, block);
+   return {
+     blockId: block,
+@@ -58,7 +62,7 @@ function blockMoved(step: Step, state: WalkState): Payload {
+   const from = pos[block];
+   order.splice(order.indexOf(block), 1);
+   const to = order.indexOf('paragraph');
+-  pos[block] = between(to ? pos[order[to - 1]] : null, pos[order[to]]);
++  pos[block] = between(to ? placeAt(state, to - 1) : null, placeAt(state, to));
+   order.splice(to, 0, block);
+   return {
+     blockId: block,
+diff --git a/sheet/samples/payloads/localePayloads.ts b/sheet/samples/payloads/localePayloads.ts
+index d895e9d..ed37899 100644
+--- a/sheet/samples/payloads/localePayloads.ts
++++ b/sheet/samples/payloads/localePayloads.ts
+@@ -83,7 +83,9 @@ function edited(step: Step, state: WalkState): Payload {
+ function holderChanged(step: Step, state: WalkState): Payload {
+   const locale = need(localeOf(step), { step, what: 'locale' });
+   const given = /assigned to/.test(step.what);
+-  const to = given ? FACTS.assignedFor[locale] : step.whoId;
++  const to = given
++    ? need(FACTS.assignedFor[locale], { step, what: 'its assignee' })
++    : step.whoId;
+   const payload = {
+     locale,
+     from: state.lholder[locale] || null,
 diff --git a/sheet/samples/payloads/payloadsTypes.ts b/sheet/samples/payloads/payloadsTypes.ts
 index f786eda..678b89d 100644
 --- a/sheet/samples/payloads/payloadsTypes.ts
@@ -3464,6 +3688,34 @@ index f786eda..678b89d 100644
  
 -export type { Handler, LoggedEvent, OpenThread, Payload, Step, WalkState };
 +export type { Handler, LoggedEvent, Payload, Step, WalkState };
+diff --git a/sheet/samples/payloads/stepReading.ts b/sheet/samples/payloads/stepReading.ts
+index 0273ccb..f7bfa48 100644
+--- a/sheet/samples/payloads/stepReading.ts
++++ b/sheet/samples/payloads/stepReading.ts
+@@ -17,10 +17,10 @@ function between(low?: string | null, high?: string | null): string {
+   let upper = high || null;
+   let out = '';
+   for (let index = 0; ; index += 1) {
+-    const down = index < from.length ? DIGITS.indexOf(from[index]) : 0;
++    const down = index < from.length ? DIGITS.indexOf(from.charAt(index)) : 0;
+     const up =
+       upper && index < upper.length
+-        ? DIGITS.indexOf(upper[index])
++        ? DIGITS.indexOf(upper.charAt(index))
+         : DIGITS.length;
+     if (up - down > 1) return out + DIGITS[Math.floor((down + up) / 2)];
+     out += DIGITS[down];
+@@ -44,8 +44,8 @@ function steps(): Step[] {
+ function blockOf(step: Step): string | null {
+   const named = FACTS.blockOfStep[step.n];
+   if (named) return named;
+-  const inParentheses = /\(([a-z]+)\)/.exec(step.what);
+-  if (inParentheses) return inParentheses[1];
++  const inParentheses = /\(([a-z]+)\)/.exec(step.what)?.[1];
++  if (inParentheses !== undefined) return inParentheses;
+   const what = step.what.toLowerCase();
+   let best: readonly [number, string] | null = null;
+   for (const [label, id] of LABELS) {
 diff --git a/sheet/screens/content-list/editorTabs.ts b/sheet/screens/content-list/editorTabs.ts
 index cb76bd9..8aa64a2 100644
 --- a/sheet/screens/content-list/editorTabs.ts
@@ -3657,6 +3909,22 @@ index 0b0192e..298df37 100644
        ? ONE[String(line)]
        : undefined;
    const text = one || line;
+diff --git a/sheet/words/messages/situations.ts b/sheet/words/messages/situations.ts
+index c007b34..0280d30 100644
+--- a/sheet/words/messages/situations.ts
++++ b/sheet/words/messages/situations.ts
+@@ -19,7 +19,10 @@ const BY: Readonly<Record<string, Situation>> = Object.fromEntries(
+       group: row[1],
+       state: row[2],
+       move: Object.fromEntries(
+-        READERS.map((reader, index) => [reader, row[3 + index]]),
++        READERS.flatMap((reader, index) => {
++          const cell = row[3 + index];
++          return cell === undefined ? [] : [[reader, cell]];
++        }),
+       ),
+     },
+   ]),
 diff --git a/syncpack.config.ts b/syncpack.config.ts
 new file mode 100644
 index 0000000..983795d
@@ -3668,10 +3936,10 @@ index 0000000..983795d
 +
 +export default SYNCPACK;
 diff --git a/tsconfig.json b/tsconfig.json
-index 453869a..a4ccd76 100644
+index 453869a..e8f43dc 100644
 --- a/tsconfig.json
 +++ b/tsconfig.json
-@@ -1,16 +1,11 @@
+@@ -1,18 +1,14 @@
  {
 +  "extends": "./shared/tsconfig.base.json",
    "compilerOptions": {
@@ -3687,9 +3955,13 @@ index 453869a..a4ccd76 100644
      "resolveJsonModule": true,
 -    "isolatedModules": true,
      "types": ["node", "vitest/globals"],
-     "jsx": "react-jsx"
+-    "jsx": "react-jsx"
++    "jsx": "react-jsx",
++    "noUncheckedIndexedAccess": true
    },
-@@ -25,7 +20,10 @@
+   "include": [
+     "sheet/**/*.ts",
+@@ -25,7 +21,10 @@
      "tests/**/*.ts",
      "tests/**/*.tsx",
      "*.config.ts",

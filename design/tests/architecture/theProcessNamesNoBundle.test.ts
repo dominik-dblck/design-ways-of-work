@@ -10,7 +10,9 @@ const A_BUNDLE = /(?<![\w/.-])([a-z][\w-]*\.js)\b/g;
 const THE_PROCESS = /^(CLAUDE\.md|\.claude\/skills\/|docs\/rules\/)/;
 
 const bundlesIn = (source: Source): readonly string[] => [
-  ...new Set([...source.text.matchAll(A_BUNDLE)].map(([, named]) => named)),
+  ...new Set(
+    [...source.text.matchAll(A_BUNDLE)].flatMap(([, named]) => named ?? []),
+  ),
 ];
 
 describe('the process names a source, never a bundle', () => {
