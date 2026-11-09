@@ -2413,10 +2413,10 @@ index 9c7b0cf..ce1fef1 100644
 +export type { TrackFinding, TrackReading, TrackRow };
 diff --git a/scope.ts b/scope.ts
 new file mode 100644
-index 0000000..d9beb97
+index 0000000..94f55a1
 --- /dev/null
 +++ b/scope.ts
-@@ -0,0 +1,399 @@
+@@ -0,0 +1,400 @@
 +// scope.ts · what the design project names once: its ESLint config, its shared tests and its tools read it
 +import type { RepoScope } from './shared/repoScope.ts';
 +import {
@@ -2456,6 +2456,7 @@ index 0000000..d9beb97
 +  'deeplink',
 +  'deeplinks',
 +  'inapp',
++  'kinded',
 +  'lendable',
 +  'preheader',
 +  'repliable',

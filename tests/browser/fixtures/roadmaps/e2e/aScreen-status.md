@@ -8,6 +8,10 @@
 
 - edge · no edge a person reaches here · nowhere · the screen has none
 
+## Roles no flow takes, and why
+
+- AP · an approver opens no document from this screen · nowhere · the screen holds no approval
+
 ## What no flow covers, and why
 
 - the export · walked by a test of its own · `tests/browser/fixtures/coveringFlow.ts` › exports the screen

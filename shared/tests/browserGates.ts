@@ -1,5 +1,6 @@
 /**
- * - `unwalkedOf`, `statusFaultsOf` · paths no flow walks; a status file's faults
+ * - `unwalkedOf`, `rolesMissingOf` · the paths and the roles no flow takes
+ * - `statusFaultsOf` · a status file's faults
  * - `dragsIn`, `reachesOut` · a file's own drags; the framework's imports past it
  */
 import ts from 'typescript';
@@ -15,9 +16,10 @@ import {
 } from './statusFile.ts';
 
 const WAIVED = 'Paths no flow takes, and why';
+const ROLES_WAIVED = 'Roles no flow takes, and why';
 const ANSWERED = [
   'What no flow covers, and why',
-  'Roles no flow takes, and why',
+  ROLES_WAIVED,
   WAIVED,
 ] as const;
 const RED = 'Red on a planted fault, each flow once';
@@ -41,6 +43,26 @@ const unwalkedOf = (catalog: Catalog, status: string): readonly string[] => {
       .map((kind) => `${kind} · a waiver of a kind FLOW_PATHS lacks`),
   ];
 };
+
+// the roles of the tier no flow takes and the status waives none of, then each waiver naming no role
+function rolesMissingOf({
+  roles,
+  catalog,
+  status,
+}: {
+  readonly roles: readonly string[];
+  readonly catalog: Catalog;
+  readonly status: string;
+}): readonly string[] {
+  const taken = new Set(Object.values(catalog).map(({ userType }) => userType));
+  const waived = bulletsOf(sectionOf(status, ROLES_WAIVED)).map(subjectOf);
+  return [
+    ...roles.filter((role) => !taken.has(role) && !waived.includes(role)),
+    ...waived
+      .filter((role) => !roles.includes(role))
+      .map((role) => `${role} · a waiver of a role the tier lacks`),
+  ];
+}
 
 // a red table of one row a flow, a flow in both lists, done claimed while one was never seen red
 function redFaultsOf(catalog: Catalog, status: string): readonly string[] {
@@ -90,4 +112,4 @@ const reachesOut = (text: string): readonly string[] =>
     .importedFiles.map((file) => file.fileName)
     .filter((specifier) => !ITS_OWN.test(specifier));
 
-export { dragsIn, reachesOut, statusFaultsOf, unwalkedOf };
+export { dragsIn, reachesOut, rolesMissingOf, statusFaultsOf, unwalkedOf };

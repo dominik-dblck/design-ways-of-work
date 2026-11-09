@@ -1,7 +1,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { statusFaultsOf, unwalkedOf } from '../../shared/tests/browserGates.ts';
+import {
+  rolesMissingOf,
+  statusFaultsOf,
+  unwalkedOf,
+} from '../../shared/tests/browserGates.ts';
 import {
   catalogOf,
   screensOf,
@@ -55,6 +59,15 @@ describe("a browser tier's gates, on a tree of one screen", () => {
       'edge',
       'hover · a waiver of a kind FLOW_PATHS lacks',
     ]);
+  });
+
+  it('roles · green when each is taken or waived, red on a role untaken and on a waiver of none', async () => {
+    const catalog = await catalogOf(AT, 'aScreen');
+    const missing = (roles: readonly string[]) =>
+      rolesMissingOf({ roles, catalog, status: STATUS });
+    expect(missing(['CM', 'AP'])).toEqual([]);
+    expect(missing(['CM', 'AP', 'LG'])).toEqual(['LG']);
+    expect(missing(['CM'])).toEqual(['AP · a waiver of a role the tier lacks']);
   });
 
   it.each([

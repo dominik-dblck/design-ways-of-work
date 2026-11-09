@@ -402,6 +402,14 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
   left eslintConfig.ts (at 200 lines) for files of their own. The rule's row in tests.ts. My call, no visible
   effect: the shapes' name `FLOW_SHAPES`, as `E2E_…` is the production rule's test switch.
 
+- Stage 5 task 3, everyRoleHasAFlow (mailing-automation's at 56a47d46, its roles then the directory's plus
+  signed-out): each role the scope's tier names is taken by a flow of each screen (`userType`), or waived under
+  "Roles no flow takes, and why"; a waiver of a role the tier lacks is red. `rolesMissingOf` beside `unwalkedOf`;
+  the list of roles the product's scope computes (its directory and its visitor), never fixed here. Red and green
+  on the one-screen fixture (an AP waiver added to its status).
+  The copy's tier caught P1's `kinded` (release 4's types) unknown to the spelling: the port's scope.ts lists
+  it among the sheet's words.
+
 ## Questions for the PM
 
 - The design side's 71 entries keep kebab names (`sheet-status.ts`): the artifact and the build side read them by
