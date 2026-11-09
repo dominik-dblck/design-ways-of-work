@@ -36,6 +36,11 @@ const scope: RepoScope = {
   names: [],
   nameCases: [
     {
+      folders: ['design-system/fonts'],
+      kinds: { '.ttf': 'regex:^[A-Z][A-Za-z]+-[A-Z][A-Za-z]+$' },
+      why: "a font keeps its foundry's name (`BasisGrotesquePro-Bold.ttf`), as its licence and the stylesheet name it",
+    },
+    {
       folders: ['shared/rules'],
       kinds: { '.ts': 'kebab-case' },
       why: "a rule file is named by its group's key, the key its markdown and its readers name (D29)",

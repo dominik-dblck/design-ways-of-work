@@ -7,11 +7,6 @@ import { runFileLint } from '../shared/lint/runFileLint.ts';
 
 process.exitCode = runFileLint({
   scope,
-  folders: {
-    'design-system': { '.ttf': 'regex:[A-Z][A-Za-z]+-[A-Z][A-Za-z]+' },
-    tests: { '.json': 'camelCase' },
-    plan: { '.tsv': 'kebab-case' },
-    ports: { '.patch': 'kebab-case' },
-  },
+  folders: {},
   ignore: ['.git', 'design', 'dev', 'legacy'],
 });

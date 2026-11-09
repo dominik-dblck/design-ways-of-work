@@ -12,7 +12,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 | stage | what | done | of |
 | 1 | Harness | 5 | 5 |
 | 2 | Rules | 10 | 10 |
-| 3 | Names | 2 | 6 |
+| 3 | Names | 4 | 6 |
 | 4 | Tools | 0 | 8 |
 | 5 | e2e | 0 | 4 |
 | 6 | Port design | 0 | 5 |
@@ -22,6 +22,8 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 - 09:38 · stage 2 · 10 of 10 · step 2 verified ALL SAME, 50 expected; committed 38d402e
 - 10:10 · stage 3 · 1 of 7 · file case by kind, nameCases, git's ignores (facc5a5)
 - 10:10 · stage 3 · 2 of 7 · 18 renames by the one mover (facc5a5)
+- 10:16 · stage 3 · 3 of 6 · folder case by kind; a module's folder by its name (task 3)
+- 10:21 · stage 3 · 4 of 6 · data, tables, assets by kind (task 4)
 
 - 08:24 · stage 1 · 1 of 5 · the build side's skills to legacy/ (8bfcd8e)
 - 08:51 · stage 1 · 2 of 5 · 7g commitlint (d282df5)
@@ -126,6 +128,12 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
   component shape; an entry's, held by the design side's folder rules: its name, and the case below it); a
   framework's names (Next's `[id]`) are a product's case (eagle-dev), the shared tests pass one. The copy: its
   records' folders by id (`E04`, `T-E18-00`).
+
+- Step 3 task 4, data, tables and assets by kind (eagle-dev's "still to say"): JSON camelCase (data code reads),
+  `package`, `tsconfig`, `eslint-suppressions` as their tools name them; a table (`.tsv`), a patch, an asset (`.svg`,
+  `.png`) and a font kebab-case. Named: a font keeps its foundry's name, an icon its source's (`ic_de_color_flag.svg`,
+  snake_case), a check's snapshot its check's key, a module written as JSON its module's name until the port's
+  release. SQL is the build side's, at its port (by migration order).
 
 ## Questions for the PM
 

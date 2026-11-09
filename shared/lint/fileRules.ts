@@ -47,6 +47,8 @@ const BANNED_EXTENSIONS: readonly Banned[] = [
 // a name a tool or an agent opens by its convention, a file's (`README`) or a folder's (`.claude`, `__tests__`)
 const FIXED = ['README', 'SKILL', 'CLAUDE', 'AGENTS'];
 const CODE = 'camelCase';
+const DATA = 'camelCase | regex:^(?:package|tsconfig|eslint-suppressions)$';
+const KEBAB = 'kebab-case';
 const VIEW = 'camelCase | PascalCase';
 const PROSE = `kebab-case | regex:^_[a-z0-9]+(?:-[a-z0-9]+)*$ | regex:^(?:${FIXED.join('|')})$`;
 const FOLDER = 'kebab-case | regex:^\\.[a-z]+$ | regex:^__[a-z]+__$';
@@ -65,6 +67,15 @@ const CASE_BY_KIND: FolderRules = {
   '.tsx': VIEW,
   '.test.tsx': VIEW,
   '.md': PROSE,
+  '.json': DATA,
+  '.base.json': DATA,
+  '.spec.json': DATA,
+  '.tsv': KEBAB,
+  '.patch': KEBAB,
+  '.svg': KEBAB,
+  '.png': KEBAB,
+  '.ttf': KEBAB,
+  '.woff2': KEBAB,
 };
 
 const BANS: FolderRules = Object.fromEntries(

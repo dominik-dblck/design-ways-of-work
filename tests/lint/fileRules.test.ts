@@ -147,4 +147,22 @@ describe("a repository's folder rules", () => {
       ),
     ).toEqual(['Bad_Dir', 'E04']);
   });
+  it("data is camelCase, a tool's own JSON by its name; a table, a patch and an asset kebab-case", () => {
+    expect(
+      lintedTree(
+        [
+          'data/goodData.json',
+          'data/bad-data.json',
+          'package.json',
+          'tsconfig.base.json',
+          'eslint-suppressions.json',
+          'plan/a-map.tsv',
+          'plan/A_Map.tsv',
+          'img/logo-mark.svg',
+          'img/Logo_Mark.svg',
+        ],
+        { folders: {}, ignore: [], cases: [] },
+      ),
+    ).toEqual(['data/bad-data.json', 'img/Logo_Mark.svg', 'plan/A_Map.tsv']);
+  });
 });

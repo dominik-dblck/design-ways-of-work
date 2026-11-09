@@ -1900,10 +1900,10 @@ index 9c7b0cf..ce1fef1 100644
 +export type { TrackFinding, TrackReading, TrackRow };
 diff --git a/scope.ts b/scope.ts
 new file mode 100644
-index 0000000..9a50669
+index 0000000..e1e81b0
 --- /dev/null
 +++ b/scope.ts
-@@ -0,0 +1,350 @@
+@@ -0,0 +1,361 @@
 +// scope.ts · what the design project names once: its ESLint config, its shared tests and its tools read it
 +import type { RepoScope } from './shared/repoScope.ts';
 +import {
@@ -2170,11 +2170,22 @@ index 0000000..9a50669
 +  // a name beyond its kind's case, each by its why (shared/lint/fileRules.ts)
 +  nameCases: [
 +    {
++      folders: ['guards/__snapshots__'],
++      kinds: { '.json': 'kebab-case' },
++      why: "a check's snapshot is named by its check's key, as the checks write it (`content-type-snapshot.json`)",
++    },
++    {
++      folders: ['design-system/fonts'],
++      kinds: { '.ttf': 'regex:^[A-Z][A-Za-z]+-[A-Z][A-Za-z]+$' },
++      why: "a font keeps its foundry's name (`BasisGrotesquePro-Bold.ttf`), as its licence and the stylesheet name it",
++    },
++    {
 +      folders: [
 +        ...new Set(ENTRIES.map((file) => file.slice(0, file.lastIndexOf('/')))),
++        'fixtures/data',
 +      ],
-+      kinds: { '.ts': 'kebab-case' },
-+      why: "an entry is a module the artifact and the build side read by its path: renamed inside a release alone, on the PM's word",
++      kinds: { '.ts': 'kebab-case', '.json': 'kebab-case' },
++      why: "an entry, and a module written as JSON, is read by the artifact and the build side by its path: renamed in the port's release (PM 9 Nov, A)",
 +    },
 +    {
 +      folders: [
@@ -2197,9 +2208,9 @@ index 0000000..9a50669
 +      why: 'a record is named by its id: an epic (`E04Tickets.ts`, `feature-E04.md`), a ticket (`T-E18-00.md`)',
 +    },
 +    {
-+      folders: ['public'],
-+      kinds: { '.md': 'regex:^SOURCE$' },
-+      why: "an asset folder's note of where each file came from, `SOURCE.md`, released by that path",
++      folders: ['public/assets/icons', 'fixtures/screens'],
++      kinds: { '.svg': 'snake_case', '.md': 'regex:^SOURCE$' },
++      why: "an icon keeps its source's name (`ic_de_color_flag.svg`, the Deblock design system's), its folder's `SOURCE.md` saying where each came from; a screen's record holds the copies it was drawn with",
 +    },
 +  ],
 +  spelling: {

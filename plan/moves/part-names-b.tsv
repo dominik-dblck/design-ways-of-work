@@ -1,0 +1,9 @@
+# step 3 · a part named by what it holds (PM 9 Nov, 6f B): file:line:column, new name
+app/components/organisms/BoardPage/components/BoardPagePageHead.tsx:10:10	BoardPageHead
+app/components/organisms/BoardPage/components/BoardPageBoardColumns.tsx:19:10	BoardPageColumns
+app/components/organisms/BoardPage/components/BoardPageBoardColumns.tsx:12:11	BoardPageColumnsProps
+app/components/organisms/BoardPage/components/BoardPageBoardColumn.tsx:16:10	BoardPageColumn
+app/components/organisms/BoardPage/components/BoardPageBoardColumn.tsx:9:11	BoardPageColumnProps
+app/components/organisms/FeaturePage/components/FeaturePageFeatureHead.tsx:21:10	FeaturePageHead
+app/components/organisms/FeaturePage/components/FeaturePageFeatureHead.tsx:16:11	FeaturePageHeadProps
+app/components/organisms/FeaturePage/components/FeaturePageFeatureSteps.tsx:13:10	FeaturePageSteps

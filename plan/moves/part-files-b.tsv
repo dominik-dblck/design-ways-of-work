@@ -1,0 +1,8 @@
+# step 3 · the parts' files after their names (PM 9 Nov, 6f B): from, to
+design/app/components/organisms/BoardPage/components/BoardPagePageHead.tsx	design/app/components/organisms/BoardPage/components/BoardPageHead.tsx
+design/app/components/organisms/BoardPage/components/BoardPageBoardColumns.tsx	design/app/components/organisms/BoardPage/components/BoardPageColumns.tsx
+design/app/components/organisms/BoardPage/components/BoardPageBoardColumn.tsx	design/app/components/organisms/BoardPage/components/BoardPageColumn.tsx
+design/app/components/organisms/FeaturePage/components/FeaturePageFeatureHead.tsx	design/app/components/organisms/FeaturePage/components/FeaturePageHead.tsx
+design/app/components/organisms/FeaturePage/components/FeaturePageFeatureSteps.tsx	design/app/components/organisms/FeaturePage/components/FeaturePageSteps.tsx
+design/app/components/organisms/FeaturePage/constants/featurePageFeatureStepsConstants.ts	design/app/components/organisms/FeaturePage/constants/featurePageStepsConstants.ts
+design/app/components/organisms/FeaturePage/utils/featurePageFeatureHeadJumpUtils.ts	design/app/components/organisms/FeaturePage/utils/featurePageHeadJumpUtils.ts
