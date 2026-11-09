@@ -1,8 +1,7 @@
 # Styling
 
-The look comes from the design system's tokens through one MUI theme; a component names a role,
-never a value. MUI's own rules: `.claude/patterns/mui7.md`, until the pipeline's sync brings them
-here.
+The look comes from the design system's tokens; code names a role, never a value. The tokens reach a component through one MUI theme. MUI's own rules: `.claude/patterns/mui7.md`, until
+the pipeline's sync brings them here.
 
 A renderer under `app/renderers/` draws another app, Deblock's, as Figma draws it: its own ink,
 type and pixels, never the theme's. The two rules on spaces and heights leave it out.

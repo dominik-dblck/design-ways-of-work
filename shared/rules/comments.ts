@@ -6,7 +6,7 @@ import type { SharedRules } from './sharedRuleTypes.ts';
 // prettier-ignore
 const shared: SharedRules<never> = {
   title: 'Comments',
-  opening: '',
+  opening: 'The default is none: the code and the file\'s header say what.',
   rows: [
     { rule: 'The file\'s header (`responsibility.md`) is the one comment that says what a file does.', why: 'Said once at the top, it is not said again above every function.', design: { gate: 'ESLint `wow/file-states-its-job`', exceptions: '—' }, build: { gate: '`aFileStatesItsJob`', exceptions: '—' } },
     { rule: 'A JSDoc past the header is one line, directly above an export, stating a contract its name and type do not show: what `null` means, a unit, what the server checks again. It never restates the name or the type.', why: 'It shows on hover wherever the export is used; a restated name is noise the hover repeats.', design: { gate: 'ESLint `wow/comments-are-invariants`', exceptions: 'tests · generated files' }, build: { gate: '`commentsAreInvariants` (one line, above an export) · `review` (a contract, not a restatement)', exceptions: 'tests · generated files · the files on its list, which only shrink' } },

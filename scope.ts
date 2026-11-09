@@ -47,6 +47,8 @@ const scope: RepoScope = {
     commit: ['lint:copies', 'test:rules', 'test:shared', 'lint:kept'],
     featureEnd: ['verify'],
   },
+  // no file of its own runs code it built
+  runsCode: {},
   // no skill, and no instruction an agent loads: its sessions read the products'
   instructions: { skills: [], whole: [], onDemand: [], everyTurn: [] },
   // its own code's strings and both sides' trees: a rule's text, a check's finding, each written once

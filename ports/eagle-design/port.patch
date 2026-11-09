@@ -716,10 +716,29 @@ index 4ed4a71..89724d3 100644
 -- `app/pages/`, `app/theme/`, `app/workspace/`, `roadmaps/templates.ts`, `public/lucide-icons/`.
 +- `app/pages/`, `app/theme/`, `app/workspace/`, `roadmaps/templates.ts`.
 diff --git a/docs/process/ticket-pipeline.md b/docs/process/ticket-pipeline.md
-index db1e4a6..6cc7b8b 100644
+index db1e4a6..cea5055 100644
 --- a/docs/process/ticket-pipeline.md
 +++ b/docs/process/ticket-pipeline.md
-@@ -521,7 +521,8 @@ commit, merge, push — each reversible on its own.
+@@ -18,8 +18,7 @@
+ 
+ Replaces `.claude/skills/ticket/SKILL.md` (632 lines, four actions). Three skills are modes — they
+ run a ticket and decide where it stops; four are blocks a mode calls. Every skill holds purpose, input,
+-steps, output, stop, and is measured in words (D8 · PM, 25 Oct): an entry at most 2000, a loaded file past
+-100 lines opens with ## Contents, a description says what and when in at most 1024 characters. Rules that hold at every stage
++steps, output, stop, and is measured in words (D8 · PM, 25 Oct): an entry at most 2000, a description says what and when in at most 1024 characters. Rules that hold at every stage
+ live once, in `_shared.md`, and every skill's first task is to read it; the rules for writing and reviewing
+ code live once, in `_code.md`. History lives in the ticket's
+ own documents; a skill carries a lesson only as a one-line rule tagged `why: {ticket-id}`. This source never
+@@ -183,7 +182,7 @@ database or a test run
+ 
+ - **A story quote is verbatim from backlog.ts.** If the story does not describe the ticket, quote it
+   and add "placed here by the PM" — never paraphrase in a blockquote. `why: T-E01-10`
+-- **A file is named from the repo root** — `packages/domain/commands/createDocument.ts`, never `createDocument.ts`; scans and
++- **A file is named from the repo root** — `app/api/documents/createDocumentRoute.ts`, never `createDocumentRoute.ts`; scans and
+   indexes match on the path (`tests/architecture/theDocsNameRealPaths.test.ts`). `why: T-E01-10`
+ 
+ ## Decisions are written, design-side files compared
+@@ -521,7 +520,8 @@ commit, merge, push — each reversible on its own.
     - `## Commit` — branch, staged count, message
     Update `epic-notes.md`
  9. `git add -A`, show what is staged, present the commit message
@@ -729,7 +748,7 @@ index db1e4a6..6cc7b8b 100644
     a test the report names and the commit leaves out is a criterion with no test in the tree.
     `why: T-E01-06` — c3's endpoint test was named and left unstaged. Repo-wide changes — skills, docs, patterns
     — ride with this ticket
-@@ -846,7 +847,6 @@ reported (rule:feature-run-never-stops) — or, under `reconStop`, a question.**
+@@ -846,7 +846,6 @@ reported (rule:feature-run-never-stops) — or, under `reconStop`, a question.**
  | 23  | every wireframe and screen that shows what the ticket builds is read against the spec; where the wireframe says more, the wireframe moves | {which wireframes, or "none shows this ticket"} |
  | 24  | the ticket carries why · today / after / unlocks / not / oneLine, product words, no paths | {yes / which line is missing} |
  | 25  | a PM change mid-build is a requirement: built, written up at stage end as REPLACE / WITH, in the sheet before the report closes | {taken as it happens, not here} |
@@ -739,37 +758,40 @@ index db1e4a6..6cc7b8b 100644
  **And one the checklist does not ask.** Count the reading table against the criteria. A row the
 diff --git a/docs/rules/checks.md b/docs/rules/checks.md
 new file mode 100644
-index 0000000..bf53ae6
+index 0000000..813631b
 --- /dev/null
 +++ b/docs/rules/checks.md
-@@ -0,0 +1,21 @@
+@@ -0,0 +1,24 @@
 +# Checks
 +
 +Which tool holds a rule, and what keeps the tools one system.
 +
-+| Rule                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | Gate                                                  | Exceptions                                                                                               | Why                                                                                                                                       |
-+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-+| A rule is held by the tool that reads its kind of fact: what one TypeScript file shows by ESLint (a rule or a shape of the way of working's plugin, reported as the code is written); what needs many files, running code or a file that is not TypeScript by a test, shared when the rule is; a file's name or path by ls-lint, an unused export or file by knip, a guarantee of the language by tsc, a generated file by its generator's check mode.                                                                                                            | `review`                                              | —                                                                                                        | A rule reported where the code is written is fixed in the same place; each kind of fact has the one tool that reads it.                   |
-+| A rule across files is an ESLint rule only when it indexes the program once (`wow/one-home-per-name`); any other is a shared test.                                                                                                                                                                                                                                                                                                                                                                                                                                | `review`                                              | —                                                                                                        | ESLint reads one file at a time; an index built once a run is the one read across files it holds cheaply.                                 |
-+| A rule is one row naming its one gate, in `shared/rules/` when it is generic and in the product's rules when not; a rule moving between gates names until when.                                                                                                                                                                                                                                                                                                                                                                                                   | `everyRuleHasAGate`                                   | —                                                                                                        | Two gates for one rule drift apart, and a rule with none holds nothing.                                                                   |
-+| A repository names its code once, in its `scope.ts` (a `RepoScope`): its ESLint config, its shared tests and its tools read that one file, and a field holds one list for one job.                                                                                                                                                                                                                                                                                                                                                                                | `tsc` · `review`                                      | —                                                                                                        | A list written twice drifts, and lint and a test then disagree on what a file is.                                                         |
-+| A tool takes its exceptions one way, the same in every repository: ESLint a directive with its reason (`comments.md`) or `eslint-suppressions.json`, a test the way of working's one baseline (`tests.md`); never a list a check invents for itself.                                                                                                                                                                                                                                                                                                              | ESLint `require-description` · `review`               | —                                                                                                        | What is let through is found in one place, in every repository.                                                                           |
-+| A lint rule or shape of the way of working is proven by its RuleTester cases, those that must fire and those that must pass, one for each case of the test it replaced.                                                                                                                                                                                                                                                                                                                                                                                           | `review`                                              | the way of working's own `test:rules` runs them, in its repository                                       | A gate never seen red is no gate.                                                                                                         |
-+| A finding says in one sentence what a person writes instead, names its rule file (`(docs/rules/names.md)`), and points at what it fired on.                                                                                                                                                                                                                                                                                                                                                                                                                       | `review`                                              | the way of working's own `test:rules` reads each message                                                 | The fix is made where the finding is read.                                                                                                |
-+| Code meets SonarJS's recommended rules too, less those `shared/lint/sonarRules.ts` turns off, each with its reason: `OFF` everywhere, `OFF_IN_TESTS` in tests.                                                                                                                                                                                                                                                                                                                                                                                                    | ESLint `sonarjs/*`                                    | —                                                                                                        | It reads what a reviewer misses: a regular expression that backtracks, a value written and never read, a collection that is always empty. |
-+| Every word the scope's `spelling` names is spelled (cspell, `en` and `en-GB`, another language only in the files it names); a word no dictionary holds has one home: the way of working's (`shared/lint/wowWords.ts`) or the product's, built from its data where data names it, never an inline directive.                                                                                                                                                                                                                                                       | `lint:words` · `theSpellingNamesFiles`                | a test, until data names its people and its translations' words; a generated file, spelled at its source | A misspelt word on a screen is found as it is typed, not when someone reads it there.                                                     |
-+| Every dependency is pinned to one exact version, the same in every `package.json` syncpack reads: the root's and those its `workspaces` name (`shared/lint/syncpackConfig.ts`).                                                                                                                                                                                                                                                                                                                                                                                   | `lint:deps`                                           | —                                                                                                        | A range lets two installs of one commit differ: a check green on one machine is red on the next.                                          |
-+| A tool the checks load through another (ESLint, TypeScript, Vitest, typescript-eslint and every package of its scope) resolves to one version in the lockfile.                                                                                                                                                                                                                                                                                                                                                                                                    | `aCheckToolResolvesOnce`                              | —                                                                                                        | Two copies, and a check proves its rule on one while the code runs on the other.                                                          |
-+| A commit message is a subject of at most 72 characters, every character counted, closed by no full stop, and one blank line before any body (`shared/lint/commitlintConfig.ts`); its words are each side's own.                                                                                                                                                                                                                                                                                                                                                   | `lint:commit` (commit-msg)                            | a merge commit, as git writes it                                                                         | A subject is read whole in one line of a log, and what follows one blank line is what git and every tool read as the body.                |
-+| Every check runs at a tier of one map (`shared/checkTiers.ts`), the same on both sides: as a file is written, on that file (the edit hook: Prettier, ESLint with SonarJS, cspell); at a commit (`check:chunk`), on the files it stages, and at a merge commit on what it brings, beside the whole program's type check and the tree's checks of seconds, in under 3 minutes; at a feature's end and a push (`check:feature`), on the whole tree. A check too slow for its tier moves to the next, never out: a script no tier and no git hook runs gates nothing. | `everyRuleHasAGate` · `check:chunk` · `check:feature` | —                                                                                                        | A commit waits only on what it touches, so the work stays fast, and the whole tree still passes before a feature is done.                 |
-+| A `spike/*` branch runs neither tier: a prototype is tried there freely; merged, a merge commit runs the commit tier on what it brings and the push the feature end on the whole tree, so a fast-forward's work is checked at the push.                                                                                                                                                                                                                                                                                                                           | `check:chunk` (it skips a spike) · `review`           | —                                                                                                        | Work is fast where it is tried; the gates hold what reaches the integration branch.                                                       |
-+| The way of working names no product: a blank repository spawned from its template, with an empty `scope.ts` and an empty rules file, passes every shared check from its first day.                                                                                                                                                                                                                                                                                                                                                                                | `theWayOfWorkingNamesNoProduct` · `review`            | the spawn check comes with the template (phase 7)                                                        | What a product needs is its own; the way of working is the same for every product.                                                        |
++| Rule                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | Gate                                                  | Exceptions                                                                                                | Why                                                                                                                                       |
++| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
++| A rule is held by the tool that reads its kind of fact: what one TypeScript file shows by ESLint (a rule or a shape of the way of working's plugin, reported as the code is written); what needs many files, running code or a file that is not TypeScript by a test, shared when the rule is; a folder, a path and a file's case by ls-lint, a name's pattern (its purpose, its prefix, its drawer's suffix) by ESLint, an unused export or file by knip, a guarantee of the language by tsc, a generated file by its generator's check mode.                    | `review`                                              | —                                                                                                         | A rule reported where the code is written is fixed in the same place; each kind of fact has the one tool that reads it.                   |
++| A rule across files is an ESLint rule only when it indexes the program once (`wow/one-home-per-name`); any other is a shared test.                                                                                                                                                                                                                                                                                                                                                                                                                                | `review`                                              | —                                                                                                         | ESLint reads one file at a time; an index built once a run is the one read across files it holds cheaply.                                 |
++| A rule is one row naming its one gate, in `shared/rules/` when it is generic and in the product's rules when not; a rule moving between gates names until when.                                                                                                                                                                                                                                                                                                                                                                                                   | `everyRuleHasAGate`                                   | —                                                                                                         | Two gates for one rule drift apart, and a rule with none holds nothing.                                                                   |
++| A repository names its code once, in its `scope.ts` (a `RepoScope`): its ESLint config, its shared tests and its tools read that one file, and a field holds one list for one job.                                                                                                                                                                                                                                                                                                                                                                                | `tsc` · `review`                                      | —                                                                                                         | A list written twice drifts, and lint and a test then disagree on what a file is.                                                         |
++| A tool takes its exceptions one way, the same in every repository: ESLint a directive with its reason (`comments.md`) or `eslint-suppressions.json`, a test the way of working's one baseline (`tests.md`); never a list a check invents for itself.                                                                                                                                                                                                                                                                                                              | ESLint `require-description` · `review`               | —                                                                                                         | What is let through is found in one place, in every repository.                                                                           |
++| A lint rule or shape of the way of working is proven by its RuleTester cases, those that must fire and those that must pass, one for each case of the test it replaced.                                                                                                                                                                                                                                                                                                                                                                                           | `review`                                              | the way of working's own `test:rules` runs them, in its repository                                        | A gate never seen red is no gate.                                                                                                         |
++| A finding says in one sentence what a person writes instead, names its rule file (`(docs/rules/names.md)`), and points at what it fired on.                                                                                                                                                                                                                                                                                                                                                                                                                       | `review`                                              | the way of working's own `test:rules` reads each message                                                  | The fix is made where the finding is read.                                                                                                |
++| Code meets SonarJS's recommended rules too, less those `shared/lint/sonarRules.ts` turns off, each with its reason: `OFF` everywhere, `OFF_IN_TESTS` in tests.                                                                                                                                                                                                                                                                                                                                                                                                    | ESLint `sonarjs/*`                                    | `code-eval` in a file that runs code the project built, each named in the scope's `runsCode` with its why | It reads what a reviewer misses: a regular expression that backtracks, a value written and never read, a collection that is always empty. |
++| Every word the scope's `spelling` names is spelled (cspell, `en` and `en-GB`, another language only in the files it names); a word no dictionary holds has one home: the way of working's (`shared/lint/wowWords.ts`) or the product's, built from its data where data names it, never an inline directive.                                                                                                                                                                                                                                                       | `lint:words` · `theSpellingNamesFiles`                | a test, until data names its people and its translations' words; a generated file, spelled at its source  | A misspelt word on a screen is found as it is typed, not when someone reads it there.                                                     |
++| Every dependency is pinned to one exact version, the same in every `package.json` syncpack reads: the root's and those its `workspaces` name (`shared/lint/syncpackConfig.ts`).                                                                                                                                                                                                                                                                                                                                                                                   | `lint:deps`                                           | —                                                                                                         | A range lets two installs of one commit differ: a check green on one machine is red on the next.                                          |
++| A tool the checks load through another (ESLint, TypeScript, Vitest, typescript-eslint and every package of its scope) resolves to one version in the lockfile.                                                                                                                                                                                                                                                                                                                                                                                                    | `aCheckToolResolvesOnce`                              | —                                                                                                         | Two copies, and a check proves its rule on one while the code runs on the other.                                                          |
++| A commit message is a subject of at most 72 characters, every character counted, closed by no full stop, and one blank line before any body (`shared/lint/commitlintConfig.ts`); its words are each side's own.                                                                                                                                                                                                                                                                                                                                                   | `lint:commit` (commit-msg)                            | a merge commit, as git writes it                                                                          | A subject is read whole in one line of a log, and what follows one blank line is what git and every tool read as the body.                |
++| A generator writes its own files alone: run under `--permission`, it may write only to the `--out` its scope names.                                                                                                                                                                                                                                                                                                                                                                                                                                               | `aGeneratedFileIsAFreshEmit`                          | —                                                                                                         | A generator that reaches past its files can overwrite another's, and nothing would say which wrote what.                                  |
++| A check writes only the outputs its scope names, each with its why (a build-info file, a report folder, the test database it resets), and no other check reads them.                                                                                                                                                                                                                                                                                                                                                                                              | `review`                                              | until a stamp test: a run, then nothing newer outside the named outputs                                   | A check that writes elsewhere leaves state the next run reads: a result that depends on the order the checks ran in.                      |
++| Nothing happens by default: a generator names its files, a baseline starts by its own act, a scope field has no default, and a script's flag that chooses where it writes or what it reaches (`--out`, `--for`) is required.                                                                                                                                                                                                                                                                                                                                      | `tsc` · `baseline`                                    | a flag's clause is `review` until a scan reads the scripts' flags                                         | A default does its work unseen: the reader of a call cannot tell where it wrote or what it touched.                                       |
++| Every check runs at a tier of one map (`shared/checkTiers.ts`), the same on both sides: as a file is written, on that file (the edit hook: Prettier, ESLint with SonarJS, cspell); at a commit (`check:chunk`), on the files it stages, and at a merge commit on what it brings, beside the whole program's type check and the tree's checks of seconds, in under 3 minutes; at a feature's end and a push (`check:feature`), on the whole tree. A check too slow for its tier moves to the next, never out: a script no tier and no git hook runs gates nothing. | `everyRuleHasAGate` · `check:chunk` · `check:feature` | —                                                                                                         | A commit waits only on what it touches, so the work stays fast, and the whole tree still passes before a feature is done.                 |
++| A `spike/*` branch runs neither tier: a prototype is tried there freely; merged, a merge commit runs the commit tier on what it brings and the push the feature end on the whole tree, so a fast-forward's work is checked at the push.                                                                                                                                                                                                                                                                                                                           | `check:chunk` (it skips a spike) · `review`           | —                                                                                                         | Work is fast where it is tried; the gates hold what reaches the integration branch.                                                       |
++| The way of working names no product: a blank repository spawned from its template, with an empty `scope.ts` and an empty rules file, passes every shared check from its first day.                                                                                                                                                                                                                                                                                                                                                                                | `theWayOfWorkingNamesNoProduct` · `review`            | the spawn check comes with the template (phase 7)                                                         | What a product needs is its own; the way of working is the same for every product.                                                        |
 diff --git a/eslint-suppressions.json b/eslint-suppressions.json
 new file mode 100644
-index 0000000..a264935
+index 0000000..bc08815
 --- /dev/null
 +++ b/eslint-suppressions.json
-@@ -0,0 +1,636 @@
+@@ -0,0 +1,633 @@
 +{
 +  "app/styles/gate-states.ts": {
 +    "@typescript-eslint/no-deprecated": {
@@ -795,9 +817,6 @@ index 0000000..a264935
 +    },
 +    "no-restricted-syntax": {
 +      "count": 2
-+    },
-+    "sonarjs/code-eval": {
-+      "count": 1
 +    }
 +  },
 +  "guards/checks/measureCheck.ts": {
@@ -1865,10 +1884,10 @@ index 9c7b0cf..ce1fef1 100644
 +export type { TrackFinding, TrackReading, TrackRow };
 diff --git a/scope.ts b/scope.ts
 new file mode 100644
-index 0000000..b7b56da
+index 0000000..c838a5e
 --- /dev/null
 +++ b/scope.ts
-@@ -0,0 +1,308 @@
+@@ -0,0 +1,315 @@
 +// scope.ts · what the design project names once: its ESLint config, its shared tests and its tools read it
 +import type { RepoScope } from './shared/repoScope.ts';
 +import {
@@ -2071,6 +2090,13 @@ index 0000000..b7b56da
 +    commit: ['test:architecture', 'checks:gate'],
 +    featureEnd: ['test'],
 +  },
++  // a check that runs code the project built, as its page runs it: SonarJS's `code-eval` is off there alone
++  runsCode: {
++    'guards/checks/checkWorld.ts':
++      'a bundle the build wrote, run in the world a page gives it',
++    'guards/checks/listPart.ts':
++      "the list page's own script, run to read what it draws",
++  },
 +  // a skill is read whole when it loads, the rule files when a skill or CLAUDE.md sends a reader there
 +  // the process's prose: a sentence of it written once (its UI's have their home, sheet/words/messages.ts)
 +  sentences: { code: [], prose: ['CLAUDE.md', SKILLS, 'docs/rules/*.md'] },
@@ -2246,6 +2272,63 @@ index 533de98..b578abe 100644
    PlayScene,
    PlayView,
    Requirement,
+diff --git a/sheet/logic/approval/approval-logic/chipCtas.ts b/sheet/logic/approval/approval-logic/chipCtas.ts
+index dc4cd92..b55c8a2 100644
+--- a/sheet/logic/approval/approval-logic/chipCtas.ts
++++ b/sheet/logic/approval/approval-logic/chipCtas.ts
+@@ -20,9 +20,10 @@ const idsOf = (
+     { readonly id?: string } | readonly unknown[] | null | undefined
+   )[],
+ ): readonly unknown[] =>
+-  list.map((one) =>
+-    Array.isArray(one) ? one[2] : one && 'id' in one ? one.id : one,
+-  );
++  list.map((one) => {
++    if (Array.isArray(one)) return one[2];
++    return one && 'id' in one ? one.id : one;
++  });
+ 
+ const ASSIGNED = new Set(['waiting', 'ok', 'proxy', 'stale', 'heldSigned']);
+ 
+diff --git a/sheet/logic/approval/approval-logic/docMatrix.ts b/sheet/logic/approval/approval-logic/docMatrix.ts
+index 651dcda..4d03b82 100644
+--- a/sheet/logic/approval/approval-logic/docMatrix.ts
++++ b/sheet/logic/approval/approval-logic/docMatrix.ts
+@@ -68,12 +68,10 @@ function peopleCell(
+   state: DocState,
+   { editing, frozen, unsigned }: Flags,
+ ): Cell {
+-  const why =
+-    state.version === 'draft'
+-      ? lineOf('version.none_yet')
+-      : editing
+-        ? lineOf('document.bulk_edit_open')
+-        : lineOf('approval.all_signed');
++  const greyed = editing
++    ? lineOf('document.bulk_edit_open')
++    : lineOf('approval.all_signed');
++  const why = state.version === 'draft' ? lineOf('version.none_yet') : greyed;
+   return cellOf(
+     !frozen && state.version !== 'draft' && !editing && unsigned,
+     why,
+diff --git a/sheet/logic/approval/approval-logic/seatChip.ts b/sheet/logic/approval/approval-logic/seatChip.ts
+index 328e4b8..9d5ed2e 100644
+--- a/sheet/logic/approval/approval-logic/seatChip.ts
++++ b/sheet/logic/approval/approval-logic/seatChip.ts
+@@ -132,11 +132,12 @@ function seatChip(at: ChipAt): RoleChip | null {
+   const menu = menuOf(at, { seatHolder, holds });
+   const live = menu.some((row) => row.tone === 'live' || row.tone === 'on');
+   const holderName = String(DIRECTORY.person(seatHolder)?.name);
++  const heldDot = live ? 'waiting' : 'ok';
+   return {
+     key: 'CM',
+     label: 'Content manager',
+     kind: 'cm',
+-    dot: holds ? (live ? 'waiting' : 'ok') : 'pool',
++    dot: holds ? heldDot : 'pool',
+     assigned: holds,
+     ctas: seatCtas(menu, { trashed: view.trashed, holds, seatHolder }),
+     title: holds ? 'In the seat' : `${holderName} is in the seat`,
 diff --git a/sheet/logic/approval/approval-logic/todoBuilt.ts b/sheet/logic/approval/approval-logic/todoBuilt.ts
 index 089bf8f..99f7a29 100644
 --- a/sheet/logic/approval/approval-logic/todoBuilt.ts
@@ -2256,6 +2339,24 @@ index 089bf8f..99f7a29 100644
  
 -export type { Built };
  export { todoRowsOf, orderedRows };
+diff --git a/sheet/logic/approval/flow-check/flowEffects.ts b/sheet/logic/approval/flow-check/flowEffects.ts
+index 5527324..b4a2935 100644
+--- a/sheet/logic/approval/flow-check/flowEffects.ts
++++ b/sheet/logic/approval/flow-check/flowEffects.ts
+@@ -104,10 +104,10 @@ function signedOf(gate: FlowGate): string {
+ // one key per state: two states with one key are one state
+ function encode(state: FlowState): string {
+   const gates = Object.entries(state.gates).map(([key, gate]) => {
++    const text = gate.inDoc === false ? 'na' : gate.text;
++    const missing = gate.missing ? 'm' : '';
+     const own =
+-      key === state.lang
+-        ? `:${gate.inDoc === false ? 'na' : gate.text}${gate.missing ? 'm' : ''}${gate.lapse || ''}`
+-        : '';
++      key === state.lang ? `:${text}${missing}${gate.lapse || ''}` : '';
+     return `${gate.holder || '-'}:${signedOf(gate)}${own}`;
+   });
+   return `${state.cut}${state.draft}|${state.seat}|${state.author}|${gates.join(',')}`;
 diff --git a/sheet/logic/approval/gate-rules/gateDialog.ts b/sheet/logic/approval/gate-rules/gateDialog.ts
 index f913540..4ba6ddf 100644
 --- a/sheet/logic/approval/gate-rules/gateDialog.ts
@@ -2266,6 +2367,38 @@ index f913540..4ba6ddf 100644
  export { dialogModes, dialogRow };
 -export type { DialogRow, Probe };
 +export type { Probe };
+diff --git a/sheet/logic/approval/gate-rules/gateNote.ts b/sheet/logic/approval/gate-rules/gateNote.ts
+index 98c770b..b02fb9b 100644
+--- a/sheet/logic/approval/gate-rules/gateNote.ts
++++ b/sheet/logic/approval/gate-rules/gateNote.ts
+@@ -27,6 +27,12 @@ const first = (name: string | undefined): string =>
+ const noteVersionOf = (version: string): number =>
+   Number(version.replace(/^v/, ''));
+ 
++// a signature a gate's state voids, by its why
++const LAPSED_BY: Readonly<Partial<Record<string, { readonly why: string }>>> = {
++  stale: { why: 'voided' },
++  withdrawn: { why: 'withdrawn' },
++};
++
+ // the gate as GateFacts: what a line does not name read as lineSignature says
+ function factOf({ gate, hold }: NoteRow): BarFact {
+   const signature =
+@@ -34,13 +40,7 @@ function factOf({ gate, hold }: NoteRow): BarFact {
+     (gate.cls === 'signed'
+       ? lineSignature({ onBehalf: gate.state === 'proxy', holder: hold[2] })
+       : null);
+-  const lapsed =
+-    gate.lapsed ||
+-    (gate.state === 'stale'
+-      ? { why: 'voided' }
+-      : gate.state === 'withdrawn'
+-        ? { why: 'withdrawn' }
+-        : null);
++  const lapsed = gate.lapsed || (LAPSED_BY[gate.state] ?? null);
+   return {
+     key: gate.key,
+     holder: gate.holder || (gate.cls === 'waiting' ? hold[2] : null),
 diff --git a/sheet/logic/approval/gate-rules/gateNotices.ts b/sheet/logic/approval/gate-rules/gateNotices.ts
 index 9121b59..4bf5c3b 100644
 --- a/sheet/logic/approval/gate-rules/gateNotices.ts
@@ -2305,6 +2438,69 @@ index 206228f..e59642c 100644
    todoSituationOf,
  };
 -export type { LanguageFacts };
+diff --git a/sheet/logic/approval/gate-rules/manageRows.ts b/sheet/logic/approval/gate-rules/manageRows.ts
+index ed25ae2..08a2b9b 100644
+--- a/sheet/logic/approval/gate-rules/manageRows.ts
++++ b/sheet/logic/approval/gate-rules/manageRows.ts
+@@ -121,7 +121,8 @@ function behalfCells(
+   const reason = /\{signer\}/.test(said)
+     ? said.replace('{signer}', signerOf(base, probe))
+     : said;
+-  const verb = takeBack ? 'Take back' : live ? 'Sign' : '';
++  const signVerb = live ? 'Sign' : '';
++  const verb = takeBack ? 'Take back' : signVerb;
+   return {
+     live,
+     verb,
+@@ -151,8 +152,9 @@ function manageCells(
+   const reason = live
+     ? ''
+     : greyedOf(base.asked, { ask: ask.reason, remind: remind.reason });
++  const remindVerb = isRemind ? 'Remind' : '';
+   return {
+-    verb: isAsk ? 'Assign' : isRemind ? 'Remind' : '',
++    verb: isAsk ? 'Assign' : remindVerb,
+     live,
+     moves: ask.control === 'radio',
+     reason,
+diff --git a/sheet/logic/approval/role-combinations/combinationFacts.ts b/sheet/logic/approval/role-combinations/combinationFacts.ts
+index bbde459..6ccbdb6 100644
+--- a/sheet/logic/approval/role-combinations/combinationFacts.ts
++++ b/sheet/logic/approval/role-combinations/combinationFacts.ts
+@@ -65,7 +65,8 @@ function docKey(
+   >,
+   edit: readonly [boolean, boolean],
+ ): string {
+-  const where = doc.trashed ? 'trashed' : doc.sent ? 'sent' : 'live';
++  const kept = doc.sent ? 'sent' : 'live';
++  const where = doc.trashed ? 'trashed' : kept;
+   return `${where}${editWord(edit)}${doc.openChanges ? ' · a change open' : ''}${doc.myProposals ? ' · my proposal' : ''}`;
+ }
+ 
+@@ -107,7 +108,8 @@ interface MenuX {
+ }
+ 
+ function menuKey(doc: MenuX, edit: readonly [boolean, boolean]): string {
+-  const end = doc.trashed ? ' · trashed' : doc.sent ? ' · sent' : '';
++  const sent = doc.sent ? ' · sent' : '';
++  const end = doc.trashed ? ' · trashed' : sent;
+   return `${doc.version}${editWord(edit)}${doc.checksFailing ? ' · a check fails' : ''}${doc.openProposals ? ' · a proposal open' : ''}${end}`;
+ }
+ 
+diff --git a/sheet/logic/approval/role-combinations/combinationSituations.ts b/sheet/logic/approval/role-combinations/combinationSituations.ts
+index 88bcb92..2f23c56 100644
+--- a/sheet/logic/approval/role-combinations/combinationSituations.ts
++++ b/sheet/logic/approval/role-combinations/combinationSituations.ts
+@@ -74,7 +74,8 @@ function situationOfRow(row: RoleRow | ClassRow): Situation {
+       as: row.as || 'inCharge',
+     });
+   const language = row.role === 'language';
+-  const key = language ? 'FR' : row.as === 'cmApprover' ? 'PRD' : 'LGL';
++  const gateKey = row.as === 'cmApprover' ? 'PRD' : 'LGL';
++  const key = language ? 'FR' : gateKey;
+   return GATE_RULES.todoSituationOf({
+     doc,
+     gate: { key, ...gateFactOf(row.gate) },
 diff --git a/sheet/logic/approval/role-combinations/combinationTypes.ts b/sheet/logic/approval/role-combinations/combinationTypes.ts
 index a04ce6c..e69f448 100644
 --- a/sheet/logic/approval/role-combinations/combinationTypes.ts
@@ -2336,11 +2532,40 @@ index 4334fc9..2d8abca 100644
    TypeChecks,
 -  TypeExtension,
  };
+diff --git a/sheet/logic/assembly/content-type-logic/fileFlow.ts b/sheet/logic/assembly/content-type-logic/fileFlow.ts
+index 0eec080..007fd98 100644
+--- a/sheet/logic/assembly/content-type-logic/fileFlow.ts
++++ b/sheet/logic/assembly/content-type-logic/fileFlow.ts
+@@ -107,10 +107,11 @@ function itemOf(
+   ).length;
+   const made = at.made.has(file);
+   const inside = at.inside.get(file);
++  const plural = moves > 1 ? 's' : '';
+   const sub = [
+     `L${String(at.layers[file])}`,
+     made ? '' : ' · reads it',
+-    moves ? ` · ${moves} move${moves > 1 ? 's' : ''}` : '',
++    moves ? ` · ${moves} move${plural}` : '',
+     inside ? ` · reads ${inside.join(', ')}` : '',
+   ].join('');
+   return {
 diff --git a/sheet/logic/assembly/content-type-logic/partViews.ts b/sheet/logic/assembly/content-type-logic/partViews.ts
-index 750d06e..d3e2248 100644
+index 750d06e..f06cb0f 100644
 --- a/sheet/logic/assembly/content-type-logic/partViews.ts
 +++ b/sheet/logic/assembly/content-type-logic/partViews.ts
-@@ -203,5 +203,4 @@ function partView(given: AssemblyPart | string, slug?: string): PartView {
+@@ -137,9 +137,8 @@ function configView(part: AssemblyPart): PartView {
+   const fields = part.fields ?? [];
+   const accepts = part.accepts ?? [];
+   const known = CONTENT_MODULES.fields;
+-  const accepted = accepts.length
+-    ? accepts.join(', ') + (part.blocks ? ', stack' : '')
+-    : '';
++  const stack = part.blocks ? ', stack' : '';
++  const accepted = accepts.length ? accepts.join(', ') + stack : '';
+   return {
+     key: part.key,
+     name: part.name,
+@@ -203,5 +202,4 @@ function partView(given: AssemblyPart | string, slug?: string): PartView {
    return offers ? withTimes(view, offers) : view;
  }
  

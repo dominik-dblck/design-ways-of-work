@@ -1,6 +1,7 @@
 /**
  * - `COMMIT`, `COMMIT_BUDGET_SECONDS`, `FEATURE_END` · each tier, both sides
  * - `TierCheck`, `CheckTiers` · a check by its script; a repository's own, by tier
+ * - `TYPESCRIPT` · a file ESLint reads, by its extension
  */
 
 // a check by the package script that runs it on the tree; `onFiles`, its command on a change's files
@@ -61,5 +62,5 @@ const COMMIT: readonly TierCheck[] = [
 // what a feature's end adds to the commit's checks, run on the whole tree: what reads the program at once
 const FEATURE_END: readonly TierCheck[] = [{ script: 'lint:exports' }];
 
-export { COMMIT, COMMIT_BUDGET_SECONDS, FEATURE_END };
+export { COMMIT, COMMIT_BUDGET_SECONDS, FEATURE_END, TYPESCRIPT };
 export type { TierCheck, CheckTiers };

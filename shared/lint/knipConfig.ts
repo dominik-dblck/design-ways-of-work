@@ -15,12 +15,12 @@ const SETTINGS = ['settings.json', 'settings.local.json'];
 const CONFIGS = ['*.config.{ts,mts}', 'scope.ts'];
 
 // every string a parsed settings file holds: a command, unescaped
-const stringsIn = (setting: unknown): readonly string[] =>
-  typeof setting === 'string'
-    ? [setting]
-    : typeof setting === 'object' && setting !== null
-      ? Object.values(setting).flatMap(stringsIn)
-      : [];
+function stringsIn(setting: unknown): readonly string[] {
+  if (typeof setting === 'string') return [setting];
+  return typeof setting === 'object' && setting !== null
+    ? Object.values(setting).flatMap(stringsIn)
+    : [];
+}
 
 // a hook's command runs a file no script names: knip reads no Claude Code settings
 function hookRuns(root: string): readonly string[] {

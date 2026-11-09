@@ -152,7 +152,7 @@ export const SHARED_SKILL: readonly DocumentSection[] = [
       '',
       '- **A story quote is verbatim from backlog.ts.** If the story does not describe the ticket, quote it',
       '  and add "placed here by the PM" — never paraphrase in a blockquote. `why: T-E01-10`',
-      '- **A file is named from the repo root** — `packages/domain/commands/createDocument.ts`, never `createDocument.ts`; scans and',
+      '- **A file is named from the repo root** — `app/api/documents/createDocumentRoute.ts`, never `createDocumentRoute.ts`; scans and',
       '  indexes match on the path (`tests/architecture/theDocsNameRealPaths.test.ts`). `why: T-E01-10`',
       '',
     ],

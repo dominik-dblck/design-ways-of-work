@@ -107,11 +107,9 @@ function editOf(
   const node = nodeAt(location.fileName, location.textSpan.start);
   const isShorthand = ts.isShorthandPropertyAssignment(node.parent);
   const isProperty = (symbol.flags & ts.SymbolFlags.Property) !== 0;
-  const text = !isShorthand
-    ? name
-    : isProperty
-      ? `${name}: ${was}`
-      : `${was}: ${name}`;
+  // a shorthand `{ was }` becomes a pair: a property keeps its key, a value its name
+  const pair = isProperty ? `${name}: ${was}` : `${was}: ${name}`;
+  const text = isShorthand ? pair : name;
   return {
     start: location.textSpan.start,
     length: location.textSpan.length,

@@ -8,7 +8,7 @@ import { shared } from '../../shared/rules/tests.ts';
 const rules = ruleFileFor({
   side: 'build',
   shared,
-  intro: 'A test sits where its project reads it, proves something that can fail, and never touches a\ndatabase it does not own. `packages/domain` adds `.claude/patterns/domain-testing.md`, which wins\nwhere the two differ; browser flows follow `.claude/skills/e2e/_shared.md`.',
+  intro: 'It never touches a database it does not own. `packages/domain` adds `.claude/patterns/domain-testing.md`, which wins\nwhere the two differ; browser flows follow `.claude/skills/e2e/_shared.md`.',
   rows: [
     { rule: 'A test\'s path decides its project, as the table below and `vitest.config.mts` give them; nothing in the test, no tag or flag, moves it.', gate: '`threeTiers` · `statedCounts`', exceptions: '—', why: { shared: 'pathIsTier' } },
     { rule: 'A tier that needs a switch in both positions is two projects over one include list, differing by one environment variable (`STORE_IMPL`, `AUTH_GOOGLE_ID`); a test never sets one in a `beforeAll`.', gate: '`storeSuiteRunsBoth` · `review`', exceptions: '—', why: 'An environment is process-global: one set in a file leaked into the file beside it.' },

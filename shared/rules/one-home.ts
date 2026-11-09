@@ -4,9 +4,9 @@
 import type { SharedRules } from './sharedRuleTypes.ts';
 
 // prettier-ignore
-const shared: SharedRules<'sentenceOnce'> = {
+const shared: SharedRules<never> = {
   title: 'One home',
-  opening: '',
+  opening: 'A fact is written in one place, and everything else reads it from there.',
   rows: [
     { rule: 'An exported name — a value, a type, a component — is declared in one file.', why: 'Two declarations of one name are two things a reader takes for one, or one thing written twice.', design: { gate: 'ESLint `wow/one-home-per-name`', exceptions: 'an entry\'s API names · a family\'s one name, which its loader reads from every file (`rules`, `skill`, `shared`)' }, build: { gate: '`aNameHasOneHome`', exceptions: 'an HTTP verb in a `route.ts` · `default`' } },
     { rule: 'A block of code is written once: fifty tokens alike, in two files or twice in one, become one function, type or constant that both read.', why: 'Two copies of a rule change apart and the fix reaches one; fifty tokens is jscpd\'s default, and a look-alike under it is judged by whether it is one rule.', design: { gate: '`aBlockIsWrittenOnce`', exceptions: 'imports · tests · generated files · a pair open on the sheet, named with its finding' }, build: { gate: '`aBlockIsWrittenOnce`', exceptions: 'imports · tests, fixtures and generated files' } },
@@ -17,7 +17,6 @@ const shared: SharedRules<'sentenceOnce'> = {
     { rule: '`export … from` stands only in a barrel (an `index.ts`, or an entry passing its parts on), and a barrel re-exports its own folder, never another barrel.', why: 'A re-export elsewhere is a second door to one name; a barrel of barrels loads everything behind it.', design: { gate: 'ESLint `wow/re-exports-in-barrels`', exceptions: '—' }, build: { gate: '`reExportsLiveInBarrels`', exceptions: 'a `route.ts` re-exporting its handler, the App Router\'s door' } },
   ],
   whys: {
-    sentenceOnce: 'Two copies of a sentence are two places for it to differ.',
   },
 };
 

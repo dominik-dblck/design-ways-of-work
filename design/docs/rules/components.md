@@ -1,8 +1,6 @@
 # Components
 
-For the React pages, once a page
-moves (D7). The tiers are counted by tests that run on `app/components/` already; the rows still held by
-`review` get their test with the first component.
+`app/components/` in atomic design: a tier is counted from what a component imports, never judged from its size. The tiers are counted by tests that run on `app/components/` already; the rows still held by `review` get their test with the first component.
 
 | Rule                                                                                                                                                                                                                                                                        | Gate                                                                                                                                         | Exceptions                                    | Why                                                                                                                                                           |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |

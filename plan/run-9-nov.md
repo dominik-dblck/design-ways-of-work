@@ -5,6 +5,27 @@ dzialajcie autonomicznie, macie odpowiedzi" · progress after every finished par
 held by the run hook (`.claude/run.json`). Held for the PM: a release, a page deleted, a snapshot retaken, the
 product repositories (eagle-design through its port only, mailing-automation read only).
 
+## Progress
+
+Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never counted by hand in a reply.
+
+| stage | what | done | of |
+| 1 | Harness | 5 | 5 |
+| 2 | Rules | 8 | 10 |
+| 3 | Names | 0 | 6 |
+| 4 | Tools | 0 | 8 |
+| 5 | e2e | 0 | 4 |
+| 6 | Port design | 0 | 4 |
+
+## History
+
+- 08:24 · stage 1 · 1 of 5 · the build side's skills to legacy/ (8bfcd8e)
+- 08:51 · stage 1 · 2 of 5 · 7g commitlint (d282df5)
+- 09:12 · stage 1 · 3 of 5 · deps:dedupe, three passes (46bda0b)
+- 09:47 · stage 1 · 4 of 5 · checks in three tiers (a50ec3c)
+- 09:47 · stage 1 · 5 of 5 · the spike lane (a50ec3c)
+- 10:05 · stage 2 · 8 of 10 · nested conditionals, cognitive 15, pattern rows, tools row, openings, points 1, 2, 6, 9
+
 ## Calls
 
 - Step 1 part 1, the build side's skills: 11 skills and the 5 evaluations only they read to `legacy/dev/claude/`

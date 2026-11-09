@@ -1,7 +1,6 @@
 # Comments
 
-The default is none. The code and the file's header say what; `git log` and the work trail say when,
-who and why it was asked for.
+The default is none: the code and the file's header say what. `git log` and the work trail say when, who and why it was asked for.
 
 | Rule                                                                                                                                                                                                              | Gate                                                                                                      | Exceptions                                                         | Why                                                                                                 |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |

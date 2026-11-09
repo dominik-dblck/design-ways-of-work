@@ -23,8 +23,6 @@ const OFF: Readonly<Record<string, string>> = {
     'false here: `void` is the discard no-floating-promises asks for',
   'sonarjs/no-unused-vars': "held twice: typescript-eslint's no-unused-vars",
   'sonarjs/no-identical-functions': 'held twice: jscpd',
-  'sonarjs/cognitive-complexity':
-    'held twice: complexity, max-depth, max-lines-per-function',
   'sonarjs/argument-type': 'held twice: tsc',
   'sonarjs/deprecation': "held twice: typescript-eslint's no-deprecated",
   'sonarjs/no-nested-template-literals': 'style no rule of ours names',
@@ -40,14 +38,13 @@ const OFF: Readonly<Record<string, string>> = {
   'sonarjs/no-nested-functions': 'style no rule of ours names',
   'sonarjs/no-redundant-assignments':
     'its cost: on one tree, 958 of 966 s of rule time over an eighth of its files linted together; 0 found on any',
-  'sonarjs/no-nested-conditional':
-    "the ternary rule's depth waits on the PM: this fires at 2, the rule says 3",
   'sonarjs/no-redundant-optional':
     'waits on exactOptionalPropertyTypes in the shared tsconfig base',
 };
 
 // a rule off in tests alone: it guards production, and a test's fixtures are what it flags
 const OFF_IN_TESTS: Readonly<Record<string, string>> = {
+  'sonarjs/cognitive-complexity': "a test's cases are a table read row by row",
   'sonarjs/super-linear-regex': 'a test reads short planted text',
   'sonarjs/no-clear-text-protocols': "a fixture's URL is never fetched",
   'sonarjs/pseudo-random': 'random data for a test, no secret',

@@ -6,7 +6,12 @@
 import { execFileSync, spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
-import { COMMIT, COMMIT_BUDGET_SECONDS, FEATURE_END } from '../checkTiers.ts';
+import {
+  COMMIT,
+  COMMIT_BUDGET_SECONDS,
+  FEATURE_END,
+  TYPESCRIPT,
+} from '../checkTiers.ts';
 import type { TierCheck } from '../checkTiers.ts';
 import { scope } from '../../scope.ts';
 
@@ -14,6 +19,7 @@ const ROOT = process.cwd();
 const BIN = path.join(ROOT, 'node_modules', '.bin');
 const SPIKE = /^spike\//;
 const TIERS = new Set(['commit', 'feature']);
+const FLAGS = new Set(['--staged', '--write']);
 
 interface Ran {
   readonly script: string;
@@ -25,16 +31,19 @@ interface Ran {
 const git = (args: readonly string[]): string =>
   execFileSync('git', args, { cwd: ROOT, encoding: 'utf8' });
 
+// git's names with -z: split on NUL, never quoted
 const listed = (text: string): readonly string[] =>
-  text.split('\n').filter((file) => file !== '');
+  text.split('\0').filter((file) => file !== '');
 
 // a commit's files are the index's; a chunk's, the working tree's with what is new: a deleted one is no file to read
 function changedFiles(isStaged: boolean): readonly string[] {
   const files = isStaged
-    ? listed(git(['diff', '--cached', '--name-only', '--diff-filter=d']))
+    ? listed(git(['diff', '--cached', '--name-only', '-z', '--diff-filter=d']))
     : [
-        ...listed(git(['diff', '--name-only', '--diff-filter=d', 'HEAD'])),
-        ...listed(git(['ls-files', '--others', '--exclude-standard'])),
+        ...listed(
+          git(['diff', '--name-only', '-z', '--diff-filter=d', 'HEAD']),
+        ),
+        ...listed(git(['ls-files', '-z', '--others', '--exclude-standard'])),
       ];
   return [...new Set(files)].filter((file) =>
     fs.existsSync(path.join(ROOT, file)),
@@ -67,7 +76,7 @@ function commandOf(
 
 // a staged file formatted and staged again, only when it is staged whole: a part left out stays out
 function written(staged: readonly string[]): void {
-  const partly = new Set(listed(git(['diff', '--name-only'])));
+  const partly = new Set(listed(git(['diff', '--name-only', '-z'])));
   const whole = staged.filter((file) => !partly.has(file));
   const left = staged.filter((file) => partly.has(file));
   if (whole.length) {
@@ -76,6 +85,13 @@ function written(staged: readonly string[]): void {
       ['--write', '--ignore-unknown', '--log-level', 'warn', ...whole],
       { cwd: ROOT },
     );
+    const typescript = whole.filter((file) => TYPESCRIPT.test(file));
+    if (typescript.length)
+      spawnSync(
+        path.join(BIN, 'eslint'),
+        ['--fix', '--no-warn-ignored', ...typescript],
+        { cwd: ROOT },
+      );
     git(['add', '--', ...whole]);
   }
   if (left.length)
@@ -85,9 +101,15 @@ function written(staged: readonly string[]): void {
 const line = ({ script, seconds, isGreen }: Ran): string =>
   `${isGreen ? '✓' : '✗'} ${script} · ${seconds.toFixed(1)} s`;
 
-const [tier = ''] = process.argv.slice(2);
-if (!TIERS.has(tier)) {
-  console.error('checkTier: commit or feature');
+const [tier = '', ...flags] = process.argv.slice(2);
+const isStaged = flags.includes('--staged');
+const isWrite = flags.includes('--write');
+if (
+  !TIERS.has(tier) ||
+  flags.some((flag) => !FLAGS.has(flag)) ||
+  (isWrite && !isStaged)
+) {
+  console.error('checkTier: commit|feature [--staged [--write]]');
   process.exit(2);
 }
 const branch = git(['rev-parse', '--abbrev-ref', 'HEAD']).trim();
@@ -98,9 +120,8 @@ if (SPIKE.test(branch)) {
   process.exit(0);
 }
 const isCommit = tier === 'commit';
-const isStaged = process.argv.includes('--staged');
 const files = isCommit ? changedFiles(isStaged) : null;
-if (isStaged && process.argv.includes('--write')) written(files ?? []);
+if (isWrite) written(files ?? []);
 const checks: readonly TierCheck[] = [
   ...COMMIT,
   ...(isCommit ? [] : FEATURE_END),

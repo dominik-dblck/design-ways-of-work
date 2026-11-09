@@ -5,7 +5,6 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
-import vm from 'node:vm';
 
 type World = Record<string, unknown>;
 
@@ -93,11 +92,7 @@ function bareWorld(): World {
 
 // a bundle the project built, run as a page runs it: its window, globalThis and self are the world
 function runIn(world: World, text: string): void {
-  vm.compileFunction(text, ['window', 'globalThis', 'self'])(
-    world,
-    world,
-    world,
-  );
+  new Function('window', 'globalThis', 'self', text)(world, world, world);
 }
 
 // a JSON text's value, undefined when it is none

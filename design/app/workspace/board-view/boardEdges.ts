@@ -16,10 +16,11 @@ function edgeLines(edge: Edge): readonly string[] {
       `${letter}${letter === edge.pick ? ' ✓' : ''} · ${text}`,
   );
   const open = options.length ? words.pmDecides : words.contractOwes;
+  const trailing = edge.why ? ` · ${edge.why}` : '';
   return [
     edge.edge,
     ...options,
-    edge.pick ? edge.why : `${open}${edge.why ? ` · ${edge.why}` : ''}`,
+    edge.pick ? edge.why : `${open}${trailing}`,
     ...(edge.into ? [`→ ${edge.into}`] : []),
   ];
 }

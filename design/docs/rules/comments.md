@@ -1,7 +1,6 @@
 # Comments
 
-The default is none. The code and the
-file's header say what; `git log`, the notebooks and `docs/process/decisions.ts` say when, who and why it was decided.
+The default is none: the code and the file's header say what. `git log`, the notebooks and `docs/process/decisions.ts` say when, who and why it was decided.
 
 | Rule                                                                                                                                                                                                              | Gate                                                                                                      | Exceptions                                               | Why                                                                                                            |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |

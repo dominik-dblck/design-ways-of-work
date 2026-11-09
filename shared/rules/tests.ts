@@ -6,7 +6,7 @@ import type { SharedRules } from './sharedRuleTypes.ts';
 // prettier-ignore
 const shared: SharedRules<'pathIsTier'> = {
   title: 'Tests',
-  opening: '',
+  opening: 'A test sits where its project reads it and proves something that can fail.',
   rows: [
     { rule: 'A test imports the real function and asserts exact values; it never copies the logic, never mocks the module under test, and is seen red once with its condition broken.', why: 'A test that cannot fail proves nothing.', design: { gate: 'ESLint `wow/no-mock-of-its-subject` · `review`', exceptions: '—' }, build: { gate: '`noTestMocksItsSubject` · `review`', exceptions: '—' } },
     { rule: 'A scan proves itself on a synthetic `{ path, text }`, never on a file planted in the tree.', why: 'Suites walk the tree in parallel, and a planted file is read by every one of them.', design: { gate: '`review`', exceptions: '—' }, build: { gate: '`aScanPlantsNothing`', exceptions: '`baseline.ts`, which writes the lists under `BASELINES=write`' } },

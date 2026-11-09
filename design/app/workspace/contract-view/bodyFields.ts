@@ -16,12 +16,12 @@ interface Fields {
 
 const drafted = (type: string): string => `${DRAFT_OPEN}${type}${DRAFT_CLOSE}`;
 
-const stateOf = (fields: readonly BodyField[]): EndpointState =>
-  fields.some(([, type]) => type === UNTYPED)
-    ? 'todo'
-    : fields.some(([, type]) => type.startsWith(DRAFT_OPEN))
-      ? 'draft'
-      : 'typed';
+const stateOf = (fields: readonly BodyField[]): EndpointState => {
+  if (fields.some(([, type]) => type === UNTYPED)) return 'todo';
+  return fields.some(([, type]) => type.startsWith(DRAFT_OPEN))
+    ? 'draft'
+    : 'typed';
+};
 
 function commandField(part: string): BodyField {
   const at = part.indexOf(':');

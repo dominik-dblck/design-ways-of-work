@@ -21,7 +21,6 @@ const SIZE: Linter.RulesRecord = {
     'error',
     { max: 40, skipBlankLines: true, skipComments: true },
   ],
-  complexity: ['error', 10],
   'max-depth': ['error', 3],
 };
 

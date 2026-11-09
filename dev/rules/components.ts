@@ -8,7 +8,7 @@ import { shared } from '../../shared/rules/components.ts';
 const rules = ruleFileFor({
   side: 'build',
   shared,
-  intro: '`app/components/` in atomic design: a tier is counted from what a component imports, never judged\nfrom its size.',
+  intro: '',
   rows: [
     { rule: 'An atom is one element over MUI and the theme; joined with another atom it is a molecule (`HintButton`, not a `Button` with two more props). A neighbour\'s id comes in as a prop (`describedBy`), and an atom under a `Hint` passes on its listeners and its ref.', gate: '`anAtomComposesNothing`', exceptions: '—', why: 'A prop that adds a neighbour is a second component hiding in the first.' },
     { rule: 'A molecule imports no query, request, command or provider: what it draws comes in as props (`app/providers/` read with a type import alone).', gate: '`theMoleculesAreDumb`', exceptions: '—', why: 'It draws what it is handed, so every screen can use it.' },

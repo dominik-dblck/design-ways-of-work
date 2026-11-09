@@ -156,6 +156,17 @@ const DISABLES: Linter.Config = {
   rules: { '@eslint-community/eslint-comments/require-description': 'error' },
 };
 
+// a file the scope names as running code the project built: SonarJS's `code-eval` off there, by the scope's why
+const runsCodeRules = (scope: RepoScope): readonly Linter.Config[] =>
+  Object.keys(scope.runsCode).length
+    ? [
+        {
+          files: Object.keys(scope.runsCode),
+          rules: { 'sonarjs/code-eval': 'off' },
+        },
+      ]
+    : [];
+
 const eslintConfig = (scope: RepoScope): Linter.Config[] =>
   defineConfig(
     {
@@ -172,6 +183,7 @@ const eslintConfig = (scope: RepoScope): Linter.Config[] =>
     WOW,
     sourceRules(scope.root),
     { ...SONAR, files: ['**/*.{ts,tsx}'] },
+    ...runsCodeRules(scope),
     ...scopedRules(scope),
     ...testRules(scope),
     ...productionRules(scope),

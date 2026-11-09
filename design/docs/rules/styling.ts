@@ -8,7 +8,7 @@ import { shared } from '../../shared/rules/styling.ts';
 const rules = ruleFileFor({
   side: 'design',
   shared,
-  intro: 'The look comes from the design system\'s\ntokens; a page names a role, never a value.',
+  intro: '',
   rows: [
     { rule: 'In React code a colour is a palette role read through the theme: never a token variable, a typed value, a palette path on a `color` prop, nor `theme.palette` (the light value).', gate: 'ESLint `no-restricted-syntax` (a colour)', exceptions: '—', why: 'The theme holds the tokens, so a colour follows the mode and changes in one place.' },
     { rule: 'In React code a spacing or a radius is in theme units (`p: 1.75`, `radiusOf(\'uiRContainer\')`), never a px string.', gate: 'ESLint `no-restricted-syntax` (a space)', exceptions: '—', why: 'A step of the scale moves in one place.' },

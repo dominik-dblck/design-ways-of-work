@@ -1,7 +1,6 @@
 # Tests
 
-A test sits where its project reads it, proves something that can fail, and never touches a
-database it does not own. `packages/domain` adds `.claude/patterns/domain-testing.md`, which wins
+A test sits where its project reads it and proves something that can fail. It never touches a database it does not own. `packages/domain` adds `.claude/patterns/domain-testing.md`, which wins
 where the two differ; browser flows follow `.claude/skills/e2e/_shared.md`.
 
 | Rule                                                                                                                                                                                                                                                                                                                                                                                  | Gate                                               | Exceptions                                                                                          | Why                                                                                                                         |

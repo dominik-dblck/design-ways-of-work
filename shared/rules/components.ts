@@ -6,7 +6,7 @@ import type { SharedRules } from './sharedRuleTypes.ts';
 // prettier-ignore
 const shared: SharedRules<'oneGlyphSet'> = {
   title: 'Components',
-  opening: '',
+  opening: '`app/components/` in atomic design: a tier is counted from what a component imports, never judged from its size.',
   rows: [
     { rule: 'A tier is what a component imports from `app/components/`: an atom nothing, a molecule atoms and at most one other molecule, an organism two or more molecules or a screen\'s own flow, a template a page\'s layout.', why: 'Counted, not judged, so two people sort a component the same way.', design: { gate: 'ESLint `boundaries/dependencies` (an atom, a molecule above its tier) · ESLint `wow/molecules-compose-one-molecule` · `review` (an organism)', exceptions: '—' }, build: { gate: '`anAtomComposesNothing` · `aMoleculeComposesOneMolecule`', exceptions: '—' } },
     { rule: 'An organism is reached through its barrel, its `index.ts`: a page mounts one, and another organism renders it, only through that file.', why: 'The barrel is the organism\'s face; the files behind it can move.', design: { gate: 'ESLint `boundaries/dependencies` (past a barrel)', exceptions: '—' }, build: { gate: '`organismsMeetAtTheBarrel`', exceptions: '—' } },

@@ -8,7 +8,7 @@ import { shared } from '../../shared/rules/comments.ts';
 const rules = ruleFileFor({
   side: 'build',
   shared,
-  intro: 'The default is none. The code and the file\'s header say what; `git log` and the work trail say when,\nwho and why it was asked for.',
+  intro: '`git log` and the work trail say when, who and why it was asked for.',
   rows: [],
   outro: '',
 });

@@ -69,11 +69,10 @@ function viewsLine(
     (key) => JSON.stringify(was[key]) !== JSON.stringify(views[key]),
   );
   const held = Object.keys(was).length;
+  const named = moved.length ? ` · ${moved.slice(0, 8).join(', ')}` : '';
   return lineOf('wireframes · views', {
     ok: !moved.length || !held,
-    text: held
-      ? `${moved.length} moved${moved.length ? ` · ${moved.slice(0, 8).join(', ')}` : ''}`
-      : 'no snapshot yet',
+    text: held ? `${moved.length} moved${named}` : 'no snapshot yet',
   });
 }
 

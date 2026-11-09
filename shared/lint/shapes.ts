@@ -50,12 +50,6 @@ const SHAPES: readonly Shape[] = [
       'Past two parameters a function takes one object (docs/rules/functions.md); a callback keeps its caller’s shape.',
   },
   {
-    selector:
-      'ConditionalExpression > ConditionalExpression > ConditionalExpression',
-    message:
-      'No ternary chain three deep (docs/rules/functions.md): name the branches, or a lookup.',
-  },
-  {
     selector: 'ExportNamedDeclaration[source][specifiers.length=0]',
     message:
       'An export names what it takes, never an empty clause (docs/rules/names.md).',
