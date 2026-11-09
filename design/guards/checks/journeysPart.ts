@@ -27,7 +27,7 @@ const EPICS: readonly string[] = [
   'E10',
   'E18',
 ];
-const FEATURED: readonly string[] = ['E04', 'E06', 'E09', 'E18'];
+const FEATURED: readonly string[] = ['E04', 'E06', 'E09', 'E18', 'E19'];
 
 // the cases a person meets, read with each feature ticket's own endpoints as the Feature page reads them
 function metLines({

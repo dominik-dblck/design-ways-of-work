@@ -470,6 +470,30 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
   only; its three payloads agree with deliveryEvents.ts's prose; c3 was wrong on the sheet (a Stack is 400
   malformed once it leaves BlockType) and is corrected on main (2e2860f), its release the PM's word.
 
+- Night, 9 Nov · release 5.3.1 sent (b6caffd, tag release-2026-11-09-7); eagle-dev took it, digests matched. c9:
+  Batch's composer token is its drag-and-drop composer's alone, an HTML email takes an anchor marked
+  data-msys-unsubscribe; RT3b already says the syntax is copied from the tool's documentation, so agreed, a note line
+  (e76c08e). c17 (eagle-dev's Q3): the repository holds no S3; the PM's "repo's bucket" is legacy/config/cdn.json's
+  (deblock-blog, crm/, cdn1.deblock.com, aws login): b, an S3 store behind the asset port, the target later by its
+  address alone; a (Postgres, route opened) lost, it leaves the target a new adapter. Note line in E19Notes.
+- Night · wow's push refused by verify, one unexplained: dist features.js. Cause: release 5.3 changed
+  rule:feature-run-never-stops in eagle-design's deliveryRules.ts, a wow file, and wow kept the old line. Ported by
+  script (the line by its id). A sweep of every wow file eagle-design changed since 6 Nov found one more:
+  journeysPart.ts's FEATURED gained E19 on main (3b797dd), ported the same way. Verify missed it: part g prints a
+  summary line only. Lesson: until the port lands, a product edit to a wow file reaches wow by hand; after it, the
+  take refuses such an edit.
+- Finding, wow (D28): journeysPart.ts holds the product's epics, EPICS (E00-E10, E18), FEATURED, 'E18' for the
+  case ids and an 'E14' exemption. Measured: E14 and E19 have journeys and are not in EPICS, so part g never checks
+  their dangling cases. Fix at the port's cut: the epics read from the backlog, FEATURED from the tickets
+  (T-EXX-00), the exemption a field of the journey rows (E14's are Claude Code flows, no browser test).
+- Stage 6 task 1, consulted with eagle-dev (B decided by the PM): A · wow is a git dependency pinned to a tag
+  (yarn.lock holds the sha; wow's package.json gains a version, yarn 1 refuses one without), a postinstall take
+  copies the homes the product names (package.json wow.takes) to its paths, records them in .git/info/wow-taken
+  and excludes them in .git/info/exclude; nothing of wow enters a product's history. Measured: node strips no type
+  under node_modules, so the take runs from a copy of its folder (no jiti: no second loader, eagle-dev). eagle-dev
+  takes dev/ and shared/; its condition: the take is idempotent and refuses, never overwrites, a file edited since
+  the take (the install stops with the path); its tree.ts reads the record into NOT_OURS at its port.
+
 ## Questions for the PM
 
 - The design side's 71 entries keep kebab names (`sheet-status.ts`): the artifact and the build side read them by
@@ -550,3 +574,6 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
   address in the environment (A) · 4 · wow's files in eagle-design written by a script from a pinned wow tag and
   ignored by its git (B) · 5 · the rename rewrites the 34 legacy pages' script paths (A) · 6 · R6 already on the
   sheet since release 4: closed, no decision · 7 · release 5.3 mine once every check passes (A).
+- **Morning, 10 Nov · c17's bucket:** eagle-dev found no S3 in the repository; the bucket on the sheet is read as
+  legacy/config/cdn.json's, deblock-blog under crm/ (the blog's production bucket, fronted by cdn1.deblock.com),
+  test assets written there through aws login. Confirm, or name another bucket.
