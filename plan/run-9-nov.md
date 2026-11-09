@@ -549,6 +549,9 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
   taken files with the product's (git ls-files would miss them on the branch, where they are untracked), the read
   set the same, 67 modules and 526 files. Lesson: before a wow tag, the copy runs yarn lint and yarn test whole,
   not its commit tier alone.
+- Night · v0.1.6 taken on the branch: its feature tier refused 'unvendored', a word of recordText.ts; the copy's
+  commit tier reads the words of changed files only. Renamed staleCopies: v0.1.7. The lesson, whole: before a wow
+  tag the copy runs its feature tier.
 
 ## Questions for the PM
 

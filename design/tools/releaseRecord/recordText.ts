@@ -85,10 +85,10 @@ function recordFaults(text: string): readonly string[] {
     ...listed.filter((entry) => !named.includes(entry)),
     ...PROJECT.buildReads.files.filter((file) => !filesNamed.includes(file)),
   ].map((entry) => `${entry} · not in the record`);
-  const unvendored = vendoredFiles(ROOT)
+  const staleCopies = vendoredFiles(ROOT)
     .filter((file) => digestOf(path.join(VENDOR, file)) !== digestOf(file))
     .map((file) => `${file} · not vendored as taken: yarn build`);
-  return [...missing, ...moduleFaults, ...fileFaults, ...unvendored];
+  return [...missing, ...moduleFaults, ...fileFaults, ...staleCopies];
 }
 
 export { MARK, recordFaults, recordSections };
