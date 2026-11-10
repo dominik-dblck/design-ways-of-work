@@ -3,7 +3,6 @@
  * - `branchesCheck`, `codeLines` · a rule or a view branching on a type's name
  * - `exampleRow`, `readable` · a test's example row, the files a copy is read in
  */
-import { SHEET_PAGE } from './sourceScope.ts';
 import type {
   FileReads,
   SourceFinding,
@@ -137,16 +136,13 @@ function layersCheck(texts: Texts): readonly SourceFinding[] {
 function layerOf(file: string): number {
   const layer = LAYERS[file];
   if (layer != null) return layer;
-  return /\.dc\.html$/.test(file) ? 7.5 : 8;
+  return 8;
 }
 
-// a rule or a view branching on a type's name: a layered file of the rules or above, every product page
+// a rule or a view branching on a type's name: a layered file of the rules or above
 function branchesCheck(texts: Texts): readonly SourceFinding[] {
   const files = Object.keys(texts).filter(
-    (file) =>
-      texts[file] != null &&
-      ((LAYERS[file] ?? 0) >= 5 ||
-        (/\.dc\.html$/.test(file) && !SHEET_PAGE.test(file))),
+    (file) => texts[file] != null && (LAYERS[file] ?? 0) >= 5,
   );
   return files.flatMap((file) =>
     codeLines(texts[file]).flatMap((line, index) =>
@@ -181,10 +177,7 @@ function exampleRow(file: string, line: string): boolean {
 
 function readable(texts: Texts): readonly string[] {
   return Object.keys(texts).filter(
-    (file) =>
-      texts[file] != null &&
-      file !== 'sourceCheck.js' &&
-      !SHEET_PAGE.test(file),
+    (file) => texts[file] != null && file !== 'sourceCheck.js',
   );
 }
 

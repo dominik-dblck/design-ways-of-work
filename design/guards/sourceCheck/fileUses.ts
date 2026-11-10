@@ -1,6 +1,6 @@
 /**
  * - `callOf` · where a reader uses a file: its line, or its first call through it
- * - `usesOf` · each file's readers: a layered file's reads, a page's components
+ * - `usesOf` · each file's readers: a layered file's reads
  */
 import { layerOf } from './sourceLayers.ts';
 import { isCode } from './sourceScope.ts';
@@ -67,34 +67,11 @@ function readUses(
   return uses;
 }
 
-// a page embeds a component once, at its first dc-import
 function usesOf(
   reads: Readonly<Record<string, FileReads>>,
   texts: Texts,
 ): ReadonlyMap<string, readonly UseRow[]> {
-  const uses = readUses(reads, texts);
-  const pages = Object.keys(texts).filter(
-    (page) => /\.dc\.html$/.test(page) && texts[page] != null,
-  );
-  for (const page of pages)
-    String(texts[page])
-      .split('\n')
-      .forEach((line, index) => {
-        for (const found of line.matchAll(/<dc-import\s+name="([^"]+)"/g)) {
-          const file = `${String(found[1])}.dc.html`;
-          if (file === page) continue;
-          const used = uses.get(file) ?? [];
-          uses.set(file, used);
-          if (!used.some((one) => one.file === page))
-            used.push({
-              file: page,
-              line: index + 1,
-              code: line.trim().slice(0, 120),
-              layer: layerOf(page),
-            });
-        }
-      });
-  return uses;
+  return readUses(reads, texts);
 }
 
 export { callOf, usesOf };

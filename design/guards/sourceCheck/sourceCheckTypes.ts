@@ -42,7 +42,6 @@ interface LineAt {
   readonly index: number;
   readonly line: string;
   readonly decl: string;
-  readonly isPage: boolean;
 }
 
 // a string of messages.js with a space in it: its path, its key, its object's other keys

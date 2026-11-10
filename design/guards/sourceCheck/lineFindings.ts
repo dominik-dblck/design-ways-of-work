@@ -3,7 +3,7 @@
  * - `sentencesIn` · a sentence typed in code, or a messages.js line typed again
  */
 import { exampleRow } from './sourceLayers.ts';
-import { homesOfRow, LOGIC_PAGE } from './sourceScope.ts';
+import { homesOfRow } from './sourceScope.ts';
 import { stringKeyOf, kindOf, STATUS_KEYS, TEXT } from './textKinds.ts';
 import type { SourceFinding, LineAt } from './sourceCheckTypes.ts';
 
@@ -104,7 +104,7 @@ function copiesInLine(at: LineAt): readonly SourceFinding[] {
   ];
 }
 
-// each string's words and its key; a file's name on dc-import and an object's key are none
+// each string's words and its key; a name= attribute's and an object's key are none
 function literalsOf(at: LineAt): readonly (readonly [string, string])[] {
   const found: (readonly [string, string])[] = [];
   for (const match of at.line.matchAll(
@@ -116,9 +116,6 @@ function literalsOf(at: LineAt): readonly (readonly [string, string])[] {
     if (!/name=$/.test(before) && !isKey)
       found.push([String(match[1] ?? match[2]), stringKeyOf(before)]);
   }
-  if (at.isPage)
-    for (const text of at.line.match(/>([^<>{}]{12,})</g) ?? [])
-      found.push([text.slice(1, -1), '<text>']);
   return found;
 }
 
@@ -128,7 +125,6 @@ function sentencesInCode(
 ): readonly SourceFinding[] {
   if (
     homesOfRow(SENTENCES).includes(at.file) ||
-    LOGIC_PAGE.test(at.file) ||
     /throw new Error|console\./.test(at.line)
   )
     return [];

@@ -76,7 +76,6 @@ const TEXT: Readonly<Record<string, TextKinds | undefined>> = {
   'fieldKinds.js': { is: 'sheet', screen: ['says'] },
   'screenView.js': { is: 'screen', sheet: ['why', 'says'] },
   'contentCheck.js': { is: 'sheet' },
-  'EditorScreen.dc.html': { is: 'screen', sheetDecl: ['DIFF_SAMPLE'] },
   'commands.js': { is: 'sheet', expectedIn: ['COMMANDS'] },
   'refusals.js': { is: 'sheet' },
   'queries.js': { is: 'sheet' },

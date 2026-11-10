@@ -1,7 +1,7 @@
 /**
  * - `MAP`, `homesOfRow`, `mapRowOf` · one row, one home: where each fact lives
  * - `SCOPE` · the files the guard reads
- * - `LOGIC_PAGE`, `SHEET_PAGE`, `isCode` · pages by kind, code
+ * - `isCode` · a line that is code, not a comment
  */
 import type { MapRow } from './sourceCheckTypes.ts';
 
@@ -78,12 +78,6 @@ const SCOPE: readonly string[] = [
   'journeys.js',
 ];
 
-const LOGIC_PAGE = /^(rules-|Translation statuses)/;
-
-// the design side's own pages: their words are the sheet's, never a screen's
-const SHEET_PAGE =
-  /^(plan-|Feature drawings\.dc|rules-|Wireframes\.dc|E\d+ .* UI spec|ContextBar languages|TimeTravelBar|Columns paint grid|Translation statuses)/;
-
 function homesOfRow(row: string): readonly string[] {
   return MAP.find((one) => one.row === row)?.home ?? [];
 }
@@ -98,4 +92,4 @@ function isCode(line: string): boolean {
   return !/^\s*(\/\/|\*|<!--)/.test(line);
 }
 
-export { homesOfRow, isCode, LOGIC_PAGE, MAP, mapRowOf, SCOPE, SHEET_PAGE };
+export { homesOfRow, isCode, MAP, mapRowOf, SCOPE };

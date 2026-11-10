@@ -61,31 +61,15 @@ function commentHead(lines: readonly string[], first: number): FileHead {
   return { about: answers, answers, answersCount, holds };
 }
 
-// a page's header is its logic's, past its dc-script tag; null when it has none
-function bodyOf(
-  file: string,
-  text: string,
-): { readonly body: string; readonly name: string } | null {
-  if (!/\.dc\.html$/.test(file)) return { body: text, name: file };
-  const script = text.indexOf('data-dc-script');
-  if (script < 0) return null;
-  return {
-    body: text.slice(text.indexOf('>', script) + 1),
-    name: file.replace(/\.dc\.html$/, ''),
-  };
-}
-
 function fileHeadOf(file: string, text: string | null | undefined): FileHead {
   if (text == null) return BLANK;
   if (/\.json$/.test(file)) return jsonHead(text);
-  const page = bodyOf(file, text);
-  if (!page) return BLANK;
-  const lines = page.body.split('\n');
+  const lines = text.split('\n');
   const found = lines.findIndex((line) => line.trim() !== '');
   const first = found < 0 ? lines.length : found;
   const top = (lines[first] ?? '').trim();
   if (top === '/**') return bulletHead(lines, first);
-  const named = `// ${page.name}`;
+  const named = `// ${file}`;
   if (top.indexOf(`${named} \u00b7 `) === 0)
     return { ...BLANK, about: top.slice(named.length + 3).trim() };
   return top === named ? commentHead(lines, first) : BLANK;

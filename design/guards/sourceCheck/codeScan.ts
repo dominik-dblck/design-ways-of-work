@@ -10,14 +10,13 @@ import {
   MODULE_IMPORTS,
   ownModulesText,
 } from './ownModules.ts';
-import { pageWordsCheck } from './pageWords.ts';
 import {
   decisionLines,
   requirementItems,
   targets,
 } from './requirementReads.ts';
 import { bannedPatterns } from './screenWords.ts';
-import { isCode, LOGIC_PAGE, mapRowOf, SCOPE } from './sourceScope.ts';
+import { isCode, mapRowOf, SCOPE } from './sourceScope.ts';
 import type { SourceFinding, LineAt, Texts } from './sourceCheckTypes.ts';
 import * as MESSAGES from '../../sheet/words/messages.ts';
 
@@ -52,20 +51,8 @@ function fileFindings(
     readonly words: Parameters<typeof sentencesIn>[1];
   },
 ): readonly SourceFinding[] {
-  const found: SourceFinding[] =
-    LOGIC_PAGE.test(file) && /gateRules\.js|translationFlow\.js/.test(text)
-      ? [
-          {
-            kind: 'logic page',
-            row: VIEW,
-            file,
-            line: 1,
-            text: 'a page drawing the rules, which are the sheet’s data',
-          },
-        ]
-      : [];
+  const found: SourceFinding[] = [];
   const decided = decisionLines(file, text);
-  const isPage = /\.dc\.html$/.test(file);
   let decl = '';
   text.split('\n').forEach((line, index) => {
     const declared = DECLARED.exec(line);
@@ -76,7 +63,7 @@ function fileFindings(
       (/^\s*R\('/.test(line) || decided.has(index))
     )
       return;
-    const at: LineAt = { file, index, line, decl, isPage };
+    const at: LineAt = { file, index, line, decl };
     found.push(...copiesInLine(at), ...sentencesIn(at, words));
   });
   return found;
@@ -149,7 +136,6 @@ function scan(files: Texts): readonly SourceFinding[] {
     ...retired(files),
     ...twiceWritten(),
     ...messageWordsCheck(files),
-    ...pageWordsCheck(files),
   ];
 }
 

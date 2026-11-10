@@ -16,7 +16,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 | 4 | Tools | 8 | 8 |
 | 7 | P1 release | 5 | 5 |
 | 5 | e2e | 4 | 4 |
-| 6 | Port design | 6 | 8 |
+| 6 | Port design | 7 | 8 |
 | 8 | E19 + backup | 3 | 3 |
 
 Stage 6, measured 9 Nov 17:20 (the PM holds it: start asked): 1 · links, how wow's files stand in eagle-design's git
@@ -63,6 +63,7 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
 - 01:56 · stage 6 · 4 of 6 · rename built: wow 4915103, moves.tsv; branch waits on task 5
 - 10:02 · stage 6 · 5 of 8 · task 8: every HTML and CSS to legacy, df0c982 pushed
 - 10:48 · stage 6 · 6 of 8 · task 7: JSON to TS, cd1fd3a pushed
+- 11:48 · stage 6 · 7 of 8 · task 5: guard-map and content-type retaken, 67441ed
 
 - 08:24 · stage 1 · 1 of 5 · the build side's skills to legacy/ (8bfcd8e)
 - 08:51 · stage 1 · 2 of 5 · 7g commitlint (d282df5)
@@ -648,6 +649,12 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
 - **PM, 10 Nov · B:** two releases, back to back: 5.3.2 first (main, 8e031ff), then the port (port/wow, cc9982b,
   wow v0.1.9). Not now: the PM and eagle-dev work on E19; both releases wait for the PM's word. The branch is pushed,
   main untouched, nothing sent to eagle-dev.
+- 10 Nov · the guard's page branches retired, as task 8's log promised: LOGIC_PAGE, SHEET_PAGE, a line's isPage, a
+  page's dc-imports, layer 7.5, a page's header past its dc-script, EditorScreen's text kind; pageWords.ts to wow's
+  legacy/design/. The ratchet's three kinds no check emits gone (drawing without a row, component without a drawing,
+  sentence in an attribute), the rest held at their count now (typed colour 36 → 0, type-name branches 5 → 0, a list
+  held twice 1 → 0, a typed list 1 → 0): a count only falls. The guard map moved with them. The bucket's epic left the
+  morning list: its pick changes nothing built today, asked at E10's refinement.
 
 ## Questions for the PM
 

@@ -8,25 +8,21 @@ import type { SourceFinding } from './sourceCheckTypes.ts';
 
 // the app outside the scope, frozen at its count: cleaned epic by epic, a number only goes down
 const FROZEN: Readonly<Record<string, number>> = {
-  'component without a drawing': 0,
   'sentence in code': 0,
   'sentence in code · banned word': 0,
   'sentence copied': 0,
   'banned word in code': 0,
-  'drawing without a row': 15,
   'read upwards': 0,
-  'sentence in an attribute': 29,
-  'typed colour': 36,
-  'branch on a type name': 5,
-  'list held twice': 1,
+  'typed colour': 0,
+  'branch on a type name': 0,
+  'list held twice': 0,
   'sentence held twice': 14,
-  'typed list': 1,
+  'typed list': 0,
 };
 
 // the scope and the fixtures the build side ports, held to these counts
 const BASELINE: Readonly<Record<string, number>> = {
   'status map': 0,
-  'drawing without a row': 5,
   'read upwards': 0,
   'branch on a type name': 0,
   'typed list': 0,
