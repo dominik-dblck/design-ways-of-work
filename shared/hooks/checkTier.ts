@@ -14,6 +14,7 @@ import {
 } from '../checkTiers.ts';
 import type { TierCheck } from '../checkTiers.ts';
 import { scope } from '../../scope.ts';
+import { isNamedBy } from '../tests/globs.ts';
 
 const ROOT = process.cwd();
 const BIN = path.join(ROOT, 'node_modules', '.bin');
@@ -35,7 +36,7 @@ const git = (args: readonly string[]): string =>
 const listed = (text: string): readonly string[] =>
   text.split('\0').filter((file) => file !== '');
 
-// a commit's files are the index's; a chunk's, the working tree's with what is new: a deleted one is no file to read
+// a commit's files are the index's; a chunk's, the working tree's with what is new: a deleted one, or one the scope ignores, no check reads
 function changedFiles(isStaged: boolean): readonly string[] {
   const files = isStaged
     ? listed(git(['diff', '--cached', '--name-only', '-z', '--diff-filter=d']))
@@ -45,8 +46,9 @@ function changedFiles(isStaged: boolean): readonly string[] {
         ),
         ...listed(git(['ls-files', '-z', '--others', '--exclude-standard'])),
       ];
-  return [...new Set(files)].filter((file) =>
-    fs.existsSync(path.join(ROOT, file)),
+  return [...new Set(files)].filter(
+    (file) =>
+      fs.existsSync(path.join(ROOT, file)) && !isNamedBy(file, scope.ignores),
   );
 }
 
