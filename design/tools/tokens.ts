@@ -1,10 +1,15 @@
 /**
  * - `tokensText` · tokens.ts from design-system/ and productTokens.ts (D22)
- * - the faces too, so a reader of the theme needs no stylesheet for its fonts
+ * - the faces, the element styles and reduced motion: no stylesheet read beside it
  * - a name the system and the product both declare is refused, never overridden
  */
 import { productTokens } from '../app/styles/productTokens.ts';
-import { designSystem, fonts, isToken } from '../design-system/index.ts';
+import {
+  designSystem,
+  elements,
+  fonts,
+  isToken,
+} from '../design-system/index.ts';
 import { tokensModule } from './tokens/tokenPrint.ts';
 
 function tokensText(): string {
@@ -23,6 +28,14 @@ function tokensText(): string {
       ),
     ),
     faces: fonts.map((face) => ({ ...face })),
+    reducedMotion: new Map(
+      tokens.flatMap((token) =>
+        token.reducedMotion === undefined
+          ? []
+          : [[token.name, token.reducedMotion] as const],
+      ),
+    ),
+    elements,
   });
 }
 

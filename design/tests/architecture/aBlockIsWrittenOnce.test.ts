@@ -13,11 +13,11 @@ const SAME_TOKENS = 50;
 // a pair the sheet still holds open, or holds as two facts that agree by value, each with its reason
 const OPEN: readonly (readonly [string, string])[] = [
   [
-    'app/styles/components.spec/atomsButton.ts · app/styles/components.spec/atomsIconButton.ts',
+    'app/styles/componentsSpec/atomsButton.ts · app/styles/componentsSpec/atomsIconButton.ts',
     'two facts: each control names the tokens it draws, the shared choice is the tokens',
   ],
   [
-    'app/styles/components.spec/atomsCheckbox.ts · app/styles/components.spec/atomsCheckbox.ts',
+    'app/styles/componentsSpec/atomsCheckbox.ts · app/styles/componentsSpec/atomsCheckbox.ts',
     'two facts: Checkbox and Radio name the same tokens unchecked, the shared choice is the tokens',
   ],
   [

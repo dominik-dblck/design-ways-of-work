@@ -1,6 +1,6 @@
 /**
  * - `Spec`, `SpecRow`, `SpecPart`, `Tier`, `TieredRow` · the spec's rows by tier
- * - `ScriptIo` · what a run is handed: a file reader and a log
+ * - `ScriptIo` · what a run is handed: a log
  */
 interface SpecPart {
   readonly atom?: string;
@@ -39,7 +39,6 @@ interface Spec {
 }
 
 interface ScriptIo {
-  readFile(file: string): Promise<string>;
   log(...parts: readonly unknown[]): void;
 }
 

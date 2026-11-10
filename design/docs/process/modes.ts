@@ -1,6 +1,5 @@
 /**
  * - `modesPage` · the ticket modes' page as data, its parts in key order
- * - the build writes modes.json from it (`tools/emit.ts`): edit here
  */
 import { ABOUT_TO_HOLDS_NOTE } from './modes/aboutToHoldsNote.ts';
 import { HOLDS_TO_LEGEND } from './modes/holdsToLegend.ts';

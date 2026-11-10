@@ -622,6 +622,19 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
   (a name holds no date); say-snapshot was read by nothing, to legacy/ alone.
 - 10 Nov · the guard map carries no time now: it moves only when the map does, so the port saves it as any file
   (portSave's and digests' exceptions for it gone). Its retake rides that: the PM's B on task 5.
+- 10 Nov · task 7a: the three emitted JSON files (fixtures/data/blockModel, components.spec, modes) to legacy/;
+  their modules are ordinary entries now, bundled as the others (blockModel.js, componentsSpec.js, modes.js), and
+  every reader imports the module: part c, the modes line, spec-check (its io a log alone), measure's FIXTURES and
+  the guard's layers name blockModel.js; buildReads.files keeps ticket-pipeline.md alone (eagle-dev reads the
+  module, its homes already hold it). components.spec.ts is componentsSpec.ts (an entry's name is camelCase, no
+  dot): moved by the mover with its 24 parts, its rows joined to moves.tsv (the mover joins now, an earlier row
+  following a new move of its file, never overwritten). 67 files that named a JSON name its module now, by script;
+  dev/ is the build side's own world (its components.spec.json is its copy), a record and a cut pack stay as
+  they were. The wow code that reads a JSON in general (the json print, a pack's JSON section, aboutCheck) stays:
+  the way of working is product agnostic.
+- 10 Nov · task 7e: app/styles/tokens.ts gains `reducedMotion` (each token's value under prefers-reduced-motion,
+  keyed as the tokens) and `elements` (the system's element and class styles, each declaration as written, var()
+  kept), so eagle-dev's two CSS reads swap for the module at its take.
 
 ## Questions for the PM
 

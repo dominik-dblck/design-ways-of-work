@@ -7,7 +7,7 @@ import * as EXPECTED_FILES from '../../guards/expectedFiles.ts';
 import * as JOURNEYS from '../../sheet/cases/journeys.ts';
 import * as REFUSALS from '../../sheet/contract/refusals.ts';
 import * as TEST_CASES from '../../sheet/cases/testCases.ts';
-import { componentsSpec } from '../../app/styles/components.spec.ts';
+import { componentsSpec } from '../../app/styles/componentsSpec.ts';
 
 type Ticket = ReturnType<typeof ticketOf>;
 type Said = (line: string) => void;

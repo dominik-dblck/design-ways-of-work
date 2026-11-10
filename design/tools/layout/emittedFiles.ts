@@ -13,26 +13,8 @@ interface Emitted {
   readonly print: 'json' | 'rules' | 'skill' | 'document';
 }
 
-// a module whose data the build writes as JSON, committed so a release's commit holds it
+// a module whose data the build prints, committed so a release's commit holds it
 const EMITTED: readonly Emitted[] = [
-  {
-    module: 'app/styles/components.spec.ts',
-    name: 'componentsSpec',
-    fixture: 'fixtures/data/components.spec.json',
-    print: 'json',
-  },
-  {
-    module: 'sheet/contract/blockModel.ts',
-    name: 'blockModel',
-    fixture: 'fixtures/data/blockModel.json',
-    print: 'json',
-  },
-  {
-    module: 'docs/process/modes.ts',
-    name: 'modesPage',
-    fixture: 'fixtures/data/modes.json',
-    print: 'json',
-  },
   // the markdown the build side reads, at the paths it reads them
   {
     module: 'docs/documents/ticket-pipeline.ts',

@@ -1,5 +1,5 @@
 /**
- * - `run` · components.spec.json holds together: logs each finding, throws if any
+ * - `run` · componentsSpec.ts holds together: logs each finding, throws if any
  * - `SpecRow` · a row of the components spec
  * - a run that prints nothing has not run · each check is a drift already seen
  */
@@ -15,6 +15,7 @@ import {
   wrapperFindings,
 } from './specCheck/rowChecks.ts';
 import type { ScriptIo, Spec, TieredRow } from './specCheck/specCheckTypes.ts';
+import { componentsSpec } from '../app/styles/componentsSpec.ts';
 import { TOKEN_NAMES } from '../app/styles/tokens.ts';
 
 // every token design-system/ and the product declare, by the name a spec row cites
@@ -50,7 +51,7 @@ function countsOf(spec: Spec): Record<string, number> {
 }
 
 async function run(io: ScriptIo): Promise<void> {
-  const spec: Spec = JSON.parse(await io.readFile('components.spec.json'));
+  const spec: Spec = componentsSpec;
   const declared = declaredTokens();
   const rows = rowsOf(spec);
   const organisms = new Set(spec.organisms.map((row) => row.id));

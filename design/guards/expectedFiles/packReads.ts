@@ -94,13 +94,13 @@ function reads(ticket: ExpectedTicket, spec: ComponentsSpec): string[] {
       (row) =>
         row.ownedBy === ticket.id || (row.changedIn ?? []).includes(ticket.id),
     )
-    .map((row) => `components.spec.json · ${row.id}`);
+    .map((row) => `componentsSpec.ts · ${row.id}`);
   const all = [
     ...facts.ids,
     ...facts.keys.map((key) => `refusals.ts · ${key}`),
     ...facts.emits.map((key) => `events.ts · ${key}`),
     ...(facts.mention ? ['events.ts · TARGET'] : []),
-    ...modelTypesOf(facts.texts).map((name) => `blockModel.json · ${name}`),
+    ...modelTypesOf(facts.texts).map((name) => `blockModel.ts · ${name}`),
     ...journeys.map(
       (journey) => `journeys.ts · ${journey.id} (${ticket.epic})`,
     ),

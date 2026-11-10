@@ -18,7 +18,7 @@ const LAYERS: Readonly<Record<string, number | undefined>> = {
   'messagesContent.js': 1.3,
   'gateStates.js': 2.1,
   'sheetStatus.js': 2.2,
-  'blockModel.json': 3.0,
+  'blockModel.js': 3.0,
   'commands.js': 3.1,
   'events.js': 3.2,
   'queries.js': 3.3,

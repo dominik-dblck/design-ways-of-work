@@ -44,7 +44,6 @@ const FILE_HOMES: readonly (readonly [string, string])[] = [
   ['records', ''],
   ['guards/__snapshots__', 'scraps'],
   ['public/assets', 'assets'],
-  ['fixtures/data', ''],
   ['fixtures/packs', 'packs'],
   ['fixtures/screens', 'screens'],
 ];

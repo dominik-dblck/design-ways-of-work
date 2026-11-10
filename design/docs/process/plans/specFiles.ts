@@ -12,7 +12,7 @@ export const SPEC: readonly FileRow[] = [
     holds: 'one name per idea, every decided mechanic, the open questions · and its screen words (ui), the single source of truth for both (UV1 · PM, 18 Oct)',
   },
   {
-    file: 'blockModel.json',
+    file: 'blockModel.ts',
     holds: 'the 25 decisions and the types · the schema is generated from this',
   },
   {
@@ -98,7 +98,7 @@ export const PROJECT_CONTEXT: readonly ContextRead[] = [
     why: 'the one name for each idea, and the decided mechanics: snapshot, stream version, hash chain, refusal, silent command',
   },
   {
-    read: 'blockModel.json · decisions',
+    read: 'blockModel.ts · decisions',
     why: 'what a block, a revision and a version are · a version holds no text',
   },
   {

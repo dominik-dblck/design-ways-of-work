@@ -7,7 +7,7 @@ const ABOUT_TO_HOLDS_NOTE = {
     'The three ticket modes as data (PM, 25 Sep 2026) · the ticket carries its mode as a chip (D19) · pipeline-cleanup.md moves it into ticket-pipeline.md for the agent',
   eyebrow: 'DECIDED WITH THE PM 25 SEP · LANDED 28 SEP AS SYNC 6, BEFORE E04',
   source:
-    'data · modes.json · rendered here · in ticket-pipeline.md since 28 Sep (sync 6)',
+    'data · modes.ts · rendered here · in ticket-pipeline.md since 28 Sep (sync 6)',
   intro: [
     'An epic → one ticket, one run',
     'Anything smaller → a light path',

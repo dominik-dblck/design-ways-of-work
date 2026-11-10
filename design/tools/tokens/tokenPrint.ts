@@ -1,8 +1,10 @@
 /**
- * - `tokensModule` · the tokens, system's and product's, and the faces, one module
+ * - `tokensModule` · tokens, faces, element styles, reduced motion: one module
  * - every var() resolved at build, so a jsdom test can measure a colour
  * - an alias whose target the dark block flips stays an alias, to follow
  */
+import type { ElementStyle } from '../../design-system/index.ts';
+
 const ALIAS = /^var\(\s*(--[\w-]+)\s*\)$/;
 
 interface Lookup {
@@ -82,15 +84,32 @@ ${faces.map(faceLine).join('\n')}
 ] as const;
 `;
 
-function tokensModule({
-  light,
-  dark,
-  faces,
-}: {
+// each value a token takes when the person asks for less motion, keyed as the tokens are
+const reducedBlock = (reduced: ReadonlyMap<string, string>): string => `
+/** A token's value under \`prefers-reduced-motion: reduce\` · every other token keeps its own. */
+export const reducedMotion = {
+${[...reduced].map(([name, cssValue]) => line(keyOf(name), typed(cssValue))).join('\n')}
+} as const;
+`;
+
+// the styles an element or a class takes, each declaration as the system writes it
+const elementsBlock = (styles: readonly ElementStyle[]): string => `
+/** Each element or class the system styles · its declarations as written, var() kept. */
+export const elements = [
+${styles.map((one) => `  { selector: ${JSON.stringify(one.selector)}, style: ${JSON.stringify(one.style)} },`).join('\n')}
+] as const;
+`;
+
+interface Sources {
   readonly light: ReadonlyMap<string, string>;
   readonly dark: ReadonlyMap<string, string>;
   readonly faces: readonly Face[];
-}): string {
+  readonly reducedMotion: ReadonlyMap<string, string>;
+  readonly elements: readonly ElementStyle[];
+}
+
+function tokensModule(sources: Sources): string {
+  const { light, dark, faces, reducedMotion, elements } = sources;
   const flips = new Set(dark.keys());
   const block = (
     source: ReadonlyMap<string, string>,
@@ -121,7 +140,7 @@ ${block(dark, [dark, light])}
 export const TOKEN_NAMES: Record<keyof typeof tokens.light, string> = {
 ${names}
 };
-${facesBlock(faces)}${FOOTER}`;
+${facesBlock(faces)}${reducedBlock(reducedMotion)}${elementsBlock(elements)}${FOOTER}`;
 }
 
 export { tokensModule };

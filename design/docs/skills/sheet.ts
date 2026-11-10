@@ -16,7 +16,7 @@ const skill: SkillFile = {
       first: null,
       lines: [
         'No `.js` in git (D12): a sheet file is `{home}/{name}.ts`; `yarn build` writes `dist/project/` (outside git), which the checks run on and the artifact is published from.',
-        "A JSON the sheet publishes is written from TypeScript (D21): `tools/layout/emittedFiles.ts` names each module; `yarn build` writes it to `fixtures/data/`, committed so a release's commit holds it. Edit the module, never the JSON. The same build writes `app/styles/tokens.ts` from `design-system/` and `app/styles/productTokens.ts` (`tools/tokens.ts`, D22), and each skill from `docs/skills/` (D25): edit the source, never what it writes. The markdown the build side reads — `ticket-pipeline.md`, `agent-instructions.md`, `api-convention.md` — is written the same way from `docs/documents/`, byte for byte at its path: edit the data, never the file.",
+        'The sheet publishes no JSON: the build side reads its modules, `sheet/contract/blockModel.ts` and `app/styles/componentsSpec.ts` among them. The build writes `app/styles/tokens.ts` from `design-system/` and `app/styles/productTokens.ts` (`tools/tokens.ts`, D22), and each skill from `docs/skills/` (D25): edit the source, never what it writes. The markdown the build side reads — `ticket-pipeline.md`, `agent-instructions.md`, `api-convention.md` — is written the same way from `docs/documents/`, byte for byte at its path: edit the data, never the file.',
         "An epic's folder `roadmaps/EXX/` holds the epic whole: its notebook and its parts of the board's entries (`EXXTickets.ts`, `EXXEdges.ts`, `EXX…Receipts.ts`, each serving the entry its name ends with). A new epic's folder is started by `yarn new-epic EXX` once its backlog row stands: it writes the parts the folder lacks from `roadmaps/templates.ts` and lists each in its entry.",
         'How the app works is `sheet/logic/capabilities.ts` (D20): per capability what it decides, its states, rules, walk and examples, each a pointer `{file}.js · {export}`; checks part a holds every pointer to a live export.',
         "`tools/` is this repository's tooling and is not published. `poc/` holds trials.",
@@ -52,7 +52,7 @@ const skill: SkillFile = {
         "`--snap` retakes a part's snapshot, only after the PM accepted the change it records (parts b, c and d hand their harness `'diff'` hard-coded: `--snap` does not reach them).",
         "The checks read the top folder of `dist/project/` only, as Claude Design's run_script did.",
         '`guards/__snapshots__/guardMap.ts` is the guard map part a writes on every run: it moves only with a change that moves the map, and is committed and published with that change.',
-        '`yarn spec-check` (`tools/specCheck.ts`) — `app/styles/components.spec.ts` holds together.',
+        '`yarn spec-check` (`tools/specCheck.ts`) — `app/styles/componentsSpec.ts` holds together.',
         'Every commit runs ESLint, tsc, the architecture tests and the checks (D23); a push runs every test.',
       ],
     },

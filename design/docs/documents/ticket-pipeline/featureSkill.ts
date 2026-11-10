@@ -61,7 +61,7 @@ export const FEATURE_SKILL: readonly DocumentSection[] = [
       '     shard. `why: T-E06-00` — LV1 was in the run and no row carried it, so no review saw it go',
       "   Wait for the review's answer; a moved row comes back with its digest and the tests move with it (PM, 25 Sep)",
       '5. Domain and routes, part by part in the ticket’s order; green per part',
-      '6. Screens from their `components.spec.json` rows, read beside the wireframes; the row is read, not synced',
+      '6. Screens from their `componentsSpec.ts` rows, read beside the wireframes; the row is read, not synced',
       '   (rule:the-look-is-the-repos). A shape no row names: inside one organism, compose it from the atoms and molecules that',
       '   exist, by the wireframes and the repo’s conventions, and list it under what was guessed. A new global',
       '   atom or molecule is built the same way and reported on its own — what it is, where it lives, why no',

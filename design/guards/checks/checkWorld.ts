@@ -1,7 +1,7 @@
 /**
  * - `Mirror`, `mirrorAt` · the built project a run reads and writes, file by file
  * - `bareWorld`, `loadAll` · a bare window, and the bundles run in it
- * - `errorMessageOf`, `parsedOr`, `lineOf`, `tallyOf` · error, JSON, line, tally
+ * - `errorMessageOf`, `lineOf`, `tallyOf` · an error, a line, a tally
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -80,15 +80,6 @@ function runIn(world: World, text: string): void {
   new Function('window', 'globalThis', 'self', text)(world, world, world);
 }
 
-// a JSON text's value, undefined when it is none
-function parsedOr(text: string | null): unknown {
-  try {
-    return text == null ? undefined : JSON.parse(text);
-  } catch {
-    return undefined;
-  }
-}
-
 function errorMessageOf(error: unknown): string {
   return error instanceof Error ? error.message : String(error);
 }
@@ -127,13 +118,5 @@ function tallyOf(lines: readonly string[]): string {
     : `${lines.filter((line) => /^FAIL/.test(line)).length} FAILED`;
 }
 
-export {
-  bareWorld,
-  lineOf,
-  loadAll,
-  errorMessageOf,
-  mirrorAt,
-  parsedOr,
-  tallyOf,
-};
+export { bareWorld, lineOf, loadAll, errorMessageOf, mirrorAt, tallyOf };
 export type { Mirror, World };

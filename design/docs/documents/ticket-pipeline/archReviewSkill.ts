@@ -66,7 +66,7 @@ export const ARCH_REVIEW_SKILL: readonly DocumentSection[] = [
       '6b. **The fixes run before the stage is presented:** `yarn tsc`, the architecture project and one',
       '   `yarn e2e`; a type import counts as a door. `why: T-E04-00` — O40, four journeys red at the next e2e',
       '6c. **A component moved between tiers moves its spec row in the same change:** `spec-check` over',
-      '   `app/styles/components.spec.json` reads 0 before the stage is presented. `why: T-E06-00` — the',
+      '   `app/styles/componentsSpec.ts` reads 0 before the stage is presented. `why: T-E06-00` — the',
       '   re-layer moved gate-dot and the chip’s key, and the copy read 5 until the regression',
       '7. Hand the file to the calling mode; the report names it',
       '',

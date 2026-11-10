@@ -8,7 +8,7 @@ const RUNS_FEATURE_LAST_ROWS = [
     cc: {
       title: 'Screens from their spec rows',
       bullets: [
-        'components.spec.json: read, never synced (rule:the-look-is-the-repos)',
+        'componentsSpec.ts: read, never synced (rule:the-look-is-the-repos)',
         'a shape with no row: built, never asked (rule:unnamed-shape-built-not-stopped)',
         'inside one organism → reported as guessed',
         'a new global atom or molecule → reported with what, where, why',

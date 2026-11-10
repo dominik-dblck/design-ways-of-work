@@ -40,7 +40,7 @@ export const REPORT_SKILL: readonly DocumentSection[] = [
       "   `'{id}': { criteria, tests, skipped: ['n · why · waits on'], uncovered: [], at: 'YYYY-MM-DD' }`.",
       '   `criteria` is how many the ticket held when read, not how many were built to',
       '6a. **The spec copy.** A run that moved a component — a new one, a tier, a wrapper, what a row composes —',
-      '   attaches `app/styles/components.spec.json`, written on the sheet’s spec as fetched for the run, never on',
+      '   attaches `app/styles/componentsSpec.ts`, written on the sheet’s spec as fetched for the run, never on',
       '   an older copy here. The tree writes what it holds: tier and wrapper from the folder, each part’s kind,',
       '   what a row composes from its imports, and a component the run built from its code (MUI imports, props,',
       '   layout). Every field the tree cannot see stays as the sheet wrote it: words, notes, tokens, `wireframe`,',

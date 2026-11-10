@@ -95,7 +95,7 @@ const TEXT: Readonly<Record<string, TextKinds | undefined>> = {
   'wireframes.js': { is: 'sheet' },
   'glossary.js': { is: 'sheet' },
   'sheetStatus.js': { is: 'sheet' },
-  'blockModel.json': { is: 'sheet' },
+  'blockModel.js': { is: 'sheet' },
   'testCases.js': { is: 'sheet' },
   'journeys.js': { is: 'sheet' },
 };

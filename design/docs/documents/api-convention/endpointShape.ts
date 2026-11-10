@@ -40,7 +40,7 @@ export const ENDPOINT_SHAPE: readonly DocumentSection[] = [
     heading: '## Bodies and query strings',
     lines: [
       '',
-      '- A body is typed on its row: `field: Type · …`, the types from blockModel.json. Prose has no route. (rule:command-body-is-typed)',
+      '- A body is typed on its row: `field: Type · …`, the types from blockModel.ts. Prose has no route. (rule:command-body-is-typed)',
       '- No fields: the row reads `—`, the body is `{}` or absent, and any field sent is 400. (rule:command-body-is-typed)',
       '- The actor is never in a body, a query or a header: it is the session. (T-E00-11)',
       '- A caller does not send a stream version. The exceptions state the version and hash they read:',
@@ -83,7 +83,7 @@ export const ENDPOINT_SHAPE: readonly DocumentSection[] = [
       '',
       '- Every query answers the stream version it read at, beside its data. (queries.ts · contract)',
       "- A person reads `line`, never `reason` or `key`. A 400 on a person's input carries a sentence from",
-      '  blockModel.json (T-E02-05 · E34, E41).',
+      '  blockModel.ts (T-E02-05 · E34, E41).',
       '- Losing a race is not a refusal: the server reads again and redoes. (refusals.ts · contract)',
       '',
     ],

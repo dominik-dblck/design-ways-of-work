@@ -37,7 +37,7 @@ export const ENDPOINT_CHECKS: readonly DocumentSection[] = [
       "| CommandId | `[a-z0-9]{8}`, nanoid (rule:short-random-block-ids), unique within the document's log; the seed's readable ids stay valid (CI1) | 400 · the same one again is 200 `replayed: true`, nothing written (CI2) |",
       "| AssetId | `[a-z0-9]{8}`, nanoid (rule:short-random-block-ids), unique across the library; the seed's readable ids stay valid · the bucket's key is the server's, never this (AS5) | 400 · another file under a taken one is 409 `asset.id_taken` |",
       '| MessageId, ProposalId | non-empty string from the caller | 400 |',
-      '| A name a person types | trimmed, then non-empty, **at most 120 characters** (PM, 24 Sep · O2); the sentences are blockModel.json’s | 400 “The name can’t be blank.” · “The name can be at most 120 characters.” |',
+      '| A name a person types | trimmed, then non-empty, **at most 120 characters** (PM, 24 Sep · O2); the sentences are blockModel.ts’s | 400 “The name can’t be blank.” · “The name can be at most 120 characters.” |',
       "| Enum (`'email' \\| 'push'`, Lang, Gate) | the exact value, case-sensitive; EN is the source, never a Lang | 400 |",
       '| A gate of the document (Assign, Notify and every gate command) | one of its approvals — the list its first version recorded, or its type’s before it (GL1 · T-E06-13 c7) — or one of its languages (E09 · N25) | 400 naming the field · reason “This {type} has no {gate} approval.”, e.g. “This email has no German approval.” on an email made without German — one sentence for every gate command (EG1, CM3 · PM, 6 Oct) |',
       '| A list (`Lang[]`) | every element valid, **each once** (PM, 24 Sep · O3) | 400 naming the field |',

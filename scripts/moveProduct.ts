@@ -1,7 +1,7 @@
 /**
  * - `node scripts/moveProduct.ts <map.tsv> [copy]` · a product's files, moved
  * - its own move in the copy, a linked one here too; every reader follows
- * - its map whole to ports/<product>/moves.tsv; records, notes, snapshots stay
+ * - its rows join ports/<product>/moves.tsv; records, notes, snapshots stay
  */
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
@@ -148,6 +148,22 @@ function scriptsMoved(file: string, names: readonly Move[]): boolean {
   return after !== before;
 }
 
+function movesJoined(moves: readonly Move[]): void {
+  const earlier = fs.existsSync(MOVES)
+    ? mapRows(MOVES).map(([from = '', to = '']) => ({ from, to }))
+    : [];
+  const now = new Map(moves.map(({ from, to }) => [from, to]));
+  const reached = new Set(earlier.map(({ to }) => to));
+  const rows = [
+    ...earlier.map(({ from, to }) => ({ from, to: now.get(to) ?? to })),
+    ...moves.filter(({ from }) => !reached.has(from)),
+  ];
+  fs.writeFileSync(
+    MOVES,
+    `${['# from\tto · each file a product moved, at its paths', ...rows.map(({ from, to }) => `${from}\t${to}`)].join('\n')}\n`,
+  );
+}
+
 async function main(): Promise<void> {
   const files = trackedOf(COPY);
   const rows = mapRows(MAP).map(([from = '', to = '']) => ({ from, to }));
@@ -179,10 +195,7 @@ async function main(): Promise<void> {
   const loaded = files
     .filter((file) => LEGACY_PAGE.test(file))
     .filter((file) => scriptsMoved(file, names)).length;
-  fs.writeFileSync(
-    MOVES,
-    `${['# from\tto · each file a product moved, at its paths', ...moves.map(({ from, to }) => `${from}\t${to}`)].join('\n')}\n`,
-  );
+  movesJoined(moves);
   console.log(
     `${moves.length} moved, ${movesHere.length} of them here · ${changed} files rewritten there, ${changedHere} here · ${loaded} legacy pages' scripts`,
   );

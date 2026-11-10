@@ -28,7 +28,7 @@ const skill: SkillFile = {
       first: null,
       lines: [
         'The spec is read where it sits and written only here; a spec file a test needs is a fixture with a hash. `rule:spec-written-only-here`',
-        'A UI component is defined when a ticket needs it, in `app/styles/components.spec.ts`, one ticket at a time; the build side gets the rows it builds and nothing more. `rule:component-defined-when-needed`',
+        'A UI component is defined when a ticket needs it, in `app/styles/componentsSpec.ts`, one ticket at a time; the build side gets the rows it builds and nothing more. `rule:component-defined-when-needed`',
         'A file the design side authors is compared, never described — its count is parsed off the file. `pipeline · contract`',
         'A criterion with "X, or Y" is a decision I did not make; make it. `pipeline · green 3a`',
         'A landed receipt never moves; a later ticket that moves the thing under it writes `reported:` on its own report. `rule:receipt-is-a-measurement`',

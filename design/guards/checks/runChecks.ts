@@ -101,26 +101,23 @@ function textsOf(
   );
 }
 
-// the scan over the guard's list, the layered files and the components' spec
+// the scan over the guard's list and the layered files
 function guardFindings({
-  mirror,
   guard,
   files,
   layered,
 }: {
-  readonly mirror: Mirror;
   readonly guard: Guard;
   readonly files: Texts;
   readonly layered: Texts;
 }): readonly Finding[] {
-  const spec = mirror.readOr('components.spec.json', null);
   const both = { ...files, ...layered };
   return [
     ...guard.scan(files),
     ...guard.layersCheck(layered),
     ...guard.branchesCheck(both),
     ...guard.twiceCheck(both),
-    ...guard.aboutCheck({ ...both, 'components.spec.json': spec }),
+    ...guard.aboutCheck(both),
     ...assemblyFindings(guard),
   ];
 }
@@ -133,7 +130,7 @@ function guardRun(mirror: Mirror): GuardRun {
     files: Object.keys(guard.layers),
     fallback: null,
   });
-  const found = guardFindings({ mirror, guard, files, layered });
+  const found = guardFindings({ guard, files, layered });
   const scope = new Set([...guard.scope, ...guard.targets(), 'messages.js']);
   return {
     guard,
@@ -145,7 +142,6 @@ function guardRun(mirror: Mirror): GuardRun {
     list: readList,
     fileTexts: {
       ...files,
-      'components.spec.json': mirror.readOr('components.spec.json', null),
     },
   };
 }

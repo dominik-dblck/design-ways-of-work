@@ -1,6 +1,6 @@
 /**
  * - `refineGate` · no pack for a ticket failing refine-check or its track
- * - `typesFails` · every type the epic's bodies name is in blockModel.json
+ * - `typesFails` · every type the epic's bodies name is in blockModel.ts
  * - `sourceFails` · no copy over the guard's scope before a feature is cut
  */
 import type { ReadyKey } from '../../docs/process/plans.ts';
@@ -96,7 +96,7 @@ interface Defined {
   readonly defined: ReadonlySet<string>;
 }
 
-// the names a text uses that blockModel.json does not define
+// the names a text uses that blockModel.ts does not define
 function undefinedIn(
   names: readonly string[],
   { id, defined, where }: Defined & { readonly where: string },
@@ -105,7 +105,7 @@ function undefinedIn(
     .filter((name) => !defined.has(name))
     .map(
       (name) =>
-        `${id} · ${where} names ${name}, which blockModel.json does not define`,
+        `${id} · ${where} names ${name}, which blockModel.ts does not define`,
     );
 }
 
@@ -127,7 +127,7 @@ function queryFails(query: Query, known: Defined): readonly string[] {
   ];
 }
 
-// every type a body, a param or an answer of the epic names is defined in blockModel.json
+// every type a body, a param or an answer of the epic names is defined in blockModel.ts
 function typesFails(
   ticket: Ticket,
   { log }: { readonly log: Said },
@@ -155,7 +155,7 @@ function typesFails(
     ...queries.flatMap((query) => queryFails(query, known)),
   ];
   log(
-    `${ticket.id} · types checked · the epic’s bodies and ${queries.length} queries against ${known.defined.size} names in blockModel.json`,
+    `${ticket.id} · types checked · the epic’s bodies and ${queries.length} queries against ${known.defined.size} names in blockModel.ts`,
   );
   return fails;
 }

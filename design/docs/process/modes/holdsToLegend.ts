@@ -42,7 +42,7 @@ const HOLDS_TO_LEGEND = {
       title: 'The look is the repo’s',
       rule: 'rule:the-look-is-the-repos',
       bullets: [
-        'No test syncs components.spec.json with the code',
+        'No test syncs componentsSpec.ts with the code',
         'A row: read, never synced',
         'Screens: checked by the PM, by hand',
         'Behaviour: kept by the journeys',

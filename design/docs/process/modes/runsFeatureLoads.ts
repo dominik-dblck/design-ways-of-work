@@ -81,7 +81,7 @@ const RUNS_FEATURE_LOADS = {
       at: { '3': '×5', '4': 'main', '5': 'main', '2a': 'main' },
     },
     {
-      name: 'components.spec.json',
+      name: 'componentsSpec.ts',
       note: 'the rows the ticket builds · read, never synced',
       at: { '3': '×5', '6': 'main' },
     },
