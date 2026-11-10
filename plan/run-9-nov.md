@@ -642,6 +642,9 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
   every move a name, but one fact the modules show that the JSON hid, a link contentCheck.ts → blockModel.ts in
   each of its 8 file diagrams (contentCheck reads the model: its contract rows against it). Part c green, checks
   exit 0; the two exit rows held for the retake gone.
+- 10 Nov · the port branch took v0.1.8 green (feature tier, checks), but its commit tier refused: ESLint 10 reads the
+  config nearest a file, and a staged move into legacy/ handed it a kept eslint.config.js (legacy/poc) whose plugin no
+  install holds. The commit tier names no file the scope ignores now (ec0e275): v0.1.9.
 
 ## Questions for the PM
 
