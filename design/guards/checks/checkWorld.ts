@@ -1,6 +1,6 @@
 /**
  * - `Mirror`, `mirrorAt` · the built project a run reads and writes, file by file
- * - `pageWorld`, `bareWorld`, `loadAll` · a window, and the bundles run in it
+ * - `bareWorld`, `loadAll` · a bare window, and the bundles run in it
  * - `errorMessageOf`, `parsedOr`, `lineOf`, `tallyOf` · error, JSON, line, tally
  */
 import fs from 'node:fs';
@@ -69,21 +69,6 @@ function mirrorAt(
   };
 }
 
-// a page's window: what the bundles touch when they load
-function pageWorld(): World {
-  const world: World = {
-    document: {
-      querySelectorAll: () => [],
-      getElementById: () => null,
-      addEventListener() {},
-    },
-    addEventListener() {},
-    location: { pathname: '/' },
-  };
-  world['window'] = world;
-  return world;
-}
-
 function bareWorld(): World {
   const world: World = { document: { querySelectorAll: () => [] } };
   world['window'] = world;
@@ -148,7 +133,6 @@ export {
   loadAll,
   errorMessageOf,
   mirrorAt,
-  pageWorld,
   parsedOr,
   tallyOf,
 };

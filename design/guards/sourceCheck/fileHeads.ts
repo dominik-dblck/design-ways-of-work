@@ -1,6 +1,6 @@
 /**
  * - `fileHeadOf`, `aboutOf` · a file's header: bullets, answers and holds, sentence
- * - `aboutCheck` · a file that does not say what it is, in one to three short lines
+ * - `aboutCheck` · a JSON that does not say what it is, in one to three short lines
  */
 import type { FileHead, SourceFinding, Texts } from './sourceCheckTypes.ts';
 
@@ -131,7 +131,7 @@ function headFaults(head: FileHead): readonly string[] {
 
 function aboutCheck(texts: Texts): readonly SourceFinding[] {
   return Object.keys(texts)
-    .filter((file) => texts[file] != null && /\.(json|dc\.html)$/.test(file))
+    .filter((file) => texts[file] != null && /\.json$/.test(file))
     .flatMap((file) =>
       headFaults(fileHeadOf(file, texts[file])).map((why) => ({
         kind: 'file without a sentence',

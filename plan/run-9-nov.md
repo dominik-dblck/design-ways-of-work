@@ -16,7 +16,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 | 4 | Tools | 8 | 8 |
 | 7 | P1 release | 5 | 5 |
 | 5 | e2e | 4 | 4 |
-| 6 | Port design | 4 | 6 |
+| 6 | Port design | 4 | 8 |
 | 8 | E19 + backup | 3 | 3 |
 
 Stage 6, measured 9 Nov 17:20 (the PM holds it: start asked): 1 · links, how wow's files stand in eagle-design's git
@@ -581,6 +581,31 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
   wow's own files by exact path only.
 - Night · held for the PM: checks part c (Content type logic, 8 keys moved) is the content-type snapshot naming
   files by their old names in the requirements' notes: following them is its retake, task 5, your word.
+- 10 Nov · PM · A: the sheet's own pages stay (Board, Feature: React already, their .html a shell the build writes);
+  the drawings of the product go. plan-Measure.html is a page of HTML, so it leaves with legacy/ (a React page of it
+  would be new work, not asked).
+- 10 Nov · the rename's checks, mine: a parts' folder named by itself (`content-types/destinations.ts`) was missed;
+  the mover now follows it, and a folder's name leads a path in movePaths.mentioned. The content-type snapshot's 8
+  moved keys: 7 are the names alone once followed, `files` the same once its lists are sorted (the new names sort
+  otherwise): its retake is the names and their order. My night's line "84 dist differences, the rename alone,
+  byte for byte" said too much: 40 files were compared byte for byte; the renamed bundles also carry the port's
+  earlier changes, which their old names' rows already explained.
+- 10 Nov · eagle-dev, on the port now: block-model read as the module (`blockModel`, plain node loads it, deep-equal
+  to the JSON); components.spec.json and modes.json are read by nothing there; its two CSS reads (tokens.css, the
+  export's colors_and_type.css) swap for app/styles/tokens.ts once it holds what they gave: it holds the 264
+  properties and the 10 faces, and gains `elements` (the element and class styles) and `reducedMotion` (my call: the
+  design system's own TS, as faces were); guards/ds-scan.ts retires (it scanned the drawings against those two).
+- 10 Nov · stage 6 task 8: 21 files to legacy/, 15 the product's (poc/, checks part d with its legacy world, page
+  shims and its list snapshot) and 6 of wow to wow's legacy/design/ (the Wireframes page, its view and test); the
+  build publishes legacy/ no more (its .dc.html drawings, the export's stylesheets, tokens.css, plan-Measure.html).
+- 10 Nov · eagle-dev: nothing there reads agentFlow.ts `later` or `neverRest` (not in its sheetReads, E14's CONSENT
+  reads the rows off commands.ts). Both stop being exports; `later` stays inside the agent check. `neverRest` was
+  read by the consent drawing alone: its sentence ("Everything else a person decides") goes to E14's notebook,
+  Carried in, the words of that row E14's to write (ask-only-visible-effect: nothing built shows it).
+- 10 Nov · the ratchet's 5 "file without a sentence" were the drawings a requirement's `replaces` names
+  (ManageApprovals, ApproveOnBehalf, ContextBar, ApprovalsPill, ApprovalBarRoles): gone from the build, read as
+  empty. aboutCheck reads a JSON only now; the guard's other page branches (codeScan, fileUses, pageWords,
+  sourceLayers, textKinds) retire with the JSON pass, the next task.
 
 ## Questions for the PM
 
@@ -668,6 +693,13 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
   Visible until then (no question): an HTML exported from E19 names each image by a url under the app's origin,
   behind its sign-in (R7), so pasted into a reader's Gmail or Outlook its images do not load; the wordmark loads
   only if the build side hands the client an image it reads (C14 left that to it: Gmail reads no SVG).
+- **PM, 10 Nov morning · B:** "Teraz w trakcie i pozbądźmy się jsonow - wszystko ts , każdy HTML i CSS leci do
+  legacy - jak coś to sobie je stamtąd podejrzymy bo za widok teraz odpowiada dev". The port's release goes now,
+  during E19, with its two retakes (guard-map, content-type). Stage 6 gains two tasks: 7 · no JSON of data, all
+  TypeScript (the emitted fixtures/data/*.json, the checks' snapshots, the assets' manifest; a file a tool reads only
+  as JSON stays: package.json, tsconfig, .claude/settings.json, eslint-suppressions.json) · 8 · every HTML and CSS
+  to legacy/, neither built, published nor checked (the 49 .dc.html drawings, the design system's export and its
+  stylesheets, tokens.css, poc/). Asked: whether the design side's own pages (Board, Feature, plan-Measure) go too.
 - **Morning, 10 Nov · the port's snapshots (task 5), for your word with the port's release:** the rename (task 4) is
   built on the rehearsal and in wow, untagged. Its one red is checks part c: the content-type snapshot's
   requirements' notes name files by their old names (`content-types.ts` → `contentTypes.ts`, 8 keys). Task 5 so

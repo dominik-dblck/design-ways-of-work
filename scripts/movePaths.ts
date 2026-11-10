@@ -73,12 +73,15 @@ function importsMoved(
   );
 }
 
-// an exact path, never a longer name holding it: `tools/a.ts` in `design/tools/a.ts` is the same file
+// an exact path, never a longer name holding it: `tools/a.ts` in `design/tools/a.ts` is the same file; a folder's `a/` leads a path
 const mentioned = (text: string, moves: readonly Move[]): string =>
   moves.reduce(
     (now, { from, to }) =>
       now.replace(
-        new RegExp(`(?<![\\w.-])${escaped(from)}(?![\\w-])`, 'g'),
+        new RegExp(
+          `(?<![\\w.-])${escaped(from)}${from.endsWith('/') ? '' : '(?![\\w-])'}`,
+          'g',
+        ),
         to,
       ),
     text,

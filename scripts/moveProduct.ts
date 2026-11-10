@@ -48,7 +48,7 @@ function expanded(
   });
 }
 
-// the names a row's file is known by beyond its path: its bundle, its own name, its parts' folder, a regex's
+// the names a row's file goes by: its bundle, its own name, its parts' folder by path or by name, a regex's
 const namesOf = (rows: readonly Move[]): readonly Move[] =>
   rows.flatMap(({ from, to }) => {
     const stem = (file: string): string =>
@@ -64,10 +64,11 @@ const namesOf = (rows: readonly Move[]): readonly Move[] =>
         from: `${from.replace(BUNDLED, '')}/`,
         to: `${to.replace(BUNDLED, '')}/`,
       },
+      { from: `${stem(from)}/`, to: `${stem(to)}/` },
     ];
   });
 
-// a bare name another file carries too would be renamed in both: refused before anything moves
+// a bare name another file or folder carries too would be renamed in both: refused before anything moves
 const sharedNames = ({
   names,
   files,
@@ -78,13 +79,15 @@ const sharedNames = ({
   readonly moves: readonly Move[];
 }): readonly string[] => {
   const moving = new Set(moves.map(({ from }) => from));
+  const carries = (file: string, from: string): boolean =>
+    from.endsWith('/')
+      ? file.split('/').slice(0, -1).includes(from.slice(0, -1))
+      : path.posix.basename(file) === from;
   return names
-    .filter(({ from }) => !from.endsWith('/'))
+    .filter(({ from }) => !from.slice(0, -1).includes('/'))
     .flatMap(({ from }) =>
       files
-        .filter(
-          (file) => path.posix.basename(file) === from && !moving.has(file),
-        )
+        .filter((file) => carries(file, from) && !moving.has(file))
         .map((file) => `${from} · also ${file}`),
     );
 };

@@ -118,7 +118,7 @@ index f72c4df..7f6fe41 100644
 +- `yarn spec-check` (`tools/specCheck.ts`) — `app/styles/components.spec.ts` holds together.
 +- Every commit runs ESLint, tsc, the architecture tests and the checks (D23); a push runs every test.
 diff --git a/.prettierignore b/.prettierignore
-index c3bb28b..872aa26 100644
+index c3bb28b..946be99 100644
 --- a/.prettierignore
 +++ b/.prettierignore
 @@ -1,25 +1,37 @@
@@ -149,9 +149,9 @@ index c3bb28b..872aa26 100644
 +# what the lint leaves aside
 +dist/
 +node_modules/
-+poc/
 +.artifact/
 +vendor/
++legacy/
 +# a product's tree, formatted in its product
 +dev/claude/
 +# a file a tool writes keeps the tool's layout
@@ -2148,7 +2148,7 @@ diff --git a/fixtures/data/block-model.json b/fixtures/data/blockModel.json
 similarity index 98%
 rename from fixtures/data/block-model.json
 rename to fixtures/data/blockModel.json
-index 56daad7..9abcd26 100644
+index 56daad7..d3f0814 100644
 --- a/fixtures/data/block-model.json
 +++ b/fixtures/data/blockModel.json
 @@ -810,7 +810,7 @@
@@ -2160,7 +2160,7 @@ index 56daad7..9abcd26 100644
      },
      {
        "name": "LocaleTextState",
-@@ -837,7 +837,7 @@
+@@ -837,28 +837,28 @@
        "name": "ContentType",
        "kind": "raw",
        "src": [
@@ -2169,7 +2169,14 @@ index 56daad7..9abcd26 100644
        ]
      },
      {
-@@ -851,14 +851,14 @@
+       "name": "DestinationKey",
+       "kind": "raw",
+       "src": [
+-        "type DestinationKey = 'eagleCore' | 'batch' | 'postmark'   // where a document is delivered: Eagle Core sends itself, Batch and Postmark are tools that send · content-types/destinations.ts (E10 1, 1a)"
++        "type DestinationKey = 'eagleCore' | 'batch' | 'postmark'   // where a document is delivered: Eagle Core sends itself, Batch and Postmark are tools that send · contentTypes/destinations.ts (E10 1, 1a)"
+       ]
+     },
+     {
        "name": "Kind",
        "kind": "raw",
        "src": [
@@ -2388,113 +2395,6 @@ index c3636f8..6b7c4bd 100644
    });
    const was: Readonly<Record<string, unknown>> = JSON.parse(
      mirror.read('scraps/content-type-snapshot.json'),
-diff --git a/guards/checks/legacyWorld.ts b/guards/checks/legacyWorld.ts
-new file mode 100644
-index 0000000..5309e9b
---- /dev/null
-+++ b/guards/checks/legacyWorld.ts
-@@ -0,0 +1,48 @@
-+/**
-+ * - `legacyWorld` · a page's window, every bundle a legacy page reads run in it
-+ * - the one place the checks run bundles: it leaves with the last legacy page
-+ */
-+import { loadAll, pageWorld } from './checkWorld.ts';
-+import type { Mirror, World } from './checkWorld.ts';
-+
-+// a legacy page's inline script reads these globals: each bundle carries its own imports
-+const PAGE_BUNDLES: readonly string[] = [
-+  'glossary.js',
-+  'messages.js',
-+  'messagesContent.js',
-+  'languages.js',
-+  'directory.js',
-+  'gateStates.js',
-+  'blockRules.js',
-+  'contentTypes.js',
-+  'contentModules.js',
-+  'contentAssembly.js',
-+  'blocks.js',
-+  'fieldKinds.js',
-+  'events.js',
-+  'sampleRun.js',
-+  'commands.js',
-+  'refusals.js',
-+  'gateRules.js',
-+  'scenes.js',
-+  'translationFlow.js',
-+  'roleCombinations.js',
-+  'approvalLogic.js',
-+  'sheetStatus.js',
-+  'deliveryFlow.js',
-+  'contentCheck.js',
-+  'contentTypeLogic.js',
-+  'catalog.js',
-+  'contentSamples.js',
-+  'contentList.js',
-+  'screenView.js',
-+  'wireframes.js',
-+];
-+
-+function legacyWorld(mirror: Mirror): World {
-+  const world = pageWorld();
-+  loadAll(world, { mirror, files: PAGE_BUNDLES });
-+  return world;
-+}
-+
-+export { legacyWorld };
-diff --git a/guards/checks/listPart.ts b/guards/checks/listPart.ts
-index bc7ca82..b8ee1f9 100644
---- a/guards/checks/listPart.ts
-+++ b/guards/checks/listPart.ts
-@@ -6,8 +6,8 @@ import { lineOf } from './checkWorld.ts';
- import type { Mirror, World } from './checkWorld.ts';
- import { LIST_REACT, ListLogic } from './pageShims.ts';
- import { legacyWorld } from './legacyWorld.ts';
--import * as CONTENT_SAMPLES from '../../sheet/samples/content-samples.ts';
--import * as CONTENT_TYPES from '../../sheet/model/content-types.ts';
-+import * as CONTENT_SAMPLES from '../../sheet/samples/contentSamples.ts';
-+import * as CONTENT_TYPES from '../../sheet/model/contentTypes.ts';
- 
- const PAGE = 'TypeLibrary.dc.html';
- // the page's logic class, its MSG beside it, each window read through the run's window
-@@ -64,14 +64,17 @@ function listShots(
-     for (const type of category.types) {
-       shots.set(
-         type.slug,
--        stripped({ shown: values({ pick: type.slug, route: 'browse' }).shown }),
-+        stripped({
-+          shown: values({ pick: type.slug, route: 'browse' })['shown'],
-+        }),
-       );
-       for (const group of CONTENT_SAMPLES.groups(type.slug) || [])
-         shots.set(
-           `${type.slug}|${group.id}`,
-           stripped({
--            flat: values({ pick: type.slug, group: group.id, route: 'browse' })
--              .flat,
-+            flat: values({ pick: type.slug, group: group.id, route: 'browse' })[
-+              'flat'
-+            ],
-           }),
-         );
-     }
-@@ -88,14 +91,14 @@ function harnessLog(mirror: Mirror): readonly string[] {
-   const was = Object.fromEntries(
-     Object.entries(before).map(([key, one]) => [
-       key,
--      one.cats ? { shown: one.shown } : one,
-+      one['cats'] ? { shown: one['shown'] } : one,
-     ]),
-   );
-   const moved = Object.keys(was).filter(
-     (key) => JSON.stringify(was[key]) !== JSON.stringify(shots[key]),
-   );
-   const sample: unknown = Object(
--    Object(Object(Object(shots.email).shown)[0]).rows,
-+    Object(Object(Object(shots['email']).shown)[0]).rows,
-   )[0];
-   return [
-     `keys ${Object.keys(was).length} · moved ${moved.length}`,
 diff --git a/guards/checks/measureCheck.ts b/guards/checks/measureCheck.ts
 index 1b6f9d6..8033645 100644
 --- a/guards/checks/measureCheck.ts
@@ -2548,33 +2448,6 @@ index 1b6f9d6..8033645 100644
      });
    }
    if (mirror.mode === 'snap' && !run.error)
-diff --git a/guards/checks/pageShims.ts b/guards/checks/pageShims.ts
-new file mode 100644
-index 0000000..4993b9c
---- /dev/null
-+++ b/guards/checks/pageShims.ts
-@@ -0,0 +1,21 @@
-+/**
-+ * - `ListLogic`, `LIST_REACT` · the base class and React the list logic reaches
-+ */
-+
-+// the list's harness never redraws: its state is set before each read
-+class ListLogic {
-+  props: unknown;
-+  constructor(props?: unknown) {
-+    this.props = props || {};
-+  }
-+  setState(): void {
-+    this.props = Object(this.props);
-+  }
-+  forceUpdate(): void {
-+    this.props = Object(this.props);
-+  }
-+}
-+
-+const LIST_REACT = { createRef: (): object => ({}) };
-+
-+export { LIST_REACT, ListLogic };
 diff --git a/guards/checks/parsePools.ts b/guards/checks/parsePools.ts
 index 06d04b8..96da151 100644
 --- a/guards/checks/parsePools.ts
@@ -3808,6 +3681,223 @@ index 0000000..09a8484
 +---
 +
 +**Ready to iterate.** See `preview/` for the card-level breakdown populating the Design System tab, and `ui_kits/mobile_app/index.html` for the interactive recreation.
+diff --git a/guards/__snapshots__/list-snapshot.json b/legacy/guards/__snapshots__/list-snapshot.json
+similarity index 100%
+rename from guards/__snapshots__/list-snapshot.json
+rename to legacy/guards/__snapshots__/list-snapshot.json
+diff --git a/legacy/guards/checks/legacyWorld.ts b/legacy/guards/checks/legacyWorld.ts
+new file mode 100644
+index 0000000..5309e9b
+--- /dev/null
++++ b/legacy/guards/checks/legacyWorld.ts
+@@ -0,0 +1,48 @@
++/**
++ * - `legacyWorld` · a page's window, every bundle a legacy page reads run in it
++ * - the one place the checks run bundles: it leaves with the last legacy page
++ */
++import { loadAll, pageWorld } from './checkWorld.ts';
++import type { Mirror, World } from './checkWorld.ts';
++
++// a legacy page's inline script reads these globals: each bundle carries its own imports
++const PAGE_BUNDLES: readonly string[] = [
++  'glossary.js',
++  'messages.js',
++  'messagesContent.js',
++  'languages.js',
++  'directory.js',
++  'gateStates.js',
++  'blockRules.js',
++  'contentTypes.js',
++  'contentModules.js',
++  'contentAssembly.js',
++  'blocks.js',
++  'fieldKinds.js',
++  'events.js',
++  'sampleRun.js',
++  'commands.js',
++  'refusals.js',
++  'gateRules.js',
++  'scenes.js',
++  'translationFlow.js',
++  'roleCombinations.js',
++  'approvalLogic.js',
++  'sheetStatus.js',
++  'deliveryFlow.js',
++  'contentCheck.js',
++  'contentTypeLogic.js',
++  'catalog.js',
++  'contentSamples.js',
++  'contentList.js',
++  'screenView.js',
++  'wireframes.js',
++];
++
++function legacyWorld(mirror: Mirror): World {
++  const world = pageWorld();
++  loadAll(world, { mirror, files: PAGE_BUNDLES });
++  return world;
++}
++
++export { legacyWorld };
+diff --git a/guards/checks/listPart.ts b/legacy/guards/checks/listPart.ts
+similarity index 90%
+rename from guards/checks/listPart.ts
+rename to legacy/guards/checks/listPart.ts
+index bc7ca82..b8ee1f9 100644
+--- a/guards/checks/listPart.ts
++++ b/legacy/guards/checks/listPart.ts
+@@ -6,8 +6,8 @@ import { lineOf } from './checkWorld.ts';
+ import type { Mirror, World } from './checkWorld.ts';
+ import { LIST_REACT, ListLogic } from './pageShims.ts';
+ import { legacyWorld } from './legacyWorld.ts';
+-import * as CONTENT_SAMPLES from '../../sheet/samples/content-samples.ts';
+-import * as CONTENT_TYPES from '../../sheet/model/content-types.ts';
++import * as CONTENT_SAMPLES from '../../sheet/samples/contentSamples.ts';
++import * as CONTENT_TYPES from '../../sheet/model/contentTypes.ts';
+ 
+ const PAGE = 'TypeLibrary.dc.html';
+ // the page's logic class, its MSG beside it, each window read through the run's window
+@@ -64,14 +64,17 @@ function listShots(
+     for (const type of category.types) {
+       shots.set(
+         type.slug,
+-        stripped({ shown: values({ pick: type.slug, route: 'browse' }).shown }),
++        stripped({
++          shown: values({ pick: type.slug, route: 'browse' })['shown'],
++        }),
+       );
+       for (const group of CONTENT_SAMPLES.groups(type.slug) || [])
+         shots.set(
+           `${type.slug}|${group.id}`,
+           stripped({
+-            flat: values({ pick: type.slug, group: group.id, route: 'browse' })
+-              .flat,
++            flat: values({ pick: type.slug, group: group.id, route: 'browse' })[
++              'flat'
++            ],
+           }),
+         );
+     }
+@@ -88,14 +91,14 @@ function harnessLog(mirror: Mirror): readonly string[] {
+   const was = Object.fromEntries(
+     Object.entries(before).map(([key, one]) => [
+       key,
+-      one.cats ? { shown: one.shown } : one,
++      one['cats'] ? { shown: one['shown'] } : one,
+     ]),
+   );
+   const moved = Object.keys(was).filter(
+     (key) => JSON.stringify(was[key]) !== JSON.stringify(shots[key]),
+   );
+   const sample: unknown = Object(
+-    Object(Object(Object(shots.email).shown)[0]).rows,
++    Object(Object(Object(shots['email']).shown)[0]).rows,
+   )[0];
+   return [
+     `keys ${Object.keys(was).length} · moved ${moved.length}`,
+diff --git a/legacy/guards/checks/pageShims.ts b/legacy/guards/checks/pageShims.ts
+new file mode 100644
+index 0000000..4993b9c
+--- /dev/null
++++ b/legacy/guards/checks/pageShims.ts
+@@ -0,0 +1,21 @@
++/**
++ * - `ListLogic`, `LIST_REACT` · the base class and React the list logic reaches
++ */
++
++// the list's harness never redraws: its state is set before each read
++class ListLogic {
++  props: unknown;
++  constructor(props?: unknown) {
++    this.props = props || {};
++  }
++  setState(): void {
++    this.props = Object(this.props);
++  }
++  forceUpdate(): void {
++    this.props = Object(this.props);
++  }
++}
++
++const LIST_REACT = { createRef: (): object => ({}) };
++
++export { LIST_REACT, ListLogic };
+diff --git a/poc/react-wireframes/.prettierignore b/legacy/poc/react-wireframes/.prettierignore
+similarity index 100%
+rename from poc/react-wireframes/.prettierignore
+rename to legacy/poc/react-wireframes/.prettierignore
+diff --git a/poc/react-wireframes/.prettierrc.json b/legacy/poc/react-wireframes/.prettierrc.json
+similarity index 100%
+rename from poc/react-wireframes/.prettierrc.json
+rename to legacy/poc/react-wireframes/.prettierrc.json
+diff --git a/poc/react-wireframes/eslint.config.js b/legacy/poc/react-wireframes/eslint.config.js
+similarity index 100%
+rename from poc/react-wireframes/eslint.config.js
+rename to legacy/poc/react-wireframes/eslint.config.js
+diff --git a/poc/react-wireframes/package-lock.json b/legacy/poc/react-wireframes/package-lock.json
+similarity index 100%
+rename from poc/react-wireframes/package-lock.json
+rename to legacy/poc/react-wireframes/package-lock.json
+diff --git a/poc/react-wireframes/package.json b/legacy/poc/react-wireframes/package.json
+similarity index 100%
+rename from poc/react-wireframes/package.json
+rename to legacy/poc/react-wireframes/package.json
+diff --git a/poc/react-wireframes/public/index.html b/legacy/poc/react-wireframes/public/index.html
+similarity index 100%
+rename from poc/react-wireframes/public/index.html
+rename to legacy/poc/react-wireframes/public/index.html
+diff --git a/poc/react-wireframes/src/App.tsx b/legacy/poc/react-wireframes/src/App.tsx
+similarity index 99%
+rename from poc/react-wireframes/src/App.tsx
+rename to legacy/poc/react-wireframes/src/App.tsx
+index 6d7f3ce..eab8a38 100644
+--- a/poc/react-wireframes/src/App.tsx
++++ b/legacy/poc/react-wireframes/src/App.tsx
+@@ -28,7 +28,7 @@ type ViewResult = { view: EditorView; error: null } | { view: null; error: strin
+ function computeView(num: string, viewer: string): ViewResult {
+   try {
+     const sv = window.ScreenView;
+-    if (!sv) return { view: null, error: 'screen-view.js did not load' };
++    if (!sv) return { view: null, error: 'screenView.js did not load' };
+     return { view: sv.editorView(num, viewer ? { viewer } : undefined), error: null };
+   } catch (e) {
+     return { view: null, error: e instanceof Error ? e.message : String(e) };
+diff --git a/poc/react-wireframes/src/main.tsx b/legacy/poc/react-wireframes/src/main.tsx
+similarity index 100%
+rename from poc/react-wireframes/src/main.tsx
+rename to legacy/poc/react-wireframes/src/main.tsx
+diff --git a/poc/react-wireframes/src/sheet.d.ts b/legacy/poc/react-wireframes/src/sheet.d.ts
+similarity index 98%
+rename from poc/react-wireframes/src/sheet.d.ts
+rename to legacy/poc/react-wireframes/src/sheet.d.ts
+index a19ab78..fa9a87f 100644
+--- a/poc/react-wireframes/src/sheet.d.ts
++++ b/legacy/poc/react-wireframes/src/sheet.d.ts
+@@ -1,5 +1,5 @@
+ // sheet.d.ts · the types of what the sheet's scripts put on window, as far as this page reads them
+-// The values come from the design project (wireframes.js, screen-view.js, directory.js, gate-states.js);
++// The values come from the design project (wireframes.js, screenView.js, directory.js, gateStates.js);
+ // this file only names their shape.
+ 
+ export interface WireframeEntry {
+diff --git a/poc/react-wireframes/tsconfig.json b/legacy/poc/react-wireframes/tsconfig.json
+similarity index 100%
+rename from poc/react-wireframes/tsconfig.json
+rename to legacy/poc/react-wireframes/tsconfig.json
+diff --git a/poc/react-wireframes/vite.config.ts b/legacy/poc/react-wireframes/vite.config.ts
+similarity index 86%
+rename from poc/react-wireframes/vite.config.ts
+rename to legacy/poc/react-wireframes/vite.config.ts
+index c02b843..8a44169 100644
+--- a/poc/react-wireframes/vite.config.ts
++++ b/legacy/poc/react-wireframes/vite.config.ts
+@@ -1,5 +1,5 @@
+ // vite.config.ts · builds the React page into one classic script, dist/app.js, beside the page dist/index.html
+-// The sheet's own files (wireframes.js, screen-view.js …) are not bundled: the page loads them as the
++// The sheet's own files (wireframes.js, screenView.js …) are not bundled: the page loads them as the
+ // project's pages do, so the bundle reads the sheet and holds none of it.
+ import { defineConfig } from 'vite';
+ import react from '@vitejs/plugin-react';
 diff --git a/app/styles/tokens.css b/legacy/tokens.css
 similarity index 100%
 rename from app/styles/tokens.css
@@ -3910,41 +4000,6 @@ index d82391f..70ad2e9 100644
    },
    "dependencies": {
      "@emotion/react": "11.14.0",
-diff --git a/poc/react-wireframes/src/App.tsx b/poc/react-wireframes/src/App.tsx
-index 6d7f3ce..eab8a38 100644
---- a/poc/react-wireframes/src/App.tsx
-+++ b/poc/react-wireframes/src/App.tsx
-@@ -28,7 +28,7 @@ type ViewResult = { view: EditorView; error: null } | { view: null; error: strin
- function computeView(num: string, viewer: string): ViewResult {
-   try {
-     const sv = window.ScreenView;
--    if (!sv) return { view: null, error: 'screen-view.js did not load' };
-+    if (!sv) return { view: null, error: 'screenView.js did not load' };
-     return { view: sv.editorView(num, viewer ? { viewer } : undefined), error: null };
-   } catch (e) {
-     return { view: null, error: e instanceof Error ? e.message : String(e) };
-diff --git a/poc/react-wireframes/src/sheet.d.ts b/poc/react-wireframes/src/sheet.d.ts
-index a19ab78..fa9a87f 100644
---- a/poc/react-wireframes/src/sheet.d.ts
-+++ b/poc/react-wireframes/src/sheet.d.ts
-@@ -1,5 +1,5 @@
- // sheet.d.ts · the types of what the sheet's scripts put on window, as far as this page reads them
--// The values come from the design project (wireframes.js, screen-view.js, directory.js, gate-states.js);
-+// The values come from the design project (wireframes.js, screenView.js, directory.js, gateStates.js);
- // this file only names their shape.
- 
- export interface WireframeEntry {
-diff --git a/poc/react-wireframes/vite.config.ts b/poc/react-wireframes/vite.config.ts
-index c02b843..8a44169 100644
---- a/poc/react-wireframes/vite.config.ts
-+++ b/poc/react-wireframes/vite.config.ts
-@@ -1,5 +1,5 @@
- // vite.config.ts · builds the React page into one classic script, dist/app.js, beside the page dist/index.html
--// The sheet's own files (wireframes.js, screen-view.js …) are not bundled: the page loads them as the
-+// The sheet's own files (wireframes.js, screenView.js …) are not bundled: the page loads them as the
- // project's pages do, so the bundle reads the sheet and holds none of it.
- import { defineConfig } from 'vite';
- import react from '@vitejs/plugin-react';
 diff --git a/public/assets/icons/SOURCE.md b/public/assets/icons/SOURCE.md
 index 1b7e18a..06b0b4b 100644
 --- a/public/assets/icons/SOURCE.md
@@ -4901,10 +4956,24 @@ index ca4b0ff..98a790c 100644
      { on: 18, edge: "ROWS · whose agent a row marks", options: {"a":"any person’s, the tooltip naming whose","b":"the reader’s own"}, pick: "a", why: "PM, 13 Oct (open 1) · everyone sees who uses an agent · b hides the others’", into: "criterion 18" },
      { on: 19, edge: "MARK · the agent’s block in the editor", options: {"a":"marked from via","b":"unmarked, the log alone"}, pick: "a", why: "PM, 13 Oct (point 6) · on behalf is drawn · b leaves it to the log", into: "criterion 19" },
 diff --git a/roadmaps/E14/E14Notes.ts b/roadmaps/E14/E14Notes.ts
-index 4c70bee..1b7dfaf 100644
+index 4c70bee..350be05 100644
 --- a/roadmaps/E14/E14Notes.ts
 +++ b/roadmaps/E14/E14Notes.ts
-@@ -66,11 +66,11 @@ const E14_NOTES: EpicNotes = {
+@@ -32,6 +32,13 @@ const E14_NOTES: EpicNotes = {
+         'point 3 is answered by it: every role',
+       ],
+     },
++    {
++      kind: 'carriedIn',
++      title: 'Carried in from the drawings’ retirement (10 Nov)',
++      lines: [
++        'the consent drawing (legacy/AgentConsentDialog.dc.html) named its last IT NEVER row “Everything else a person decides”, for every closed command no row of agentFlow.ts · never takes · it was agentFlow.ts · neverRest, read by the drawing alone, and stopped being an export when the drawing went to legacy: the build side reads the rows off commands.ts (T-E14-00 · CONSENT) · the words of that row are E14’s to write',
++      ],
++    },
+     {
+       kind: 'found',
+       title: 'Findings',
+@@ -66,11 +73,11 @@ const E14_NOTES: EpicNotes = {
        kind: 'check',
        title: 'Cross-check of the nine points (13 Oct)',
        lines: [
@@ -4918,7 +4987,7 @@ index 4c70bee..1b7dfaf 100644
          "**Superseded 14 Oct (rule:rows-name-their-feature · PM):** E14's rows stay in the files T-E09-00 builds, each naming E14; the build leaves them out by epic, and via by Payloads · FIELD_SINCE. rule:contract-on-sheet-when-decided holds: the contract is on the sheet the day it is decided.",
        ],
      },
-@@ -90,7 +90,7 @@ const E14_NOTES: EpicNotes = {
+@@ -90,7 +97,7 @@ const E14_NOTES: EpicNotes = {
        lines: [
          "a · the last writer: a person's edit clears the agent's mark · b · the agent stays until a version a person changed without it: via is set, never cleared, before the version · c · both, each edit with its writer",
          "pick: b (PM, 13 Oct) · why: answers whether the agent took part, at one field · a lost: one word's fix erases the agent's part · c lost: typing becomes a history of edits, against EditBlock's decision",
@@ -4927,7 +4996,7 @@ index 4c70bee..1b7dfaf 100644
        ],
      },
      {
-@@ -107,16 +107,16 @@ const E14_NOTES: EpicNotes = {
+@@ -107,16 +114,16 @@ const E14_NOTES: EpicNotes = {
        title:
          'Open 5 · what cutting off the last app does to the access (5 Nov)',
        lines: [
@@ -4947,7 +5016,7 @@ index 4c70bee..1b7dfaf 100644
        lines: [],
      },
      {
-@@ -127,13 +127,13 @@ const E14_NOTES: EpicNotes = {
+@@ -127,13 +134,13 @@ const E14_NOTES: EpicNotes = {
          "the label (PM, 13 Oct · a): 'Agent · Off' / 'Agent · On', the name · state pattern without 'API' · b ('Enable agent' / 'Agent on') lost: two patterns in one pill",
          "how it reads, from ACCESS: off · on here · on elsewhere ('On · Mailing standard', a click moves it) · no app connected (it leads to the consent) · beside it, the others' agents on this document · a row marks any person's agent, its tooltip names whose",
          "into, at the transfer: components.spec.json · AgentToggle (label) · AppShell, DocumentRow, FolderRow (the tooltips lose 'Agent API') · drawn now in Agent switch.dc.html",
@@ -4963,7 +5032,7 @@ index 4c70bee..1b7dfaf 100644
        lines: [
          "Agent access.dc.html (the checks, the commands per role, the source and the languages, the sign-in, the access) · Agent switch.dc.html (the pill's four views, the others' agents) · Agent connect.dc.html (the consent: may from the column, never grouped by what each command emits, later with E07 and E08; the connected apps)",
          'LATER holds ProposeSourceFix too (E08 · SF1)',
-@@ -147,11 +147,11 @@ const E14_NOTES: EpicNotes = {
+@@ -147,11 +154,11 @@ const E14_NOTES: EpicNotes = {
          "commands.js · the agent column (AGENT: source, languages, images, later; absent = a person's) · SwitchAgentOn and SwitchAgentOff (E14-S1, every role, a person's own) · cutting an app off is the authorization server's revocation, outside the log",
          "events.js · agent.access_on and agent.access_off (outside the run) · agentApiOf derives the agent's types from the column",
          'payloads.js · the two samples · block.revised carries via (null by hand)',
@@ -5534,10 +5603,10 @@ index 9c7b0cf..ce1fef1 100644
 +export type { TrackFinding, TrackReading, TrackRow };
 diff --git a/scope.ts b/scope.ts
 new file mode 100644
-index 0000000..a178149
+index 0000000..7e21f73
 --- /dev/null
 +++ b/scope.ts
-@@ -0,0 +1,411 @@
+@@ -0,0 +1,409 @@
 +// scope.ts · what the design project names once: its ESLint config, its shared tests and its tools read it
 +import type { RepoScope } from './shared/repoScope.ts';
 +import {
@@ -5663,13 +5732,13 @@ index 0000000..a178149
 +  browser: {
 +    none: 'its app is for the PM and the team to look at; the build side runs the full suite (PM, 9 Nov)',
 +  },
-+  // vendor/wow/ is the taken files as the take wrote them, checked where they are written
++  // legacy/ is kept as it was (D24), never checked; vendor/wow/ the taken files as the take wrote them
 +  ignores: [
 +    'dist/**',
 +    'node_modules/**',
-+    'poc/**',
 +    '.artifact/**',
 +    'vendor/**',
++    'legacy/**',
 +  ],
 +  // the build side's .claude/, held for it: its scope reads the data, its product checks the tree
 +  productTrees: ['dev/claude/**'],
@@ -5772,8 +5841,6 @@ index 0000000..a178149
 +  runsCode: {
 +    'guards/checks/checkWorld.ts':
 +      'a bundle the build wrote, run in the world a page gives it',
-+    'guards/checks/listPart.ts':
-+      "the list page's own script, run to read what it draws",
 +  },
 +  // the tables whose rows are objects (rules, plans, tokens, words): a row one line however long (shared/lint/prettierConfig.ts)
 +  tables: [
@@ -6441,10 +6508,10 @@ index 674b63d..f2eabdf 100644
        'params?: Record<string, number | string>     // what the sentence’s braces read, named after the validator — {maxLength}, {max}, {types}',
      ],
 diff --git a/sheet/contract/block-model/typesGateFacts.ts b/sheet/contract/blockModel/typesGateFacts.ts
-similarity index 90%
+similarity index 89%
 rename from sheet/contract/block-model/typesGateFacts.ts
 rename to sheet/contract/blockModel/typesGateFacts.ts
-index a4a17db..2edc4f5 100644
+index a4a17db..b8bfdab 100644
 --- a/sheet/contract/block-model/typesGateFacts.ts
 +++ b/sheet/contract/blockModel/typesGateFacts.ts
 @@ -14,7 +14,7 @@ const TYPES_GATE_FACTS = [
@@ -6456,7 +6523,7 @@ index a4a17db..2edc4f5 100644
    },
    {
      name: 'LocaleTextState',
-@@ -41,7 +41,7 @@ const TYPES_GATE_FACTS = [
+@@ -41,28 +41,28 @@ const TYPES_GATE_FACTS = [
      name: 'ContentType',
      kind: 'raw',
      src: [
@@ -6465,7 +6532,14 @@ index a4a17db..2edc4f5 100644
      ],
    },
    {
-@@ -55,14 +55,14 @@ const TYPES_GATE_FACTS = [
+     name: 'DestinationKey',
+     kind: 'raw',
+     src: [
+-      "type DestinationKey = 'eagleCore' | 'batch' | 'postmark'   // where a document is delivered: Eagle Core sends itself, Batch and Postmark are tools that send · content-types/destinations.ts (E10 1, 1a)",
++      "type DestinationKey = 'eagleCore' | 'batch' | 'postmark'   // where a document is delivered: Eagle Core sends itself, Batch and Postmark are tools that send · contentTypes/destinations.ts (E10 1, 1a)",
+     ],
+   },
+   {
      name: 'Kind',
      kind: 'raw',
      src: [
@@ -6982,13 +7056,23 @@ index 4141744..0e1574f 100644
    OtherAgent,
    SignInStep,
 diff --git a/sheet/logic/agent/agent-flow.ts b/sheet/logic/agent/agentFlow.ts
-similarity index 92%
+similarity index 85%
 rename from sheet/logic/agent/agent-flow.ts
 rename to sheet/logic/agent/agentFlow.ts
-index 995e54e..bc394f8 100644
+index 995e54e..60a8579 100644
 --- a/sheet/logic/agent/agent-flow.ts
 +++ b/sheet/logic/agent/agentFlow.ts
-@@ -9,7 +9,7 @@ import {
+@@ -1,7 +1,7 @@
+ /**
+- * - `agent`, `later`, `check` · the agent column off commands.ts, and its check
++ * - `agent`, `check` · the agent column off commands.ts, and its check
+  * - `checks`, `reads`, `notRead`, `roles` · how a call is checked, what it reads
+- * - `never`, `neverRest`, `open` · what a person never hands it, what stays open
++ * - `never`, `open` · what a person never hands it, what stays open
+  */
+ import {
+   CHECKS,
+@@ -9,19 +9,18 @@ import {
    OPEN_FINDINGS,
    READS,
    ROLES,
@@ -6997,9 +7081,10 @@ index 995e54e..bc394f8 100644
  import {
    COMMAND_NOTES,
    DECISION,
-@@ -18,10 +18,10 @@ import {
+   KIND_WORDS,
+   LATER_EPICS,
    NEVER,
-   NEVER_REST,
+-  NEVER_REST,
    THREAD_COMMANDS,
 -} from './agent-flow/agentCommands.ts';
 -import type { AgentCheck } from './agent-flow/agentFlowTypes.ts';
@@ -7011,6 +7096,16 @@ index 995e54e..bc394f8 100644
  
  // closed by default: a command the agent column does not mark is a person's
  function readColumn(): {
+@@ -93,9 +92,7 @@ export {
+   AGENT as agent,
+   check,
+   CHECKS as checks,
+-  LATER as later,
+   NEVER as never,
+-  NEVER_REST as neverRest,
+   NOT_READ as notRead,
+   OPEN_FINDINGS as open,
+   READS as reads,
 diff --git a/sheet/logic/agent/agent-flow/agentChecks.ts b/sheet/logic/agent/agentFlow/agentChecks.ts
 similarity index 96%
 rename from sheet/logic/agent/agent-flow/agentChecks.ts
@@ -7028,9 +7123,28 @@ index 34c2643..b720805 100644
    {
      at: 'Token',
 diff --git a/sheet/logic/agent/agent-flow/agentCommands.ts b/sheet/logic/agent/agentFlow/agentCommands.ts
-similarity index 100%
+similarity index 89%
 rename from sheet/logic/agent/agent-flow/agentCommands.ts
 rename to sheet/logic/agent/agentFlow/agentCommands.ts
+index b223bd0..05f6c59 100644
+--- a/sheet/logic/agent/agent-flow/agentCommands.ts
++++ b/sheet/logic/agent/agentFlow/agentCommands.ts
+@@ -1,7 +1,7 @@
+ /**
+  * - `KIND_WORDS`, `COMMAND_NOTES` · the words beside each kind of command
+  * - `LATER_EPICS`, `THREAD_COMMANDS` · which epic a later command waits on
+- * - `DECISION`, `NEVER`, `NEVER_REST` · what a person never hands the agent
++ * - `DECISION`, `NEVER` · what a person never hands the agent
+  */
+ 
+ // the agent column lives in commands.ts · here only the words a reader sees beside each kind
+@@ -49,6 +49,3 @@ export const NEVER: readonly (readonly [RegExp, string])[] = [
+   [/^delivery\./, 'Send'],
+   [/^document\./, 'Create, rename, move or trash a document'],
+ ];
+-
+-// whatever no group above takes and the column does not mark: groups, deleting an image, deciding a proposal
+-export const NEVER_REST = 'Everything else a person decides';
 diff --git a/sheet/logic/agent/agent-flow/agentFlowTypes.ts b/sheet/logic/agent/agentFlow/agentFlowTypes.ts
 similarity index 100%
 rename from sheet/logic/agent/agent-flow/agentFlowTypes.ts
@@ -12932,7 +13046,7 @@ index bfe840a..e264905 100644
  const TEXTS = ['none', 'drafted', 'written'];
  const SIGNATURES = [
 diff --git a/tsconfig.json b/tsconfig.json
-index 453869a..929a020 100644
+index 453869a..20ffae2 100644
 --- a/tsconfig.json
 +++ b/tsconfig.json
 @@ -1,18 +1,15 @@
@@ -12968,7 +13082,8 @@ index 453869a..929a020 100644
 +    "shared/**/*.ts",
 +    "design-system/**/*.ts"
    ],
-   "exclude": ["node_modules", "dist", "poc", ".artifact"]
+-  "exclude": ["node_modules", "dist", "poc", ".artifact"]
++  "exclude": ["node_modules", "dist", ".artifact"]
  }
 diff --git a/vitest.config.mts b/vitest.config.mts
 index d9e8e7d..712e067 100644

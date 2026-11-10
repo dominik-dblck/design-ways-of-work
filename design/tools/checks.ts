@@ -10,7 +10,6 @@ import type { Mirror } from '../guards/checks/checkWorld.ts';
 import { contentTypePart } from '../guards/checks/contentTypePart.ts';
 import { guardPart } from '../guards/checks/guardPart.ts';
 import { journeysPart } from '../guards/checks/journeysPart.ts';
-import { listPart } from '../guards/checks/listPart.ts';
 import { flowPart, rulesPart } from '../guards/checks/rulesParts.ts';
 import { sourceOf } from './layout.ts';
 import { sentencesPart } from '../guards/checks/sentencesPart.ts';
@@ -27,7 +26,6 @@ const PARTS: Readonly<
   g: journeysPart,
   b: sentencesPart,
   c: contentTypePart,
-  d: listPart,
   w: wireframesPart,
 };
 

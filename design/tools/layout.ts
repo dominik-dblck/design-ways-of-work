@@ -42,7 +42,6 @@ const SHEET_HOMES: readonly string[] = [
 // the homes copied as they are: [repository folder, folder in dist/project/]
 const FILE_HOMES: readonly (readonly [string, string])[] = [
   ['records', ''],
-  ['legacy', ''],
   ['guards/__snapshots__', 'scraps'],
   ['public/assets', 'assets'],
   ['fixtures/data', ''],

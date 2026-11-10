@@ -9,7 +9,6 @@ import { modesLine } from './modesCheck.ts';
 import { rulesLine } from './rulesCheck.ts';
 import type { Mirror } from './checkWorld.ts';
 import { measureLines } from './measureCheck.ts';
-import { copiedRulesLine } from './copiedRules.ts';
 import { poolsLine } from './parsePools.ts';
 import { guardRun } from './runChecks.ts';
 import type { GuardRun } from './runChecks.ts';
@@ -98,7 +97,6 @@ function guardPart(mirror: Mirror): readonly string[] {
       text: run.ratchet.length ? JSON.stringify(run.ratchet) : '0',
     }),
     screenKeysLine(mirror),
-    copiedRulesLine(mirror),
     capabilitiesLine(mirror),
     decisionsLine(),
     modesLine(mirror),
