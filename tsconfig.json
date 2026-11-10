@@ -21,6 +21,7 @@
     "design-system/**/*.ts",
     "tests/**/*.ts",
     "eslint.config.ts",
+    "prettier.config.ts",
     "cspell.config.ts",
     "syncpack.config.ts",
     "commitlint.config.ts",

@@ -2,8 +2,10 @@
  * - `wireframesPart` · part w: every wireframe through the editor's view: no error,
  * - the gaps under their baseline, the views against their snapshot
  */
+import { wireframesSnapshot } from '../__snapshots__/wireframesSnapshot.ts';
 import { lineOf, errorMessageOf } from './checkWorld.ts';
 import type { Mirror } from './checkWorld.ts';
+import { snapshotRecord, snapshotText } from './snapshotModule.ts';
 import * as SCREEN_VIEW from '../../sheet/screens/screenView.ts';
 import * as WIREFRAMES from '../../sheet/screens/wireframes.ts';
 
@@ -56,15 +58,16 @@ function viewsLine(
   views: Readonly<Record<string, unknown>>,
 ): string {
   if (mirror.mode === 'snap') {
-    mirror.save('scraps/wireframes-snapshot.json', JSON.stringify(views));
+    mirror.save(
+      'scraps/wireframesSnapshot.ts',
+      snapshotText('wireframesSnapshot', views),
+    );
     return lineOf('wireframes · snapshot', {
       ok: true,
       text: `${Object.keys(views).length} taken`,
     });
   }
-  const was: Readonly<Record<string, unknown>> = JSON.parse(
-    mirror.readOr('scraps/wireframes-snapshot.json', null) ?? '{}',
-  );
+  const was = snapshotRecord(wireframesSnapshot);
   const moved = Object.keys(views).filter(
     (key) => JSON.stringify(was[key]) !== JSON.stringify(views[key]),
   );

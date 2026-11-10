@@ -10,7 +10,6 @@ dev/
 shared/rules/
 # a file a tool writes keeps the tool's layout
 design-system/guide.md
-.prettierrc.json
 .prettierignore
 design-system/guide.md
 # prose keeps the layout its writer gave it

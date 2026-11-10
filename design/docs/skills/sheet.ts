@@ -51,7 +51,7 @@ const skill: SkillFile = {
         '`yarn checks` (build, then `tools/checks.ts` on `dist/project/`, what it writes saved back to its home, `tools/layout.ts · sourceOf`) — every part, one file each in `guards/checks/` (a e f g b c d w r h; `checkWorld.ts` is the world checks and packs run in); `yarn checks c` for one. They list the files they wrote.',
         "`--snap` retakes a part's snapshot, only after the PM accepted the change it records (parts b, c and d hand their harness `'diff'` hard-coded: `--snap` does not reach them).",
         "The checks read the top folder of `dist/project/` only, as Claude Design's run_script did.",
-        '`guards/__snapshots__/guard-map.json` is rewritten by every part a run (its time moves): commit and publish it only with a change that moves the map; otherwise `git checkout guards/__snapshots__/guard-map.json`.',
+        '`guards/__snapshots__/guardMap.ts` is the guard map part a writes on every run: it moves only with a change that moves the map, and is committed and published with that change.',
         '`yarn spec-check` (`tools/specCheck.ts`) — `app/styles/components.spec.ts` holds together.',
         'Every commit runs ESLint, tsc, the architecture tests and the checks (D23); a push runs every test.',
       ],

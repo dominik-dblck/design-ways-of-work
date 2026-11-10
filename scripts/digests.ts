@@ -43,10 +43,7 @@ function written(root: string): ReadonlyMap<string, string> {
 
 function contentOf(file: string): string {
   if (!fs.existsSync(file)) return '<gone>';
-  const bytes = fs.readFileSync(file);
-  return file.endsWith('guard-map.json')
-    ? bytes.toString('utf8').replace(/"at":"[^"]*"/, '"at":""')
-    : bytes.toString('latin1');
+  return fs.readFileSync(file).toString('latin1');
 }
 
 // each linked file's bytes: a run of the copy that changes one has written this repository

@@ -71,12 +71,12 @@ const scope: RepoScope = {
   components: [],
   // and no renderer drawn inside it
   renderers: [],
-  // prettier's two files, from this scope
+  // prettier's ignore file, from this scope
   generators: [
     {
       script: 'shared/lint/writeFormatterFiles.ts',
       args: [],
-      writes: ['.prettierrc.json', '.prettierignore'],
+      writes: ['.prettierignore'],
     },
     {
       script: 'design-system/writeGuide.ts',

@@ -7,6 +7,7 @@ import { lineOf } from './checkWorld.ts';
 import { decisionsLine } from './decisionsCheck.ts';
 import { modesLine } from './modesCheck.ts';
 import { rulesLine } from './rulesCheck.ts';
+import { snapshotText } from './snapshotModule.ts';
 import type { Mirror } from './checkWorld.ts';
 import { measureLines } from './measureCheck.ts';
 import { poolsLine } from './parsePools.ts';
@@ -27,7 +28,6 @@ function mapLine(run: GuardRun, mirror: Mirror): string {
   });
   const map = {
     ...drawn,
-    at: new Date().toISOString(),
     ratchet: {
       baseline: run.guard.baseline,
       now: run.inScope,
@@ -35,10 +35,10 @@ function mapLine(run: GuardRun, mirror: Mirror): string {
       rest: run.rest,
     },
   };
-  mirror.save('scraps/guard-map.json', JSON.stringify(map));
+  mirror.save('scraps/guardMap.ts', snapshotText('guardMap', map));
   return lineOf('architecture map', {
     ok: map.files.length > 0,
-    text: `${map.files.length} files · ${map.links.length} links · ${map.quiet.length} read, nothing to draw · scraps/guard-map.json`,
+    text: `${map.files.length} files · ${map.links.length} links · ${map.quiet.length} read, nothing to draw · scraps/guardMap.ts`,
   });
 }
 

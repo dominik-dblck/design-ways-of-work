@@ -29,7 +29,6 @@ const diff = execFileSync(
     'product',
     '--',
     '.',
-    ':!guards/__snapshots__/guard-map.json',
     ...LINKED_HOMES.flatMap(([, at]) => (at ? [`:!${at}`] : [])),
     // a linked file is this repository's: a write through its link is no port
     ...linkedFiles().map(([, at]) => `:!${at}`),
