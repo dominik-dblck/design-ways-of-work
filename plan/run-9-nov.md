@@ -16,7 +16,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 | 4 | Tools | 8 | 8 |
 | 7 | P1 release | 5 | 5 |
 | 5 | e2e | 4 | 4 |
-| 6 | Port design | 3 | 6 |
+| 6 | Port design | 4 | 6 |
 | 8 | E19 + backup | 3 | 3 |
 
 Stage 6, measured 9 Nov 17:20 (the PM holds it: start asked): 1 · links, how wow's files stand in eagle-design's git
@@ -60,6 +60,7 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
 - 20:28 · stage 6 · 1 of 6 · take built in wow, product side lands with the patch
 - 21:10 · stage 6 · 2 of 6 · port branch on wow v0.1.4, feature tier green
 - 00:59 · stage 6 · 3 of 6 · vendor/wow on the branch a95cc34, wow v0.1.7, faces in tokens
+- 01:56 · stage 6 · 4 of 6 · rename built: wow 4915103, moves.tsv; branch waits on task 5
 
 - 08:24 · stage 1 · 1 of 5 · the build side's skills to legacy/ (8bfcd8e)
 - 08:51 · stage 1 · 2 of 5 · 7g commitlint (d282df5)
@@ -664,6 +665,9 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
 - **Morning, 10 Nov · the bucket's epic:** C17 is out of E19 by your word; R7 (public asset files, U3) is open
   for "another epic". Proposed: E10, where Publish hands an email's HTML to Batch and Postmark and its images must
   load in a reader's client. A · E10 · B · an epic of its own.
+  Visible until then (no question): an HTML exported from E19 names each image by a url under the app's origin,
+  behind its sign-in (R7), so pasted into a reader's Gmail or Outlook its images do not load; the wordmark loads
+  only if the build side hands the client an image it reads (C14 left that to it: Gmail reads no SVG).
 - **Morning, 10 Nov · the port's snapshots (task 5), for your word with the port's release:** the rename (task 4) is
   built on the rehearsal and in wow, untagged. Its one red is checks part c: the content-type snapshot's
   requirements' notes name files by their old names (`content-types.ts` → `contentTypes.ts`, 8 keys). Task 5 so
