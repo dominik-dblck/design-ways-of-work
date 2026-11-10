@@ -645,6 +645,9 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
 - 10 Nov · the port branch took v0.1.8 green (feature tier, checks), but its commit tier refused: ESLint 10 reads the
   config nearest a file, and a staged move into legacy/ handed it a kept eslint.config.js (legacy/poc) whose plugin no
   install holds. The commit tier names no file the scope ignores now (ec0e275): v0.1.9.
+- **PM, 10 Nov · B:** two releases, back to back: 5.3.2 first (main, 8e031ff), then the port (port/wow, cc9982b,
+  wow v0.1.9). Not now: the PM and eagle-dev work on E19; both releases wait for the PM's word. The branch is pushed,
+  main untouched, nothing sent to eagle-dev.
 
 ## Questions for the PM
 
