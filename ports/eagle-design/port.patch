@@ -4392,7 +4392,7 @@ similarity index 100%
 rename from app/styles/tokens.css
 rename to legacy/tokens.css
 diff --git a/package.json b/package.json
-index d82391f..ff90f5d 100644
+index d82391f..aae404b 100644
 --- a/package.json
 +++ b/package.json
 @@ -3,6 +3,14 @@
@@ -4463,7 +4463,7 @@ index d82391f..ff90f5d 100644
      "@types/react": "19.2.18",
      "@types/react-dom": "19.2.7",
 +    "cspell": "10.4.0",
-+    "design-ways-of-work": "git+ssh://git@github.com/dominik-dblck/design-ways-of-work.git#v0.1.9",
++    "design-ways-of-work": "git+ssh://git@github.com/dominik-dblck/design-ways-of-work.git#v0.1.10",
      "eslint": "10.10.0",
 +    "eslint-import-resolver-typescript": "4.4.5",
 +    "eslint-plugin-boundaries": "7.3.0",
@@ -14016,7 +14016,7 @@ index d9e8e7d..712e067 100644
      // a scan reads the whole tree, which takes seconds on a loaded machine
      testTimeout: 30_000,
 diff --git a/yarn.lock b/yarn.lock
-index b0e2084..87d2078 100644
+index b0e2084..763f0b0 100644
 --- a/yarn.lock
 +++ b/yarn.lock
 @@ -113,6 +113,15 @@
@@ -15467,9 +15467,9 @@ index b0e2084..87d2078 100644
    resolved "https://registry.yarnpkg.com/deep-is/-/deep-is-0.1.4.tgz#a6f2dce612fadd2ef1f519b73551f17e85199831"
    integrity sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==
  
-+"design-ways-of-work@git+ssh://git@github.com/dominik-dblck/design-ways-of-work.git#v0.1.9":
-+  version "0.1.9"
-+  resolved "git+ssh://git@github.com/dominik-dblck/design-ways-of-work.git#0b3aad7bee223040eeb340d38cd52ae0dde92305"
++"design-ways-of-work@git+ssh://git@github.com/dominik-dblck/design-ways-of-work.git#v0.1.10":
++  version "0.1.10"
++  resolved "git+ssh://git@github.com/dominik-dblck/design-ways-of-work.git#dd21b1f2c1620636903a0e64494d89fbb13196ae"
 +  dependencies:
 +    "@emotion/react" "11.14.0"
 +    "@emotion/styled" "11.14.1"
