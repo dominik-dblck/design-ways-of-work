@@ -5,7 +5,7 @@
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import type { ReactElement } from 'react';
-import { open, words } from '../../../../workspace/board-view.ts';
+import { open, words } from '../../../../workspace/boardView.ts';
 import { SectionHead } from '../../../atoms/SectionHead/index.ts';
 import { TitledList } from '../../../atoms/TitledList/index.ts';
 import { radiusOf } from '../../../../theme/tokenReads.ts';

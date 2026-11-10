@@ -118,7 +118,7 @@ export const RECON_TEMPLATE: readonly DocumentSection[] = [
       'read off the file, never typed here (26 on 21 Sep). Answered here, because nothing on this side read',
       'them before and every one of them is cheaper now than later.',
       '',
-      '**The pack already answered the regex lines** (1, 3, 4, 15, 17, 18, 20, 24, 28 — `refine-check.ts`,',
+      '**The pack already answered the regex lines** (1, 3, 4, 15, 17, 18, 20, 24, 28 — `refineCheck.ts`,',
       'rule:regex-lines-run-as-code); its header says so and this table copies that line, it does not re-answer them.',
       "**The reader's lines are the pack's `## Checklist, read` clauses**, and this table confirms or",
       'contradicts each one against the repository. **A contradicted clause is a finding, decided and',

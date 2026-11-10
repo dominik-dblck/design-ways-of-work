@@ -5,7 +5,7 @@ import { useState } from 'react';
 import {
   countLine,
   featureWords as words,
-} from '../../../../workspace/feature-view.ts';
+} from '../../../../workspace/featureView.ts';
 
 // counting walks every row for seconds, so it runs when asked, after the line has drawn
 function useFeaturePageCount(

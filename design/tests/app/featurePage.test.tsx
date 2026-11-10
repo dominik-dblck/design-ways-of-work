@@ -11,7 +11,7 @@ import {
   featureOf,
   featureWords as words,
   firstEpic,
-} from '../../app/workspace/feature-view.ts';
+} from '../../app/workspace/featureView.ts';
 
 describe('the Feature page', () => {
   it('draws the epic it opens on, its journeys and its endpoints', () => {
@@ -34,7 +34,7 @@ describe('the Feature page', () => {
     const translations = drawn(
       <FeaturePageCombinationsSection view={featureOf('E09')} />,
     );
-    expect(translations).toContain('role-combinations.js');
+    expect(translations).toContain('roleCombinations.js');
     expect(translations).toContain(words.combinations.count);
     const approvals = featureOf('E06');
     expect(

@@ -5,7 +5,7 @@
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
-import { words } from '../../../../workspace/board-view.ts';
+import { words } from '../../../../workspace/boardView.ts';
 
 function BoardPageHead(): ReactElement {
   return (

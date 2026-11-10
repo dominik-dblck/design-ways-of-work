@@ -6,8 +6,8 @@ import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
-import { featureWords as words } from '../../../../workspace/feature-view.ts';
-import type { Section } from '../../../../workspace/board-view.ts';
+import { featureWords as words } from '../../../../workspace/featureView.ts';
+import type { Section } from '../../../../workspace/boardView.ts';
 import { SectionHead } from '../../../atoms/SectionHead/index.ts';
 import { TitledList } from '../../../atoms/TitledList/index.ts';
 

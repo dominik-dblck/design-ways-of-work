@@ -4,7 +4,7 @@
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
-import type { CombinationView } from '../../../../workspace/feature-view.ts';
+import type { CombinationView } from '../../../../workspace/featureView.ts';
 
 function FeaturePageCombinationTitle({
   one,

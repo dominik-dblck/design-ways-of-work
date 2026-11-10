@@ -7,7 +7,7 @@ import {
   findingCounts,
   ratchet,
   scanAll,
-} from '../../guards/source-check.ts';
+} from '../../guards/sourceCheck.ts';
 
 // a finding as the scan answers it, read off the guard's own entry
 type SourceFinding = Awaited<ReturnType<typeof scanAll>>[number];

@@ -4,7 +4,7 @@
  */
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-import type { Stat } from '../../../../workspace/board-view.ts';
+import type { Stat } from '../../../../workspace/boardView.ts';
 import type { ReactElement } from 'react';
 import { radiusOf } from '../../../../theme/tokenReads.ts';
 

@@ -10,7 +10,7 @@ interface Standing {
 
 type Standings = Readonly<Record<string, Standing>>;
 
-// how one record of a type's chain stands against the epic's moves (content-type-logic.ts · HOMES)
+// how one record of a type's chain stands against the epic's moves (contentTypeLogic.ts · HOMES)
 const HOME = {
   done: { label: 'IN ITS HOME', bg: 'var(--st-ready-bg)' },
   moves: { label: 'MOVES IN E18', bg: 'var(--st-review-bg)' },

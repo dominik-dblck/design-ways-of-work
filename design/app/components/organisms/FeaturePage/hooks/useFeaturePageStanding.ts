@@ -2,8 +2,8 @@
  * - `useFeaturePageStanding` · the source's standing, scanned once mounted
  */
 import { useEffect, useState } from 'react';
-import { scanAll, standingOf } from '../../../../workspace/source-view.ts';
-import type { SourceStanding } from '../../../../workspace/source-view.ts';
+import { scanAll, standingOf } from '../../../../workspace/sourceView.ts';
+import type { SourceStanding } from '../../../../workspace/sourceView.ts';
 
 function useFeaturePageStanding(): SourceStanding | null {
   const [standing, setStanding] = useState<SourceStanding | null>(null);

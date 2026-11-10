@@ -1,9 +1,9 @@
 /**
- * - `tokensText` · tokens.ts from design-system/ and product-tokens.ts (D22)
+ * - `tokensText` · tokens.ts from design-system/ and productTokens.ts (D22)
  * - the faces too, so a reader of the theme needs no stylesheet for its fonts
  * - a name the system and the product both declare is refused, never overridden
  */
-import { productTokens } from '../app/styles/product-tokens.ts';
+import { productTokens } from '../app/styles/productTokens.ts';
 import { designSystem, fonts, isToken } from '../design-system/index.ts';
 import { tokensModule } from './tokens/tokenPrint.ts';
 

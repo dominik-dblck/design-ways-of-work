@@ -4,7 +4,7 @@
  */
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
-import type { TicketDetail } from '../../../../workspace/board-view.ts';
+import type { TicketDetail } from '../../../../workspace/boardView.ts';
 import { TitledList } from '../../../atoms/TitledList/index.ts';
 
 interface BoardPageTicketEdgesProps {

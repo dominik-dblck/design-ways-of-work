@@ -1,7 +1,7 @@
 /**
  * - `createRule` · a rule of the way of working's plugin, documented by its gate
  * - `syntaxOf`, `pathOf` · the file a rule reads: its tree, its repository path
- * - `matchesAny`, `moduleOf` · a path a scope's globs name; a specifier's path
+ * - `matchesAny`, `moduleOf` · a path a list of globs names, a `!` one not; a module
  */
 import { ESLintUtils } from '@typescript-eslint/utils';
 import type { TSESLint } from '@typescript-eslint/utils';
@@ -39,9 +39,10 @@ function syntaxOf(context: Context): ts.SourceFile {
 const pathOf = (context: Context, file = context.filename): string =>
   path.relative(context.cwd, file).split(path.sep).join('/');
 
-// case kept on every platform: node's own matcher drops it on macOS and Windows
+// case kept on every platform, which node's own matcher drops; a `!` glob takes a path out of the list
 const matchesAny = (file: string, globs: readonly string[]): boolean =>
-  globs.some((glob) => minimatch(file, glob));
+  globs.some((glob) => !glob.startsWith('!') && minimatch(file, glob)) &&
+  !globs.some((glob) => glob.startsWith('!') && minimatch(file, glob.slice(1)));
 
 // the repository path a specifier names: the program's resolution, else a relative one by its folder
 function moduleOf(context: Context, specifier: string): string | null {

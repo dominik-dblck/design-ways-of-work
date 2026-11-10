@@ -1,16 +1,16 @@
 /**
- * - `app/workspace/feature-view.ts`: one epic read whole, from the sheet lent to the page
+ * - `app/workspace/featureView.ts`: one epic read whole, from the sheet lent to the page
  */
 import { describe, expect, it } from 'vitest';
 import { journeysOfEpic } from '../../sheet/cases/journeys.ts';
 import { all as COMMANDS } from '../../sheet/contract/commands.ts';
-import { decidedIn } from '../../sheet/model/field-kinds.ts';
+import { decidedIn } from '../../sheet/model/fieldKinds.ts';
 import {
   featureOf,
   features,
   firstEpic,
-} from '../../app/workspace/feature-view.ts';
-import { piecesOf } from '../../app/workspace/contract-view/codeTokens.ts';
+} from '../../app/workspace/featureView.ts';
+import { piecesOf } from '../../app/workspace/contractView/codeTokens.ts';
 
 describe('the Feature view', () => {
   it('has a tab per feature ticket and opens on the first one not done', () => {
@@ -74,7 +74,7 @@ describe('the Feature view', () => {
 
   it('names its combinations, or the states without them', () => {
     expect(featureOf('E09').combinations.map((one) => one.file)).toEqual([
-      'role-combinations.js',
+      'roleCombinations.js',
     ]);
     const approvals = featureOf('E06');
     expect(approvals.combinations).toEqual([]);

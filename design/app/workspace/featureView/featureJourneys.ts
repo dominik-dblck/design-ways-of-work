@@ -3,7 +3,7 @@
  */
 import * as JOURNEYS from '../../../sheet/cases/journeys.ts';
 import { byId as PEOPLE } from '../../../sheet/model/directory.ts';
-import type * as TEST_CASES from '../../../sheet/cases/test-cases.ts';
+import type * as TEST_CASES from '../../../sheet/cases/testCases.ts';
 import { FEATURE_WORDS } from './featureWords.ts';
 import type { JourneyCard, StepCover } from './featureTypes.ts';
 

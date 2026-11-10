@@ -55,7 +55,7 @@ function partsAsked(args: readonly string[]): readonly string[] {
 
 function mirrorOf(mode: string): Mirror | null {
   const root = builtRoot();
-  if (!fs.existsSync(path.join(root, 'source-check.js'))) {
+  if (!fs.existsSync(path.join(root, 'sourceCheck.js'))) {
     console.error(`no built project at ${root} · run yarn build first`);
     return null;
   }

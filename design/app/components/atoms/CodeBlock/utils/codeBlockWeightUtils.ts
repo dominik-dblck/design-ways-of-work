@@ -1,7 +1,7 @@
 /**
  * - `weightOf` · a piece's weight: a route and a warning most
  */
-import type { CodeLine } from '../../../../workspace/contract-view.ts';
+import type { CodeLine } from '../../../../workspace/contractView.ts';
 
 // a route and a warning stand out most, a type a little
 const weightOf = (piece: CodeLine[number]): number => {

@@ -8,8 +8,8 @@ import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import type { ReactElement } from 'react';
-import { words } from '../../../../workspace/board-view.ts';
-import type { VelocityDay } from '../../../../workspace/board-view.ts';
+import { words } from '../../../../workspace/boardView.ts';
+import type { VelocityDay } from '../../../../workspace/boardView.ts';
 
 interface BoardPageVelocityTableProps {
   readonly days: readonly VelocityDay[];

@@ -6,7 +6,7 @@ import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
-import { featureWords as words } from '../../../../workspace/feature-view.ts';
+import { featureWords as words } from '../../../../workspace/featureView.ts';
 import { SectionHead } from '../../../atoms/SectionHead/index.ts';
 import { inkOf } from '../utils/featurePageSourceSectionInkUtils.ts';
 import { useFeaturePageStanding } from '../hooks/useFeaturePageStanding.ts';

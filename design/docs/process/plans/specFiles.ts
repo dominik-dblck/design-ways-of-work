@@ -12,7 +12,7 @@ export const SPEC: readonly FileRow[] = [
     holds: 'one name per idea, every decided mechanic, the open questions · and its screen words (ui), the single source of truth for both (UV1 · PM, 18 Oct)',
   },
   {
-    file: 'block-model.json',
+    file: 'blockModel.json',
     holds: 'the 25 decisions and the types · the schema is generated from this',
   },
   {
@@ -52,14 +52,14 @@ export const SPEC: readonly FileRow[] = [
     holds: 'the payload of every step of the run · one function over events.js · RUN plus a FACTS table, 99 entries typed to their key · what T-E00-11 seeds from',
   },
   {
-    file: 'gate-rules.js',
+    file: 'gateRules.js',
     holds: 'the action rules and their reason strings · 41 documented states as fixtures',
   },
   {
-    file: 'block-rules.js',
+    file: 'blockRules.js',
     holds: 'what a block shows and what may be done to it · 9 situations as fixtures',
   },
-  { file: 'gate-states.js', holds: 'the legend for every gate dot' },
+  { file: 'gateStates.js', holds: 'the legend for every gate dot' },
   {
     file: 'backlog.js',
     holds: 'epics, stories, dependencies · and how the work gets built',
@@ -82,8 +82,8 @@ export const SPEC: readonly FileRow[] = [
     holds: 'read first in the repo · what to read, what never to write, and the one shape a report back takes',
   },
   {
-    file: 'db-schema.js',
-    holds: 'the tables and their columns · the ten criteria behind Postgres, their tally and the answer (db-schema.js · rows, tally, answer, oneLine), and what would flip them',
+    file: 'dbSchema.js',
+    holds: 'the tables and their columns · the ten criteria behind Postgres, their tally and the answer (dbSchema.js · rows, tally, answer, oneLine), and what would flip them',
   },
 ];
 
@@ -98,7 +98,7 @@ export const PROJECT_CONTEXT: readonly ContextRead[] = [
     why: 'the one name for each idea, and the decided mechanics: snapshot, stream version, hash chain, refusal, silent command',
   },
   {
-    read: 'block-model.json · decisions',
+    read: 'blockModel.json · decisions',
     why: 'what a block, a revision and a version are · a version holds no text',
   },
   {
@@ -119,7 +119,7 @@ export const PROJECT_CONTEXT: readonly ContextRead[] = [
 export const COMBINATIONS: readonly CombinationFile[] = [
   {
     epic: 'E09',
-    file: 'role-combinations.js',
+    file: 'roleCombinations.js',
     fn: 'all',
     call: 'RoleCombinations.combinationRows()',
     count: 'RoleCombinations.count',

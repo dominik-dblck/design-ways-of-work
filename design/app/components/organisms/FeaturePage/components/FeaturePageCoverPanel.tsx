@@ -6,7 +6,7 @@ import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
-import type { CoverView } from '../../../../workspace/feature-view.ts';
+import type { CoverView } from '../../../../workspace/featureView.ts';
 import { FeaturePageCoverRow } from './FeaturePageCoverRow.tsx';
 
 function FeaturePageCoverPanel({

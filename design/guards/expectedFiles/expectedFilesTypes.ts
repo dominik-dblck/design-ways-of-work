@@ -2,7 +2,7 @@
  * - `ExpectedTicket`, `ComponentsSpec` · a ticket and the spec's rows, as read here
  * - `ExpectedFile` · a path and why the run touches it
  */
-import type { SpecRow } from '../spec-check.ts';
+import type { SpecRow } from '../specCheck.ts';
 
 interface ExpectedTicket {
   readonly id: string;

@@ -4,7 +4,7 @@
  */
 import { LAYERS } from './sourceLayers.ts';
 import { SCOPE } from './sourceScope.ts';
-import * as APPROVAL_LOGIC from '../../sheet/logic/approval/approval-logic.ts';
+import * as APPROVAL_LOGIC from '../../sheet/logic/approval/approvalLogic.ts';
 
 type Requirement =
   (typeof APPROVAL_LOGIC)['requirements'][number]['items'][number];
@@ -16,7 +16,7 @@ function requirementItems(): readonly Requirement[] {
 // the requirements are the decisions' home: in the built file, the lines of their parts
 function decisionLines(file: string, text: unknown): ReadonlySet<number> {
   const lines = new Set<number>();
-  if (file !== 'approval-logic.js') return lines;
+  if (file !== 'approvalLogic.js') return lines;
   let part = '';
   String(text)
     .split('\n')
@@ -44,7 +44,7 @@ function readList(): readonly string[] {
     ...new Set([
       ...SCOPE,
       ...targets(),
-      ...Object.keys(LAYERS).filter((file) => file !== 'source-check.js'),
+      ...Object.keys(LAYERS).filter((file) => file !== 'sourceCheck.js'),
       'messages.js',
     ]),
   ];

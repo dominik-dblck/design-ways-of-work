@@ -5,8 +5,8 @@
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
-import { featureWords as words } from '../../../../workspace/feature-view.ts';
-import type { EndpointCode } from '../../../../workspace/contract-view.ts';
+import { featureWords as words } from '../../../../workspace/featureView.ts';
+import type { EndpointCode } from '../../../../workspace/contractView.ts';
 import { SectionHead } from '../../../atoms/SectionHead/index.ts';
 import { FeaturePageEndpointItem } from './FeaturePageEndpointItem.tsx';
 

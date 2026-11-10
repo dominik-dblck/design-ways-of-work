@@ -4,9 +4,9 @@
  */
 import { ownText } from './bundleText.ts';
 import type { Mirror } from './checkWorld.ts';
-import * as CONTENT_CHECK from '../../sheet/logic/assembly/content-check.ts';
-import * as CONTENT_TYPE_LOGIC from '../../sheet/logic/assembly/content-type-logic.ts';
-import * as SOURCE_CHECK from '../source-check.ts';
+import * as CONTENT_CHECK from '../../sheet/logic/assembly/contentCheck.ts';
+import * as CONTENT_TYPE_LOGIC from '../../sheet/logic/assembly/contentTypeLogic.ts';
+import * as SOURCE_CHECK from '../sourceCheck.ts';
 
 type Guard = typeof SOURCE_CHECK;
 type Finding = ReturnType<Guard['scan']>[number];
@@ -26,7 +26,7 @@ interface GuardRun {
 const assemblyFinding = (row: string, text: string): Finding => ({
   kind: 'assembly',
   row,
-  file: 'content-type-logic.js',
+  file: 'contentTypeLogic.js',
   line: 0,
   text,
 });

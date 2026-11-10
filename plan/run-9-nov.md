@@ -16,7 +16,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 | 4 | Tools | 8 | 8 |
 | 7 | P1 release | 5 | 5 |
 | 5 | e2e | 4 | 4 |
-| 6 | Port design | 2 | 6 |
+| 6 | Port design | 3 | 6 |
 | 8 | E19 + backup | 3 | 3 |
 
 Stage 6, measured 9 Nov 17:20 (the PM holds it: start asked): 1 · links, how wow's files stand in eagle-design's git
@@ -59,6 +59,7 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
 - 18:42 · stage 8 · 3 of 3 · port.patch re-saved on main of 9 Nov evening, chain green
 - 20:28 · stage 6 · 1 of 6 · take built in wow, product side lands with the patch
 - 21:10 · stage 6 · 2 of 6 · port branch on wow v0.1.4, feature tier green
+- 00:59 · stage 6 · 3 of 6 · vendor/wow on the branch a95cc34, wow v0.1.7, faces in tokens
 
 - 08:24 · stage 1 · 1 of 5 · the build side's skills to legacy/ (8bfcd8e)
 - 08:51 · stage 1 · 2 of 5 · 7g commitlint (d282df5)
@@ -557,6 +558,28 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
   guard-map.json (main's, task 5) and vendor/, which its build writes from the take's record (the copy links and
   never takes, so it has none). Feature tier green, checks ALL GREEN (diff), wow --check 514 files the tag's.
   port.patch pins v0.1.7. eagle-dev told; asked whether any read of its own reaches a taken file outside the 27.
+- Night · eagle-dev answered: outside the two modules it opens docs/process/ticket-pipeline.md by path, the
+  product's own emit (tracked; its sources are taken): the set stays 27. Its ds-scan and tokens.css reads leave at
+  its port, as settled.
+- Night · wow's pushes of 796fccc: verify took 66, 38 and 35 min under the machine's night load (system indexing,
+  load 8 to 21) and git's SSH connection dropped while the pre-push hook ran, three times. Pushed over HTTPS (git
+  connects after the hook there), verify whole, 208 s once the load fell.
+- Night · stage 6 task 4 on the rehearsal (PM 9 Nov · A, unify the repository in the port's release; legacy pages'
+  script paths · A): scripts/moveProduct.ts moves files at a product's paths, its own in the copy and a linked one
+  here too, and every reader follows: relative imports, exact paths, a bundle's name (`gate-rules.js`), its parts'
+  folder, a regex's escaped name, a legacy page's script src alone. Records, notes, closed notebooks and snapshots
+  stay as they were. 38 rows (the 36 kebab entries, block-model's module and JSON): 256 files moved, 64 of them
+  wow's, 375 rewritten in the copy, 26 legacy pages' scripts. The whole map, old → new at the product's paths,
+  is ports/eagle-design/moves.tsv: it rides the port's release for the build side.
+- Night · what the rename asked beyond the mover, my calls: an entry is camelCase in the scope and the rules (the
+  "until a release renames it" exception gone); a types file is `*Types.ts` but an entry, whatever its noun
+  (`contentTypes.ts` holds the types' tree); the lint's glob lists read a `!` glob as the scope's do (minimatch
+  alone read `!x` as every other path: a latent fault, none hit yet), one implementation; the closed notebooks'
+  paths are history (namedPaths.docs); a record before the rename names blockModel.json as it was then. The
+  mover's first pass rewrote wow's own legacy/ and a rule test's example path: restored, and the mover reads
+  wow's own files by exact path only.
+- Night · held for the PM: checks part c (Content type logic, 8 keys moved) is the content-type snapshot naming
+  files by their old names in the requirements' notes: following them is its retake, task 5, your word.
 
 ## Questions for the PM
 
@@ -641,5 +664,9 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
 - **Morning, 10 Nov · the bucket's epic:** C17 is out of E19 by your word; R7 (public asset files, U3) is open
   for "another epic". Proposed: E10, where Publish hands an email's HTML to Batch and Postmark and its images must
   load in a reader's client. A · E10 · B · an epic of its own.
+- **Morning, 10 Nov · the port's snapshots (task 5), for your word with the port's release:** the rename (task 4) is
+  built on the rehearsal and in wow, untagged. Its one red is checks part c: the content-type snapshot's
+  requirements' notes name files by their old names (`content-types.ts` → `contentTypes.ts`, 8 keys). Task 5 so
+  retakes two snapshots, guard-map and content-type; nothing else waits.
 - **Morning, 10 Nov · release 5.3.2:** main holds the snapshot's catch-up and C17's withdrawal, pack re-cut, checks
   green; eagle-dev builds to it already. Release it? A · now · B · with E19's report.

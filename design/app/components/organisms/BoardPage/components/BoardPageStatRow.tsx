@@ -4,7 +4,7 @@
  */
 import Stack from '@mui/material/Stack';
 import type { ReactElement } from 'react';
-import type { Stat } from '../../../../workspace/board-view.ts';
+import type { Stat } from '../../../../workspace/boardView.ts';
 import { BoardPageStatTile } from './BoardPageStatTile.tsx';
 
 interface BoardPageStatRowProps {

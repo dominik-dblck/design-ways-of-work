@@ -2,10 +2,10 @@
  * - `fieldKindsOf`, `fieldOptionsOf` · kinds, and what any field sets: their epic
  * - `fieldsCodeOf`, `docTypesOf` · the kinds as code; each block's fields
  */
-import * as FIELD_KINDS from '../../../sheet/model/field-kinds.ts';
+import * as FIELD_KINDS from '../../../sheet/model/fieldKinds.ts';
 import { specs as SPECS } from '../../../sheet/samples/blocks.ts';
-import { piecesOf } from '../contract-view.ts';
-import type { CodeLine } from '../contract-view.ts';
+import { piecesOf } from '../contractView.ts';
+import type { CodeLine } from '../contractView.ts';
 import type {
   DocTypeView,
   FieldKindView,

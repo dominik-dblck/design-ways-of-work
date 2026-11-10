@@ -13,7 +13,7 @@ function contentCheck(world?: ContentWorld | null): readonly SourceFinding[] {
   return check.contentFindings().map((text) => ({
     kind: 'content',
     row: 'modules and delivery (T23, T28, T55)',
-    file: 'content-check.js',
+    file: 'contentCheck.js',
     line: 0,
     text,
   }));

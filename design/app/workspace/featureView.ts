@@ -7,25 +7,25 @@ import { all as TICKETS } from '../../roadmaps/tickets.ts';
 import { byId as EPICS } from '../../roadmaps/backlog.ts';
 import { stepsOf } from '../../roadmaps/features.ts';
 import { notesOf } from '../../roadmaps/notes.ts';
-import { casesOfEpic, flat, named } from '../../sheet/cases/test-cases.ts';
-import { ticketDetailOf } from './board-view.ts';
-import { endpointsOf } from './contract-view.ts';
-import { caseGroupsOf, caseKindsOf } from './feature-view/featureCases.ts';
-import { coverOf } from './feature-view/featureCover.ts';
+import { casesOfEpic, flat, named } from '../../sheet/cases/testCases.ts';
+import { ticketDetailOf } from './boardView.ts';
+import { endpointsOf } from './contractView.ts';
+import { caseGroupsOf, caseKindsOf } from './featureView/featureCases.ts';
+import { coverOf } from './featureView/featureCover.ts';
 import {
   docTypesOf,
   fieldKindsOf,
   fieldOptionsOf,
   fieldsCodeOf,
-} from './feature-view/featureFields.ts';
-import { journeysOf } from './feature-view/featureJourneys.ts';
+} from './featureView/featureFields.ts';
+import { journeysOf } from './featureView/featureJourneys.ts';
 import {
   combinationsOf,
   countLine,
   statesNamed,
-} from './feature-view/featureCombinations.ts';
-import { FEATURE_WORDS } from './feature-view/featureWords.ts';
-import type { FeatureTab, FeatureView } from './feature-view/featureTypes.ts';
+} from './featureView/featureCombinations.ts';
+import { FEATURE_WORDS } from './featureView/featureWords.ts';
+import type { FeatureTab, FeatureView } from './featureView/featureTypes.ts';
 
 // a feature is an epic's one ticket, numbered 00
 const A_FEATURE = /-00$/;
@@ -76,8 +76,8 @@ function featureOf(epic: string): FeatureView {
   };
 }
 
-export type * from './feature-view/featureTypes.ts';
-export type * from './feature-view/featureFieldTypes.ts';
+export type * from './featureView/featureTypes.ts';
+export type * from './featureView/featureFieldTypes.ts';
 export {
   countLine,
   featureOf,

@@ -6,7 +6,7 @@ import Chip from '@mui/material/Chip';
 import ListItemButton from '@mui/material/ListItemButton';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import type { TicketLine } from '../../../../workspace/board-view.ts';
+import type { TicketLine } from '../../../../workspace/boardView.ts';
 import { toneOf } from '../utils/boardPageTonesUtils.ts';
 import type { ReactElement } from 'react';
 import { radiusOf } from '../../../../theme/tokenReads.ts';

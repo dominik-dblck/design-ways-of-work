@@ -5,7 +5,7 @@ import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import { useMemo, useState } from 'react';
 import type { ReactElement } from 'react';
-import { featureOf, firstEpic } from '../../../workspace/feature-view.ts';
+import { featureOf, firstEpic } from '../../../workspace/featureView.ts';
 import { FeaturePageApiSection } from './components/FeaturePageApiSection.tsx';
 import { FeaturePageCasesSection } from './components/FeaturePageCasesSection.tsx';
 import { FeaturePageCombinationsSection } from './components/FeaturePageCombinationsSection.tsx';

@@ -3,8 +3,8 @@
  */
 import Box from '@mui/material/Box';
 import type { ReactElement } from 'react';
-import { words } from '../../../../workspace/board-view.ts';
-import type { Column, IdeaCard } from '../../../../workspace/board-view.ts';
+import { words } from '../../../../workspace/boardView.ts';
+import type { Column, IdeaCard } from '../../../../workspace/boardView.ts';
 import { BoardPageColumn } from './BoardPageColumn.tsx';
 import { BoardPageEpicTile } from './BoardPageEpicTile.tsx';
 import { BoardPageIdeaTile } from './BoardPageIdeaTile.tsx';

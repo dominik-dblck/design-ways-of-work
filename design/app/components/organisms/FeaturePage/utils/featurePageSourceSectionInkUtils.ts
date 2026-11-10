@@ -1,7 +1,7 @@
 /**
  * - `inkOf` · a count's colour against its base
  */
-import type { KindStanding } from '../../../../workspace/source-view.ts';
+import type { KindStanding } from '../../../../workspace/sourceView.ts';
 
 // a count over its base rises, under it fell, at it holds
 const inkOf = ({ n, base }: KindStanding): string => {

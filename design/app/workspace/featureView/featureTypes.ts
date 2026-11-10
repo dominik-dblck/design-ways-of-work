@@ -5,13 +5,13 @@
  */
 import type { FeatureStep } from '../../../roadmaps/features.ts';
 import type { EpicNotes } from '../../../roadmaps/notes.ts';
-import type { CodeLine, EndpointCode } from '../contract-view.ts';
+import type { CodeLine, EndpointCode } from '../contractView.ts';
 import type {
   DocTypeView,
   FieldKindView,
   FieldOptionView,
 } from './featureFieldTypes.ts';
-import type { Section } from '../board-view.ts';
+import type { Section } from '../boardView.ts';
 
 interface FeatureTab {
   readonly epic: string;

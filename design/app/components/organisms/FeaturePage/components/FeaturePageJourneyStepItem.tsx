@@ -6,7 +6,7 @@ import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
-import type { JourneyStepView } from '../../../../workspace/feature-view.ts';
+import type { JourneyStepView } from '../../../../workspace/featureView.ts';
 
 function FeaturePageJourneyStepItem({
   step,

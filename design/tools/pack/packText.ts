@@ -13,7 +13,7 @@ import { bytesOf, sheetDigest } from './packSources.ts';
 import * as EDGES from '../../roadmaps/edges.ts';
 import * as PLANS from '../../docs/process/plans.ts';
 import * as RECEIPTS from '../../roadmaps/receipts.ts';
-import * as REFINE_CHECK from '../../guards/refine-check.ts';
+import * as REFINE_CHECK from '../../guards/refineCheck.ts';
 import * as TICKETS from '../../roadmaps/tickets.ts';
 import * as TRACKS from '../../roadmaps/tracks.ts';
 

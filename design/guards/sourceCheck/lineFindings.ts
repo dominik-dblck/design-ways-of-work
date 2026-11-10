@@ -11,10 +11,10 @@ const FACTS = 'facts of a document, the API’s shape';
 const SENTENCES = 'sentences a person sees';
 const LANGUAGE = 'a language: its status and what an act does to it';
 const STATUS_HOMES: readonly string[] = [
-  'translation-flow.js',
-  'gate-rules.js',
-  'gate-states.js',
-  'source-check.js',
+  'translationFlow.js',
+  'gateRules.js',
+  'gateStates.js',
+  'sourceCheck.js',
 ];
 
 const finding = (
@@ -72,7 +72,7 @@ function statusFunction(at: LineAt): readonly SourceFinding[] {
 function typedList(at: LineAt): readonly SourceFinding[] {
   if (
     homesOfRow(FACTS).includes(at.file) ||
-    ['directory.js', 'content-modules.js'].includes(at.file) ||
+    ['directory.js', 'contentModules.js'].includes(at.file) ||
     exampleRow(at.file, at.line) ||
     !/\[\s*'(EN|FR|PT|ES|DE|IT|PRD|LGL)'\s*(,\s*'(FR|PT|ES|DE|IT|PRD|LGL|EN|cm)'\s*){1,}\]/.test(
       at.line,

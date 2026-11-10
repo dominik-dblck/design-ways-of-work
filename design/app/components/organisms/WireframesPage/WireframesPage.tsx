@@ -8,7 +8,7 @@ import type { ReactElement } from 'react';
 import {
   wireframesOf,
   wireframesWords as words,
-} from '../../../workspace/wireframes-view.ts';
+} from '../../../workspace/wireframesView.ts';
 import { SectionHead } from '../../atoms/SectionHead/index.ts';
 import { WireframesPageScreenPlaceholder } from './components/WireframesPageScreenPlaceholder.tsx';
 

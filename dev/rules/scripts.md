@@ -38,5 +38,5 @@
 | `checkReports.ts`        | `yarn reports:check <re-ports.json>`                               | each re-port row against the cached sheet: ready, applied or broken                                                  |
 | `renderComponentsDoc.ts` | `node scripts/renderComponentsDoc.ts [--print]`                    | `docs/components.md` from `app/styles/components.spec.json` · `--print` writes nothing                               |
 | `generateSeedFixture.ts` | `node scripts/generateSeedFixture.ts [--fixtures dir] [--out dir]` | the seed and the domain's emitted files from the copied sheet                                                        |
-| `generateRunFixture.ts`  | `node scripts/generateRunFixture.ts [--fixtures dir] [--out dir]`  | `run.ts` from the copied `sample-run.js` and `events.js`                                                             |
+| `generateRunFixture.ts`  | `node scripts/generateRunFixture.ts [--fixtures dir] [--out dir]`  | `run.ts` from the copied `sampleRun.js` and `events.js`                                                             |
 | `generateTokens.ts`      | `node scripts/generateTokens.ts [--check]`                         | `app/styles/tokens.ts` from the two CSS fixtures · `--check` compares and writes nothing                             |

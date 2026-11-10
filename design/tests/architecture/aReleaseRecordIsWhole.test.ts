@@ -23,6 +23,20 @@ const BEFORE_THE_TOOL: readonly string[] = [
 ];
 // the records the tool wrote before it named the files read whole
 const BEFORE_THE_FILES: readonly string[] = ['release-3-4.md'];
+// a record before the port's rename names a file read whole as it was named then
+const BEFORE_THE_RENAME: readonly string[] = [
+  'release-3-4-1.md',
+  'release-4.md',
+  'release-4-1.md',
+  'release-5.md',
+  'release-5-1.md',
+  'release-5-2.md',
+  'release-5-3.md',
+  'release-5-3-1.md',
+];
+const NAMED_THEN: Readonly<Record<string, string>> = {
+  'fixtures/data/blockModel.json': 'fixtures/data/block-model.json',
+};
 const WRITTEN_BY = 'Written by `yarn release:record`';
 
 // a section's count in its heading against the lines it lists
@@ -89,9 +103,13 @@ describe('a release record is whole', () => {
       const isStamped = text.includes(MARK) && text.includes(WRITTEN_BY);
       const isWhole =
         BEFORE_THE_FILES.includes(name) ||
-        PROJECT.buildReads.files.every((file) =>
-          text.includes(`- ${file} · sha256 `),
-        );
+        PROJECT.buildReads.files
+          .map((file) =>
+            BEFORE_THE_RENAME.includes(name)
+              ? (NAMED_THEN[file] ?? file)
+              : file,
+          )
+          .every((file) => text.includes(`- ${file} · sha256 `));
       return [
         ...(isStamped ? [] : [`${name} · not written by the tool`]),
         ...(isWhole

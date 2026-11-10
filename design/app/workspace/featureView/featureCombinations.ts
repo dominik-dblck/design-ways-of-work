@@ -3,7 +3,7 @@
  * - `countLine` · a file's rows counted by kind, or why they cannot be
  */
 import { combinations as COMBINATIONS } from '../../../docs/process/plans.ts';
-import { count as roleCount } from '../../../sheet/logic/approval/role-combinations.ts';
+import { count as roleCount } from '../../../sheet/logic/approval/roleCombinations.ts';
 import { stateIndex } from '../../../sheet/logic/approval/scenes.ts';
 import type { CombinationView } from './featureTypes.ts';
 
@@ -14,7 +14,7 @@ interface Tally {
 
 // the row names its counter as a call for the build side; the page reaches it by the file
 const COUNTERS: Readonly<Record<string, () => Tally>> = {
-  'role-combinations.ts': roleCount,
+  'roleCombinations.ts': roleCount,
 };
 
 const combinationsOf = (epic: string): readonly CombinationView[] =>

@@ -7,14 +7,14 @@ import {
   changedFindings,
   ownerFindings,
   scopeFindings,
-} from './spec-check/ownerChecks.ts';
+} from './specCheck/ownerChecks.ts';
 import {
   partsFindings,
   stateFindings,
   tokenFindings,
   wrapperFindings,
-} from './spec-check/rowChecks.ts';
-import type { ScriptIo, Spec, TieredRow } from './spec-check/specCheckTypes.ts';
+} from './specCheck/rowChecks.ts';
+import type { ScriptIo, Spec, TieredRow } from './specCheck/specCheckTypes.ts';
 import { TOKEN_NAMES } from '../app/styles/tokens.ts';
 
 // every token design-system/ and the product declare, by the name a spec row cites
@@ -73,4 +73,4 @@ async function run(io: ScriptIo): Promise<void> {
 }
 
 export { run };
-export type { SpecRow } from './spec-check/specCheckTypes.ts';
+export type { SpecRow } from './specCheck/specCheckTypes.ts';

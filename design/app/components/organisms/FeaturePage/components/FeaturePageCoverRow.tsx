@@ -6,7 +6,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
-import type { CoverLine } from '../../../../workspace/feature-view.ts';
+import type { CoverLine } from '../../../../workspace/featureView.ts';
 
 function FeaturePageCoverRow({
   line,

@@ -11,7 +11,7 @@ import {
   stats,
   velocity,
   words,
-} from '../../app/workspace/board-view.ts';
+} from '../../app/workspace/boardView.ts';
 
 describe('the Board page', () => {
   const html = renderToString(

@@ -22,7 +22,7 @@ import type { Source } from './tree.ts';
 
 // and what its tests call by name on their copies of the sheet (sheetCall, sheetValue)
 const READ_BY_THE_BUILD_SIDE: Readonly<Record<string, readonly string[]>> = {
-  'sheet/logic/approval/approval-logic.ts': [
+  'sheet/logic/approval/approvalLogic.ts': [
     'barRoleChips',
     'roleHeads',
     'roleMatrix',
@@ -30,7 +30,7 @@ const READ_BY_THE_BUILD_SIDE: Readonly<Record<string, readonly string[]>> = {
     'todoOf',
   ],
   'sheet/samples/blocks.ts': ['compare'],
-  'sheet/logic/assembly/content-assembly.ts': [
+  'sheet/logic/assembly/contentAssembly.ts': [
     'cfg',
     'deliveryKindOf',
     'documentGatesOfType',
@@ -40,9 +40,9 @@ const READ_BY_THE_BUILD_SIDE: Readonly<Record<string, readonly string[]>> = {
     'pool',
     'tabsOf',
   ],
-  'sheet/model/content-types.ts': ['channels', 'rowOf'],
+  'sheet/model/contentTypes.ts': ['channels', 'rowOf'],
   'sheet/model/directory.ts': ['gates'],
-  'sheet/logic/approval/gate-rules.ts': [
+  'sheet/logic/approval/gateRules.ts': [
     'confirm',
     'documentSituationOf',
     'foldOf',
@@ -82,7 +82,7 @@ const READ_BY_THE_BUILD_SIDE: Readonly<Record<string, readonly string[]>> = {
     'sharedKey',
     'tiers',
   ],
-  'sheet/logic/approval/role-combinations.ts': [
+  'sheet/logic/approval/roleCombinations.ts': [
     'classes',
     'combinationDeadEnds',
     'count',
@@ -93,7 +93,7 @@ const READ_BY_THE_BUILD_SIDE: Readonly<Record<string, readonly string[]>> = {
     'reductionCheck',
     'roles',
   ],
-  'sheet/samples/sample-run.ts': [
+  'sheet/samples/sampleRun.ts': [
     'acts',
     'eventsFiredCoverage',
     'outsideRun',
@@ -102,7 +102,7 @@ const READ_BY_THE_BUILD_SIDE: Readonly<Record<string, readonly string[]>> = {
   ],
   'sheet/logic/approval/scenes.ts': ['factsOf', 'stateIndex', 'states'],
   'sheet/logic/approval/signatures.ts': ['all'],
-  'sheet/cases/test-cases.ts': ['casesAddedRemoved'],
+  'sheet/cases/testCases.ts': ['casesAddedRemoved'],
 };
 
 const globalOf = (entry: string): string =>

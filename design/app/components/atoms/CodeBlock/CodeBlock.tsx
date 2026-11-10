@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
-import type { CodeLine } from '../../../workspace/contract-view.ts';
+import type { CodeLine } from '../../../workspace/contractView.ts';
 import { INK } from './constants/codeBlockInkConstants.ts';
 import { weightOf } from './utils/codeBlockWeightUtils.ts';
 

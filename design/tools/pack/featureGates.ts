@@ -3,10 +3,10 @@
  * - walk; the epic's refusals in order; every row the data names in its reads
  */
 import type { ticketOf } from './packText.ts';
-import * as EXPECTED_FILES from '../../guards/expected-files.ts';
+import * as EXPECTED_FILES from '../../guards/expectedFiles.ts';
 import * as JOURNEYS from '../../sheet/cases/journeys.ts';
 import * as REFUSALS from '../../sheet/contract/refusals.ts';
-import * as TEST_CASES from '../../sheet/cases/test-cases.ts';
+import * as TEST_CASES from '../../sheet/cases/testCases.ts';
 import { componentsSpec } from '../../app/styles/components.spec.ts';
 
 type Ticket = ReturnType<typeof ticketOf>;
@@ -23,7 +23,7 @@ function journeysFails(
   const cases = TEST_CASES;
   if (!journeys || !cases)
     return [
-      `${ticket.id} · journeys not checked: journeys.js or test-cases.js not loaded`,
+      `${ticket.id} · journeys not checked: journeys.js or testCases.js not loaded`,
     ];
   const checked = journeys.check(
     ticket.epic,

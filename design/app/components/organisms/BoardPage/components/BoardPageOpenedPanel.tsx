@@ -10,8 +10,8 @@ import {
   epicOf,
   ticketDetailOf,
   words,
-} from '../../../../workspace/board-view.ts';
-import type { IdeaCard } from '../../../../workspace/board-view.ts';
+} from '../../../../workspace/boardView.ts';
+import type { IdeaCard } from '../../../../workspace/boardView.ts';
 import { BoardPageEpicPanel } from './BoardPageEpicPanel.tsx';
 import { BoardPageIdeaPanel } from './BoardPageIdeaPanel.tsx';
 import { BoardPageTicketPanel } from './BoardPageTicketPanel.tsx';

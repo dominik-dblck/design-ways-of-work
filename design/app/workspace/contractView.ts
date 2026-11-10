@@ -6,10 +6,10 @@
 import * as COMMANDS from '../../sheet/contract/commands.ts';
 import * as PORTS from '../../sheet/contract/ports.ts';
 import * as QUERIES from '../../sheet/contract/queries.ts';
-import { piecesOf } from './contract-view/codeTokens.ts';
-import { commandCode, queryCode } from './contract-view/endpointCode.ts';
-import { portCode } from './contract-view/portCode.ts';
-import type { EndpointCode } from './contract-view/contractTypes.ts';
+import { piecesOf } from './contractView/codeTokens.ts';
+import { commandCode, queryCode } from './contractView/endpointCode.ts';
+import { portCode } from './contractView/portCode.ts';
+import type { EndpointCode } from './contractView/contractTypes.ts';
 
 // a read list names an endpoint as `commands.ts · AddBlock` or `queries.ts · GetDocument`, X.js on a closed ticket
 const NAMED = /^(?:commands|queries)\.[tj]s\s+·\s+(\w+)/;
@@ -33,5 +33,5 @@ export type {
   CodeToken,
   EndpointCode,
   TokenKind,
-} from './contract-view/contractTypes.ts';
+} from './contractView/contractTypes.ts';
 export { endpointsOf, piecesOf };

@@ -6,7 +6,7 @@ import { renderToString } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
 import { BoardPageTicketPanel } from '../../app/components/organisms/BoardPage/components/BoardPageTicketPanel.tsx';
 import { theme } from '../../app/theme/theme.ts';
-import { ticketDetailOf, words } from '../../app/workspace/board-view.ts';
+import { ticketDetailOf, words } from '../../app/workspace/boardView.ts';
 import { all as allTickets } from '../../roadmaps/tickets.ts';
 
 describe('the ticket panel', () => {

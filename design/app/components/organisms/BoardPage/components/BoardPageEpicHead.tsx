@@ -5,7 +5,7 @@ import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
-import type { EpicCard } from '../../../../workspace/board-view.ts';
+import type { EpicCard } from '../../../../workspace/boardView.ts';
 
 function BoardPageEpicHead({
   epic,

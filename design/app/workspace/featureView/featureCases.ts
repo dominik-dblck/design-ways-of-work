@@ -1,7 +1,7 @@
 /**
  * - `caseGroupsOf`, `caseKindsOf` · an epic's test cases by endpoint, by kind
  */
-import type * as TEST_CASES from '../../../sheet/cases/test-cases.ts';
+import type * as TEST_CASES from '../../../sheet/cases/testCases.ts';
 import type { CaseGroup } from './featureTypes.ts';
 
 type Groups = ReturnType<typeof TEST_CASES.casesOfEpic>;

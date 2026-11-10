@@ -6,9 +6,7 @@
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
-import { pathToFileURL } from 'node:url';
-import type { RepoScope } from '../shared/repoScope.ts';
-import { isNamedBy } from '../shared/tests/globs.ts';
+import { followed } from './followed.ts';
 import { mapRows } from './mapRows.ts';
 import {
   barrelOf,
@@ -30,28 +28,7 @@ const MAP = repoAt('', 0);
 const COPY = repoAt(path.join(HERE, '.rehearsal', 'eagle-design'), 1);
 // notes name what moved since, a port is written by its script, legacy/ is kept as it was
 const KEPT = /^(plan|legacy|ports)\//;
-const TEXT = /\.(ts|tsx|mts|md|json|yml|yaml|tsv|txt)$/;
 const CODE = /\.(ts|tsx|mts)$/;
-const PROSE = /\.md$/;
-
-const hasScope = (loaded: unknown): loaded is { readonly scope: RepoScope } =>
-  typeof loaded === 'object' && loaded !== null && 'scope' in loaded;
-
-// a doc whose paths are checked follows a move; any other prose, a note or a record, names what was
-async function followed(root: string): Promise<readonly string[]> {
-  const loaded: unknown = await import(
-    pathToFileURL(path.join(root, 'scope.ts')).href
-  );
-  if (!hasScope(loaded)) throw new Error(`no scope in ${root}/scope.ts`);
-  const { docs } = loaded.scope.namedPaths;
-  return execFileSync('git', ['ls-files', '-z'], {
-    cwd: root,
-    encoding: 'utf8',
-  })
-    .split('\0')
-    .filter((file) => TEXT.test(file) && !KEPT.test(file))
-    .filter((file) => !PROSE.test(file) || isNamedBy(file, docs));
-}
 
 // the product's own files name a linked file by its path there: design/ is its root
 const inProduct = (moves: readonly Move[]): readonly Move[] =>
@@ -131,17 +108,27 @@ function expanded(rows: readonly Move[]): readonly Move[] {
   });
 }
 
+// the copy's own files a move rewrites: a linked one is this repository's, rewritten here
+async function copyFiles(): Promise<readonly string[]> {
+  if (!fs.existsSync(COPY)) return [];
+  const linked = new Set(lastLinked(COPY));
+  return (await followed({ root: COPY, kept: KEPT })).filter(
+    (file) => !linked.has(file),
+  );
+}
+
 async function main(): Promise<void> {
   const moves = expanded(
     mapRows(MAP).map(([from = '', to = '']) => ({ from, to })),
   );
-  const linked = new Set(lastLinked(COPY));
-  const here: Tree = { root: HERE, files: await followed(HERE), moves };
+  const here: Tree = {
+    root: HERE,
+    files: await followed({ root: HERE, kept: KEPT }),
+    moves,
+  };
   const there: Tree = {
     root: COPY,
-    files: fs.existsSync(COPY)
-      ? (await followed(COPY)).filter((file) => !linked.has(file))
-      : [],
+    files: await copyFiles(),
     moves: inProduct(moves),
   };
   movedByGit(moves);

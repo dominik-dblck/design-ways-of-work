@@ -5,14 +5,14 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
-import { minimatch } from 'minimatch';
+import { matchesAny } from '../lint/rules/ruleKit.ts';
 import type { RepoScope } from '../repoScope.ts';
 
 type Tree = Pick<RepoScope, 'root' | 'ignores' | 'productTrees'>;
 
+// the lint's own reading of a list, so a script, a test and a rule name the same files
 const isNamedBy = (file: string, globs: readonly string[]): boolean =>
-  globs.some((glob) => !glob.startsWith('!') && minimatch(file, glob)) &&
-  !globs.some((glob) => glob.startsWith('!') && minimatch(file, glob.slice(1)));
+  matchesAny(file, globs);
 
 // a path as each folder spells it: a disk that ignores case echoes a glob's, and a link resolves away
 const isSpelledAsOnDisk = (root: string, file: string): boolean => {

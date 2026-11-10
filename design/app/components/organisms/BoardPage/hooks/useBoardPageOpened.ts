@@ -3,7 +3,7 @@
  * - an idea, or an epic and one of its tickets
  */
 import { useState } from 'react';
-import { ticketDetailOf } from '../../../../workspace/board-view.ts';
+import { ticketDetailOf } from '../../../../workspace/boardView.ts';
 
 interface Opened {
   readonly ideaId: string | null;

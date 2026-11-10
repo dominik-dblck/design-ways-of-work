@@ -9,7 +9,7 @@ import { theme } from '../../app/theme/theme.ts';
 import {
   wireframesOf,
   wireframesWords as words,
-} from '../../app/workspace/wireframes-view.ts';
+} from '../../app/workspace/wireframesView.ts';
 
 describe('the Wireframes page', () => {
   it('draws every screen of every track, each beside its placeholder', () => {

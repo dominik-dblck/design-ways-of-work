@@ -1,7 +1,7 @@
 /**
  * - `INK` · a piece's colour by its kind, a palette role
  */
-import type { TokenKind } from '../../../../workspace/contract-view.ts';
+import type { TokenKind } from '../../../../workspace/contractView.ts';
 
 // a piece's colour, as a palette role
 const INK: Readonly<Record<TokenKind, string>> = {

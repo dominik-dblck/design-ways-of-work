@@ -5,8 +5,8 @@
 import Stack from '@mui/material/Stack';
 import { useState } from 'react';
 import type { ReactElement } from 'react';
-import { featureWords as words } from '../../../../workspace/feature-view.ts';
-import type { CaseGroup } from '../../../../workspace/feature-view.ts';
+import { featureWords as words } from '../../../../workspace/featureView.ts';
+import type { CaseGroup } from '../../../../workspace/featureView.ts';
 import { SectionHead } from '../../../atoms/SectionHead/index.ts';
 import { FeaturePageCaseTable } from './FeaturePageCaseTable.tsx';
 import { FeaturePageKindChips } from './FeaturePageKindChips.tsx';

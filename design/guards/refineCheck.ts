@@ -7,19 +7,19 @@ import {
   criterionFindings,
   edgeFindings,
   whyFindings,
-} from './refine-check/criterionFindings.ts';
+} from './refineCheck/criterionFindings.ts';
 import type {
   Finding,
   SheetEdge,
   SheetTicket,
   SheetTickets,
-} from './refine-check/refineCheckTypes.ts';
+} from './refineCheck/refineCheckTypes.ts';
 import {
   closingFindings,
   journeyFindings,
   notebookFindings,
   routeFindings,
-} from './refine-check/sheetFindings.ts';
+} from './refineCheck/sheetFindings.ts';
 import * as EDGES from '../roadmaps/edges.ts';
 import * as TICKETS from '../roadmaps/tickets.ts';
 

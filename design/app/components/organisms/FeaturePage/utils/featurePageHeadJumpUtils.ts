@@ -1,8 +1,8 @@
 /**
  * - `jumpsOf` · the page's jumps: each section, its word, its count
  */
-import { featureWords as words } from '../../../../workspace/feature-view.ts';
-import type { FeatureView } from '../../../../workspace/feature-view.ts';
+import { featureWords as words } from '../../../../workspace/featureView.ts';
+import type { FeatureView } from '../../../../workspace/featureView.ts';
 
 function jumpsOf(
   view: FeatureView,

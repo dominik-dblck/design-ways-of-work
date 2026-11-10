@@ -8,8 +8,8 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
-import { featureWords as words } from '../../../../workspace/feature-view.ts';
-import type { JourneyCard } from '../../../../workspace/feature-view.ts';
+import { featureWords as words } from '../../../../workspace/featureView.ts';
+import type { JourneyCard } from '../../../../workspace/featureView.ts';
 import { FeaturePageJourneyStepItem } from './FeaturePageJourneyStepItem.tsx';
 
 function FeaturePageJourneyItem({

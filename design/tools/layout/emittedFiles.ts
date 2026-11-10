@@ -22,9 +22,9 @@ const EMITTED: readonly Emitted[] = [
     print: 'json',
   },
   {
-    module: 'sheet/contract/block-model.ts',
+    module: 'sheet/contract/blockModel.ts',
     name: 'blockModel',
-    fixture: 'fixtures/data/block-model.json',
+    fixture: 'fixtures/data/blockModel.json',
     print: 'json',
   },
   {

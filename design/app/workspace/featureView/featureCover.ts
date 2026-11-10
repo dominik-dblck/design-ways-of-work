@@ -2,7 +2,7 @@
  * - `coverOf` · how far an epic's journeys cover its test cases and its 02a states
  */
 import { check } from '../../../sheet/cases/journeys.ts';
-import type * as TEST_CASES from '../../../sheet/cases/test-cases.ts';
+import type * as TEST_CASES from '../../../sheet/cases/testCases.ts';
 import { FEATURE_WORDS } from './featureWords.ts';
 import type { CoverLine, CoverView } from './featureTypes.ts';
 

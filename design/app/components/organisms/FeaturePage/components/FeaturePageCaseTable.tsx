@@ -11,8 +11,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
-import { featureWords as words } from '../../../../workspace/feature-view.ts';
-import type { CaseGroup } from '../../../../workspace/feature-view.ts';
+import { featureWords as words } from '../../../../workspace/featureView.ts';
+import type { CaseGroup } from '../../../../workspace/featureView.ts';
 
 function FeaturePageCaseTable({
   group,

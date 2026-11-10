@@ -7,8 +7,8 @@ import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
-import { wireframesWords as words } from '../../../../workspace/wireframes-view.ts';
-import type { ScreenCard } from '../../../../workspace/wireframes-view.ts';
+import { wireframesWords as words } from '../../../../workspace/wireframesView.ts';
+import type { ScreenCard } from '../../../../workspace/wireframesView.ts';
 import { radiusOf } from '../../../../theme/tokenReads.ts';
 
 function WireframesPageScreenPlaceholder({

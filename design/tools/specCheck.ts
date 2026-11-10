@@ -4,7 +4,7 @@
  */
 import { errorMessageOf, mirrorAt } from '../guards/checks/checkWorld.ts';
 import { builtRoot } from './root.ts';
-import * as SPEC_CHECK from '../guards/spec-check.ts';
+import * as SPEC_CHECK from '../guards/specCheck.ts';
 
 async function main(): Promise<number> {
   const mirror = mirrorAt(builtRoot(), { mode: 'read', copyTo: null });

@@ -11,8 +11,8 @@ import type { ReactElement } from 'react';
 import {
   features,
   featureWords as words,
-} from '../../../../workspace/feature-view.ts';
-import type { FeatureView } from '../../../../workspace/feature-view.ts';
+} from '../../../../workspace/featureView.ts';
+import type { FeatureView } from '../../../../workspace/featureView.ts';
 import { FeaturePageSteps } from './FeaturePageSteps.tsx';
 import { jumpsOf } from '../utils/featurePageHeadJumpUtils.ts';
 

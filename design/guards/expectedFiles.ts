@@ -3,14 +3,14 @@
  * - `reads`, `named` · the read list a pack needs, and the endpoints by name
  * - what no data names stays in the note beside the marker; recon confirms each path
  */
-import { named } from '../sheet/cases/test-cases.ts';
+import { named } from '../sheet/cases/testCases.ts';
 import type {
   ComponentsSpec,
   ExpectedFile,
   ExpectedTicket,
-} from './expected-files/expectedFilesTypes.ts';
-import { reads } from './expected-files/packReads.ts';
-import { endpointsOf, specRowsOf } from './expected-files/ticketEndpoints.ts';
+} from './expectedFiles/expectedFilesTypes.ts';
+import { reads } from './expectedFiles/packReads.ts';
+import { endpointsOf, specRowsOf } from './expectedFiles/ticketEndpoints.ts';
 import * as COMMANDS from '../sheet/contract/commands.ts';
 import * as QUERIES from '../sheet/contract/queries.ts';
 

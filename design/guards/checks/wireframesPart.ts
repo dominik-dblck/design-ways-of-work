@@ -4,7 +4,7 @@
  */
 import { lineOf, errorMessageOf } from './checkWorld.ts';
 import type { Mirror } from './checkWorld.ts';
-import * as SCREEN_VIEW from '../../sheet/screens/screen-view.ts';
+import * as SCREEN_VIEW from '../../sheet/screens/screenView.ts';
 import * as WIREFRAMES from '../../sheet/screens/wireframes.ts';
 
 // every wireframe's data is in the samples: the gaps are held at none

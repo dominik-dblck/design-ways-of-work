@@ -13,9 +13,9 @@ import { copiedRulesLine } from './copiedRules.ts';
 import { poolsLine } from './parsePools.ts';
 import { guardRun } from './runChecks.ts';
 import type { GuardRun } from './runChecks.ts';
-import * as CONTENT_TYPE_LOGIC from '../../sheet/logic/assembly/content-type-logic.ts';
+import * as CONTENT_TYPE_LOGIC from '../../sheet/logic/assembly/contentTypeLogic.ts';
 import * as MESSAGES from '../../sheet/words/messages.ts';
-import * as MESSAGES_CONTENT from '../../sheet/words/messages-content.ts';
+import * as MESSAGES_CONTENT from '../../sheet/words/messagesContent.ts';
 import * as WIREFRAMES from '../../sheet/screens/wireframes.ts';
 
 // the architecture map's data: this run's findings, never counted again

@@ -23,7 +23,7 @@ export const RECON_SKILL: readonly DocumentSection[] = [
       '**Tasks.**',
       '',
       '1. Read `ticket/_shared.md`; before the first ticket of a session also `agent-instructions.md`,',
-      '   `plans.ts`, `glossary.ts`, `block-model.json`, `backlog.ts` (header), `commands.ts` (header),',
+      '   `plans.ts`, `glossary.ts`, `blockModel.json`, `backlog.ts` (header), `commands.ts` (header),',
       '   `events.ts` (the RUN)',
       '2. Branch — `git switch feature/deblock-content && git pull --ff-only; git switch -c feature/{id}`',
       '3. Read the ticket with `yarn ticket:read`, then every read-list entry, section by section',

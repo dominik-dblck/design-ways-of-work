@@ -113,7 +113,7 @@ function derivedLines(ref: string, cut: Cut): readonly string[] | null {
     return `${sources[0]?.path ?? file} and its ${sources.length - 1} parts sha256 ${sheetDigest(sources)}`;
   };
   return [
-    `_derived_ · expanded at load by journeys.ts · perType, off its type’s row in content-types.ts · ${digest('journeys.ts')} · ${digest('content-types.ts')} (each over its files' paths and bytes in path order)`,
+    `_derived_ · expanded at load by journeys.ts · perType, off its type’s row in contentTypes.ts · ${digest('journeys.ts')} · ${digest('contentTypes.ts')} (each over its files' paths and bytes in path order)`,
     '',
     '```json',
     JSON.stringify(journey, null, 1),

@@ -1,5 +1,5 @@
 /**
- * - `app/workspace/board-view.ts`: each epic stands in one column, by its tickets
+ * - `app/workspace/boardView.ts`: each epic stands in one column, by its tickets
  * - an epic opened and a ticket opened read the same rows the board shows
  */
 import { describe, expect, it } from 'vitest';
@@ -15,7 +15,7 @@ import {
   stats,
   ticketDetailOf,
   velocity,
-} from '../../app/workspace/board-view.ts';
+} from '../../app/workspace/boardView.ts';
 
 describe('the board view', () => {
   const board = columns();

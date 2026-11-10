@@ -11,7 +11,7 @@ import {
   nextUp,
   stats,
   velocity,
-} from '../../../workspace/board-view.ts';
+} from '../../../workspace/boardView.ts';
 import { BoardPageColumns } from './components/BoardPageColumns.tsx';
 import { BoardPageKindLegend } from './components/BoardPageKindLegend.tsx';
 import { BoardPageNextUp } from './components/BoardPageNextUp.tsx';

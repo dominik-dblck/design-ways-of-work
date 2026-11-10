@@ -6,7 +6,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { build } from 'rolldown';
-import { moduleEntries, moduleImports } from '../guards/source-check.ts';
+import { moduleEntries, moduleImports } from '../guards/sourceCheck.ts';
 import { copyNamedIcons } from './build/namedIcons.ts';
 import { writeVendored } from './build/vendored.ts';
 import { emittedTexts } from './emit.ts';
@@ -36,7 +36,7 @@ function bannerOf(file: string): string {
   return head.replace(FIRST_LINE_NAME, '$1.js').trimEnd();
 }
 
-// the pages read an entry under its PascalCase name: sheet-status.ts is SheetStatus
+// the pages read an entry under its PascalCase name: sheetStatus.ts is SheetStatus
 function globalOf(file: string): string {
   return path
     .basename(file, '.ts')

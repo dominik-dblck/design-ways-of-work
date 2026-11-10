@@ -6,7 +6,7 @@ import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
-import { kinds, words } from '../../../../workspace/board-view.ts';
+import { kinds, words } from '../../../../workspace/boardView.ts';
 import { SectionHead } from '../../../atoms/SectionHead/index.ts';
 
 function BoardPageKindLegend(): ReactElement {

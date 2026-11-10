@@ -84,7 +84,7 @@ export const PIPELINE_OVERVIEW: readonly DocumentSection[] = [
       'Arch-review runs before regression in every mode: it changes code, regression measures it. `why: T-E03-00`',
       '— eight stages and five stops per ticket took 35–50% of the effort (PM, 25 Sep)',
       '',
-      "**Stage 0 is the design side's and happens before the pack exists.** `refine-check.ts` runs the",
+      "**Stage 0 is the design side's and happens before the pack exists.** `refineCheck.ts` runs the",
       'checklist lines a regex can read (1, 3, 4, 15, 17, 18, 20, 24, 28, 31, 32, 33) and `tools/pack.ts` cuts no',
       'pack for a `todo` ticket with a finding — so a pack in `fixtures/packs/` is a ticket that passed them. The pack',
       'carries `## Checklist, read` — every line the regex does not read (2, 5–14, 16, 19, 21–23, 25–27, 30), one clause each,',

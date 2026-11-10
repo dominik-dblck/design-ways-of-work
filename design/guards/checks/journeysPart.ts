@@ -6,7 +6,7 @@ import { lineOf, errorMessageOf } from './checkWorld.ts';
 import * as COMMANDS from '../../sheet/contract/commands.ts';
 import * as JOURNEYS from '../../sheet/cases/journeys.ts';
 import * as QUERIES from '../../sheet/contract/queries.ts';
-import * as TEST_CASES from '../../sheet/cases/test-cases.ts';
+import * as TEST_CASES from '../../sheet/cases/testCases.ts';
 import * as TICKETS from '../../roadmaps/tickets.ts';
 
 type Cases = typeof TEST_CASES;

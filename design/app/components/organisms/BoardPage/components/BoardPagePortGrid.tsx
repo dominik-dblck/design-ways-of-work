@@ -4,7 +4,7 @@
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import type { ReactElement } from 'react';
-import { ports } from '../../../../workspace/board-view.ts';
+import { ports } from '../../../../workspace/boardView.ts';
 import { TitledList } from '../../../atoms/TitledList/index.ts';
 import { radiusOf } from '../../../../theme/tokenReads.ts';
 

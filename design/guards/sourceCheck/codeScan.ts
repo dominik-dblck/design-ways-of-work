@@ -53,7 +53,7 @@ function fileFindings(
   },
 ): readonly SourceFinding[] {
   const found: SourceFinding[] =
-    LOGIC_PAGE.test(file) && /gate-rules\.js|translation-flow\.js/.test(text)
+    LOGIC_PAGE.test(file) && /gateRules\.js|translationFlow\.js/.test(text)
       ? [
           {
             kind: 'logic page',
@@ -72,7 +72,7 @@ function fileFindings(
     if (declared) decl = String(declared[1] || declared[2]);
     if (!isCode(line)) return;
     if (
-      file === 'approval-logic.js' &&
+      file === 'approvalLogic.js' &&
       (/^\s*R\('/.test(line) || decided.has(index))
     )
       return;
@@ -131,7 +131,7 @@ function twiceWritten(): readonly SourceFinding[] {
           {
             kind: 'requirement twice',
             row: VIEW,
-            file: 'approval-logic.js',
+            file: 'approvalLogic.js',
             line: 1,
             text: requirement.id.slice(0, 140),
           },

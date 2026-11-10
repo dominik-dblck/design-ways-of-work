@@ -2,18 +2,18 @@
  * - `reads` · a pack's read list: rows, refusals, events, types, journeys, specs
  */
 import type { ComponentsSpec, ExpectedTicket } from './expectedFilesTypes.ts';
-import type { ReadEndpoint } from '../../sheet/cases/test-cases.ts';
+import type { ReadEndpoint } from '../../sheet/cases/testCases.ts';
 import { endpointsOf, specRowsOf } from './ticketEndpoints.ts';
-import { modelTypes } from '../../sheet/contract/block-model.ts';
+import { modelTypes } from '../../sheet/contract/blockModel.ts';
 import * as COMMANDS from '../../sheet/contract/commands.ts';
 import * as JOURNEYS from '../../sheet/cases/journeys.ts';
 import * as QUERIES from '../../sheet/contract/queries.ts';
 
 const ALWAYS = [
-  'test-cases.ts',
+  'testCases.ts',
   'api-convention.md',
-  'shared-cases.ts',
-  'field-kinds.ts',
+  'sharedCases.ts',
+  'fieldKinds.ts',
 ];
 
 // a type named in a body or an answer, and every type its own src names, transitively
@@ -100,7 +100,7 @@ function reads(ticket: ExpectedTicket, spec: ComponentsSpec): string[] {
     ...facts.keys.map((key) => `refusals.ts · ${key}`),
     ...facts.emits.map((key) => `events.ts · ${key}`),
     ...(facts.mention ? ['events.ts · TARGET'] : []),
-    ...modelTypesOf(facts.texts).map((name) => `block-model.json · ${name}`),
+    ...modelTypesOf(facts.texts).map((name) => `blockModel.json · ${name}`),
     ...journeys.map(
       (journey) => `journeys.ts · ${journey.id} (${ticket.epic})`,
     ),

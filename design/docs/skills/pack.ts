@@ -33,11 +33,11 @@ const skill: SkillFile = {
       lead: null,
       first: null,
       lines: [
-        '`guards/refine-check.ts` · the checklist rules a regex reads, each finding named by its rule’s key (rule:regex-lines-run-as-code) — mechanically; every other rule is the reader’s, ticked in the pack under Checklist, read.',
-        '`sheet/cases/test-cases.ts` + `sheet/cases/journeys.ts` · the test cases are generated from the rows, each with its reach (shown, guarded, api); the journeys are data, covers per step · `Journeys.check` empty before a feature ticket is READY (JR2–JR4) · refine-check’s rule:journeys-in-one-grammar still parses the old one-line journey grammar, until `sheet/cases/journeys.ts` holds it.',
-        '`guards/spec-check.ts` · parts exist, tokens declared, no hex outside gate-dot, canon states or `skip`, wrapper paths follow the tier, `layout` on every molecule, an organism’s parts named after it.',
+        '`guards/refineCheck.ts` · the checklist rules a regex reads, each finding named by its rule’s key (rule:regex-lines-run-as-code) — mechanically; every other rule is the reader’s, ticked in the pack under Checklist, read.',
+        '`sheet/cases/testCases.ts` + `sheet/cases/journeys.ts` · the test cases are generated from the rows, each with its reach (shown, guarded, api); the journeys are data, covers per step · `Journeys.check` empty before a feature ticket is READY (JR2–JR4) · refine-check’s rule:journeys-in-one-grammar still parses the old one-line journey grammar, until `sheet/cases/journeys.ts` holds it.',
+        '`guards/specCheck.ts` · parts exist, tokens declared, no hex outside gate-dot, canon states or `skip`, wrapper paths follow the tier, `layout` on every molecule, an organism’s parts named after it.',
         "`tools/pack.ts` · verbatim, one path per basename, refuses a todo ticket with findings. Each section is cut from `{home}/{name}.ts` or one of its parts and carries that file's sha256; the pack is one file. A `whole` pointer travels whole, file by file. Every file a root loads, and every fixture the repository holds, travels with its digest (The files the roots load).",
-        '`guards/source-check.ts` · after every change `SourceCheck.ratchet` reads 0 (no kind of copy above its baseline; a retired `replaces` still in its file fails) · zero copies before a feature ticket is READY; `tools/pack.ts` refuses the pack. `rule:one-source-of-truth`',
+        '`guards/sourceCheck.ts` · after every change `SourceCheck.ratchet` reads 0 (no kind of copy above its baseline; a retired `replaces` still in its file fails) · zero copies before a feature ticket is READY; `tools/pack.ts` refuses the pack. `rule:one-source-of-truth`',
       ],
     },
     {
