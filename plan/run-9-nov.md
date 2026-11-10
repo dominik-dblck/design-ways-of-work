@@ -16,7 +16,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 | 4 | Tools | 8 | 8 |
 | 7 | P1 release | 5 | 5 |
 | 5 | e2e | 4 | 4 |
-| 6 | Port design | 5 | 8 |
+| 6 | Port design | 6 | 8 |
 | 8 | E19 + backup | 3 | 3 |
 
 Stage 6, measured 9 Nov 17:20 (the PM holds it: start asked): 1 · links, how wow's files stand in eagle-design's git
@@ -62,6 +62,7 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
 - 00:59 · stage 6 · 3 of 6 · vendor/wow on the branch a95cc34, wow v0.1.7, faces in tokens
 - 01:56 · stage 6 · 4 of 6 · rename built: wow 4915103, moves.tsv; branch waits on task 5
 - 10:02 · stage 6 · 5 of 8 · task 8: every HTML and CSS to legacy, df0c982 pushed
+- 10:48 · stage 6 · 6 of 8 · task 7: JSON to TS, cd1fd3a pushed
 
 - 08:24 · stage 1 · 1 of 5 · the build side's skills to legacy/ (8bfcd8e)
 - 08:51 · stage 1 · 2 of 5 · 7g commitlint (d282df5)
@@ -635,6 +636,12 @@ Stage 7 (PM 9 Nov, A: P1 alone before the port, everything eagle-dev changed sin
 - 10 Nov · task 7e: app/styles/tokens.ts gains `reducedMotion` (each token's value under prefers-reduced-motion,
   keyed as the tokens) and `elements` (the system's element and class styles, each declaration as written, var()
   kept), so eagle-dev's two CSS reads swap for the module at its take.
+- 10 Nov · stage 6 task 5, the retakes (PM, B): the guard map is retaken by its own run (it carries no time now,
+  its map the port's); the content-type snapshot by script, written only once the old one, its names followed
+  through moves.tsv and the JSON's modules, equalled part c's data now, a list's order aside: 8 of 14 keys moved,
+  every move a name, but one fact the modules show that the JSON hid, a link contentCheck.ts → blockModel.ts in
+  each of its 8 file diagrams (contentCheck reads the model: its contract rows against it). Part c green, checks
+  exit 0; the two exit rows held for the retake gone.
 
 ## Questions for the PM
 
