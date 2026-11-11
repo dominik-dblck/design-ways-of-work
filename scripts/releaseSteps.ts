@@ -14,7 +14,9 @@ function bumped(version: string, kind: Unreleased['kind']): string {
   const numbers = version.split('.').map(Number);
   if (numbers.length !== 3 || numbers.some((one) => !Number.isInteger(one)))
     throw new Error(`${version} is no version of three numbers`);
-  const at = PLACE[kind];
+  // below 1.0 an action raises the minor, as semver reads 0.x: 1.0.0 is named, never counted
+  const isBelowOne = numbers[0] === 0;
+  const at = isBelowOne && kind === 'major' ? PLACE.minor : PLACE[kind];
   return numbers
     .map((one, place) => {
       if (place < at) return one;

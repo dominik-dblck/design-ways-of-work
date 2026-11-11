@@ -19,9 +19,17 @@ describe('the version a release takes', () => {
   it.each([
     ['patch', '0.1.11'],
     ['minor', '0.2.0'],
-    ['major', '1.0.0'],
+    ['major', '0.2.0'],
   ] as const)('a %s release after 0.1.10 is %s', (kind, version) => {
     expect(bumped('0.1.10', kind)).toBe(version);
+  });
+
+  it.each([
+    ['patch', '1.2.4'],
+    ['minor', '1.3.0'],
+    ['major', '2.0.0'],
+  ] as const)('a %s release after 1.2.3 is %s', (kind, version) => {
+    expect(bumped('1.2.3', kind)).toBe(version);
   });
 
   it('a version that is not three numbers is refused', () => {

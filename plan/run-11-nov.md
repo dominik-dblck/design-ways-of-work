@@ -461,3 +461,11 @@ Each call: what, why, how to undo. None changes what the PM sees.
   the registry as rows suits it; the five reds equal on both sides are its own, mended by script in its merge
   commit. The build side's read list goes, by its word, into `sheet/project.ts` as `buildReads.names`: one
   home for what the build side reads, no new file.
+- The release script numbers an action below 1.0 as a minor (0.2.0 to 0.3.0), as semver reads 0.x; the row
+  keeps its kind, so a repository still reads that the release asks an action. Why: a release that lets the
+  product's branch take its `main` is not the end of the design side, and v1.0.0 is that end by the PM's
+  word. The script reaches 1.0.0 by no count now: its naming is written with task 10. Whether and when the
+  release goes out stays the PM's. Undo: revert the commit; an action is numbered 1.0.0 again.
+- Asked of eagle-design for task 4: the read list moves on its own `main`, by its session (the field in
+  `sheet/project.ts`, its test reading it), and the gate's trunk brings it; the home's test then takes that
+  change as a carry. A migration writes no file that holds rows, so the field is not this repository's to add.
