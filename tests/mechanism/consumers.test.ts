@@ -48,13 +48,14 @@ describe('the gate tries the commit in hand on a repository that takes it', () =
   );
 
   it(
-    'a difference no row expects is red; so is a rule off in a taken file, a package past its homes, a registry gone',
+    'a difference no row expects is red; so is a rule off in a taken file, a package past its homes, a registry named in another case',
     () => {
       wow.committed('design/says.txt', 'next\n');
       wow.committed('.gitattributes', `${attributes}/scripts -export-ignore\n`);
       product.committed('eslint-suppressions.json', `{ "${TAKEN}": {} }\n`);
-      product.git(['mv', 'registry.txt', 'moved.txt']);
-      product.git(['commit', '-q', '-m', 'a registry moves']);
+      // a disk that folds case still answers for `registry.txt`: git's own names do not
+      product.git(['mv', 'registry.txt', 'Registry.txt']);
+      product.git(['commit', '-q', '-m', 'a registry takes a capital']);
       const said = tried();
       expect(said.stdout).toContain('DIFF · output · yarn says');
       expect(said.stdout).toContain(
@@ -79,7 +80,7 @@ describe('the gate tries the commit in hand on a repository that takes it', () =
     () => {
       wow.committed('.gitattributes', attributes);
       product.git(['rm', '-q', 'eslint-suppressions.json']);
-      product.git(['mv', 'moved.txt', 'registry.txt']);
+      product.git(['mv', 'Registry.txt', 'registry.txt']);
       product.git(['commit', '-q', '-m', 'no rule is off']);
       scratch.inHand({
         what: 'the word a product says moves',

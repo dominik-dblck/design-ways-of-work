@@ -114,12 +114,26 @@ const strays = (root: string): readonly string[] =>
       (entry) => entry !== 'package.json' && !Object.hasOwn(HOMES, entry),
     );
 
-// a file the homes read by its path is there in every product, with no row or with many: a plug alone may be absent
-const lacking = (root: string): readonly string[] =>
-  CONTRACT.filter(
-    ({ file, kind }) =>
-      kind !== 'plug' && !fs.existsSync(path.join(root, file)),
+// the files git tracks in a clone, each by its exact name: a disk that folds case answers for a name it does not hold
+const tracked = (root: string): ReadonlySet<string> =>
+  new Set(
+    execFileSync('git', ['ls-files', '-z'], {
+      cwd: root,
+      env: childEnv(),
+      maxBuffer: BUFFER,
+      encoding: 'utf8',
+    })
+      .split('\0')
+      .filter(Boolean),
+  );
+
+// a file the homes read by its path is tracked in every product, with no row or with many: a plug alone may be absent
+function lacking(root: string): readonly string[] {
+  const held = tracked(root);
+  return CONTRACT.filter(
+    ({ file, kind }) => kind !== 'plug' && !held.has(file),
   ).map(({ file }) => file);
+}
 
 export {
   cloned,

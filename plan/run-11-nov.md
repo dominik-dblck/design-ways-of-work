@@ -273,3 +273,21 @@ Each call: what, why, how to undo. None changes what the PM sees.
   of Measure the count of the standard registries comes to the home and the product keeps its own lines. Asked
   by it of the harness: every part takes a retake, none holds `diff` fixed. The retake itself stays the PM's
   word in the product. Left for the split of mechanics from rows: the block model's emit, which reads generic.
+- The pair of the wireframes (no snapshot where there is no wireframe) is a rule of data: the wireframes' part
+  holds it, in the home; the gate holds the contract alone, a file being there. Agreed by eagle-design.
+- Settled with eagle-design, mechanics against rows, the tickets (5d77a15 sent to it). To the home: the
+  tickets' types and kinds, the ticket of a command, the receipt flags, the board, the views, the context, the
+  expand, and `roadmaps/tickets.ts` itself. To the product, as rows: the commands' states, the checklist
+  reads, the status. Split: of the list, the building comes here and the epics imported by name stay, as an
+  index a product holds (a registry's row, written by its new-epic as the edges and the receipts are); of the
+  pointer, the grammar comes here and the two imports of the product's own rules go, such a pointer resolved
+  as a section of a file, the way the pack reads one. That last is what cuts the 299 files behind the tickets.
+- The same for the block model. To the home: the model's type, the parts put together in the order of their
+  keys, `tools/emit.ts`, and the pack's read of the emitted file. To the product: the parts, the model put
+  together, and the list of the modules it emits, a registry's row.
+- eagle-design's review of 5d77a15, mended. The gate asked the disk whether a registry is there, and a disk
+  that folds case (this machine's) answers yes for `componentsSpec.ts` where the product holds
+  `ComponentsSpec.ts`: green here, red on Linux. It reads the clone's tracked files now, by their exact names;
+  the red proof renames a registry by case alone. The kinds of the 45 rows agree with its tree, each file
+  tracked on `port/wow`. Rows to come when the mechanics land here, each a registry: the checklist reads, the
+  commands' states, the index of the tickets' parts, the list of the emitted modules.
