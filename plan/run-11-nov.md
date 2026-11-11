@@ -124,3 +124,10 @@ Each call: what, why, how to undo. None changes what the PM sees.
   clone of the commit.
 - The same rehearsal: a commit the checks refused left the manifest and the changelog written, and the next
   run refused a dirty tree. The script now puts both back (the tree was clean before it wrote them).
+- Task 4 proven three ways. The package through yarn's own git path, in a scratch project depending on a bare
+  clone at ffa1f64: `node_modules/design-ways-of-work` holds `design`, `dev`, `shared`, `design-system`,
+  `package.json`, 4.5 MB, installed in 4 s with no second install. The feature tier on that commit: green, the
+  gate 195 s. `yarn release` whole, in a scratch clone of 912724b with its hooks installed and a bare remote
+  beside it: the commit past the commit tier, `main` pushed past the feature tier and the gate (172.8 s), the
+  tag's push "carries no commit its remote lacks", "v0.2.0 is out", 3 min 44 s in all. This repository and
+  GitHub hold no v0.2.0: the real one is the PM's word (task 7).
