@@ -312,3 +312,29 @@ Each call: what, why, how to undo. None changes what the PM sees.
 - `ports/*/tree/**` joins the scope's product trees: a product's files on their way to it, checked in that
   product by the gate's clone, as `design/` is. No rule is off for this repository's own code by it.
 - The row of the release in hand is a major now: a repository does its migration to take it.
+- The gate on b5b6c4c, eagle-design's `port/wow` migrated: no difference in thirteen of its fourteen scripts;
+  `yarn lint:exports` red. Its knip read no `product.ts`: the shared config names the root's tool configs and
+  `scope.ts` as the project, so the parts reached through `product.ts` read as unused. `product.ts` stands
+  beside `scope.ts` there now. eagle-design's finding on the same commit: its `product.ts` opens with the
+  block header its rules ask of a file, where it carried the one line a config does.
+- eagle-design's X1, and the call. The gate's repository is `port/wow`, frozen; its `main` stands 28 commits
+  past their common base (8e031ff). Measured, read only: 98 files, 81 changed and 17 new, nearly all rows
+  (`sheet/`, `roadmaps/E*`, snapshots, packs). Of what this stage touches: three files of `roadmaps/tickets/`
+  (the list, the status, the checklist reads), the frozen notebooks' test, five of the components' spec, two
+  documents. It proposes the gate take a fresh clone of `main` now. The call: the plan's order stands, `port/wow`
+  to task 10, where the rehearsal on `main` is built (W17). Why: that rehearsal is the port itself done by
+  script on a moving tree, a task of its own size, and nothing of tasks 3 to 9 needs it if one rule is kept
+  from here: a migration never writes whole a file that holds rows. It writes a new file, moves one, removes
+  one, or edits one by script, so `main`'s newer rows survive it. Undo: task 10 first. For the PM: its proposal.
+- On `main` the checks run three parts more (d, r, h: the list, the pages, the props). The port took them out
+  with the pages (W2, W11); the rehearsal on `main` will name them as differences the port means. Whether a
+  product's board, pages and props get a part again, in TypeScript, is the PM's: listed for the return.
+- Settled with eagle-design, the files that read a plug (its T4). The guard's part keeps its standard lines and
+  takes its tail from `Product.guardLines`; the moves of the architecture map are a plug, the layers' names
+  come from the source guard's rows. The assembly findings are `Product.guardFindings`. The wireframes' part
+  takes `Product.screens` (sweep, editor view). The pack reads the emitted block model, no module. The states
+  an epic names and the counters are plugs, `statesOf` and `counters`, handed by the entry point as an
+  argument to a library module, which never reads `product.ts`. The requirements are a registry at a neutral
+  path, `sheet/requirements.ts`: a row that names the code a decision retires is every product's. The feature
+  view's fields go whole to the product, a view part, their test with them. The source guard stays here, an
+  engine; its rows (the map, the scope, the layers) are a registry, `guards/sourceRows.ts`.

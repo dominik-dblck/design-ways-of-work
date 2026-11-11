@@ -1,4 +1,7 @@
-// product.ts · what this product plugs into the way of working: its entry points alone read it
+/**
+ * - `product` · what this product plugs into the way of working, code alone
+ * - read by what it runs alone, never by a module one of them imports
+ */
 import { contentTypePart } from './guards/checks/contentTypePart.ts';
 import { flowPart, rulesPart } from './guards/checks/rulesParts.ts';
 import { sentencesPart } from './guards/checks/sentencesPart.ts';

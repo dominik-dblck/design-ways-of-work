@@ -37,6 +37,7 @@ describe('knip from a scope', () => {
       'tools/local.mts',
       '*.config.{ts,mts}',
       'scope.ts',
+      'product.ts',
     ]);
     expect(config.project).toEqual(
       expect.arrayContaining(['sheet/**/*.ts', 'tests/**', 'scope.ts']),
@@ -65,6 +66,7 @@ describe('knip from a scope', () => {
     expect(beyondTheFace(knipConfig(scopeAt('/nowhere')).entry)).toEqual([
       '*.config.{ts,mts}',
       'scope.ts',
+      'product.ts',
     ]);
   });
 });
