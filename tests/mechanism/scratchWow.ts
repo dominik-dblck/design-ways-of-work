@@ -28,6 +28,7 @@ const portsOf = (migration: Migration | null): string => `const CONSUMERS = [
     commands: [['says']],
     folders: [],
     migration: ${JSON.stringify(migration)},
+    port: null,
   },
 ];
 const BUILD_SOURCE = '../build';

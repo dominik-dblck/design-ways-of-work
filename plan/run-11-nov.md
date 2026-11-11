@@ -355,3 +355,15 @@ Each call: what, why, how to undo. None changes what the PM sees.
   and the components' spec, which the port renamed. One is a file `main` added in a folder the port renamed.
   Four are rows both sides moved: an organism of the components' spec, its JSON in `legacy/`, an epic of the
   backlog, a command of E04.
+- Stage 2 task 3, the gate on eagle-design's newest `main`. The four conflicts of rows are eagle-design's to
+  settle, so the port is not replayed here: its branch takes `main` (a merge there, on a working branch, the
+  PM's word on its side, asked of the PM), and the gate holds the branch to it. Two checks, `scripts/
+  consumerPort.ts`, by a `port` a repository of `ports/` names: the branch tried stands behind the branch its
+  work lands on, by how many commits; and a change of that trunk's to a file the port took out of the branch
+  (as git reads the port, a move followed, with the moves' map for a file rewritten as it moved) is carried
+  into its home and named in `ports/eagle-design/carried.ts` by the file and its blob, so a later change is
+  asked for again. Why: `main` still runs its own copies of what a home holds now, and a fix made there
+  (e0a4939 is one) would be lost at the catch-up with no word. Today it reads: 29 commits behind, four files
+  to carry. Undo: `port: null`. The gate is red from here until the branch takes `main`: no push before that.
+- At the end the catch-up is a fast-forward: the branch holds `main` whole, so `main` moves to it with no
+  conflict, then the migration. That is why a merge kept current beats a replay by script at the end.

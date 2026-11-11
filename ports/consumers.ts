@@ -3,6 +3,7 @@
  * - `BUILD_SOURCE` · the build repository `dev/` is taken from, by script
  */
 import type { Consumer } from '../scripts/consumerTypes.ts';
+import { CARRIED } from './eagle-design/carried.ts';
 import { MIGRATION } from './eagle-design/migration.ts';
 
 // one at least: a release is tried on a repository, never on none
@@ -29,6 +30,13 @@ const CONSUMERS: readonly [Consumer, ...Consumer[]] = [
     ],
     folders: ['dist'],
     migration: MIGRATION,
+    // its own work lands on `main`, which takes nothing yet: the branch holds `main` whole, or the gate is red
+    port: {
+      trunk: 'main',
+      base: '8e031ff6f80c8a25127c9fc214c5859f84477f03',
+      moves: 'ports/eagle-design/moves.tsv',
+      carried: CARRIED,
+    },
   },
 ];
 

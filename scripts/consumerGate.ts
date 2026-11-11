@@ -16,6 +16,7 @@ import {
 } from './consumerClones.ts';
 import { explained, mapDifferences, runDifferences } from './consumerDiff.ts';
 import type { Run, Sides } from './consumerDiff.ts';
+import { portFaults } from './consumerPort.ts';
 import { ranIn } from './consumerRuns.ts';
 import type { Consumer } from './consumerTypes.ts';
 import { hashes, since, writtenIn } from './digests.ts';
@@ -71,7 +72,7 @@ function fileDifferences({
   ];
 }
 
-// what no row of a release excuses: a take a run undid, a rule off in a taken file, a package past its homes, a registry not there
+// what no row of a release excuses in a clone: a take a run undid, a rule off in a taken file, a package past its homes, a registry not there
 function faults({ pinned, next }: Sides<string>): readonly string[] {
   const undone = (side: string, root: string): readonly string[] =>
     holdsItsTake(root) ? [] : [`${side} · a run rewrote a file the take wrote`];
@@ -147,7 +148,7 @@ async function tried({
   ];
   const out = path.join(scratch, consumer.name, 'out');
   kept(out, runs);
-  const broken = faults(sides);
+  const broken = [...faults(sides), ...portFaults({ consumer, wow })];
   fs.writeFileSync(
     path.join(out, 'differences.txt'),
     `${[...found, ...broken].join('\n')}\n`,
