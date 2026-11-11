@@ -60,3 +60,26 @@ Each call: what, why, how to undo. None changes what the PM sees.
   its why; `plan/expected-differences.tsv` was the extraction's and retires with it (task 3).
 - The take's own check (`yarn wow --check`) is asked of both clones after their runs, not compared as an output:
   its line prints the version, which every release moves.
+- Stage 1 task 3, what retired to `legacy/` (git mv, as it ran): `verify`, `rehearse`, `portSave`, `moveProduct`,
+  the port's patch, the inventory, the differences verify expected. `moveProduct` went with them: it moved a file
+  in a linked copy and here at once, and a repository that takes its files tracks none of them; the migration
+  (stage 2 task 10) is its successor. `move` follows a product's checkout only when one is handed in; `rename`
+  works here unless a tree is. Undo: `git mv` back, the package scripts restored.
+- `keepsItsRules` reads this repository alone; the gate holds the other half, as a fault no changelog row
+  excuses: a repository's `eslint-suppressions.json` naming a file it took, and a run that rewrites a taken file.
+- `.rehearsal/` (191 MB, the rehearsal copies, their files hard-linked to this repository's) is left on this
+  machine's disk, still ignored by git and the scope; it holds eagle-design's `CLAUDE.md`, which a session opened
+  there loads. Its removal is asked of the PM.
+- The PM, 11 Nov: "przegaduj to z eagle-design zeby miec weryfikacje po kazdym zadaniu". Its first review, of
+  tasks 1 and 2, by commit: six findings taken (8d141c0): `cut-pack` and `release:record` join its scripts; a
+  hook's git variables never reach a child; timings are cut where a tool prints one; the package's dependencies
+  and peers are compared; uncommitted `ports/` and `releases/` are said. Not taken: its own `check:chunk` as one
+  more script (each check of that tier already runs by its own name).
+- Its control for two clones run at once: this repository's homes are byte for byte v0.1.10's (`git diff v0.1.10
+  HEAD -- design dev shared design-system` is empty), so every run so far compared a tag with itself: three in a
+  row read NO DIFFERENCE (8540d56 12 scripts; 90dbed7 inside `check:feature`, 199.8 s in all; 8d141c0 14 scripts,
+  2 min 53 s, under `GIT_DIR` and `GIT_INDEX_FILE` as a hook sets them, with the narrowed timings).
+  `cut-pack T-E19-00` exits 1 on both sides (its self-check misses two `.dc.html` pointers the branch dropped);
+  the pack is written first and compared.
+- Its request for the plan (relayed as the PM's word, so said to the PM at this stop): the migration is rehearsed
+  on a fresh clone of its `main`, not on `port/wow`. Taken as a technical call: stage 2's line and section 8.

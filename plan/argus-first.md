@@ -94,8 +94,10 @@ Costs are estimates of this session's working time. ✋ marks the PM's word.
 - The way of working's own tsc, ESLint, knip, prettier, tests, build and checks run `design/` on the sample.
   The 302 files nothing checks here today are checked here.
 - The no-product test reads every home: the names from `ports/`, the ids anything but the sample's own.
-- The migration for eagle-design: a map and a script, run on a clone of its branch at every release from here on,
-  so its catch-up later is one step already rehearsed.
+- The migration for eagle-design: a map and a script, run at every release from here on, on a fresh clone of its
+  `main` (its moves from `ports/eagle-design/moves.tsv` by script, the JSON to TypeScript changes from `port/wow`,
+  then the take), so its catch-up later is the same script on the same tree. That clone joins `ports/consumers.ts`;
+  `port/wow` is the gate's repository until it does, and the source of the JSON to TypeScript changes after.
 - Done when: v1.0.0 is out, the sample is green in the gate, the test of line 3 is green.
 
 ### Stage 3 · Spawn, the design side · 0.5–1 day
@@ -210,3 +212,8 @@ waited for the PM's word waits for stage 5.
 - **Its tools since 8 Nov**: the backup at a commit (a request already taken, review section 9); `yarn backup`,
   here already; `journeysPart.ts` differs from the copy here by this repository's own renames alone; the E19 pin
   goes to `FROZEN_NOTEBOOKS`. The work mode is a line of its `CLAUDE.md` and a hook outside every repository.
+
+- **Asked by eagle-design after its review of the gate, 11 Nov** (relayed as the PM's "tak, poproś go o
+  poprawki"): the migration is rehearsed on its `main`, 18 commits ahead of `port/wow` that day, never on the
+  frozen branch; stage 2's migration line says so. The files where the moves do not land cleanly on `main` are
+  the first list it gets, settled row by row.
