@@ -1,0 +1,51 @@
+# State · design-ways-of-work
+
+What is true now, and nothing else. It is mended in the commit that changes what it says.
+A past log stands in `plan/log/` as it was written: its paths and its plans are that day's.
+
+## Where to read what
+
+- How it works: `README.md`. How to work in it: `CLAUDE.md`.
+- The version: `package.json`. Each release and what it moved: `releases/changelog.ts`.
+- The plan in force: `plan/argus-first.md`, accepted for the design side; the build side is parked.
+- The run in hand: `plan/run-11-nov.md`. Its table is the progress; its calls each say why and how to undo.
+- The PM's decisions: `decisions/register.ts`.
+- The review behind the plan: `plan/review-11-nov.md`, dated 11 Nov; the plan replaces its sections 7 and 8.
+- A sketch for the parked build side: `plan/browser-tier.md`.
+
+## Who takes it
+
+- `ports/consumers.ts` names each repository the gate tries, and the branch it tries.
+- eagle-design: its branch `port/wow` takes the tag v0.1.10. Its `main` runs on its own copies until its
+  migration, rehearsed on a fresh clone of that `main` and landed on the PM's word.
+- argus-design: not spawned yet.
+- The build side: `dev/` is copied from its repository by script; its port is parked.
+
+## What holds a change
+
+- A commit: the commit tier (`yarn check:chunk`), by pre-commit and by the Stop hook.
+- A push: the feature tier (`yarn check:feature`), by pre-push, only for a commit the remote lacks under that
+  ref, and only from a clean checkout that stands on the commit pushed. It ends with the release's and the
+  gate's tests on scratch repositories, this repository's own checks on a fresh clone, then the gate.
+- A release: `yarn release`, one command, on the PM's word.
+
+## Open for the PM
+
+1. The rules in `CLAUDE.md` reached this session relayed, on 11 Nov: read once, confirm or strike.
+2. Argus's stack, before its design repository is spawned.
+3. A word to talk to the build side's session, before its stage starts.
+4. The work-mode hook: its source here and tested, or only named here.
+5. The scope's fields: every one required, as now, or presets a scope spreads.
+6. `.rehearsal/` on this machine's disk, 191 MB of the extraction's copies, ignored by git: remove or keep.
+
+## Known gaps
+
+- The homes still name Eagle: its ids, names and paths, in the files the plan counted. The plan's stage 2.
+- A change that holds no file still runs prettier and cspell with no file named, green by accident.
+  A home (`shared/checkTiers.ts`): stage 2.
+- `design/tools/build.ts` removes its output folder with all it holds, outside the guard. A home: stage 2.
+- The checks that clone are a list in `scripts/scratch.ts`; a field of the scope would change a home's type:
+  stage 2.
+- A commit pushed straight to `main` from a clone with no hooks is checked by nothing here: a branch
+  protection on the remote alone closes that.
+- The hooks outside every repository (the work mode, the run bars) are not versioned or tested here.

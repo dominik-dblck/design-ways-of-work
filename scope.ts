@@ -109,8 +109,13 @@ const scope: RepoScope = {
     '**/*.md': 'prose keeps the layout its writer gave it',
     'plan/**': "a run's notes and maps, as written",
   },
-  // no skill, and no instruction an agent loads: its sessions read the products'
-  instructions: { skills: [], whole: [], onDemand: [], everyTurn: [] },
+  // no skill: the one instruction its owner's session loads, on every turn
+  instructions: {
+    skills: [],
+    whole: [],
+    onDemand: [],
+    everyTurn: ['CLAUDE.md'],
+  },
   // its own code's strings and both sides' trees: a rule's text, a check's finding, each written once
   sentences: {
     code: [
@@ -128,8 +133,8 @@ const scope: RepoScope = {
   // no rule table of its own: the products' rule files, each checked in its product
   ruleFiles: [],
   namedPaths: {
-    // plan/ out: its plan names files to come, its notes what moved since
-    docs: ['README.md', 'design-system/**/*.md'],
+    // plan/ out but its state: its plan names files to come, its logs what moved since
+    docs: ['README.md', 'CLAUDE.md', 'plan/state.md', 'design-system/**/*.md'],
     roots: [
       'scripts',
       'shared',
@@ -137,6 +142,7 @@ const scope: RepoScope = {
       'tests',
       'ports',
       'releases',
+      'decisions',
       'plan',
       'design',
       'dev',
@@ -149,9 +155,9 @@ const scope: RepoScope = {
       // notes about the products, in their words, and the PM's own, quoted in Polish
       '!plan/**',
     ],
-    // none: the way of working's own words are WOW_WORDS, in every repository
+    // the way of working's own words are WOW_WORDS, in every repository; here, the name of a mode
     computed: [],
-    reviewed: [],
+    reviewed: ['cowork'],
     onPurpose: [],
     alsoIn: [],
   },

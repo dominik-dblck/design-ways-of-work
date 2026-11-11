@@ -4,6 +4,10 @@ The PM, 11 Nov: "ok, rob robote iteracyjnie po kazdym chunku wypisuj progress w 
 WoW zeby wyspawnowac nowy projekt designu juz na czysto tak zeby eagle design i argus design mieli to samo zrodlo
 prawdy WoW-a". The plan in force is `plan/argus-first.md`; its build side (the plan's stage 4) is parked.
 
+The PM, 11 Nov, on the pace: first "A tak poprosze" (one task, then a stop with the progress, then his word);
+then, after task 5, "lec do konca 1 foundation, 6 i 7 bez stopu i cale design (2)": tasks 6 and 7 of stage 1,
+the release of v0.2.0 with them, and stage 2 run without a stop. v1.0.0 stays his word.
+
 Held for the PM: the first push and every tag (a release), a merge, a snapshot retaken, a message to eagle-dev,
 Argus's stack, the spawn of `argus-design`. The product repositories are read only from here.
 

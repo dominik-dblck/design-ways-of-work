@@ -11,6 +11,7 @@
     "scripts/**/*.ts",
     "ports/**/*.ts",
     "releases/**/*.ts",
+    "decisions/**/*.ts",
     "shared/hooks/**/*.ts",
     "shared/lint/**/*.ts",
     "shared/sync/**/*.ts",
