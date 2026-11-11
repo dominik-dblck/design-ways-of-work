@@ -10,7 +10,32 @@ const NEXT: Unreleased = {
   action:
     'the migration `ports/` names for the repository, on its checkout; then the pin to the tag',
   rules: { added: [], changed: [], removed: [] },
-  outputs: {},
+  outputs: {
+    'eagle-design': {
+      'output · yarn build':
+        'the api convention’s module holds the sixth check and the 502 row its `main` wrote: the build finds the page written already',
+      'output · yarn checks':
+        'the journeys’ part reads its epics off the backlog: the cases met of E10 and E14, the journeys of E14 and E19',
+      'output · yarn cut-pack T-E19-00':
+        'the pack carries the api convention as its `main` holds it; the pins’ registry is one file more to commit',
+      'output · yarn test':
+        'the closed notebooks’ test reads the pins off the product’s registry, the newest epic’s among them',
+      'exit · yarn test · 1 → 0':
+        'the pins’ test fails on the tag, which holds five pins of its own; the product’s registry holds the sixth',
+      'dist · project/api-convention.md':
+        'the sixth check and the 502 row, word for word as its `main` holds them',
+      'dist · project/module-entries.json':
+        'the pins’ registry is a file of the module roadmaps/notes.ts',
+      'dist · project/packs/T-E19-00.md':
+        'the pack carries the api convention, the 502 row and the sixth check in it',
+      'written · fixtures/packs/T-E19-00.md':
+        'the pack carries the api convention, the 502 row and the sixth check in it',
+      'written · records/release-5-3-1.md':
+        'the module roadmaps/notes.ts counts the pins’ registry: one file more, its digest moved',
+      'written · sheet/contract/api-convention.md':
+        'the sixth check and the 502 row, word for word as its `main` holds them',
+    },
+  },
 };
 
 const RELEASES: readonly Release[] = [
