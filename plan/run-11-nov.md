@@ -192,3 +192,16 @@ Each call: what, why, how to undo. None changes what the PM sees.
   green by that. Stage 2 reads it.
 - What task 5 costs: the commit tier 15 s → 26 s (the hooks' tests); the feature tier 3 min 20 s → 4 min 24 s
   (`test:mechanism` 9 s, `fresh` 53 s, the gate 171 s). All 15 checks green on 7b13daf.
+- eagle-design's review of task 5 (01d386b, 7b13daf): no fault in `fresh.ts` or the guard; `tests/mechanism`
+  it read by its tests' names alone. Four notes, taken (09419e1). A stub proves which call a hook makes,
+  never that the tool takes it: `tests/hooks/realTools.test.ts` runs the commit tier once with prettier,
+  cspell and ESLint as installed. Its product sets `ESLINT_FLAGS` for a config written in TypeScript: a
+  hook's environment reaches ESLint as a command and as a library (a flag ESLint does not know stops it by
+  name). A Stop that says nothing of itself is read as the first. The checks that clone are a list in
+  `scripts/scratch.ts`, held by a test to the feature end's scripts that name the scratch; its proposal, a
+  field of the scope, would change a home's type, so it waits for stage 2.
+- Its answer on the empty change (`format:check` with no file): not seen there, and worth mending in the
+  home, by not calling a tool with no file. Stage 2, with the other home changes. On `design/tools/build.ts`
+  it agrees: stage 2. What skips the gate's scratch, asked by it and read: `.prettierignore`, the scope's
+  ignores (ESLint, cspell, knip), vitest's exclude, `tsconfig.json`'s include, git's ignore.
+- The feature tier whole on 09419e1: 15 checks green, 4 min 12 s (`fresh` 50 s, the gate 165 s, NO DIFFERENCE).
