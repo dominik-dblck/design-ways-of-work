@@ -22,10 +22,12 @@ git -C $repo ls-files -co --exclude-standard -z |
   zip -q -X $out -@
 
 tmp=$(mktemp -d)
-trap 'rm -rf $tmp' EXIT
+# the bundle moves into the zip, so its folder ends empty: rmdir takes a folder that holds nothing, never more
+trap 'rmdir $tmp 2>/dev/null || true' EXIT
 bundle=$tmp/$name.bundle
 git -C $repo bundle create $bundle --all 2>/dev/null
 git -C $repo bundle verify $bundle >/dev/null 2>&1
-zip -q -X -j $out $bundle
+weight=$(du -h $bundle | cut -f1)
+zip -q -X -j -m $out $bundle
 
-print "$out · $(du -h $out | cut -f1) · $(unzip -l $out | tail -1 | awk '{print $2}') files · history $(du -h $bundle | cut -f1), $(git -C $repo for-each-ref --format=x refs/heads | wc -l | tr -d ' ') branches"
+print "$out · $(du -h $out | cut -f1) · $(unzip -l $out | tail -1 | awk '{print $2}') files · history $weight, $(git -C $repo for-each-ref --format=x refs/heads | wc -l | tr -d ' ') branches"

@@ -9,6 +9,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { BUILD_REPO, HERE, repoAt } from './repos.ts';
 import { isRetired } from './retired.ts';
+import { emptied } from './scratch.ts';
 
 const SOURCE = repoAt(BUILD_REPO);
 const TO = path.join(HERE, 'dev', 'claude');
@@ -27,7 +28,7 @@ const files = execFileSync('git', ['ls-files', '.claude'], {
       !WRITTEN_FROM_THE_PIPELINE.test(file) &&
       !isRetired(file),
   );
-fs.rmSync(TO, { recursive: true, force: true });
+emptied({ within: HERE, folder: TO });
 const naming: string[] = [];
 for (const file of files) {
   const bytes = fs.readFileSync(path.join(SOURCE, file));

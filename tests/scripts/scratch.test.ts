@@ -21,7 +21,7 @@ afterAll(() => {
 describe('a folder is emptied below the scratch alone', () => {
   it('a folder below the scratch is made new', () => {
     const folder = holding(path.join(scratch, 'one', 'clone'));
-    expect(emptied({ scratch, folder })).toBe(folder);
+    expect(emptied({ within: scratch, folder })).toBe(folder);
     expect(fs.readdirSync(folder)).toEqual([]);
   });
 
@@ -33,7 +33,9 @@ describe('a folder is emptied below the scratch alone', () => {
   ])('%s is refused, and nothing is removed', (_, folder) => {
     holding(scratch);
     holding(outside);
-    expect(() => emptied({ scratch, folder })).toThrow('nothing removed');
+    expect(() => emptied({ within: scratch, folder })).toThrow(
+      'nothing removed',
+    );
     expect(fs.existsSync(path.join(scratch, 'file.txt'))).toBe(true);
     expect(fs.existsSync(path.join(outside, 'file.txt'))).toBe(true);
   });

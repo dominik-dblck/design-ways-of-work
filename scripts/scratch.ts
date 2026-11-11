@@ -1,6 +1,6 @@
 /**
  * - `SCRATCH` · the folder the gate builds its clones in, the one it empties
- * - `emptied` · a folder below a scratch, made new; a path outside is refused
+ * - `emptied` · a folder made new, below the one it is held within, or refused
  * - `childEnv` · a child's environment: none of git's names for this repository
  */
 import { execFileSync } from 'node:child_process';
@@ -10,17 +10,17 @@ import { HERE } from './repos.ts';
 
 const SCRATCH = path.join(HERE, '.consumers');
 
-// below the scratch alone: the scratch itself, a `..` or another drive never reaches the removal
+// below the folder that holds it alone: that folder itself, a `..` or another drive never reaches the removal
 function emptied({
-  scratch,
+  within,
   folder,
 }: {
-  readonly scratch: string;
+  readonly within: string;
   readonly folder: string;
 }): string {
-  const below = path.relative(path.resolve(scratch), path.resolve(folder));
+  const below = path.relative(path.resolve(within), path.resolve(folder));
   if (below === '' || below.startsWith('..') || path.isAbsolute(below))
-    throw new Error(`${folder} is not below ${scratch}: nothing removed`);
+    throw new Error(`${folder} is not below ${within}: nothing removed`);
   fs.rmSync(folder, { recursive: true, force: true });
   fs.mkdirSync(folder, { recursive: true });
   return folder;

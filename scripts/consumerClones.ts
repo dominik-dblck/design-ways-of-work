@@ -41,7 +41,7 @@ function cloned({
   const source = path.resolve(wow, consumer.path);
   const sideAt = (side: string): string => {
     const root = emptied({
-      scratch,
+      within: scratch,
       folder: path.join(scratch, consumer.name, side),
     });
     const branch = ['--branch', consumer.ref, '--single-branch'];
@@ -84,7 +84,7 @@ function nextTaken({
 }): Sides<ReadonlyMap<string, string>> {
   const folder = path.join(root, 'node_modules', PACKAGE);
   const pinned = resolvedBy(folder);
-  emptied({ scratch: root, folder });
+  emptied({ within: root, folder });
   execFileSync('tar', ['-x', '-C', folder], { input: archive });
   quietly(root, ['yarn', '-s', 'wow']);
   return { pinned, next: resolvedBy(folder) };
