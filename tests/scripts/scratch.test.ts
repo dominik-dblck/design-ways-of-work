@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { afterAll, describe, expect, it } from 'vitest';
-import { emptied } from '../../scripts/scratch.ts';
+import { childEnv, emptied } from '../../scripts/scratch.ts';
 
 const base = fs.mkdtempSync(path.join(os.tmpdir(), 'wow-scratch-'));
 const scratch = path.join(base, 'scratch');
@@ -36,5 +36,21 @@ describe('a folder is emptied below the scratch alone', () => {
     expect(() => emptied({ scratch, folder })).toThrow('nothing removed');
     expect(fs.existsSync(path.join(scratch, 'file.txt'))).toBe(true);
     expect(fs.existsSync(path.join(outside, 'file.txt'))).toBe(true);
+  });
+});
+
+describe("a child's environment holds none of git's names for one repository", () => {
+  it('what a hook hands down is left out, the rest is kept', () => {
+    expect(
+      childEnv({
+        GIT_DIR: '.git',
+        GIT_INDEX_FILE: '.git/index',
+        GIT_AUTHOR_NAME: 'kept: no repository is named by it',
+        PATH: '/usr/bin',
+      }),
+    ).toEqual({
+      GIT_AUTHOR_NAME: 'kept: no repository is named by it',
+      PATH: '/usr/bin',
+    });
   });
 });

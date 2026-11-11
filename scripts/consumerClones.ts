@@ -1,6 +1,6 @@
 /**
  * - `cloned` · two fresh clones of a repository, each installed at its pinned tag
- * - `packageOf`, `nextTaken` · the commit in hand as a package, taken by a clone
+ * - `packageOf`, `nextTaken` · the commit as a package, taken; what it resolves
  * - `holdsItsTake`, `suppressedTaken` · the take as a run left it; a rule off
  */
 import { execFileSync, spawnSync } from 'node:child_process';
@@ -9,7 +9,7 @@ import path from 'node:path';
 import { takenFiles } from '../shared/take/takeRecord.ts';
 import type { Sides } from './consumerDiff.ts';
 import type { Consumer } from './consumerTypes.ts';
-import { emptied } from './scratch.ts';
+import { childEnv, emptied } from './scratch.ts';
 
 const PACKAGE = 'design-ways-of-work';
 const BUFFER = 1 << 28;
@@ -21,6 +21,7 @@ const quietly = (
 ): void => {
   execFileSync(bin, args, {
     cwd: root,
+    env: childEnv(),
     maxBuffer: BUFFER,
     stdio: ['ignore', 'pipe', 'pipe'],
   });
@@ -54,27 +55,43 @@ function cloned({
 const packageOf = (wow: string): Buffer =>
   execFileSync('git', ['archive', '--format=tar', 'HEAD'], {
     cwd: wow,
+    env: childEnv(),
     maxBuffer: BUFFER,
   });
 
-// the installed package replaced by the commit's, then the repository's own take
+// what a repository's install resolves through the package: its dependencies and its peers
+function resolvedBy(folder: string): ReadonlyMap<string, string> {
+  const manifest: Readonly<Record<string, unknown>> = JSON.parse(
+    fs.readFileSync(path.join(folder, 'package.json'), 'utf8'),
+  );
+  return new Map(
+    ['dependencies', 'peerDependencies'].flatMap((kind) =>
+      Object.entries(Object(manifest[kind])).map(
+        ([name, range]) => [`${kind} · ${name}`, String(range)] as const,
+      ),
+    ),
+  );
+}
+
+// the installed package replaced by the commit's, then the repository's own take: its lockfile stays the tag's
 function nextTaken({
   root,
   archive,
 }: {
   readonly root: string;
   readonly archive: Buffer;
-}): void {
-  const at = emptied({
-    scratch: root,
-    folder: path.join(root, 'node_modules', PACKAGE),
-  });
-  execFileSync('tar', ['-x', '-C', at], { input: archive });
+}): Sides<ReadonlyMap<string, string>> {
+  const folder = path.join(root, 'node_modules', PACKAGE);
+  const pinned = resolvedBy(folder);
+  emptied({ scratch: root, folder });
+  execFileSync('tar', ['-x', '-C', folder], { input: archive });
   quietly(root, ['yarn', '-s', 'wow']);
+  return { pinned, next: resolvedBy(folder) };
 }
 
 const holdsItsTake = (root: string): boolean =>
-  spawnSync('yarn', ['-s', 'wow', '--check'], { cwd: root }).status === 0;
+  spawnSync('yarn', ['-s', 'wow', '--check'], { cwd: root, env: childEnv() })
+    .status === 0;
 
 // a repository turns no rule off in a file it took: that file is mended here
 function suppressedTaken(root: string): readonly string[] {

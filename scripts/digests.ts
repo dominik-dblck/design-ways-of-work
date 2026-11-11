@@ -6,6 +6,7 @@ import { execFileSync } from 'node:child_process';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
+import { childEnv } from './scratch.ts';
 
 function hashes(folder: string): ReadonlyMap<string, string> {
   const out = new Map<string, string>();
@@ -30,6 +31,7 @@ function writtenIn(root: string): ReadonlyMap<string, string> {
   const entries = execFileSync('git', [...status, '--untracked-files=all'], {
     cwd: root,
     encoding: 'utf8',
+    env: childEnv(),
   });
   return new Map(
     entries

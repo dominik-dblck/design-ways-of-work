@@ -15,6 +15,8 @@ const CONSUMERS: readonly [Consumer, ...Consumer[]] = [
       ['checks'],
       ['spec-check'],
       ['checks:gate'],
+      ['cut-pack', 'T-E19-00'],
+      ['release:record', '5.3.1'],
       ['tsc'],
       ['lint'],
       ['test'],

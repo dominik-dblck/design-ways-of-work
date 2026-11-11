@@ -104,7 +104,7 @@ async function tried({
   expected,
 }: Trial): Promise<boolean> {
   const sides = cloned({ consumer, wow, scratch });
-  nextTaken({ root: sides.next, archive: packageOf(wow) });
+  const resolved = nextTaken({ root: sides.next, archive: packageOf(wow) });
   const { commands } = consumer;
   const [pinned, next] = await Promise.all([
     ranIn({ root: sides.pinned, commands }),
@@ -113,7 +113,11 @@ async function tried({
   const runs = { pinned, next };
   for (const run of pinned)
     console.log(`  ran · yarn ${run.command} · exit ${String(run.status)}`);
-  const found = [...runDifferences(runs), ...fileDifferences(consumer, sides)];
+  const found = [
+    ...mapDifferences('package', resolved),
+    ...runDifferences(runs),
+    ...fileDifferences(consumer, sides),
+  ];
   const out = path.join(scratch, consumer.name, 'out');
   kept(out, runs);
   const broken = faults(sides);

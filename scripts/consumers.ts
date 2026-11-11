@@ -9,18 +9,25 @@ import { NEXT } from '../releases/changelog.ts';
 import { tried } from './consumerGate.ts';
 import type { Consumer } from './consumerTypes.ts';
 import { HERE } from './repos.ts';
-import { SCRATCH } from './scratch.ts';
+import { childEnv, SCRATCH } from './scratch.ts';
 
-const HOMES_AND_MANIFEST = [
+// what a trial reads: the homes and the manifest from the commit, the repositories and the release from the tree
+const READ_BY_A_TRIAL = [
   'design',
   'dev',
   'shared',
   'design-system',
   'package.json',
+  'ports',
+  'releases',
 ];
 
 const git = (args: readonly string[]): string =>
-  execFileSync('git', args, { cwd: HERE, encoding: 'utf8' }).trim();
+  execFileSync('git', args, {
+    cwd: HERE,
+    encoding: 'utf8',
+    env: childEnv(),
+  }).trim();
 
 // one after another: two repositories' installs and runs at once would only share the machine
 const triedAll = (consumers: readonly Consumer[]): Promise<boolean> =>
@@ -46,16 +53,11 @@ async function main(): Promise<void> {
     process.exitCode = 2;
     return;
   }
-  const uncommitted = git([
-    'status',
-    '--porcelain',
-    '--',
-    ...HOMES_AND_MANIFEST,
-  ]);
+  const uncommitted = git(['status', '--porcelain', '--', ...READ_BY_A_TRIAL]);
   console.log(`the commit in hand · ${git(['rev-parse', '--short', 'HEAD'])}`);
   if (uncommitted !== '')
     console.log(
-      'the homes hold uncommitted work: the gate tries the commit, not the tree',
+      'uncommitted work in what a trial reads: the commit is tried, the release read from the tree',
     );
   process.exitCode = (await triedAll(consumers)) ? 0 : 1;
 }
