@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON \"$CLAUDE_PROJECT_DIR\"/scripts/guard.ts && tsx '${CLAUDE_PROJECT_DIR}/tools/local.mts' && python3 ~/.claude/hooks/review.py"
+          }
+        ]
+      }
+    ]
+  }
+}

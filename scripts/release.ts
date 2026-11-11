@@ -100,8 +100,12 @@ function committed(version: string): void {
   );
   done(['add', '--', MANIFEST, CHANGELOG]);
   const message = ['-m', `chore(release): v${version}`, '-m', NEXT.what];
-  if (!done(['commit', ...message, ...trailers]))
-    stopped('the commit was refused: its checks say why, above');
+  if (done(['commit', ...message, ...trailers])) return;
+  // the tree was clean before the two files were written: put back, it is clean again
+  done(['restore', '--staged', '--worktree', '--', MANIFEST, CHANGELOG]);
+  stopped(
+    'the commit was refused, its checks say why above: nothing is left written',
+  );
 }
 
 // main first, past the gate; its tag once the remote holds the commit, so the tag's own push checks nothing

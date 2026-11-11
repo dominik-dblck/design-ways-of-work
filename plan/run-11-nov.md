@@ -98,3 +98,29 @@ Each call: what, why, how to undo. None changes what the PM sees.
   does (once a clone) and `lint:hooks`, in the commit tier, is red when git runs none of them. The gate holds
   the package to it: an entry past the homes and the manifest in what the next side unpacks is a fault.
   Undo: the `prepare` line back, the attributes file gone.
+- Stage 1 task 4, `yarn release`, its order: the row and the version written and committed, `main` pushed, the
+  tag cut once the remote holds the commit, the tag pushed. The plan listed the gate as a step of its own; it
+  runs where every push meets it, in pre-push, once and from nothing. Why: a tag is never cut on a commit a
+  gate refused (9 Nov, v0.1.1 and v0.1.5 were), and the gate's three and a half minutes are not paid twice.
+  A refused push leaves the release commit here, untagged: mended by a commit, `yarn release` again sends the
+  same release. Undo: run `check:feature` in the script before the tag.
+- pre-push (`scripts/prePush.ts`) runs the feature tier only when the push carries a commit its remote lacks,
+  asked of the remote itself (`git ls-remote`), never of a ref kept here: no cache. A remote that does not
+  answer holds nothing, so everything is checked. Without it the tag's push would run the tier again on the
+  commit just pushed. Undo: `.husky/pre-push` back to `yarn -s check:feature`.
+- The push goes over HTTPS, the URL read off `origin`, signed in by `gh` (the PM's rule: a long pre-push drops
+  an SSH connection).
+- A release's row, against what was settled with eagle-design: version, kind, action, outputs and rule keys
+  are written by hand in `NEXT`; the paths that moved or left each home and the commit of each repository are
+  computed. "Whether a snapshot moves" has no field: it is a row of `outputs` (`written · guards/__snapshots__/…`).
+  `tried` is where each repository's branch stood as the row was written; the gate clones the branch at the push.
+- `releases/changelog.ts` is held at 200 lines like any file, about a dozen releases; older ones then move to a
+  file of their own. The release does not refresh `origin/main` here: pre-push asks the remote.
+- Found by rehearsing `yarn release` in a scratch clone against a local remote: this repository's own
+  `test:rules` was red on any clone but this machine's. `tests/lint/fixtures/.claude/settings.local.json`, which
+  `knipConfig.test.ts` reads, was never committed: the machine's global git ignore holds
+  `**/.claude/settings.local.json`. Added by force; once tracked, no ignore touches it. The class of fault (a
+  check green here on a file no clone holds) gets its gate in task 5: this repository's own tier run on a fresh
+  clone of the commit.
+- The same rehearsal: a commit the checks refused left the manifest and the changelog written, and the next
+  run refused a dirty tree. The script now puts both back (the tree was clean before it wrote them).
