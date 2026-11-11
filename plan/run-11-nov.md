@@ -12,7 +12,7 @@ Argus's stack, the spawn of `argus-design`. The product repositories are read on
 Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never counted by hand in a reply.
 
 | stage | what | done | of |
-| 1 | Foundation | 3 | 7 |
+| 1 | Foundation | 4 | 7 |
 | 2 | Design clean | 0 | 10 |
 | 3 | Spawn design | 0 | 3 |
 | 4 | Eagle-design | 0 | 2 |
@@ -40,6 +40,7 @@ word · 2 · both design repositories pinned to one tag, the gate green on both.
 - 12:25 · stage 1 · 1 of 7 · ports/consumers.ts names the repositories; build path mended to ../eagle (c4c82da)
 - 12:35 · stage 1 · 2 of 7 · yarn consumers: NO DIFFERENCE on eagle-design port/wow in 2 min 30 s, red on a mutated commit (8540d56)
 - 12:52 · stage 1 · 3 of 7 · gate at the feature end, scaffolding to legacy/; eagle-design's review mended; 3 runs NO DIFFERENCE (90dbed7, 8d141c0, a4c22de)
+- 13:14 · stage 1 · 4 of 7 · package of four homes, yarn release and pre-push; release rehearsed whole on a local remote (ffa1f64, 96273a9, 912724b)
 
 ## Calls
 
@@ -95,7 +96,7 @@ Each call: what, why, how to undo. None changes what the PM sees.
   and `package.json`, so what git archives, and yarn 1 unpacks for a git dependency with no `prepare`, is those
   alone (3.6 MB, was 7.5). `prepare` leaves the manifest: with it, yarn 1 clones this repository, installs all
   of it and packs it inside every repository's install. Nothing installs git's hooks any more, so `yarn hooks`
-  does (once a clone) and `lint:hooks`, in the commit tier, is red when git runs none of them. The gate holds
+  does (once a clone), and `yarn release` refuses a clone where git runs none of them. The gate holds
   the package to it: an entry past the homes and the manifest in what the next side unpacks is a fault.
   Undo: the `prepare` line back, the attributes file gone.
 - Stage 1 task 4, `yarn release`, its order: the row and the version written and committed, `main` pushed, the
@@ -131,3 +132,28 @@ Each call: what, why, how to undo. None changes what the PM sees.
   beside it: the commit past the commit tier, `main` pushed past the feature tier and the gate (172.8 s), the
   tag's push "carries no commit its remote lacks", "v0.2.0 is out", 3 min 44 s in all. This repository and
   GitHub hold no v0.2.0: the real one is the PM's word (task 7).
+- eagle-design's review of task 4 (ffa1f64, 96273a9, 912724b): seven findings, all taken (cdf483d).
+  A release's `rules` are keys `added`, `changed` and `removed`: a removed key leaves a sheet row that points
+  at no rule. A manifest whose text does not hold `"version": "<the last>"` stops the release before a file is
+  written (it was left as it was, in silence: a tag on the version before). An `ssh://` origin goes over HTTPS
+  as a `git@host:` one does. A release that went out whole is not sent again: the remote is asked for its tag,
+  and `NEXT` says nothing (it pushed `main` with all that came since and said the release was out).
+- The same review, pre-push. It measured a push against every ref the remote holds, so a commit that reached
+  the remote unchecked (a clone with no hooks, `--no-verify`, a merge on GitHub) and was then pushed to `main`
+  read "nothing to check". Now a ref the remote has is measured against what it holds there, as git hands it
+  to the hook; a new ref against the remote's `main`. One step past its proposal (it kept every ref for a new
+  one): against `main` alone, a tag cut by hand on a commit only a side branch holds is checked too. Not
+  closed, and no hook can: a commit pushed straight to `main` from a clone with no hooks.
+  Undo: `heldByRemote` back, every ref after `--not`.
+- The same review: the checks read the checkout, not the commit pushed. A push whose commit is not `HEAD`, or
+  from a tree with uncommitted work (untracked too), is refused with its reason, before the tier runs. The
+  tier on a fresh clone of the commit (task 5) may replace the refusal. Undo: `misread` out of `prePush.ts`.
+- The same review: `lint:hooks` leaves the commit tier. The hook that runs the tier is the thing it checked,
+  so it was green whenever it ran and red only where the tier is run by hand: a fresh clone, which task 5
+  runs. `hooksInstalled` is one module; `yarn release` asks it, and the README names `yarn hooks`.
+- The mends proven in a scratch clone of cdf483d, hooks installed, a bare remote beside it. `yarn release`
+  whole: "v0.2.0 is out", 3 min 52 s (the commit tier 15.4 s, the feature tier 209.9 s). `yarn release` again:
+  "NEXT says nothing", exit 1, nothing pushed. A push from a tree with an untracked file: refused. A push of a
+  branch whose commit is not the one checked out: refused. A commit sent with no hook to a side branch, then
+  pushed to `main`: the feature tier runs (195.2 s), where it read "nothing to check"; a tag cut by hand on it
+  after: nothing to check. 74 tests in `tests/scripts` (56 before). This repository and GitHub hold no v0.2.0.
