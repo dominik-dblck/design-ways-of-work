@@ -1,14 +1,15 @@
 /**
- * - `ruledOn` · one conflict of a port taking its trunk, settled by the port's rules
+ * - `ruledOn`, `Ruled` · a conflict of a port taking its trunk, by the port's rules
  * - `unmerged` · the conflicts git left, each with the sides that hold the file
  * - `gitAt` · git run in a checkout, its output read
  */
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
-import os from 'node:os';
 import path from 'node:path';
 import type { Move } from './movePaths.ts';
-import { importsAnew, movedTo, namedAnew } from './portNames.ts';
+import { bytesOf, isBinary, laid } from './portLaid.ts';
+import type { Laid } from './portLaid.ts';
+import { movedTo } from './portNames.ts';
 import type { Port } from './portTypes.ts';
 import { childEnv } from './scratch.ts';
 
@@ -63,78 +64,95 @@ function unmerged(git: Git): readonly Conflict[] {
   return [...files.values()];
 }
 
-interface Laid {
-  readonly text: string;
-  readonly isClean: boolean;
+interface Ruled {
+  readonly says: string;
+  // a person reads it before the merge is committed: the script ends red
+  readonly isHeld: boolean;
 }
 
-// the trunk's change laid on the branch's file, three ways: the base and the trunk's side named as after the port first, so its renames are no change
-function laid(
-  { conflict, git, root, port, moves }: Settling,
+const said = (says: string): Ruled => ({ says, isHeld: false });
+
+const indented = (text: string): string =>
+  text
+    .split('\n')
+    .map((line) => `    ${line}`)
+    .join('\n');
+
+// the trunk's change on the branch's file: both kept, or the trunk's side with what of the port's it lacks
+function laidOn(
+  { root, port, moves, conflict }: Settling,
   target: string,
-): Laid {
-  const folder = fs.mkdtempSync(path.join(os.tmpdir(), 'port-merge-'));
-  const exists = (one: string): boolean => fs.existsSync(path.join(root, one));
-  const named = (text: string): string =>
-    namedAnew(importsAnew(text, { file: target, moves, exists }), {
-      moves,
-      names: port.names,
-    });
-  const sideAt = (name: string, blob: string | undefined): string => {
-    const file = path.join(folder, name);
-    const text = blob === undefined ? '' : git(['cat-file', 'blob', blob]);
-    fs.writeFileSync(file, named(`${text}\n`));
-    return file;
-  };
-  const args = [
-    'merge-file',
-    '-p',
-    path.join(root, target),
-    sideAt('base', conflict.base),
-    sideAt('theirs', conflict.theirs),
-  ];
-  const merged = spawnSync('git', args, {
-    encoding: 'utf8',
-    maxBuffer: BUFFER,
+): Ruled {
+  const { text, isMerged, dropped }: Laid = laid({
+    root,
+    target,
+    base: conflict.base,
+    theirs: conflict.theirs,
+    port,
+    moves,
   });
-  const theirs = fs.readFileSync(path.join(folder, 'theirs'), 'utf8');
-  for (const side of ['base', 'theirs']) fs.rmSync(path.join(folder, side));
-  fs.rmdirSync(folder);
-  return merged.status === 0
-    ? { text: merged.stdout, isClean: true }
-    : { text: theirs, isClean: false };
+  fs.writeFileSync(path.join(root, target), text);
+  if (isMerged)
+    return said(`MERGED · ${target} · the trunk's change beside the port's`);
+  return dropped === ''
+    ? said(
+        `TAKEN · ${target} · the trunk's side: the port changed names alone there`,
+      )
+    : {
+        says: `READ · ${target} · the trunk's side taken: the port's own change, left out, is to lay again\n${indented(dropped)}`,
+        isHeld: true,
+      };
+}
+
+// a file that is no text is never laid: the trunk's bytes, and a word when the port had its own
+function bytesTaken({ git, conflict }: Settling): Ruled {
+  const { file, base, ours } = conflict;
+  git(['checkout', '--theirs', '--', file]);
+  git(['add', '--', file]);
+  return {
+    says: `READ · ${file} · no text: the trunk's bytes taken`,
+    isHeld: ours !== base,
+  };
 }
 
 // the port took the file out, the trunk changed it: the port moved it, or a home holds it now
-function takenOut(settling: Settling): string {
+function takenOut(settling: Settling): Ruled {
   const { conflict, git, root, moves } = settling;
-  const target = movedTo(conflict.file, moves);
-  git(['rm', '-q', '--cached', '--', conflict.file]);
-  fs.rmSync(path.join(root, conflict.file), { force: true });
-  if (target === conflict.file || !fs.existsSync(path.join(root, target)))
-    return `CARRY · ${conflict.file} · blob ${conflict.theirs ?? ''} · a home holds it: its change goes there, its row to ports/`;
-  const { text, isClean } = laid(settling, target);
-  fs.writeFileSync(path.join(root, target), text);
+  const { file, theirs } = conflict;
+  const target = movedTo(file, moves);
+  git(['rm', '-q', '--cached', '--', file]);
+  fs.rmSync(path.join(root, file), { force: true });
+  if (target === file || !fs.existsSync(path.join(root, target)))
+    return said(
+      `CARRY · ${file} · blob ${theirs ?? ''} · a home holds it: its change goes there, its row to ports/`,
+    );
+  const bytes = bytesOf(root, theirs);
+  if (isBinary(bytes)) {
+    fs.writeFileSync(path.join(root, target), bytes);
+    git(['add', '--', target]);
+    return {
+      says: `READ · ${target} · no text: the trunk's bytes`,
+      isHeld: true,
+    };
+  }
+  const ruled = laidOn(settling, target);
   git(['add', '--', target]);
-  return isClean
-    ? `MOVED · ${conflict.file} · the trunk's change laid on ${target}`
-    : `READ · ${target} · the trunk's ${conflict.file} taken whole: the port's own change to it is to lay again`;
+  return ruled;
 }
 
-// both sides hold the file: the port's folders stay its own; elsewhere the trunk's change is laid on the branch's
-function bothHold(settling: Settling): string {
+// both sides hold the file: the trunk's change is laid on the branch's
+function bothHold(settling: Settling): Ruled {
   const { conflict, git, root } = settling;
-  const { file } = conflict;
+  const { file, ours, theirs } = conflict;
+  if ([ours, theirs].some((blob) => isBinary(bytesOf(root, blob))))
+    return bytesTaken(settling);
   git(['checkout', '--ours', '--', file]);
-  const { text, isClean } = laid(settling, file);
-  fs.writeFileSync(path.join(root, file), text);
+  const ruled = laidOn(settling, file);
   git(['add', '--', file]);
-  return isClean
-    ? `MERGED · ${file} · the trunk's change beside the port's names`
-    : `READ · ${file} · both changed one place: the trunk's side taken, its names as after the port`;
+  return ruled;
 }
 
-function ruledOn(settling: Settling): string {
+function ruledOn(settling: Settling): Ruled {
   const { conflict, git, port } = settling;
   const { file, ours, theirs } = conflict;
   if (port.kept.some((folder) => file.startsWith(folder))) {
@@ -144,15 +162,19 @@ function ruledOn(settling: Settling): string {
         : ['checkout', '--ours', '--', file],
     );
     if (ours !== undefined) git(['add', '--', file]);
-    return `KEPT · ${file} · as the port left it`;
+    return said(`KEPT · ${file} · as the port left it`);
   }
   if (theirs === undefined)
-    return `LEFT · ${file} · the trunk removed what the port changed`;
+    return {
+      says: `LEFT · ${file} · the trunk removed what the port changed`,
+      isHeld: true,
+    };
   if (ours !== undefined) return bothHold(settling);
   if (conflict.base !== undefined) return takenOut(settling);
   git(['checkout', '--theirs', '--', file]);
   git(['add', '--', file]);
-  return `ADDED · ${file} · the trunk's, where the port's moves put it`;
+  return said(`ADDED · ${file} · the trunk's, where the port's moves put it`);
 }
 
 export { gitAt, ruledOn, unmerged };
+export type { Ruled };

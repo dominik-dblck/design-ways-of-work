@@ -405,3 +405,15 @@ Each call: what, why, how to undo. None changes what the PM sees.
 - Open, both the PM's: the word for eagle-design's merge of `main` into `port/wow`, asked on both sides; and
   the gate stays red until that merge, so task 3 closes after it, on a gate that reads the differences this
   release means (the frozen notebooks' test, the journeys' lines) and no other.
+- eagle-design's review of 9b13661, mended. Where the trunk's side is taken over a place both changed, the
+  port's own change there was dropped with no word: it is printed now, as a diff of the base named as after
+  the port against the branch's file, and the script ends red while one stands (a place where the port
+  changed names alone drops nothing and passes). A blob was read as text and trimmed: it is laid byte for
+  byte, and a file that is no text (a NUL in its first 8000 bytes, git's measure) is never laid, the trunk's
+  bytes taken and the file listed. A snapshot was written whole from the trunk's JSON, over a key the port
+  had moved and the PM accepted there: it is written key by key, three ways, a key the trunk left as the
+  base keeping the port's value. With the bytes kept, the one place listed to read in the rehearsal merges.
+- eagle-design reports the PM's standing word for its merge, given on its side: forward only, nothing
+  rewritten, `main` untouched, each run reported to the PM; a snapshot that still differs after it and the
+  catch-up of `main` stay the PM's each time. It is the product session's act in its repository; nothing
+  held on this side moves by that report.

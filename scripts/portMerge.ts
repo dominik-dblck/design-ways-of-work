@@ -33,16 +33,38 @@ const moves = mapRows(path.join(HERE, port.moves)).map(
 );
 const at = (file: string): string => path.join(ROOT, file);
 
-// a snapshot the trunk moved since the branch last took it, written as the module the port holds
+// a snapshot's module as the checks write it: its one export's value
+const valueOf = (module: string): unknown =>
+  JSON.parse(module.slice(module.indexOf('= ') + 2, module.lastIndexOf(';')));
+
+const keyed = (snapshot: unknown): Readonly<Record<string, unknown>> =>
+  typeof snapshot === 'object' && snapshot !== null
+    ? Object.fromEntries(Object.entries(snapshot))
+    : {};
+
+// key by key, three ways: a key the trunk left as the base keeps the port's value, any other takes the trunk's, named as after the port
 function rewritten(since: string): readonly string[] {
+  const named = (taken: unknown): unknown =>
+    JSON.parse(namedAnew(JSON.stringify(taken), { moves, names: port.names }));
+  const heldAt = (
+    commit: string,
+    file: string,
+  ): Readonly<Record<string, unknown>> =>
+    keyed(JSON.parse(git(['show', `${commit}:${file}`])));
   return port.rewritten.flatMap(({ from, to, name }) => {
     if (git(['diff', '--name-only', since, port.trunk, '--', from]) === '')
       return [];
-    const taken: unknown = JSON.parse(git(['show', `${port.trunk}:${from}`]));
-    fs.writeFileSync(
-      at(to),
-      namedAnew(snapshotText(name, taken), { moves, names: port.names }),
+    const was = heldAt(since, from);
+    const ours = keyed(valueOf(fs.readFileSync(at(to), 'utf8')));
+    const byKey = Object.fromEntries(
+      Object.entries(heldAt(port.trunk, from)).map(([key, trunks]) => [
+        key,
+        JSON.stringify(trunks) === JSON.stringify(was[key]) && key in ours
+          ? ours[key]
+          : named(trunks),
+      ]),
     );
+    fs.writeFileSync(at(to), snapshotText(name, byKey));
     git(['add', '--', to]);
     return [to];
   });
@@ -82,23 +104,28 @@ async function main(): Promise<void> {
     refused(`${ROOT} holds uncommitted work`);
   const since = git(['merge-base', 'HEAD', port.trunk]);
   git(['merge', '--no-commit', '--no-ff', port.trunk], { mayFail: true });
-  const lines = unmerged(git).map((conflict) =>
+  const ruled = unmerged(git).map((conflict) =>
     ruledOn({ conflict, git, root: ROOT, port, moves }),
   );
   const snapshots = rewritten(since);
   const renamed = await namedAgain(snapshots);
   // the merge wrote the trunk's copy over a file the take holds there, and settling it removed the file
   execFileSync('yarn', ['-s', 'wow'], { cwd: ROOT, env: childEnv() });
-  for (const line of lines) console.log(line);
+  for (const { says } of ruled) console.log(says);
   for (const file of snapshots)
     console.log(`REWRITTEN · ${file} · the trunk's value, as a module`);
   console.log(
-    `${String(lines.length)} conflicts read, ${String(snapshots.length)} snapshots written again, ${String(renamed)} files named again, the take run again; nothing committed`,
+    `${String(ruled.length)} conflicts read, ${String(snapshots.length)} snapshots written again, ${String(renamed)} files named again, the take run again; nothing committed`,
   );
   const left = unmerged(git).length;
+  const held = ruled.filter(({ isHeld }) => isHeld).length;
   if (left > 0)
     console.log(`${String(left)} left unmerged: settle each by hand`);
-  process.exitCode = left > 0 ? 1 : 0;
+  if (held > 0)
+    console.log(
+      `${String(held)} to read before the merge is committed: each named READ or LEFT above`,
+    );
+  process.exitCode = left + held > 0 ? 1 : 0;
 }
 
 await main();

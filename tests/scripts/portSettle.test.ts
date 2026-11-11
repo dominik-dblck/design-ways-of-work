@@ -37,12 +37,17 @@ describe('a port takes its trunk: each conflict by the port’s rules', () => {
   product.committed('sheet/gate-rules.ts', 'rows\n');
   product.committed(
     'sheet/send-epics.ts',
-    `reads: 'gate-rules.ts · the send row'\n${lines(6, 'epic')}`,
+    `\nreads: 'gate-rules.ts · the send row'\n${lines(6, 'epic')}\n\n`,
   );
   product.committed(
     'sheet/the-spec.ts',
     `import './gate-rules.ts';\n${lines(6, 'part')}`,
   );
+  product.committed('sheet/ownRows.ts', `a row\n${lines(3, 'row')}`);
+  fs.mkdirSync(at('public'));
+  fs.writeFileSync(at('public/mark.png'), Buffer.from([137, 80, 78, 71, 0, 0]));
+  product.git(['add', '--', 'public/mark.png']);
+  product.git(['commit', '-q', '-m', 'a mark']);
   product.git(['checkout', '-q', '-b', 'port']);
   // the port: a file a home takes, a legacy copy changed, names moved, a module moved and rewritten
   product.git(['rm', '-q', 'tools/check.ts']);
@@ -51,8 +56,18 @@ describe('a port takes its trunk: each conflict by the port’s rules', () => {
   product.git(['mv', 'sheet/send-epics.ts', 'sheet/sendEpics.ts']);
   product.committed(
     'sheet/sendEpics.ts',
-    `reads: 'gateRules.ts · the send row'\n${lines(6, 'epic')}`,
+    `\nreads: 'gateRules.ts · the send row'\n${lines(6, 'epic')}\n\n`,
   );
+  product.committed(
+    'sheet/ownRows.ts',
+    `a row of the port’s own\n${lines(3, 'row')}`,
+  );
+  fs.writeFileSync(
+    at('public/mark.png'),
+    Buffer.from([137, 80, 78, 71, 0, 1, 1]),
+  );
+  product.git(['add', '--', 'public/mark.png']);
+  product.git(['commit', '-q', '-m', 'the port’s mark']);
   product.git(['rm', '-q', 'sheet/the-spec.ts']);
   product.committed(
     'sheet/theSpec.ts',
@@ -64,8 +79,18 @@ describe('a port takes its trunk: each conflict by the port’s rules', () => {
   product.committed('legacy/data.json', '{ "as": "the trunk moved it" }\n');
   product.committed(
     'sheet/send-epics.ts',
-    `reads: 'gate-rules.ts · RIGHTS'\n${lines(6, 'epic')}`,
+    `\nreads: 'gate-rules.ts · RIGHTS'\n${lines(6, 'epic')}\n\n`,
   );
+  product.committed(
+    'sheet/ownRows.ts',
+    `a row of the trunk’s\n${lines(3, 'row')}`,
+  );
+  fs.writeFileSync(
+    at('public/mark.png'),
+    Buffer.from([137, 80, 78, 71, 0, 2, 2, 2]),
+  );
+  product.git(['add', '--', 'public/mark.png']);
+  product.git(['commit', '-q', '-m', 'the trunk’s mark']);
   product.committed(
     'sheet/the-spec.ts',
     `import './gate-rules.ts';\n${lines(6, 'part')}part 6\n`,
@@ -73,13 +98,37 @@ describe('a port takes its trunk: each conflict by the port’s rules', () => {
   product.git(['checkout', '-q', 'port']);
   const git = gitAt(product.root);
   git(['merge', '--no-commit', '--no-ff', 'main'], { mayFail: true });
-  const said = unmerged(git).map((conflict) =>
+  const ruled = unmerged(git).map((conflict) =>
     ruledOn({ conflict, git, root: product.root, port, moves }),
   );
+  const said = ruled.map(({ says }) => says);
 
-  it('every conflict is settled: none is left unmerged', () => {
+  it('every conflict is settled: none is left unmerged; held for a person, the two where the port’s own is left out', () => {
     expect(unmerged(git)).toEqual([]);
-    expect(said.length).toBe(4);
+    expect(said.length).toBe(6);
+    expect(
+      ruled
+        .filter(({ isHeld }) => isHeld)
+        .map(({ says }) => says.split(' · ')[1])
+        .sort(),
+    ).toEqual(['public/mark.png', 'sheet/ownRows.ts']);
+  });
+
+  it('where the trunk’s side is taken over a change of the port’s own, that change is printed', () => {
+    const held = said.find((one) => one.startsWith('READ · sheet/ownRows.ts'));
+    expect(held).toContain('+a row of the port’s own');
+    expect(read('sheet/ownRows.ts')).toContain('a row of the trunk’s');
+  });
+
+  it('a file that is no text takes the trunk’s bytes, never laid as text', () => {
+    expect(fs.readFileSync(at('public/mark.png'))).toEqual(
+      Buffer.from([137, 80, 78, 71, 0, 2, 2, 2]),
+    );
+  });
+
+  it('a blob is laid byte for byte: its leading blank line and its last lines stay', () => {
+    expect(read('sheet/sendEpics.ts').startsWith('\nreads: ')).toBe(true);
+    expect(read('sheet/sendEpics.ts').endsWith('epic 5\n\n\n')).toBe(true);
   });
 
   it('a file a home holds stays out, and its row for ports/ is named with the trunk’s blob', () => {
