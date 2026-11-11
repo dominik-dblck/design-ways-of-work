@@ -152,6 +152,13 @@ const DECISIONS: readonly Decision[] = [
     says: 'the side that writes here pushes when its own checks are green; the build side probes the pushed commits in batches, its findings landing as commits after.',
     from: 'plan/log/run-9-nov.md',
   },
+  {
+    id: 'W22',
+    title: 'the gate tries the product as it stands today',
+    held: '11 Nov · A',
+    says: 'eagle-design is tried on its newest `main`, not on a branch frozen behind it: the rehearsal of its migration comes before the rest of the design side’s cleaning, not at its end.',
+    from: 'plan/run-11-nov.md',
+  },
 ];
 
 export { DECISIONS };

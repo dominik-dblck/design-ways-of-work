@@ -17,7 +17,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 
 | stage | what | done | of |
 | 1 | Foundation | 7 | 7 |
-| 2 | Design clean | 1 | 10 |
+| 2 | Design clean | 2 | 10 |
 | 3 | Spawn design | 0 | 3 |
 | 4 | Eagle-design | 0 | 2 |
 
@@ -29,10 +29,11 @@ the gate, the release and the three hooks · 6 · `CLAUDE.md`, `README.md`, one 
 7 · v0.2.0 out through the new gate, the PM's word (the first push and tag).
 
 Stage 2, the plan's stage 2: 1 · the contract table, row by row with eagle-design · 2 · `product.ts` typed here ·
-3 · the first slice: the frozen notebooks, the featured epics, the epics · 4 · the registry readers through the
-contract, the files that read more split · 5 · the facts in the 33 files leave · 6 · the stack a parameter of the
-product · 7 · `examples/sample-product` · 8 · the way of working checks all of `design/` on the sample · 9 · the
-no-product test over every home · 10 · the migration for eagle-design rehearsed, v1.0.0 (the PM's word).
+3 · the gate on eagle-design's newest `main`, its migration rehearsed there (the plan's last task, first by the
+PM's word, 11 Nov · A) · 4 · the first slice: the frozen notebooks, the featured epics, the epics · 5 · the
+registry readers through the contract, the files that read more split · 6 · the facts in the 33 files leave ·
+7 · the stack a parameter of the product · 8 · `examples/sample-product` and the way of working's own checks
+on `design/` there · 9 · the no-product test over every home · 10 · v1.0.0 (the PM's word).
 
 Stage 3, the plan's stage 3: 1 · `yarn spawn design <path> <name>` · 2 · the new-project guide · 3 · `argus-design`
 spawned and green on its first commit, the PM's word.
@@ -49,6 +50,7 @@ word · 2 · both design repositories pinned to one tag, the gate green on both.
 - 14:27 · stage 1 · 6 of 7 · CLAUDE.md for the owner, README on the live mechanism, plan/state.md, the decisions as data, the logs to plan/log (21d815f)
 - 14:33 · stage 1 · 7 of 7 · v0.2.0 out by yarn release: main pushed past the feature tier and the gate, then its tag (232b141)
 - 14:49 · stage 2 · 1 of 10 · the contract table settled with eagle-design, the gate holds each product to its paths by git's names (5d77a15, 7e84a2a)
+- 15:10 · stage 2 · 2 of 10 · product.ts typed here, the checks' own parts through it; the gate migrates the clone that takes the commit; NO DIFFERENCE on eagle-design (b5b6c4c, 8223828)
 
 ## Calls
 
@@ -338,3 +340,18 @@ Each call: what, why, how to undo. None changes what the PM sees.
   path, `sheet/requirements.ts`: a row that names the code a decision retires is every product's. The feature
   view's fields go whole to the product, a view part, their test with them. The source guard stays here, an
   engine; its rows (the map, the scope, the layers) are a registry, `guards/sourceRows.ts`.
+- The gate on 8223828: NO DIFFERENCE, each of the fourteen scripts of eagle-design's `port/wow`, migrated,
+  against its pinned tag. A run before it tried b5b6c4c again and was stopped: a commit that failed its hook
+  had been chained before the gate in one command, so the gate read the commit before. A gate is run alone.
+- The PM, 11 Nov, asked why the work stands 28 commits behind eagle-design's `main`, and chose A of three: the
+  rehearsal on `main` now, before the rest of the stage (W22). The stage's tasks are numbered again above.
+- eagle-design on the epics of the journeys' part, done on its `main` (e0a4939): the epics are the backlog's,
+  in its order; a cases-met line for each with a feature ticket and a journey; a journey row carries
+  `waits: 'refinement'` where the part named E14; the case ids are read with no epic. Its `port/wow` holds
+  none of it. The notebook's path is the product's shape, so it stands in the registry beside the pins.
+- Measured for the rehearsal, in a clone under `.consumers/trial-main`: `port/wow` merged into `main`
+  (e0a4939) without a commit conflicts in ten files. Five are files a home holds now that `main` changed since
+  the base: the journeys' part, the frozen notebooks' test, a rule's README, a document of the API convention,
+  and the components' spec, which the port renamed. One is a file `main` added in a folder the port renamed.
+  Four are rows both sides moved: an organism of the components' spec, its JSON in `legacy/`, an epic of the
+  backlog, a command of E04.
