@@ -1,14 +1,14 @@
 /**
- * - `node scripts/keepsItsRules.ts [copy]` · the way of working keeps its rules
- * - no directive in a file of its own, no suppression of one in a rehearsal copy
+ * - `node scripts/keepsItsRules.ts` · the way of working keeps its rules
+ * - no directive in a file of its own, no suppressions file of its own
+ * - a repository that suppresses a file it took is the gate's to find
  */
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import ts from 'typescript';
-import { HERE, linkedFiles, repoAt } from './repos.ts';
+import { HERE } from './repos.ts';
 
-const COPY = repoAt(path.join(HERE, '.rehearsal', 'eagle-design'));
 const SUPPRESSIONS = 'eslint-suppressions.json';
 const A_SOURCE = /\.(?:ts|tsx|mts|cts|js|mjs)$/;
 // the files a rule's tests read as a program, wrong on purpose
@@ -63,24 +63,11 @@ function directives(): readonly string[] {
   });
 }
 
-// each suppression of a file of its own: here, or a linked file's in the copy
-function suppressions(): readonly string[] {
-  const own = fs.existsSync(path.join(HERE, SUPPRESSIONS))
+// a suppressions file here would turn a rule off in its own code
+const suppressions = (): readonly string[] =>
+  fs.existsSync(path.join(HERE, SUPPRESSIONS))
     ? [`${SUPPRESSIONS} · this repository suppresses its own code`]
     : [];
-  const copied = path.join(COPY, SUPPRESSIONS);
-  if (!fs.existsSync(copied)) return own;
-  const held: Readonly<Record<string, unknown>> = JSON.parse(
-    fs.readFileSync(copied, 'utf8'),
-  );
-  const linked = new Set(linkedFiles().map(([, at]) => at));
-  return [
-    ...own,
-    ...Object.keys(held)
-      .filter((file) => linked.has(file))
-      .map((file) => `${path.basename(COPY)}/${SUPPRESSIONS} · ${file}`),
-  ];
-}
 
 const found = [...directives(), ...suppressions()];
 for (const line of found) console.log(`  KEPT NOT · ${line}`);

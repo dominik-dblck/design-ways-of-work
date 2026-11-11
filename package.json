@@ -29,10 +29,7 @@
     "test": "yarn -s check:feature",
     "consumers": "node scripts/consumers.ts",
     "prepare": "husky",
-    "rehearse": "node scripts/rehearse.ts",
-    "verify": "node scripts/verify.ts",
     "take-dev-map": "node scripts/takeDevMap.ts",
-    "port-save": "node scripts/portSave.ts",
     "take-dev-claude": "node scripts/takeDevClaude.ts",
     "backup": "zsh scripts/zipRepo.sh"
   },

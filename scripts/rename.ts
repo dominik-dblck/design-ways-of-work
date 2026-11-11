@@ -1,7 +1,7 @@
 /**
- * - `node scripts/rename.ts <map.tsv> [copy]` · renames by TypeScript's own rename
+ * - `node scripts/rename.ts <map.tsv> [tree]` · renames by TypeScript's own rename
  * - a row: `file:line:column` of a name, then its new name; each reference follows
- * - on a rehearsal copy: a linked file writes here, a product's to the port
+ * - on this repository, or on a tree handed in: its tsconfig names the program
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -18,7 +18,7 @@ interface Row {
 }
 
 const MAP = repoAt('', 0);
-const COPY = repoAt(path.join(HERE, '.rehearsal', 'eagle-design'), 1);
+const TREE = repoAt(HERE, 1);
 
 const rows: readonly Row[] = mapRows(MAP).map(([at = '', name = '']) => {
   const [file = '', row = '0', column = '0'] = at.split(':');
@@ -38,9 +38,9 @@ interface Planned {
   readonly headers: readonly string[];
 }
 
-const service = serviceOf(COPY);
+const service = serviceOf(TREE);
 const program = service.getProgram();
-if (program === undefined) throw new Error(`no program in ${COPY}`);
+if (program === undefined) throw new Error(`no program in ${TREE}`);
 const checker = program.getTypeChecker();
 const ANY_NAME =
   ts.SymbolFlags.Value | ts.SymbolFlags.Type | ts.SymbolFlags.Alias;
@@ -112,7 +112,7 @@ const headersOf = (
 ];
 
 function plan(row: Row): Planned {
-  const file = path.join(COPY, row.file);
+  const file = path.join(TREE, row.file);
   const syntax = program?.getSourceFile(file);
   if (syntax === undefined) throw new Error(`${row.file} is not compiled`);
   const at = syntax.getPositionOfLineAndCharacter(row.line - 1, row.column - 1);

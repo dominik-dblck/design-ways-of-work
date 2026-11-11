@@ -1,7 +1,7 @@
 /**
- * - `node scripts/move.ts <map.tsv> [copy]` · files moved by a map of from, to
+ * - `node scripts/move.ts <map.tsv> [product]` · files moved by a map of from, to
  * - each relative import and exact path follows; a component's root gets its barrel
- * - a copy's own files by its paths; a name left bare is listed, never guessed
+ * - a product's checkout follows by its paths; a bare name is listed, never guessed
  */
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
@@ -16,7 +16,8 @@ import {
   mentioned,
 } from './movePaths.ts';
 import type { Move } from './movePaths.ts';
-import { HERE, lastLinked, LINKED_HOMES, repoAt } from './repos.ts';
+import { HOMES } from '../shared/take/takeHomes.ts';
+import { HERE, repoAt } from './repos.ts';
 
 interface Tree {
   readonly root: string;
@@ -25,15 +26,20 @@ interface Tree {
 }
 
 const MAP = repoAt('', 0);
-const COPY = repoAt(path.join(HERE, '.rehearsal', 'eagle-design'), 1);
+// a product's checkout, when one is handed in: its own files follow the move too
+const [, HANDED_IN] = process.argv
+  .slice(2)
+  .filter((arg) => !arg.startsWith('--'));
+const PRODUCT = HANDED_IN === undefined ? null : path.resolve(HANDED_IN);
+const HOME_PAIRS = Object.entries(HOMES);
 // notes name what moved since, a port is written by its script, legacy/ is kept as it was
 const KEPT = /^(plan|legacy|ports)\//;
 const CODE = /\.(ts|tsx|mts)$/;
 
-// the product's own files name a linked file by its path there: design/ is its root
+// the product's own files name a taken file by its path there: design/ is its root
 const inProduct = (moves: readonly Move[]): readonly Move[] =>
   moves.flatMap(({ from, to }) => {
-    const home = LINKED_HOMES.find(([here]) => from.startsWith(`${here}/`));
+    const home = HOME_PAIRS.find(([here]) => from.startsWith(`${here}/`));
     if (home === undefined || !to.startsWith(`${home[0]}/`)) return [];
     const at = (file: string): string =>
       path.posix.join(home[1], file.slice(home[0].length + 1));
@@ -108,14 +114,11 @@ function expanded(rows: readonly Move[]): readonly Move[] {
   });
 }
 
-// the copy's own files a move rewrites: a linked one is this repository's, rewritten here
-async function copyFiles(): Promise<readonly string[]> {
-  if (!fs.existsSync(COPY)) return [];
-  const linked = new Set(lastLinked(COPY));
-  return (await followed({ root: COPY, kept: KEPT })).filter(
-    (file) => !linked.has(file),
-  );
-}
+// the product's own files a move rewrites: its git lists none of the files it took
+const productFiles = (): Promise<readonly string[]> =>
+  PRODUCT === null
+    ? Promise.resolve([])
+    : followed({ root: PRODUCT, kept: KEPT });
 
 async function main(): Promise<void> {
   const moves = expanded(
@@ -127,21 +130,24 @@ async function main(): Promise<void> {
     moves,
   };
   const there: Tree = {
-    root: COPY,
-    files: await copyFiles(),
+    root: PRODUCT ?? HERE,
+    files: await productFiles(),
     moves: inProduct(moves),
   };
   movedByGit(moves);
-  // a linked file names another by its product's path; this repository's own, by its own
-  const isLinked = (file: string): boolean =>
-    LINKED_HOMES.some(([home]) => file.startsWith(`${home}/`));
+  // a home's file names another by its product's path; this repository's own, by its own
+  const isOfAHome = (file: string): boolean =>
+    HOME_PAIRS.some(([home]) => file.startsWith(`${home}/`));
   const changed =
     rewritten({
       ...here,
-      files: here.files.filter(isLinked),
+      files: here.files.filter(isOfAHome),
       moves: [...moves, ...there.moves],
     }) +
-    rewritten({ ...here, files: here.files.filter((file) => !isLinked(file)) });
+    rewritten({
+      ...here,
+      files: here.files.filter((file) => !isOfAHome(file)),
+    });
   const copied = rewritten(there);
   const roots = moves.map(({ to }) => to).filter(isARoot);
   for (const root of roots)
@@ -150,7 +156,7 @@ async function main(): Promise<void> {
       barrelOf(root),
     );
   console.log(
-    `${moves.length} moved, ${roots.length} barrels · ${changed} files rewritten here, ${copied} in ${path.relative(HERE, COPY)}`,
+    `${moves.length} moved, ${roots.length} barrels · ${changed} files rewritten here, ${copied} in ${PRODUCT === null ? 'no product' : path.basename(PRODUCT)}`,
   );
   for (const line of [...bareNames(here), ...bareNames(there)])
     console.log(`  BARE · ${line}`);

@@ -9,6 +9,7 @@ const scope: RepoScope = {
   },
   ignores: [
     'node_modules/**',
+    // the extraction's rehearsal copies, where a machine still holds them
     '.rehearsal/**',
     '.consumers/**',
     'legacy/**',
@@ -85,7 +86,7 @@ const scope: RepoScope = {
       writes: ['design-system/guide.md'],
     },
   ],
-  // its own checks beside the shared tiers: the copies, its rules' tests, the shared tests, its tools' tests, its kept rules; the products' at the end
+  // its own checks beside the shared tiers: the copies, its rules' tests, the shared tests, its tools' tests, its kept rules; at the end, the commit tried on each repository that takes it
   checks: {
     commit: [
       'lint:copies',
@@ -94,7 +95,7 @@ const scope: RepoScope = {
       'test:tools',
       'lint:kept',
     ],
-    featureEnd: ['verify'],
+    featureEnd: ['consumers'],
   },
   // no file of its own runs code it built
   runsCode: {},
@@ -107,7 +108,6 @@ const scope: RepoScope = {
   unformatted: {
     '**/*.md': 'prose keeps the layout its writer gave it',
     'plan/**': "a run's notes and maps, as written",
-    'ports/**/*.{patch,tsv}': 'a port, as its script writes it',
   },
   // no skill, and no instruction an agent loads: its sessions read the products'
   instructions: { skills: [], whole: [], onDemand: [], everyTurn: [] },
@@ -136,6 +136,7 @@ const scope: RepoScope = {
       'design-system',
       'tests',
       'ports',
+      'releases',
       'plan',
       'design',
       'dev',

@@ -1,16 +1,15 @@
 # design-ways-of-work
 
-The design side's way of working, taken out of eagle-design so more than one product runs it (D75, D76).
-The plan is `plan/README.md`; where it stands is `plan/progress.md`.
+The way of working more than one product runs: rules, checks, tools, skills and a design system.
+A repository takes it at a tag; nothing of it enters that repository's history.
 
-- `design/` · the tools, checks, pages, skills and documents, each at the path a product reads it from
-- `scripts/rehearse.ts` · a copy of a product with design/'s files linked back in place
-- `scripts/verify.ts` · that copy against a clone of the product as it is: every output compared
+- `design/`, `dev/`, `shared/`, `design-system/` · the four homes a repository takes, each at the path it reads it from
+- `ports/consumers.ts` · the repositories that take it
+- `scripts/consumers.ts` · the gate: a commit tried on a fresh clone of each of them, against its pinned tag
+- `releases/changelog.ts` · the release in hand, and each output it means to move
 
 ```
-yarn verify ../eagle-design
+yarn consumers
 ```
 
-A product's node runs keep a link's own path (`NODE_OPTIONS='--preserve-symlinks --preserve-symlinks-main'`,
-`preserveSymlinks` in tsconfig and vitest, `resolve.symlinks: false` in rolldown), so a linked file's `..`
-reaches the product.
+The plan in force is `plan/argus-first.md`; the run's notes are `plan/run-11-nov.md`.

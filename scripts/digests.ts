@@ -1,13 +1,11 @@
 /**
- * - `hashes`, `written` · a run's files: a folder's bytes, what git sees it wrote
- * - `writtenIn` · the same in a clone that took its files: git never shows those
- * - `linkedHashes` · the bytes of each file a product links from this repository
+ * - `hashes` · a folder's files, each by its bytes
+ * - `writtenIn` · what a run wrote in a clone, as git sees it: a taken file never
  */
 import { execFileSync } from 'node:child_process';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
-import { linkedFiles } from './repos.ts';
 
 function hashes(folder: string): ReadonlyMap<string, string> {
   const out = new Map<string, string>();
@@ -24,22 +22,6 @@ function hashes(folder: string): ReadonlyMap<string, string> {
     );
   }
   return out;
-}
-
-// what a run wrote in the product: a linked file is this repository's, written through its link
-function written(root: string): ReadonlyMap<string, string> {
-  const linked = new Set(linkedFiles().map(([, at]) => at));
-  const lines = execFileSync(
-    'git',
-    ['status', '--porcelain', '--untracked-files=all'],
-    { cwd: root, encoding: 'utf8' },
-  );
-  const files = lines
-    .split('\n')
-    .filter(Boolean)
-    .map((line) => line.slice(3))
-    .filter((file) => file !== 'node_modules' && !linked.has(file));
-  return new Map(files.map((file) => [file, contentOf(path.join(root, file))]));
 }
 
 // git's names with -z: split on NUL, never quoted, a rename two entries
@@ -63,13 +45,4 @@ function contentOf(file: string): string {
   return fs.readFileSync(file).toString('latin1');
 }
 
-// each linked file's bytes: a run of the copy that changes one has written this repository
-const linkedHashes = (): ReadonlyMap<string, string> =>
-  new Map(
-    linkedFiles().map(([here, at]) => [
-      at,
-      crypto.createHash('sha256').update(fs.readFileSync(here)).digest('hex'),
-    ]),
-  );
-
-export { hashes, linkedHashes, written, writtenIn };
+export { hashes, writtenIn };

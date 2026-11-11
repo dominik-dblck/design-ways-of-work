@@ -1,7 +1,7 @@
 /**
  * - `tried` · a repository on its pinned tag and on the commit in hand, compared
  * - every script's exit and output, the folders it builds, the files it writes
- * - a difference is one the release expects, with why, or the gate is red
+ * - red on a difference the release does not expect, and on a broken take
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -10,6 +10,7 @@ import {
   holdsItsTake,
   nextTaken,
   packageOf,
+  suppressedTaken,
 } from './consumerClones.ts';
 import { explained, mapDifferences, runDifferences } from './consumerDiff.ts';
 import type { Run, Sides } from './consumerDiff.ts';
@@ -40,8 +41,6 @@ function fileDifferences(
   consumer: Consumer,
   { pinned, next }: Sides<string>,
 ): readonly string[] {
-  const holds = (side: string, root: string): readonly string[] =>
-    holdsItsTake(root) ? [] : [`take · ${side} · a run rewrote a taken file`];
   return [
     ...consumer.folders.flatMap((folder) =>
       mapDifferences(folder, {
@@ -53,23 +52,38 @@ function fileDifferences(
       pinned: writtenIn(pinned),
       next: writtenIn(next),
     }),
-    ...holds('pinned', pinned),
-    ...holds('next', next),
+  ];
+}
+
+// what no row of a release excuses: a take a run undid, a rule turned off in a taken file
+function faults({ pinned, next }: Sides<string>): readonly string[] {
+  const undone = (side: string, root: string): readonly string[] =>
+    holdsItsTake(root) ? [] : [`${side} · a run rewrote a file the take wrote`];
+  return [
+    ...undone('pinned', pinned),
+    ...undone('next', next),
+    ...suppressedTaken(next).map(
+      (file) => `eslint-suppressions.json · ${file} is a taken file`,
+    ),
   ];
 }
 
 function reported({
   consumer,
   found,
+  broken,
   expected,
 }: {
   readonly consumer: Consumer;
   readonly found: readonly string[];
+  readonly broken: readonly string[];
   readonly expected: Readonly<Record<string, string>>;
 }): boolean {
   const { lines, unexplained, stale } = explained({ found, expected });
   for (const line of lines) console.log(`  ${line}`);
-  const isClean = unexplained.length === 0 && stale.length === 0;
+  for (const line of broken) console.log(`  BROKEN · ${line}`);
+  const isClean =
+    unexplained.length === 0 && stale.length === 0 && broken.length === 0;
   const same =
     found.length === 0
       ? 'NO DIFFERENCE'
@@ -77,7 +91,7 @@ function reported({
   console.log(
     isClean
       ? `${same} · ${consumer.name} on the commit in hand, against its pinned tag`
-      : `${consumer.name} · ${unexplained.length} unexplained, ${stale.length} stale`,
+      : `${consumer.name} · ${unexplained.length} unexplained, ${stale.length} stale, ${broken.length} broken`,
   );
   return isClean;
 }
@@ -102,8 +116,12 @@ async function tried({
   const found = [...runDifferences(runs), ...fileDifferences(consumer, sides)];
   const out = path.join(scratch, consumer.name, 'out');
   kept(out, runs);
-  fs.writeFileSync(path.join(out, 'differences.txt'), `${found.join('\n')}\n`);
-  return reported({ consumer, found, expected });
+  const broken = faults(sides);
+  fs.writeFileSync(
+    path.join(out, 'differences.txt'),
+    `${[...found, ...broken].join('\n')}\n`,
+  );
+  return reported({ consumer, found, broken, expected });
 }
 
 export { tried };

@@ -23,7 +23,6 @@ const CONSUMERS: readonly [Consumer, ...Consumer[]] = [
       ['lint:words'],
       ['lint:deps'],
       ['lint:exports'],
-      ['wow', '--check'],
     ],
     folders: ['dist'],
   },

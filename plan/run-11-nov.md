@@ -12,7 +12,7 @@ Argus's stack, the spawn of `argus-design`. The product repositories are read on
 Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never counted by hand in a reply.
 
 | stage | what | done | of |
-| 1 | Foundation | 1 | 7 |
+| 1 | Foundation | 2 | 7 |
 | 2 | Design clean | 0 | 10 |
 | 3 | Spawn design | 0 | 3 |
 | 4 | Eagle-design | 0 | 2 |
@@ -38,6 +38,7 @@ word · 2 · both design repositories pinned to one tag, the gate green on both.
 
 ## History
 - 12:25 · stage 1 · 1 of 7 · ports/consumers.ts names the repositories; build path mended to ../eagle (c4c82da)
+- 12:35 · stage 1 · 2 of 7 · yarn consumers: NO DIFFERENCE on eagle-design port/wow in 2 min 30 s, red on a mutated commit (8540d56)
 
 ## Calls
 
