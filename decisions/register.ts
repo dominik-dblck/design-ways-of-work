@@ -124,6 +124,13 @@ const DECISIONS: readonly Decision[] = [
     says: 'eagle-design’s migration is rehearsed on a fresh clone of its `main`, never on the frozen branch.',
     from: 'plan/run-11-nov.md',
   },
+  {
+    id: 'W18',
+    title: 'the run to the end of the design side',
+    held: '11 Nov',
+    says: 'the last tasks of the foundation, the release of v0.2.0 with them, and the whole of the design side’s cleaning run without a stop between tasks; a breaking release still waits for his word.',
+    from: 'plan/run-11-nov.md',
+  },
 ];
 
 export { DECISIONS };

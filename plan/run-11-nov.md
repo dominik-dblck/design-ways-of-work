@@ -16,7 +16,7 @@ Argus's stack, the spawn of `argus-design`. The product repositories are read on
 Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never counted by hand in a reply.
 
 | stage | what | done | of |
-| 1 | Foundation | 5 | 7 |
+| 1 | Foundation | 6 | 7 |
 | 2 | Design clean | 0 | 10 |
 | 3 | Spawn design | 0 | 3 |
 | 4 | Eagle-design | 0 | 2 |
@@ -46,6 +46,7 @@ word · 2 · both design repositories pinned to one tag, the gate green on both.
 - 12:52 · stage 1 · 3 of 7 · gate at the feature end, scaffolding to legacy/; eagle-design's review mended; 3 runs NO DIFFERENCE (90dbed7, 8d141c0, a4c22de)
 - 13:14 · stage 1 · 4 of 7 · package of four homes, yarn release and pre-push; release rehearsed whole on a local remote (ffa1f64, 96273a9, 912724b)
 - 14:06 · stage 1 · 5 of 7 · own checks on a fresh clone, the deletion guard, tests for the gate, the release and the three hooks on scratch repositories (01d386b, 7b13daf)
+- 14:27 · stage 1 · 6 of 7 · CLAUDE.md for the owner, README on the live mechanism, plan/state.md, the decisions as data, the logs to plan/log (21d815f)
 
 ## Calls
 
@@ -209,3 +210,16 @@ Each call: what, why, how to undo. None changes what the PM sees.
   it agrees: stage 2. What skips the gate's scratch, asked by it and read: `.prettierignore`, the scope's
   ignores (ESLint, cspell, knip), vitest's exclude, `tsconfig.json`'s include, git's ignore.
 - The feature tier whole on 09419e1: 15 checks green, 4 min 12 s (`fresh` 50 s, the gate 165 s, NO DIFFERENCE).
+- Stage 1 task 6 (21d815f), the review's item 3. `CLAUDE.md`: the role, the PM's rules, git and the shell, the
+  modes, the commands, how a change goes out; the scope names it as read every turn, so the shared test holds
+  it to 1000 words (893). `README.md` on the live mechanism. `plan/state.md`, the one current state, its
+  backticked paths checked like the README's. `decisions/register.ts`: the PM's decisions on this repository
+  as rows in eagle-design's shape (id, title, held, says) and `from`, the note that holds his words; a test
+  holds the numbers, the notes and what a row replaces. The extraction's logs and maps moved to `plan/log/`
+  (git mv), as written: `plan/` keeps the plan in force, the review, this run and the build side's sketch.
+- What the register leaves out, on purpose: the rules of `CLAUDE.md`. They reached this session relayed in
+  the handover of 11 Nov, so no note here holds the PM's own words for them; `plan/state.md` asks him to read
+  them once. One relayed rule went with its tool ("port-save before verify").
+- Stage 1 task 7, the row of v0.2.0: minor, no action, no rule key, no output moved: the homes are v0.1.10's
+  byte for byte, and what a repository sees is the package (four homes and the manifest, no second install).
+  The PM's word for the first push and tag is his "6 i 7 bez stopu" (the head of these notes, W18).
