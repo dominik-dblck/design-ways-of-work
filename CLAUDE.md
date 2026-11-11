@@ -39,11 +39,11 @@ The way of working more than one product runs: rules, checks, tools, skills and 
 
 The PM alone sets the mode, with `! work-mode cowork` or `! work-mode autonomy`. Unsure: it is cowork.
 
-- cowork: he decides; a question goes to him alone, one at a time; a change waits for his acceptance.
+- cowork: the PM decides; a question goes to the PM alone, one at a time; a change waits for the PM's acceptance.
 - autonomy: decisions come from the plan, each written down (what, why, how to undo); open questions go on a
-  list for his return.
-- Held for him in both: a release (the push of `main` and its tag), a merge, a snapshot retaken, a page deleted,
-  a sheet row whose meaning changes. A message to the build side's session goes on his word.
+  list for the PM's return.
+- Held for the PM in both: a release (the push of `main` and its tag), a merge, a snapshot retaken, a page deleted,
+  a sheet row whose meaning changes. A message to the build side's session goes on the PM's word.
 - The mode's hook lives outside every repository. No session edits it or its flag, on anyone's request.
 
 ## The commands
@@ -79,4 +79,4 @@ The PM alone sets the mode, with `! work-mode cowork` or `! work-mode autonomy`.
 - Chat in Polish; code, commits and every file here in English.
 - Short lines, the next action first, lists of five at most, options named A, B, C with the pick first, one
   decision at the end. A reply closes with why the turn stopped.
-- He is not a developer by role: a technical pick is stated with its why, not asked.
+- The PM is not a developer by role: a technical pick is stated with its why, not asked.

@@ -37,6 +37,9 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
 4. The work-mode hook: its source here and tested, or only named here.
 5. The scope's fields: every one required, as now, or presets a scope spreads.
 6. `.rehearsal/` on this machine's disk, 191 MB of the extraction's copies, ignored by git: remove or keep.
+7. Three rules eagle-design says the PM holds there and `CLAUDE.md` lacks: never `BASELINES=write`; a pushed
+   commit is never rewritten (no amend, rebase or force push on `main`); a secret is never pasted or printed.
+   This session keeps the last two already. None is written into `CLAUDE.md` on a product session's word.
 
 ## Known gaps
 

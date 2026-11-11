@@ -7,7 +7,7 @@ import { HERE } from '../../scripts/repos.ts';
 const REPLACED = /replaces (W\d+)/;
 
 describe("the register holds the PM's decisions as data", () => {
-  it('each has its number, in the order they were taken', () => {
+  it('each has its number, in the order it was written down', () => {
     expect(DECISIONS.map(({ id }) => id)).toEqual(
       DECISIONS.map((_, at) => `W${String(at + 1)}`),
     );
@@ -21,11 +21,11 @@ describe("the register holds the PM's decisions as data", () => {
     ).toEqual([]);
   });
 
-  it('a decision that replaces another names one taken before it', () => {
-    const lost = DECISIONS.flatMap(({ id, held }, at) => {
+  it('a decision that replaces another names one of the register, never itself', () => {
+    const ids = new Set(DECISIONS.map(({ id }) => id));
+    const lost = DECISIONS.flatMap(({ id, held }) => {
       const replaced = REPLACED.exec(held)?.[1];
-      const before = DECISIONS.slice(0, at).map((one) => one.id);
-      return replaced === undefined || before.includes(replaced)
+      return replaced === undefined || (replaced !== id && ids.has(replaced))
         ? []
         : [`${id} replaces ${replaced}`];
     });

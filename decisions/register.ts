@@ -1,5 +1,5 @@
 /**
- * - `DECISIONS` · the PM's decisions on how this repository works, oldest first
+ * - `DECISIONS` · the PM's decisions on how this repository works, by number
  * - a product's own decisions stand in that product; a rule stands in `CLAUDE.md`
  */
 import type { Decision } from '../scripts/decisionTypes.ts';
@@ -100,7 +100,7 @@ const DECISIONS: readonly Decision[] = [
     id: 'W14',
     title: 'the design side first',
     held: '11 Nov',
-    says: 'the plan is accepted for the design side alone; the build side is parked until he asks for it.',
+    says: 'the plan is accepted for the design side alone; the build side is parked until the PM asks for it.',
     from: 'plan/argus-first.md',
   },
   {
@@ -113,7 +113,7 @@ const DECISIONS: readonly Decision[] = [
   {
     id: 'W16',
     title: 'a run shows its progress and is verified',
-    held: '11 Nov',
+    held: '11 Nov, replaces W21',
     says: 'work goes task by task, its progress printed by the run hook; eagle-design verifies each task by its commit, and its findings are mended before the task counts.',
     from: 'plan/run-11-nov.md',
   },
@@ -128,8 +128,29 @@ const DECISIONS: readonly Decision[] = [
     id: 'W18',
     title: 'the run to the end of the design side',
     held: '11 Nov',
-    says: 'the last tasks of the foundation, the release of v0.2.0 with them, and the whole of the design side’s cleaning run without a stop between tasks; a breaking release still waits for his word.',
+    says: 'the last tasks of the foundation, the release of v0.2.0 with them, and the whole of the design side’s cleaning run without a stop between tasks; a breaking release still waits for the PM’s word.',
     from: 'plan/run-11-nov.md',
+  },
+  {
+    id: 'W19',
+    title: 'it names no product',
+    held: 'before 8 Nov, eagle-design’s D28',
+    says: 'the way of working is product-agnostic: no product’s fact lives in it; a product’s facts stand in that product.',
+    from: 'plan/log/extraction-plan-8-nov.md',
+  },
+  {
+    id: 'W20',
+    title: 'the rules re-read after each part',
+    held: '8 Nov',
+    says: 'one home per fact, one responsibility per file, the long term over the work of today, nothing by hand, and correct over fast: a check runs whole and fresh, with a red proof for every new check.',
+    from: 'plan/log/overnight-8-nov.md',
+  },
+  {
+    id: 'W21',
+    title: 'pushed on green, probed after',
+    held: '9 Nov · B',
+    says: 'the side that writes here pushes when its own checks are green; the build side probes the pushed commits in batches, its findings landing as commits after.',
+    from: 'plan/log/run-9-nov.md',
   },
 ];
 

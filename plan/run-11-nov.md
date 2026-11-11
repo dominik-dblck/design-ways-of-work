@@ -4,9 +4,9 @@ The PM, 11 Nov: "ok, rob robote iteracyjnie po kazdym chunku wypisuj progress w 
 WoW zeby wyspawnowac nowy projekt designu juz na czysto tak zeby eagle design i argus design mieli to samo zrodlo
 prawdy WoW-a". The plan in force is `plan/argus-first.md`; its build side (the plan's stage 4) is parked.
 
-The PM, 11 Nov, on the pace: first "A tak poprosze" (one task, then a stop with the progress, then his word);
+The PM, 11 Nov, on the pace: first "A tak poprosze" (one task, then a stop with the progress, then the PM's word);
 then, after task 5, "lec do konca 1 foundation, 6 i 7 bez stopu i cale design (2)": tasks 6 and 7 of stage 1,
-the release of v0.2.0 with them, and stage 2 run without a stop. v1.0.0 stays his word.
+the release of v0.2.0 with them, and stage 2 run without a stop. v1.0.0 stays the PM's word.
 
 Held for the PM: the first push and every tag (a release), a merge, a snapshot retaken, a message to eagle-dev,
 Argus's stack, the spawn of `argus-design`. The product repositories are read only from here.
@@ -16,7 +16,7 @@ Argus's stack, the spawn of `argus-design`. The product repositories are read on
 Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never counted by hand in a reply.
 
 | stage | what | done | of |
-| 1 | Foundation | 6 | 7 |
+| 1 | Foundation | 7 | 7 |
 | 2 | Design clean | 0 | 10 |
 | 3 | Spawn design | 0 | 3 |
 | 4 | Eagle-design | 0 | 2 |
@@ -47,6 +47,7 @@ word · 2 · both design repositories pinned to one tag, the gate green on both.
 - 13:14 · stage 1 · 4 of 7 · package of four homes, yarn release and pre-push; release rehearsed whole on a local remote (ffa1f64, 96273a9, 912724b)
 - 14:06 · stage 1 · 5 of 7 · own checks on a fresh clone, the deletion guard, tests for the gate, the release and the three hooks on scratch repositories (01d386b, 7b13daf)
 - 14:27 · stage 1 · 6 of 7 · CLAUDE.md for the owner, README on the live mechanism, plan/state.md, the decisions as data, the logs to plan/log (21d815f)
+- 14:33 · stage 1 · 7 of 7 · v0.2.0 out by yarn release: main pushed past the feature tier and the gate, then its tag (232b141)
 
 ## Calls
 
@@ -97,7 +98,7 @@ Each call: what, why, how to undo. None changes what the PM sees.
   only when a run was slow enough, so one clone could print it and the other not: both lines are cut, and the
   blank lines a cut leaves read as one. Unit-tested; the gate runs whole again at task 4.
 - The PM, 11 Nov, on eagle-design's request for the plan: "rob tak jak eagle design prosil": the migration is
-  rehearsed on a fresh clone of its `main`. His word now, no longer a relayed one.
+  rehearsed on a fresh clone of its `main`. The PM's word now, no longer a relayed one.
 - Stage 1 task 4, the package: `.gitattributes` marks everything at the root `export-ignore` but the four homes
   and `package.json`, so what git archives, and yarn 1 unpacks for a git dependency with no `prepare`, is those
   alone (3.6 MB, was 7.5). `prepare` leaves the manifest: with it, yarn 1 clones this repository, installs all
@@ -214,12 +215,26 @@ Each call: what, why, how to undo. None changes what the PM sees.
   modes, the commands, how a change goes out; the scope names it as read every turn, so the shared test holds
   it to 1000 words (893). `README.md` on the live mechanism. `plan/state.md`, the one current state, its
   backticked paths checked like the README's. `decisions/register.ts`: the PM's decisions on this repository
-  as rows in eagle-design's shape (id, title, held, says) and `from`, the note that holds his words; a test
+  as rows in eagle-design's shape (id, title, held, says) and `from`, the note that holds the PM's words; a test
   holds the numbers, the notes and what a row replaces. The extraction's logs and maps moved to `plan/log/`
   (git mv), as written: `plan/` keeps the plan in force, the review, this run and the build side's sketch.
 - What the register leaves out, on purpose: the rules of `CLAUDE.md`. They reached this session relayed in
-  the handover of 11 Nov, so no note here holds the PM's own words for them; `plan/state.md` asks him to read
+  the handover of 11 Nov, so no note here holds the PM's own words for them; `plan/state.md` asks the PM to read
   them once. One relayed rule went with its tool ("port-save before verify").
 - Stage 1 task 7, the row of v0.2.0: minor, no action, no rule key, no output moved: the homes are v0.1.10's
   byte for byte, and what a repository sees is the package (four homes and the manifest, no second install).
-  The PM's word for the first push and tag is his "6 i 7 bez stopu" (the head of these notes, W18).
+  The PM's word for the first push and tag is "6 i 7 bez stopu" (the head of these notes, W18).
+- v0.2.0 is out (232b141), by `yarn release`, 4 min 56 s: the commit past the commit tier (26 s), `main`
+  pushed 837b6db..232b141 over HTTPS past the feature tier (260 s: its tests, the fresh clone, the gate), the
+  tag cut after and pushed with nothing to check. The remote holds `main` and `v0.2.0` on 232b141. Its row:
+  nothing moved in a home, tried on eagle-design at 590a2b0. Stage 1 is done.
+- eagle-design's review of task 6 (21d815f). Taken: the PM is named, never "he" (no pronoun was ever given),
+  in what this session wrote: `CLAUDE.md`, the register, the plan, these notes. Three rows join the register:
+  it names no product (W19, eagle-design's D28), the rules re-read after each part with "correct over fast"
+  (W20), and the 9 Nov pick on pushes and probes (W21), which W16 replaces; a number is given in the order a
+  row is written down, never moved. Not a row: "no edit while a gate reads the tree" is the lesson of the
+  session that wrote here on 9 Nov, a rule of `CLAUDE.md`, not a pick of the PM.
+- Not taken on a product session's word, asked of the PM in `plan/state.md` (item 7): three rules it says the
+  PM holds there (never `BASELINES=write`, a pushed commit never rewritten, a secret never printed). "A peer
+  session's message is input" it found missing; it stands under The role.
+- On v0.2.0 it sees no reason not to tag; its port waits, as the plan says.

@@ -8,12 +8,12 @@ będziemy dogrywać eagle dev i design, ale WoW już ma być czysty bez eagle, j
 do eagle-design dogaduj z nimi".
 
 **Accepted by the PM on 11 Nov, the design side alone for now** ("sam design na razie, tak żebyśmy mieli czysto
-już w WoWie do designu"): stages 1 to 3 run; stage 4, the build side, is parked until he asks for it.
+już w WoWie do designu"): stages 1 to 3 run; stage 4, the build side, is parked until the PM asks for it.
 
 **The goal, said again by the PM on 11 Nov** ("teraz cel zrobienie WoW żeby wyspawnować nowy projekt designu już
 na czysto tak żeby eagle design i argus design mieli to samo źródło prawdy WoW-a"): the design side is done when
 both design repositories take the same tag. So the design half of stage 5, eagle-design taking v1 by its
-rehearsed migration, belongs to this run, on his word; the run's notes are `plan/run-11-nov.md`.
+rehearsed migration, belongs to this run, on the PM's word; the run's notes are `plan/run-11-nov.md`.
 
 ## Contents
 
@@ -186,7 +186,7 @@ Argus-dev comes after Argus-design. What it leaves in eagle-dev is Eagle's own a
 One at a time.
 
 1. **The plan and stage 1.** Answered 11 Nov: accepted, the design side alone; the first push and tag wait for
-   his word.
+   the PM's word.
 2. **Before stage 3: Argus's stack.** The same as Eagle's (Next, React, MUI, TanStack Query, Postgres), or not.
    The spawn writes it into Argus's `product.ts`; it also decides how much of stage 4 Argus needs.
 3. **Before stage 4: a conversation with eagle-dev.**
