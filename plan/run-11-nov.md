@@ -157,3 +157,6 @@ Each call: what, why, how to undo. None changes what the PM sees.
   branch whose commit is not the one checked out: refused. A commit sent with no hook to a side branch, then
   pushed to `main`: the feature tier runs (195.2 s), where it read "nothing to check"; a tag cut by hand on it
   after: nothing to check. 74 tests in `tests/scripts` (56 before). This repository and GitHub hold no v0.2.0.
+- eagle-design read cdf483d: a new ref measured against `main` breaks nothing there (it pushes nothing here;
+  its pin is a tag, which stands on a commit of `main`). No finding. Its note, no change asked: an untracked
+  file git does not ignore (a `.DS_Store`) refuses a push, as meant, and the refusal says so.
