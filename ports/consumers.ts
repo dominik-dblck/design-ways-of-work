@@ -4,6 +4,7 @@
  */
 import type { Consumer } from '../scripts/consumerTypes.ts';
 import { CARRIED } from './eagle-design/carried.ts';
+import { REWRITTEN } from './eagle-design/rewritten.ts';
 import { MIGRATION } from './eagle-design/migration.ts';
 
 // one at least: a release is tried on a repository, never on none
@@ -36,6 +37,10 @@ const CONSUMERS: readonly [Consumer, ...Consumer[]] = [
       base: '8e031ff6f80c8a25127c9fc214c5859f84477f03',
       moves: 'ports/eagle-design/moves.tsv',
       carried: CARRIED,
+      kept: ['legacy/'],
+      rewritten: REWRITTEN,
+      // the block model's data became a module: a row names it so
+      names: [['block-model.json', 'blockModel.ts']],
     },
   },
 ];

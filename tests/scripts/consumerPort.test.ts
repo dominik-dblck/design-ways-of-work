@@ -42,7 +42,15 @@ describe('a repository whose work lands on a branch that takes nothing yet', () 
       commands: [],
       folders: [],
       migration: null,
-      port: { trunk: 'main', base: shared, moves: 'moves.tsv', carried },
+      port: {
+        trunk: 'main',
+        base: shared,
+        moves: 'moves.tsv',
+        carried,
+        kept: [],
+        rewritten: [],
+        names: [],
+      },
     };
     return portFaults({ consumer, wow });
   };

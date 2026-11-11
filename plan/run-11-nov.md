@@ -367,3 +367,29 @@ Each call: what, why, how to undo. None changes what the PM sees.
   to carry. Undo: `port: null`. The gate is red from here until the branch takes `main`: no push before that.
 - At the end the catch-up is a fast-forward: the branch holds `main` whole, so `main` moves to it with no
   conflict, then the migration. That is why a merge kept current beats a replay by script at the end.
+- eagle-design: the merge is the PM's word on its side too, held by its work-mode hook; it asks the PM for
+  one standing word for `main` into `port/wow` (forward only, nothing rewritten, `main` untouched). Since the
+  gate is red after each commit of its `main`, the merge has to be a script, not handwork: asked of this
+  session, as the moves' map and the pass of names are this repository's.
+- `node scripts/portMerge.ts <name> <checkout>`, run by the product's session on its port branch. The merge is
+  left uncommitted. A conflict is ruled by the port's data in `ports/`: a file a home holds stays out, and its
+  row for `carried` is printed with the trunk's blob; a file the port moved and rewrote, or one both sides
+  hold, takes the trunk's change laid on it three ways, the base and the trunk's side named as after the port
+  first, so the port's renames are no change (where one place still meets, the trunk's side is taken and the
+  file is listed to read); a file the trunk added in a moved folder follows the folder; `legacy/` stays as the
+  port left it. Then each snapshot the port holds as a module is written again from the trunk's JSON by the
+  writer the checks use, each file the merge brought has its paths, its imports and its bare file names named
+  as after the port, and the product's own take runs again: the merge writes the trunk's copy over a file the
+  take holds, and ruling it removes the file. Tests: the names (`portNames`), the rules on a scratch port and
+  trunk (`portSettle`). Why here: nothing of a product's rows is held in this repository by it. Undo: the
+  files go to `legacy/` once the product's work lands on the branch that takes the way of working.
+- Carried into the homes, the four changes of `main` the port's checks named: the journeys' part reads the
+  backlog's epics and a journey that waits (e0a4939); the API convention's sixth check, word for word; the
+  rules' README names the build repository by its role; the frozen notebooks' pins and the notebook's path
+  are the product's registry `roadmaps/notes/frozenNotebooks.ts`, written by the migration with E19's pin,
+  and the test no longer asks for more than five notebooks. Each is a row of `ports/eagle-design/carried.ts`.
+- Held for the build side, from eagle-design: it reads by a commit's blob `fixtures/data/block-model.json`,
+  `components.spec.json` and `modes.json`, `fixtures/packs/` and `fixtures/screens/`. The port emits none of
+  the three data files today (the home's list of emitted modules holds documents alone): a gap of the port.
+  They come back at the same paths with the emitted modules' registry (task 5), before the catch-up, so the
+  build side sees no change and no word to it is needed. Those paths and that way of reading stay.

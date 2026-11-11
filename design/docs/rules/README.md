@@ -2,7 +2,7 @@
 
 The rules of the design project's own code, one file per concern, each row **rule · gate · exceptions ·
 why**. A gate is a scan in `tests/architecture/`, an ESLint rule, a `yarn` script or `review`; a
-reviewer reads only the rows marked `review`, the suite holds the rest. Adapted from mailing-automation's
+reviewer reads only the rows marked `review`, the suite holds the rest. Adapted from the build repository's
 `docs/rules/` at `359b2ac` (Q4 · A, D15): a row kept, narrowed to this project, or left out where the
 project has no such code.
 

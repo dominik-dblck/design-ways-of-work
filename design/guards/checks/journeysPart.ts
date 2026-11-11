@@ -3,6 +3,7 @@
  * - case a step names exists, each person, each refusal key; each ticket's cases
  */
 import { lineOf, errorMessageOf } from './checkWorld.ts';
+import * as BACKLOG from '../../roadmaps/backlog.ts';
 import * as COMMANDS from '../../sheet/contract/commands.ts';
 import * as JOURNEYS from '../../sheet/cases/journeys.ts';
 import * as QUERIES from '../../sheet/contract/queries.ts';
@@ -13,21 +14,8 @@ type Cases = typeof TEST_CASES;
 type Journeys = typeof JOURNEYS;
 type Groups = ReturnType<Cases['casesOfEpic']>;
 
-const EPICS: readonly string[] = [
-  'E00',
-  'E01',
-  'E02',
-  'E03',
-  'E04',
-  'E05',
-  'E06',
-  'E07',
-  'E08',
-  'E09',
-  'E10',
-  'E18',
-];
-const FEATURED: readonly string[] = ['E04', 'E06', 'E09', 'E18', 'E19'];
+// every epic of the backlog, in its order
+const EPICS: readonly string[] = BACKLOG.epics.map((epic) => epic.id);
 
 // the cases a person meets, read with each feature ticket's own endpoints as the Feature page reads them
 function metLines({
@@ -37,9 +25,9 @@ function metLines({
   readonly cases: Cases;
   readonly journeys: Journeys;
 }): readonly string[] {
-  return FEATURED.flatMap((epic) => {
+  return EPICS.flatMap((epic) => {
     const ticket = TICKETS.byId[`T-${epic}-00`];
-    if (!ticket) return [];
+    if (!ticket || !journeys.journeysOfEpic(epic).length) return [];
     try {
       const met = journeys.check(
         epic,
@@ -63,14 +51,14 @@ function metLines({
   });
 }
 
-// every endpoint's cases at once, so one id held twice fails here
+// every endpoint's cases at once, named rather than one epic's, so one id held twice fails here
 function idsLine(cases: Cases): string {
   try {
     const every = [
       ...COMMANDS.all.map((one) => one.id),
       ...QUERIES.all.map((one) => one.id),
     ];
-    const count = cases.flat(cases.casesOfEpic('E18', every)).length;
+    const count = cases.flat(cases.casesOfEpic('', every)).length;
     return lineOf('case ids', {
       ok: true,
       text: `${count} cases over ${every.length} endpoints, every id once`,
@@ -80,7 +68,7 @@ function idsLine(cases: Cases): string {
   }
 }
 
-// a journey carries its test, but one epic's journeys wait on its refinement
+// a journey carries its test, unless it waits on its epic's refinement
 function epicLine(
   epic: string,
   {
@@ -98,10 +86,9 @@ function epicLine(
   const keys = checked.keys.length;
   const people = checked.people.length;
   const walked = journeys.journeysOfEpic(epic);
-  const untested =
-    epic === 'E14'
-      ? []
-      : walked.filter((one) => !one.test).map((one) => one.id);
+  const untested = walked
+    .filter((one) => !one.test && !one.waits)
+    .map((one) => one.id);
   if (!(dangling + keys + people) && !walked.length) return [];
   const shown = dangling
     ? ` · ${checked.dangling

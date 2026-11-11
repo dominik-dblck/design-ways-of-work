@@ -70,7 +70,7 @@ export const ENDPOINT_CHECKS: readonly DocumentSection[] = [
       '4. **Same create twice** (same id, same content) → 200, one thing. Same id, other content → 409 `*.id_taken`.',
       '5. **Two writers at once** → both land, in order; the server reads again and redoes. Only Approve,',
       '   Approve on a language gate answers 409 `approval.version_moved` when what it read has moved; the two confirmations, EditTranslation and DraftTranslation answer `locale.source_moved`.',
-      '6. **The document was handed to Batch** → Rename, Move and Trash are 409 `document.sent`; Restore answers 200 with no event, since a sent document is never in the trash (T-E03-00 · D35, 25 Sep).',
+      '6. **The message was sent** (Batch started the campaign Eagle published, which Eagle learns at Publish or OpenBulkEdit, E10 · PM, 11 Nov; Eagle Core sent a one-time message, E20) → Rename, Move and Trash are 409 `document.sent`, as every command is; Restore answers 200 with no event, since a sent document is never in the trash (T-E03-00 · D35, 25 Sep). Handed to a tool and not sent yet, a document is PUBLISHED and still takes a new version.',
       "7. **The document is in the trash** → every write but RestoreDocument is 409 `document.trashed`, its line messages.ts · refusals['document.trashed'] (one line per reader: a content manager “In the trash · restore it to make changes”, anyone else “In the trash · a content manager can restore it”); reads still answer. (PM, 24 Sep · O1)",
       '8. **A list, a page past the last** → 200 with no rows. (T-E02-04)',
       '9. **A throw** → 500 with a request id.',
