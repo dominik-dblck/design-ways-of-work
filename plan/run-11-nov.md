@@ -20,7 +20,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 
 | stage | what | done | of |
 | 1 | Foundation | 7 | 7 |
-| 2 | Design clean | 3 | 10 |
+| 2 | Design clean | 4 | 10 |
 | 3 | Spawn design | 0 | 3 |
 | 4 | Eagle-design | 0 | 2 |
 
@@ -55,6 +55,7 @@ word · 2 · both design repositories pinned to one tag, the gate green on both.
 - 14:49 · stage 2 · 1 of 10 · the contract table settled with eagle-design, the gate holds each product to its paths by git's names (5d77a15, 7e84a2a)
 - 15:10 · stage 2 · 2 of 10 · product.ts typed here, the checks' own parts through it; the gate migrates the clone that takes the commit; NO DIFFERENCE on eagle-design (b5b6c4c, 8223828)
 - 17:00 · stage 2 · 3 of 10 · the gate on eagle-design's newest main, the trunk taken by the port's script; eleven differences, each a row of the release in hand; verified by eagle-design (52bf59f, 66d30f2, a8bdcc0, 7c9dbb2)
+- 17:51 · stage 2 · 4 of 10 · the first slice: the build side's read list out of the home into the product's registry, the merge keeps two changes that touch, a repository's migration by one command; v0.3.0 out; verified by eagle-design (a53a832, 3d1a872, c82439e, 272bceb)
 
 ## Calls
 
@@ -498,3 +499,16 @@ Each call: what, why, how to undo. None changes what the PM sees.
   difference as this release's do, each under its version, and are never stale, since a row put out is not
   mended. Tested on the rows and on a scratch product that pins an older tag. Undo: revert the commit; a
   release that moves an output cannot pass its own push.
+- v0.3.0 is out, on the PM's word: `main` pushed past the feature tier, the fresh clone and the gate, then
+  its tag, both at 272bceb. The release's own commit is 4d4c0a4; the tag stands one commit after it, on the
+  mend the refused push asked for. eagle-design is told the order the gate tried: the merge by script, the
+  pin, the migration by its command, its own mends, one commit.
+- eagle-design verified task 4 on its own checkout at v0.3.0, the order kept, nothing committed: the merge
+  ends green with none held and `sheet/project.ts` kept whole (the port's fields, its names at the port's
+  paths, every key on the tree); the pin and the take; the migration's two files; the two tests and its
+  commit tier green whole. Its commit of them waits on the PM's word on its side.
+- Its findings, none of them a fault of the release. For task 5: its scope names the files the build side
+  reads by name as starts for knip, a line every product would write; the knip config here can take them
+  from the contract. For the PM's open question on pages (state, 8): the pack of E19 points at two pages
+  the port's tree no longer holds, so cutting it is refused there. Its own, on its `main`: a hook that
+  writes into `.git` as a folder, which a worktree does not have.

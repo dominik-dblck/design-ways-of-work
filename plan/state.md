@@ -18,7 +18,8 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
 - `ports/consumers.ts` names each repository the gate tries, and the branch it tries.
 - eagle-design: its branch `port/wow` takes the tag v0.1.10 and stands behind its `main`, which runs on its
   own copies. The gate tries it on its newest `main` (W22): each clone takes the trunk by the port's script,
-  then the migration. Its own commit of the merge, the pin and the migration waits for the next release.
+  then the migration. v0.3.0 is out for it (W23): its own commit of the merge, the pin and the migration is
+  its session's to make, by `scripts/portMerge.ts` and `scripts/migrate.ts`.
 - argus-design: not spawned yet.
 - The build side: `dev/` is copied from its repository by script; its port is parked.
 
