@@ -8,6 +8,9 @@ The PM, 11 Nov, on the pace: first "A tak poprosze" (one task, then a stop with 
 then, after task 5, "lec do konca 1 foundation, 6 i 7 bez stopu i cale design (2)": tasks 6 and 7 of stage 1,
 the release of v0.2.0 with them, and stage 2 run without a stop. v1.0.0 stays the PM's word.
 
+The PM, 11 Nov, later: "A moze byc" on a release between v0.2.0 and v1.0.0 (v0.3.0, W23), and "jak skonczysz 4
+to zatrzymaj sie prosze": the run stops when task 4 of stage 2 is closed.
+
 Held for the PM: the first push and every tag (a release), a merge, a snapshot retaken, a message to eagle-dev,
 Argus's stack, the spawn of `argus-design`. The product repositories are read only from here.
 
@@ -469,3 +472,19 @@ Each call: what, why, how to undo. None changes what the PM sees.
 - Asked of eagle-design for task 4: the read list moves on its own `main`, by its session (the field in
   `sheet/project.ts`, its test reading it), and the gate's trunk brings it; the home's test then takes that
   change as a carry. A migration writes no file that holds rows, so the field is not this repository's to add.
+- Task 4, the first slice. The pins and the epics left with task 3's carries; what stood was the build
+  side's read list. eagle-design moved it on its `main` (98deb53): `sheet/project.ts` · `buildReads.names`,
+  its test reading it. The home's test reads it there too, its own list gone (a53a832), the carried row on
+  the new blob. Undo: revert a53a832; the list stands in the home again.
+- That move met the port's own cut of the same object, line to line: git's merge reads two changes with no
+  line between them as one place, the script took the trunk's side and held the file, and the feature tier's
+  gate was red on a merge that loses nothing. After git's merge refuses, the script now reads each side's
+  changes by the base's lines they replace and keeps both where none shares a line and no two add at one
+  gap (`scripts/portBeside.ts`, 3d1a872); it says so by the file and holds nothing. Two changes that share
+  a line stay a person's. Why not held: the gate runs the product's own checks on the merged tree, and a
+  held file is a red gate on every such move. Undo: revert 3d1a872. On the trial clone the merge of 98deb53
+  ends green, the object holding the port's two fields and the trunk's names, named as after the port.
+- A repository's session had no command for its migration: the gate alone ran it, on its clone.
+  `node scripts/migrate.ts <name> <checkout>` (c82439e) runs it on the repository's own checkout, on the
+  branch that takes the way of working alone, with no commit; the release row's action names it.
+- The gate on a53a832, the product's `main` at 98deb53: the same eleven differences, each expected.

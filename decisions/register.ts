@@ -159,6 +159,13 @@ const DECISIONS: readonly Decision[] = [
     says: 'eagle-design is tried on its newest `main`, not on a branch frozen behind it: the rehearsal of its migration comes before the rest of the design side’s cleaning, not at its end.',
     from: 'plan/run-11-nov.md',
   },
+  {
+    id: 'W23',
+    title: 'a release before the design side is clean',
+    held: '11 Nov · A',
+    says: 'v0.3.0 goes out so eagle-design’s branch can take its `main` now, in one commit of its own: the merge, its pin, its migration. v1.0.0 stays the end of the design side, on the PM’s word.',
+    from: 'plan/run-11-nov.md',
+  },
 ];
 
 export { DECISIONS };

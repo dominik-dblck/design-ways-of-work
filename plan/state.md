@@ -43,8 +43,6 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
    This session keeps the last two already. None is written into `CLAUDE.md` on a product session's word.
 8. On eagle-design's `main` the checks run three parts the port took out with the pages (the list, the pages,
    the props). Whether a product's board, pages and props get a check part again, in TypeScript.
-9. A release between v0.2.0 and v1.0.0, so eagle-design's branch can take its `main` now: 0.3.0 (the pick),
-   1.0.0 now, or none until the design side is clean.
 
 ## Known gaps
 
