@@ -89,3 +89,12 @@ Each call: what, why, how to undo. None changes what the PM sees.
   (`Isolate  N workers spawned · ~99ms startup each`, `at least ~258ms faster with isolate: false`) is printed
   only when a run was slow enough, so one clone could print it and the other not: both lines are cut, and the
   blank lines a cut leaves read as one. Unit-tested; the gate runs whole again at task 4.
+- The PM, 11 Nov, on eagle-design's request for the plan: "rob tak jak eagle design prosil": the migration is
+  rehearsed on a fresh clone of its `main`. His word now, no longer a relayed one.
+- Stage 1 task 4, the package: `.gitattributes` marks everything at the root `export-ignore` but the four homes
+  and `package.json`, so what git archives, and yarn 1 unpacks for a git dependency with no `prepare`, is those
+  alone (3.6 MB, was 7.5). `prepare` leaves the manifest: with it, yarn 1 clones this repository, installs all
+  of it and packs it inside every repository's install. Nothing installs git's hooks any more, so `yarn hooks`
+  does (once a clone) and `lint:hooks`, in the commit tier, is red when git runs none of them. The gate holds
+  the package to it: an entry past the homes and the manifest in what the next side unpacks is a fault.
+  Undo: the `prepare` line back, the attributes file gone.

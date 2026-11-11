@@ -94,6 +94,7 @@ const scope: RepoScope = {
       'test:shared',
       'test:tools',
       'lint:kept',
+      'lint:hooks',
     ],
     featureEnd: ['consumers'],
   },

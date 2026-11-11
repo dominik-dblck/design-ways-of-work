@@ -10,6 +10,7 @@ import {
   holdsItsTake,
   nextTaken,
   packageOf,
+  strays,
   suppressedTaken,
 } from './consumerClones.ts';
 import { explained, mapDifferences, runDifferences } from './consumerDiff.ts';
@@ -55,7 +56,7 @@ function fileDifferences(
   ];
 }
 
-// what no row of a release excuses: a take a run undid, a rule turned off in a taken file
+// what no row of a release excuses: a take a run undid, a rule off in a taken file, a package past its homes
 function faults({ pinned, next }: Sides<string>): readonly string[] {
   const undone = (side: string, root: string): readonly string[] =>
     holdsItsTake(root) ? [] : [`${side} · a run rewrote a file the take wrote`];
@@ -64,6 +65,9 @@ function faults({ pinned, next }: Sides<string>): readonly string[] {
     ...undone('next', next),
     ...suppressedTaken(next).map(
       (file) => `eslint-suppressions.json · ${file} is a taken file`,
+    ),
+    ...strays(next).map(
+      (entry) => `the package holds ${entry}: the homes and the manifest alone`,
     ),
   ];
 }

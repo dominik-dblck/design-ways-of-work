@@ -1,0 +1,7 @@
+# the package a repository installs is what git archives: the four homes and the manifest
+/*              export-ignore
+/design         -export-ignore
+/dev            -export-ignore
+/shared         -export-ignore
+/design-system  -export-ignore
+/package.json   -export-ignore

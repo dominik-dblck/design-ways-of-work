@@ -1,11 +1,12 @@
 /**
  * - `cloned` · two fresh clones of a repository, each installed at its pinned tag
  * - `packageOf`, `nextTaken` · the commit as a package, taken; what it resolves
- * - `holdsItsTake`, `suppressedTaken` · the take as a run left it; a rule off
+ * - `holdsItsTake`, `suppressedTaken`, `strays` · a take's faults, a package's
  */
 import { execFileSync, spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
+import { HOMES } from '../shared/take/takeHomes.ts';
 import { takenFiles } from '../shared/take/takeRecord.ts';
 import type { Sides } from './consumerDiff.ts';
 import type { Consumer } from './consumerTypes.ts';
@@ -104,4 +105,12 @@ function suppressedTaken(root: string): readonly string[] {
   return Object.keys(held).filter((file) => taken.has(file));
 }
 
-export { cloned, holdsItsTake, nextTaken, packageOf, suppressedTaken };
+// the package is the four homes and the manifest: anything more an install unpacks is a stray
+const strays = (root: string): readonly string[] =>
+  fs
+    .readdirSync(path.join(root, 'node_modules', PACKAGE))
+    .filter(
+      (entry) => entry !== 'package.json' && !Object.hasOwn(HOMES, entry),
+    );
+
+export { cloned, holdsItsTake, nextTaken, packageOf, strays, suppressedTaken };
