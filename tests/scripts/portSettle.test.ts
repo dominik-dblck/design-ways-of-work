@@ -44,6 +44,7 @@ describe('a port takes its trunk: each conflict by the port’s rules', () => {
     `import './gate-rules.ts';\n${lines(6, 'part')}`,
   );
   product.committed('sheet/ownRows.ts', `a row\n${lines(3, 'row')}`);
+  product.committed('sheet/nearRows.ts', lines(4, 'row'));
   fs.mkdirSync(at('public'));
   fs.writeFileSync(at('public/mark.png'), Buffer.from([137, 80, 78, 71, 0, 0]));
   product.git(['add', '--', 'public/mark.png']);
@@ -61,6 +62,10 @@ describe('a port takes its trunk: each conflict by the port’s rules', () => {
   product.committed(
     'sheet/ownRows.ts',
     `a row of the port’s own\n${lines(3, 'row')}`,
+  );
+  product.committed(
+    'sheet/nearRows.ts',
+    lines(4, 'row').replace('row 1', 'the port’s row'),
   );
   fs.writeFileSync(
     at('public/mark.png'),
@@ -85,6 +90,10 @@ describe('a port takes its trunk: each conflict by the port’s rules', () => {
     'sheet/ownRows.ts',
     `a row of the trunk’s\n${lines(3, 'row')}`,
   );
+  product.committed(
+    'sheet/nearRows.ts',
+    lines(4, 'row').replace('row 2', 'the trunk’s row'),
+  );
   fs.writeFileSync(
     at('public/mark.png'),
     Buffer.from([137, 80, 78, 71, 0, 2, 2, 2]),
@@ -105,13 +114,22 @@ describe('a port takes its trunk: each conflict by the port’s rules', () => {
 
   it('every conflict is settled: none is left unmerged; held for a person, the two where the port’s own is left out', () => {
     expect(unmerged(git)).toEqual([]);
-    expect(said.length).toBe(6);
+    expect(said.length).toBe(7);
     expect(
       ruled
         .filter(({ isHeld }) => isHeld)
         .map(({ says }) => says.split(' · ')[1])
         .sort(),
     ).toEqual(['public/mark.png', 'sheet/ownRows.ts']);
+  });
+
+  it('two changes that touch, with no line between them, are both kept and said', () => {
+    expect(said).toContain(
+      'MERGED · sheet/nearRows.ts · the two touch, no line between them: both kept',
+    );
+    expect(read('sheet/nearRows.ts')).toBe(
+      'row 0\nthe port’s row\nthe trunk’s row\nrow 3\n',
+    );
   });
 
   it('where the trunk’s side is taken over a change of the port’s own, that change is printed', () => {

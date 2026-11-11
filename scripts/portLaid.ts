@@ -7,6 +7,8 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import type { Move } from './movePaths.ts';
+import { laidBeside } from './portBeside.ts';
+import type { ThreeWays } from './portBeside.ts';
 import { importsAnew, namedAnew } from './portNames.ts';
 import type { Port } from './portTypes.ts';
 import { childEnv } from './scratch.ts';
@@ -30,6 +32,8 @@ interface Laid {
   readonly text: string;
   // the two met in no one place: the result holds both
   readonly isMerged: boolean;
+  // both kept where they touch with no line between them, which git's merge refuses
+  readonly isTouching: boolean;
   // else the trunk's side is the text, and this is the port's own change it lacks: none when the port changed names alone
   readonly dropped: string;
 }
@@ -55,6 +59,31 @@ function droppedFrom(base: string, ours: string): string {
     .join('\n');
 }
 
+// git's merge first; then both kept where they only touch; else the trunk's side
+function mergedOf(ways: ThreeWays): Laid {
+  const { base, ours, theirs } = ways;
+  const merged = spawnSync('git', ['merge-file', '-p', ours, base, theirs], {
+    encoding: 'utf8',
+    maxBuffer: BUFFER,
+  });
+  if (merged.status === 0)
+    return {
+      text: merged.stdout,
+      isMerged: true,
+      isTouching: false,
+      dropped: '',
+    };
+  const beside = laidBeside(ways);
+  if (beside !== undefined)
+    return { text: beside, isMerged: true, isTouching: true, dropped: '' };
+  return {
+    text: fs.readFileSync(theirs, 'utf8'),
+    isMerged: false,
+    isTouching: false,
+    dropped: droppedFrom(base, ours),
+  };
+}
+
 // the base and the trunk's side are named as after the port first, so the port's renames are no change
 function laid({ root, target, base, theirs, port, moves }: Laying): Laid {
   const folder = fs.mkdtempSync(path.join(os.tmpdir(), 'port-merge-'));
@@ -73,18 +102,7 @@ function laid({ root, target, base, theirs, port, moves }: Laying): Laid {
   };
   const ours = path.join(root, target);
   const [was, trunk] = [sideAt('base', base), sideAt('theirs', theirs)];
-  const merged = spawnSync('git', ['merge-file', '-p', ours, was, trunk], {
-    encoding: 'utf8',
-    maxBuffer: BUFFER,
-  });
-  const laidOut =
-    merged.status === 0
-      ? { text: merged.stdout, isMerged: true, dropped: '' }
-      : {
-          text: fs.readFileSync(trunk, 'utf8'),
-          isMerged: false,
-          dropped: droppedFrom(was, ours),
-        };
+  const laidOut = mergedOf({ base: was, ours, theirs: trunk });
   for (const side of [was, trunk]) fs.rmSync(side);
   fs.rmdirSync(folder);
   return laidOut;

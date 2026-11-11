@@ -83,7 +83,7 @@ function laidOn(
   { root, port, moves, conflict }: Settling,
   target: string,
 ): Ruled {
-  const { text, isMerged, dropped }: Laid = laid({
+  const { text, isMerged, isTouching, dropped }: Laid = laid({
     root,
     target,
     base: conflict.base,
@@ -92,6 +92,10 @@ function laidOn(
     moves,
   });
   fs.writeFileSync(path.join(root, target), text);
+  if (isTouching)
+    return said(
+      `MERGED · ${target} · the two touch, no line between them: both kept`,
+    );
   if (isMerged)
     return said(`MERGED · ${target} · the trunk's change beside the port's`);
   return dropped === ''
