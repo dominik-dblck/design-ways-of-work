@@ -14,6 +14,9 @@ import { textsUnder } from './tree.ts';
 const digestOf = (text: string): string =>
   crypto.createHash('sha256').update(text).digest('hex');
 
+const pinOf = (epic: string): string | undefined =>
+  FROZEN_NOTEBOOKS.find((one) => one.epic === epic)?.digest;
+
 describe('a closed notebook is frozen', () => {
   const notebooks = textsUnder('roadmaps', ['.md', '.ts']).flatMap((source) => {
     const epic = A_NOTEBOOK.exec(source.path)?.[1];
@@ -24,13 +27,13 @@ describe('a closed notebook is frozen', () => {
     const closed = notebooks
       .filter(({ epic }) => STATUS[`T-${epic}-00`] === 'done')
       .map(({ epic }) => epic);
-    expect(closed).toEqual(Object.keys(FROZEN_NOTEBOOKS));
+    expect(closed).toEqual(FROZEN_NOTEBOOKS.map(({ epic }) => epic));
   });
 
   it('a closed notebook reads as it closed', () => {
     const moved = notebooks
-      .filter(({ epic }) => FROZEN_NOTEBOOKS[epic] !== undefined)
-      .filter(({ epic, text }) => digestOf(text) !== FROZEN_NOTEBOOKS[epic])
+      .filter(({ epic }) => pinOf(epic) !== undefined)
+      .filter(({ epic, text }) => digestOf(text) !== pinOf(epic))
       .map(({ epic }) => epic);
     expect(moved).toEqual([]);
   });
