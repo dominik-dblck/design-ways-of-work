@@ -17,4 +17,4 @@ design-system/guide.md
 # a run's notes and maps, as written
 plan/
 # a port, as its script writes it
-ports/
+ports/**/*.{patch,tsv}

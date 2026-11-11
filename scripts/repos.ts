@@ -5,11 +5,13 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { BUILD_SOURCE, CONSUMERS } from '../ports/consumers.ts';
 import { filesOfHomes, HOMES } from '../shared/take/takeHomes.ts';
 
 const HERE = path.resolve(import.meta.dirname, '..');
-const PRODUCT_REPO = path.join(HERE, '..', 'eagle-design');
-const BUILD_REPO = path.join(HERE, '..', 'mailing-automation');
+// each path is ports/'s: the extraction's product is its first repository
+const PRODUCT_REPO = path.resolve(HERE, CONSUMERS[0].path);
+const BUILD_REPO = path.resolve(HERE, BUILD_SOURCE);
 
 const repoAt = (fallback: string, at = 0): string =>
   path.resolve(

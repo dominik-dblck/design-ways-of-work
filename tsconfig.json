@@ -9,6 +9,7 @@
   },
   "include": [
     "scripts/**/*.ts",
+    "ports/**/*.ts",
     "shared/hooks/**/*.ts",
     "shared/lint/**/*.ts",
     "shared/sync/**/*.ts",

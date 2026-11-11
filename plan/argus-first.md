@@ -10,6 +10,11 @@ do eagle-design dogaduj z nimi".
 **Accepted by the PM on 11 Nov, the design side alone for now** ("sam design na razie, tak żebyśmy mieli czysto
 już w WoWie do designu"): stages 1 to 3 run; stage 4, the build side, is parked until he asks for it.
 
+**The goal, said again by the PM on 11 Nov** ("teraz cel zrobienie WoW żeby wyspawnować nowy projekt designu już
+na czysto tak żeby eagle design i argus design mieli to samo źródło prawdy WoW-a"): the design side is done when
+both design repositories take the same tag. So the design half of stage 5, eagle-design taking v1 by its
+rehearsed migration, belongs to this run, on his word; the run's notes are `plan/run-11-nov.md`.
+
 ## Contents
 
 1. What "ready for Argus" means

@@ -106,7 +106,7 @@ const scope: RepoScope = {
   unformatted: {
     '**/*.md': 'prose keeps the layout its writer gave it',
     'plan/**': "a run's notes and maps, as written",
-    'ports/**': 'a port, as its script writes it',
+    'ports/**/*.{patch,tsv}': 'a port, as its script writes it',
   },
   // no skill, and no instruction an agent loads: its sessions read the products'
   instructions: { skills: [], whole: [], onDemand: [], everyTurn: [] },
