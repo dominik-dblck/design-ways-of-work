@@ -27,8 +27,8 @@ const CARRIED: readonly Carried[] = [
   },
   {
     file: 'tests/architecture/anExportIsRead.test.ts',
-    blob: 'e62eacb349d38ce283022efc4a364ac3cd86e525',
-    how: 'design/tests/architecture/anExportIsRead.test.ts: the destinations’ table among what the build side reads',
+    blob: 'ce273b208e75b06980a71a61d630d60dc267f515',
+    how: 'design/tests/architecture/anExportIsRead.test.ts reads the names off the product’s sheet/project.ts · buildReads.names: the list left the home',
   },
 ];
 

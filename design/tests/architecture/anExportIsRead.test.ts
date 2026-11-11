@@ -1,11 +1,12 @@
 /**
  * - `docs/rules/responsibility.md`: an entry's export is read by its global (a part's: knip)
- * - `READ_BY_THE_BUILD_SIDE` · what the build repository reads at `359b2ac`, and the pack offers it
+ * - the build side reads names too: `sheet/project.ts` · buildReads.names
  * - a module's data the build writes as JSON is read by name (`tools/layout.ts · emitted`)
  */
 import fs from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
+import * as PROJECT from '../../sheet/project.ts';
 import { emitted } from '../../tools/layout.ts';
 import { ROOT } from '../../tools/root.ts';
 import { heldToItsBaseline } from '../../shared/tests/baseline.ts';
@@ -19,93 +20,6 @@ import {
   textsUnder,
 } from './tree.ts';
 import type { Source } from './tree.ts';
-
-// and what its tests call by name on their copies of the sheet (sheetCall, sheetValue)
-const READ_BY_THE_BUILD_SIDE: Readonly<Record<string, readonly string[]>> = {
-  'sheet/logic/approval/approvalLogic.ts': [
-    'barRoleChips',
-    'roleHeads',
-    'roleMatrix',
-    'roleStates',
-    'todoOf',
-  ],
-  'sheet/samples/blocks.ts': ['compare'],
-  // its emitter writes the destinations' table from the sheet
-  'sheet/model/contentTypes/destinations.ts': ['DESTINATIONS'],
-  'sheet/logic/assembly/contentAssembly.ts': [
-    'cfg',
-    'deliveryKindOf',
-    'documentGatesOfType',
-    'greyTabsOf',
-    'languagesOf',
-    'peopleErrors',
-    'pool',
-    'tabsOf',
-  ],
-  'sheet/model/contentTypes.ts': ['channels', 'rowOf'],
-  'sheet/model/directory.ts': ['gates'],
-  'sheet/logic/approval/gateRules.ts': [
-    'confirm',
-    'documentSituationOf',
-    'foldOf',
-    'fourEyesCases',
-    'fourEyesCheck',
-    'fromFacts',
-    'fromLine',
-    'gateList',
-    'gateSituationOf',
-    'lead',
-    'manage',
-    'manageCases',
-    'noticeFor',
-    'pendingOf',
-    'progressSituationOf',
-    'relationOf',
-    'seatMenu',
-    'slots',
-    'stateChip',
-    'todoSituationOf',
-    'why',
-  ],
-  'sheet/words/glossary.ts': ['uiRows'],
-  'guards/measure.ts': ['fixtureLoad', 'fixtures', 'run'],
-  'sheet/words/messages.ts': [
-    'cells',
-    'messageCounts',
-    'messageRowsCheck',
-    'refusals',
-    'say',
-  ],
-  'sheet/samples/payloads.ts': ['DOC', 'outside', 'payloadOfStep'],
-  'sheet/samples/projections.ts': ['blocks', 'order'],
-  'sheet/contract/refusals.ts': [
-    'actorKey',
-    'refusalRows',
-    'sharedKey',
-    'tiers',
-  ],
-  'sheet/logic/approval/roleCombinations.ts': [
-    'classes',
-    'combinationDeadEnds',
-    'count',
-    'docs',
-    'gateStates',
-    'languageFacts',
-    'menuDocs',
-    'reductionCheck',
-    'roles',
-  ],
-  'sheet/samples/sampleRun.ts': [
-    'acts',
-    'eventsFiredCoverage',
-    'outsideRun',
-    'phases',
-    'sampleSteps',
-  ],
-  'sheet/logic/approval/scenes.ts': ['factsOf', 'stateIndex', 'states'],
-  'sheet/logic/approval/signatures.ts': ['all'],
-  'sheet/cases/testCases.ts': ['casesAddedRemoved'],
-};
 
 const globalOf = (entry: string): string =>
   path.posix
@@ -151,7 +65,7 @@ function unreadIn(
       ? []
       : others.filter((reader) => reader.text.includes(global));
   const outside = [
-    ...(READ_BY_THE_BUILD_SIDE[source.path] ?? []),
+    ...(PROJECT.buildReads.names[source.path] ?? []),
     ...emitted()
       .filter((one) => one.module === source.path)
       .map((one) => one.name),
@@ -232,7 +146,7 @@ describe('an export is read', () => {
   });
 
   it('each name the build side reads is still exported', () => {
-    for (const [file, names] of Object.entries(READ_BY_THE_BUILD_SIDE)) {
+    for (const [file, names] of Object.entries(PROJECT.buildReads.names)) {
       const source = productionSources().find((one) => one.path === file);
       expect(source, file).toBeDefined();
       if (source !== undefined)
