@@ -1,5 +1,5 @@
 /**
- * - `SCRATCH` · the folder the gate builds its clones in, the one it empties
+ * - `SCRATCH`, `CLONING` · the folder clones are built in; the checks that clone
  * - `emptied` · a folder made new, below the one it is held within, or refused
  * - `childEnv` · a child's environment: none of git's names for this repository
  */
@@ -9,6 +9,8 @@ import path from 'node:path';
 import { HERE } from './repos.ts';
 
 const SCRATCH = path.join(HERE, '.consumers');
+// by package script: a clone's own run never clones again
+const CLONING: ReadonlySet<string> = new Set(['fresh', 'consumers']);
 
 // below the folder that holds it alone: that folder itself, a `..` or another drive never reaches the removal
 function emptied({
@@ -38,4 +40,4 @@ const childEnv = (env: NodeJS.ProcessEnv = process.env): NodeJS.ProcessEnv =>
     Object.entries(env).filter(([name]) => !LOCAL_TO_A_REPOSITORY.has(name)),
   );
 
-export { childEnv, emptied, SCRATCH };
+export { childEnv, CLONING, emptied, SCRATCH };

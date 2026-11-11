@@ -9,9 +9,8 @@ import { scope } from '../scope.ts';
 import { COMMIT, FEATURE_END } from '../shared/checkTiers.ts';
 import { ranIn } from './consumerRuns.ts';
 import { HERE } from './repos.ts';
-import { childEnv, emptied, SCRATCH } from './scratch.ts';
+import { childEnv, CLONING, emptied, SCRATCH } from './scratch.ts';
 
-const CLONING = new Set(['fresh', 'consumers']);
 const BUFFER = 1 << 28;
 
 const run = (root: string, [bin = '', ...args]: readonly string[]): string =>

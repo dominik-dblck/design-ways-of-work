@@ -1,6 +1,7 @@
 /**
  * - `hookRepo` · a scratch repository that took the shared home, its tools stubs
  * - `ran` on it · a hook run there: its exit, what it printed, each tool's call
+ * - with `isReal`, prettier, ESLint and cspell are this repository's own
  */
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
@@ -39,6 +40,8 @@ interface Hooked {
   // what a failing one prints, and what it prints as an error
   readonly out?: string;
   readonly err?: string;
+  // what the hook's own environment holds beside
+  readonly env?: Readonly<Record<string, string>>;
 }
 
 interface Said {
@@ -51,12 +54,28 @@ interface HookRepo extends ScratchRepo {
   readonly ran: (hooked: Hooked) => Said;
 }
 
+// the tools a check runs on a change's files: stubs, or the ones installed here
+function tooled(bin: string, isReal: boolean): void {
+  if (!isReal) {
+    stubbed(bin, BINS);
+    return;
+  }
+  fs.mkdirSync(bin, { recursive: true });
+  for (const tool of BINS)
+    fs.symlinkSync(
+      path.join(HERE, 'node_modules', '.bin', tool),
+      path.join(bin, tool),
+    );
+}
+
 function hookRepo({
   base,
   name,
+  isReal = false,
 }: {
   readonly base: string;
   readonly name: string;
+  readonly isReal?: boolean;
 }): HookRepo {
   const repo = scratchRepo({ base, name });
   const modules = path.join(repo.root, 'node_modules');
@@ -65,7 +84,7 @@ function hookRepo({
   fs.cpSync(path.join(HERE, 'shared'), path.join(repo.root, 'shared'), {
     recursive: true,
   });
-  stubbed(path.join(modules, '.bin'), BINS);
+  tooled(path.join(modules, '.bin'), isReal);
   stubbed(yarnAt, ['yarn']);
   for (const one of RESOLVED) {
     fs.mkdirSync(path.dirname(path.join(modules, one)), { recursive: true });
@@ -85,7 +104,13 @@ function hookRepo({
   fs.writeFileSync(path.join(repo.root, 'scope.ts'), SCOPE);
   repo.git(['add', '--', '.gitignore', 'package.json', 'scope.ts']);
   repo.git(['commit', '-q', '-m', 'a repository that took the shared home']);
-  const ran = ({ hook, args = [], input = '', ...stubs }: Hooked): Said => {
+  const ran = ({
+    hook,
+    args = [],
+    input = '',
+    env = {},
+    ...stubs
+  }: Hooked): Said => {
     fs.writeFileSync(calls, '');
     const done = spawnSync(
       process.execPath,
@@ -97,6 +122,7 @@ function hookRepo({
         env: {
           ...childEnv(),
           ...stubEnv({ calls, ...stubs }),
+          ...env,
           PATH: `${yarnAt}${path.delimiter}${process.env.PATH ?? ''}`,
         },
       },

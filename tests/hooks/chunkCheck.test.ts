@@ -60,6 +60,11 @@ describe('a chunk that ends red is held once', () => {
     expect(String(reason).split('\n').slice(1)).toEqual(lines.slice(-40));
   });
 
+  it('a stop that says nothing of itself is read as the first', () => {
+    const said = repo.ran({ hook: HOOK, ...red });
+    expect(decided(said.stdout).decision).toBe('block');
+  });
+
   it('red a second time in a row, it only says so: the turn is not held', () => {
     const said = repo.ran({
       hook: HOOK,

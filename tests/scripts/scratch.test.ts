@@ -2,7 +2,9 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { afterAll, describe, expect, it } from 'vitest';
-import { childEnv, emptied } from '../../scripts/scratch.ts';
+import { scope } from '../../scope.ts';
+import { HERE } from '../../scripts/repos.ts';
+import { childEnv, CLONING, emptied } from '../../scripts/scratch.ts';
 
 const base = fs.mkdtempSync(path.join(os.tmpdir(), 'wow-scratch-'));
 const scratch = path.join(base, 'scratch');
@@ -54,5 +56,30 @@ describe("a child's environment holds none of git's names for one repository", (
       GIT_AUTHOR_NAME: 'kept: no repository is named by it',
       PATH: '/usr/bin',
     });
+  });
+});
+
+describe('a check that clones is named, so a clone never clones again', () => {
+  const scripts: Readonly<Record<string, unknown>> = Object(
+    Reflect.get(
+      Object(
+        JSON.parse(fs.readFileSync(path.join(HERE, 'package.json'), 'utf8')),
+      ),
+      'scripts',
+    ),
+  );
+  // a script that builds a clone names the scratch it builds it in
+  const namesTheScratch = (script: string): boolean => {
+    const file = /^node (scripts\/\S+\.ts)/.exec(String(scripts[script]))?.[1];
+    return (
+      file !== undefined &&
+      /\bSCRATCH\b/.test(fs.readFileSync(path.join(HERE, file), 'utf8'))
+    );
+  };
+
+  it('each check of the feature end that names the scratch is one of them', () => {
+    expect(scope.checks.featureEnd.filter(namesTheScratch).sort()).toEqual(
+      [...CLONING].sort(),
+    );
   });
 });
