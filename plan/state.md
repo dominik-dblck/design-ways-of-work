@@ -17,7 +17,8 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
 
 - `ports/consumers.ts` names each repository the gate tries, and the branch it tries.
 - eagle-design: its branch `port/wow` takes the tag v0.1.10 and stands behind its `main`, which runs on its
-  own copies. The gate moves to its newest `main` next (W22); its migration lands there on the PM's word.
+  own copies. The gate tries it on its newest `main` (W22): each clone takes the trunk by the port's script,
+  then the migration. Its own commit of the merge, the pin and the migration waits for the next release.
 - argus-design: not spawned yet.
 - The build side: `dev/` is copied from its repository by script; its port is parked.
 
@@ -42,6 +43,8 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
    This session keeps the last two already. None is written into `CLAUDE.md` on a product session's word.
 8. On eagle-design's `main` the checks run three parts the port took out with the pages (the list, the pages,
    the props). Whether a product's board, pages and props get a check part again, in TypeScript.
+9. A release between v0.2.0 and v1.0.0, so eagle-design's branch can take its `main` now: 0.3.0 (the pick),
+   1.0.0 now, or none until the design side is clean.
 
 ## Known gaps
 

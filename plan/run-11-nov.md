@@ -17,7 +17,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 
 | stage | what | done | of |
 | 1 | Foundation | 7 | 7 |
-| 2 | Design clean | 2 | 10 |
+| 2 | Design clean | 3 | 10 |
 | 3 | Spawn design | 0 | 3 |
 | 4 | Eagle-design | 0 | 2 |
 
@@ -51,6 +51,7 @@ word · 2 · both design repositories pinned to one tag, the gate green on both.
 - 14:33 · stage 1 · 7 of 7 · v0.2.0 out by yarn release: main pushed past the feature tier and the gate, then its tag (232b141)
 - 14:49 · stage 2 · 1 of 10 · the contract table settled with eagle-design, the gate holds each product to its paths by git's names (5d77a15, 7e84a2a)
 - 15:10 · stage 2 · 2 of 10 · product.ts typed here, the checks' own parts through it; the gate migrates the clone that takes the commit; NO DIFFERENCE on eagle-design (b5b6c4c, 8223828)
+- 17:00 · stage 2 · 3 of 10 · the gate on eagle-design's newest main, the trunk taken by the port's script; eleven differences, each a row of the release in hand; verified by eagle-design (52bf59f, 66d30f2, a8bdcc0, 7c9dbb2)
 
 ## Calls
 
@@ -437,3 +438,26 @@ Each call: what, why, how to undo. None changes what the PM sees.
   tried.
 - `main` moved again (390b1a8): a 502 row in the API convention, carried word for word into
   `design/docs/documents/api-convention/endpointShape.ts`; its row in `carried` holds the new blob.
+- The gate read twelve differences on 52bf59f; one was the migration's own fault. The product's lint refused
+  the pins' registry as this repository wrote it: a ticket's name as a key, a header bullet past 80
+  characters. The registry is rows of epic and digest now (66d30f2), tried by hand in the gate's clone with
+  the product's own eslint, test, prettier and tsc before the gate ran. Undo: revert it; a keyed record.
+- `main` moved again (3414810): one row more in `READ_BY_THE_BUILD_SIDE`, in the export test a home holds,
+  carried at the port's path (a8bdcc0), its row in `carried`. That list is a product's fact the home still
+  holds, and the product's work moves it: each move blocks the gate until it is carried here. It leaves the
+  home first in task 4, into a registry of the product's, the path asked of eagle-design.
+- The gate on 7c9dbb2, the product's `main` at 3414810: eleven differences, each a row of the release in
+  hand, none broken. The pins' test green where the tag fails it; the journeys' part reading the backlog's
+  epics (the cases met of E10 and E14, the journeys of E14 and E19); the API convention as `main` holds it,
+  in the page, the build's copy, the pack and the build's line; the pins' registry one file more of its
+  module, in the module entries and the release record. Red and equal on both sides, the product's to mend
+  in its merge commit: its lint, its format, its spelling, its unused exports, the pack's uncommitted files.
+- Open, the PM's: a release between v0.2.0 and v1.0.0. The product's one commit (the merge, its pin, its
+  migration) needs a tag that holds the contract; the release in hand is of the kind that asks an action,
+  which the script numbers 1.0.0, and v1.0.0 is the end of the design side by the plan. The pick here: 0.3.0,
+  the script raising the minor for an action while the version stands below 1.0, as semver reads 0.x.
+- eagle-design verified task 3 at 7c9dbb2, read only: each of the eleven is its own `main`'s output (the
+  pin of E19 equals its test's and the sha256 of the notebook; part g's lines are `main`'s, in its order);
+  the registry as rows suits it; the five reds equal on both sides are its own, mended by script in its merge
+  commit. The build side's read list goes, by its word, into `sheet/project.ts` as `buildReads.names`: one
+  home for what the build side reads, no new file.
