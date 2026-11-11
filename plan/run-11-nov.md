@@ -12,7 +12,7 @@ Argus's stack, the spawn of `argus-design`. The product repositories are read on
 Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never counted by hand in a reply.
 
 | stage | what | done | of |
-| 1 | Foundation | 0 | 7 |
+| 1 | Foundation | 1 | 7 |
 | 2 | Design clean | 0 | 10 |
 | 3 | Spawn design | 0 | 3 |
 | 4 | Eagle-design | 0 | 2 |
@@ -37,5 +37,25 @@ Stage 4, the design half of the plan's stage 5: 1 · eagle-design takes v1 by th
 word · 2 · both design repositories pinned to one tag, the gate green on both.
 
 ## History
+- 12:25 · stage 1 · 1 of 7 · ports/consumers.ts names the repositories; build path mended to ../eagle (c4c82da)
 
 ## Calls
+
+Each call: what, why, how to undo. None changes what the PM sees.
+
+- Stage 1 task 2, the gate tries the commit in hand, not the working tree (the plan said the tree). Why: a push
+  carries commits; a gate on uncommitted work proves something no one receives. It says so when the homes hold
+  uncommitted work. Undo: `packageOf` reads the tree instead of `git archive HEAD`.
+- The next side is not installed from a URL: its clone installs the pinned tag as its lockfile says, then the
+  installed package's folder is replaced by `git archive HEAD` and its own `yarn wow` takes it. Why: the
+  repository's manifest and lockfile stay as committed, so its own checks read the same files on both sides, and
+  the archive is what an install unpacks once the package runs no `prepare` (task 4). Not seen by it: a change
+  of this package's own `dependencies`. Undo: write the dependency into the clone's manifest and install.
+- Both clones run their scripts at once; the scripts of one clone run in order. Measured on eagle-design's
+  `port/wow`, 13 scripts: 2 min 30 s, "NO DIFFERENCE". Proven red on a scratch clone of this repository with one
+  export nothing reads added to a taken file: `output · yarn lint:exports`, `exit · yarn lint:exports · 0 → 1`,
+  2 unexplained.
+- The differences a release means are rows of `releases/changelog.ts` · `NEXT.outputs`, by repository, each with
+  its why; `plan/expected-differences.tsv` was the extraction's and retires with it (task 3).
+- The take's own check (`yarn wow --check`) is asked of both clones after their runs, not compared as an output:
+  its line prints the version, which every release moves.

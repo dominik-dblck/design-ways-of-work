@@ -1,5 +1,6 @@
 /**
  * - `hashes`, `written` · a run's files: a folder's bytes, what git sees it wrote
+ * - `writtenIn` · the same in a clone that took its files: git never shows those
  * - `linkedHashes` · the bytes of each file a product links from this repository
  */
 import { execFileSync } from 'node:child_process';
@@ -41,6 +42,22 @@ function written(root: string): ReadonlyMap<string, string> {
   return new Map(files.map((file) => [file, contentOf(path.join(root, file))]));
 }
 
+// git's names with -z: split on NUL, never quoted, a rename two entries
+function writtenIn(root: string): ReadonlyMap<string, string> {
+  const status = ['status', '--porcelain', '-z', '--no-renames'];
+  const entries = execFileSync('git', [...status, '--untracked-files=all'], {
+    cwd: root,
+    encoding: 'utf8',
+  });
+  return new Map(
+    entries
+      .split('\0')
+      .filter(Boolean)
+      .map((entry) => entry.slice(3))
+      .map((file) => [file, contentOf(path.join(root, file))]),
+  );
+}
+
 function contentOf(file: string): string {
   if (!fs.existsSync(file)) return '<gone>';
   return fs.readFileSync(file).toString('latin1');
@@ -55,4 +72,4 @@ const linkedHashes = (): ReadonlyMap<string, string> =>
     ]),
   );
 
-export { hashes, linkedHashes, written };
+export { hashes, linkedHashes, written, writtenIn };

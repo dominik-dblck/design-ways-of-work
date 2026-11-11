@@ -27,6 +27,7 @@
     "format:check": "prettier --check . --log-level warn",
     "format:files": "node shared/lint/writeFormatterFiles.ts --out .",
     "test": "yarn -s check:feature",
+    "consumers": "node scripts/consumers.ts",
     "prepare": "husky",
     "rehearse": "node scripts/rehearse.ts",
     "verify": "node scripts/verify.ts",

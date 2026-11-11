@@ -10,6 +10,7 @@
   "include": [
     "scripts/**/*.ts",
     "ports/**/*.ts",
+    "releases/**/*.ts",
     "shared/hooks/**/*.ts",
     "shared/lint/**/*.ts",
     "shared/sync/**/*.ts",

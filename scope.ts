@@ -10,6 +10,7 @@ const scope: RepoScope = {
   ignores: [
     'node_modules/**',
     '.rehearsal/**',
+    '.consumers/**',
     'legacy/**',
     // the files a rule's tests read as a program, wrong on purpose
     'tests/lint/fixtures/**',

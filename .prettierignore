@@ -1,6 +1,7 @@
 # what the lint leaves aside
 node_modules/
 .rehearsal/
+.consumers/
 legacy/
 tests/lint/fixtures/
 tests/browser/fixtures/
