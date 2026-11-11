@@ -393,3 +393,15 @@ Each call: what, why, how to undo. None changes what the PM sees.
   the three data files today (the home's list of emitted modules holds documents alone): a gap of the port.
   They come back at the same paths with the emitted modules' registry (task 5), before the catch-up, so the
   build side sees no change and no word to it is needed. Those paths and that way of reading stay.
+- The merge rehearsed, in `.consumers/trial-main` (its `port/wow` 590a2b0, its `main` e0a4939): ten conflicts
+  read, none left; one file listed to read, an epic of the backlog where both changed one place. Four
+  snapshots written again; with the port's one name beyond a move (`block-model.json`, a module now) the
+  content types' part fell from three differences to one. The product's own scripts on the merged tree: the
+  take's check, tsc, the file names and the unused exports green. Red, each the product's to mend in its
+  merge: one name its lint refuses in a row `main` added, seventeen words its spelling lacks, one file to
+  format, the emitted files to build again, and one key of the content types' snapshot (the map of the files'
+  links, which differs between the two trees: a retake, its side and the PM's word). One test is red there by
+  design: E19's pin, which the home's test of the tag lacks and this release's registry holds.
+- Open, both the PM's: the word for eagle-design's merge of `main` into `port/wow`, asked on both sides; and
+  the gate stays red until that merge, so task 3 closes after it, on a gate that reads the differences this
+  release means (the frozen notebooks' test, the journeys' lines) and no other.
