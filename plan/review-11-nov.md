@@ -6,6 +6,10 @@ Nothing in the repository or in a consumer changed for it. Every plan item waits
 The PM's aim (11 Nov): stability, scalability, fast work together, precision after; "we may have done too much
 or too little"; and whether more patterns are worth adding. Each finding below is judged against that.
 
+**Since then (11 Nov):** the plan in force is `plan/argus-first.md`, which replaces section 7's order and closes
+section 8's first decision (eagle-design's port waits). Two lines here were mended after eagle-design's check:
+B5 and E4 on what cuts the installed package, and C1's count of tags.
+
 ## Contents
 
 1. The verdict
@@ -130,9 +134,10 @@ rules, the checklist and `docs/skills/*.ts`. It does not read `docs/documents/`,
 `.rehearsal/eagle-design`; `verify.ts` runs eagle-design's script names (`ds-scan`, `spec-check`…);
 `plan/expected-differences.tsv` and `plan/inventory.tsv` are Eagle's and carry no product in their path.
 
-**B5 · A consumer installs the whole repository.** `package.json` names no `files`: the package is 7.9 MB with
-`plan/` (the PM's words, Eagle's notes), `ports/eagle-design/port.patch`, `legacy/`, `tests/`, `scripts/`. A second
-product would receive Eagle's port.
+**B5 · A consumer installs the whole repository.** Nothing cuts the package: it is 7.9 MB with `plan/` (the PM's
+words, Eagle's notes), `ports/eagle-design/port.patch`, `legacy/`, `tests/`, `scripts/`. A second product would
+receive Eagle's port. What cuts it depends on E4: with a `prepare` script yarn 1 packs and reads `files`; without
+one it takes `git archive`, which reads `export-ignore` in `.gitattributes` and never `files`.
 
 ### C · Rules held by memory, not by tools
 
@@ -240,7 +245,7 @@ Costs are estimates of this session's working time. "Risk" is the risk for a con
 | # | item | why | cost | risk | order |
 |---|---|---|---|---|---|
 | 1 | **The gate reads a consumer, not a patch.** `ports/<consumer>.ts` names its repository, ref and commands; `yarn consumers` clones each at that ref, takes wow from the working tree (`takeWow --from`), runs the consumer's feature tier and its outputs, and compares them with the same clone on its pinned tag; a difference is named in the release's changes. `port.patch`, the inventory and the hard links retire to `legacy/` when `port/wow` merges. `rehearse` refuses a target outside `.rehearsal/` | A1, A2, A3, A5, B4, E1 | 4–6 h | none: read-only clones | first; needs decision 1 |
-| 2 | **`yarn release`.** Clean tree, commit tier, consumers, version, changelog row, commit, tag, push over HTTPS, tracking ref moved. `files` names the four homes; `prepare` leaves the published manifest | C1, B5, E4, E5 | 3–4 h | low: a consumer receives fewer files, the take reads the homes alone; proven by a pack listing and the take's test | before the next tag |
+| 2 | **`yarn release`.** Clean tree, commit tier, consumers, version, changelog row, commit, tag, push over HTTPS, tracking ref moved. The package holds the four homes alone: `prepare` leaves the manifest, `.gitattributes` cuts the archive | C1, B5, E4, E5 | 3–4 h | low: a consumer receives fewer files, the take reads the homes alone; proven by a pack listing and the take's test | before the next tag |
 | 3 | **The owner's guide and one current state.** `CLAUDE.md` here (role, the PM's rules, the commands, the modes); `README.md` on the live mechanism; `plan/state.md` current, the logs under `plan/log/`; wow's decisions as data | C2, C4, D3, D4 | 3 h | none | with 1 |
 | 4 | **Ready for the build side's port.** One direction for each part of `dev/`; `dev` lands on the build repository's paths; one channel for its rules; `ports/eagle-dev.ts`; the React hooks rules in the shared config; the consumer check on its port branch | D1, D2, B4 | 1 day here, then eagle-dev's port (its estimate: 1–2 days) | medium for eagle-dev: 14 rule files change words, new rules bring findings, each held in a baseline | after 1 and 2 |
 | 5 | **A product of its own.** `examples/sample-product`: one epic, a command, a query, a refusal, a journey, a ticket; wow's tsc, ESLint, knip and tests run `design/`, `dev/` and `shared/` on it; `spawn` writes the same tree | A4, C5 | 1–2 days | none | before 6 |
