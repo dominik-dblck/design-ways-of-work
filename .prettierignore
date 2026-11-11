@@ -9,6 +9,7 @@ tests/browser/fixtures/
 design/
 dev/
 shared/rules/
+ports/*/tree/
 # a file a tool writes keeps the tool's layout
 design-system/guide.md
 .prettierignore

@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { afterAll, describe, expect, it } from 'vitest';
-import { scratchWow } from './scratchWow.ts';
+import { contractOf, portsOf, scratchWow } from './scratchWow.ts';
 
 const base = fs.mkdtempSync(path.join(os.tmpdir(), 'wow-tried-'));
 // two clones installed from nothing, and their scripts run: seconds, not a unit test's
@@ -96,6 +96,42 @@ describe('the gate tries the commit in hand on a repository that takes it', () =
       expect(said.status).toBe(0);
     },
     A_TRIAL,
+  );
+
+  it(
+    'a release that asks a repository for more is red, then tried after the migration that gives it',
+    () => {
+      wow.committed(
+        'ports/contract.ts',
+        contractOf(['held/registry.txt', 'asked.txt']),
+      );
+      const asked = tried(['product']);
+      expect(asked.stdout).toContain(
+        'BROKEN · the contract · held/registry.txt is not there: every product holds it',
+      );
+      expect(asked.stdout).toContain(
+        'BROKEN · the contract · asked.txt is not there: every product holds it',
+      );
+      expect(asked.status).toBe(1);
+      wow.committed('ports/product/tree/asked.txt', 'no row yet\n');
+      wow.committed(
+        'ports/consumers.ts',
+        portsOf({
+          removes: ['package-lock.json'],
+          moves: [['registry.txt', 'held/registry.txt']],
+          tree: 'ports/product/tree',
+        }),
+      );
+      const given = tried(['product']);
+      expect(given.stdout).toContain(
+        'migrated · 1 removed, 1 moved, 1 written',
+      );
+      expect(given.stdout).toContain(
+        '1 differences, each expected · product on the commit in hand',
+      );
+      expect(given.status).toBe(0);
+    },
+    2 * A_TRIAL,
   );
 
   it('a repository ports/ does not name is refused', () => {

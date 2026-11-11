@@ -17,7 +17,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 
 | stage | what | done | of |
 | 1 | Foundation | 7 | 7 |
-| 2 | Design clean | 0 | 10 |
+| 2 | Design clean | 1 | 10 |
 | 3 | Spawn design | 0 | 3 |
 | 4 | Eagle-design | 0 | 2 |
 
@@ -48,6 +48,7 @@ word · 2 · both design repositories pinned to one tag, the gate green on both.
 - 14:06 · stage 1 · 5 of 7 · own checks on a fresh clone, the deletion guard, tests for the gate, the release and the three hooks on scratch repositories (01d386b, 7b13daf)
 - 14:27 · stage 1 · 6 of 7 · CLAUDE.md for the owner, README on the live mechanism, plan/state.md, the decisions as data, the logs to plan/log (21d815f)
 - 14:33 · stage 1 · 7 of 7 · v0.2.0 out by yarn release: main pushed past the feature tier and the gate, then its tag (232b141)
+- 14:49 · stage 2 · 1 of 10 · the contract table settled with eagle-design, the gate holds each product to its paths by git's names (5d77a15, 7e84a2a)
 
 ## Calls
 
@@ -291,3 +292,23 @@ Each call: what, why, how to undo. None changes what the PM sees.
   the red proof renames a registry by case alone. The kinds of the 45 rows agree with its tree, each file
   tracked on `port/wow`. Rows to come when the mechanics land here, each a registry: the checklist reads, the
   commands' states, the index of the tickets' parts, the list of the emitted modules.
+- Stage 2 task 2, `product.ts` typed here. `design/tools/productTypes.ts` holds `Product`: code a product plugs
+  in, nothing else. Its first field is the checks' own parts: `tools/checks.ts` runs the standard parts (a, g,
+  w) and takes the rest from `product.ts`, where it imported four of eagle-design's files by path. The type
+  grows a field with each file split in task 4, never ahead of its reader. A test holds `product.ts` a leaf: no
+  file of a home imports a file that reads it. Its row in the contract is of a kind of its own, `product`.
+- `checkOrder`, a field a product may leave out: the order a full run takes the parts in. Why: eagle-design's
+  run is a, e, f, g, b, c, w, and the gate compares the whole output of `yarn checks`; with the order kept that
+  output stays byte for byte, so the gate stays strict on it through the stage. A product that names none runs
+  the standard parts first. Undo: drop the field, and write the moved order as a row of the release.
+- The gate migrates the clone that takes the commit. A release that asks a repository for more than its pin
+  names a `Migration` in `ports/`: files removed, files moved, and a folder `tree/` whose files are written at
+  the same paths. `scripts/migrated.ts` does it through git's index and never commits: the product's hooks and
+  its history stay its own, and no commit is made past a hook. The contract reads the index, so a file the
+  migration adds is held. Undo: `migration: null` in `ports/consumers.ts`.
+- What the runs wrote is measured from the clone as it stood before the first run, where it was measured from
+  the commit: a file the migration staged is not a file a run wrote; one a run rewrites, or puts back as
+  committed, still is. `writtenIn` had no test; it has one now, with `since` and `migrated`.
+- `ports/*/tree/**` joins the scope's product trees: a product's files on their way to it, checked in that
+  product by the gate's clone, as `design/` is. No rule is off for this repository's own code by it.
+- The row of the release in hand is a major now: a repository does its migration to take it.

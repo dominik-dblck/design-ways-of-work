@@ -31,5 +31,5 @@
     "knip.ts",
     "vitest.config.ts"
   ],
-  "exclude": ["tests/lint/fixtures/**"]
+  "exclude": ["tests/lint/fixtures/**", "ports/*/tree/**"]
 }

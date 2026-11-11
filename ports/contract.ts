@@ -28,11 +28,6 @@ const CONTRACT: readonly ContractRow[] = [
     what: 'the wireframes as last checked, held with the wireframes',
   },
   {
-    file: 'guards/checks/contentTypePart.ts',
-    kind: 'plug',
-    what: 'a check part of the product’s own',
-  },
-  {
     file: 'guards/checks/measureCheck.ts',
     kind: 'plug',
     what: 'the product’s half of Measure',
@@ -43,14 +38,9 @@ const CONTRACT: readonly ContractRow[] = [
     what: 'a check part of the product’s own',
   },
   {
-    file: 'guards/checks/rulesParts.ts',
-    kind: 'plug',
-    what: 'the rules’ check parts',
-  },
-  {
-    file: 'guards/checks/sentencesPart.ts',
-    kind: 'plug',
-    what: 'the surfaces the product’s sentences stand on',
+    file: 'product.ts',
+    kind: 'product',
+    what: 'what the product plugs in: code alone, read by what it runs',
   },
   {
     file: 'roadmaps/backlog.ts',

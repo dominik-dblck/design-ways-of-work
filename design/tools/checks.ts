@@ -7,27 +7,34 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { mirrorAt, tallyOf } from '../guards/checks/checkWorld.ts';
 import type { Mirror } from '../guards/checks/checkWorld.ts';
-import { contentTypePart } from '../guards/checks/contentTypePart.ts';
 import { guardPart } from '../guards/checks/guardPart.ts';
 import { journeysPart } from '../guards/checks/journeysPart.ts';
-import { flowPart, rulesPart } from '../guards/checks/rulesParts.ts';
+import { product } from '../product.ts';
 import { sourceOf } from './layout.ts';
-import { sentencesPart } from '../guards/checks/sentencesPart.ts';
 import { wireframesPart } from '../guards/checks/wireframesPart.ts';
+import type { CheckPart } from './productTypes.ts';
 import { builtRoot } from './root.ts';
 
-// the parts in the order a full run takes them; b, c and d diff against snapshots retaken by hand
-const PARTS: Readonly<
-  Record<string, ((mirror: Mirror) => readonly string[]) | undefined>
-> = {
+// the parts every product runs
+const STANDARD: Readonly<Record<string, CheckPart>> = {
   a: guardPart,
-  e: flowPart,
-  f: rulesPart,
   g: journeysPart,
-  b: sentencesPart,
-  c: contentTypePart,
   w: wireframesPart,
 };
+
+// with the product's own: a letter of the standard ones stays theirs
+const PARTS: Readonly<Record<string, CheckPart | undefined>> = {
+  ...product.checkParts,
+  ...STANDARD,
+};
+
+// the order a full run takes them in: the product's, or the standard parts then its own
+const ORDER: readonly string[] = product.checkOrder ?? [
+  ...Object.keys(STANDARD),
+  ...Object.keys(product.checkParts).filter(
+    (part) => !Object.hasOwn(STANDARD, part),
+  ),
+];
 
 function partText(part: string, mirror: Mirror): string {
   const started = Date.now();
@@ -43,9 +50,7 @@ function partText(part: string, mirror: Mirror): string {
 }
 
 function partsAsked(args: readonly string[]): readonly string[] {
-  return (
-    args.find((one) => !one.startsWith('--')) || Object.keys(PARTS).join(',')
-  )
+  return (args.find((one) => !one.startsWith('--')) || ORDER.join(','))
     .split(',')
     .map((one) => one.trim())
     .filter(Boolean);

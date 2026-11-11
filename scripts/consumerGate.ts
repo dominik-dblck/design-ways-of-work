@@ -1,6 +1,6 @@
 /**
  * - `tried` · a repository on its pinned tag and on the commit in hand, compared
- * - every script's exit and output, the folders it builds, the files it writes
+ * - the clone that takes the commit migrated first; each script, folder and file
  * - red on a difference the release does not expect, and on a broken take
  */
 import fs from 'node:fs';
@@ -18,7 +18,8 @@ import { explained, mapDifferences, runDifferences } from './consumerDiff.ts';
 import type { Run, Sides } from './consumerDiff.ts';
 import { ranIn } from './consumerRuns.ts';
 import type { Consumer } from './consumerTypes.ts';
-import { hashes, writtenIn } from './digests.ts';
+import { hashes, since, writtenIn } from './digests.ts';
+import { migrated } from './migrated.ts';
 
 interface Trial {
   readonly consumer: Consumer;
@@ -39,10 +40,23 @@ function kept(out: string, runs: Sides<readonly Run[]>): void {
       );
 }
 
-function fileDifferences(
-  consumer: Consumer,
-  { pinned, next }: Sides<string>,
-): readonly string[] {
+type Standing = Sides<ReadonlyMap<string, string>>;
+
+// each clone as it stands against its commit: before the runs, what a migration staged
+const standing = ({ pinned, next }: Sides<string>): Standing => ({
+  pinned: writtenIn(pinned),
+  next: writtenIn(next),
+});
+
+function fileDifferences({
+  consumer,
+  sides: { pinned, next },
+  before,
+}: {
+  readonly consumer: Consumer;
+  readonly sides: Sides<string>;
+  readonly before: Standing;
+}): readonly string[] {
   return [
     ...consumer.folders.flatMap((folder) =>
       mapDifferences(folder, {
@@ -51,8 +65,8 @@ function fileDifferences(
       }),
     ),
     ...mapDifferences('written', {
-      pinned: writtenIn(pinned),
-      next: writtenIn(next),
+      pinned: since(before.pinned, writtenIn(pinned)),
+      next: since(before.next, writtenIn(next)),
     }),
   ];
 }
@@ -112,8 +126,13 @@ async function tried({
   expected,
 }: Trial): Promise<boolean> {
   const sides = cloned({ consumer, wow, scratch });
+  const { commands, migration } = consumer;
+  if (migration !== null)
+    console.log(
+      `  migrated · ${migrated({ root: sides.next, wow, migration })}`,
+    );
   const resolved = nextTaken({ root: sides.next, archive: packageOf(wow) });
-  const { commands } = consumer;
+  const before = standing(sides);
   const [pinned, next] = await Promise.all([
     ranIn({ root: sides.pinned, commands }),
     ranIn({ root: sides.next, commands }),
@@ -124,7 +143,7 @@ async function tried({
   const found = [
     ...mapDifferences('package', resolved),
     ...runDifferences(runs),
-    ...fileDifferences(consumer, sides),
+    ...fileDifferences({ consumer, sides, before }),
   ];
   const out = path.join(scratch, consumer.name, 'out');
   kept(out, runs);

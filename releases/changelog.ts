@@ -5,9 +5,10 @@
 import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
 const NEXT: Unreleased = {
-  kind: 'patch',
-  what: '',
-  action: 'none: move the pin to the tag',
+  kind: 'major',
+  what: 'the design home reads a product through a contract: its registries at their paths, its own parts through its `product.ts`',
+  action:
+    'the migration `ports/` names for the repository, on its checkout; then the pin to the tag',
   rules: { added: [], changed: [], removed: [] },
   outputs: {},
 };

@@ -1,6 +1,7 @@
 /**
  * - `Consumer` · a repository that takes the way of working at a tag
  */
+import type { Migration } from './migrationTypes.ts';
 
 interface Consumer {
   // its folder in the gate's scratch, its name in a changelog row
@@ -13,6 +14,8 @@ interface Consumer {
   readonly commands: readonly (readonly string[])[];
   // the folders git ignores that a run writes, compared file by file
   readonly folders: readonly string[];
+  // what it does to take the release in hand, done on the clone that takes it; none when the release asks nothing
+  readonly migration: Migration | null;
 }
 
 export type { Consumer };

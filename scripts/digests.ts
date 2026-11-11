@@ -1,6 +1,7 @@
 /**
  * - `hashes` · a folder's files, each by its bytes
- * - `writtenIn` · what a run wrote in a clone, as git sees it: a taken file never
+ * - `writtenIn` · what differs from the commit in a clone, as git sees it
+ * - `since` · of that, what the runs wrote: what stood before them left out
  */
 import { execFileSync } from 'node:child_process';
 import crypto from 'node:crypto';
@@ -42,9 +43,21 @@ function writtenIn(root: string): ReadonlyMap<string, string> {
   );
 }
 
+// a file a migration staged stood so before the first run: it counts when a run moved it again, or put it back
+const since = (
+  before: ReadonlyMap<string, string>,
+  after: ReadonlyMap<string, string>,
+): ReadonlyMap<string, string> =>
+  new Map([
+    ...[...after].filter(([file, content]) => before.get(file) !== content),
+    ...[...before.keys()]
+      .filter((file) => !after.has(file))
+      .map((file) => [file, '<as committed>'] as const),
+  ]);
+
 function contentOf(file: string): string {
   if (!fs.existsSync(file)) return '<gone>';
   return fs.readFileSync(file).toString('latin1');
 }
 
-export { hashes, writtenIn };
+export { hashes, since, writtenIn };

@@ -3,6 +3,7 @@
  * - `BUILD_SOURCE` · the build repository `dev/` is taken from, by script
  */
 import type { Consumer } from '../scripts/consumerTypes.ts';
+import { MIGRATION } from './eagle-design/migration.ts';
 
 // one at least: a release is tried on a repository, never on none
 const CONSUMERS: readonly [Consumer, ...Consumer[]] = [
@@ -27,6 +28,7 @@ const CONSUMERS: readonly [Consumer, ...Consumer[]] = [
       ['lint:exports'],
     ],
     folders: ['dist'],
+    migration: MIGRATION,
   },
 ];
 

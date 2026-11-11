@@ -1,9 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import { CONTRACT } from '../../ports/contract.ts';
-import { productReads } from '../../scripts/productReadsOf.ts';
+import { homeReads, productReads } from '../../scripts/productReadsOf.ts';
 import { HERE } from '../../scripts/repos.ts';
 
-const read = [...new Set(productReads(HERE).map(({ file }) => file))].sort();
+const reads = productReads(HERE);
+const read = [...new Set(reads.map(({ file }) => file))].sort();
 
 describe('the contract names each file of a product the homes read', () => {
   it('a file read has its row, and no row names a file nothing reads', () => {
@@ -12,5 +13,14 @@ describe('the contract names each file of a product the homes read', () => {
 
   it('each row says what the file is', () => {
     expect(CONTRACT.filter(({ what }) => what === '')).toEqual([]);
+  });
+
+  it('`product.ts` is read by what a product runs alone: no file of a home imports its reader', () => {
+    const readers = reads
+      .filter(({ file }) => file === 'product.ts')
+      .map(({ reader }) => reader);
+    const imported = new Set(homeReads(HERE).map(({ file }) => file));
+    expect(readers).not.toEqual([]);
+    expect(readers.filter((reader) => imported.has(reader))).toEqual([]);
   });
 });

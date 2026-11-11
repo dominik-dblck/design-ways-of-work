@@ -1,6 +1,7 @@
 /**
  * - `productReads` · each import of a home's file that lands on a product's file
- * - `Read` · the reader, the product's file, the values and the types read by name
+ * - `homeReads` · each that lands on a home's file, at the path a product holds it
+ * - `Read` · the reader, the file read, the values and the types read by name
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -10,7 +11,7 @@ import { HOMES } from '../shared/take/takeHomes.ts';
 interface Read {
   // the reader, at the path a product holds it
   readonly reader: string;
-  // the product's file it reads, a file this repository lacks
+  // the file it reads, at a product's path: the product's own, or a home's
   readonly file: string;
   readonly values: readonly string[];
   readonly types: readonly string[];
@@ -103,9 +104,11 @@ interface Held {
   // a home's file here, and the path a product holds it at
   readonly file: string;
   readonly reader: string;
+  // the reads wanted: those of a home's files, or those of a product's
+  readonly ofHomes: boolean;
 }
 
-function readsOf({ root, file, reader }: Held): readonly Read[] {
+function readsOf({ root, file, reader, ofHomes }: Held): readonly Read[] {
   const source = ts.createSourceFile(
     file,
     fs.readFileSync(file, 'utf8'),
@@ -121,7 +124,7 @@ function readsOf({ root, file, reader }: Held): readonly Read[] {
     const target = path.normalize(
       path.join(path.dirname(reader), specifier.text),
     );
-    if (target.startsWith('..') || isHeld(root, target)) return [];
+    if (target.startsWith('..') || isHeld(root, target) !== ofHomes) return [];
     const names = isImport
       ? namesImported(source, statement)
       : namesReExported(statement);
@@ -130,16 +133,21 @@ function readsOf({ root, file, reader }: Held): readonly Read[] {
 }
 
 // every home of the way of working at `root`, each file read at the path it lands on in a product
-const productReads = (root: string): readonly Read[] =>
+const readsIn = (root: string, ofHomes: boolean): readonly Read[] =>
   Object.entries(HOMES).flatMap(([home, at]) =>
     sourcesUnder(path.join(root, home)).flatMap((file) =>
       readsOf({
         root,
         file,
         reader: path.join(at, path.relative(path.join(root, home), file)),
+        ofHomes,
       }),
     ),
   );
 
-export { productReads };
+const productReads = (root: string): readonly Read[] => readsIn(root, false);
+
+const homeReads = (root: string): readonly Read[] => readsIn(root, true);
+
+export { homeReads, productReads };
 export type { Read };

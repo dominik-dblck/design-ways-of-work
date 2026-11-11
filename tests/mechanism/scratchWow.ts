@@ -1,12 +1,13 @@
 /**
  * - `scratchWow` · a scratch way of working: these scripts, a remote, a product
- * - `ran` on it · one of its scripts run there: its exit, its words, the calls
- * - `inHand`, `held` on it · the release in hand committed; a ref on the remote
+ * - `ran`, `inHand`, `held` on it · a script run there, the release, a remote ref
+ * - `portsOf`, `contractOf` · its ports with a migration, its contract's registries
  */
 import { execFileSync, spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import type { Unreleased } from '../../scripts/changelogTypes.ts';
+import type { Migration } from '../../scripts/migrationTypes.ts';
 import { HERE } from '../../scripts/repos.ts';
 import { childEnv } from '../../scripts/scratch.ts';
 import { scratchRepo } from '../scripts/scratchRepo.ts';
@@ -18,13 +19,15 @@ const VERSION = '0.1.10';
 const TAKE =
   'T=$(mktemp -d) && cp -R node_modules/design-ways-of-work/shared/take "$T" && node "$T/take/takeWow.ts"';
 
-const PORTS = `const CONSUMERS = [
+// the one repository a test's way of working names, and what the release in hand asks of it
+const portsOf = (migration: Migration | null): string => `const CONSUMERS = [
   {
     name: 'product',
     path: '../product',
     ref: 'main',
     commands: [['says']],
     folders: [],
+    migration: ${JSON.stringify(migration)},
   },
 ];
 const BUILD_SOURCE = '../build';
@@ -32,14 +35,18 @@ const BUILD_SOURCE = '../build';
 export { BUILD_SOURCE, CONSUMERS };
 `;
 
-// one registry every product holds, and a part of its own it may lack
-const CONTRACT = `const CONTRACT = [
-  { file: 'registry.txt', kind: 'registry', what: 'a registry' },
-  { file: 'own.txt', kind: 'plug', what: 'a part of its own' },
-];
-
-export { CONTRACT };
-`;
+// the registries every product holds, and a part of its own it may lack
+const contractOf = (registries: readonly string[]): string => {
+  const rows = [
+    ...registries.map((file) => ({
+      file,
+      kind: 'registry',
+      what: 'a registry',
+    })),
+    { file: 'own.txt', kind: 'plug', what: 'a part of its own' },
+  ];
+  return `const CONTRACT = ${JSON.stringify(rows)};\n\nexport { CONTRACT };\n`;
+};
 
 const NOTHING_IN_HAND: Unreleased = {
   kind: 'minor',
@@ -117,8 +124,8 @@ function written(wow: ScratchRepo): void {
   fs.copyFileSync(path.join(HERE, '.gitattributes'), at('.gitattributes'));
   fs.writeFileSync(at('.gitignore'), 'node_modules/\n.consumers/\n');
   fs.writeFileSync(at('design', 'says.txt'), 'pinned\n');
-  fs.writeFileSync(at('ports', 'consumers.ts'), PORTS);
-  fs.writeFileSync(at('ports', 'contract.ts'), CONTRACT);
+  fs.writeFileSync(at('ports', 'consumers.ts'), portsOf(null));
+  fs.writeFileSync(at('ports', 'contract.ts'), contractOf(['registry.txt']));
   fs.writeFileSync(at('releases', 'changelog.ts'), changelog(NOTHING_IN_HAND));
   fs.writeFileSync(
     at('package.json'),
@@ -139,6 +146,8 @@ function producing(base: string, remote: string): ScratchRepo {
   const product = scratchRepo({ base, name: 'product' });
   fs.writeFileSync(path.join(product.root, '.gitignore'), 'node_modules/\n');
   fs.writeFileSync(path.join(product.root, 'registry.txt'), 'no row yet\n');
+  // a file a later release takes from it
+  fs.writeFileSync(path.join(product.root, 'package-lock.json'), '{}\n');
   fs.writeFileSync(
     path.join(product.root, 'package.json'),
     json({
@@ -215,5 +224,5 @@ function scratchWow({
   };
 }
 
-export { scratchWow };
+export { contractOf, portsOf, scratchWow };
 export type { ScratchWow };
