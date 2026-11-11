@@ -6,11 +6,15 @@ import { spawn } from 'node:child_process';
 import type { Run } from './consumerDiff.ts';
 import { childEnv } from './scratch.ts';
 
-// a time where a tool prints one, never a number a check states: a tier's line, vitest's head and its tests
+// a time where a tool prints one, never a number a check states: a tier's line, vitest's head, its tests, its isolate hint
 const TIMING: readonly (readonly [RegExp, string])[] = [
   [/ · \d+(?:\.\d+)? s$/gm, ''],
   [/^[ \t]*(?:Start at|Duration) .*$/gm, ''],
   [/^([ \t]*[✓❯×↓].*) \d+(?:\.\d+)?m?s$/gm, '$1'],
+  [/^[ \t]*Isolate\s+\d+ workers spawned.*$/gm, ''],
+  [/^[ \t]*(?:at least )?~\S+ faster with isolate: false.*$/gm, ''],
+  // the hint is printed when a run was slow enough: the blank lines a cut leaves are one
+  [/\n(?:[ \t]*\n){2,}/g, '\n\n'],
 ];
 
 const settled = (root: string, text: string): string =>

@@ -28,6 +28,21 @@ describe("an output is kept with its clone's root and its timings out", () => {
     expect(settled(ROOT, printed)).toBe(kept);
   });
 
+  it('a run slow enough for the isolate hint reads as one that was not', () => {
+    const summary =
+      ' Test Files  1 failed | 15 passed (16)\n   Start at  12:24:14\n   Duration  2.05s (import 61%)\n';
+    const hint = [
+      '',
+      '    Isolate  36 workers spawned · ~99ms startup each (spawn + environment, per file)',
+      '             at least ~258ms faster with isolate: false — reuses workers across files instead of one per file',
+      '',
+    ].join('\n');
+    expect(settled(ROOT, `${summary}${hint}`)).toBe(settled(ROOT, summary));
+    expect(settled(ROOT, summary)).toBe(
+      ' Test Files  1 failed | 15 passed (16)\n\n',
+    );
+  });
+
   it.each([
     ['a number a check states', 'FAIL · the block waits 30s before it retries'],
     [

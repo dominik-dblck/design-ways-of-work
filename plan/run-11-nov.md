@@ -12,7 +12,7 @@ Argus's stack, the spawn of `argus-design`. The product repositories are read on
 Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never counted by hand in a reply.
 
 | stage | what | done | of |
-| 1 | Foundation | 2 | 7 |
+| 1 | Foundation | 3 | 7 |
 | 2 | Design clean | 0 | 10 |
 | 3 | Spawn design | 0 | 3 |
 | 4 | Eagle-design | 0 | 2 |
@@ -39,6 +39,7 @@ word · 2 · both design repositories pinned to one tag, the gate green on both.
 ## History
 - 12:25 · stage 1 · 1 of 7 · ports/consumers.ts names the repositories; build path mended to ../eagle (c4c82da)
 - 12:35 · stage 1 · 2 of 7 · yarn consumers: NO DIFFERENCE on eagle-design port/wow in 2 min 30 s, red on a mutated commit (8540d56)
+- 12:52 · stage 1 · 3 of 7 · gate at the feature end, scaffolding to legacy/; eagle-design's review mended; 3 runs NO DIFFERENCE (90dbed7, 8d141c0, a4c22de)
 
 ## Calls
 
@@ -83,3 +84,8 @@ Each call: what, why, how to undo. None changes what the PM sees.
   the pack is written first and compared.
 - Its request for the plan (relayed as the PM's word, so said to the PM at this stop): the migration is rehearsed
   on a fresh clone of its `main`, not on `port/wow`. Taken as a technical call: stage 2's line and section 8.
+- eagle-design's review of task 3 (90dbed7, 8d141c0): nothing in its repository reads a retired file; the hard
+  fault on a suppressed taken file agrees with the rule of 8 Nov; one finding, mended: vitest's isolate hint
+  (`Isolate  N workers spawned · ~99ms startup each`, `at least ~258ms faster with isolate: false`) is printed
+  only when a run was slow enough, so one clone could print it and the other not: both lines are cut, and the
+  blank lines a cut leaves read as one. Unit-tested; the gate runs whole again at task 4.
