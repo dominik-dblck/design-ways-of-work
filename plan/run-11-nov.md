@@ -12,7 +12,7 @@ Argus's stack, the spawn of `argus-design`. The product repositories are read on
 Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never counted by hand in a reply.
 
 | stage | what | done | of |
-| 1 | Foundation | 4 | 7 |
+| 1 | Foundation | 5 | 7 |
 | 2 | Design clean | 0 | 10 |
 | 3 | Spawn design | 0 | 3 |
 | 4 | Eagle-design | 0 | 2 |
@@ -41,6 +41,7 @@ word · 2 · both design repositories pinned to one tag, the gate green on both.
 - 12:35 · stage 1 · 2 of 7 · yarn consumers: NO DIFFERENCE on eagle-design port/wow in 2 min 30 s, red on a mutated commit (8540d56)
 - 12:52 · stage 1 · 3 of 7 · gate at the feature end, scaffolding to legacy/; eagle-design's review mended; 3 runs NO DIFFERENCE (90dbed7, 8d141c0, a4c22de)
 - 13:14 · stage 1 · 4 of 7 · package of four homes, yarn release and pre-push; release rehearsed whole on a local remote (ffa1f64, 96273a9, 912724b)
+- 14:06 · stage 1 · 5 of 7 · own checks on a fresh clone, the deletion guard, tests for the gate, the release and the three hooks on scratch repositories (01d386b, 7b13daf)
 
 ## Calls
 
@@ -160,3 +161,34 @@ Each call: what, why, how to undo. None changes what the PM sees.
 - eagle-design read cdf483d: a new ref measured against `main` breaks nothing there (it pushes nothing here;
   its pin is a tag, which stands on a commit of `main`). No finding. Its note, no change asked: an untracked
   file git does not ignore (a `.DS_Store`) refuses a push, as meant, and the refusal says so.
+- Stage 1 task 5, this repository's own checks on a fresh clone: `yarn fresh` (`scripts/fresh.ts`). The commit
+  in hand is cloned into the gate's scratch (`.consumers/own/clone`), installed from its lockfile, and every
+  script of the feature tier runs on the clone, but the two that clone (`fresh`, `consumers`). It runs at the
+  feature end, before the gate. Why: the release's rehearsal found a test green here on a file no clone held.
+  Cost: 53 s of the feature tier. Undo: `fresh` out of `scope.checks.featureEnd`.
+- Its proof, in a scratch clone of 7b13daf: the fixture of task 4 leaves the commit and stays on the disk,
+  ignored. The tests there: 268 passed. `yarn fresh` there: "1 of 13 checks red on the clone", `test:rules`,
+  the same `knipConfig` test. On the commit as it is: 13 green.
+- The deletion guard (the plan: a script that deletes a folder refuses one outside the folder it is held in).
+  `emptied` names its bound `within`; `takeDevClaude` empties `dev/claude` through it; the backup moves its
+  bundle into the zip and removes its temp folder with `rmdir`, which takes an empty folder alone;
+  `tests/scripts/removals.test.ts` reads every script and hook: none but the guard removes a folder with all
+  it holds. Not covered, a home and so stage 2's: `design/tools/build.ts` removes its `dist` so.
+- Tests on scratch repositories (the plan: the gate, the release and the three hooks, each on one). The hooks,
+  `tests/hooks`, 28 tests in the commit tier: `checkTier`, `chunkCheck` and `editCheck` run as a repository
+  that took `shared/` runs them, the tools stubs that write down each call. The release and the gate,
+  `tests/mechanism`, 16 tests at the feature end (9 s): `scripts/` copied into a scratch way of working with a
+  bare remote, its hooks, and a product pinned to its tag; `yarn release` whole, again, a commit refused, a
+  push refused then mended, three states it does not start from, a manifest it cannot move; `yarn consumers`
+  with no difference, a difference no row expects beside two faults, the same difference expected.
+- Each mechanism broken once to see its test red, then put back byte for byte: 11 of 13 caught. The two not
+  caught change nothing a caller sees (`--diff-filter=d` beside a check that the file exists; a second push
+  of `main` that carries nothing). The homes are still v0.1.10's, byte for byte.
+- The scratch product pins the tag on a local remote (`git+file://…#v0.1.10`), as a product does. A folder
+  (`file:`) cannot: yarn writes its path relative in the lockfile, and a clone elsewhere fails
+  `--frozen-lockfile`.
+- Seen on the way, a home, not changed: a change that holds no file still runs `format:check` and
+  `lint:words` with no file named; prettier prints an error and exits 0, so a commit of removals alone is
+  green by that. Stage 2 reads it.
+- What task 5 costs: the commit tier 15 s → 26 s (the hooks' tests); the feature tier 3 min 20 s → 4 min 24 s
+  (`test:mechanism` 9 s, `fresh` 53 s, the gate 171 s). All 15 checks green on 7b13daf.
