@@ -25,6 +25,11 @@ const CARRIED: readonly Carried[] = [
     blob: '14591e9d875ab117e2a69fe545527b6768aed39b',
     how: 'the pins stand in the migration’s roadmaps/notes/frozenNotebooks.ts, the newest among them',
   },
+  {
+    file: 'tests/architecture/anExportIsRead.test.ts',
+    blob: 'e62eacb349d38ce283022efc4a364ac3cd86e525',
+    how: 'design/tests/architecture/anExportIsRead.test.ts: the destinations’ table among what the build side reads',
+  },
 ];
 
 export { CARRIED };

@@ -30,6 +30,8 @@ const READ_BY_THE_BUILD_SIDE: Readonly<Record<string, readonly string[]>> = {
     'todoOf',
   ],
   'sheet/samples/blocks.ts': ['compare'],
+  // its emitter writes the destinations' table from the sheet
+  'sheet/model/contentTypes/destinations.ts': ['DESTINATIONS'],
   'sheet/logic/assembly/contentAssembly.ts': [
     'cfg',
     'deliveryKindOf',
