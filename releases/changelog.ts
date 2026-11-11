@@ -8,7 +8,7 @@ const NEXT: Unreleased = {
   kind: 'major',
   what: 'the design home reads a product through a contract: its registries at their paths, its own parts through its `product.ts`',
   action:
-    'the migration `ports/` names for the repository, on its checkout; then the pin to the tag',
+    'the migration `ports/` names for the repository, on its checkout: `node scripts/migrate.ts <name> <checkout>`, run from this repository at the tag; the pin to the tag in the same commit',
   rules: { added: [], changed: [], removed: [] },
   outputs: {
     'eagle-design': {

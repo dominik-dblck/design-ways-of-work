@@ -134,6 +134,23 @@ describe('the gate tries the commit in hand on a repository that takes it', () =
     2 * A_TRIAL,
   );
 
+  it('a repository runs that migration on its own checkout by one command, on the branch that takes it alone', () => {
+    const run = (root: string): ReturnType<typeof scratch.ran> =>
+      scratch.ran({ script: 'migrate.ts', args: ['product', root] });
+    const own = run(product.root);
+    expect(own.stdout).toContain('migrated · 1 removed, 1 moved, 1 written');
+    expect(own.status).toBe(0);
+    const held = (file: string): boolean =>
+      fs.existsSync(path.join(product.root, file));
+    expect(
+      ['held/registry.txt', 'asked.txt', 'registry.txt'].map(held),
+    ).toEqual([true, true, false]);
+    product.git(['checkout', '-q', '-b', 'aside']);
+    const aside = run(product.root);
+    expect(aside.stdout).toContain('does not stand on main');
+    expect(aside.status).toBe(2);
+  });
+
   it('a repository ports/ does not name is refused', () => {
     const said = tried(['another']);
     expect(said.status).toBe(2);
