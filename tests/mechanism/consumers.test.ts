@@ -48,11 +48,13 @@ describe('the gate tries the commit in hand on a repository that takes it', () =
   );
 
   it(
-    'a difference no row expects is red; so is a rule off in a taken file, and a package past its homes',
+    'a difference no row expects is red; so is a rule off in a taken file, a package past its homes, a registry gone',
     () => {
       wow.committed('design/says.txt', 'next\n');
       wow.committed('.gitattributes', `${attributes}/scripts -export-ignore\n`);
       product.committed('eslint-suppressions.json', `{ "${TAKEN}": {} }\n`);
+      product.git(['mv', 'registry.txt', 'moved.txt']);
+      product.git(['commit', '-q', '-m', 'a registry moves']);
       const said = tried();
       expect(said.stdout).toContain('DIFF · output · yarn says');
       expect(said.stdout).toContain(
@@ -62,7 +64,10 @@ describe('the gate tries the commit in hand on a repository that takes it', () =
         'BROKEN · the package holds scripts: the homes and the manifest alone',
       );
       expect(said.stdout).toContain(
-        'product · 1 unexplained, 0 stale, 2 broken',
+        'BROKEN · the contract · registry.txt is not there: every product holds it',
+      );
+      expect(said.stdout).toContain(
+        'product · 1 unexplained, 0 stale, 3 broken',
       );
       expect(said.status).toBe(1);
     },
@@ -74,6 +79,7 @@ describe('the gate tries the commit in hand on a repository that takes it', () =
     () => {
       wow.committed('.gitattributes', attributes);
       product.git(['rm', '-q', 'eslint-suppressions.json']);
+      product.git(['mv', 'moved.txt', 'registry.txt']);
       product.git(['commit', '-q', '-m', 'no rule is off']);
       scratch.inHand({
         what: 'the word a product says moves',

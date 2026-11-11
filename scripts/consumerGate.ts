@@ -8,6 +8,7 @@ import path from 'node:path';
 import {
   cloned,
   holdsItsTake,
+  lacking,
   nextTaken,
   packageOf,
   strays,
@@ -56,7 +57,7 @@ function fileDifferences(
   ];
 }
 
-// what no row of a release excuses: a take a run undid, a rule off in a taken file, a package past its homes
+// what no row of a release excuses: a take a run undid, a rule off in a taken file, a package past its homes, a registry not there
 function faults({ pinned, next }: Sides<string>): readonly string[] {
   const undone = (side: string, root: string): readonly string[] =>
     holdsItsTake(root) ? [] : [`${side} · a run rewrote a file the take wrote`];
@@ -68,6 +69,9 @@ function faults({ pinned, next }: Sides<string>): readonly string[] {
     ),
     ...strays(next).map(
       (entry) => `the package holds ${entry}: the homes and the manifest alone`,
+    ),
+    ...lacking(next).map(
+      (file) => `the contract · ${file} is not there: every product holds it`,
     ),
   ];
 }

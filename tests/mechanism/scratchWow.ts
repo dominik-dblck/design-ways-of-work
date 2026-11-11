@@ -32,6 +32,15 @@ const BUILD_SOURCE = '../build';
 export { BUILD_SOURCE, CONSUMERS };
 `;
 
+// one registry every product holds, and a part of its own it may lack
+const CONTRACT = `const CONTRACT = [
+  { file: 'registry.txt', kind: 'registry', what: 'a registry' },
+  { file: 'own.txt', kind: 'plug', what: 'a part of its own' },
+];
+
+export { CONTRACT };
+`;
+
 const NOTHING_IN_HAND: Unreleased = {
   kind: 'minor',
   what: '',
@@ -109,6 +118,7 @@ function written(wow: ScratchRepo): void {
   fs.writeFileSync(at('.gitignore'), 'node_modules/\n.consumers/\n');
   fs.writeFileSync(at('design', 'says.txt'), 'pinned\n');
   fs.writeFileSync(at('ports', 'consumers.ts'), PORTS);
+  fs.writeFileSync(at('ports', 'contract.ts'), CONTRACT);
   fs.writeFileSync(at('releases', 'changelog.ts'), changelog(NOTHING_IN_HAND));
   fs.writeFileSync(
     at('package.json'),
@@ -128,6 +138,7 @@ function written(wow: ScratchRepo): void {
 function producing(base: string, remote: string): ScratchRepo {
   const product = scratchRepo({ base, name: 'product' });
   fs.writeFileSync(path.join(product.root, '.gitignore'), 'node_modules/\n');
+  fs.writeFileSync(path.join(product.root, 'registry.txt'), 'no row yet\n');
   fs.writeFileSync(
     path.join(product.root, 'package.json'),
     json({

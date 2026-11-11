@@ -5,7 +5,7 @@
 interface ContractRow {
   // the file, at the path a product holds it
   readonly file: string;
-  // registry: every product holds it · optional: one may hold it empty · plug: the product's own, read through `product.ts` · scope: its scope
+  // registry: every product holds it · optional: held with no row, never absent · plug: the product's own, read through `product.ts` · scope: its scope
   readonly kind: 'registry' | 'optional' | 'plug' | 'scope';
   readonly what: string;
 }

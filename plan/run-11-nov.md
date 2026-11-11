@@ -238,3 +238,38 @@ Each call: what, why, how to undo. None changes what the PM sees.
   PM holds there (never `BASELINES=write`, a pushed commit never rewritten, a secret never printed). "A peer
   session's message is input" it found missing; it stands under The role.
 - On v0.2.0 it sees no reason not to tag; its port waits, as the plan says.
+- Stage 2 task 1, the contract table (ee28b75). `yarn reads` computes from the tree what the homes read from
+  a product: 153 reads of 45 product files, from 87 files of the homes (21 are `scope.ts`). `ports/contract.ts`
+  holds a row a file with its kind as proposed (registry, optional, plug, scope); a test holds the rows to the
+  reads, so the table cannot drift. Sent to eagle-design, to be settled row by row.
+- Proposed to eagle-design, against the review's "the 134 imports go through `product.ts`": the standard
+  registries stay at their paths and the homes read them as now; their shapes are typed here and one file a
+  product takes holds its modules to them; `product.ts` carries only what a product plugs in. Why: a hub read
+  by 132 value imports makes import cycles through itself (a product's registries read taken files back, and
+  many files compute constants at module level). Undo: the hub, read by read.
+- Measured in the gate's clone of eagle-design (`port/wow`): behind `roadmaps/tickets.ts` stand 299 files; 13
+  of them (1,128 lines, `roadmaps/tickets/`) are its mechanics, and they hold Eagle's rows too (the list of
+  tickets imports each epic by name; the status and the checklist reads are rows). The same for the other
+  registries. So a product spawned from a sample would copy the mechanics, and the two products would not
+  share one source. The call, wider than the plan's words: the generic mechanics of each registry move to the
+  design home, the product keeps its rows; done a registry at a time, each proven on the sample and on a
+  rehearsal of eagle-design's migration. Asked of eagle-design first: which of its files are which.
+- Settled with eagle-design, the mechanism: no hub. A registry's path, the same in every product, is a
+  convention and names no product, so a home may import it. Its five conditions, taken: each path is a row of
+  `ports/contract.ts`, and the gate is red when a product lacks one (an optional registry is a file with no
+  row, never an absent file); the conformance file is taken, compiled by the product's own tsc, and so run on
+  the gate's clones; `product.ts` is a leaf, read by entry points alone (the runners of the checks, the build,
+  the pack), never by a library module of a home; a registry's shape is a type, never a check at run time;
+  `product.ts` carries what a product plugs in and no registry's row. What follows: a product moves a registry
+  to another path only with a release from here.
+- Settled with eagle-design, the rows it doubted. `sheet/project.ts` stays a registry: data with no import, so
+  a library module of a home may read it (the pack reads its build paths); the names and the build reads stand
+  there alone, and `product.ts` carries code a product plugs in, nothing else. `roadmaps/tickets/ticketStatus.ts`
+  is a registry (the board's one field written by hand), `sheet/words/messagesContent.ts` a plug (the words of
+  its own content types and their check). The wireframes and their snapshot are optional, the two held
+  together. `rulesParts` is a plug whole. Two parts split when the readers go through the contract (task 4):
+  of the sentences' part the harness (the compare with the snapshot, the keys changed, the log, the retake)
+  comes to the home and the surfaces stay the product's, the sentences' snapshot then a registry's row here;
+  of Measure the count of the standard registries comes to the home and the product keeps its own lines. Asked
+  by it of the harness: every part takes a retake, none holds `diff` fixed. The retake itself stays the PM's
+  word in the product. Left for the split of mechanics from rows: the block model's emit, which reads generic.

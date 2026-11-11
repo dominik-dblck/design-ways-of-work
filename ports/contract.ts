@@ -1,5 +1,6 @@
 /**
  * - `CONTRACT` · each file of a product the homes read, and what that read is
+ * - a path is the contract: a product moves a registry only with a release of this
  * - computed by `scripts/productReads.ts`; a test holds the rows to the reads
  */
 import type { ContractRow } from '../scripts/contractTypes.ts';
@@ -23,8 +24,8 @@ const CONTRACT: readonly ContractRow[] = [
   },
   {
     file: 'guards/__snapshots__/wireframesSnapshot.ts',
-    kind: 'registry',
-    what: 'the wireframes as last checked',
+    kind: 'optional',
+    what: 'the wireframes as last checked, held with the wireframes',
   },
   {
     file: 'guards/checks/contentTypePart.ts',
@@ -49,7 +50,7 @@ const CONTRACT: readonly ContractRow[] = [
   {
     file: 'guards/checks/sentencesPart.ts',
     kind: 'plug',
-    what: 'the sentences’ check part',
+    what: 'the surfaces the product’s sentences stand on',
   },
   {
     file: 'roadmaps/backlog.ts',
@@ -74,8 +75,8 @@ const CONTRACT: readonly ContractRow[] = [
   },
   {
     file: 'roadmaps/tickets/ticketStatus.ts',
-    kind: 'plug',
-    what: 'the status labels, the product’s words',
+    kind: 'registry',
+    what: 'each ticket’s status, the one field written by hand',
   },
   { file: 'roadmaps/tracks.ts', kind: 'optional', what: 'the tracks' },
   { file: 'scope.ts', kind: 'scope', what: 'what the repository names once' },
@@ -149,7 +150,7 @@ const CONTRACT: readonly ContractRow[] = [
   {
     file: 'sheet/project.ts',
     kind: 'registry',
-    what: 'its names, and what its build side reads',
+    what: 'its names and what its build side reads: data alone, no import',
   },
   { file: 'sheet/rules.ts', kind: 'registry', what: 'the rules’ rows' },
   {
@@ -164,15 +165,15 @@ const CONTRACT: readonly ContractRow[] = [
   },
   {
     file: 'sheet/screens/wireframes.ts',
-    kind: 'registry',
+    kind: 'optional',
     what: 'the screens and their wireframes',
   },
   { file: 'sheet/words/glossary.ts', kind: 'registry', what: 'the glossary' },
   { file: 'sheet/words/messages.ts', kind: 'registry', what: 'the messages' },
   {
     file: 'sheet/words/messagesContent.ts',
-    kind: 'registry',
-    what: 'the messages’ content',
+    kind: 'plug',
+    what: 'words of the product’s own, and their check',
   },
 ];
 

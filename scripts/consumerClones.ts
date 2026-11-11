@@ -1,11 +1,12 @@
 /**
  * - `cloned` · two fresh clones of a repository, each installed at its pinned tag
  * - `packageOf`, `nextTaken` · the commit as a package, taken; what it resolves
- * - `holdsItsTake`, `suppressedTaken`, `strays` · a take's faults, a package's
+ * - `holdsItsTake`, `suppressedTaken`, `strays`, `lacking` · a take's faults
  */
 import { execFileSync, spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
+import { CONTRACT } from '../ports/contract.ts';
 import { HOMES } from '../shared/take/takeHomes.ts';
 import { takenFiles } from '../shared/take/takeRecord.ts';
 import type { Sides } from './consumerDiff.ts';
@@ -113,4 +114,19 @@ const strays = (root: string): readonly string[] =>
       (entry) => entry !== 'package.json' && !Object.hasOwn(HOMES, entry),
     );
 
-export { cloned, holdsItsTake, nextTaken, packageOf, strays, suppressedTaken };
+// a file the homes read by its path is there in every product, with no row or with many: a plug alone may be absent
+const lacking = (root: string): readonly string[] =>
+  CONTRACT.filter(
+    ({ file, kind }) =>
+      kind !== 'plug' && !fs.existsSync(path.join(root, file)),
+  ).map(({ file }) => file);
+
+export {
+  cloned,
+  holdsItsTake,
+  lacking,
+  nextTaken,
+  packageOf,
+  strays,
+  suppressedTaken,
+};
