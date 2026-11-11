@@ -86,7 +86,7 @@ const scope: RepoScope = {
       writes: ['design-system/guide.md'],
     },
   ],
-  // its own checks beside the shared tiers: the copies, its rules' tests, the shared tests, its tools' tests, its kept rules; at the end, the commit tried on each repository that takes it
+  // its own checks beside the shared tiers: the copies, its rules' tests, the shared tests, its tools' tests, its kept rules; at the end, the gate's and the release's tests, its own checks on a fresh clone, the commit tried on each repository that takes it
   checks: {
     commit: [
       'lint:copies',
@@ -95,7 +95,7 @@ const scope: RepoScope = {
       'test:tools',
       'lint:kept',
     ],
-    featureEnd: ['consumers'],
+    featureEnd: ['test:mechanism', 'fresh', 'consumers'],
   },
   // no file of its own runs code it built
   runsCode: {},

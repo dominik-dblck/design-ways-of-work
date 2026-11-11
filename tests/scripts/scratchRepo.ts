@@ -14,6 +14,7 @@ interface ScratchRepo {
   readonly committed: (file: string, text: string) => string;
 }
 
+// a test's own git: its name, no signature, and no hook the scratch repository holds
 const AS_A_TEST = [
   '-c',
   'user.name=test',
@@ -21,6 +22,8 @@ const AS_A_TEST = [
   'user.email=test@local',
   '-c',
   'commit.gpgsign=false',
+  '-c',
+  'core.hooksPath=/dev/null',
 ];
 
 function scratchRepo({
@@ -52,3 +55,4 @@ function scratchRepo({
 }
 
 export { scratchRepo };
+export type { ScratchRepo };
