@@ -11,6 +11,7 @@ import { followed } from './followed.ts';
 import { mapRows } from './mapRows.ts';
 import { importsAnew, namedAnew } from './portNames.ts';
 import { gitAt, ruledOn, unmerged } from './portSettle.ts';
+import { moduleValue, snapshotTaken } from './portSnapshots.ts';
 import { snapshotText } from '../design/guards/checks/snapshotModule.ts';
 import { HERE } from './repos.ts';
 import { childEnv } from './scratch.ts';
@@ -33,38 +34,22 @@ const moves = mapRows(path.join(HERE, port.moves)).map(
 );
 const at = (file: string): string => path.join(ROOT, file);
 
-// a snapshot's module as the checks write it: its one export's value
-const valueOf = (module: string): unknown =>
-  JSON.parse(module.slice(module.indexOf('= ') + 2, module.lastIndexOf(';')));
-
-const keyed = (snapshot: unknown): Readonly<Record<string, unknown>> =>
-  typeof snapshot === 'object' && snapshot !== null
-    ? Object.fromEntries(Object.entries(snapshot))
-    : {};
-
-// key by key, three ways: a key the trunk left as the base keeps the port's value, any other takes the trunk's, named as after the port
+// each snapshot the trunk moved since the branch last took it, written as the module the port holds
 function rewritten(since: string): readonly string[] {
   const named = (taken: unknown): unknown =>
     JSON.parse(namedAnew(JSON.stringify(taken), { moves, names: port.names }));
-  const heldAt = (
-    commit: string,
-    file: string,
-  ): Readonly<Record<string, unknown>> =>
-    keyed(JSON.parse(git(['show', `${commit}:${file}`])));
+  const heldAt = (commit: string, file: string): unknown =>
+    JSON.parse(git(['show', `${commit}:${file}`]));
   return port.rewritten.flatMap(({ from, to, name }) => {
     if (git(['diff', '--name-only', since, port.trunk, '--', from]) === '')
       return [];
-    const was = heldAt(since, from);
-    const ours = keyed(valueOf(fs.readFileSync(at(to), 'utf8')));
-    const byKey = Object.fromEntries(
-      Object.entries(heldAt(port.trunk, from)).map(([key, trunks]) => [
-        key,
-        JSON.stringify(trunks) === JSON.stringify(was[key]) && key in ours
-          ? ours[key]
-          : named(trunks),
-      ]),
-    );
-    fs.writeFileSync(at(to), snapshotText(name, byKey));
+    const taken = snapshotTaken({
+      was: heldAt(since, from),
+      trunk: heldAt(port.trunk, from),
+      ours: moduleValue(fs.readFileSync(at(to), 'utf8')),
+      named,
+    });
+    fs.writeFileSync(at(to), snapshotText(name, taken));
     git(['add', '--', to]);
     return [to];
   });

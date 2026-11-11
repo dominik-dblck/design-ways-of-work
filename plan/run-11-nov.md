@@ -417,3 +417,8 @@ Each call: what, why, how to undo. None changes what the PM sees.
   rewritten, `main` untouched, each run reported to the PM; a snapshot that still differs after it and the
   catch-up of `main` stay the PM's each time. It is the product session's act in its repository; nothing
   held on this side moves by that report.
+- The PM, 11 Nov, here: "tak dalem zgode - robcie tak zeby sie zsyncowac w koncu". The standing word for
+  eagle-design's merge is the PM's own, said to both sessions.
+- A snapshot of one text (Measure's) was read as a snapshot of keys and written empty: found by the product's
+  own checks on the rehearsed merge, mended in `scripts/portSnapshots.ts`, tested. A snapshot of keys is
+  taken key by key, one of a single text whole.
