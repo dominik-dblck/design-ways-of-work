@@ -8,7 +8,11 @@ A repository takes it at a tag; nothing of it enters that repository's history.
 - `scripts/consumers.ts` · the gate: a commit tried on a fresh clone of each of them, against its pinned tag
 - `releases/changelog.ts` · the release in hand, and each output it means to move
 
+- `yarn hooks` · once a clone: git then runs the checks at each commit and each push; no install sets them
+- `yarn release` · the release in hand put out: its row, its version, `main` pushed past the gate, then its tag
+
 ```
+yarn hooks
 yarn consumers
 ```
 

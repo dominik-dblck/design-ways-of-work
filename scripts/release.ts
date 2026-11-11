@@ -11,13 +11,14 @@ import { CONSUMERS } from '../ports/consumers.ts';
 import { NEXT, RELEASES } from '../releases/changelog.ts';
 import { HOMES } from '../shared/take/takeHomes.ts';
 import type { Release } from './changelogTypes.ts';
+import { hooksInstalled } from './hooksInstalled.ts';
 import { bumped, changelogText, leftSince } from './releaseSteps.ts';
+import { overHttps, versioned } from './releaseTexts.ts';
 import { HERE } from './repos.ts';
 import { childEnv } from './scratch.ts';
 
 const MANIFEST = path.join(HERE, 'package.json');
 const CHANGELOG = path.join(HERE, 'releases', 'changelog.ts');
-const HOOKS = '.husky/_';
 // a long pre-push outlives an SSH connection: the push goes over HTTPS, signed in by gh
 const SIGNED_IN = [
   '-c',
@@ -47,7 +48,7 @@ function ready(): void {
     stopped('a release is cut from main');
   if (asked(['status', '--porcelain']) !== '')
     stopped('the tree holds uncommitted work');
-  if (asked(['config', 'core.hooksPath']) !== HOOKS)
+  if (!hooksInstalled(HERE))
     stopped('git runs no hook here, so a push would pass no gate: yarn hooks');
 }
 
@@ -79,18 +80,18 @@ async function written(version: string, last: string): Promise<void> {
     }),
     tried: triedOn(),
   };
+  // the manifest's text first: one that cannot take the version stops before a file is written
+  const manifest = versioned(fs.readFileSync(MANIFEST, 'utf8'), {
+    from: last,
+    to: version,
+  });
   const options = await prettier.resolveConfig(CHANGELOG);
   const text = changelogText([release, ...RELEASES]);
   fs.writeFileSync(
     CHANGELOG,
     await prettier.format(text, { ...options, filepath: CHANGELOG }),
   );
-  fs.writeFileSync(
-    MANIFEST,
-    fs
-      .readFileSync(MANIFEST, 'utf8')
-      .replace(`"version": "${last}"`, `"version": "${version}"`),
-  );
+  fs.writeFileSync(MANIFEST, manifest);
 }
 
 function committed(version: string): void {
@@ -109,9 +110,7 @@ function committed(version: string): void {
 }
 
 // main first, past the gate; its tag once the remote holds the commit, so the tag's own push checks nothing
-function pushed(version: string): void {
-  const origin = asked(['remote', 'get-url', 'origin']);
-  const url = origin.replace(/^git@([^:]+):/, 'https://$1/');
+function pushed(url: string, version: string): void {
   if (!done([...SIGNED_IN, 'push', url, 'main']))
     stopped('the push was refused and no tag is cut: mend it, run this again');
   const tag = `v${version}`;
@@ -121,20 +120,26 @@ function pushed(version: string): void {
   console.log(`${tag} is out`);
 }
 
+// asked of the remote itself: a tag it holds is a release that went out whole
+const isOut = (url: string, version: string): boolean =>
+  asked([...SIGNED_IN, 'ls-remote', '--tags', url, `refs/tags/v${version}`]) !==
+  '';
+
 async function main(): Promise<void> {
   ready();
   const last = versionNow();
-  const isInHand = NEXT.what !== '';
-  // a release written whose push or tag stopped goes out as it is: nothing is written twice
-  if (!isInHand && RELEASES[0]?.version === last) {
-    pushed(last);
+  const url = overHttps(asked(['remote', 'get-url', 'origin']));
+  if (NEXT.what === '') {
+    // a release written whose push or tag stopped goes out as it is: nothing is written twice
+    if (RELEASES[0]?.version !== last || isOut(url, last))
+      stopped('releases/changelog.ts · NEXT says nothing');
+    pushed(url, last);
     return;
   }
-  if (!isInHand) stopped('releases/changelog.ts · NEXT says nothing');
   const version = bumped(last, NEXT.kind);
   await written(version, last);
   committed(version);
-  pushed(version);
+  pushed(url, version);
 }
 
 await main();

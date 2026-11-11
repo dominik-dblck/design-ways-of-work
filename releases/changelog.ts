@@ -8,7 +8,7 @@ const NEXT: Unreleased = {
   kind: 'minor',
   what: 'a release is tried on a clone of each repository that takes it, and put out by one command; an install unpacks the four homes alone',
   action: 'none: move the pin to the tag',
-  rules: [],
+  rules: { added: [], changed: [], removed: [] },
   outputs: {},
 };
 

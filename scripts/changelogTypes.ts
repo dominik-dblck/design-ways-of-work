@@ -3,14 +3,21 @@
  * - `Release` · a release put out: that row, and what the release script adds
  */
 
+interface RuleKeys {
+  readonly added: readonly string[];
+  readonly changed: readonly string[];
+  // a key that left: a sheet row still naming it points at no rule
+  readonly removed: readonly string[];
+}
+
 interface Unreleased {
   // patch: nothing a repository sees; minor: more, nothing to do; major: an action
   readonly kind: 'patch' | 'minor' | 'major';
   readonly what: string;
   // what a repository does to take it, beside moving its pin
   readonly action: string;
-  // the keys of the rules it adds or changes
-  readonly rules: readonly string[];
+  // the keys of the rules it adds, changes or removes
+  readonly rules: RuleKeys;
   // by repository: each difference the gate finds there that this release means, and why
   readonly outputs: Readonly<Record<string, Readonly<Record<string, string>>>>;
 }

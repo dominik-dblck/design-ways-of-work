@@ -65,7 +65,7 @@ const NOTHING_IN_HAND: Unreleased = {
   kind: 'patch',
   what: '',
   action: 'none: move the pin to the tag',
-  rules: [],
+  rules: { added: [], changed: [], removed: [] },
   outputs: {},
 };
 

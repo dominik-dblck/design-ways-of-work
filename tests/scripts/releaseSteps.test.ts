@@ -63,7 +63,7 @@ describe("the changelog's file", () => {
         kind: 'minor',
         what: 'one command',
         action: 'none',
-        rules: [],
+        rules: { added: [], changed: ['file-name'], removed: ['old-key'] },
         outputs: {},
         moved: {},
         tried: { product: 'abc1234' },
@@ -71,6 +71,9 @@ describe("the changelog's file", () => {
     ]);
     expect(text).toContain('"version":"0.2.0"');
     expect(text).toContain('"tried":{"product":"abc1234"}');
+    expect(text).toContain(
+      '"rules":{"added":[],"changed":["file-name"],"removed":["old-key"]}',
+    );
     expect(text).toContain(
       'const NEXT: Unreleased = {"kind":"patch","what":""',
     );
