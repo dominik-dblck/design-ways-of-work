@@ -422,3 +422,18 @@ Each call: what, why, how to undo. None changes what the PM sees.
 - A snapshot of one text (Measure's) was read as a snapshot of keys and written empty: found by the product's
   own checks on the rehearsed merge, mended in `scripts/portSnapshots.ts`, tested. A snapshot of keys is
   taken key by key, one of a single text whole.
+- eagle-design's first run of the merge, on its `port/wow`: every conflict settled, and its own commit tier
+  red on one test, the frozen notebooks'. The tag it pins (v0.1.10) holds the pins in the home's test, five of
+  them, and its `main` has closed E19 since: the port cannot be green on that tag once it holds `main`, the
+  take refuses an edited file, and it commits past no hook. So the branch can take `main` only together with
+  a release that reads the pins from the product. And the gate held the release to a branch that holds
+  `main`: each waited on the other.
+- The call that opens it: the gate takes the trunk itself. Each of its two clones merges the trunk by the
+  port's script, uncommitted, before anything else (`trunkTaken`); what the script could not settle is the
+  fault. A branch that stands behind its trunk is no fault any more: the trial is of the product as it stands
+  today whatever the branch holds, which is what W22 asks, and it waits on no commit of the product's
+  session. The carried check stays. Undo: the `behind` fault of b42d5a2. The product's own merge commit
+  comes with the next release: the merge, its pin moved, its migration, one commit, green by what the gate
+  tried.
+- `main` moved again (390b1a8): a 502 row in the API convention, carried word for word into
+  `design/docs/documents/api-convention/endpointShape.ts`; its row in `carried` holds the new blob.

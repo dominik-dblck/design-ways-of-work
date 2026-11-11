@@ -61,37 +61,23 @@ describe('a repository whose work lands on a branch that takes nothing yet', () 
     expect(faults()).toEqual([]);
   });
 
-  it('a trunk past the branch is named with its count', () => {
+  it('a trunk past the branch is no fault of its own: the gate takes it by script; what it moved in a file the port moved is none either', () => {
     product.committed('sheet/kept.ts', 'kept, and more\n');
     product.committed('sheet/gate-rules.ts', 'rows, and one more\n');
     product.committed('data/guard-map.json', '{ "files": ["one"] }\n');
-    expect(faults()).toEqual([
-      'main stands 3 commits past port: the branch takes them first',
-    ]);
+    expect(faults()).toEqual([]);
   });
 
   it('a trunk change to a file the branch holds at neither path is asked for, until it is carried', () => {
     product.committed('tools/check.ts', 'a check, mended\n');
     const asked =
       'main changed tools/check.ts, a file the way of working holds now: carry the change into its home, then name it in ports/';
-    expect(faults()).toContain(asked);
-    expect(faults().filter((one) => one.includes(' changed '))).toEqual([
-      asked,
-    ]);
+    expect(faults()).toEqual([asked]);
     const carried = [
       { file: 'tools/check.ts', blob: blobOf('tools/check.ts'), how: 'a home' },
     ];
-    expect(faults(carried).filter((one) => one.includes(' changed '))).toEqual(
-      [],
-    );
+    expect(faults(carried)).toEqual([]);
     product.committed('tools/check.ts', 'a check, mended again\n');
-    expect(faults(carried)).toContain(asked);
-  });
-
-  it('a branch that took the trunk stands behind it no more', () => {
-    product.git(['checkout', '-q', 'port']);
-    product.git(['merge', '-q', '-s', 'ours', '-m', 'the trunk taken', 'main']);
-    product.git(['checkout', '-q', 'main']);
-    expect(faults().filter((one) => one.includes(' stands '))).toEqual([]);
+    expect(faults(carried)).toEqual([asked]);
   });
 });

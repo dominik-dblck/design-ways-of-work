@@ -16,7 +16,7 @@ import {
 } from './consumerClones.ts';
 import { explained, mapDifferences, runDifferences } from './consumerDiff.ts';
 import type { Run, Sides } from './consumerDiff.ts';
-import { portFaults } from './consumerPort.ts';
+import { portFaults, trunkTaken } from './consumerPort.ts';
 import { ranIn } from './consumerRuns.ts';
 import type { Consumer } from './consumerTypes.ts';
 import { hashes, since, writtenIn } from './digests.ts';
@@ -119,6 +119,36 @@ function reported({
   return isClean;
 }
 
+interface Readied {
+  readonly sides: Sides<string>;
+  // what the port's script could not settle when a clone took the trunk
+  readonly untaken: readonly string[];
+  // what the package resolves, on the tag and on the commit in hand
+  readonly resolved: Sides<ReadonlyMap<string, string>>;
+}
+
+// two clones made ready: each takes its trunk where the repository has a port, the one that takes the commit is migrated first
+function readied({
+  consumer,
+  wow,
+  scratch,
+}: Pick<Trial, 'consumer' | 'wow' | 'scratch'>): Readied {
+  const sides = cloned({ consumer, wow, scratch });
+  const untaken = [sides.pinned, sides.next].flatMap((root) =>
+    trunkTaken({ consumer, wow, root }),
+  );
+  if (consumer.port !== null)
+    console.log(`  taken · ${consumer.port.trunk}, by the port's script`);
+  if (consumer.migration !== null) {
+    const { migration } = consumer;
+    console.log(
+      `  migrated · ${migrated({ root: sides.next, wow, migration })}`,
+    );
+  }
+  const resolved = nextTaken({ root: sides.next, archive: packageOf(wow) });
+  return { sides, untaken, resolved };
+}
+
 // both clones run at once: each holds its own tree, and a run waits on nothing of the other's
 async function tried({
   consumer,
@@ -126,13 +156,8 @@ async function tried({
   scratch,
   expected,
 }: Trial): Promise<boolean> {
-  const sides = cloned({ consumer, wow, scratch });
-  const { commands, migration } = consumer;
-  if (migration !== null)
-    console.log(
-      `  migrated · ${migrated({ root: sides.next, wow, migration })}`,
-    );
-  const resolved = nextTaken({ root: sides.next, archive: packageOf(wow) });
+  const { sides, untaken, resolved } = readied({ consumer, wow, scratch });
+  const { commands } = consumer;
   const before = standing(sides);
   const [pinned, next] = await Promise.all([
     ranIn({ root: sides.pinned, commands }),
@@ -148,7 +173,11 @@ async function tried({
   ];
   const out = path.join(scratch, consumer.name, 'out');
   kept(out, runs);
-  const broken = [...faults(sides), ...portFaults({ consumer, wow })];
+  const broken = [
+    ...untaken,
+    ...faults(sides),
+    ...portFaults({ consumer, wow }),
+  ];
   fs.writeFileSync(
     path.join(out, 'differences.txt'),
     `${[...found, ...broken].join('\n')}\n`,

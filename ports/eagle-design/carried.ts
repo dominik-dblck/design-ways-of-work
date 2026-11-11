@@ -7,8 +7,8 @@ import type { Carried } from '../../scripts/portTypes.ts';
 const CARRIED: readonly Carried[] = [
   {
     file: 'docs/documents/api-convention/apiConventionOne.ts',
-    blob: '2607f8e9c281156ad47b3db2bd41324dc6e87f01',
-    how: 'the sixth check of design/docs/documents/api-convention/endpointChecks.ts, word for word',
+    blob: '3a2af9e0eeec9748ba8d559d60e493cbed8b505c',
+    how: 'word for word in design/docs/documents/api-convention: the sixth check of endpointChecks.ts, the 502 row of endpointShape.ts',
   },
   {
     file: 'docs/rules/README.md',

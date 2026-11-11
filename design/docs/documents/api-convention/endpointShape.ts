@@ -80,6 +80,7 @@ export const ENDPOINT_SHAPE: readonly DocumentSection[] = [
       "| 404 | `{ ok: false, kind: 'missing', document \\| group \\| asset \\| block \\| version }` | what the path or a param names does not exist |",
       "| 409 | `{ ok: false, kind: 'rule', key, line, firedOn, streamVersion, fix }` | a rule refused it · `key` is a refusals.ts key · `asset.not_accepted` adds `validator` and `params`, G1’s shape, and its `line` is that validator’s sentence (AS4 · 29 Sep) | The params are typed as the validator’s in fieldKinds.ts — mimeTypes string[], maxSize number — one Check variant per validator, as in the SILENT answer (T-E04-00 step 5).",
       "| 500 | `{ ok: false, kind: 'error', id }` | a throw · the stack is in the server log under `id`, never on the wire |",
+      "| 502 | `{ ok: false, kind: 'unanswered', destination, id }` | the destination's tool did not answer, or kept answering 429 · nothing recorded · the attempt is in the server log under `id` |",
       '',
       '- Every query answers the stream version it read at, beside its data. (queries.ts · contract)',
       "- A person reads `line`, never `reason` or `key`. A 400 on a person's input carries a sentence from",

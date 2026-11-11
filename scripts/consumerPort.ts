@@ -1,9 +1,8 @@
 /**
- * - `portFaults` · a repository whose work lands on a branch that takes nothing
- * - the branch tried behind that trunk; a change of the trunk's to a file a home
- * - holds now, not carried into the home yet
+ * - `trunkTaken` · a clone's branch takes the trunk its work lands on, by script
+ * - `portFaults` · a change of that trunk's to a file a home holds, not carried yet
  */
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import path from 'node:path';
 import type { Consumer } from './consumerTypes.ts';
 import { mapRows } from './mapRows.ts';
@@ -33,16 +32,27 @@ const gitIn =
 const namesIn = (listed: string): readonly string[] =>
   listed.split('\0').filter(Boolean);
 
-// the trunk's newest commit is in the branch tried, or the trial is of a product as it stood
-function behind({ source, ref, port }: Tried): readonly string[] {
-  const count = Number(
-    gitIn(source)(['rev-list', '--count', `${ref}..${port.trunk}`]),
+interface Taking {
+  readonly consumer: Consumer;
+  readonly wow: string;
+  // a clone of the branch tried, installed
+  readonly root: string;
+}
+
+// the trial is of the product as it stands today: the clone's branch takes the trunk by the port's own script, uncommitted; what the script could not settle is the fault
+function trunkTaken({ consumer, wow, root }: Taking): readonly string[] {
+  const { name, ref, port } = consumer;
+  if (port === null) return [];
+  const { trunk } = port;
+  gitIn(root)(['fetch', '-q', 'origin', `${trunk}:${trunk}`]);
+  const merge = spawnSync(
+    process.execPath,
+    [path.join(wow, 'scripts', 'portMerge.ts'), name, root],
+    { cwd: wow, encoding: 'utf8', env: childEnv(), maxBuffer: BUFFER },
   );
-  return count === 0
-    ? []
-    : [
-        `${port.trunk} stands ${String(count)} commits past ${ref}: the branch takes them first`,
-      ];
+  if (merge.status === 0) return [];
+  const told = `${merge.stdout}${merge.stderr}`.trim().split('\n').slice(-6);
+  return [`${ref} does not take ${trunk} by script · ${told.join(' | ')}`];
 }
 
 // the files the port took out of the branch, as git reads it: one it moved, even rewritten a little, is none
@@ -110,7 +120,7 @@ const portFaults = ({
 }): readonly string[] => {
   if (port === null) return [];
   const tried = { source: path.resolve(wow, from), ref, port, wow };
-  return [...behind(tried), ...toCarry(tried)];
+  return toCarry(tried);
 };
 
-export { portFaults };
+export { portFaults, trunkTaken };
