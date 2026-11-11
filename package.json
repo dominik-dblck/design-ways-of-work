@@ -29,6 +29,7 @@
     "format:files": "node shared/lint/writeFormatterFiles.ts --out .",
     "test": "yarn -s check:feature",
     "consumers": "node scripts/consumers.ts",
+    "release": "node scripts/release.ts",
     "hooks": "husky",
     "take-dev-map": "node scripts/takeDevMap.ts",
     "take-dev-claude": "node scripts/takeDevClaude.ts",

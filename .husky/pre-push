@@ -1,1 +1,1 @@
-yarn -s check:feature
+node scripts/prePush.ts "$@"
