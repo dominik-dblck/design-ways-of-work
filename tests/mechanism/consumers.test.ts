@@ -99,6 +99,29 @@ describe('the gate tries the commit in hand on a repository that takes it', () =
   );
 
   it(
+    'once that release is put out, its row still explains the difference to a repository on an older tag',
+    () => {
+      const out = {
+        version: '9.9.9',
+        outputs: { product: { 'output · yarn says': 'the word moved' } },
+      };
+      wow.committed(
+        'releases/changelog.ts',
+        `const NEXT = { what: '', outputs: {} };\n\nconst RELEASES = [${JSON.stringify(out)}];\n\nexport { NEXT, RELEASES };\n`,
+      );
+      const said = tried(['product']);
+      expect(said.stdout).toContain(
+        'EXPECTED · output · yarn says · v9.9.9 · the word moved',
+      );
+      expect(said.stdout).toContain(
+        '1 differences, each expected · product on the commit in hand',
+      );
+      expect(said.status).toBe(0);
+    },
+    A_TRIAL,
+  );
+
+  it(
     'a release that asks a repository for more is red, then tried after the migration that gives it',
     () => {
       wow.committed(

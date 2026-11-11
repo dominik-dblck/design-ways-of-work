@@ -13,6 +13,7 @@ import {
   packageOf,
   strays,
   suppressedTaken,
+  versionTaken,
 } from './consumerClones.ts';
 import { explained, mapDifferences, runDifferences } from './consumerDiff.ts';
 import type { Run, Sides } from './consumerDiff.ts';
@@ -21,6 +22,8 @@ import { ranIn } from './consumerRuns.ts';
 import type { Consumer } from './consumerTypes.ts';
 import { hashes, since, writtenIn } from './digests.ts';
 import { migrated } from './migrated.ts';
+import { rowsSince } from './releasedRows.ts';
+import type { Released } from './releasedRows.ts';
 
 interface Trial {
   readonly consumer: Consumer;
@@ -28,6 +31,8 @@ interface Trial {
   readonly scratch: string;
   // each difference this release means in the repository, and why
   readonly expected: Readonly<Record<string, string>>;
+  // each release put out, the newest first, with its rows for the repository
+  readonly released: readonly Released[];
 }
 
 // each run's output beside the clones, for the one who reads a difference
@@ -95,14 +100,14 @@ function reported({
   consumer,
   found,
   broken,
-  expected,
+  rows,
 }: {
   readonly consumer: Consumer;
   readonly found: readonly string[];
   readonly broken: readonly string[];
-  readonly expected: Readonly<Record<string, string>>;
+  readonly rows: Pick<Parameters<typeof explained>[0], 'expected' | 'allowed'>;
 }): boolean {
-  const { lines, unexplained, stale } = explained({ found, expected });
+  const { lines, unexplained, stale } = explained({ found, ...rows });
   for (const line of lines) console.log(`  ${line}`);
   for (const line of broken) console.log(`  BROKEN · ${line}`);
   const isClean =
@@ -155,8 +160,11 @@ async function tried({
   wow,
   scratch,
   expected,
+  released,
 }: Trial): Promise<boolean> {
   const { sides, untaken, resolved } = readied({ consumer, wow, scratch });
+  // a repository that pins an older tag meets each release since: their rows explain as this one's do
+  const allowed = rowsSince(released, versionTaken(sides.pinned));
   const { commands } = consumer;
   const before = standing(sides);
   const [pinned, next] = await Promise.all([
@@ -182,7 +190,7 @@ async function tried({
     path.join(out, 'differences.txt'),
     `${[...found, ...broken].join('\n')}\n`,
   );
-  return reported({ consumer, found, broken, expected });
+  return reported({ consumer, found, broken, rows: { expected, allowed } });
 }
 
 export { tried };

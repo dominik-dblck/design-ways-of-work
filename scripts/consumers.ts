@@ -5,7 +5,7 @@
  */
 import { execFileSync } from 'node:child_process';
 import { CONSUMERS } from '../ports/consumers.ts';
-import { NEXT } from '../releases/changelog.ts';
+import { NEXT, RELEASES } from '../releases/changelog.ts';
 import { tried } from './consumerGate.ts';
 import type { Consumer } from './consumerTypes.ts';
 import { HERE } from './repos.ts';
@@ -39,6 +39,10 @@ const triedAll = (consumers: readonly Consumer[]): Promise<boolean> =>
       wow: HERE,
       scratch: SCRATCH,
       expected: NEXT.outputs[consumer.name] ?? {},
+      released: RELEASES.map(({ version, outputs }) => ({
+        version,
+        rows: outputs[consumer.name] ?? {},
+      })),
     });
     return isCleanSoFar && isClean;
   }, Promise.resolve(true));

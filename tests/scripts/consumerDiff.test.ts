@@ -60,6 +60,7 @@ describe('a difference is expected by a row of the release, or it is red', () =>
     const { unexplained, stale } = explained({
       found: ['output · yarn build'],
       expected: {},
+      allowed: {},
     });
     expect(unexplained).toEqual(['output · yarn build']);
     expect(stale).toEqual([]);
@@ -69,6 +70,7 @@ describe('a difference is expected by a row of the release, or it is red', () =>
     const { lines, unexplained } = explained({
       found: ['output · yarn build'],
       expected: { 'output · yarn build': 'a page more' },
+      allowed: {},
     });
     expect(unexplained).toEqual([]);
     expect(lines).toEqual(['EXPECTED · output · yarn build · a page more']);
@@ -78,14 +80,32 @@ describe('a difference is expected by a row of the release, or it is red', () =>
     const { unexplained } = explained({
       found: ['dist · project/a.js', 'dist · project/b.js', 'dist · other.js'],
       expected: { 'dist · project/*': 'the pages are built again' },
+      allowed: {},
     });
     expect(unexplained).toEqual(['dist · other.js']);
+  });
+
+  it('a row of a release put out since the pin explains too, and is never stale', () => {
+    const { lines, unexplained, stale } = explained({
+      found: ['output · yarn build'],
+      expected: {},
+      allowed: {
+        'output · yarn build': 'v0.3.0 · a page more',
+        'output · yarn test': 'v0.3.0 · a test more',
+      },
+    });
+    expect(unexplained).toEqual([]);
+    expect(stale).toEqual([]);
+    expect(lines).toEqual([
+      'EXPECTED · output · yarn build · v0.3.0 · a page more',
+    ]);
   });
 
   it('a row nothing matches is stale: the release no longer means it', () => {
     const { stale, lines } = explained({
       found: [],
       expected: { 'output · yarn build': 'a page more' },
+      allowed: {},
     });
     expect(stale).toEqual(['output · yarn build']);
     expect(lines).toEqual([

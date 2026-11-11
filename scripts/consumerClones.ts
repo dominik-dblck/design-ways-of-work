@@ -1,5 +1,5 @@
 /**
- * - `cloned` · two fresh clones of a repository, each installed at its pinned tag
+ * - `cloned`, `versionTaken` · two fresh clones at the pinned tag; its version
  * - `packageOf`, `nextTaken` · the commit as a package, taken; what it resolves
  * - `holdsItsTake`, `suppressedTaken`, `strays`, `lacking` · a take's faults
  */
@@ -51,6 +51,17 @@ function cloned({
     return root;
   };
   return { pinned: sideAt('pinned'), next: sideAt('next') };
+}
+
+// the version a clone runs on: the package's manifest as its install unpacked it
+function versionTaken(root: string): string {
+  const manifest: Readonly<Record<string, unknown>> = JSON.parse(
+    fs.readFileSync(
+      path.join(root, 'node_modules', PACKAGE, 'package.json'),
+      'utf8',
+    ),
+  );
+  return String(manifest.version);
 }
 
 // the commit as git archives it: what an install unpacks when the package runs no prepare script
@@ -143,4 +154,5 @@ export {
   packageOf,
   strays,
   suppressedTaken,
+  versionTaken,
 };

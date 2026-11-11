@@ -61,13 +61,17 @@ const isExpectedBy = (row: string, difference: string): boolean =>
 function explained({
   found,
   expected,
+  allowed,
 }: {
   readonly found: readonly string[];
   readonly expected: Readonly<Record<string, string>>;
+  // rows of the releases put out since the repository's pin: each explains, none is stale
+  readonly allowed: Readonly<Record<string, string>>;
 }): Explained {
   const rows = Object.entries(expected);
+  const every = [...rows, ...Object.entries(allowed)];
   const whyOf = (difference: string): string | undefined =>
-    rows.find(([row]) => isExpectedBy(row, difference))?.[1];
+    every.find(([row]) => isExpectedBy(row, difference))?.[1];
   const stale = rows
     .map(([row]) => row)
     .filter(

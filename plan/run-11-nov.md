@@ -488,3 +488,13 @@ Each call: what, why, how to undo. None changes what the PM sees.
   `node scripts/migrate.ts <name> <checkout>` (c82439e) runs it on the repository's own checkout, on the
   branch that takes the way of working alone, with no commit; the release row's action names it.
 - The gate on a53a832, the product's `main` at 98deb53: the same eleven differences, each expected.
+- The real tools' tests (prettier, cspell, ESLint as installed) stood under a unit test's limit and went red
+  once on a busy machine: thirty seconds now (4a4c8dc). Undo: revert it.
+- The first run of the release wrote its commit (4d4c0a4) and its push was refused, no tag cut, nothing
+  sent: the release moves its rows from the release in hand to the releases put out, and the gate read the
+  release in hand alone, so at the release's own commit the eleven differences had no row. v0.2.0 moved no
+  output and never met it. The gate now reads, beside the release in hand, the rows of each release put out
+  since the one the repository pins (the version of the package its clone installed): they explain a
+  difference as this release's do, each under its version, and are never stale, since a row put out is not
+  mended. Tested on the rows and on a scratch product that pins an older tag. Undo: revert the commit; a
+  release that moves an output cannot pass its own push.
