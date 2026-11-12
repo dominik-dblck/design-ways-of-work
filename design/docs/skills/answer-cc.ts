@@ -30,7 +30,7 @@ const skill: SkillFile = {
       lines: [
         "One fenced English block: status decision first · answers in the build side's order · what moved on the sheet (file · what) · digests (`roadmaps/tickets.ts`, pack, any fixture) · questions back.",
         "Address tickets by ids that exist. Never restate MUI's behaviour. Never send a number read from prose.",
-        'The build side reads `ticket-pipeline.md` as its skills; a lesson lands there first, in its data `docs/documents/ticket-pipeline/` (design side), and the build side regenerates by digest. `rule:process-docs-authored-here`',
+        "The build side reads `ticket-pipeline.md` as its skills; a lesson lands there first: the way of working's rule in its data `docs/documents/ticket-pipeline/`, the product's cite in `docs/process/documentSlots.ts` (design side), and the build side regenerates by digest. `rule:process-docs-authored-here`",
         'The block is fenced (```) so the PM copies it in one click; no emoji.',
       ],
     },
