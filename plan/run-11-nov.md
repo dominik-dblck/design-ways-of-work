@@ -24,7 +24,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 
 | stage | what | done | of |
 | 1 | Foundation | 7 | 7 |
-| 2 | Design clean | 17 | 24 |
+| 2 | Design clean | 18 | 24 |
 | 3 | Eagle-design | 0 | 2 |
 | 4 | Spawn design | 0 | 3 |
 
@@ -85,6 +85,7 @@ new-project guide · 3 · `argus-design` spawned and green on its first commit, 
 - 20:10 · stage 2 · 15 of 20 · decisions split: 72 way-of-working rows join the register as W32 to W103, verbatim, the product's rows name them by heldBy, the homes cite W ids; gate green (26 expected), eagle-design approved (f8d1871, c38e5a1; v0.13.0)
 - 20:25 · stage 2 · 16 of 20 · user hooks homed: workMode and runBars byte-equal in shared/user-hooks, tested on a home of their own, installed by a script that never overwrites; gate green (4 expected), eagle-design approved (e180349, d03eee1; v0.14.0)
 - 21:18 · stage 2 · 17 of 20 · sample product: Acme holds the contract's 46 files and the fewest rows, its scope spreads the preset (W27), yarn sample builds it from nothing, six of ten green, the four red task 18's list; eagle-design's scope cut to the preset; gate no difference, eagle-design approved (d6fc33d, 0c78a82, 2a02e4b, ec9e0db; v0.15.0)
+- 21:51 · stage 2 · 18 of 24 · the sample's feature tier in this repository's, the homes green on a product that names none; v0.16.0 out (41727fb)
 
 ## Calls
 
