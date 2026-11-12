@@ -24,7 +24,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 
 | stage | what | done | of |
 | 1 | Foundation | 7 | 7 |
-| 2 | Design clean | 16 | 20 |
+| 2 | Design clean | 17 | 20 |
 | 3 | Spawn design | 0 | 3 |
 | 4 | Eagle-design | 0 | 2 |
 
@@ -81,6 +81,7 @@ word · 2 · both design repositories pinned to one tag, the gate green on both.
 - 19:40 · stage 2 · 14 of 20 · way-of-working files homed: configs, settings, types, backup, post-commit held to the scope's remote, tsconfig from the scope, epic test on its own registry; gate green (7 expected), eagle-design approved (5969551, 04aabd3, 98da1da, 82c851f, ef48600; v0.12.0)
 - 20:10 · stage 2 · 15 of 20 · decisions split: 72 way-of-working rows join the register as W32 to W103, verbatim, the product's rows name them by heldBy, the homes cite W ids; gate green (26 expected), eagle-design approved (f8d1871, c38e5a1; v0.13.0)
 - 20:25 · stage 2 · 16 of 20 · user hooks homed: workMode and runBars byte-equal in shared/user-hooks, tested on a home of their own, installed by a script that never overwrites; gate green (4 expected), eagle-design approved (e180349, d03eee1; v0.14.0)
+- 21:18 · stage 2 · 17 of 20 · sample product: Acme holds the contract's 46 files and the fewest rows, its scope spreads the preset (W27), yarn sample builds it from nothing, six of ten green, the four red task 18's list; eagle-design's scope cut to the preset; gate no difference, eagle-design approved (d6fc33d, 0c78a82, 2a02e4b, ec9e0db; v0.15.0)
 
 ## Calls
 
@@ -1128,3 +1129,10 @@ Each call: what, why, how to undo. None changes what the PM sees.
   product is task 18's call; the tests, seven asking a product's counts or files (rules over 90, cites over 20,
   `records/`, the skills citing nine of its rules, the open pairs naming its files, `new-project.md` naming four
   of its paths, a command ticket on the board and the panel).
+- Gate on 2a02e4b: two differences, eagle-design's format check, the cut scope's one array past the width; the
+  migration's text is its prettier's now (ec9e0db). Gate on ec9e0db: no difference; the product's feature tier
+  on the gate's clone, the migration taken, ten of ten.
+- v0.15.0 out under W30: its tag on 17b1ed8, on the remote, at the first try (feature tier 275 s). Task 17
+  closed. eagle-design's input for task 18: an epic whose stories wait is a field of its row, never a home's id;
+  knip in a product reads the taken files as entries, this repository's knip over the sample finds a home's
+  dead export; a home's test asserts the relation, its floors and the product's paths become the product's tests.
