@@ -849,3 +849,7 @@ Each call: what, why, how to undo. None changes what the PM sees.
 - W26 step 2: the tokens module the build writes types a colour as `TokenHex`, the type the build side's
   module exports, so the theme copied here reads the same module. A product's committed `tokens.ts` takes the
   line at its build. Undo: revert it.
+- The PM's pick (12 Nov, form · A): task 7's step 3 waits on the build side, which asks the PM's yes in its
+  own session after its audit fix; meanwhile task 8's skeleton starts (`examples/sample-product`: its package,
+  scope, `product.ts`, the contract's registries, its stack), its pages after the theme lands. Undo: the
+  skeleton's commits reverted, task 8 starts after task 7 closes.
