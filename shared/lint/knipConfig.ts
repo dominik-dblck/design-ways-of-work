@@ -29,12 +29,24 @@ function stringsIn(setting: unknown): readonly string[] {
     : [];
 }
 
-// a hook's command runs a file no script names: knip reads no Claude Code settings
+// a git hook's lines, each file of .husky/ beside its `_` folder
+function gitHookLines(root: string): readonly string[] {
+  const folder = path.join(root, '.husky');
+  if (!fs.existsSync(folder)) return [];
+  return fs
+    .readdirSync(folder, { withFileTypes: true })
+    .filter((entry) => entry.isFile())
+    .map((entry) => fs.readFileSync(path.join(folder, entry.name), 'utf8'));
+}
+
+// a hook's command runs a file no script names: knip reads no Claude Code settings, nor a git hook's own lines
 function hookRuns(root: string): readonly string[] {
-  const text = SETTINGS.map((name) => path.join(root, '.claude', name))
-    .filter((file) => fs.existsSync(file))
-    .flatMap((file) => stringsIn(JSON.parse(fs.readFileSync(file, 'utf8'))))
-    .join('\n');
+  const text = [
+    ...SETTINGS.map((name) => path.join(root, '.claude', name))
+      .filter((file) => fs.existsSync(file))
+      .flatMap((file) => stringsIn(JSON.parse(fs.readFileSync(file, 'utf8')))),
+    ...gitHookLines(root),
+  ].join('\n');
   return [...new Set([...text.matchAll(A_RUN)].map(([, file]) => file ?? ''))];
 }
 

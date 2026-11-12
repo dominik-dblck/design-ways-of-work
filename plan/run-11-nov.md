@@ -1059,3 +1059,6 @@ Each call: what, why, how to undo. None changes what the PM sees.
   taken, the scope's new `extraRoots` (eagle-design's `public`, its assets' manifest); the writer's output is
   the product's file byte for byte. `GENERATED_FILES` (0.12.0) names the writer and the root in its scope and
   writes its ignore file again, so its freshness test stays green. Undo: revert it.
+- Gate on 98da1da: 2 differences, knip in the product calling `shared/hooks/postCommit.ts` and `remotes.ts`
+  unused: it reads the Claude Code settings' runs, not a git hook's lines. `knipConfig` reads each file of
+  `.husky/` too; knip green again on the gate's clone. Undo: revert it.
