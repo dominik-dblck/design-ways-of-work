@@ -1,4 +1,7 @@
-import { describe, expect, it } from 'vitest';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { afterAll, describe, expect, it } from 'vitest';
 import { knipConfig } from '../../shared/lint/knipConfig.ts';
 import { FIXTURES } from './ruleTester.ts';
 import { scopeAt } from './scopeAt.ts';
@@ -19,7 +22,24 @@ const beyondTheFace = (
       entry !== INSTALLER,
   );
 
+const taken = fs.mkdtempSync(path.join(os.tmpdir(), 'wow-knip-taken-'));
+
+afterAll(() => {
+  fs.rmSync(taken, { recursive: true, force: true });
+});
+
 describe('knip from a scope', () => {
+  it("a product's take: each file of code the take wrote is an entry, its own files not", () => {
+    fs.mkdirSync(path.join(taken, '.git'));
+    fs.writeFileSync(
+      path.join(taken, '.git', 'wow-taken'),
+      '# design-ways-of-work 1.0.0\nsheet/words/sayWord.ts\t0\ndocs/rules/size.md\t0\n',
+    );
+    const { entry } = knipConfig(scopeAt(taken));
+    expect(entry).toEqual(expect.arrayContaining(['sheet/words/sayWord.ts']));
+    expect(entry).not.toEqual(expect.arrayContaining(['docs/rules/size.md']));
+  });
+
   it("its entries are the scope's, the browser tier's face, what it starts from, each file a hook runs, once", () => {
     const config = knipConfig(
       scopeAt(FIXTURES, {

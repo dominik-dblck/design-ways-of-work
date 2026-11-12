@@ -1,0 +1,22 @@
+---
+name: design-publish
+description: "Publishes the design project to the artifact, the PM's render and, until the switch commit lands, the release the build side reads: commit, build, one Artifact call, the tag. Use when a change has to reach the PM's view or the build side's read."
+---
+
+<!-- Written by `yarn build` from `docs/skills/publish.ts`: edit the data, never this file. -->
+
+# design-publish · the artifact
+
+The artifact is the PM's render and the release the build side reads: the address the product names. What is not published, the build side does not see. Publishing goes only from here.
+
+## Steps
+
+1. Commit first. The files to publish are those `git diff --name-only <last published-* tag> HEAD` names in the homes, each at its published path (`tools/layout.ts · publishedOf`, under `project/`).
+2. `yarn build`, then one Artifact call: `url` as above, `root: "dist"`, `file_path: "dist/project/compat.json"` (always, unchanged unless pages are added, removed or reordered — keep its `report` as it is), `files:` every file changed, `{"project/tickets.js": "project/tickets.js"}`; a removed file `null`. With any bundle, `project/module-entries.json` and `project/module-imports.json` go too: the build writes them outside git, and without them the source check reads each bundle whole and counts every import again. Never write `index.html`, `SKILL.md` or `artifact-type/`.
+3. Tag the commit `published-<version id>` from the result.
+4. Refused with "You haven't viewed the latest version" (a new session, or after a compaction): a plain `read` of the url (no `path`/`paths`) counts as viewing it, a `paths` read does not; then publish again.
+
+## Held
+
+- A sheet edit, its re-cut pack and its digests go out in the same move.
+- A page removed is a deletion: only with the PM's word.

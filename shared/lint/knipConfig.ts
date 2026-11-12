@@ -1,6 +1,6 @@
 /**
  * - `knipConfig` · knip from a scope: a file, an export or a type nobody reads
- * - its entries: the scope's, what it starts from, its generators, its hooks' runs
+ * - its entries: the scope's, its starts, generators, hooks' runs, the files taken
  * - and the browser tier's face, the files of `shared/e2e/` a product's flows import
  */
 import fs from 'node:fs';
@@ -8,6 +8,7 @@ import path from 'node:path';
 import type { KnipConfig } from 'knip';
 import { testsOf } from '../repoScope.ts';
 import type { RepoScope } from '../repoScope.ts';
+import { takenFiles } from '../take/takeRecord.ts';
 
 // `node` or `tsx`, its flags, a quote, the project's own folder named by Claude Code, then the file
 const A_RUN =
@@ -75,9 +76,18 @@ const BROWSER_FACE = [
     'shared/user-hooks/installUserHooks.ts',
   );
 
+// a file the take wrote is the way of working's: a product judges its own code, never a home's
+const takenCode = (root: string): readonly string[] =>
+  fs.existsSync(path.join(root, '.git'))
+    ? [...takenFiles(root).keys()].filter((file) =>
+        /\.(?:ts|tsx|mts)$/.test(file),
+      )
+    : [];
+
 const knipConfig = (scope: RepoScope): KnipSettings => ({
   entry: [
     ...scope.entries,
+    ...takenCode(scope.root),
     ...BROWSER_FACE,
     ...scope.starts,
     ...scope.generators.map(({ script }) => script),

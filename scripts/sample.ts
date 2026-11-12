@@ -1,8 +1,8 @@
 /**
- * - `node scripts/sample.ts [script…]` · the sample, the homes in hand taken in
- * - built in `.consumers/sample` from nothing; its scripts, or its feature tier
+ * - `node scripts/sample.ts [--emit] [script…]` · the sample on the homes in hand
+ * - from nothing; its generated files current (`--emit` writes them); its scripts
  */
-import { spawnSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { HERE } from './repos.ts';
@@ -26,6 +26,17 @@ function ran(command: string, args: readonly string[]): void {
   }
 }
 
+// what the generators changed or added: the taken files are git's excluded ones
+const changedFiles = (): readonly string[] =>
+  execFileSync(
+    'git',
+    ['status', '--porcelain', '-z', '--untracked-files=all'],
+    { cwd: ROOT, encoding: 'utf8', env: childEnv() },
+  )
+    .split('\0')
+    .filter(Boolean)
+    .map((line) => line.slice(3));
+
 emptied({ within: SCRATCH, folder: ROOT });
 fs.cpSync(SAMPLE, ROOT, { recursive: true });
 ran('git', ['init', '-q']);
@@ -43,7 +54,22 @@ ran(process.execPath, [
   '--from',
   HERE,
 ]);
-const named = process.argv.slice(2);
+ran(process.execPath, ['tools/writeGenerated.ts']);
+const changed = changedFiles();
+const isEmit = process.argv.includes('--emit');
+for (const file of changed) {
+  if (isEmit)
+    fs.cpSync(path.join(ROOT, file), path.join(SAMPLE, file), {
+      recursive: true,
+    });
+  console.log(`sample · ${isEmit ? 'written' : 'stale'} · ${file}`);
+}
+if (isEmit) process.exit(0);
+if (changed.length > 0) {
+  console.log('sample · its generated files are stale: yarn sample --emit');
+  process.exit(1);
+}
+const named = process.argv.slice(2).filter((arg) => !arg.startsWith('--'));
 for (const script of named.length === 0 ? ['check:feature'] : named)
   ran('yarn', ['-s', script]);
 console.log('sample · green');

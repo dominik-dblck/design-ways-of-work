@@ -204,6 +204,11 @@ const CONTRACT: readonly ContractRow[] = [
     kind: 'registry',
     what: 'the screen’s words: statuses, legends, fills, hints, labels and hovers',
   },
+  {
+    file: 'tests/architecture/openPairs.ts',
+    kind: 'optional',
+    what: 'each pair of blocks written twice it holds open, with the reason',
+  },
 ];
 
 export { CONTRACT };

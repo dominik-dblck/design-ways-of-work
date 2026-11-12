@@ -3,6 +3,7 @@
  */
 import type { SkillFile } from './skillTypes.ts';
 import { productStack } from '../process/productStack.ts';
+import { citeLines } from '../documents/cited.ts';
 
 const skill: SkillFile = {
   title: 'design-criteria · what a criterion may say',
@@ -42,22 +43,19 @@ const skill: SkillFile = {
         'One hover: the fill arrives (`--ui-hover-fill`), nothing else moves; a filled control darkens. 16px boxes take a 28 halo; inside a row the row owns it. `design-system/tokens/hover.ts`',
         'Buttons are never pills; menus, popovers and dialogs share one paper; four z-layers. `design-system/`',
         'A component an organism owns is `{Organism}{Part}` (`campaigns-header`); a shared one has no prefix and `scope: global`. `rule:part-named-after-its-organism`',
-        'A campaign is a folder of documents in the UI: `folder-*` / `document-*` parts are global, the organism hands them their words. `rule:campaign-is-a-folder`',
+        ...citeLines('criteria.parts'),
         'One smart organism per screen; every other component is dumb and gets its props from the organism’s adapters. `rule:one-smart-component-per-screen`',
         'Every test is seen red once: domain / endpoint RED before GREEN; app / browser / infra after GREEN with a planted fault; measured = a dated fact, no test. `rule:every-test-seen-red`',
-        'Who writes what and who sees what are the product’s rules (`sheet/rules/`), read before a criterion that touches them. `rule:a-block-has-no-owner, rule:every-role-sees-everything`',
+        ...citeLines('criteria.roles'),
         'A control a role may not use: greyed with its refusal line or left out — asked per control, written in the criterion and the spec row, no default. `rule:greyed-or-hidden-per-control`',
         'Three modes: an epic is one feature ticket (`reconStop` where recon’s questions need a stop); anything else standard at 2+ points, fast at 0–1 (`roadmaps/tracks.ts`); only upward. Mark the factors at refinement. `rule:three-ticket-modes`',
-        'Block ids: read rule:short-random-block-ids in `sheet/rules/architectureRules.ts` (short, random, who mints them)',
-        'A command’s route stands on a typed row: its ticket types `sheet/contract/commands.ts · body` (`field: Type`, `writes`) at refinement; prose has no route. `rule:command-body-is-typed`',
+        ...citeLines('criteria.model'),
         'The look is the repo’s: no spec-sync test, no criterion that equals a row, no count of rows; the PM checks screens by hand. `rule:the-look-is-the-repos` · a report that moved a component carries the repo’s copy of the spec, written on the sheet’s as fetched, and the sheet takes it whole (SP1, SP2)',
         'A shape the sheet does not name: the build side builds it and never stops — inside one organism reported as guessed; a new global atom or molecule reported with what, where and why, and its row written here after the report · a test case the sheet lacks: added on the flow’s entry. `rule:unnamed-shape-built-not-stopped`',
         'In a feature run the build side never stops for a question: it decides and writes “did X because Y” — contract decisions in the snapshot, the rest in the report, a new event marked. Stops: a digest that differs, the snapshot, the report. `rule:feature-run-never-stops`',
-        'A 403 names who can: one refusal key per actor set, its sentence on the sheet at the first command with that set. `rule:refusal-per-actor-set`',
+        ...citeLines('criteria.refusals'),
         'Who may act is the product’s requirement rows: a criterion that names who may act reads them first.',
-        'A stated read is checked in the decide at version_moved’s tier; the claim stays the guard in the write; a version alone is a rule. `rule:decide-checks-the-stated-read`',
-        'A refusal with a line shows where the press was: in its window with what was typed, or as the notification when there is no window. `rule:refusal-shows-where-pressed`',
-        'A list page is one statement on current snapshots; a stale one heals once, apart and uncounted. `rule:one-statement-per-page`',
+        ...citeLines('criteria.reads'),
         'The build side never writes here — even with the MCP connected. `rule:build-side-never-writes-spec`',
         'The logic first, the words after the MVP: colour, icon and the status’s name show a state; no new or polished sentence until then, a words-only question takes what is built. `D33`',
         'A later epic writes into the files an earlier one builds; every row, case and field names its epic, and a build takes behaviour and log up to its own: rows by epic, cases by since, fields by `FIELD_SINCE`. Types of every row may be emitted. `rule:rows-name-their-feature`',

@@ -77,8 +77,9 @@ describe('a release record is whole', () => {
   });
 
   it('every record after the tool is written by it, each count its lines', () => {
-    const records = fs
-      .readdirSync(path.join(ROOT, 'records'))
+    // a product that has released nothing holds no records
+    const folder = path.join(ROOT, 'records');
+    const records = (fs.existsSync(folder) ? fs.readdirSync(folder) : [])
       .filter((name) => /^release-[\d-]+\.md$/.test(name))
       .filter((name) => !BEFORE_THE_TOOL.includes(name));
     const faults = records.flatMap((name) => {

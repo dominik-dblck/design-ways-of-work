@@ -71,10 +71,10 @@ function boardCounts(): Readonly<Record<string, number>> {
   };
 }
 
-// every story should have a ticket; the push epic's wait for their epic
+// every story should have a ticket, but those of an epic whose stories wait for epics of their own
 function uncoveredStories(): readonly string[] {
   const have = new Set(TICKETS.map((ticket) => ticket.story));
-  return EPICS.filter((epic) => epic.id !== 'EPUSH')
+  return EPICS.filter((epic) => epic.storiesWait !== true)
     .flatMap((epic) => epic.stories)
     .filter((story) => !have.has(story.id))
     .map((story) => `${story.id} · ${story.title}`);

@@ -1,30 +1,15 @@
 /**
  * - `docs/rules/one-home.md`: a block is written once · fifty tokens alike, in two files or twice in one
- * - imports are left out; a pair the PM has still to decide is named below with its finding
+ * - imports are left out; a pair the product holds open stands in `openPairs.ts` beside
  */
 import { createHash } from 'node:crypto';
 import ts from 'typescript';
 import { describe, expect, it } from 'vitest';
 import { productionSources } from './tree.ts';
+import { OPEN_PAIRS } from './openPairs.ts';
 import type { Source } from './tree.ts';
 
 const SAME_TOKENS = 50;
-
-// a pair the sheet still holds open, or holds as two facts that agree by value, each with its reason
-const OPEN: readonly (readonly [string, string])[] = [
-  [
-    'app/styles/componentsSpec/atomsButton.ts · app/styles/componentsSpec/atomsIconButton.ts',
-    'two facts: each control names the tokens it draws, the shared choice is the tokens',
-  ],
-  [
-    'app/styles/componentsSpec/atomsCheckbox.ts · app/styles/componentsSpec/atomsCheckbox.ts',
-    'two facts: Checkbox and Radio name the same tokens unchecked, the shared choice is the tokens',
-  ],
-  [
-    'sheet/model/catalog/campaignRows.ts · sheet/model/catalog/summerRows.ts',
-    'two facts: two sample campaigns, alike by chance',
-  ],
-];
 
 type Token = { readonly text: string; readonly at: number };
 type Spot = { readonly source: Source; readonly start: number };
@@ -106,7 +91,7 @@ describe('a block is written once', () => {
   });
 
   it('no block is written twice but the pairs open on the sheet', () => {
-    const open = new Set(OPEN.map(([pair]) => pair));
+    const open = new Set(OPEN_PAIRS.map(([pair]) => pair));
     const found = pairsWrittenTwice(productionSources());
     expect(found.filter((pair) => !open.has(pair))).toEqual([]);
     expect(

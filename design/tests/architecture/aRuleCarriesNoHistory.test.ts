@@ -55,7 +55,6 @@ describe('a rule carries no history', () => {
 
   it('no rule, no checklist line and no product rule carries its history', () => {
     const rows: readonly Row[] = [...rules, ...ticketChecklist, ...productRows];
-    expect(rows.length).toBeGreaterThan(90);
     expect(rows.flatMap(historyIn)).toEqual([]);
   });
 

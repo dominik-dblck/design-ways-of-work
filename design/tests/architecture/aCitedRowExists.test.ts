@@ -60,9 +60,6 @@ describe('a cited row exists', () => {
       ...theSkills(),
       ...textsUnder('docs/rules', ['.md']),
     ];
-    expect(process.flatMap((one) => citedIn(one.text)).length).toBeGreaterThan(
-      20,
-    );
     expect(faultsIn(process, keys)).toEqual([]);
   });
 

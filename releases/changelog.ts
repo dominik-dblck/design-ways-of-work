@@ -5,9 +5,10 @@
 import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
 const NEXT: Unreleased = {
-  kind: 'patch',
-  what: '',
-  action: 'none: move the pin to the tag',
+  kind: 'minor',
+  what: 'the homes are green on a product that names none, the sample: the board skips an epic whose stories wait (`storiesWait` on its row), never one named by id; the criteria skill asks the product for its own lines (`criteria.*` slots); a home test asserts the relation, never a product’s count; the pairs of blocks a product holds open stand in its `tests/architecture/openPairs.ts`; the new-project guide names only paths every product holds; knip in a product reads the files its take wrote as entries, judging its own code alone; `tools/writeGenerated.ts` writes every file the scope’s generators own',
+  action:
+    'the pin to the tag: its migration marks the push epic’s stories as waiting, writes its criteria lines and its open pairs into files of its own, and gathers the lines in its slots; the counts the homes no longer hold stand in its own tests if it wants them',
   rules: { added: [], changed: [], removed: [] },
   outputs: {},
 };

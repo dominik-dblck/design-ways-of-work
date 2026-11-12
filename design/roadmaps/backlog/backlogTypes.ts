@@ -30,6 +30,8 @@ interface EpicRow {
   readonly code: string;
   // the screens in the register this epic starts serving
   readonly screens: readonly string[];
+  // its stories wait for epics of their own: no ticket is asked of them
+  readonly storiesWait?: true;
 }
 
 interface Story {

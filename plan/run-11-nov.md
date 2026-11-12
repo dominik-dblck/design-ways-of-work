@@ -1136,3 +1136,19 @@ Each call: what, why, how to undo. None changes what the PM sees.
   closed. eagle-design's input for task 18: an epic whose stories wait is a field of its row, never a home's id;
   knip in a product reads the taken files as entries, this repository's knip over the sample finds a home's
   dead export; a home's test asserts the relation, its floors and the product's paths become the product's tests.
+- Task 18, piece a, the homes green on the sample, ten of ten from nothing. Each red was a home holding a
+  product's fact, mended where the fact belongs, on eagle-design's own reading of each:
+  the board skips an epic whose row says its stories wait (`storiesWait`), never `EPUSH` by id; the criteria
+  skill's nine lines citing the product's rules come from the product (`criteria.*` slots, eagle-design's text
+  byte for byte); the open pairs of blocks stand in the product's `tests/architecture/openPairs.ts`, beside the
+  test (an entry's export a test alone reads is unread); a home test asserts the relation, never a count (rules
+  over 90, cites over 20: eagle-design keeps them as its own tests if it wants), a product with no release holds no
+  `records/`, the board and the panel draw the first command ticket where one is held, the pace forecasts
+  nothing with no ticket done; the new-project guide names only paths every product holds. knip in a product
+  reads the files its take wrote as entries, so a product judges its own code (eagle-design's pick, A of two:
+  the other moved the readers back into the product). Why: a product cannot judge a home's API by its own
+  reads. Left, a known gap: a home's export no product reads is found by no check. Undo: revert it.
+- The sample holds its generated files as a product does (skills, process documents); `tools/writeGenerated.ts`
+  (a home) runs every generator of the scope; `yarn sample` fails on a generated file gone stale and
+  `yarn sample --emit` writes them back. The sample caught a home's header past its width that no check here
+  reads: the reason it runs.

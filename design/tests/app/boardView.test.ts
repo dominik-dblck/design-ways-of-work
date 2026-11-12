@@ -71,16 +71,23 @@ describe('the board view', () => {
     ).length;
     expect(Math.round(spread)).toBe(done);
     expect(pace.daysLeft).toBe(
-      Math.ceil(pace.ticketsLeft / pace.ticketsPerDay),
+      pace.ticketsPerDay
+        ? Math.ceil(pace.ticketsLeft / pace.ticketsPerDay)
+        : null,
     );
   });
 
   it('a command ticket opens with its command, refusals and reads resolved', () => {
-    const command = allTickets().find((one) => one.command !== null);
-    const opened = ticketDetailOf(command?.id ?? '');
-    expect(opened?.command).toContain(' · ');
-    expect(opened?.reading.length).toBe(opened?.read.length);
-    for (const one of opened?.reading ?? []) expect(one.title).not.toBe('');
+    // the first command ticket, where the product holds one
+    const first = allTickets()
+      .filter((one) => one.command !== null)
+      .slice(0, 1);
+    for (const command of first) {
+      const opened = ticketDetailOf(command.id);
+      expect(opened?.command).toContain(' · ');
+      expect(opened?.reading.length).toBe(opened?.read.length);
+      for (const one of opened?.reading ?? []) expect(one.title).not.toBe('');
+    }
   });
 
   it('an idea opens to its points, its example and its questions', () => {
