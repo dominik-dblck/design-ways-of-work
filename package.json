@@ -33,6 +33,7 @@
     "consumers": "node scripts/consumers.ts",
     "release": "node scripts/release.ts",
     "hooks": "husky",
+    "hooks:user": "node shared/user-hooks/installUserHooks.ts",
     "take-dev-map": "node scripts/takeDevMap.ts",
     "take-dev-claude": "node scripts/takeDevClaude.ts",
     "backup": "zsh design/tools/zipRepo.sh"

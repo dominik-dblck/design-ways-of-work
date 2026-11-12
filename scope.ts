@@ -50,6 +50,7 @@ const scope: RepoScope = {
   starts: [
     'scripts/*.ts',
     'shared/hooks/*.ts',
+    'shared/user-hooks/*.ts',
     'design-system/index.ts',
     'shared/tests/baseline.ts',
   ],

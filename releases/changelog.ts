@@ -5,9 +5,10 @@
 import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
 const NEXT: Unreleased = {
-  kind: 'patch',
-  what: '',
-  action: 'none: move the pin to the tag',
+  kind: 'minor',
+  what: 'the user hooks of the way of working stand in `shared/user-hooks/`, byte for byte as the machine runs them, and tested: the work mode (read at every turn, its flag refused to an agent) and the run’s bars; `installUserHooks.ts` writes one a machine lacks, keeps one byte-equal, and never overwrites one that differs',
+  action:
+    'the pin to the tag; on a new machine, `node shared/user-hooks/installUserHooks.ts` (this repository: `yarn hooks:user`); a hook that differs on the machine is left as it is and reported',
   rules: { added: [], changed: [], removed: [] },
   outputs: {},
 };

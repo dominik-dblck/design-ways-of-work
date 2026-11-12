@@ -55,7 +55,9 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
   stage 2.
 - A commit pushed straight to `main` from a clone with no hooks is checked by nothing here: a branch
   protection on the remote alone closes that.
-- The hooks outside every repository (the work mode, the run bars) are not versioned or tested here.
+- Two user hooks stay outside: `slackAtStop.py` holds a person's Slack id, `peerReview.py` this repository's
+  path and its peer by name. Each becomes a home once that data moves to a local file it reads. Where a hook
+  is wired is each repository's own `settings.local.json`: this repository's runs the bars, not the mode.
 - A port that takes its trunk takes the trunk's generated copies too (`vendor/wow/`, the emitted skills):
   the port's build writes them back from its pin, so they settle at the next take. `scripts/portMerge.ts`
   could keep the port's side for what a build writes.

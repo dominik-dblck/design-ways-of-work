@@ -1090,3 +1090,11 @@ Each call: what, why, how to undo. None changes what the PM sees.
   "he", in the notes and the scope, as it asked; the end state of the moved rows' words in the state's gaps.
 - v0.13.0 out under W30: its tag on e021f38, on the remote, at the first try (feature tier 281 s); the gate on
   c38e5a1 green, the product's feature tier on the gate's clone ten of ten. Task 15 closed.
+- Task 16, the user hooks as homes (W28, W29, W31): `workMode.py` and `runBars.py` stand in `shared/user-hooks/`
+  byte for byte as `~/.claude/hooks` holds them (`cmp`), tested on a home of the test's own (the machine's
+  hooks and the mode's flag never read or written: the flag still says autonomy since 15:27). The installer
+  writes a hook a machine lacks, keeps one byte-equal and leaves one that differs, failing: no session edits an
+  installed hook, so a change reaches a machine only by a release on the PM's word (W29). Bringing the mode's
+  hook in byte-equal is a W30 release (W31). Left local, as gaps: `slackAtStop.py` (a person's Slack id) and
+  `peerReview.py` (this repository's path and its peer by name); the hooks of other repositories (the build
+  side's runs, reviews) are theirs. Undo: revert it.
