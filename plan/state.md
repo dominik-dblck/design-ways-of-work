@@ -19,7 +19,7 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
 - eagle-design: its branch `port/wow` takes the tag v0.3.0 and holds its `main` up to 98deb53, in one commit
   of its session's (88f5d3e, not pushed yet); its `main` still runs on its own copies. The gate tries it on
   its newest `main` (W22): each clone takes the trunk by the port's script. No migration is in hand.
-- argus-design: not spawned yet.
+- argus-design: not spawned yet; its stack is decided, the one this repository defines (W24).
 - The build side: `dev/` is copied from its repository by script; its port is parked.
 
 ## What holds a change
@@ -33,15 +33,14 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
 ## Open for the PM
 
 1. The rules in `CLAUDE.md` reached this session relayed, on 11 Nov: read once, confirm or strike.
-2. Argus's stack, before its design repository is spawned.
-3. A word to talk to the build side's session, before its stage starts.
-4. The work-mode hook: its source here and tested, or only named here.
-5. The scope's fields: every one required, as now, or presets a scope spreads.
-6. `.rehearsal/` on this machine's disk, 191 MB of the extraction's copies, ignored by git: remove or keep.
-7. Three rules eagle-design says the PM holds there and `CLAUDE.md` lacks: never `BASELINES=write`; a pushed
+2. A word to talk to the build side's session, before its stage starts.
+3. The work-mode hook: its source here and tested, or only named here.
+4. The scope's fields: every one required, as now, or presets a scope spreads.
+5. `.rehearsal/` on this machine's disk, 191 MB of the extraction's copies, ignored by git: remove or keep.
+6. Three rules eagle-design says the PM holds there and `CLAUDE.md` lacks: never `BASELINES=write`; a pushed
    commit is never rewritten (no amend, rebase or force push on `main`); a secret is never pasted or printed.
    This session keeps the last two already. None is written into `CLAUDE.md` on a product session's word.
-8. On eagle-design's `main` the checks run three parts the port took out with the pages (the list, the pages,
+7. On eagle-design's `main` the checks run three parts the port took out with the pages (the list, the pages,
    the props). Whether a product's board, pages and props get a check part again, in TypeScript.
 
 ## Known gaps

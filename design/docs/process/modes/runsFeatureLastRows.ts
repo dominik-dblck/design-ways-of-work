@@ -2,6 +2,7 @@
  * - `RUNS_FEATURE_LAST_ROWS` · the feature run’s last rows, in the page’s order
  */
 import { EXAMPLE_TICKET } from './modeExample.ts';
+import { STACK } from '../productStack.ts';
 const RUNS_FEATURE_LAST_ROWS = [
   {
     n: '6',
@@ -20,7 +21,7 @@ const RUNS_FEATURE_LAST_ROWS = [
     n: '7',
     name: 'Journeys',
     cc: {
-      title: 'One Playwright flow per journey, a category at a time',
+      title: `One ${STACK.browserTests.name} flow per journey, a category at a time`,
       chips: ['e2e-discovery → e2e-category'],
       bullets: [
         'red once on a planted fault, then green',

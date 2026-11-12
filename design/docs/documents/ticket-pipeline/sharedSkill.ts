@@ -3,6 +3,7 @@
  */
 import type { DocumentSection } from '../documentTypes.ts';
 import { cite, citeLines } from '../cited.ts';
+import { STACK } from '../../process/productStack.ts';
 
 export const SHARED_SKILL: readonly DocumentSection[] = [
   {
@@ -100,7 +101,9 @@ export const SHARED_SKILL: readonly DocumentSection[] = [
     lines: [
       '',
       'The design side says what — values as tokens, states, parts, a layout line, what is forbidden. This',
-      "side decides how — file, tier, props, DOM, MUI slot — from the repository's conventions. A test asserts",
+      'side decides how — file, tier, props, DOM, ' +
+        STACK.components.name +
+        " slot — from the repository's conventions. A test asserts",
       'a value or a mechanism; a shape is checked by a reader at arch-review and snapshot, never parsed. A',
       'criterion that says how is a finding at recon.' + cite('sharedSkill.10'),
       '',

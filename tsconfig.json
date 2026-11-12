@@ -19,6 +19,7 @@
     "shared/skills/**/*.ts",
     "shared/take/**/*.ts",
     "shared/repoScope.ts",
+    "shared/stack/**/*.ts",
     "shared/tests/**/*.ts",
     "scope.ts",
     "design-system/**/*.ts",

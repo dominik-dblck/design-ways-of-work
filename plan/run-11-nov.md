@@ -757,3 +757,14 @@ Each call: what, why, how to undo. None changes what the PM sees.
   migration is skipped and what the script left is the trial's BROKEN lines. eagle-design lays the five on
   port/wow. Open: the scratch tests hold no port with a trunk yet, so this path has no mechanism test; one
   is a task of its own. Undo: revert it.
+- 7a, the stack (this commit), on the PM's A (12 Nov, W24): `shared/stack/` defines the one stack by key,
+  `web`, each part's name and its packages; a product's `sheet/project.ts` names it (`stack`), a migration edit
+  writing it for eagle-design; the home's documents and the journey grammar read the part's name through
+  `docs/process/productStack.ts` instead of writing MUI and Playwright. My call, over the relayed "product.ts
+  names it": names stand in `sheet/project.ts`, pure data a page may bundle, as the product's type says;
+  `product.ts` holds code. The build side's scope names it in stage 4. Every printed text stays byte for byte
+  for eagle-design. Undo: revert it.
+- 7b, the atoms (PM, 12 Nov · A, by the form, W25): a probe copied eagle's 25 atoms and their theme into the
+  gate's clone: 11 tsc errors, 47 lint findings under this side's rules (eagle runs its own config). Sent to
+  eagle-dev on the PM's word, nine points with file and line; the sync script waits for its sha. The sheet's
+  `Button` and `Badge` types rename on eagle-design's side (cf4530c), the atoms keep the design system's names.

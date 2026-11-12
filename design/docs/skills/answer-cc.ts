@@ -2,6 +2,7 @@
  * - `skill` · design-answer-cc: what it does, when to use it, its sections
  */
 import type { SkillFile } from './skillTypes.ts';
+import { STACK } from '../process/productStack.ts';
 
 const skill: SkillFile = {
   title: "design-answer-cc · the repo session's messages",
@@ -29,7 +30,9 @@ const skill: SkillFile = {
       first: null,
       lines: [
         "One fenced English block: status decision first · answers in the build side's order · what moved on the sheet (file · what) · digests (`roadmaps/tickets.ts`, pack, any fixture) · questions back.",
-        "Address tickets by ids that exist. Never restate MUI's behaviour. Never send a number read from prose.",
+        'Address tickets by ids that exist. Never restate ' +
+          STACK.components.name +
+          "'s behaviour. Never send a number read from prose.",
         "The build side reads `ticket-pipeline.md` as its skills; a lesson lands there first: the way of working's rule in its data `docs/documents/ticket-pipeline/`, the product's cite in `docs/process/documentSlots.ts` (design side), and the build side regenerates by digest. `rule:process-docs-authored-here`",
         'The block is fenced (```) so the PM copies it in one click; no emoji.',
       ],

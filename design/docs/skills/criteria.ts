@@ -2,6 +2,7 @@
  * - `skill` · design-criteria: what it does, when to use it, its sections
  */
 import type { SkillFile } from './skillTypes.ts';
+import { STACK } from '../process/productStack.ts';
 
 const skill: SkillFile = {
   title: 'design-criteria · what a criterion may say',
@@ -16,7 +17,9 @@ const skill: SkillFile = {
       first: null,
       lines: [
         'The design side says WHAT: values as tokens, states, parts, a layout line to read, what is forbidden. No criterion asserts a row: the look is the repo’s and the PM checks it by hand. `rule:the-look-is-the-repos`',
-        "The build side decides HOW: file, tier, props, DOM, MUI slot — from the repository's conventions, which this side cannot see and never guesses at.",
+        'The build side decides HOW: file, tier, props, DOM, ' +
+          STACK.components.name +
+          " slot — from the repository's conventions, which this side cannot see and never guesses at.",
         'A test asserts a value or a mechanism: an answer, a refusal, a digest, a journey — never a spec row’s look (`rule:the-look-is-the-repos`). `rule:test-asserts-value-not-look` · journeys come from the people’s actions and are checked against the test cases, never generated from them (JR1)',
         'A shape — order of parts, which props, where the badge sits — is checked by a reader at arch-review and snapshot, against the spec. Never parsed by a test.',
         'A criterion that starts to say how is the wrong side writing.',

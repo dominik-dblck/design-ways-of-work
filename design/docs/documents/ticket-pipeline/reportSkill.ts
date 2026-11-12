@@ -4,6 +4,7 @@
 import type { DocumentSection } from '../documentTypes.ts';
 import { cite, citeLines } from '../cited.ts';
 import { buildBranch } from '../../../sheet/project.ts';
+import { STACK } from '../../process/productStack.ts';
 
 export const REPORT_SKILL: readonly DocumentSection[] = [
   {
@@ -46,7 +47,9 @@ export const REPORT_SKILL: readonly DocumentSection[] = [
       '6a. **The spec copy.** A run that moved a component — a new one, a tier, a wrapper, what a row composes —',
       '   attaches `app/styles/componentsSpec.ts`, written on the sheet’s spec as fetched for the run, never on',
       '   an older copy here. The tree writes what it holds: tier and wrapper from the folder, each part’s kind,',
-      '   what a row composes from its imports, and a component the run built from its code (MUI imports, props,',
+      '   what a row composes from its imports, and a component the run built from its code (' +
+        STACK.components.name +
+        ' imports, props,',
       '   layout). Every field the tree cannot see stays as the sheet wrote it: words, notes, tokens, `wireframe`,',
       '   `live`, `fingerprints`, `tests`, `changedIn`. Every row added, moved or renamed is named; the sheet',
       '   takes the file whole (SP1).' + cite('reportSkill.3'),

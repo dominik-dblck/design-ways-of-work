@@ -4,6 +4,7 @@
 import type { DocumentSection } from '../documentTypes.ts';
 import { cite, citeLines } from '../cited.ts';
 import { buildBranch } from '../../../sheet/project.ts';
+import { STACK } from '../../process/productStack.ts';
 
 export const FEATURE_SKILL: readonly DocumentSection[] = [
   {
@@ -82,7 +83,9 @@ export const FEATURE_SKILL: readonly DocumentSection[] = [
       '   No test is written before a screen — the journeys follow it',
       '7. Browser flows through the e2e skills, without their stops: `e2e-discovery` extends each screen’s',
       '   catalogue from the ticket’s journeys — one entry per journey, its `expectedResult` the journey’s check. A',
-      '   journey is a row of `journeys.ts` in the pack: steps `[where, does, sees, covers]`, one Playwright flow per',
+      '   journey is a row of `journeys.ts` in the pack: steps `[where, does, sees, covers]`, one ' +
+        STACK.browserTests.name +
+        ' flow per',
       '   journey under `e2e/`, the file named by the repository’s own rule, its title opening with the journey’s id; `covers` names the test cases a step',
       '   makes happen and stays in `journeys.ts`, the flow’s catalogue entry listing the journey’s cases whole; a case the',
       '   sheet does not hold, met while writing the flow, goes on the entry as `added: [{ step, case, why }]` and in the report,',

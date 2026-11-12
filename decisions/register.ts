@@ -166,6 +166,20 @@ const DECISIONS: readonly Decision[] = [
     says: 'v0.3.0 goes out so eagle-design’s branch can take its `main` now, in one commit of its own: the merge, its pin, its migration. v1.0.0 stays the end of the design side, on the PM’s word.',
     from: 'plan/run-11-nov.md',
   },
+  {
+    id: 'W24',
+    title: 'one stack, defined here',
+    held: '12 Nov · A',
+    says: 'every product is built on the stack the way of working defines (Next, React, MUI, TanStack Query, Zod, Vitest, Playwright, Postgres, the company’s design system), and its project names it by key; its stack’s parts and atoms come in stage 2, before the sample product.',
+    from: 'plan/run-11-nov.md',
+  },
+  {
+    id: 'W25',
+    title: 'the build side’s atoms, synced once they pass here',
+    held: '12 Nov · A',
+    says: 'the build side mends its atoms to this repository’s rules on its own tree, then a script copies them here unchanged, never a hand copy, until its port turns the direction.',
+    from: 'plan/run-11-nov.md',
+  },
 ];
 
 export { DECISIONS };

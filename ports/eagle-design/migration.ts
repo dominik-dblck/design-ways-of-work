@@ -5,6 +5,7 @@
 import type { Migration } from '../../scripts/migrationTypes.ts';
 import { PLAN_EDITS } from './migration/planEdits.ts';
 import { RECORD_EDITS } from './migration/recordEdits.ts';
+import { STACK_EDITS } from './migration/stackEdits.ts';
 
 const APPROVAL = 'sheet/logic/approval/approvalLogic';
 const LOGIC_TYPES = `${APPROVAL}/approvalLogicTypes.ts`;
@@ -181,6 +182,7 @@ import { readStarts } from './tools/readStarts.ts';
     },
     ...PLAN_EDITS,
     ...RECORD_EDITS,
+    ...STACK_EDITS,
   ],
   tree: 'ports/eagle-design/tree',
 };
