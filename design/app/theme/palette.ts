@@ -1,13 +1,23 @@
 /**
- * - `paletteFor` · the MUI palette of one mode, every value a token's
+ * - `paletteFor` · the MUI palette of one mode, code's inks too, each a token's
  */
 import type { PaletteOptions } from '@mui/material/styles';
 import type { Mode } from '../styles/tokens.ts';
 import { colourOf } from './tokenReads.ts';
 
+type Read = (key: Parameters<typeof colourOf>[0]) => string;
+
+// TypeScript as the original drew it: keywords blue, type names amber, strings green
+const codeInksOf = (read: Read): NonNullable<PaletteOptions['code']> => ({
+  keyword: read('b300'),
+  type: read('o500'),
+  string: read('g600'),
+  number: read('y500'),
+  comment: read('n500'),
+});
+
 function paletteFor(mode: Mode): PaletteOptions {
-  const read = (key: Parameters<typeof colourOf>[0]): string =>
-    colourOf(key, mode);
+  const read: Read = (key) => colourOf(key, mode);
   return {
     mode,
     primary: {
@@ -39,6 +49,7 @@ function paletteFor(mode: Mode): PaletteOptions {
     },
     background: { default: read('bgSecondary'), paper: read('uiPaperBg') },
     divider: read('bgDivider'),
+    code: codeInksOf(read),
   };
 }
 

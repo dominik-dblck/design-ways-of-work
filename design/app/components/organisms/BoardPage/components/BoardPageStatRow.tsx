@@ -13,7 +13,7 @@ interface BoardPageStatRowProps {
 
 function BoardPageStatRow({ stats }: BoardPageStatRowProps): ReactElement {
   return (
-    <Stack direction={{ xs: 'column', md: 'row' }} spacing={2.5}>
+    <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5}>
       {stats.map((stat) => (
         <BoardPageStatTile key={stat.label} stat={stat} />
       ))}

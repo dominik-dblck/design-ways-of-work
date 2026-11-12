@@ -1,20 +1,17 @@
 /**
- * - `FeaturePageHead` · eyebrow, title, what the page is
- * - tabs, steps and jumps
+ * - `FeaturePageHead` · the way back, the epic tabs, the title
+ * - its source check folded, its steps
  */
-import Chip from '@mui/material/Chip';
+import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import Tab from '@mui/material/Tab';
-import Tabs from '@mui/material/Tabs';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
-import {
-  features,
-  featureWords as words,
-} from '../../../../workspace/featureView.ts';
+import { boardHref } from '../../../../workspace/boardView.ts';
+import { featureWords as words } from '../../../../workspace/featureView.ts';
 import type { FeatureView } from '../../../../workspace/featureView.ts';
+import { FeaturePageEpicTabs } from './FeaturePageEpicTabs.tsx';
+import { FeaturePageSourceSection } from './FeaturePageSourceSection.tsx';
 import { FeaturePageSteps } from './FeaturePageSteps.tsx';
-import { jumpsOf } from '../utils/featurePageHeadJumpUtils.ts';
 
 interface FeaturePageHeadProps {
   readonly view: FeatureView;
@@ -24,37 +21,20 @@ interface FeaturePageHeadProps {
 function FeaturePageHead({ view, onEpic }: FeaturePageHeadProps): ReactElement {
   return (
     <Stack spacing={1.5}>
+      <Button
+        href={boardHref}
+        size="small"
+        sx={{ alignSelf: 'flex-start' }}
+      >{`← ${words.board}`}</Button>
       <Typography variant="overline" color="textSecondary">
         {words.eyebrow}
       </Typography>
+      <FeaturePageEpicTabs epic={view.epic} onEpic={onEpic} />
       <Typography variant="h3" component="h1">
         {view.title}
       </Typography>
-      <Typography variant="body1" color="textSecondary" sx={{ maxWidth: 760 }}>
-        {words.intro}
-      </Typography>
-      <Tabs
-        value={view.epic}
-        onChange={(_, epic: string) => onEpic(epic)}
-        variant="scrollable"
-      >
-        {features().map((tab) => (
-          <Tab key={tab.epic} value={tab.epic} label={tab.label} />
-        ))}
-      </Tabs>
+      <FeaturePageSourceSection />
       <FeaturePageSteps steps={view.steps} />
-      <Stack direction="row" spacing={1} useFlexGap sx={{ flexWrap: 'wrap' }}>
-        {jumpsOf(view).map(([anchor, label, count]) => (
-          <Chip
-            key={anchor}
-            component="a"
-            href={`#${anchor}`}
-            clickable
-            variant="outlined"
-            label={`${label} · ${count}`}
-          />
-        ))}
-      </Stack>
     </Stack>
   );
 }

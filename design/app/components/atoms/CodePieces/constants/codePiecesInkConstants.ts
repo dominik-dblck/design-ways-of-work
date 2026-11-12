@@ -3,13 +3,13 @@
  */
 import type { TokenKind } from '../../../../workspace/contractView.ts';
 
-// a piece's colour, as a palette role
+// a piece's colour, as a palette role: the theme's code inks, as the original drew them
 const INK: Readonly<Record<TokenKind, string>> = {
-  com: 'text.secondary',
-  kw: 'info.dark',
-  type: 'text.primary',
-  str: 'success.dark',
-  num: 'warning.dark',
+  com: 'code.comment',
+  kw: 'code.keyword',
+  type: 'code.type',
+  str: 'code.string',
+  num: 'code.number',
   txt: 'text.primary',
   warn: 'error.main',
 };

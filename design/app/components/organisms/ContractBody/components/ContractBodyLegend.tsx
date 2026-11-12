@@ -1,5 +1,5 @@
 /**
- * - `ContractPageLegend` · how a typed, a drafted, an untyped name look, and why
+ * - `ContractBodyLegend` · how a typed, a drafted, an untyped name look, and why
  */
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
@@ -7,11 +7,11 @@ import type { ReactElement } from 'react';
 import type { LegendItem } from '../../../../workspace/contractView.ts';
 import { CodePieces } from '../../../atoms/CodePieces/index.ts';
 
-interface ContractPageLegendProps {
+interface ContractBodyLegendProps {
   readonly legend: readonly LegendItem[];
 }
 
-function ContractPageLegend({ legend }: ContractPageLegendProps): ReactElement {
+function ContractBodyLegend({ legend }: ContractBodyLegendProps): ReactElement {
   return (
     <Stack direction="row" spacing={3} useFlexGap sx={{ flexWrap: 'wrap' }}>
       {legend.map((entry) => (
@@ -26,4 +26,4 @@ function ContractPageLegend({ legend }: ContractPageLegendProps): ReactElement {
   );
 }
 
-export { ContractPageLegend };
+export { ContractBodyLegend };

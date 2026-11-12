@@ -6,9 +6,8 @@
 import { all as TICKETS } from '../../roadmaps/tickets.ts';
 import { byId as EPICS } from '../../roadmaps/backlog.ts';
 import { stepsOf } from '../../roadmaps/features.ts';
-import { notesOf } from '../../roadmaps/notes.ts';
 import { casesOfEpic, flat, named } from '../../sheet/cases/testCases.ts';
-import { ticketDetailOf } from './boardView.ts';
+import { cards, ticketDetailOf } from './boardView.ts';
 import { endpointsOf, piecesOf } from './contractView.ts';
 import { caseGroupsOf, caseKindsOf } from './featureView/featureCases.ts';
 import { coverOf } from './featureView/featureCover.ts';
@@ -18,27 +17,24 @@ import {
   countLine,
   statesNamed,
 } from './featureView/featureCombinations.ts';
+import { notesViewOf } from './featureView/featureNotes.ts';
 import { FEATURE_WORDS } from './featureView/featureWords.ts';
 import type { ProductFields, ProductView } from '../../tools/productTypes.ts';
 import type { FeatureTab, FeatureView } from './featureView/featureTypes.ts';
 
-// a feature is an epic's one ticket, numbered 00
-const A_FEATURE = /-00$/;
-
-const featureTickets = (): ReturnType<typeof TICKETS> =>
-  TICKETS().filter((one) => one.kind === 'feature' && A_FEATURE.test(one.id));
-
+// every epic has its page, in the backlog's order, its status the board's column
 function features(): readonly FeatureTab[] {
-  return featureTickets().map((one) => ({
-    epic: one.epic,
-    label: `${one.epic} · ${one.status}`,
-  }));
+  return cards().map((card) => ({ epic: card.id, status: card.column }));
 }
 
-// the first feature not done yet is the one the page opens on
+// the page opens on the epic in hand, else the first not done yet
 function firstEpic(): string | null {
-  const all = featureTickets();
-  return (all.find((one) => one.status !== 'done') ?? all.at(-1))?.epic ?? null;
+  const all = features();
+  const opened =
+    all.find((one) => one.status === 'doing') ??
+    all.find((one) => one.status !== 'done') ??
+    all.at(-1);
+  return opened?.epic ?? null;
 }
 
 const readOf = (
@@ -79,7 +75,7 @@ function featureOf(epic: string, plugs: ProductView = {}): FeatureView {
     caseKinds: caseKindsOf(caseGroups),
     ...fieldsView(plugs.fieldsOf?.(epic)),
     decisions: ticket ? (ticketDetailOf(ticket.id)?.edgeSections ?? []) : [],
-    notes: notesOf(epic),
+    notes: notesViewOf(epic),
     combinations: combinationsOf(epic),
     statesNamed: statesNamed(epic, plugs.statesOf),
     countOf: (file) => countLine(file, plugs.counters),

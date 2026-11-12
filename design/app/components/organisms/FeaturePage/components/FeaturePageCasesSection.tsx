@@ -2,12 +2,11 @@
  * - `FeaturePageCasesSection` · the epic's test cases by endpoint
  * - or of the one kind picked
  */
-import Stack from '@mui/material/Stack';
 import { useState } from 'react';
 import type { ReactElement } from 'react';
 import { featureWords as words } from '../../../../workspace/featureView.ts';
 import type { CaseGroup } from '../../../../workspace/featureView.ts';
-import { SectionHead } from '../../../atoms/SectionHead/index.ts';
+import { FoldSection } from '../../../molecules/FoldSection/index.ts';
 import { FeaturePageCaseTable } from './FeaturePageCaseTable.tsx';
 import { FeaturePageKindChips } from './FeaturePageKindChips.tsx';
 
@@ -21,6 +20,7 @@ function FeaturePageCasesSection({
   kinds,
 }: FeaturePageCasesSectionProps): ReactElement {
   const [kind, setKind] = useState<string | null>(null);
+  const total = kinds.reduce((sum, one) => sum + one.count, 0);
   const shown = groups
     .map((group) => ({
       ...group,
@@ -28,13 +28,17 @@ function FeaturePageCasesSection({
     }))
     .filter((group) => group.cases.length > 0);
   return (
-    <Stack spacing={1.5} id="cases">
-      <SectionHead label={words.cases.label} note={words.cases.note} />
+    <FoldSection
+      id="cases"
+      label={words.cases.label}
+      note={words.cases.note}
+      count={total}
+    >
       <FeaturePageKindChips kinds={kinds} kind={kind} onPick={setKind} />
       {shown.map((group) => (
         <FeaturePageCaseTable key={group.endpoint} group={group} />
       ))}
-    </Stack>
+    </FoldSection>
   );
 }
 

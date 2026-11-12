@@ -1,6 +1,6 @@
 /**
  * - `FeaturePageJourneyItem` · one journey
- * - folded, its id, goal, people; open, steps and test
+ * - folded, its id, people and counts as chips, its goal; open, its steps and test
  */
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
 import { featureWords as words } from '../../../../workspace/featureView.ts';
 import type { JourneyCard } from '../../../../workspace/featureView.ts';
+import { FeaturePageJourneyChips } from './FeaturePageJourneyChips.tsx';
 import { FeaturePageJourneyStepItem } from './FeaturePageJourneyStepItem.tsx';
 
 function FeaturePageJourneyItem({
@@ -24,18 +25,13 @@ function FeaturePageJourneyItem({
       slotProps={{ transition: { unmountOnExit: true } }}
     >
       <AccordionSummary>
-        <Stack spacing={0.25}>
-          <Typography variant="overline" color="textSecondary">
-            {`${journey.id} · ${journey.who} · ${journey.steps.length} steps`}
-          </Typography>
+        <Stack spacing={1}>
+          <FeaturePageJourneyChips journey={journey} />
           <Typography variant="subtitle1">{journey.goal}</Typography>
-          <Typography variant="caption" color="textSecondary">
-            {journey.covers}
-          </Typography>
         </Stack>
       </AccordionSummary>
       <AccordionDetails>
-        <Stack spacing={1.5}>
+        <Stack spacing={2}>
           {journey.steps.map((step) => (
             <FeaturePageJourneyStepItem key={step.n} step={step} />
           ))}

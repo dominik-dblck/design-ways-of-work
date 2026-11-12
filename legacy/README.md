@@ -37,3 +37,12 @@ A migration is what a repository does to take one release; once its branch holds
 
 - `ports/eagle-design/migration.ts` and its `tree/` · v0.3.0: eagle-design's `product.ts` and the frozen
   notebooks' registry, written on its checkout; its `port/wow` holds them since 88f5d3e
+
+## The views' retired parts
+
+What a view stopped drawing when eagle-design's `main` changed it (50cd593), kept as it stood in its home.
+
+- `design/app/components/organisms/BoardPage/components/BoardPageOutsideAndOpen.tsx` · the ports and the
+  backlog's open points under one head: the ports fold on their own, the open points went to their tickets
+- `design/app/components/organisms/FeaturePage/utils/featurePageHeadJumpUtils.ts` · the Feature page's jump
+  chips: every section folds and counts itself

@@ -12,6 +12,7 @@ import { SectionHead } from '../../../atoms/SectionHead/index.ts';
 import { FeaturePageFieldOptions } from './FeaturePageFieldOptions.tsx';
 import { FeaturePageFieldKindTable } from './FeaturePageFieldKindTable.tsx';
 import { FeaturePageFieldTable } from './FeaturePageFieldTable.tsx';
+import { FoldSection } from '../../../molecules/FoldSection/index.ts';
 
 function FeaturePageFieldsSection({
   view,
@@ -20,8 +21,13 @@ function FeaturePageFieldsSection({
 }): ReactElement | null {
   if (!view.fieldKinds.length && !view.docTypes.length) return null;
   return (
-    <Stack spacing={2} id="fields">
-      <SectionHead label={words.fields.label} note={words.fields.note} />
+    <FoldSection
+      id="fields"
+      label={words.fields.label}
+      note={words.fields.note}
+      count={view.fieldKinds.length}
+      spacing={2}
+    >
       <FeaturePageFieldKindTable kinds={view.fieldKinds} />
       <FeaturePageFieldOptions options={view.fieldOptions} />
       {view.fieldsCode.length ? (
@@ -42,7 +48,7 @@ function FeaturePageFieldsSection({
             fields={group.fields}
           />
         ))}
-    </Stack>
+    </FoldSection>
   );
 }
 

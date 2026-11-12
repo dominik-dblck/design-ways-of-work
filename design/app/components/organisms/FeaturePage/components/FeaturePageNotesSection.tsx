@@ -1,15 +1,13 @@
 /**
- * - `FeaturePageNotesSection` · the epic's notebook
- * - its lede, then each section with its lines
+ * - `FeaturePageNotesSection` · the epic's notebook, folded
+ * - its lede, then each section, its lines as bullets
  */
-import Paper from '@mui/material/Paper';
-import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
 import { featureWords as words } from '../../../../workspace/featureView.ts';
 import type { FeatureView } from '../../../../workspace/featureView.ts';
-import { SectionHead } from '../../../atoms/SectionHead/index.ts';
-import { TitledList } from '../../../atoms/TitledList/index.ts';
+import { FoldSection } from '../../../molecules/FoldSection/index.ts';
+import { FeaturePageNoteSectionCard } from './FeaturePageNoteSectionCard.tsx';
 
 function FeaturePageNotesSection({
   notes,
@@ -17,8 +15,12 @@ function FeaturePageNotesSection({
   readonly notes: FeatureView['notes'];
 }): ReactElement {
   return (
-    <Stack spacing={1.5} id="notes">
-      <SectionHead label={words.notes.label} note={words.notes.note} />
+    <FoldSection
+      id="notes"
+      label={words.notes.label}
+      note={words.notes.note}
+      count={notes?.sections.length ?? 0}
+    >
       {notes === null ? (
         <Typography variant="body2" color="textSecondary">
           {words.notes.none}
@@ -31,13 +33,11 @@ function FeaturePageNotesSection({
             </Typography>
           ))}
           {notes.sections.map((section) => (
-            <Paper key={section.title} variant="outlined" sx={{ p: 2 }}>
-              <TitledList label={section.title} lines={section.lines} />
-            </Paper>
+            <FeaturePageNoteSectionCard key={section.title} section={section} />
           ))}
         </>
       )}
-    </Stack>
+    </FoldSection>
   );
 }
 

@@ -1,12 +1,13 @@
 /**
  * - `FeaturePageJourneyStepItem` · one step
- * - where, what is done and seen, the cases it covers
+ * - its number and where, what is done and seen, the cases it covers
  */
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
 import type { JourneyStepView } from '../../../../workspace/featureView.ts';
+import { FeaturePageStepCovers } from './FeaturePageStepCovers.tsx';
 
 function FeaturePageJourneyStepItem({
   step,
@@ -14,33 +15,28 @@ function FeaturePageJourneyStepItem({
   readonly step: JourneyStepView;
 }): ReactElement {
   return (
-    <Stack spacing={0.5}>
-      <Typography
-        variant="overline"
-        color="textSecondary"
-      >{`${step.n} · ${step.where}`}</Typography>
-      <Typography variant="body2">{step.does}</Typography>
-      <Typography variant="body2" color="textSecondary">
-        {step.sees}
-      </Typography>
-      {step.covers.length ? (
-        <Stack
-          direction="row"
-          spacing={0.5}
-          useFlexGap
-          sx={{ flexWrap: 'wrap' }}
-        >
-          {step.covers.map((cover) => (
-            <Chip
-              key={cover.id}
-              size="small"
-              variant="outlined"
-              color={cover.known ? 'default' : 'error'}
-              label={`${cover.id} · ${cover.reach}`}
-            />
-          ))}
-        </Stack>
-      ) : null}
+    <Stack direction="row" spacing={1.5} sx={{ alignItems: 'flex-start' }}>
+      <Chip
+        size="small"
+        color="primary"
+        variant="outlined"
+        label={step.n}
+        sx={{ minWidth: 28 }}
+      />
+      <Stack spacing={0.75} sx={{ minWidth: 0 }}>
+        <Chip
+          size="small"
+          label={step.where}
+          sx={{ alignSelf: 'flex-start' }}
+        />
+        <Typography variant="body2">{step.does}</Typography>
+        <Typography variant="body2" color="textSecondary">
+          {`→ ${step.sees}`}
+        </Typography>
+        {step.covers.length ? (
+          <FeaturePageStepCovers covers={step.covers} />
+        ) : null}
+      </Stack>
     </Stack>
   );
 }

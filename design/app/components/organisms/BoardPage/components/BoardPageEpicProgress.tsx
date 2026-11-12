@@ -16,12 +16,10 @@ import { radiusOf } from '../../../../theme/tokenReads.ts';
 
 interface BoardPageEpicProgressProps {
   readonly progress: Progress;
-  readonly onEpic: (id: string) => void;
 }
 
 function BoardPageEpicProgress({
   progress,
-  onEpic,
 }: BoardPageEpicProgressProps): ReactElement {
   const { mvp } = progress;
   return (
@@ -52,7 +50,7 @@ function BoardPageEpicProgress({
         <Divider />
         <List dense disablePadding>
           {progress.rows.map((row) => (
-            <BoardPageEpicProgressRow key={row.id} row={row} onOpen={onEpic} />
+            <BoardPageEpicProgressRow key={row.id} row={row} />
           ))}
         </List>
       </Paper>

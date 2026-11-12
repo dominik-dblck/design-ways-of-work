@@ -3,18 +3,7 @@
  */
 const FEATURE_WORDS = {
   eyebrow: 'Feature · one epic, read whole',
-  intro:
-    'Everything one feature is made of, read from the sheet: its journeys and what they cover, its endpoints, its test cases, its fields, the decisions on its ticket, its notebook, the drawings and screens it reads, and its fact combinations.',
-  nav: {
-    journeys: 'Journeys',
-    api: 'API',
-    cases: 'Test cases',
-    fields: 'Fields',
-    docTypes: 'Document types',
-    decisions: 'Decisions',
-    notes: 'Notebook',
-    combinations: 'Combinations',
-  },
+  board: 'Back to the board',
   journeys: {
     label: 'Journeys',
     note: 'one person’s path each, one Playwright flow',

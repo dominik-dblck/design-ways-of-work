@@ -5,11 +5,11 @@
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import type { ReactElement } from 'react';
-import { open, words } from '../../../../workspace/boardView.ts';
-import { SectionHead } from '../../../atoms/SectionHead/index.ts';
-import { TitledList } from '../../../atoms/TitledList/index.ts';
-import { radiusOf } from '../../../../theme/tokenReads.ts';
-import { BoardPagePortGrid } from './BoardPagePortGrid.tsx';
+import { open, words } from '../../../../../../../design/app/workspace/boardView.ts';
+import { SectionHead } from '../../../../../../../design/app/components/atoms/SectionHead/index.ts';
+import { TitledList } from '../../../../../../../design/app/components/atoms/TitledList/index.ts';
+import { radiusOf } from '../../../../../../../design/app/theme/tokenReads.ts';
+import { BoardPagePortGrid } from '../../../../../../../design/app/components/organisms/BoardPage/components/BoardPagePortGrid.tsx';
 
 function BoardPageOutsideAndOpen(): ReactElement {
   return (

@@ -3,6 +3,7 @@
  */
 import { columns as COLUMNS } from '../../../roadmaps/tickets.ts';
 import { cards } from './boardEpics.ts';
+import { featureHrefOf } from './boardLinks.ts';
 import { BOARD_WORDS } from './boardWords.ts';
 import type { ColumnId, EpicCard } from './boardTypes.ts';
 import type {
@@ -39,6 +40,7 @@ const rowOf = (card: EpicCard): ProgressRow => ({
   mvp: card.badge.tone === 'mvp',
   badge: card.badge.label,
   column: card.column,
+  feature: featureHrefOf(card.id),
   counts: countsOf(card),
   total: card.tickets.length,
 });

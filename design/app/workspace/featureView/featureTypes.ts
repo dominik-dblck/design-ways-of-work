@@ -1,10 +1,9 @@
 /**
  * - `FeatureTab`, `FeatureView`, `CombinationView` · tab, view, combinations
  * - `JourneyCard`, `JourneyStepView`, `StepCover`, `CoverView`, `CoverLine` · walks
- * - `CaseGroup`, `CaseRow` · the test cases, grouped by endpoint
+ * - `CaseGroup`, `CaseRow`, `NoteLine`, `NotePoint`, `NotesView` · cases, notes
  */
 import type { FeatureStep } from '../../../roadmaps/features.ts';
-import type { EpicNotes } from '../../../roadmaps/notes.ts';
 import type { CodeLine, EndpointCode } from '../contractView.ts';
 import type {
   DocTypeView,
@@ -15,7 +14,7 @@ import type { Section } from '../boardView.ts';
 
 interface FeatureTab {
   readonly epic: string;
-  readonly label: string;
+  readonly status: string;
 }
 
 interface StepCover {
@@ -32,13 +31,20 @@ interface JourneyStepView {
   readonly covers: readonly StepCover[];
 }
 
+// a person on a journey: the initials a chip shows, the name it holds for the reader
+interface JourneyPerson {
+  readonly initials: string;
+  readonly name: string;
+}
+
 interface JourneyCard {
   readonly id: string;
-  readonly who: string;
+  readonly people: readonly JourneyPerson[];
   readonly goal: string;
   readonly steps: readonly JourneyStepView[];
   readonly test: string;
-  readonly covers: string;
+  // its counts as chips: its steps, the test cases it covers, the endpoints they hit
+  readonly counts: readonly string[];
 }
 
 interface CoverLine {
@@ -69,6 +75,24 @@ interface CaseGroup {
   readonly cases: readonly CaseRow[];
 }
 
+// one point of a notebook line, its words in bold kept apart
+type NotePoint = readonly { readonly text: string; readonly strong: boolean }[];
+
+// a notebook line in parts: its head in bold, who decided it and when, its points
+interface NoteLine {
+  readonly head: string | null;
+  readonly source: string | null;
+  readonly points: readonly NotePoint[];
+}
+
+interface NotesView {
+  readonly lede: readonly string[];
+  readonly sections: readonly {
+    readonly title: string;
+    readonly lines: readonly NoteLine[];
+  }[];
+}
+
 interface CombinationView {
   readonly file: string;
   readonly call: string;
@@ -81,7 +105,7 @@ interface FeatureView {
   readonly title: string;
   readonly status: string;
   readonly steps: readonly FeatureStep[];
-  readonly notes: EpicNotes | null;
+  readonly notes: NotesView | null;
   readonly journeys: readonly JourneyCard[];
   readonly cover: CoverView | null;
   readonly endpoints: readonly EndpointCode[];
@@ -111,5 +135,8 @@ export type {
   FeatureView,
   JourneyCard,
   JourneyStepView,
+  NoteLine,
+  NotePoint,
+  NotesView,
   StepCover,
 };

@@ -14,8 +14,6 @@ type Step = Journey['steps'][number];
 const counted = (count: number, noun: string): string =>
   `${count} ${noun}${count === 1 ? '' : 's'}`;
 
-const nameOf = (initials: string): string => PEOPLE[initials]?.name ?? initials;
-
 function whereOf(where: Step[0]): string {
   return typeof where === 'string'
     ? JOURNEYS.say(where)
@@ -40,7 +38,10 @@ function cardOf(
   const endpoints = new Set(all.map((id) => id.split('.')[0]));
   return {
     id: journey.id,
-    who: journey.who.map(nameOf).join(', '),
+    people: journey.who.map((initials) => ({
+      initials,
+      name: PEOPLE[initials]?.name ?? initials,
+    })),
     goal: journey.goal,
     steps: journey.steps.map((step, at) => ({
       n: at + 1,
@@ -50,7 +51,11 @@ function cardOf(
       covers: coversOf(step[3] ?? [], cases),
     })),
     test: JOURNEYS.say(journey.test),
-    covers: `${counted(all.length, 'test case')} over ${counted(endpoints.size, 'endpoint')}`,
+    counts: [
+      counted(journey.steps.length, 'step'),
+      counted(all.length, 'test case'),
+      counted(endpoints.size, 'endpoint'),
+    ],
   };
 }
 

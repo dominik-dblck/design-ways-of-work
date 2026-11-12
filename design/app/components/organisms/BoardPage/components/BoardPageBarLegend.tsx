@@ -6,7 +6,7 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
 import type { Progress } from '../../../../workspace/boardView.ts';
-import { barColourOf } from '../utils/boardPageTonesUtils.ts';
+import { barColourOf } from '../../../../theme/tones.ts';
 import { radiusOf } from '../../../../theme/tokenReads.ts';
 
 interface BoardPageBarLegendProps {

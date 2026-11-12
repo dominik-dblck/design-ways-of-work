@@ -1,24 +1,24 @@
 /**
- * - `ContractPageFilters` · the endpoints narrowed by state and by epic
+ * - `ContractBodyFilters` · the endpoints narrowed by state and by epic
  */
 import Stack from '@mui/material/Stack';
 import type { ReactElement } from 'react';
 import type { ContractPageView } from '../../../../workspace/contractView.ts';
-import type { Picked } from '../utils/contractPagePickedUtils.ts';
-import { ContractPageEpicChips } from './ContractPageEpicChips.tsx';
-import { ContractPageStateToggle } from './ContractPageStateToggle.tsx';
+import type { Picked } from '../utils/contractBodyPickedUtils.ts';
+import { ContractBodyEpicChips } from './ContractBodyEpicChips.tsx';
+import { ContractBodyStateToggle } from './ContractBodyStateToggle.tsx';
 
-interface ContractPageFiltersProps {
+interface ContractBodyFiltersProps {
   readonly page: ContractPageView;
   readonly picked: Picked;
   readonly onPick: (picked: Picked) => void;
 }
 
-function ContractPageFilters({
+function ContractBodyFilters({
   page,
   picked,
   onPick,
-}: ContractPageFiltersProps): ReactElement {
+}: ContractBodyFiltersProps): ReactElement {
   return (
     <Stack
       direction="row"
@@ -26,12 +26,12 @@ function ContractPageFilters({
       useFlexGap
       sx={{ flexWrap: 'wrap', alignItems: 'center' }}
     >
-      <ContractPageStateToggle
+      <ContractBodyStateToggle
         states={page.states}
         picked={picked}
         onPick={onPick}
       />
-      <ContractPageEpicChips
+      <ContractBodyEpicChips
         epics={page.epics}
         picked={picked}
         onPick={onPick}
@@ -40,4 +40,4 @@ function ContractPageFilters({
   );
 }
 
-export { ContractPageFilters };
+export { ContractBodyFilters };

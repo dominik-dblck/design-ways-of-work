@@ -12,6 +12,8 @@ interface ProgressRow {
   readonly mvp: boolean;
   readonly badge: string;
   readonly column: ColumnId;
+  // its page on the Feature page, every epic has one
+  readonly feature: string;
   readonly counts: TicketCounts;
   readonly total: number;
 }

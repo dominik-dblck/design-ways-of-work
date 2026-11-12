@@ -1,5 +1,5 @@
 /**
- * - `ContractPageSharedTypes` · what every endpoint uses, the model's notes asked
+ * - `ContractBodySharedTypes` · what every endpoint uses, the model's notes asked
  */
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
@@ -10,13 +10,13 @@ import type { ContractPageView } from '../../../../workspace/contractView.ts';
 import { CodeBlock } from '../../../molecules/CodeBlock/index.ts';
 import { SectionHead } from '../../../atoms/SectionHead/index.ts';
 
-interface ContractPageSharedTypesProps {
+interface ContractBodySharedTypesProps {
   readonly shared: ContractPageView['shared'];
 }
 
-function ContractPageSharedTypes({
+function ContractBodySharedTypes({
   shared,
-}: ContractPageSharedTypesProps): ReactElement {
+}: ContractBodySharedTypesProps): ReactElement {
   const [hasNotes, setHasNotes] = useState(false);
   return (
     <Stack spacing={1.5}>
@@ -35,4 +35,4 @@ function ContractPageSharedTypes({
   );
 }
 
-export { ContractPageSharedTypes };
+export { ContractBodySharedTypes };

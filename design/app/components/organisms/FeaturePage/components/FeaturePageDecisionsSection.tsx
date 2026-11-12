@@ -3,12 +3,11 @@
  * - question, options, the pick
  */
 import Paper from '@mui/material/Paper';
-import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
 import { featureWords as words } from '../../../../workspace/featureView.ts';
 import type { Section } from '../../../../workspace/boardView.ts';
-import { SectionHead } from '../../../atoms/SectionHead/index.ts';
+import { FoldSection } from '../../../molecules/FoldSection/index.ts';
 import { TitledList } from '../../../atoms/TitledList/index.ts';
 
 function FeaturePageDecisionsSection({
@@ -17,8 +16,12 @@ function FeaturePageDecisionsSection({
   readonly sections: readonly Section[];
 }): ReactElement {
   return (
-    <Stack spacing={1.5} id="decisions">
-      <SectionHead label={words.decisions.label} note={words.decisions.note} />
+    <FoldSection
+      id="decisions"
+      label={words.decisions.label}
+      note={words.decisions.note}
+      count={sections.length}
+    >
       {sections.length === 0 ? (
         <Typography variant="body2" color="textSecondary">
           {words.nothing}
@@ -30,7 +33,7 @@ function FeaturePageDecisionsSection({
           </Paper>
         ))
       )}
-    </Stack>
+    </FoldSection>
   );
 }
 

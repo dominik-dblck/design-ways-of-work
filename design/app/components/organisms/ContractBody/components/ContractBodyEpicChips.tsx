@@ -1,23 +1,23 @@
 /**
- * - `ContractPageEpicChips` · one epic picked, or all of them
+ * - `ContractBodyEpicChips` · one epic picked, or all of them
  */
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import type { ReactElement } from 'react';
 import { contractWords as words } from '../../../../workspace/contractView.ts';
-import type { Picked } from '../utils/contractPagePickedUtils.ts';
+import type { Picked } from '../utils/contractBodyPickedUtils.ts';
 
-interface ContractPageEpicChipsProps {
+interface ContractBodyEpicChipsProps {
   readonly epics: readonly string[];
   readonly picked: Picked;
   readonly onPick: (picked: Picked) => void;
 }
 
-function ContractPageEpicChips({
+function ContractBodyEpicChips({
   epics,
   picked,
   onPick,
-}: ContractPageEpicChipsProps): ReactElement {
+}: ContractBodyEpicChipsProps): ReactElement {
   return (
     <Stack direction="row" spacing={0.75} useFlexGap sx={{ flexWrap: 'wrap' }}>
       {[null, ...epics].map((epic) => (
@@ -33,4 +33,4 @@ function ContractPageEpicChips({
   );
 }
 
-export { ContractPageEpicChips };
+export { ContractBodyEpicChips };

@@ -1,10 +1,16 @@
 /**
- * - `BoardPageEpicHead` · an epic's id, name, line and tags
+ * - `BoardPageEpicHead` · an epic's id, name, line and tags, the way to its feature
  */
+import Button from '@mui/material/Button';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
+import {
+  featureHrefOf,
+  pickedEpic,
+  words,
+} from '../../../../workspace/boardView.ts';
 import type { EpicCard } from '../../../../workspace/boardView.ts';
 
 function BoardPageEpicHead({
@@ -24,6 +30,14 @@ function BoardPageEpicHead({
           <Chip key={tag} size="small" variant="outlined" label={tag} />
         ))}
       </Stack>
+      <Button
+        variant="contained"
+        href={featureHrefOf(epic.id)}
+        onClick={() => pickedEpic.remember(epic.id)}
+        sx={{ alignSelf: 'flex-start' }}
+      >
+        {words.openFeature}
+      </Button>
     </Stack>
   );
 }

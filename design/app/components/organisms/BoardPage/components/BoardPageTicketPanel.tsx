@@ -11,7 +11,7 @@ import { words } from '../../../../workspace/boardView.ts';
 import type { TicketDetail } from '../../../../workspace/boardView.ts';
 import { BoardPageTicketEdges } from './BoardPageTicketEdges.tsx';
 import { TitledList } from '../../../atoms/TitledList/index.ts';
-import { toneOf } from '../utils/boardPageTonesUtils.ts';
+import { toneOf } from '../../../../theme/tones.ts';
 
 interface BoardPageTicketPanelProps {
   readonly ticket: TicketDetail;

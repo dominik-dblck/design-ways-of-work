@@ -35,7 +35,7 @@ const theme = createTheme({
 
 export { theme };
 
-// built with CSS variables on, its type carries the colour schemes and the code variant
+// built with CSS variables on, its type carries the colour schemes, the code variant and inks
 declare module '@mui/material/styles' {
   interface CssThemeVariables {
     enabled: true;
@@ -45,6 +45,20 @@ declare module '@mui/material/styles' {
   }
   interface TypographyVariantsOptions {
     code?: CSSProperties;
+  }
+  // the inks a line of code is drawn in, each a design system colour
+  interface CodeInks {
+    keyword: string;
+    type: string;
+    string: string;
+    number: string;
+    comment: string;
+  }
+  interface Palette {
+    code: CodeInks;
+  }
+  interface PaletteOptions {
+    code?: CodeInks;
   }
 }
 

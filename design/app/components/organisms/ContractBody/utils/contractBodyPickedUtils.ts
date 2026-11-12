@@ -12,9 +12,10 @@ interface Picked {
   readonly epic: string | null;
 }
 
-// a link may open the page on one epic: Contract.html?epic=<the epic's id>
+// a link may open the contract on one epic: Contract.html?epic=<its id>; drawn in a test, no address
 function firstPicked(epics: readonly string[]): Picked {
-  const asked = new URLSearchParams(window.location.search).get('epic');
+  const search = typeof window === 'undefined' ? '' : window.location.search;
+  const asked = new URLSearchParams(search).get('epic');
   return { state: null, epic: asked && epics.includes(asked) ? asked : null };
 }
 

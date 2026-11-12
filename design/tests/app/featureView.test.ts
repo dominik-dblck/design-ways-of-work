@@ -24,9 +24,10 @@ const filesOf = (epic: string): readonly string[] =>
   combinations.filter((one) => one.epic === epic).map((one) => one.file);
 
 describe('the Feature view', () => {
-  it('has a tab per feature ticket and opens on the first one not done', () => {
-    expect(EPICS.length).toBeGreaterThan(0);
-    expect(EPICS).toContain(firstEpic());
+  it('has a tab per epic and opens on the one in hand', () => {
+    const tabs = features();
+    expect(tabs.length).toBeGreaterThan(0);
+    expect(tabs.map((tab) => tab.epic)).toContain(firstEpic());
   });
 
   it('reads every journey of an epic, each step’s words filled in', () => {
@@ -115,5 +116,19 @@ describe('the Feature view', () => {
     expect(code).toEqual(['type Field = {', '  name: string;', '};']);
     expect(featureOf(OTHER, plugs).fieldsCode).toEqual([]);
     expect(featureOf(ONE).fieldOptions).toEqual([]);
+  });
+
+  it('reads each notebook line as its head, its source and its points, no star left', () => {
+    const lines = EPICS.flatMap(
+      (epic) =>
+        featureOf(epic).notes?.sections.flatMap((one) => one.lines) ?? [],
+    );
+    for (const line of lines) {
+      const words = line.points.flatMap((point) =>
+        point.map((part) => part.text),
+      );
+      expect(words.join(' ')).not.toContain('**');
+      expect(line.source ?? '').not.toMatch(/^\(|\)$/);
+    }
   });
 });

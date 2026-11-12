@@ -3,17 +3,16 @@
  */
 
 const BOARD_WORDS = {
-  eyebrow: 'BOARD · WHAT GETS BUILT, IN ITS ORDER',
   title: 'Board',
-  intro: 'One card per epic: its feature ticket, and the smaller tickets inside it. An idea waits on the left until it is picked; an epic moves right as its tickets do.',
   ideas: { label: 'IDEAS', note: 'written down, not yet an epic' },
+  columns: { label: 'COLUMNS', note: 'the ideas, then every epic in the column it stands in' },
+  contract: { label: 'API CONTRACT' },
   idea: { points: 'THE IDEA', example: 'IN AN EXAMPLE', reads: 'WHAT THE AGENT READS', changes: 'WHEN A REFERENCE CHANGES', connects: 'CONNECTS TO', questions: 'OPEN QUESTIONS', usedBy: 'is used by', notTold: 'not told', together: 'read together' },
   kinds: { label: 'KINDS', note: 'what each kind of ticket is' },
-  progress: { label: 'PROGRESS', closed: 'MVP epics closed', doing: 'in hand', ready: 'ready', epics: 'epics', tickets: 'tickets', open: 'Open the epic' },
+  progress: { label: 'PROGRESS', closed: 'MVP epics closed', doing: 'in hand', ready: 'ready', epics: 'epics', tickets: 'tickets' },
   nextUp: { label: 'NEXT UP', note: 'ready, in backlog order · the top one first' },
   nothingReady: 'Nothing is ready: everything left waits on the doing column.',
   ports: { label: 'PORTS', note: 'what the outside still has to tell us, each behind a mock' },
-  open: { label: 'TO SETTLE', note: 'what the backlog does not settle yet' },
   noTicket: 'no ticket yet',
   badges: { mvp: 'MVP', later: 'AFTER MVP', deferred: 'DEFERRED' },
   stats: {
@@ -37,6 +36,7 @@ const BOARD_WORDS = {
   },
   tags: { after: 'after', none: 'no dependency', port: 'port', code: 'ported code', screens: 'screens' },
   back: 'Back to the epic',
+  openFeature: 'Open the feature',
   close: 'Close',
 } as const;
 

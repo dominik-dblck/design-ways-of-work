@@ -1,5 +1,5 @@
 /**
- * - `ContractPageEndpointCard` · one endpoint: ticket, name, kind and state, code
+ * - `ContractBodyEndpointCard` · one endpoint: ticket, name, kind and state, code
  */
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
@@ -8,15 +8,15 @@ import type { ReactElement } from 'react';
 import { contractWords as words } from '../../../../workspace/contractView.ts';
 import type { EndpointCode } from '../../../../workspace/contractView.ts';
 import { CodeBlock } from '../../../molecules/CodeBlock/index.ts';
-import { TONES } from '../constants/contractPageEndpointCardConstants.ts';
+import { TONES } from '../constants/contractBodyEndpointCardConstants.ts';
 
-interface ContractPageEndpointCardProps {
+interface ContractBodyEndpointCardProps {
   readonly endpoint: EndpointCode;
 }
 
-function ContractPageEndpointCard({
+function ContractBodyEndpointCard({
   endpoint,
-}: ContractPageEndpointCardProps): ReactElement {
+}: ContractBodyEndpointCardProps): ReactElement {
   return (
     <Stack spacing={1} id={endpoint.anchor}>
       <Stack
@@ -43,4 +43,4 @@ function ContractPageEndpointCard({
   );
 }
 
-export { ContractPageEndpointCard };
+export { ContractBodyEndpointCard };

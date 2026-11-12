@@ -1,29 +1,30 @@
 /**
- * - `BoardPageEpicProgressRow` · one epic: id, name, its tickets as a bar, done
+ * - `BoardPageEpicProgressRow` · an epic as a bar of its tickets, a link to its page
  */
 import Box from '@mui/material/Box';
 import ListItemButton from '@mui/material/ListItemButton';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
-import { words } from '../../../../workspace/boardView.ts';
+import { pickedEpic, words } from '../../../../workspace/boardView.ts';
 import type { ProgressRow } from '../../../../workspace/boardView.ts';
+import { BoardPageEpicProgressName } from './BoardPageEpicProgressName.tsx';
 import { BoardPageStackedBar } from './BoardPageStackedBar.tsx';
 import { GRID } from '../constants/boardPageEpicProgressRowConstants.ts';
 
 interface BoardPageEpicProgressRowProps {
   readonly row: ProgressRow;
-  readonly onOpen: (id: string) => void;
 }
 
 function BoardPageEpicProgressRow({
   row,
-  onOpen,
 }: BoardPageEpicProgressRowProps): ReactElement {
   return (
     <ListItemButton
       divider
-      onClick={() => onOpen(row.id)}
-      aria-label={`${words.progress.open} ${row.id} · ${row.name}`}
+      component="a"
+      href={row.feature}
+      onClick={() => pickedEpic.remember(row.id)}
+      aria-label={`${words.openFeature} ${row.id} · ${row.name}`}
     >
       <Box sx={GRID}>
         <Typography
@@ -33,14 +34,7 @@ function BoardPageEpicProgressRow({
         >
           {row.id}
         </Typography>
-        <Typography variant="body2" noWrap sx={{ gridArea: 'name' }}>
-          {row.name}
-          {row.mvp ? null : (
-            <Typography component="span" variant="body2" color="textSecondary">
-              {` · ${row.badge}`}
-            </Typography>
-          )}
-        </Typography>
+        <BoardPageEpicProgressName row={row} />
         <Box sx={{ gridArea: 'bar' }}>
           <BoardPageStackedBar counts={row.counts} />
         </Box>
