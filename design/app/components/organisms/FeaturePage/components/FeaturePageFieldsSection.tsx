@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
 import { featureWords as words } from '../../../../workspace/featureView.ts';
 import type { FeatureView } from '../../../../workspace/featureView.ts';
-import { CodeBlock } from '../../../atoms/CodeBlock/index.ts';
+import { CodeBlock } from '../../../molecules/CodeBlock/index.ts';
 import { SectionHead } from '../../../atoms/SectionHead/index.ts';
 import { FeaturePageFieldOptions } from './FeaturePageFieldOptions.tsx';
 import { FeaturePageFieldKindTable } from './FeaturePageFieldKindTable.tsx';

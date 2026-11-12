@@ -9,6 +9,7 @@ const BOARD_WORDS = {
   ideas: { label: 'IDEAS', note: 'written down, not yet an epic' },
   idea: { points: 'THE IDEA', example: 'IN AN EXAMPLE', reads: 'WHAT THE AGENT READS', changes: 'WHEN A REFERENCE CHANGES', connects: 'CONNECTS TO', questions: 'OPEN QUESTIONS', usedBy: 'is used by', notTold: 'not told', together: 'read together' },
   kinds: { label: 'KINDS', note: 'what each kind of ticket is' },
+  progress: { label: 'PROGRESS', closed: 'MVP epics closed', doing: 'in hand', ready: 'ready', epics: 'epics', tickets: 'tickets', open: 'Open the epic' },
   nextUp: { label: 'NEXT UP', note: 'ready, in backlog order · the top one first' },
   nothingReady: 'Nothing is ready: everything left waits on the doing column.',
   ports: { label: 'PORTS', note: 'what the outside still has to tell us, each behind a mock' },

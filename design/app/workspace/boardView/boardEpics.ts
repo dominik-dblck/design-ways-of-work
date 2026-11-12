@@ -1,5 +1,5 @@
 /**
- * - `columns`, `epicOf` · every epic as one card, by its column; one epic's card
+ * - `cards`, `columns`, `epicOf` · every epic's card in order, by column, one
  * - `ticketLineOf` · a ticket as a list shows it: its id, title, kind and column
  */
 import { epics as EPICS } from '../../../roadmaps/backlog.ts';
@@ -88,14 +88,19 @@ function cardOf(epic: Epic, all: readonly BoardTicket[]): EpicCard {
   };
 }
 
-function columns(): readonly Column[] {
+// every epic's card, in the backlog's order
+function cards(): readonly EpicCard[] {
   const all = allTickets();
-  const cards = EPICS.map((epic) => cardOf(epic, all));
+  return EPICS.map((epic) => cardOf(epic, all));
+}
+
+function columns(): readonly Column[] {
+  const every = cards();
   return COLUMNS.map((column) => ({
     id: column.id,
     label: column.label,
     note: column.note,
-    epics: cards.filter((card) => card.column === column.id),
+    epics: every.filter((card) => card.column === column.id),
   }));
 }
 
@@ -104,4 +109,4 @@ function epicOf(id: string): EpicCard | null {
   return epic ? cardOf(epic, allTickets()) : null;
 }
 
-export { columns, epicOf, ticketLineOf };
+export { cards, columns, epicOf, ticketLineOf };

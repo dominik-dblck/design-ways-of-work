@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
 import { featureWords as words } from '../../../../workspace/featureView.ts';
 import type { EndpointCode } from '../../../../workspace/contractView.ts';
-import { CodeBlock } from '../../../atoms/CodeBlock/index.ts';
+import { CodeBlock } from '../../../molecules/CodeBlock/index.ts';
 
 function FeaturePageEndpointItem({
   endpoint,
