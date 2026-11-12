@@ -6,7 +6,7 @@ import type { Finding, SheetEdge, SheetTicket } from './refineCheckTypes.ts';
 import { JOURNEY, NOTEBOOK, WHY } from './refineRules.ts';
 import * as COMMANDS from '../../sheet/contract/commands.ts';
 import * as TICKETS from '../../roadmaps/tickets.ts';
-import { STACK } from '../../docs/process/productStack.ts';
+import { productStack } from '../../docs/process/productStack.ts';
 
 // rule:route-names-a-typed-row · a route a criterion names belongs to a typed row
 function routeFindings(ticket: SheetTicket): Finding[] {
@@ -43,7 +43,7 @@ function journeyFindings(ticket: SheetTicket): Finding[] {
           {
             rule: 'journeys-in-one-grammar',
             where: `c${index + 1}`,
-            text: `a journey out of its grammar — J{n} · who what · step → step · test (e2e, ${STACK.browserTests.name}): check`,
+            text: `a journey out of its grammar — J{n} · who what · step → step · test (e2e, ${productStack.browserTests.name}): check`,
           },
         ]
       : [],

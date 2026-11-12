@@ -773,3 +773,9 @@ Each call: what, why, how to undo. None changes what the PM sees.
   by a run that failed on the tag and passed here is explained. My call, over a coarse line in HALTED: a coarse
   explanation would let an unrelated new file through. Cost: one folder digest and one git status per run on
   one side. Undo: revert it.
+- Gate on d65144c, port/wow 29fdc87: the tag's side red as the merge left it, the commit's side red on three
+  points of this side's own. `STACK` stands in an entry, so its name is camelCase: `productStack`, renamed by
+  script. `StackPart` was exported and read by no one. The migrated `sheet/project.ts` went to 203 counted
+  lines: the json and documents reads share one local `PrintedRead`, and `stack` takes no import (the
+  contract says data alone; `STACKS[stack]` still checks the key). The product's scope did not list
+  `roadmaps/ids.ts` under the emit that now writes it: a migration edit lists it. Undo: revert it.

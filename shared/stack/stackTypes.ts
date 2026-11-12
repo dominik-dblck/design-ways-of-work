@@ -1,5 +1,5 @@
 /**
- * - `Stack`, `StackPart`, `StackKey` · what a product is built on; a part; its key
+ * - `Stack`, `StackKey` · what a product is built on, part by part; its key
  */
 
 // one part of a stack: its name as a document says it, the packages that bring it
@@ -26,4 +26,4 @@ interface Stack {
 
 type StackKey = 'web';
 
-export type { Stack, StackKey, StackPart };
+export type { Stack, StackKey };

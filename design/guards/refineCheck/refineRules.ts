@@ -3,7 +3,7 @@
  * - `JOURNEY`, `NOTEBOOK`, `PATH`, `MAX_CRITERION`, `testClause` · the rest of them
  */
 import { buildSide } from '../../sheet/project.ts';
-import { STACK } from '../../docs/process/productStack.ts';
+import { productStack } from '../../docs/process/productStack.ts';
 
 export const MAX_CRITERION = 600;
 // rule:criterion-says-what-file-holds · holds, never exists
@@ -25,7 +25,7 @@ export const LOSER = new RegExp(
 export const WHY = ['today', 'after', 'unlocks', 'not', 'oneLine'] as const;
 // rule:journeys-in-one-grammar · a journey's grammar, steps split on →, one step allowed
 export const JOURNEY = new RegExp(
-  `^J\\d+ · [^·]+ · .+ · test \\(e2e, ${STACK.browserTests.name}\\): .+`,
+  `^J\\d+ · [^·]+ · .+ · test \\(e2e, ${productStack.browserTests.name}\\): .+`,
 );
 // rule:no-notebook-in-the-pack · a feature notebook is never in a pack
 export const NOTEBOOK =

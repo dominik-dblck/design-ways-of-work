@@ -104,17 +104,20 @@ const MIGRATION: Migration = {
       file: 'sheet/project.ts',
       from: '  readonly files: readonly string[];\n',
       to: `  readonly files: readonly string[];
-  readonly json: readonly {
-    readonly module: string;
-    readonly name: string;
-    readonly fixture: string;
-  }[];
-  readonly documents: readonly {
-    readonly module: string;
-    readonly name: string;
-    readonly fixture: string;
-  }[];
+  readonly json: readonly PrintedRead[];
+  readonly documents: readonly PrintedRead[];
 `,
+    },
+    {
+      file: 'sheet/project.ts',
+      from: '// what the build side reads: every module under these homes',
+      to: `// a module's export the build prints for its side, and the file it lands in
+interface PrintedRead {
+  readonly module: string;
+  readonly name: string;
+  readonly fixture: string;
+}
+// what the build side reads: every module under these homes`,
     },
     {
       file: 'sheet/project.ts',
@@ -149,6 +152,11 @@ ${JSON_FIXTURES.map(
       file: 'scope.ts',
       from: "        'sheet/contract/*.md',\n",
       to: "        'sheet/contract/*.md',\n        'fixtures/data/*.json',\n",
+    },
+    {
+      file: 'scope.ts',
+      from: "        'app/styles/tokens.ts',\n",
+      to: "        'app/styles/tokens.ts',\n        'roadmaps/ids.ts',\n",
     },
     {
       file: '.prettierignore',

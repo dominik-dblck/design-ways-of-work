@@ -11,13 +11,8 @@ const STACK_EDITS: readonly MigrationEdit[] = [
   },
   {
     file: 'sheet/project.ts',
-    from: ' * - `buildPaths`, `buildReads`, `recordEras` · its paths, its reads, its records\n */\n',
-    to: " * - `buildPaths`, `buildReads`, `recordEras` · its paths, its reads, its records\n */\nimport type { StackKey } from '../shared/stack/stackTypes.ts';\n\n",
-  },
-  {
-    file: 'sheet/project.ts',
     from: "const buildSide = 'CC';\n",
-    to: "const buildSide = 'CC';\n// what its build side builds on, as the way of working defines it\nconst stack: StackKey = 'web';\n",
+    to: "const buildSide = 'CC';\n// what its build side builds on: a key of the way of working's stacks\nconst stack = 'web';\n",
   },
   {
     file: 'sheet/project.ts',
