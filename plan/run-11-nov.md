@@ -24,7 +24,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 
 | stage | what | done | of |
 | 1 | Foundation | 7 | 7 |
-| 2 | Design clean | 8 | 17 |
+| 2 | Design clean | 8 | 19 |
 | 3 | Spawn design | 0 | 3 |
 | 4 | Eagle-design | 0 | 2 |
 
@@ -43,10 +43,12 @@ contract, the files that read more split · 6 · the facts in the 33 files leave
 the product, the names the theme takes freed, `TokenHex` · 8 · the roadmap's types are homes · 9 · the
 readers of the roadmap are homes, its rows split from them · 10 · the cases' readers · 11 · the contract's,
 the directory's and the screens' readers · 12 · the words' readers · 13 · the homes no longer call the
-product's own logic; the mixed grammars settled · 14 · `examples/sample-product`, rows alone, each file of the
-contract · 15 · its check in the feature tier: the homes green on a product that names none (the no-product
-test) · 16 · the build side's theme and atoms held here (W25, W26), once it frees them · 17 · v1.0.0 (the PM's
-word).
+product's own logic nor hold its facts; the mixed grammars settled · 14 · the product's way-of-working files are
+homes: the root configs, the settings' hooks, the post-commit hook, the backup, the registry types · 15 · the
+decisions split: the way of working's rows join this register · 16 · `examples/sample-product`, rows and
+templates alone, each file of the contract · 17 · its check in the feature tier: the homes green on a product
+that names none (the no-product test) · 18 · the build side's theme and atoms held here (W25, W26), once it
+frees them · 19 · v1.0.0 (the PM's word).
 
 Stage 3, the plan's stage 3: 1 · `yarn spawn design <path> <name>` · 2 · the new-project guide · 3 · `argus-design`
 spawned and green on its first commit, the PM's word.
@@ -890,3 +892,7 @@ Each call: what, why, how to undo. None changes what the PM sees.
 
 - The PM's pick (12 Nov, form · A, W27): a design product's scope spreads a preset of the way of working and
   names only what differs; the sample product (task 14) and `yarn spawn` start from it. Undo: revert it.
+- The progress rebuilt again on what eagle-design's list of a new product's needs found: the product's
+  way-of-working files to homes (task 14) and the decisions' split (task 15) are stage 2's; stage 2 is 19
+  tasks. Undo: the table and the list as they stood (17 tasks).
+

@@ -72,6 +72,34 @@ The way, step 2 widened:
   `messageUsage` hold the product's keys and tables).
 - First area: the roadmap.
 
+## What a new product takes (eagle-design's list, read on its port at df692e3)
+
+The PM's word: a new product gets the whole way of working, the pages, the skills and how an epic is
+defined, refined, packed and released.
+
+- Already homes or written by the build, no work: the documents, the skills, the rules, the tools (`build`,
+  `checks`, `pack`, `newEpic`, `releaseRecord`, …), the guards, `shared/`, the git hooks but one, the pages,
+  the design system, the roadmap's types; the skills' files, the documents' markdown, the agent's
+  instructions' markdown, the fixtures, `vendor/wow/`, the tokens.
+- Become homes (stage 2, task 14): the root configs (commitlint, cspell, eslint, knip, prettier, syncpack,
+  vitest, tsconfig: shims of `shared/` and the scope, alike in every design product), `.claude/settings.json`
+  (its hooks name homes alone), `.husky/post-commit` (its names read from `sheet/project.ts` and the remote
+  from git), `tools/zipRepo.sh`, the registry types beside a product's rows (`decisionTypes`, `findingTypes`,
+  `findingSides`, `projectPlanTypes`), the epic templates' test.
+- Split (stage 2, task 15): `docs/process/decisions.ts`' rows that are the way of working's join this
+  register; the product keeps its own, a new one starts empty. Eagle-design marks them.
+- The product's own, a template the sample holds and spawn copies (tasks 16, stage 3): `.gitignore`,
+  `.nvmrc`, `sheet/rules/`' five slots, `docs/process/documentSlots.ts` and its cites (empty or a neutral
+  default), `docs/process/projectPlan.ts`' rows, `sheet/project.ts` (the product's identity, filled from
+  spawn's questions), `product.ts` and `productView.ts` with empty plugs, `legacy/compat.json`'s three pages.
+- Stage 3: the package's scripts a preset as W27's scope; the agent's instructions and the product's
+  `CLAUDE.md` written from a home's template and `sheet/project.ts`, a section kept for the product's lines.
+- Findings for task 13: `docs/rules/checks.md` in the product is a drifted copy of `dev/rules/checks.md` (one
+  home, this one's); `docs/skills/publish.ts` holds a product's artifact address, to read from
+  `sheet/project.ts`; the ticket kinds' raw hex until the theme.
+- A home takes no suppression (W1): the six roadmap readers that carry ten in the product's file are mended on
+  its tree before they are homed.
+
 ## Eagle-design's review (10bf0ef)
 
 - The eight are the way of working's: shape alone. Two fields carry a product's history, the backlog's `code`
