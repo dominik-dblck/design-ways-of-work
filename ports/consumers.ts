@@ -11,6 +11,7 @@ import { MIGRATION } from './eagle-design/migration.ts';
 import { ROADMAP_READERS } from './eagle-design/roadmapReaders.ts';
 import { ROADMAP_TYPES } from './eagle-design/roadmapTypes.ts';
 import { THEME_NAMES } from './eagle-design/themeNames.ts';
+import { WORD_READERS } from './eagle-design/wordReaders.ts';
 
 // one at least: a release is tried on a repository, never on none
 const CONSUMERS: readonly [Consumer, ...Consumer[]] = [
@@ -42,6 +43,7 @@ const CONSUMERS: readonly [Consumer, ...Consumer[]] = [
       ROADMAP_READERS,
       CASE_READERS,
       CONTRACT_READERS,
+      WORD_READERS,
     ],
     // its own work lands on `main`, which takes nothing yet: the branch holds `main` whole, or the gate is red
     port: {

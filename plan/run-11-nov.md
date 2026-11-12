@@ -958,3 +958,12 @@ Each call: what, why, how to undo. None changes what the PM sees.
   seven files that gather their rows (the commands', events', queries', refusals' rows, the people, the
   languages, the screens written by hand, that last optional); `CONTRACT_READERS` at 0.8.0, `NEXT` written
   against a pin at v0.7.0. Its gate runs once eagle-design's v0.7.0 take is committed. Undo: revert it.
+- v0.8.0 out under W30: main 241dbef and its tag on the remote, pre-push green (feature tier 444 s);
+  eagle-design took it at b908e81.
+- Task 12: the words' eleven readers are homes at eagle-design's paths, taken by `git show` at its port's
+  090c23f (rows split to three files, nine suppressions pruned, a product's word moved to the rows), verified
+  on a fresh clone at b908e81. The contract trades the glossary's reader for its rows and gains the
+  messages' rows and the screen's words; the messages' barrel stays the product's, its exports naming its
+  own words. `WORD_READERS` at 0.9.0, `NEXT` against a pin at v0.8.0. Findings for task 13: the cells read
+  the empty pill by its key; the checks' suffixes are English; a row asks three cells and one per reader.
+  Undo: revert it.

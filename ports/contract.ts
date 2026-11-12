@@ -183,8 +183,22 @@ const CONTRACT: readonly ContractRow[] = [
     kind: 'optional',
     what: 'the screens written by hand, and their families',
   },
-  { file: 'sheet/words/glossary.ts', kind: 'registry', what: 'the glossary' },
+  {
+    file: 'sheet/words/glossary/glossaryRows.ts',
+    kind: 'registry',
+    what: 'the glossary’s terms, open and deferred, gathered',
+  },
   { file: 'sheet/words/messages.ts', kind: 'registry', what: 'the messages' },
+  {
+    file: 'sheet/words/messages/messageRows.ts',
+    kind: 'registry',
+    what: 'the messages’ rows, refusals’ lines, walked and usage tables, word forms and the readers’ shapes, gathered',
+  },
+  {
+    file: 'sheet/words/messages/wordRows.ts',
+    kind: 'registry',
+    what: 'the screen’s words: statuses, legends, fills, hints, labels and hovers',
+  },
 ];
 
 export { CONTRACT };
