@@ -725,3 +725,8 @@ Each call: what, why, how to undo. None changes what the PM sees.
 - The gate on d64f9dd: the tag's board reads the backlog's open list, which eagle-design's main retired, so
   the tag's build, tsc, spec check and tests fail and this commit's pass; seven rows say so, two `exit · checks`
   rows went stale (both sides fail the snapshot now) and leave. Undo: revert the rows.
+- The gate reads a halted tag (this commit): when a run fails on the tag's side and passes on the commit's,
+  each file the tag's side never wrote explains itself; a row naming one still says more and is never stale
+  for it. Why: the tag's build halts part way with its bundles built side by side, so which modules it wrote
+  varies run to run, and a row per module went stale on the next gate (072e22f). The halted run's own exit
+  stays a difference a row must explain. Undo: revert the commit and row each module again.

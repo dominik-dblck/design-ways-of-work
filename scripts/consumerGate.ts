@@ -15,12 +15,12 @@ import {
   suppressedTaken,
   versionTaken,
 } from './consumerClones.ts';
-import { explained, mapDifferences, runDifferences } from './consumerDiff.ts';
+import { explained } from './consumerDiff.ts';
 import type { Run, Sides } from './consumerDiff.ts';
 import { portFaults, trunkTaken } from './consumerPort.ts';
+import { differencesOf, standing } from './consumerFiles.ts';
 import { ranIn } from './consumerRuns.ts';
 import type { Consumer } from './consumerTypes.ts';
-import { hashes, since, writtenIn } from './digests.ts';
 import { migrated } from './migrated.ts';
 import { rowsSince } from './releasedRows.ts';
 import type { Released } from './releasedRows.ts';
@@ -44,37 +44,6 @@ function kept(out: string, runs: Sides<readonly Run[]>): void {
         path.join(out, `${side}-${run.command.replaceAll(/[ :]/g, '-')}.txt`),
         run.output,
       );
-}
-
-type Standing = Sides<ReadonlyMap<string, string>>;
-
-// each clone as it stands against its commit: before the runs, what a migration staged
-const standing = ({ pinned, next }: Sides<string>): Standing => ({
-  pinned: writtenIn(pinned),
-  next: writtenIn(next),
-});
-
-function fileDifferences({
-  consumer,
-  sides: { pinned, next },
-  before,
-}: {
-  readonly consumer: Consumer;
-  readonly sides: Sides<string>;
-  readonly before: Standing;
-}): readonly string[] {
-  return [
-    ...consumer.folders.flatMap((folder) =>
-      mapDifferences(folder, {
-        pinned: hashes(path.join(pinned, folder)),
-        next: hashes(path.join(next, folder)),
-      }),
-    ),
-    ...mapDifferences('written', {
-      pinned: since(before.pinned, writtenIn(pinned)),
-      next: since(before.next, writtenIn(next)),
-    }),
-  ];
 }
 
 // what no row of a release excuses in a clone: a take a run undid, a rule off in a taken file, a package past its homes, a registry not there
@@ -105,7 +74,7 @@ function reported({
   readonly consumer: Consumer;
   readonly found: readonly string[];
   readonly broken: readonly string[];
-  readonly rows: Pick<Parameters<typeof explained>[0], 'expected' | 'allowed'>;
+  readonly rows: Omit<Parameters<typeof explained>[0], 'found'>;
 }): boolean {
   const { lines, unexplained, stale } = explained({ found, ...rows });
   for (const line of lines) console.log(`  ${line}`);
@@ -155,6 +124,19 @@ function readied({
 }
 
 // both clones run at once: each holds its own tree, and a run waits on nothing of the other's
+async function ranBoth(
+  sides: Sides<string>,
+  commands: Consumer['commands'],
+): Promise<Sides<readonly Run[]>> {
+  const [pinned, next] = await Promise.all([
+    ranIn({ root: sides.pinned, commands }),
+    ranIn({ root: sides.next, commands }),
+  ]);
+  for (const run of pinned)
+    console.log(`  ran · yarn ${run.command} · exit ${String(run.status)}`);
+  return { pinned, next };
+}
+
 async function tried({
   consumer,
   wow,
@@ -165,20 +147,15 @@ async function tried({
   const { sides, untaken, resolved } = readied({ consumer, wow, scratch });
   // a repository that pins an older tag meets each release since: their rows explain as this one's do
   const allowed = rowsSince(released, versionTaken(sides.pinned));
-  const { commands } = consumer;
   const before = standing(sides);
-  const [pinned, next] = await Promise.all([
-    ranIn({ root: sides.pinned, commands }),
-    ranIn({ root: sides.next, commands }),
-  ]);
-  const runs = { pinned, next };
-  for (const run of pinned)
-    console.log(`  ran · yarn ${run.command} · exit ${String(run.status)}`);
-  const found = [
-    ...mapDifferences('package', resolved),
-    ...runDifferences(runs),
-    ...fileDifferences({ consumer, sides, before }),
-  ];
+  const runs = await ranBoth(sides, consumer.commands);
+  const { found, halted } = differencesOf({
+    consumer,
+    sides,
+    before,
+    runs,
+    resolved,
+  });
   const out = path.join(scratch, consumer.name, 'out');
   kept(out, runs);
   const broken = [
@@ -190,7 +167,12 @@ async function tried({
     path.join(out, 'differences.txt'),
     `${[...found, ...broken].join('\n')}\n`,
   );
-  return reported({ consumer, found, broken, rows: { expected, allowed } });
+  return reported({
+    consumer,
+    found,
+    broken,
+    rows: { expected, allowed, halted },
+  });
 }
 
 export { tried };

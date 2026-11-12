@@ -1,8 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import {
   explained,
+  isHalted,
   mapDifferences,
   runDifferences,
+  unwrittenOnTag,
 } from '../../scripts/consumerDiff.ts';
 import type { Run } from '../../scripts/consumerDiff.ts';
 
@@ -110,6 +112,35 @@ describe('a difference is expected by a row of the release, or it is red', () =>
     expect(stale).toEqual(['output · yarn build']);
     expect(lines).toEqual([
       'STALE · output · yarn build · expected, and the same now',
+    ]);
+  });
+
+  it('what a halted tag never wrote explains itself; a row on it still says more', () => {
+    const failed: Run = { ...build, status: 1 };
+    const runs = { pinned: [failed], next: [build] };
+    const files = {
+      pinned: new Map([['a.js', '1']]),
+      next: new Map([
+        ['a.js', '2'],
+        ['b.js', '3'],
+        ['c.js', '4'],
+      ]),
+    };
+    expect(isHalted(runs)).toBe(true);
+    expect(isHalted({ pinned: [build], next: [failed] })).toBe(false);
+    const halted = new Set(unwrittenOnTag('dist', files));
+    expect([...halted]).toEqual(['dist · b.js', 'dist · c.js']);
+    const { unexplained, stale, lines } = explained({
+      found: mapDifferences('dist', files),
+      expected: { 'dist · c.js': 'a page more' },
+      allowed: {},
+      halted,
+    });
+    expect(unexplained).toEqual(['dist · a.js']);
+    expect(stale).toEqual([]);
+    expect(lines.slice(1)).toEqual([
+      'EXPECTED · dist · b.js · the tag’s side never wrote it: a run of its failed where this one passed',
+      'EXPECTED · dist · c.js · a page more',
     ]);
   });
 });

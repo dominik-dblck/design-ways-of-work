@@ -1,7 +1,7 @@
 /**
  * - `Run`, `Sides` · a script's exit and output; a thing held once a clone
  * - `runDifferences`, `mapDifferences` · the two clones' runs and files, compared
- * - `explained` · each difference with the row that expects it, and a stale row
+ * - `explained`, `isHalted`, `unwrittenOnTag` · each difference with its row; a halt
  */
 
 interface Run {
@@ -52,6 +52,22 @@ function mapDifferences<T>(
     .map((key) => `${name} · ${key}`);
 }
 
+// a run the tag's side failed and the commit's passed: what the tag's side never wrote is that halt's
+const isHalted = ({ pinned, next }: Sides<readonly Run[]>): boolean =>
+  pinned.some((run, at) => run.status !== 0 && next[at]?.status === 0);
+
+function unwrittenOnTag<T>(
+  name: string,
+  { pinned, next }: Sides<ReadonlyMap<string, T>>,
+): readonly string[] {
+  return [...next.keys()]
+    .filter((key) => !pinned.has(key))
+    .map((key) => `${name} · ${key}`);
+}
+
+const HALTED =
+  'the tag’s side never wrote it: a run of its failed where this one passed';
+
 // a row ending in `*` expects every difference it opens
 const isExpectedBy = (row: string, difference: string): boolean =>
   row.endsWith('*')
@@ -62,16 +78,20 @@ function explained({
   found,
   expected,
   allowed,
+  halted,
 }: {
   readonly found: readonly string[];
   readonly expected: Readonly<Record<string, string>>;
   // rows of the releases put out since the repository's pin: each explains, none is stale
   readonly allowed: Readonly<Record<string, string>>;
+  // what the tag's side never wrote while a run of its halted: a row may still say more
+  readonly halted?: ReadonlySet<string>;
 }): Explained {
   const rows = Object.entries(expected);
   const every = [...rows, ...Object.entries(allowed)];
   const whyOf = (difference: string): string | undefined =>
-    every.find(([row]) => isExpectedBy(row, difference))?.[1];
+    every.find(([row]) => isExpectedBy(row, difference))?.[1] ??
+    (halted?.has(difference) === true ? HALTED : undefined);
   const stale = rows
     .map(([row]) => row)
     .filter(
@@ -92,5 +112,5 @@ function explained({
   };
 }
 
-export { explained, mapDifferences, runDifferences };
+export { explained, isHalted, mapDifferences, runDifferences, unwrittenOnTag };
 export type { Run, Sides };

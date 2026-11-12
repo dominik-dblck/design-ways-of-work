@@ -120,16 +120,6 @@ const NEXT: Unreleased = {
         'the tag’s board reads the backlog’s open list, which eagle-design’s main retired: tsc fails on the tag, passes here',
       'exit · yarn test · 1 → 0':
         'the tag’s board reads the backlog’s open list, which eagle-design’s main retired: the board’s test fails on the tag, passes here',
-      'dist · project/contentCheck.js':
-        'the tag’s build stops part way, its bundles built side by side, before it writes this module: this one writes it',
-      'dist · project/contentSamples.js':
-        'the tag’s build stops part way, its bundles built side by side, before it writes this module: this one writes it',
-      'dist · project/languages.js':
-        'the tag’s build stops part way, its bundles built side by side, before it writes this module: this one writes it',
-      'dist · project/Board.html':
-        'the tag’s build stops before the pages are written: this one writes the board’s shell',
-      'dist · project/Feature.html':
-        'the tag’s build stops before the pages are written: this one writes the Feature page’s shell',
       'dist · project/Contract.html':
         'the API contract page, a page of its own',
       'dist · project/documentSlots.js':
