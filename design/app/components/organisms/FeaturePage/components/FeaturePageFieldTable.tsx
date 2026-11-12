@@ -10,7 +10,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
-import type { FieldRowView } from '../../../../workspace/featureFieldTypes.ts';
+import type { FieldRowView } from '../../../../workspace/featureView.ts';
 
 interface FeaturePageFieldTableProps {
   readonly title: string;

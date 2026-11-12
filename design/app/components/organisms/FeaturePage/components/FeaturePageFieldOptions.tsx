@@ -7,7 +7,7 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
 import { featureWords as words } from '../../../../workspace/featureView.ts';
-import type { FieldOptionView } from '../../../../workspace/featureFieldTypes.ts';
+import type { FieldOptionView } from '../../../../workspace/featureView.ts';
 import { FeaturePageFieldOption } from './FeaturePageFieldOption.tsx';
 
 function FeaturePageFieldOptions({

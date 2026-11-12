@@ -7,7 +7,7 @@ import type {
   DocTypeView,
   FieldKindView,
   FieldOptionView,
-} from '../app/workspace/featureFieldTypes.ts';
+} from '../app/workspace/featureView.ts';
 import type { Mirror } from '../guards/checks/checkWorld.ts';
 import type { MapMove, SourceFinding } from '../guards/sourceCheck.ts';
 

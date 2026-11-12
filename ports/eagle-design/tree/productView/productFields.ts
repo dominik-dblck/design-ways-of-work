@@ -1,6 +1,6 @@
 /**
- * - `fieldsOf` · the field kinds, their options and code, and each block's fields
- * - on the epic that decided them alone: the Feature page draws them
+ * - `fieldsOf` · the field kinds, their options and code, each block's fields
+ * - only on the epic that decided them: the Feature page draws them
  */
 import * as FIELD_KINDS from '../sheet/model/fieldKinds.ts';
 import { specs as SPECS } from '../sheet/samples/blocks.ts';

@@ -10,7 +10,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
-import type { FieldKindView } from '../../../../workspace/featureFieldTypes.ts';
+import type { FieldKindView } from '../../../../workspace/featureView.ts';
 
 function FeaturePageFieldKindTable({
   kinds,

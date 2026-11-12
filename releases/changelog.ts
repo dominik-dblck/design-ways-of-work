@@ -14,6 +14,12 @@ const NEXT: Unreleased = {
     'eagle-design': {
       'output · yarn cut-pack T-E19-00':
         'the migration’s two new files of the product’s own, under guards/, wait to be committed with the pack',
+      'output · yarn test':
+        'the product’s own test of its fields: one file and one test more',
+      'dist · project/sourceCheck.js':
+        'the source guard holds the seven layers’ names, which the map draws',
+      'written · guards/__snapshots__/guardMap.ts':
+        'the source guard’s built file holds the seven layers’ names: the lines of its findings there move by nine',
       'dist · project/feature-page.js':
         'the page’s entry hands the product’s view to the Feature page',
       'dist · project/featureView.js':

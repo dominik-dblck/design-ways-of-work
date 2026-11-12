@@ -567,9 +567,13 @@ Each call: what, why, how to undo. None changes what the PM sees.
   (`LAYER_NAMES`), the map draws them with no read of the product. The fields an epic decided:
   `ProductView.fieldsOf`, typed `ProductFields` here; the feature view splits their code into lines, the
   product's `productView/productFields.ts` builds them (moved there by `scripts/move.ts`), with a test of its
-  own; the home's test draws a stub. The field view types move up to an entry of their own
-  (`app/workspace/featureFieldTypes.ts`): the product's types read no part, and no barrel re-exports
-  another. Undo: revert the commit.
+  own; the home's test draws a stub. The product's types read the field view types through the feature
+  view's entry: a cycle of types alone, which the import rule lets pass. Undo: revert the commit.
+- The gate on 5c, mended: an entry of its own for the field types built an empty script, so they went back
+  behind their entry; the product's `productView/` folder is one of the folders beside the homes, as
+  `notes` is, else the file names' lint refuses it; the guard's built file is nine lines longer (the
+  layers' names), the map's lines there move with it, written on the release in hand. eagle-design's
+  review of 5c: the fields' header split a sentence, mended.
 - 5c2, the requirements, waits for the product: a registry, `sheet/requirements.ts`, the source guard reads
   by path (it reads them deep in its scan, where no entry point hands anything in). Tried in the gate's
   clone with a registry that re-exports the rows: the rule that a barrel re-exports its own folder alone

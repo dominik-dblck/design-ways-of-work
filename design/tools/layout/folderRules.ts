@@ -14,6 +14,7 @@ const OWN_FOLDERS = [
   '.husky',
   'design-system',
   'notes',
+  'productView',
 ];
 // free below: a folder and a file take their kind's case, a module's folder its name (shared/lint/fileRules.ts)
 const ANY_NAME: FolderRules = {};

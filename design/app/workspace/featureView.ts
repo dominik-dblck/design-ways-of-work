@@ -87,4 +87,5 @@ function featureOf(epic: string, plugs: ProductView = {}): FeatureView {
 }
 
 export type * from './featureView/featureTypes.ts';
+export type * from './featureView/featureFieldTypes.ts';
 export { featureOf, features, FEATURE_WORDS as featureWords, firstEpic };
