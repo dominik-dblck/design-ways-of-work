@@ -187,6 +187,13 @@ const DECISIONS: readonly Decision[] = [
     says: 'every product is an internal app, so there is one theme and every app looks the same: the theme the build side runs, held here with its atoms, the design pages drawn with it; the build side takes it from here once its port turns the direction.',
     from: 'plan/run-11-nov.md',
   },
+  {
+    id: 'W27',
+    title: 'a scope spreads a preset',
+    held: '12 Nov · A',
+    says: 'the way of working gives a design product’s scope as a preset; a product’s `scope.ts` spreads it and names only what differs, written by script, never by hand: `yarn spawn` writes a new project’s, and a script cuts an existing product’s to what differs from the preset; a default moves in one place.',
+    from: 'plan/run-11-nov.md',
+  },
 ];
 
 export { DECISIONS };

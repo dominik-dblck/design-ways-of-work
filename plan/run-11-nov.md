@@ -888,3 +888,5 @@ Each call: what, why, how to undo. None changes what the PM sees.
   the names and `TokenHex`; 8 on the roadmap's types (gate green on 85845c5, v0.5.0 out); the theme is task 16.
   Undo: the table and the list as they stood (10 tasks).
 
+- The PM's pick (12 Nov, form · A, W27): a design product's scope spreads a preset of the way of working and
+  names only what differs; the sample product (task 14) and `yarn spawn` start from it. Undo: revert it.
