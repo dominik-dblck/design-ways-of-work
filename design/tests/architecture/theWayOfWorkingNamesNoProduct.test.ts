@@ -47,9 +47,10 @@ describe('the way of working names no product', () => {
   it('finds a name of the product and an epic in a planted text', () => {
     const planted = {
       path: 'planted.ts',
-      text: ['Ask Kestrel on E0', '6 in Ledger; kestrel-dev and Wikis pass'].join(
-        '',
-      ),
+      text: [
+        'Ask Kestrel on E0',
+        '6 in Ledger; kestrel-dev and Wikis pass',
+      ].join(''),
     };
     expect(namesIn(planted, ['Kestrel', 'Ledger', 'Wiki'])).toEqual([
       'planted.ts · Kestrel',

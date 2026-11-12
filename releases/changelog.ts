@@ -9,7 +9,26 @@ const NEXT: Unreleased = {
   what: 'no file the take wrote names the product: a home test reads each one outside `dev/` against `sheet/project.ts`, its company and its stack apart; the modes’ and the ticket pipeline’s texts name the build side by the product’s `buildSide`; the design system’s token notes, the criteria skill’s example and the preset’s naming example name no product and carry no date',
   action: 'none: move the pin to the tag',
   rules: { added: [], changed: [], removed: [] },
-  outputs: {},
+  outputs: {
+    'eagle-design': {
+      'output · yarn build':
+        'the build writes the criteria skill anew: its example part is `settings-header`',
+      'output · yarn test':
+        'one test more: no file the take wrote names the product, 156 passed, not 155',
+      'dist · project/modes.js':
+        'the modes’ texts read the build side’s name from `sheet/project.ts`: the bundle holds it as a template, the text the same, `CC`',
+      'written · .claude/skills/design-criteria/SKILL.md':
+        'the criteria skill’s example part is `settings-header`, a name no product holds',
+      'written · records/release-5-3-1.md':
+        'the modes’ module and its three texts that name the build side by `buildSide`: their digests moved',
+      'written · vendor/wow/docs/process/modes/aboutToHoldsNote.ts':
+        'the home in hand: the build side named by `buildSide`',
+      'written · vendor/wow/docs/process/modes/holdsToLegend.ts':
+        'the home in hand: the build side named by `buildSide`',
+      'written · vendor/wow/docs/process/modes/runsFeatureFirstRows.ts':
+        'the home in hand: the build side named by `buildSide`',
+    },
+  },
 };
 
 const RELEASES: readonly Release[] = [
