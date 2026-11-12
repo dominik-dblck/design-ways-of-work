@@ -905,3 +905,7 @@ Each call: what, why, how to undo. None changes what the PM sees.
 - eagle-design's port at d81fcef verified on a clone: the six readers bound for the homes pass ESLint with no
   suppression and tsc whole; its findings on 133e942 and a4d990d mended (eleven, not ten; the theme is task
   19, the sample 17). Task 9's homes come next. Undo: revert it.
+- Task 9: the roadmap's sixteen readers are homes at eagle-design's paths, taken by `git show` at its port's
+  d81fcef (rows split, no suppression); the contract trades the five readers it named for the seven files
+  that gather the rows; v0.6.0's migration `ROADMAP_READERS` names the sixteen homed. Edges, receipts,
+  findings and ideas stay the product's registries (eagle-design's check). Undo: revert it.

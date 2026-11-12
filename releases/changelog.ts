@@ -5,9 +5,10 @@
 import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
 const NEXT: Unreleased = {
-  kind: 'patch',
-  what: '',
-  action: 'none: move the pin to the tag',
+  kind: 'major',
+  what: 'the roadmap’s readers are homes, at the paths a product held them: the backlog’s, the notes’, the templates’ and the new epic’s files, the tracks’, the tickets’ barrel, kinds, types, list, board, views, context, receipt flags, pointers and command tickets; a product holds their rows apart, each gathered in a file the contract names (the backlog’s, the notes’, the pointers’, the tickets’, the checklist’s reads, the commands’ states, the tracks)',
+  action:
+    'the product’s rows split from the roadmap’s readers on its own tree first, the readers byte-equal to the homes; the migrations `ports/` names for the repository, on its checkout: `node scripts/migrate.ts <name> <checkout>`, run from this repository at the tag (for eagle-design, the sixteen readers leave its index, the take writing them back); the pin to the tag in the same commit',
   rules: { added: [], changed: [], removed: [] },
   outputs: {},
 };
