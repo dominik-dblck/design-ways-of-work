@@ -2,13 +2,14 @@
  * - `skill` · design-publish: what it does, when to use it, its sections
  */
 import type { SkillFile } from './skillTypes.ts';
+import { cite } from '../documents/cited.ts';
 
 const skill: SkillFile = {
   title: 'design-publish · the artifact',
   description:
     "Publishes the design project to the artifact, the PM's render and, until the switch commit lands, the release the build side reads: commit, build, one Artifact call, the tag. Use when a change has to reach the PM's view or the build side's read.",
   intro:
-    "The artifact is the PM's render and the release the build side reads: `https://claude.ai/code/artifact/8b4b404b-411c-4d45-bf56-d453654b0289` (a Migrated Design artifact, its page list `legacy/compat.json`). What is not published, the build side does not see. Publishing goes only from here.",
+    `The artifact is the PM's render and the release the build side reads: ${cite('publish.artifact', 'the address the product names')}. What is not published, the build side does not see. Publishing goes only from here.`,
   sections: [
     {
       heading: 'Steps',

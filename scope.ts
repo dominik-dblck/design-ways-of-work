@@ -19,7 +19,13 @@ const scope: RepoScope = {
     'tests/browser/fixtures/**',
   ],
   // the design side's tree, the build side's, the rule files both read, a migration's files: each checked in its product
-  productTrees: ['design/**', 'dev/**', 'shared/rules/**', 'ports/*/tree/**'],
+  productTrees: [
+    'design/**',
+    'dev/**',
+    'shared/rules/**',
+    'ports/*/tree/**',
+    'ports/*/trees/**',
+  ],
   production: ['scripts/**/*.ts', 'shared/**/*.ts', 'design-system/**/*.ts'],
   generated: ['design-system/guide.md'],
   react: [],
@@ -60,6 +66,11 @@ const scope: RepoScope = {
       folders: ['tests/lint/fixtures'],
       kinds: { '.dir': 'PascalCase', '.ts': 'PascalCase' },
       why: "a rule's fixture copies a product's tree: a component's folder and own file are PascalCase",
+    },
+    {
+      folders: ['ports/*/trees'],
+      kinds: { '.dir': 'camelCase | kebab-case' },
+      why: "a migration's tree holds a product's files at its paths: a folder is named as the product names it",
     },
     {
       folders: ['tests/browser/fixtures'],

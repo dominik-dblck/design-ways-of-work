@@ -5,9 +5,10 @@
 import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
 const NEXT: Unreleased = {
-  kind: 'patch',
-  what: '',
-  action: 'none: move the pin to the tag',
+  kind: 'major',
+  what: 'two homes stop holding a product’s facts: the source check’s map and the files it reads stand in the product’s `guards/sourceCheck/sourceMap.ts`, a registry the contract names; the publish skill asks the product for its artifact’s address by the slot `publish.artifact`',
+  action:
+    'the migrations `ports/` names for the repository, on its checkout: `node scripts/migrate.ts <name> <checkout>`, run from this repository at the tag (for eagle-design, `guards/sourceCheck/sourceMap.ts` and `docs/process/documentSlots/publishCites.ts` written, the slots’ barrel spreading the second); a product with no such map writes the file with empty lists, and one that publishes no artifact names no slot; the pin to the tag, then `yarn build`, its copies under `vendor/wow/` in the same commit',
   rules: { added: [], changed: [], removed: [] },
   outputs: {},
 };

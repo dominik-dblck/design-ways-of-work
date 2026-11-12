@@ -974,3 +974,11 @@ Each call: what, why, how to undo. None changes what the PM sees.
   port's last merge of it (e7cb3b1), and each split's take stood on that merge, byte-equal by the migration's
   check. `ports/eagle-design/carried/splitHomes.ts` names the seventeen at main's blobs, so the next takes
   stop one file at a time. Undo: revert it.
+- v0.9.0 out under W30: main 8d1c44a and its tag on the remote, pre-push green (feature tier 525 s).
+- Task 13, first part: two homes held the product's facts. The source check's map (fifteen rows naming the
+  product's logic files) and the files it reads go to the product's `guards/sourceCheck/sourceMap.ts`, a
+  registry; the home hands them on. The publish skill's artifact address becomes the slot `publish.artifact`.
+  Both product files come from `ports/eagle-design/trees/home-facts/` by the migration `HOME_FACTS` (0.10.0),
+  so nothing stands unread in the product before the home reads it. A migration's tree holds a product's
+  files, so `ports/*/trees/**` joins `ports/*/tree/**` outside this repository's own checks. `NEXT`'s outputs are left for the gate to
+  name. Undo: revert it.

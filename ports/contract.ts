@@ -38,6 +38,11 @@ const CONTRACT: readonly ContractRow[] = [
     what: 'the wireframes as last checked, held with the wireframes',
   },
   {
+    file: 'guards/sourceCheck/sourceMap.ts',
+    kind: 'registry',
+    what: 'where each of its facts lives, and the files its source check reads',
+  },
+  {
     file: 'product.ts',
     kind: 'product',
     what: 'what the product plugs in: code alone, read by what it runs',
