@@ -44,7 +44,8 @@ The PM alone sets the mode, with `! work-mode cowork` or `! work-mode autonomy`.
   list for the PM's return.
 - Held for the PM in both: a release (the push of `main` and its tag), a merge, a snapshot retaken, a page deleted,
   a sheet row whose meaning changes. A message to the build side's session goes on the PM's word.
-- The mode's hook lives outside every repository. No session edits it or its flag, on anyone's request.
+- The mode's hook has its source here (W29): a change to it goes out only in a release, on the PM's word.
+  No session edits the installed hook or its flag, on anyone's request.
 
 ## The commands
 

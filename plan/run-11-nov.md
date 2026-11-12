@@ -24,7 +24,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 
 | stage | what | done | of |
 | 1 | Foundation | 7 | 7 |
-| 2 | Design clean | 8 | 19 |
+| 2 | Design clean | 8 | 20 |
 | 3 | Spawn design | 0 | 3 |
 | 4 | Eagle-design | 0 | 2 |
 
@@ -45,12 +45,13 @@ readers of the roadmap are homes, its rows split from them · 10 · the cases' r
 the directory's and the screens' readers · 12 · the words' readers · 13 · the homes no longer call the
 product's own logic nor hold its facts; the mixed grammars settled · 14 · the product's way-of-working files are
 homes: the root configs, the settings' hooks, the post-commit hook, the backup, the registry types · 15 · the
-decisions split: the way of working's rows join this register · 16 · `examples/sample-product`, rows and
-templates alone, each file of the contract · 17 · its check in the feature tier: the homes green on a product
-that names none (the no-product test) · 18 · the build side's theme and atoms held here (W25, W26), once it
-frees them · 19 · v1.0.0 (the PM's word).
+decisions split: the way of working's rows join this register · 16 · the hooks are homes: the user hooks' sources
+here, tested, installed by script, a person's own data in a local file (W28, W29) · 17 ·
+`examples/sample-product`, rows and templates alone, each file of the contract · 18 · its check in the
+feature tier: the homes green on a product that names none (the no-product test) · 19 · the build side's theme
+and atoms held here (W25, W26), once it frees them · 20 · v1.0.0 (the PM's word).
 
-Stage 3, the plan's stage 3: 1 · `yarn spawn design <path> <name>` · 2 · the new-project guide · 3 · `argus-design`
+Stage 3, the plan's stage 3: 1 · `yarn spawn design <path> <name>`, the hooks installed with it · 2 · the new-project guide · 3 · `argus-design`
 spawned and green on its first commit, the PM's word.
 
 Stage 4, the design half of the plan's stage 5: 1 · eagle-design takes v1 by the rehearsed migration, the PM's
@@ -895,4 +896,9 @@ Each call: what, why, how to undo. None changes what the PM sees.
 - The progress rebuilt again on what eagle-design's list of a new product's needs found: the product's
   way-of-working files to homes (task 14) and the decisions' split (task 15) are stage 2's; stage 2 is 19
   tasks. Undo: the table and the list as they stood (17 tasks).
+- Gate on 133e942 against eagle-design's port at df692e3 (v0.5.0 taken, the roadmap's rows split from their
+  readers): NO DIFFERENCE. The PM's picks by form: every hook comes from here, a person's data local (W28, A);
+  the mode's hook too, changed by release alone, the installed copy and its flag closed to every agent (W29, B,
+  `CLAUDE.md`'s rule rewritten); his word: a spawned product gets the same hooks. Stage 2 gains task 16, the
+  hooks; it is 20 tasks. Undo: revert it; the rule and the table as they stood.
 

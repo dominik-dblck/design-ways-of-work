@@ -194,6 +194,20 @@ const DECISIONS: readonly Decision[] = [
     says: 'the way of working gives a design product’s scope as a preset; a product’s `scope.ts` spreads it and names only what differs, written by script, never by hand: `yarn spawn` writes a new project’s, and a script cuts an existing product’s to what differs from the preset; a default moves in one place.',
     from: 'plan/run-11-nov.md',
   },
+  {
+    id: 'W28',
+    title: 'the hooks come from here',
+    held: '12 Nov · A',
+    says: 'every hook of the way of working, a project’s and a user’s, has its source here, tested, and is installed by script: a spawned product, a product taking a tag and a new machine get the same; a person’s own data, as a Slack id, stays in a local file never committed.',
+    from: 'plan/run-11-nov.md',
+  },
+  {
+    id: 'W29',
+    title: 'the mode’s hook from here, changed by release',
+    held: '12 Nov · B, replaces the rule that kept it outside every repository',
+    says: 'the work-mode hook’s source stands here, tested; a change to it goes out only in a release, on the PM’s word; no session edits the installed hook or its flag.',
+    from: 'plan/run-11-nov.md',
+  },
 ];
 
 export { DECISIONS };
