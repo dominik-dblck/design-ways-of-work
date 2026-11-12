@@ -967,3 +967,9 @@ Each call: what, why, how to undo. None changes what the PM sees.
   own words. `WORD_READERS` at 0.9.0, `NEXT` against a pin at v0.8.0. Findings for task 13: the cells read
   the empty pill by its key; the checks' suffixes are English; a row asks three cells and one per reader.
   Undo: revert it.
+- The gate on 9ec4210, against eagle-design at its v0.8.0 pin: the eleven homed, the outputs as `NEXT` says,
+  one broken: `main` changed `sheet/contract/commands.ts`, a home since v0.8.0. Seventeen homes in all hold a
+  change `main` made after the port's base and no carried row names; `main` has touched no home since the
+  port's last merge of it (e7cb3b1), and each split's take stood on that merge, byte-equal by the migration's
+  check. `ports/eagle-design/carried/splitHomes.ts` names the seventeen at main's blobs, so the next takes
+  stop one file at a time. Undo: revert it.

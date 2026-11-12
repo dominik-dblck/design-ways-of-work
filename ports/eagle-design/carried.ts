@@ -8,6 +8,7 @@ import { BOARD_NUMBERS } from './carried/boardNumbers.ts';
 import { ENDPOINT_FOLDS } from './carried/endpointFolds.ts';
 import { FEATURE_FOLDS } from './carried/featureFolds.ts';
 import { REPOSITORY_LINE } from './carried/repositoryLine.ts';
+import { SPLIT_HOMES } from './carried/splitHomes.ts';
 
 const CARRIED: readonly Carried[] = [
   {
@@ -43,6 +44,7 @@ const CARRIED: readonly Carried[] = [
   ...BOARD_AND_CONTRACT,
   ...FEATURE_FOLDS,
   ...ENDPOINT_FOLDS,
+  ...SPLIT_HOMES,
   ...BOARD_NUMBERS,
   ...REPOSITORY_LINE,
 ];
