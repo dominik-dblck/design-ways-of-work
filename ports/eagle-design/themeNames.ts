@@ -21,6 +21,11 @@ const THEME_NAMES: Migration = {
       from: '.join(text(ticket, SPEC))',
       to: '.join(expectedText(ticket, SPEC))',
     },
+    {
+      file: 'sheet/logic/assembly/contentTypeLogic/requirementHomes.ts',
+      from: "T18: 'sourceCheck.ts · LAYERS',",
+      to: "T18: 'sourceCheck.ts · SOURCE_LAYERS',",
+    },
   ],
   tree: null,
 };

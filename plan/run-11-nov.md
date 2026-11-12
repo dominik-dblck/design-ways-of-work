@@ -842,3 +842,7 @@ Each call: what, why, how to undo. None changes what the PM sees.
   eagle-design's own `roadmaps/tickets/ticketExpand.ts` imports `text`, so v0.5.0 asks a migration of it. The
   call: a repository holds a list of migrations, each run when its pin is before its release, in release
   order, so v0.4.0's stays for a checkout pinned before it and nothing retires. Undo: revert it.
+- Gate on a48f904: the product's prettier wrapped three renamed source-check files (format:check red), and
+  nine bundles and written homes moved by the renames alone; formatted on the clone, each a row of NEXT.
+  Eagle-design's finding: T18's pointer in its requirement homes follows by a third edit of the migration.
+  Undo: revert it.

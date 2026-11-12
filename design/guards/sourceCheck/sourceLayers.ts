@@ -111,7 +111,9 @@ function readsIn(
 // who reads whom among the layered files: each file's globals, the files whose globals it reads
 function readsOf(texts: Texts): Readonly<Record<string, FileReads>> {
   const owner = new Map<string, string>();
-  const names = Object.keys(SOURCE_LAYERS).filter((file) => texts[file] != null);
+  const names = Object.keys(SOURCE_LAYERS).filter(
+    (file) => texts[file] != null,
+  );
   const exported = names.map((file) => {
     const globals = [
       ...new Set((String(texts[file]).match(ASSIGNED) ?? []).map(globalIn)),
@@ -133,7 +135,10 @@ function readsOf(texts: Texts): Readonly<Record<string, FileReads>> {
 function layersCheck(texts: Texts): readonly SourceFinding[] {
   return Object.entries(readsOf(texts)).flatMap(([file, { reads }]) =>
     reads
-      .filter((read) => !((SOURCE_LAYERS[read.file] ?? NaN) < (SOURCE_LAYERS[file] ?? NaN)))
+      .filter(
+        (read) =>
+          !((SOURCE_LAYERS[read.file] ?? NaN) < (SOURCE_LAYERS[file] ?? NaN)),
+      )
       .map((read) => ({
         kind: 'read upwards',
         row: 'the layers (rule:layers-read-downward)',

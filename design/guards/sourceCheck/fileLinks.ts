@@ -66,7 +66,9 @@ function readLinks(
         from: file,
         to: read.file,
         kind: 'read',
-        against: !((SOURCE_LAYERS[read.file] ?? NaN) < (SOURCE_LAYERS[file] ?? NaN)),
+        against: !(
+          (SOURCE_LAYERS[read.file] ?? NaN) < (SOURCE_LAYERS[file] ?? NaN)
+        ),
       })),
   );
 }

@@ -29,6 +29,24 @@ const NEXT: Unreleased = {
       'dist · project/board-page.js':
         'the board’s numbers fold, the project’s and the repository’s, each a tile with its value, the words beside it, its bar and its note; the contract’s shared types fold',
       'dist · project/contract-page.js': 'the contract’s shared types fold',
+      'dist · project/contractView.js':
+        'the expected files’ text reads `expectedText`, the name the theme’s `text` frees',
+      'dist · project/expectedFiles.js':
+        'the expected files’ text reads `expectedText`, the name the theme’s `text` frees',
+      'dist · project/refineCheck.js':
+        'the expected files’ text reads `expectedText`, the name the theme’s `text` frees',
+      'dist · project/tickets.js':
+        'the expected files’ text reads `expectedText`, the name the theme’s `text` frees',
+      'dist · project/sourceCheck.js':
+        'the source check’s layers read `SOURCE_LAYERS`, the name the theme’s `LAYERS` frees',
+      'dist · project/sourceView.js':
+        'the source check’s layers read `SOURCE_LAYERS`, the name the theme’s `LAYERS` frees',
+      'dist · project/plans.js':
+        'the layers’ principle names the finding `SOURCE_LAYERS`',
+      'written · vendor/wow/guards/expectedFiles.ts':
+        'the expected files’ text reads `expectedText`, the name the theme’s `text` frees',
+      'written · vendor/wow/docs/process/plans/principleRules.ts':
+        'the layers’ principle names the finding `SOURCE_LAYERS`',
       'dist · project/boardView.js':
         'each number a Stat with its words, its bar and its note; the repository now from the receipts’ RepositoryState, and at close; the browser tests’ tool from the product’s stack',
       'dist · project/featureView.js':

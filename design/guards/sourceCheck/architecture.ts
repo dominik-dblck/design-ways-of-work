@@ -8,7 +8,12 @@ import { callOf, usesOf } from './fileUses.ts';
 import { exportsOf } from './bundleExports.ts';
 import { copies, findingCounts } from './ratchet.ts';
 import { targets } from './requirementReads.ts';
-import { LAYER_NAMES, SOURCE_LAYERS, layerOf, readsOf } from './sourceLayers.ts';
+import {
+  LAYER_NAMES,
+  SOURCE_LAYERS,
+  layerOf,
+  readsOf,
+} from './sourceLayers.ts';
 import { MAP, SCOPE } from './sourceScope.ts';
 import type {
   DrawnFiles,
