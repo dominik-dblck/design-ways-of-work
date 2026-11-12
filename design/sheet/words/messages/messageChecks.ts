@@ -118,7 +118,16 @@ function repeats(): string[] {
   });
 }
 
-// a count before a plural: a word of more than three letters ending in s, among the next three
+const NOT_PLURALS = new Set(['always', 'does', 'across', 'unless', 'perhaps']);
+
+// a plural: more than three letters, ending in s, not in ss, us or is, nor a word listed
+const isPlural = (word: string): boolean =>
+  word.length > 3 &&
+  /\p{L}s$/u.test(word) &&
+  !/(ss|us|is)$/i.test(word) &&
+  !NOT_PLURALS.has(word.toLowerCase());
+
+// a count before a plural, among the next three words
 function countsAPlural(line: string): boolean {
   const at = line.indexOf('{count}');
   if (at < 0) return false;
@@ -127,7 +136,7 @@ function countsAPlural(line: string): boolean {
     .split(/[\s,.;:·—()]+/)
     .filter(Boolean)
     .slice(0, 3);
-  return next.some((word) => word.length > 3 && /\p{L}s$/u.test(word));
+  return next.some(isPlural);
 }
 
 interface KeyedLine {
@@ -148,10 +157,11 @@ const keyedLines = (): readonly KeyedLine[] => [
   ...linesIn(SAY).map(({ key, line }) => ({ where: 'say', key, line })),
 ];
 
-// a plural's singular: `{key}One`, or its stem's (`blockComments`, `blockCommentOne`)
+// a plural's singular: `{key}One`, or its stem's (`blockComments`, `blockCommentOne`; `boxes`, `boxOne`)
 const singularsOf = (key: string): readonly string[] => [
   `${key}One`,
-  `${key.replace(/e?s$/, '')}One`,
+  `${key.replace(/s$/, '')}One`,
+  ...(/(s|x|z|ch|sh)es$/.test(key) ? [`${key.replace(/es$/, '')}One`] : []),
 ];
 
 // never a failure yet: a counted plural with no singular beside it, and a singular that still counts

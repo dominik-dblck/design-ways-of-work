@@ -1015,3 +1015,8 @@ Each call: what, why, how to undo. None changes what the PM sees.
   release holds them once mended. A count with no plural after it ("Show {count} more") asks nothing.
   `COUNT_FORMS` (0.11.0) makes the product's barrel hand it on. Checked on the gate's clone: ESLint, tsc,
   knip, prettier. Undo: revert it.
+- R13 reviewed by eagle-design (c764dc8, the diff read): a stem in -ges or -ces kept whole ("changes",
+  `changeOne`), es taken off only after s, x, z, ch or sh; a word in ss, us or is, or a listed one ("always"),
+  no plural. Still 14 on the gate's clone. Before the release that holds it, the mend form for cells is settled
+  with eagle-design: its pick, a fill-level form (`{count|block|blocks}`, resolved by the fill) for cells and
+  `{key}One` for keyed lines, so a cell needs no second situation row. Undo: revert it.
