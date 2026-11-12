@@ -339,7 +339,10 @@ const BODY_AFTER = `const scope: RepoScope = {
       'ESLint writes its known fails (\`--suppress-rule\`, \`--prune-suppressions\`)',
   },
   namedPaths: {
-    docs: [...SCOPE_PRESET.namedPaths.docs, '!docs/process/agent-instructions.md'],
+    docs: [
+      ...SCOPE_PRESET.namedPaths.docs,
+      '!docs/process/agent-instructions.md',
+    ],
     roots: [...SCOPE_PRESET.namedPaths.roots, 'public'],
   },
   instructions: {
