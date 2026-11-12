@@ -2,7 +2,7 @@
  * - `requirementItems`, `decisionLines` · the requirements, their built lines
  * - `targets`, `readList` · the files a requirement retires code in, a run's files
  */
-import { LAYERS } from './sourceLayers.ts';
+import { SOURCE_LAYERS } from './sourceLayers.ts';
 import { SCOPE } from './sourceScope.ts';
 import { requirements } from '../../sheet/requirements.ts';
 
@@ -35,7 +35,7 @@ function readList(): readonly string[] {
     ...new Set([
       ...SCOPE,
       ...targets(),
-      ...Object.keys(LAYERS).filter((file) => file !== 'sourceCheck.js'),
+      ...Object.keys(SOURCE_LAYERS).filter((file) => file !== 'sourceCheck.js'),
       'messages.js',
     ]),
   ];

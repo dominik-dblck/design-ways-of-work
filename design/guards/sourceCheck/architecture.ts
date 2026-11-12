@@ -8,7 +8,7 @@ import { callOf, usesOf } from './fileUses.ts';
 import { exportsOf } from './bundleExports.ts';
 import { copies, findingCounts } from './ratchet.ts';
 import { targets } from './requirementReads.ts';
-import { LAYER_NAMES, LAYERS, layerOf, readsOf } from './sourceLayers.ts';
+import { LAYER_NAMES, SOURCE_LAYERS, layerOf, readsOf } from './sourceLayers.ts';
 import { MAP, SCOPE } from './sourceScope.ts';
 import type {
   DrawnFiles,
@@ -83,7 +83,7 @@ function registry(texts: Texts): {
       about: aboutOf(file, texts[file]),
     });
   };
-  [...Object.keys(LAYERS), ...ported].forEach(add);
+  [...Object.keys(SOURCE_LAYERS), ...ported].forEach(add);
   return { known, add };
 }
 

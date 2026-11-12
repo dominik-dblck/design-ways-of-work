@@ -6,7 +6,7 @@ import { execFileSync } from 'node:child_process';
 import path from 'node:path';
 import { CONSUMERS } from '../ports/consumers.ts';
 import { versionTaken } from './consumerClones.ts';
-import { isDue, migrated } from './migrated.ts';
+import { migratedDue } from './migrated.ts';
 import { HERE } from './repos.ts';
 import { childEnv } from './scratch.ts';
 
@@ -31,12 +31,7 @@ const branch = execFileSync('git', ['rev-parse', '--abbrev-ref', 'HEAD'], {
 if (branch !== consumer.ref)
   refused(`${root} does not stand on ${consumer.ref}`);
 
-const { migration } = consumer;
+const { migrations } = consumer;
 const pinned = versionTaken(root);
-if (migration === null)
-  console.log('migrated · nothing: the release in hand asks none');
-else if (!isDue(migration, pinned))
-  console.log(
-    `migrated · nothing: its pin, v${pinned}, took v${migration.release}'s`,
-  );
-else console.log(`migrated · ${migrated({ root, wow: HERE, migration })}`);
+for (const line of migratedDue({ root, wow: HERE, migrations, pinned }))
+  console.log(line);

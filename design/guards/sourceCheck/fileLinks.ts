@@ -2,7 +2,7 @@
  * - `tallied`, `totalOf` · each copy counted on its file and on its file-home pair
  * - `linksOf` · a read, an embedded component, a copy to its home, a fact's move
  */
-import { LAYERS } from './sourceLayers.ts';
+import { SOURCE_LAYERS } from './sourceLayers.ts';
 import type {
   CopyTally,
   DrawnFiles,
@@ -66,7 +66,7 @@ function readLinks(
         from: file,
         to: read.file,
         kind: 'read',
-        against: !((LAYERS[read.file] ?? NaN) < (LAYERS[file] ?? NaN)),
+        against: !((SOURCE_LAYERS[read.file] ?? NaN) < (SOURCE_LAYERS[file] ?? NaN)),
       })),
   );
 }

@@ -21,7 +21,7 @@ import { portFaults, trunkTaken } from './consumerPort.ts';
 import { differencesOf, standing, standingOn } from './consumerFiles.ts';
 import { ranIn } from './consumerRuns.ts';
 import type { Consumer } from './consumerTypes.ts';
-import { isDue, migrated } from './migrated.ts';
+import { migratedDue } from './migrated.ts';
 import { rowsSince } from './releasedRows.ts';
 import type { Released } from './releasedRows.ts';
 
@@ -122,14 +122,16 @@ function readied({
   );
   if (consumer.port !== null)
     console.log(`  taken · ${consumer.port.trunk}, by the port's script`);
-  const { migration } = consumer;
+  const { migrations } = consumer;
   const pinned = versionTaken(sides.pinned);
-  if (migration !== null && untaken.length === 0)
-    console.log(
-      isDue(migration, pinned)
-        ? `  migrated · ${migrated({ root: sides.next, wow, migration })}`
-        : `  migrated · nothing: its pin, v${pinned}, took v${migration.release}'s`,
-    );
+  if (migrations.length > 0 && untaken.length === 0)
+    for (const line of migratedDue({
+      root: sides.next,
+      wow,
+      migrations,
+      pinned,
+    }))
+      console.log(`  ${line}`);
   const resolved = nextTaken({ root: sides.next, archive: packageOf(wow) });
   return { sides, untaken, resolved };
 }

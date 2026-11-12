@@ -12,6 +12,7 @@ import { HERE } from '../../scripts/repos.ts';
 import { childEnv } from '../../scripts/scratch.ts';
 import { scratchRepo } from '../scripts/scratchRepo.ts';
 import type { ScratchRepo } from '../scripts/scratchRepo.ts';
+import { NOTEBOOK_REGISTRY } from '../scripts/notebookRegistry.ts';
 import { callsIn, stubbed, stubEnv } from '../scripts/stubs.ts';
 
 const VERSION = '0.1.10';
@@ -20,14 +21,16 @@ const TAKE =
   'T=$(mktemp -d) && cp -R node_modules/design-ways-of-work/shared/take "$T" && node "$T/take/takeWow.ts"';
 
 // the one repository a test's way of working names, and what the release in hand asks of it
-const portsOf = (migration: Migration | null): string => `const CONSUMERS = [
+const portsOf = (
+  migrations: readonly Migration[],
+): string => `const CONSUMERS = [
   {
     name: 'product',
     path: '../product',
     ref: 'main',
     commands: [['says']],
     folders: [],
-    migration: ${JSON.stringify(migration)},
+    migrations: ${JSON.stringify(migrations)},
     port: null,
   },
 ];
@@ -125,7 +128,7 @@ function written(wow: ScratchRepo): void {
   fs.copyFileSync(path.join(HERE, '.gitattributes'), at('.gitattributes'));
   fs.writeFileSync(at('.gitignore'), 'node_modules/\n.consumers/\n');
   fs.writeFileSync(at('design', 'says.txt'), 'pinned\n');
-  fs.writeFileSync(at('ports', 'consumers.ts'), portsOf(null));
+  fs.writeFileSync(at('ports', 'consumers.ts'), portsOf([]));
   fs.writeFileSync(at('ports', 'contract.ts'), contractOf(['registry.txt']));
   fs.writeFileSync(at('releases', 'changelog.ts'), changelog(NOTHING_IN_HAND));
   fs.writeFileSync(
@@ -147,6 +150,13 @@ function producing(base: string, remote: string): ScratchRepo {
   const product = scratchRepo({ base, name: 'product' });
   fs.writeFileSync(path.join(product.root, '.gitignore'), 'node_modules/\n');
   fs.writeFileSync(path.join(product.root, 'registry.txt'), 'no row yet\n');
+  fs.mkdirSync(path.join(product.root, path.dirname(NOTEBOOK_REGISTRY.file)), {
+    recursive: true,
+  });
+  fs.writeFileSync(
+    path.join(product.root, NOTEBOOK_REGISTRY.file),
+    NOTEBOOK_REGISTRY.text,
+  );
   // a file a later release takes from it
   fs.writeFileSync(path.join(product.root, 'package-lock.json'), '{}\n');
   fs.writeFileSync(

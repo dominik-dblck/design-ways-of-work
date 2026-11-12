@@ -1,5 +1,5 @@
 /**
- * - `LAYERS`, `LAYER_NAMES`, `layerOf`, `readsOf`, `layersCheck` · the layers
+ * - `SOURCE_LAYERS`, `LAYER_NAMES`, `layerOf`, `readsOf`, `layersCheck` · the layers
  * - `branchesCheck`, `codeLines` · a rule or a view branching on a type's name
  * - `exampleRow`, `readable` · a test's example row, the files a copy is read in
  */
@@ -11,7 +11,7 @@ import type {
 } from './sourceCheckTypes.ts';
 
 // a file reads only a lower number; within a layer the decimal orders the reads, the guard on top
-const LAYERS: Readonly<Record<string, number | undefined>> = {
+const SOURCE_LAYERS: Readonly<Record<string, number | undefined>> = {
   'glossary.js': 1.1,
   'messages.js': 1.2,
   'messagesContent.js': 1.3,
@@ -111,7 +111,7 @@ function readsIn(
 // who reads whom among the layered files: each file's globals, the files whose globals it reads
 function readsOf(texts: Texts): Readonly<Record<string, FileReads>> {
   const owner = new Map<string, string>();
-  const names = Object.keys(LAYERS).filter((file) => texts[file] != null);
+  const names = Object.keys(SOURCE_LAYERS).filter((file) => texts[file] != null);
   const exported = names.map((file) => {
     const globals = [
       ...new Set((String(texts[file]).match(ASSIGNED) ?? []).map(globalIn)),
@@ -133,19 +133,19 @@ function readsOf(texts: Texts): Readonly<Record<string, FileReads>> {
 function layersCheck(texts: Texts): readonly SourceFinding[] {
   return Object.entries(readsOf(texts)).flatMap(([file, { reads }]) =>
     reads
-      .filter((read) => !((LAYERS[read.file] ?? NaN) < (LAYERS[file] ?? NaN)))
+      .filter((read) => !((SOURCE_LAYERS[read.file] ?? NaN) < (SOURCE_LAYERS[file] ?? NaN)))
       .map((read) => ({
         kind: 'read upwards',
         row: 'the layers (rule:layers-read-downward)',
         file,
         line: read.line,
-        text: `${file} (${String(LAYERS[file])}) reads ${read.file} (${String(LAYERS[read.file])})`,
+        text: `${file} (${String(SOURCE_LAYERS[file])}) reads ${read.file} (${String(SOURCE_LAYERS[read.file])})`,
       })),
   );
 }
 
 function layerOf(file: string): number {
-  const layer = LAYERS[file];
+  const layer = SOURCE_LAYERS[file];
   if (layer != null) return layer;
   return 8;
 }
@@ -153,7 +153,7 @@ function layerOf(file: string): number {
 // a rule or a view branching on a type's name: a layered file of the rules or above
 function branchesCheck(texts: Texts): readonly SourceFinding[] {
   const files = Object.keys(texts).filter(
-    (file) => texts[file] != null && (LAYERS[file] ?? 0) >= 5,
+    (file) => texts[file] != null && (SOURCE_LAYERS[file] ?? 0) >= 5,
   );
   return files.flatMap((file) =>
     codeLines(texts[file]).flatMap((line, index) =>
@@ -178,7 +178,7 @@ function branchesCheck(texts: Texts): readonly SourceFinding[] {
 
 // an example names its facts by id: a list in a row of a layer-6 file is no copy, a declared one is
 function exampleRow(file: string, line: string): boolean {
-  const layer = LAYERS[file] ?? 0;
+  const layer = SOURCE_LAYERS[file] ?? 0;
   return (
     layer >= 6 &&
     layer < 7 &&
@@ -196,7 +196,7 @@ export {
   branchesCheck,
   exampleRow,
   LAYER_NAMES,
-  LAYERS,
+  SOURCE_LAYERS,
   layerOf,
   layersCheck,
   readable,

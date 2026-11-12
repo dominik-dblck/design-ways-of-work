@@ -1,5 +1,5 @@
 /**
- * - `text` · the files a ticket's run creates or changes, derived from data
+ * - `expectedText` · the files a ticket's run creates or changes, derived from data
  * - `reads`, `named` · the read list a pack needs, and the endpoints by name
  * - what no data names stays in the note beside the marker; recon confirms each path
  */
@@ -82,10 +82,10 @@ function of(ticket: ExpectedTicket, spec: ComponentsSpec): ExpectedFile[] {
   return files;
 }
 
-function text(ticket: ExpectedTicket, spec: ComponentsSpec): string {
+function expectedText(ticket: ExpectedTicket, spec: ComponentsSpec): string {
   return of(ticket, spec)
     .map((file) => `${file.path} (${file.why.join(', ')})`)
     .join(' · ');
 }
 
-export { named, reads, text };
+export { named, reads, expectedText };

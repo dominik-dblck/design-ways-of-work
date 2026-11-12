@@ -45,7 +45,7 @@ describe('a repository whose work lands on a branch that takes nothing yet', () 
       ref: 'port',
       commands: [],
       folders: [],
-      migration: null,
+      migrations: [],
       port: {
         trunk: 'main',
         base: shared,

@@ -15,8 +15,8 @@ interface Consumer {
   readonly commands: readonly (readonly string[])[];
   // the folders git ignores that a run writes, compared file by file
   readonly folders: readonly string[];
-  // what it does to take the release in hand, done on the clone that takes it; none when the release asks nothing
-  readonly migration: Migration | null;
+  // what it does to take each release that asks something of it, done on the clone that takes it
+  readonly migrations: readonly Migration[];
   // none once its own work lands on the branch that takes the way of working
   readonly port: Port | null;
 }

@@ -1,7 +1,7 @@
 /**
  * - `migrated` · a checkout of a repository made ready for the release in hand
  * - its removes and moves through git, imports following; its edits; its tree
- * - `isDue` · a repository pinned before the migration's release has not taken it
+ * - `isDue`, `migratedDue` · a pin before a migration's release has not taken it
  */
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
@@ -96,7 +96,7 @@ function absentIn(
   return [...new Set([...deleted.filter(Boolean), ...taken])];
 }
 
-// before anything moves: the checkout whole, and no notebook importing what moves
+// before anything moves: the checkout whole, and no notebook, kept as written, importing what moves
 function assertReady(
   root: string,
   {
@@ -114,7 +114,6 @@ function assertReady(
     throw new Error(
       `the checkout lacks what the migration takes, so nothing moved: ${absent.join(', ')}`,
     );
-  // a notebook keeps its words, so a move of what it imports would leave the product's checks red
   const pinning = rewrites(root, { git, moves: migration.moves })
     .map(({ now }) => now)
     .filter(isNotebook);
@@ -191,4 +190,29 @@ function migrated({ root, wow, migration }: Migrating): string {
   return `${String(removes.length)} removed, ${String(moves.length)} moved, ${String(rewritten.length)} following, ${String(migration.edits?.length ?? 0)} edited, ${String(written.length)} written`;
 }
 
-export { isDue, migrated };
+interface Due {
+  readonly root: string;
+  readonly wow: string;
+  readonly migrations: readonly Migration[];
+  readonly pinned: string;
+}
+
+// each migration in release order, run when the pin is before it: a line each
+function migratedDue({
+  root,
+  wow,
+  migrations,
+  pinned,
+}: Due): readonly string[] {
+  if (migrations.length === 0)
+    return ['migrated · nothing: the release in hand asks none'];
+  return [...migrations]
+    .sort((one, other) => (isBefore(one.release, other.release) ? -1 : 1))
+    .map((migration) =>
+      isDue(migration, pinned)
+        ? `migrated · ${migrated({ root, wow, migration })}, for v${migration.release}`
+        : `migrated · nothing: its pin, v${pinned}, took v${migration.release}'s`,
+    );
+}
+
+export { isDue, migrated, migratedDue };

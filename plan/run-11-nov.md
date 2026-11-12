@@ -837,3 +837,8 @@ Each call: what, why, how to undo. None changes what the PM sees.
   · `A_NOTEBOOK`): `keptIn(root)` reads it in a node of its own, so the move, the port's merge and the migration
   keep both shapes. The migration refuses, before anything moves, a move of what a notebook imports, and names
   the notebook. Undo: revert it.
+- W26 step 1, the names the theme takes: the source check's `LAYERS` is `SOURCE_LAYERS` (its export `layers`
+  stays) and the expected files' `text` is `expectedText`, renamed by `scripts/rename.ts` on the gate's clone.
+  eagle-design's own `roadmaps/tickets/ticketExpand.ts` imports `text`, so v0.5.0 asks a migration of it. The
+  call: a repository holds a list of migrations, each run when its pin is before its release, in release
+  order, so v0.4.0's stays for a checkout pinned before it and nothing retires. Undo: revert it.

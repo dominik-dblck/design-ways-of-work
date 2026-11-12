@@ -23,7 +23,7 @@ export {
 export { readList, targets } from './sourceCheck/requirementReads.ts';
 export {
   branchesCheck,
-  LAYERS as layers,
+  SOURCE_LAYERS as layers,
   layersCheck,
   readsOf,
 } from './sourceCheck/sourceLayers.ts';

@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { afterAll, describe, expect, it } from 'vitest';
-import { isDue, migrated } from '../../scripts/migrated.ts';
+import { isDue, migrated, migratedDue } from '../../scripts/migrated.ts';
 import { NOTEBOOK_REGISTRY } from './notebookRegistry.ts';
 import { scratchRepo } from './scratchRepo.ts';
 
@@ -189,5 +189,39 @@ describe('a migration is due on a repository pinned before its release', () => {
     expect(() => isDue(asking, '0.5.0-rc.1')).toThrow(
       '0.5.0-rc.1: a version is numbers and dots',
     );
+  });
+});
+
+describe('a repository takes each migration its pin is before, in release order', () => {
+  const clone = scratchRepo({ base, name: 'due' });
+  clone.committed('a.ts', 'export const a = 1;\n');
+  clone.committed(NOTEBOOK_REGISTRY.file, NOTEBOOK_REGISTRY.text);
+  const moving = (release: string, to: string) =>
+    ({
+      release,
+      removes: [],
+      moves: [['a.ts', to]],
+      tree: null,
+    }) as const;
+
+  it('a migration the pin took is said and skipped; a later one runs', () => {
+    expect(
+      migratedDue({
+        root: clone.root,
+        wow,
+        migrations: [moving('0.10.0', 'b.ts'), moving('0.9.0', 'c.ts')],
+        pinned: '0.9.0',
+      }),
+    ).toEqual([
+      "migrated · nothing: its pin, v0.9.0, took v0.9.0's",
+      'migrated · 0 removed, 1 moved, 0 following, 0 edited, 0 written, for v0.10.0',
+    ]);
+    expect(fs.existsSync(path.join(clone.root, 'b.ts'))).toBe(true);
+  });
+
+  it('a repository no migration asks anything of is told so', () => {
+    expect(
+      migratedDue({ root: clone.root, wow, migrations: [], pinned: '0.9.0' }),
+    ).toEqual(['migrated · nothing: the release in hand asks none']);
   });
 });
