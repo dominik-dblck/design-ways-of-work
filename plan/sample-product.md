@@ -35,6 +35,24 @@ take their types from about 20 files of the product:
 3. The check in the feature tier.
 4. Its pages, once the build side's theme lands (task 7).
 
+## Step 2's finding: the registries hold readers
+
+A probe took the homes alone into a bare folder: 366 tsc errors, 181 of them the contract's files missing.
+The homes call about 80 functions through the registries, not rows alone: 37 of eagle-design's files export
+them (the tickets' views and context, the notes, the templates, the tracks, the journeys and test cases, the
+commands', events', queries' and refusals' readers, the directory, the screens, the glossary, the messages'
+checks). Nearly every one imports the product's row files by name (`E06Journeys`, `E10Notes`, …), so none is
+a home as it stands, and a sample writing its own would copy logic a second product copies again.
+
+The way, step 2 widened:
+
+1. Eagle-design marks each of the 37: the way of working's reader, the product's own, or mixed.
+2. A reader of the way of working is split from its rows: the product keeps one file that gathers its rows,
+   the reader becomes a home at its path and reads that file through the contract.
+3. A mixed file is split first, on eagle-design's tree; its rows stay.
+4. The sample then writes rows alone. Area by area, each its release: the roadmap, the cases, the
+   contract, the words.
+
 ## Eagle-design's review (10bf0ef)
 
 - The eight are the way of working's: shape alone. Two fields carry a product's history, the backlog's `code`

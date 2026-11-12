@@ -863,3 +863,12 @@ Each call: what, why, how to undo. None changes what the PM sees.
   answers stand in `plan/sample-product.md`, with stage 4's step for the eight. Undo: revert it.
 - Gate on 85845c5: green, 36 differences each said; eagle-design's v0.5.0 migrations: 3 edited, 8 homed. Task 8
   step 1 closed. The PM's word (12 Nov, chat): autonomy, decisions here, questions on `plan/state.md`.
+- The PM set the flag (12 Nov 15:18): `work-mode autonomy`, his pick by form that the flag, not a chat word,
+  sets every session's mode. Under it: messages to eagle-dev need no word of his; each call logged here; a
+  backup (`yarn backup`) after every chunk, his word; a long run under `caffeinate`. Held for him still: a
+  release, a merge, a push of the build branch, a snapshot retaken, a page deleted, a sheet row's meaning.
+- Task 8 step 2's probe: the homes alone give 366 tsc errors; they call about 80 functions through the
+  registries, from 37 of eagle-design's files that import its row files by name. The call (autonomy): the way
+  of working's readers become homes at their paths, split from the rows the product gathers in one file; the
+  sample writes rows alone; no stub that copies logic. Eagle-design marks the 37 first. It widens task 8 by
+  about two to four days. Undo: revert it; the sample then writes the readers itself.
