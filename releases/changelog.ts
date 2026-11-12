@@ -5,11 +5,21 @@
 import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
 const NEXT: Unreleased = {
-  kind: 'patch',
-  what: '',
-  action: 'none: move the pin to the tag',
+  kind: 'major',
+  what: 'the board’s numbers fold, the project’s and the repository’s, each number a tile with its value, the words beside it, its bar and its note; the repository now, at its last report’s commit, read from the receipts’ `RepositoryState`, and what each ticket reported at close; the contract’s shared types fold; every report ends on the repository whole at its commit, the receipt carrying it as `repository`, and the close copies it; the board names the browser tests’ tool from the product’s stack',
+  action:
+    'the product’s `roadmaps/receipts.ts` exports the type `RepositoryState` and a receipt’s optional `repository`; the pin to the tag in the same commit',
   rules: { added: [], changed: [], removed: [] },
-  outputs: {},
+  outputs: {
+    'eagle-design': {
+      'dist · project/ticket-pipeline.md':
+        'every report ends on the repository whole at its commit (6b), the receipt carrying it as `repository`',
+      'written · docs/process/ticket-pipeline.md':
+        'every report ends on the repository whole at its commit (6b), the receipt carrying it as `repository`',
+      'output · yarn lint:files':
+        'the workspace’s own folders as the take writes them, textPoints in and sheetStatus out: the trunk’s board-view folder is refused on both sides',
+    },
+  },
 };
 
 const RELEASES: readonly Release[] = [

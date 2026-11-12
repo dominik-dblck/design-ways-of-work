@@ -47,7 +47,9 @@ describe('the board view', () => {
         .map((one) => one.id)
         .sort(),
     );
-    const done = held.filter((id) => ticketDetailOf(id)?.column === 'done').length;
+    const done = held.filter(
+      (id) => ticketDetailOf(id)?.column === 'done',
+    ).length;
     const tickets = stats().find((stat) => stat.id === 'tickets');
     expect(tickets?.value).toBe(String(done));
     expect(tickets?.sub).toContain(String(held.length));
@@ -113,9 +115,9 @@ describe('the board view', () => {
       String(own.reduce((sum, one) => sum + (one.tests ?? 0), 0)),
       String(own.length),
     ]);
-    const carried = own.some((one) => one.repository);
-    expect(now.length).toBe(carried ? 3 : 0);
-    expect(commit === null).toBe(!carried);
+    const hasState = own.some((one) => one.repository);
+    expect(now.length).toBe(hasState ? 3 : 0);
+    expect(commit === null).toBe(!hasState);
     expect([...now, ...atClose].every((one) => one.note)).toBe(true);
   });
 });

@@ -10,13 +10,19 @@ import { PERCENT } from '../constants/boardPageStatTileConstants.ts';
 interface BoardPageShareBarProps {
   // a part of one, the whole being 1
   readonly share: number;
+  readonly height?: number;
 }
 
-function BoardPageShareBar({ share }: BoardPageShareBarProps): ReactElement {
+// the part stretches to the bar's height: one height, the bar's
+function BoardPageShareBar({
+  share,
+  height = 4,
+}: BoardPageShareBarProps): ReactElement {
   return (
     <Box
       sx={{
-        height: 4,
+        display: 'flex',
+        height,
         borderRadius: radiusOf('uiRControl'),
         overflow: 'hidden',
         bgcolor: 'action.hover',
@@ -24,7 +30,6 @@ function BoardPageShareBar({ share }: BoardPageShareBarProps): ReactElement {
     >
       <Box
         sx={{
-          height: 1,
           width: `${Math.round(share * PERCENT)}%`,
           bgcolor: barColourOf('done'),
         }}

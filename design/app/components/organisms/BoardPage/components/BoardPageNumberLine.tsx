@@ -1,5 +1,5 @@
 /**
- * - `BoardPageNumberLine` · one line of numbers under its name, what it means on hover
+ * - `BoardPageNumberLine` · a line of numbers under its name, its meaning on hover
  * - `BoardPageNumberLineProps` · its name, its meaning, the commit it was read at
  */
 import Box from '@mui/material/Box';
@@ -8,7 +8,7 @@ import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
 import type { Stat } from '../../../../workspace/boardView.ts';
-import { GRID } from '../constants/boardPageNumberLineConstants.ts';
+import { NUMBER_GRID } from '../constants/boardPageNumberLineConstants.ts';
 import { BoardPageStatTile } from './BoardPageStatTile.tsx';
 
 interface BoardPageNumberLineProps {
@@ -39,7 +39,7 @@ function BoardPageNumberLine({
           )}
         </Stack>
       </Tooltip>
-      <Box sx={GRID}>
+      <Box sx={NUMBER_GRID}>
         {numbers.map((one) => (
           <BoardPageStatTile key={one.id} stat={one} />
         ))}

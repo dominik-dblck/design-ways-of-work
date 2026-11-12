@@ -796,7 +796,8 @@ Each call: what, why, how to undo. None changes what the PM sees.
 - 7b, the atoms re-probed at eagle-dev's fe07f6e4 (`git archive`, read only): its nine points hold; tsc 11 → 4,
   lint 47 → 8, none of them eagle-dev's. This side's: the theme's MUI augmentations (a badge's count, an
   input's large size), lucide-react, the tokens file as the generator writes it, three names this side holds
-  already (radiusOf, LAYERS, text). eagle-design's: the sheet's Badge and Button, renamed in its next batch.
+  already (radiusOf, LAYERS, text). eagle-design's: the sheet's Badge and Button, renamed on its main
+  (cf4530c, in a99e6b1), reaching port/wow when it takes that main.
   The sync script waits for the atoms on the build side's branch.
 - The next view batch, carried (eagle-design main 1683f09..a99e6b1): the board's numbers fold, each a tile with
   its words, its bar and its note (D87–D91), the repository now at its commit and at close, read from the
@@ -805,3 +806,7 @@ Each call: what, why, how to undo. None changes what the PM sees.
   translated into the organism's parts. The stack names the browser tests' tool in the board's words. One row
   per file in `ports/`, a row that stood moved to the new blob; `LINE` retired to `legacy/`. E10's frozen pin is
   the product's registry's. Undo: revert it.
+- Gate on b1a38d5: the carried pages broke this side's rules in the product (two headers, a function of 41
+  lines, two GRIDs, `value` and an unprefixed flag, a written height) and the product's prettier; mended, the
+  numbers' lines read in `utils/`, the share bar stretched in its own height as the stacked bar. The release's
+  row: v0.5.0, the product's receipts export `RepositoryState`. Undo: revert it.

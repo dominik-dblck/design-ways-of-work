@@ -37,8 +37,8 @@ const statesOf = (receipts: readonly Receipt[]): readonly RepositoryState[] =>
     .sort((one, other) => one.at.localeCompare(other.at))
     .flatMap((one) => (one.repository ? [one.repository] : []));
 
-const shown = (value: number | null): string =>
-  value === null ? '—' : String(value);
+const shown = (count: number | null): string =>
+  count === null ? '—' : String(count);
 
 // the change since the report before, when both gave the number and it moved
 function changeOf(now: number | null, before: number | null): string | null {
@@ -46,8 +46,8 @@ function changeOf(now: number | null, before: number | null): string | null {
   return `${now > before ? '+' : ''}${now - before}`;
 }
 
-const percent = (value: number | null | undefined): string =>
-  value === null || value === undefined ? '—' : `${value}%`;
+const percent = (part: number | null | undefined): string =>
+  part === null || part === undefined ? '—' : `${part}%`;
 
 // the other three measures and the run's own commit, beside what lines counts
 function coverageNote(words: Words, state: RepositoryState): string {
