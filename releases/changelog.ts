@@ -5,58 +5,69 @@
 import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
 const NEXT: Unreleased = {
-  kind: 'major',
-  what: 'two homes stop holding a product’s facts: the source check’s map and the files it reads stand in the product’s `guards/sourceCheck/sourceMap.ts`, a registry the contract names; the publish skill asks the product for its artifact’s address by the slot `publish.artifact`, and the slots’ test reads the skills’ asks too; five exports nothing reads leave the homes (the refusals’ order’s TIER, the events’ ActorKey, Batch and TargetKey, the directory’s RoleKey)',
-  action:
-    'the migrations `ports/` names for the repository, on its checkout: `node scripts/migrate.ts <name> <checkout>`, run from this repository at the tag (for eagle-design, `guards/sourceCheck/sourceMap.ts` and `docs/process/documentSlots/publishCites.ts` written, the slots’ barrel spreading the second, the people’s file no longer exporting the roles’ key no home reads); a product with no such map writes the file with empty lists, and one that publishes no artifact names no slot; the pin to the tag, then `yarn build`, its copies under `vendor/wow/` in the same commit',
+  kind: 'patch',
+  what: '',
+  action: 'none: move the pin to the tag',
   rules: { added: [], changed: [], removed: [] },
-  outputs: {
-    'eagle-design': {
-      'dist · project/documentSlots.js':
-        'the slots’ barrel spreads the publish skill’s slot, its module new',
-      'dist · project/modes.js':
-        'the slots’ barrel spreads the publish skill’s slot, its module new: the modes’ page bundles the slots',
-      'dist · project/module-entries.json':
-        'two modules more: the product’s source map and its publish slot',
-      'dist · project/sourceCheck.js':
-        'the source check’s map and scope come from the product’s sourceMap.ts, a module of its own',
-      'dist · project/sourceView.js':
-        'the source check’s map and scope come from the product’s sourceMap.ts, a module of its own',
-      'written · guards/__snapshots__/guardMap.ts':
-        'the guard’s map reads a file more under guards/sourceCheck/: the product’s source map',
-      'dist · project/boardView.js':
-        'a bundle holding the homes the unread exports left: the refusals’ order, the events’ and the directory’s types',
-      'dist · project/featureView.js':
-        'a bundle holding the homes the unread exports left: the refusals’ order, the events’ and the directory’s types',
-      'dist · project/refineCheck.js':
-        'a bundle holding the homes the unread exports left: the refusals’ order, the events’ and the directory’s types',
-      'dist · project/refusals.js':
-        'a bundle holding the homes the unread exports left: the refusals’ order, the events’ and the directory’s types',
-      'dist · project/tickets.js':
-        'a bundle holding the homes the unread exports left: the refusals’ order, the events’ and the directory’s types',
-      'dist · project/packs/T-E19-00.md':
-        'the pack’s digests of the refusals’ order, the events’ and the directory’s types, the people’s file, and of the readers that gather them',
-      'written · fixtures/packs/T-E19-00.md':
-        'the pack’s digests of the refusals’ order, the events’ and the directory’s types, the people’s file, and of the readers that gather them',
-      'written · vendor/wow/sheet/contract/events/eventsTypes.ts':
-        'the home hands on no name its readers take from the rows',
-      'written · vendor/wow/sheet/contract/refusals/refusalOrder.ts':
-        'the home hands on no name its readers take from the rows',
-      'written · vendor/wow/sheet/model/directory/directoryTypes.ts':
-        'the home hands on no name its readers take from the rows',
-      'written · records/release-5-3-1.md':
-        'the record digests the slots’ barrel and its new publish slot again',
-      'output · yarn cut-pack T-E19-00':
-        'the migration writes two files and edits the slots’ barrel and the people’s file: four more count as uncommitted until the product commits them with its pin',
-      'exit · yarn lint:exports · 1 → 0':
-        'five exports nothing reads leave the homes: TIER from the refusals’ order, ActorKey, Batch and TargetKey from the events’ types, RoleKey from the directory’s, and the people’s file stops exporting RoleKey',
-      'output · yarn lint:exports':
-        'five exports nothing reads leave the homes: TIER from the refusals’ order, ActorKey, Batch and TargetKey from the events’ types, RoleKey from the directory’s, and the people’s file stops exporting RoleKey',
-    },
-  },
+  outputs: {},
 };
 
 const RELEASES: readonly Release[] = [
+  {
+    version: '0.10.0',
+    date: '2026-11-12',
+    kind: 'major',
+    what: 'two homes stop holding a product’s facts: the source check’s map and the files it reads stand in the product’s `guards/sourceCheck/sourceMap.ts`, a registry the contract names; the publish skill asks the product for its artifact’s address by the slot `publish.artifact`, and the slots’ test reads the skills’ asks too; five exports nothing reads leave the homes (the refusals’ order’s TIER, the events’ ActorKey, Batch and TargetKey, the directory’s RoleKey)',
+    action:
+      'the migrations `ports/` names for the repository, on its checkout: `node scripts/migrate.ts <name> <checkout>`, run from this repository at the tag (for eagle-design, `guards/sourceCheck/sourceMap.ts` and `docs/process/documentSlots/publishCites.ts` written, the slots’ barrel spreading the second, the people’s file no longer exporting the roles’ key no home reads); a product with no such map writes the file with empty lists, and one that publishes no artifact names no slot; the pin to the tag, then `yarn build`, its copies under `vendor/wow/` in the same commit',
+    rules: { added: [], changed: [], removed: [] },
+    outputs: {
+      'eagle-design': {
+        'dist · project/documentSlots.js':
+          'the slots’ barrel spreads the publish skill’s slot, its module new',
+        'dist · project/modes.js':
+          'the slots’ barrel spreads the publish skill’s slot, its module new: the modes’ page bundles the slots',
+        'dist · project/module-entries.json':
+          'two modules more: the product’s source map and its publish slot',
+        'dist · project/sourceCheck.js':
+          'the source check’s map and scope come from the product’s sourceMap.ts, a module of its own',
+        'dist · project/sourceView.js':
+          'the source check’s map and scope come from the product’s sourceMap.ts, a module of its own',
+        'written · guards/__snapshots__/guardMap.ts':
+          'the guard’s map reads a file more under guards/sourceCheck/: the product’s source map',
+        'dist · project/boardView.js':
+          'a bundle holding the homes the unread exports left: the refusals’ order, the events’ and the directory’s types',
+        'dist · project/featureView.js':
+          'a bundle holding the homes the unread exports left: the refusals’ order, the events’ and the directory’s types',
+        'dist · project/refineCheck.js':
+          'a bundle holding the homes the unread exports left: the refusals’ order, the events’ and the directory’s types',
+        'dist · project/refusals.js':
+          'a bundle holding the homes the unread exports left: the refusals’ order, the events’ and the directory’s types',
+        'dist · project/tickets.js':
+          'a bundle holding the homes the unread exports left: the refusals’ order, the events’ and the directory’s types',
+        'dist · project/packs/T-E19-00.md':
+          'the pack’s digests of the refusals’ order, the events’ and the directory’s types, the people’s file, and of the readers that gather them',
+        'written · fixtures/packs/T-E19-00.md':
+          'the pack’s digests of the refusals’ order, the events’ and the directory’s types, the people’s file, and of the readers that gather them',
+        'written · vendor/wow/sheet/contract/events/eventsTypes.ts':
+          'the home hands on no name its readers take from the rows',
+        'written · vendor/wow/sheet/contract/refusals/refusalOrder.ts':
+          'the home hands on no name its readers take from the rows',
+        'written · vendor/wow/sheet/model/directory/directoryTypes.ts':
+          'the home hands on no name its readers take from the rows',
+        'written · records/release-5-3-1.md':
+          'the record digests the slots’ barrel and its new publish slot again',
+        'output · yarn cut-pack T-E19-00':
+          'the migration writes two files and edits the slots’ barrel and the people’s file: four more count as uncommitted until the product commits them with its pin',
+        'exit · yarn lint:exports · 1 → 0':
+          'five exports nothing reads leave the homes: TIER from the refusals’ order, ActorKey, Batch and TargetKey from the events’ types, RoleKey from the directory’s, and the people’s file stops exporting RoleKey',
+        'output · yarn lint:exports':
+          'five exports nothing reads leave the homes: TIER from the refusals’ order, ActorKey, Batch and TargetKey from the events’ types, RoleKey from the directory’s, and the people’s file stops exporting RoleKey',
+      },
+    },
+    moved: {},
+    tried: { 'eagle-design': '7e05c94' },
+  },
   {
     version: '0.9.0',
     date: '2026-11-12',
