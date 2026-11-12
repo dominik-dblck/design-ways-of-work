@@ -24,7 +24,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 
 | stage | what | done | of |
 | 1 | Foundation | 7 | 7 |
-| 2 | Design clean | 9 | 20 |
+| 2 | Design clean | 10 | 20 |
 | 3 | Spawn design | 0 | 3 |
 | 4 | Eagle-design | 0 | 2 |
 
@@ -74,6 +74,7 @@ word · 2 · both design repositories pinned to one tag, the gate green on both.
 - 15:36 · stage 2 · 7 of 17 · the stack a parameter, the theme's names freed, TokenHex (a48f904, 225f0a5, eb98097; v0.5.0)
 - 15:36 · stage 2 · 8 of 17 · the roadmap's eight types are homes, homed by the migration (368914f, d89ea49; v0.5.0, gate green on 212a690)
 - 16:17 · stage 2 · 9 of 20 · roadmap readers homed: c1fe8e2 + 2c6ccc0, gate green (20 expected), eagle-design approved
+- 16:56 · stage 2 · 10 of 20 · cases readers homed: 29e9764 + 06725ea + 98ed007, gate green (17 expected), eagle-design approved
 
 ## Calls
 

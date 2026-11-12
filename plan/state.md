@@ -64,3 +64,9 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
   as the migration does: the clone's tsc shows it.
 - A halt explains a file by the command that first wrote it: a new file of a halted `yarn build` passes as
   the halt's, not as its own.
+- The gate reads a trunk's change to a home against the port's first base, so a change the port merged
+  before the home was taken asks a carried row it does not need. A base per home (the trunk commit the port
+  held when the home was taken) would be exact.
+- A split's proof (each export's output dumped before and after, each import classed home or rows, lint
+  with no suppression) is a script each side writes again; one product-agnostic tool here, its digest
+  carried by the migration, would give both sides the same proof.
