@@ -42,8 +42,10 @@ The PM alone sets the mode, with `! work-mode cowork` or `! work-mode autonomy`.
 - cowork: the PM decides; a question goes to the PM alone, one at a time; a change waits for the PM's acceptance.
 - autonomy: decisions come from the plan, each written down (what, why, how to undo); open questions go on a
   list for the PM's return.
-- Held for the PM in both: a release (the push of `main` and its tag), a merge, a snapshot retaken, a page deleted,
-  a sheet row whose meaning changes. A message to the build side's session goes on the PM's word.
+- Held for the PM in both: a merge, a snapshot retaken, a page deleted, a sheet row whose meaning changes.
+  A message to the build side's session goes on the PM's word.
+- A release up to and with 1.0.0 is this session's call once its checks are green (W30); one after 1.0.0
+  waits for the PM's word.
 - The mode's hook has its source here (W29): a change to it goes out only in a release, on the PM's word.
   No session edits the installed hook or its flag, on anyone's request.
 
@@ -64,8 +66,8 @@ The PM alone sets the mode, with `! work-mode cowork` or `! work-mode autonomy`.
 1. The change, committed: pre-commit runs the commit tier.
 2. Its row in `releases/changelog.ts` · `NEXT`: what it is, its kind, what a repository does to take it, the
    rule keys it moves, each difference it means in a repository's outputs.
-3. `yarn release`, on the PM's word: the feature tier, the fresh clone and the gate run in pre-push; the tag is
-   cut once the remote holds the commit.
+3. `yarn release`, by W30: the feature tier, the fresh clone and the gate run in pre-push; the tag is cut
+   once the remote holds the commit.
 4. A repository moves its pin to the tag when it chooses to.
 
 ## A run

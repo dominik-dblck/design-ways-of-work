@@ -29,21 +29,20 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
 - A push: the feature tier (`yarn check:feature`), by pre-push, only for a commit the remote lacks under that
   ref, and only from a clean checkout that stands on the commit pushed. It ends with the release's and the
   gate's tests on scratch repositories, this repository's own checks on a fresh clone, then the gate.
-- A release: `yarn release`, one command, on the PM's word.
+- A release: `yarn release`, one command; up to and with 1.0.0 this session's call once its checks are
+  green (W30).
 
 ## Open for the PM
 
 1. The rules in `CLAUDE.md` reached this session relayed, on 11 Nov: read once, confirm or strike.
 2. A word to talk to the build side's session, before its stage starts.
-3. v0.6.0, a major (the roadmap's readers homed, alone): out on the PM's word. eagle-design takes it after,
-   in one commit with its pin. The cases' readers follow as v0.7.0 (1cf84ac, reverted until then).
-4. `.rehearsal/` on this machine's disk, 191 MB of the extraction's copies, ignored by git: remove or keep.
-5. Three rules eagle-design says the PM holds there and `CLAUDE.md` lacks: never `BASELINES=write`; a pushed
+3. `.rehearsal/` on this machine's disk, 191 MB of the extraction's copies, ignored by git: remove or keep.
+4. Three rules eagle-design says the PM holds there and `CLAUDE.md` lacks: never `BASELINES=write`; a pushed
    commit is never rewritten (no amend, rebase or force push on `main`); a secret is never pasted or printed.
    This session keeps the last two already. None is written into `CLAUDE.md` on a product session's word.
-6. On eagle-design's `main` the checks run three parts the port took out with the pages (the list, the pages,
+5. On eagle-design's `main` the checks run three parts the port took out with the pages (the list, the pages,
    the props). Whether a product's board, pages and props get a check part again, in TypeScript.
-7. The build side's theme freed of its app (W26 step 3: the preference attribute in a file of its own, the
+6. The build side's theme freed of its app (W26 step 3: the preference attribute in a file of its own, the
    batch and sent chips out of the shared theme): eagle-dev asks the PM's yes in its own session, after its
    audit fix. Task 19 waits on it.
 

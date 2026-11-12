@@ -925,3 +925,9 @@ Each call: what, why, how to undo. None changes what the PM sees.
   so 1cf84ac is reverted on `main`; nothing retires, `legacy/` stays for what does: once v0.6.0 is out, the
   revert is reverted with `CASE_READERS` at 0.7.0 and its own `NEXT`, its rows as 1cf84ac's gate printed
   them. Undo: revert the revert now, `CASE_READERS` back in v0.6.0.
+- The PM's word here (12 Nov): "ale czemu mnie pytasz o release nie mozesz sam robic?", then "masz zgode na
+  releasy az do 1.0.0", and eagle-design relayed the same (its D98: each only once its checks are green). W30:
+  each release up to and with 1.0.0 is this session's call once pre-push is green; a change to the work-mode
+  hook still waits for him (W29). `CLAUDE.md`'s held list and step 3 say so. His next word: "zapisuj decyzje
+  i zapisuj pytania, dogadamy jak skonczycie": no form; each question goes on the state's list for his
+  return. Undo: revert it; the releases wait for his word again.
