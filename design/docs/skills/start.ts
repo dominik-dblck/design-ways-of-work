@@ -31,7 +31,7 @@ const skill: SkillFile = {
       lead: null,
       first: null,
       lines: [
-        'Nothing else until a checklist line asks for it — and `design-refine` · How a point is decided, step 2, asks, before every point, for what the epics it stands on decided: their EDGES, `docs/process/plans.ts · DECISIONS`, their notebooks.',
+        'Nothing else until a checklist line asks for it — and `design-refine` · How a point is decided, step 2, asks, before every point, for what the epics it stands on decided: their EDGES, the product’s decided points (`docs/process/projectPlan.ts · decisions`), their notebooks.',
         'History is in git: `git log --follow -p -- <file>`, and the tag `archive-claude-design-2` (D11). The process documents these skills were cut from are in `legacy/` (D25).',
       ],
     },

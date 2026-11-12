@@ -23,6 +23,11 @@ const CONTRACT: readonly ContractRow[] = [
     what: 'the decisions',
   },
   {
+    file: 'docs/process/projectPlan.ts',
+    kind: 'registry',
+    what: 'the spec’s files, the first read, the fact combinations, the drift guards and the decided points',
+  },
+  {
     file: 'guards/__snapshots__/wireframesSnapshot.ts',
     kind: 'optional',
     what: 'the wireframes as last checked, held with the wireframes',

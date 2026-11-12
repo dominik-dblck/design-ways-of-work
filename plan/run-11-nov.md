@@ -626,3 +626,13 @@ Each call: what, why, how to undo. None changes what the PM sees.
   writes it at the same path. "Eagle reads the DS scale" reads "the tool"; the pack's usage names
   `<ticket id>`; the names rule's examples are a home's module and `E01.ts`, its markdown written by the
   product's emitter on the gate's clone and brought back. Undo: revert the commit.
+- 6b. The spec's files, the first read, the fact combinations, the drift guards and the decided points are
+  eagle-design's (its tickets, its files, its greps): they leave `docs/process/plans.ts` for a registry of
+  the product's, `docs/process/projectPlan.ts` (eagle-design's name, beside its `sheet/project.ts`), their
+  parts moved by `scripts/move.ts` into the migration's tree with their types. The Feature view reads the
+  combinations from it; the ticket context reads the first read from it (two migration edits); the refine
+  and start skills, the agent's instructions and the new project's list name it. Undo: revert the commit.
+- Two of the PM's words for stage 4, relayed by eagle-design (12 Nov): `import-x/extensions` stays `always`
+  in WoW with no scope exception, and the build side's imports get their extension in one scripted commit
+  of their own at the port (A); `knowledge/ux` moves to WoW as the UX check's reference, `ux-eval.md`
+  repointed, and `knowledge/ai` goes to `legacy/` with step 0c of `architecture-review.md` (B).

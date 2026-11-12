@@ -2,7 +2,7 @@
  * - `combinationsOf`, `statesNamed` · an epic's fact combination files, its states
  * - `countLine` · a file's rows counted by kind, or why they cannot be
  */
-import { combinations as COMBINATIONS } from '../../../docs/process/plans.ts';
+import { combinations as COMBINATIONS } from '../../../docs/process/projectPlan.ts';
 import type { ProductView } from '../../../tools/productTypes.ts';
 import type { CombinationView } from './featureTypes.ts';
 

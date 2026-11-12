@@ -36,7 +36,7 @@ const SECTIONS: readonly DocumentSection[] = [
       '',
       'Read these six, in this order, before you start:',
       '',
-      '1. `plans.ts` — what exists and which of it is the specification',
+      '1. `projectPlan.ts` — what exists and which of it is the specification',
       '2. `glossary.ts` — one name per idea, and the decided mechanics: snapshot, stream version, hash chain, refusal, silent command',
       '3. `blockModel.ts` — what a block, a revision and a version are · a version holds no text',
       '4. `backlog.ts` — the header comment: how this gets built',

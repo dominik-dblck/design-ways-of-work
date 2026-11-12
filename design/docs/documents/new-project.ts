@@ -50,7 +50,7 @@ const newProject: DocumentFile = {
         '- `sheet/` · each entry’s rows: the contract, the cases, the words, the model, the screens;',
         '  `sheet/logic/` and `sheet/samples/` whole, being the product’s behaviour and its samples.',
         '- `docs/process/decisions/` · its rows: decisions are the project’s data, not the way of working.',
-        '- `docs/process/plans/specFiles.ts` and `docs/process/plans/planPages.ts` · their rows.',
+        '- `docs/process/projectPlan/` and `docs/process/plans/planPages.ts` · their rows.',
         '- `app/styles/componentsSpec/` · its rows; `app/styles/gateStates.ts` · the product’s looks.',
         '- `legacy/`, `records/`, `notes/`, `fixtures/`, `poc/`, `guards/__snapshots__/`, `public/assets/` · whole.',
         '',

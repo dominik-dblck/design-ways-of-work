@@ -159,6 +159,16 @@ import { readStarts } from './tools/readStarts.ts';
 `,
       to: '  starts: readStarts(),\n',
     },
+    {
+      file: 'roadmaps/tickets/ticketContext.ts',
+      from: "import * as PLANS from '../../docs/process/plans.ts';\n",
+      to: "import * as PLANS from '../../docs/process/plans.ts';\nimport { projectContext } from '../../docs/process/projectPlan.ts';\n",
+    },
+    {
+      file: 'roadmaps/tickets/ticketContext.ts',
+      from: '    project: PLANS.projectContext,\n',
+      to: '    project: projectContext,\n',
+    },
   ],
   tree: 'ports/eagle-design/tree',
 };

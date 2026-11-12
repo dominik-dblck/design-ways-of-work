@@ -1,7 +1,6 @@
 /**
  * - `PlanPage` · a plan page, read in its order
- * - `FileRow`, `ContextRead`, `CombinationFile` · a spec file and a first read
- * - `RuleRow`, `RuleSlot`, `Guard`, `DriftDecision` · a rule, a slot, guard, point
+ * - `RuleRow`, `RuleSlot` · a rule or a checklist line, and a slot a product fills
  */
 import type { PersonId } from '../../../sheet/model/directory.ts';
 interface PlanPage {
@@ -18,26 +17,6 @@ interface PlanPage {
   readonly purpose: string;
 }
 
-interface FileRow {
-  readonly file: string;
-  readonly holds: string;
-}
-
-interface ContextRead {
-  readonly read: string;
-  readonly why: string;
-}
-
-interface CombinationFile {
-  readonly epic: string;
-  readonly file: string;
-  readonly fn: string;
-  readonly call: string;
-  readonly count: string;
-  readonly criteria: string;
-  readonly what: string;
-}
-
 // a rule or a checklist line: its key says what it does, cited as rule:{id} (D29)
 interface RuleRow {
   readonly id: string;
@@ -47,29 +26,11 @@ interface RuleRow {
 
 // a slot a product fills (D30): the question it answers, the homes that already hold it, its rules
 interface RuleSlot {
-  readonly slot: 'domain' | 'product' | 'experience' | 'architecture' | 'quality';
+  readonly slot:
+    'domain' | 'product' | 'experience' | 'architecture' | 'quality';
   readonly asks: string;
   readonly homes: readonly string[];
   readonly rows: readonly RuleRow[];
 }
 
-interface Guard {
-  readonly id: string;
-  readonly title: string;
-  readonly prevents: string;
-  readonly does: string;
-  readonly where: string;
-  readonly evidence: readonly string[];
-  readonly cost: string;
-  readonly risk: string;
-  readonly when: string;
-}
-
-interface DriftDecision {
-  readonly id: string;
-  readonly decided: string;
-  readonly phrases: readonly string[];
-  readonly where: string;
-}
-
-export type { RuleRow, RuleSlot, CombinationFile, ContextRead, DriftDecision, FileRow, Guard, PlanPage };
+export type { RuleRow, RuleSlot, PlanPage };
