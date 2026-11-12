@@ -98,11 +98,6 @@ const CONTRACT: readonly ContractRow[] = [
     what: 'the refusals',
   },
   {
-    file: 'sheet/logic/approval/approvalLogic.ts',
-    kind: 'plug',
-    what: 'logic of the product’s own',
-  },
-  {
     file: 'sheet/logic/capabilities.ts',
     kind: 'registry',
     what: 'the capabilities',
@@ -116,6 +111,11 @@ const CONTRACT: readonly ContractRow[] = [
     file: 'sheet/project.ts',
     kind: 'registry',
     what: 'its names and what its build side reads: data alone, no import',
+  },
+  {
+    file: 'sheet/requirements.ts',
+    kind: 'registry',
+    what: 'the requirements, each with the code it retires',
   },
   { file: 'sheet/rules.ts', kind: 'registry', what: 'the rules’ rows' },
   {

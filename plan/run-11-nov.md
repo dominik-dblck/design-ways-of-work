@@ -574,8 +574,12 @@ Each call: what, why, how to undo. None changes what the PM sees.
   `notes` is, else the file names' lint refuses it; the guard's built file is nine lines longer (the
   layers' names), the map's lines there move with it, written on the release in hand. eagle-design's
   review of 5c: the fields' header split a sentence, mended.
-- 5c2, the requirements, waits for the product: a registry, `sheet/requirements.ts`, the source guard reads
-  by path (it reads them deep in its scan, where no entry point hands anything in). Tried in the gate's
-  clone with a registry that re-exports the rows: the rule that a barrel re-exports its own folder alone
-  refuses it, and rightly, a registry holds its rows. So eagle-design moves its rows there on its `main`,
-  then the home reads them.
+- 5c2, the requirements. eagle-design's call: the rows move inside the migration of the release that reads
+  them, not on its `main` first, so no commit holds them twice and its `main` is ported once. A migration
+  learns two things, both any repository's: its moves carry every relative import with them (the code
+  files it tracks, but what it keeps as it was: `legacy/`, `records/`, `notes/`), and its edits write a
+  text of a file again, the text found exactly once after the imports followed, else the migration stops.
+  eagle-design's rows: the rows and their cut to `sheet/requirements.ts` and its folder, their two types cut
+  from the logic's into the registry's folder (the tree), the logic's export and header, the registry's
+  export named `requirements`. The home reads the registry; the requirements' built file is their prose,
+  every line of it exempt; its text is of the sheet's kind (eagle-design's catch). Undo: revert the commit.

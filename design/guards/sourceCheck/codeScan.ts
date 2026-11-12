@@ -118,7 +118,7 @@ function twiceWritten(): readonly SourceFinding[] {
           {
             kind: 'requirement twice',
             row: VIEW,
-            file: 'approvalLogic.js',
+            file: 'requirements.js',
             line: 1,
             text: requirement.id.slice(0, 140),
           },

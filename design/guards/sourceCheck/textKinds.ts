@@ -70,6 +70,7 @@ const TEXT: Readonly<Record<string, TextKinds | undefined>> = {
   },
   'gateStates.js': { is: 'screen' },
   'approvalLogic.js': { is: 'sheet' },
+  'requirements.js': { is: 'sheet' },
   'roleCombinations.js': { is: 'sheet' },
   'directory.js': { is: 'sheet' },
   'contentSamples.js': { is: 'typed', content: ['array'] },

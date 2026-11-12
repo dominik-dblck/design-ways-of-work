@@ -33,7 +33,7 @@ describe('what the runs wrote in a clone, a migration left out', () => {
   const before = writtenIn(clone.root);
 
   it('a migration removes, moves and writes through the index, and says how many', () => {
-    expect(said).toBe('1 removed, 1 moved, 1 written');
+    expect(said).toBe('1 removed, 1 moved, 0 following, 0 edited, 1 written');
     expect(clone.git(['ls-files'])).toBe(
       ['folder/asked.txt', 'held/moves.txt', 'kept.txt'].join('\n'),
     );

@@ -4,28 +4,19 @@
  */
 import { LAYERS } from './sourceLayers.ts';
 import { SCOPE } from './sourceScope.ts';
-import * as APPROVAL_LOGIC from '../../sheet/logic/approval/approvalLogic.ts';
+import { requirements } from '../../sheet/requirements.ts';
 
-type Requirement =
-  (typeof APPROVAL_LOGIC)['requirements'][number]['items'][number];
+type Requirement = (typeof requirements)[number]['items'][number];
 
+// a requirement names the code it retires: the guard fails while that code stands
 function requirementItems(): readonly Requirement[] {
-  return APPROVAL_LOGIC.requirements.flatMap((area) => area.items);
+  return requirements.flatMap((area) => area.items);
 }
 
-// the requirements are the decisions' home: in the built file, the lines of their parts
+// the requirements are the decisions' home: their built file is their prose, every line of it
 function decisionLines(file: string, text: unknown): ReadonlySet<number> {
-  const lines = new Set<number>();
-  if (file !== 'approvalLogic.js') return lines;
-  let part = '';
-  String(text)
-    .split('\n')
-    .forEach((line, index) => {
-      const marker = /^\s*\/\/ [\w/-]+\/(\w+)\.ts$/.exec(line);
-      if (marker) part = String(marker[1]);
-      if (/^requirement(s\w*|Rows)$/.test(part)) lines.add(index);
-    });
-  return lines;
+  if (file !== 'requirements.js') return new Set();
+  return new Set(String(text).split('\n').keys());
 }
 
 // the files a requirement's replaces names, beyond the scope
