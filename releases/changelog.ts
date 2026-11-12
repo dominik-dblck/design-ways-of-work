@@ -6,7 +6,7 @@ import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
 const NEXT: Unreleased = {
   kind: 'patch',
-  what: '',
+  what: 'a commit whose change holds no file runs no formatter and no spelling check on it: a tool handed no file runs none',
   action: 'none: move the pin to the tag',
   rules: { added: [], changed: [], removed: [] },
   outputs: {},

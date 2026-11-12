@@ -43,7 +43,7 @@ describe('the commit tier reads the files a change holds', () => {
   repo.committed('leaves.ts', 'export const leaves = 1;\n');
   repo.committed('fixtures/wrong.ts', 'export const wrong = 1;\n');
 
-  it('a tree with no change runs the checks of the tree, and no ESLint', () => {
+  it('a tree with no change runs the checks of the tree, and no tool on its files', () => {
     const said = repo.ran({ hook: HOOK, args: ['commit'] });
     expect(said.status).toBe(0);
     expect(scriptsOf(said.calls)).toEqual([
@@ -52,6 +52,8 @@ describe('the commit tier reads the files a change holds', () => {
       'tsc',
       'own:commit',
     ]);
+    expect(handed(said.calls, 'prettier')).toBe('');
+    expect(handed(said.calls, 'cspell')).toBe('');
     expect(handed(said.calls, 'eslint')).toBe('');
     expect(said.stdout).toMatch(/^✓ lint:files · \d+\.\d s$/m);
     expect(said.stdout).toMatch(/^commit · \d+\.\d s$/m);

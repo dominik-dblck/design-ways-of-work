@@ -39,30 +39,36 @@ const rootEslintConfig = (root: string): string | undefined =>
 // a commit's checks in all, past which one moves to the feature end
 const COMMIT_BUDGET_SECONDS = 180;
 
+// a tool handed no file reads none: a change that holds no file runs none
+const onSome =
+  (command: (files: readonly string[]) => readonly string[]) =>
+  (files: readonly string[]): readonly string[] =>
+    files.length ? command(files) : [];
+
 // what a commit waits for: the files it touches, and the tree where a check costs seconds
 const COMMIT: readonly TierCheck[] = [
   { script: 'lint:files' },
   { script: 'lint:deps' },
   {
     script: 'format:check',
-    onFiles: (files) => [
+    onFiles: onSome((files) => [
       'prettier',
       '--check',
       '--ignore-unknown',
       '--log-level',
       'warn',
       ...files,
-    ],
+    ]),
   },
   {
     script: 'lint:words',
-    onFiles: (files) => [
+    onFiles: onSome((files) => [
       'cspell',
       '--no-progress',
       '--no-summary',
       '--no-must-find-files',
       ...files.flatMap((file) => ['--file', file]),
-    ],
+    ]),
   },
   {
     script: 'lint',
