@@ -13,6 +13,7 @@ import { BACKUP_HOOK } from './eagle-design/backupHook.ts';
 import { GENERATED_FILES } from './eagle-design/generatedFiles.ts';
 import { HELD_BY } from './eagle-design/heldBy.ts';
 import { REWRITTEN } from './eagle-design/rewritten.ts';
+import { SCOPE_PRESET_CUT } from './eagle-design/scopePresetCut.ts';
 import { MIGRATION } from './eagle-design/migration.ts';
 import { ROADMAP_READERS } from './eagle-design/roadmapReaders.ts';
 import { ROADMAP_TYPES } from './eagle-design/roadmapTypes.ts';
@@ -56,6 +57,7 @@ const CONSUMERS: readonly [Consumer, ...Consumer[]] = [
       BACKUP_HOOK,
       GENERATED_FILES,
       HELD_BY,
+      SCOPE_PRESET_CUT,
     ],
     // its own work lands on `main`, which takes nothing yet: the branch holds `main` whole, or the gate is red
     port: {

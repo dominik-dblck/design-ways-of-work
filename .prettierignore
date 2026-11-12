@@ -11,6 +11,7 @@ dev/
 shared/rules/
 ports/*/tree/
 ports/*/trees/
+examples/
 # a file a tool writes keeps the tool's layout
 design-system/guide.md
 .prettierignore

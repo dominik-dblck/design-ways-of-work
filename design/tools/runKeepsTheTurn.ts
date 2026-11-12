@@ -11,7 +11,10 @@ const RUN_FILE = path.join(ROOT, '.claude', 'run.json');
 const WHOLE = /^(🟢|🟡|🔴) .+ · krok \d+ z \d+ [▓░]+/u;
 const PIECE = /^\S.* \d+ z \d+ [▓░]+/u;
 const STOP = /^⏸️? ?stop: (decyzja|migawka|koniec|blokada)\b/u;
-const EXAMPLE = '🟢 B · krok 2 z 7 ▓▓░░░░░\npartia 2 · plik 30 z 64 ▓▓▓▓░░░░░░';
+const EXAMPLE = [
+  '🟢 B · krok 2 z 7 ▓▓░░░░░',
+  'partia 2 · plik 30 z 64 ▓▓▓▓░░░░░░',
+].join('\n');
 const EACH_CHUNK =
   'Each chunk ends with lint, the tests, the checks, a commit and a push.';
 

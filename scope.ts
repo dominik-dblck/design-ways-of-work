@@ -22,13 +22,14 @@ const scope: RepoScope = {
     // a browser tier of one screen, its gates' tests read
     'tests/browser/fixtures/**',
   ],
-  // the design side's tree, the build side's, the rule files both read, a migration's files: each checked in its product
+  // the design side's tree, the build side's, the rule files both read, a migration's files, the sample: each checked in its product
   productTrees: [
     'design/**',
     'dev/**',
     'shared/rules/**',
     'ports/*/tree/**',
     'ports/*/trees/**',
+    'examples/**',
   ],
   production: ['scripts/**/*.ts', 'shared/**/*.ts', 'design-system/**/*.ts'],
   generated: ['design-system/guide.md'],
