@@ -4,7 +4,6 @@
  */
 import type { Consumer } from '../scripts/consumerTypes.ts';
 import { CARRIED } from './eagle-design/carried.ts';
-import { CASE_READERS } from './eagle-design/caseReaders.ts';
 import { REWRITTEN } from './eagle-design/rewritten.ts';
 import { MIGRATION } from './eagle-design/migration.ts';
 import { ROADMAP_READERS } from './eagle-design/roadmapReaders.ts';
@@ -34,13 +33,7 @@ const CONSUMERS: readonly [Consumer, ...Consumer[]] = [
       ['lint:exports'],
     ],
     folders: ['dist'],
-    migrations: [
-      MIGRATION,
-      THEME_NAMES,
-      ROADMAP_TYPES,
-      ROADMAP_READERS,
-      CASE_READERS,
-    ],
+    migrations: [MIGRATION, THEME_NAMES, ROADMAP_TYPES, ROADMAP_READERS],
     // its own work lands on `main`, which takes nothing yet: the branch holds `main` whole, or the gate is red
     port: {
       trunk: 'main',

@@ -917,9 +917,11 @@ Each call: what, why, how to undo. None changes what the PM sees.
   count to its own files; the criterion's cite of a PM date dropped). Its migration joins v0.6.0, unreleased,
   so the product takes one major for both areas. Undo: revert it; the cases' migration then gets its own
   release.
-- Task 10: the cases' thirteen readers are homes at eagle-design's paths, taken by `git show` at its port's
-  8de80db (rows split, eight suppressions mended, the cite dropped), verified on a fresh clone: tsc, ESLint
-  whole and the fifteen files with no suppression. The contract trades the journeys' and the test cases'
-  barrels for the three files that gather their rows; `CASE_READERS` joins v0.6.0. Eagle-design's pick: the
-  roles' count is a row beside the shared cases, since counting it from the directory reads upwards. Undo:
-  revert it.
+- Task 10: the cases' thirteen readers homed in 1cf84ac, taken by `git show` at eagle-design's 8de80db (rows
+  split, eight suppressions mended, the cite dropped), verified on a fresh clone (tsc, ESLint whole, the
+  fifteen files unsuppressed, 57 tests); its gate green, thirty-three differences each expected.
+- The PM's pick in eagle-design's session, relayed (its D96): v0.6.0 holds the roadmap's readers alone, the
+  cases' go out as v0.7.0, gated alone: two smaller steps are the more stable. A tag holds its commit's tree,
+  so 1cf84ac is reverted on `main`; nothing retires, `legacy/` stays for what does: once v0.6.0 is out, the
+  revert is reverted with `CASE_READERS` at 0.7.0 and its own `NEXT`, its rows as 1cf84ac's gate printed
+  them. Undo: revert the revert now, `CASE_READERS` back in v0.6.0.

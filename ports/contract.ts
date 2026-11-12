@@ -102,20 +102,11 @@ const CONTRACT: readonly ContractRow[] = [
     what: 'the tracks',
   },
   { file: 'scope.ts', kind: 'scope', what: 'what the repository names once' },
+  { file: 'sheet/cases/journeys.ts', kind: 'registry', what: 'the journeys' },
   {
-    file: 'sheet/cases/journeys/journeyRows.ts',
+    file: 'sheet/cases/testCases.ts',
     kind: 'registry',
-    what: 'the journeys, their walked prints and the states they walk, gathered',
-  },
-  {
-    file: 'sheet/cases/sharedCases/sharedCaseRows.ts',
-    kind: 'registry',
-    what: 'what every endpoint of a kind answers, and the count of its roles',
-  },
-  {
-    file: 'sheet/cases/testCases/caseReachRows.ts',
-    kind: 'registry',
-    what: 'the refusals a client mints and those a screen shows',
+    what: 'the test cases',
   },
   {
     file: 'sheet/contract/blockModel.ts',

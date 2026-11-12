@@ -35,8 +35,8 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
 
 1. The rules in `CLAUDE.md` reached this session relayed, on 11 Nov: read once, confirm or strike.
 2. A word to talk to the build side's session, before its stage starts.
-3. v0.6.0, a major (the roadmap's readers homed; the cases' join it if they land first): out on the PM's
-   word. eagle-design takes it after, in one commit with its pin.
+3. v0.6.0, a major (the roadmap's readers homed, alone): out on the PM's word. eagle-design takes it after,
+   in one commit with its pin. The cases' readers follow as v0.7.0 (1cf84ac, reverted until then).
 4. `.rehearsal/` on this machine's disk, 191 MB of the extraction's copies, ignored by git: remove or keep.
 5. Three rules eagle-design says the PM holds there and `CLAUDE.md` lacks: never `BASELINES=write`; a pushed
    commit is never rewritten (no amend, rebase or force push on `main`); a secret is never pasted or printed.
