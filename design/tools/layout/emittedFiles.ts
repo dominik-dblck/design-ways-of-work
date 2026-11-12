@@ -1,6 +1,6 @@
 /**
  * - `emitted`, `Emitted`, `isADocument` · what the build prints, where; a document
- * - `present` · the rows a product holds: an optional one it lacks left out, another refused
+ * - `present` · rows held: a missing optional one skipped, another refused
  * - the product's JSON and documents, a rule file as markdown, a skill as SKILL.md
  */
 import fs from 'node:fs';
@@ -18,11 +18,15 @@ interface Emitted {
 }
 
 // each row whose file the product holds; one it lacks prints nothing when optional, and stops the build when not
-function present<Row extends { readonly optional?: true }>(
-  rows: readonly Row[],
-  root: string,
-  fileOf: (row: Row) => string,
-): readonly Row[] {
+function present<Row extends { readonly optional?: true }>({
+  rows,
+  root,
+  fileOf,
+}: {
+  readonly rows: readonly Row[];
+  readonly root: string;
+  readonly fileOf: (row: Row) => string;
+}): readonly Row[] {
   return rows.filter((row) => {
     if (fs.existsSync(path.join(root, fileOf(row)))) return true;
     if (row.optional) return false;
@@ -89,21 +93,23 @@ const DATA_FOLDERS: readonly DataFolder[] = [
 
 // every data file of the folders, a type file left out, with the markdown it prints as
 function dataFiles(): readonly Emitted[] {
-  return present(DATA_FOLDERS, ROOT, (one) => one.folder).flatMap(
-    ({ folder, name, print, fixtureOf }) => {
-      const full = path.join(ROOT, folder);
-      return fs
-        .readdirSync(full)
-        .filter((file) => file.endsWith('.ts') && !file.endsWith('Types.ts'))
-        .sort()
-        .map((file) => ({
-          module: `${folder}/${file}`,
-          name,
-          fixture: fixtureOf(file.replace(/\.ts$/, '')),
-          print,
-        }));
-    },
-  );
+  return present({
+    rows: DATA_FOLDERS,
+    root: ROOT,
+    fileOf: (one) => one.folder,
+  }).flatMap(({ folder, name, print, fixtureOf }) => {
+    const full = path.join(ROOT, folder);
+    return fs
+      .readdirSync(full)
+      .filter((file) => file.endsWith('.ts') && !file.endsWith('Types.ts'))
+      .sort()
+      .map((file) => ({
+        module: `${folder}/${file}`,
+        name,
+        fixture: fixtureOf(file.replace(/\.ts$/, '')),
+        print,
+      }));
+  });
 }
 
 // what the product's build side reads, each export printed at its path: its data as JSON, its documents as markdown
@@ -120,7 +126,7 @@ const isADocument = (file: string): boolean =>
   [...EMITTED, ...buildReads.documents].some((one) => one.module === file);
 
 const emitted = (): readonly Emitted[] => [
-  ...present(EMITTED, ROOT, (one) => one.module),
+  ...present({ rows: EMITTED, root: ROOT, fileOf: (one) => one.module }),
   ...productPrints(),
   ...dataFiles(),
 ];

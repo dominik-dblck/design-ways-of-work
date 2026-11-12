@@ -23,14 +23,14 @@ const rowOf = (module: string, optional?: true): Row =>
 describe('the build prints what a product holds, and refuses what it lacks', () => {
   it('a row the product holds prints; an optional one it lacks is left out', () => {
     const rows = [rowOf('docs/held.ts'), rowOf('dev/map.ts', true)];
-    expect(present(rows, root, (one) => one.module)).toEqual([
+    expect(present({ rows, root, fileOf: (one) => one.module })).toEqual([
       rowOf('docs/held.ts'),
     ]);
   });
 
   it('a row it lacks that is not optional stops the build, naming its file', () => {
     const rows = [rowOf('docs/held.ts'), rowOf('docs/gone.ts')];
-    expect(() => present(rows, root, (one) => one.module)).toThrow(
+    expect(() => present({ rows, root, fileOf: (one) => one.module })).toThrow(
       'docs/gone.ts · the build prints it, and the product holds none',
     );
   });

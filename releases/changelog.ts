@@ -15,6 +15,8 @@ const NEXT: Unreleased = {
         'the build writes the new-project guide anew: one line on `wow.takes` and the build side’s agents',
       'output · yarn cut-pack T-E19-00':
         'the new-project guide the build wrote waits uncommitted in the trial: 4 files, not 3',
+      'output · yarn test':
+        'one test file more, its two tests: the build refuses a missing module it prints unless the row is optional',
       'dist · project/new-project.md':
         'the new-project guide says a new product takes no `dev/` until its build side has its own, and names the review agents that side holds',
       'written · docs/process/new-project.md':
