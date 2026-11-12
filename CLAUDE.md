@@ -46,7 +46,8 @@ The PM alone sets the mode, with `! work-mode cowork` or `! work-mode autonomy`.
   A message to the build side's session goes on the PM's word.
 - A release up to and with 1.0.0 is this session's call once its checks are green (W30); one after 1.0.0
   waits for the PM's word.
-- The mode's hook has its source here (W29): a change to it goes out only in a release, on the PM's word.
+- The mode's hook has its source here (W29): a change to what it does goes out only in a release, on the PM's
+  word; bringing it in byte-equal is a W30 release (W31).
   No session edits the installed hook or its flag, on anyone's request.
 
 ## The commands

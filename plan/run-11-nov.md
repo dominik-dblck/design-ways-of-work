@@ -931,3 +931,8 @@ Each call: what, why, how to undo. None changes what the PM sees.
   hook still waits for him (W29). `CLAUDE.md`'s held list and step 3 say so. His next word: "zapisuj decyzje
   i zapisuj pytania, dogadamy jak skonczycie": no form; each question goes on the state's list for his
   return. Undo: revert it; the releases wait for his word again.
+- v0.6.0 out under W30: main 86ab23f and its tag on the remote, pre-push green (feature tier 327 s, the
+  fresh clone, the gate against eagle-design's port at d86ecb2).
+- The PM's pick A, asked in chat what the hook's exception means: task 16's release, the work-mode hook's
+  source brought in byte-equal, tested and installed by script, is a W30 release (W31); a change to what it
+  does waits for him. Undo: revert it; task 16's release waits for his word.

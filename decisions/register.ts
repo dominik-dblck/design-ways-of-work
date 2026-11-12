@@ -215,6 +215,13 @@ const DECISIONS: readonly Decision[] = [
     says: 'each release up to and with 1.0.0 goes out on this session’s call, never before its checks are green: the feature tier, the fresh clone and the gate, by pre-push; a release that changes the work-mode hook still waits for the PM’s word (W29).',
     from: 'plan/run-11-nov.md',
   },
+  {
+    id: 'W31',
+    title: 'the mode’s hook brought in as it runs is a W30 release',
+    held: '12 Nov · A',
+    says: 'the release that brings the work-mode hook’s source here byte-equal to the installed one, tested and installed by script, goes out under W30; a change to what the hook does (its modes, what it holds for the PM) still waits for the PM’s word (W29).',
+    from: 'plan/run-11-nov.md',
+  },
 ];
 
 export { DECISIONS };
