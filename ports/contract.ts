@@ -123,21 +123,29 @@ const CONTRACT: readonly ContractRow[] = [
     what: 'the contract’s model: its types, each a name and its source',
   },
   {
-    file: 'sheet/contract/commands.ts',
+    file: 'sheet/contract/commands/commandRows.ts',
     kind: 'registry',
-    what: 'the commands',
+    what: 'the commands, the turns nobody asks, the agent’s, the contract every command carries, gathered',
   },
-  { file: 'sheet/contract/events.ts', kind: 'registry', what: 'the events' },
+  {
+    file: 'sheet/contract/events/eventRows.ts',
+    kind: 'registry',
+    what: 'the events by group, who acts, who is told, and each event’s producers, gathered',
+  },
   {
     file: 'sheet/contract/ports.ts',
     kind: 'optional',
     what: 'the contract’s ports',
   },
-  { file: 'sheet/contract/queries.ts', kind: 'registry', what: 'the queries' },
   {
-    file: 'sheet/contract/refusals.ts',
+    file: 'sheet/contract/queries/queryRows.ts',
     kind: 'registry',
-    what: 'the refusals',
+    what: 'the queries, the stores they read and the contract every query carries, gathered',
+  },
+  {
+    file: 'sheet/contract/refusals/refusalRows.ts',
+    kind: 'registry',
+    what: 'the refusals, the order they are read in, the actors’ keys and the contract, gathered',
   },
   {
     file: 'sheet/logic/capabilities.ts',
@@ -145,9 +153,14 @@ const CONTRACT: readonly ContractRow[] = [
     what: 'the capabilities',
   },
   {
-    file: 'sheet/model/directory.ts',
+    file: 'sheet/model/directory/people.ts',
     kind: 'registry',
-    what: 'the people and the roles',
+    what: 'the people and the roles, as the roster writes them',
+  },
+  {
+    file: 'sheet/model/languages.ts',
+    kind: 'registry',
+    what: 'the languages the product offers, and their names',
   },
   {
     file: 'sheet/project.ts',
@@ -164,6 +177,11 @@ const CONTRACT: readonly ContractRow[] = [
     file: 'sheet/screens/wireframes.ts',
     kind: 'optional',
     what: 'the screens and their wireframes',
+  },
+  {
+    file: 'sheet/screens/wireframes/writtenScreens.ts',
+    kind: 'optional',
+    what: 'the screens written by hand, and their families',
   },
   { file: 'sheet/words/glossary.ts', kind: 'registry', what: 'the glossary' },
   { file: 'sheet/words/messages.ts', kind: 'registry', what: 'the messages' },

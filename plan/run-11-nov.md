@@ -951,3 +951,9 @@ Each call: what, why, how to undo. None changes what the PM sees.
   says, but one broken: `main` changed `roadmaps/notes.ts` (E22's notebook, f07c9e7), a home since v0.6.0.
   The port already gathers E22 in `notes/notesRows.ts`, so the home stays; `CARRIED` names main's blob.
   Undo: revert it.
+- v0.7.0 out under W30: main 07ea034 and its tag on the remote, pre-push green (feature tier 346 s).
+- Task 11: the contract's, the directory's and the screens' fifteen readers are homes at eagle-design's paths,
+  taken by `git show` at d86ecb2 (verified as above). The contract trades the five readers it named for the
+  seven files that gather their rows (the commands', events', queries', refusals' rows, the people, the
+  languages, the screens written by hand, that last optional); `CONTRACT_READERS` at 0.8.0, `NEXT` written
+  against a pin at v0.7.0. Its gate runs once eagle-design's v0.7.0 take is committed. Undo: revert it.

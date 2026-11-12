@@ -5,11 +5,53 @@
 import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
 const NEXT: Unreleased = {
-  kind: 'patch',
-  what: '',
-  action: 'none: move the pin to the tag',
+  kind: 'major',
+  what: 'the contract’s, the directory’s and the screens’ readers are homes, at the paths a product held them: the commands’, the events’, the queries’ and the refusals’ readers and types, the refusals’ catalog, order and sentences, the directory’s reader and types, the screens’ rows and types; a product holds their rows apart, each gathered in a file the contract names (the commands’, the events’, the queries’ and the refusals’ rows, the people, the languages, the screens written by hand)',
+  action:
+    'the product’s rows split from the sheet’s readers on its own tree first, the readers byte-equal to the homes; the migrations `ports/` names for the repository, on its checkout: `node scripts/migrate.ts <name> <checkout>`, run from this repository at the tag (for eagle-design, the fifteen readers leave its index, the take writing them back); the pin to the tag, then `yarn build`, its copies under `vendor/wow/` in the same commit',
   rules: { added: [], changed: [], removed: [] },
-  outputs: {},
+  outputs: {
+    'eagle-design': {
+      'output · yarn build':
+        'the build side reads fifteen files more in vendor/wow/: the contract’s, the directory’s and the screens’ readers, homes now',
+      'output · yarn checks':
+        'the build side reads fifteen files more in vendor/wow/: the contract’s, the directory’s and the screens’ readers, homes now',
+      'output · yarn spec-check':
+        'the build side reads fifteen files more in vendor/wow/: the contract’s, the directory’s and the screens’ readers, homes now',
+      'output · yarn cut-pack T-E19-00':
+        'the build side reads fifteen files more in vendor/wow/: the contract’s, the directory’s and the screens’ readers, homes now; the fifteen the migration takes out of the index count as uncommitted until the product commits them with its pin',
+      'written · vendor/wow/sheet/contract/commands.ts':
+        'the sheet’s reader is a home now, copied with the homes',
+      'written · vendor/wow/sheet/contract/commands/commandsTypes.ts':
+        'the sheet’s reader is a home now, copied with the homes',
+      'written · vendor/wow/sheet/contract/events.ts':
+        'the sheet’s reader is a home now, copied with the homes',
+      'written · vendor/wow/sheet/contract/events/eventsTypes.ts':
+        'the sheet’s reader is a home now, copied with the homes',
+      'written · vendor/wow/sheet/contract/queries.ts':
+        'the sheet’s reader is a home now, copied with the homes',
+      'written · vendor/wow/sheet/contract/queries/queriesTypes.ts':
+        'the sheet’s reader is a home now, copied with the homes',
+      'written · vendor/wow/sheet/contract/refusals.ts':
+        'the sheet’s reader is a home now, copied with the homes',
+      'written · vendor/wow/sheet/contract/refusals/refusalCatalog.ts':
+        'the sheet’s reader is a home now, copied with the homes',
+      'written · vendor/wow/sheet/contract/refusals/refusalOrder.ts':
+        'the sheet’s reader is a home now, copied with the homes',
+      'written · vendor/wow/sheet/contract/refusals/refusalSentences.ts':
+        'the sheet’s reader is a home now, copied with the homes',
+      'written · vendor/wow/sheet/contract/refusals/refusalsTypes.ts':
+        'the sheet’s reader is a home now, copied with the homes',
+      'written · vendor/wow/sheet/model/directory.ts':
+        'the sheet’s reader is a home now, copied with the homes',
+      'written · vendor/wow/sheet/model/directory/directoryTypes.ts':
+        'the sheet’s reader is a home now, copied with the homes',
+      'written · vendor/wow/sheet/screens/wireframes/screenRows.ts':
+        'the sheet’s reader is a home now, copied with the homes',
+      'written · vendor/wow/sheet/screens/wireframes/screenTypes.ts':
+        'the sheet’s reader is a home now, copied with the homes',
+    },
+  },
 };
 
 const RELEASES: readonly Release[] = [

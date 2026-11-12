@@ -5,6 +5,7 @@
 import type { Consumer } from '../scripts/consumerTypes.ts';
 import { CARRIED } from './eagle-design/carried.ts';
 import { CASE_READERS } from './eagle-design/caseReaders.ts';
+import { CONTRACT_READERS } from './eagle-design/contractReaders.ts';
 import { REWRITTEN } from './eagle-design/rewritten.ts';
 import { MIGRATION } from './eagle-design/migration.ts';
 import { ROADMAP_READERS } from './eagle-design/roadmapReaders.ts';
@@ -40,6 +41,7 @@ const CONSUMERS: readonly [Consumer, ...Consumer[]] = [
       ROADMAP_TYPES,
       ROADMAP_READERS,
       CASE_READERS,
+      CONTRACT_READERS,
     ],
     // its own work lands on `main`, which takes nothing yet: the branch holds `main` whole, or the gate is red
     port: {
