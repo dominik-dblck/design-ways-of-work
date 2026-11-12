@@ -998,8 +998,14 @@ Each call: what, why, how to undo. None changes what the PM sees.
   homes differ as `NEXT` now says. Checked on the gate's clone before the commit: ESLint, tsc, knip,
   prettier. Undo: revert it.
 - Task 13 closed: the gate on 4b5f711 green, twenty differences each expected; the product's feature tier,
-  run on the gate's clone with v0.10.0 taken, green (ten of ten). Left: the product moves its drifted
-  `docs/rules/checks.md` to `legacy/` on its tree; the ticket kinds' hex waits for the theme (task 19).
+  run on the gate's clone with v0.10.0 taken, green (ten of ten). Left: the ticket kinds' hex waits for
+  the theme (task 19).
 - v0.10.0's first `yarn release` stopped at its own commit: the rule-gate test, which reads the scope's world
   whole (about three seconds), passed vitest's five-second default only on a quiet machine; the load stood
   at 39. It takes thirty seconds, as the tools test already does for its real runs. Undo: revert it.
+- v0.10.0 out under W30: main ebece30 and its tag on the remote, at the second try (feature tier 451 s).
+- A finding of mine struck: the product's `docs/rules/checks.md` is no drifted copy. Its build writes it from
+  the home `design/docs/rules/checks.ts`, the design side's rules (its own rows empty), so it differs from
+  `dev/rules/checks.md` by the build side's rows alone. eagle-design moved it to `legacy/` and back (7e05c94,
+  db4ae5b). Task 14 ships it as a home beside its siblings, the product's tracked copy out of the index by
+  the migration. Undo: revert it.
