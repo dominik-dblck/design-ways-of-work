@@ -24,7 +24,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 
 | stage | what | done | of |
 | 1 | Foundation | 7 | 7 |
-| 2 | Design clean | 13 | 20 |
+| 2 | Design clean | 14 | 20 |
 | 3 | Spawn design | 0 | 3 |
 | 4 | Eagle-design | 0 | 2 |
 
@@ -78,6 +78,7 @@ word · 2 · both design repositories pinned to one tag, the gate green on both.
 - 17:09 · stage 2 · 11 of 20 · contract, directory, screens readers homed: 221c1dc, gate green (19 expected), eagle-design approved
 - 17:32 · stage 2 · 12 of 20 · words readers homed: 9ec4210 + 99f3506, gate green (15 expected), eagle-design approved
 - 18:31 · stage 2 · 13 of 20 · homes hold no product fact: 4780f18 + f505740 + 4b5f711, gate green (20 expected), product feature tier green; events and gates a known gap
+- 19:40 · stage 2 · 14 of 20 · way-of-working files homed: configs, settings, types, backup, post-commit held to the scope's remote, tsconfig from the scope, epic test on its own registry; gate green (7 expected), eagle-design approved (5969551, 04aabd3, 98da1da, 82c851f, ef48600; v0.12.0)
 
 ## Calls
 
@@ -1067,3 +1068,6 @@ Each call: what, why, how to undo. None changes what the PM sees.
   product's epics (eagle-design's asked E16 and E18); it still asks that each registry the template names
   exists, a standard registry every design product holds. Green, lint and tsc clean on the gate's clone.
   `WOW_FILES` takes the product's copy out. Undo: revert it.
+- v0.12.0 out under W30: its tag on 5ffce8c, on the remote, at the first try (feature tier 274 s). Before it,
+  the gate on ef48600 (seven differences, each expected) and the product's feature tier on the gate's clone,
+  ten of ten. Task 14 closed: eagle-design approved each piece.

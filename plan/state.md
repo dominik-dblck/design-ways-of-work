@@ -16,10 +16,9 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
 ## Who takes it
 
 - `ports/consumers.ts` names each repository the gate tries, and the branch it tries.
-- eagle-design: its branch `port/wow` takes the tag v0.5.0 (d81fcef, its session's, not pushed yet); its
-  `main` still runs on its own copies. The gate tries it on its newest `main` (W22): each clone takes the
-  trunk by the port's script. A migration is in hand: v0.6.0 homes the roadmap's sixteen readers, its gate
-  green on 2c6ccc0 (twenty differences, each expected).
+- eagle-design: its branch `port/wow` takes the tags, each by its migrations (v0.11.0 at f44929d, pushed);
+  v0.12.0 is out for it to take. Its `main` still runs on its own copies and takes the port's line at stage 4
+  (its fast-forward is the PM's word). The gate tries `port/wow`, taking `main` by the port's script.
 - argus-design: not spawned yet; its stack is decided, the one this repository defines (W24).
 - The build side: `dev/` is copied from its repository by script; its port is parked.
 
