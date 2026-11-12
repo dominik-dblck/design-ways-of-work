@@ -608,3 +608,7 @@ Each call: what, why, how to undo. None changes what the PM sees.
   module the build side reads by name), was a line every product's `scope.ts` would write: it is the home's,
   `tools/readStarts.ts`, and the product's scope calls it (the migration's two edits there). Tried on the
   gate's clone: tsc, ESLint, knip, file names, 144 tests green. Undo: revert the commit.
+- The gate on 5e (1bfe21a): the migration whole (2 moved, 3 following, 15 edited, 7 written); 23 differences,
+  each expected, none unexplained. eagle-design reviewed every piece (5a to 5e) and accepted each. Task 5
+  closes: no home reads a product's logic, model or samples by path; what a product plugs in comes through
+  `product.ts` and `productView.ts`, and its rows through registries.
