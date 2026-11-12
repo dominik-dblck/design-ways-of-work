@@ -846,3 +846,6 @@ Each call: what, why, how to undo. None changes what the PM sees.
   nine bundles and written homes moved by the renames alone; formatted on the clone, each a row of NEXT.
   Eagle-design's finding: T18's pointer in its requirement homes follows by a third edit of the migration.
   Undo: revert it.
+- W26 step 2: the tokens module the build writes types a colour as `TokenHex`, the type the build side's
+  module exports, so the theme copied here reads the same module. A product's committed `tokens.ts` takes the
+  line at its build. Undo: revert it.
