@@ -10,7 +10,50 @@ const NEXT: Unreleased = {
   action:
     'the product’s rows split from the roadmap’s readers on its own tree first, the readers byte-equal to the homes; the migrations `ports/` names for the repository, on its checkout: `node scripts/migrate.ts <name> <checkout>`, run from this repository at the tag (for eagle-design, the sixteen readers leave its index, the take writing them back); the pin to the tag in the same commit',
   rules: { added: [], changed: [], removed: [] },
-  outputs: {},
+  outputs: {
+    'eagle-design': {
+      'output · yarn build':
+        'the build side reads sixteen files more in vendor/wow/: the roadmap’s readers, homes now',
+      'output · yarn checks':
+        'the build side reads sixteen files more in vendor/wow/: the roadmap’s readers, homes now',
+      'output · yarn spec-check':
+        'the build side reads sixteen files more in vendor/wow/: the roadmap’s readers, homes now',
+      'output · yarn cut-pack T-E19-00':
+        'the build side reads sixteen files more in vendor/wow/: the roadmap’s readers, homes now; the sixteen the migration takes out of the index count as uncommitted until the product commits them with its pin',
+      'written · vendor/wow/roadmaps/backlog.ts':
+        'the roadmap’s reader is a home now, copied with the homes',
+      'written · vendor/wow/roadmaps/notes.ts':
+        'the roadmap’s reader is a home now, copied with the homes',
+      'written · vendor/wow/roadmaps/templates.ts':
+        'the roadmap’s reader is a home now, copied with the homes',
+      'written · vendor/wow/roadmaps/templates/epicFiles.ts':
+        'the roadmap’s reader is a home now, copied with the homes',
+      'written · vendor/wow/roadmaps/tickets.ts':
+        'the roadmap’s reader is a home now, copied with the homes',
+      'written · vendor/wow/roadmaps/tickets/commandTickets.ts':
+        'the roadmap’s reader is a home now, copied with the homes',
+      'written · vendor/wow/roadmaps/tickets/pointerResolve.ts':
+        'the roadmap’s reader is a home now, copied with the homes',
+      'written · vendor/wow/roadmaps/tickets/receiptFlags.ts':
+        'the roadmap’s reader is a home now, copied with the homes',
+      'written · vendor/wow/roadmaps/tickets/ticketBoard.ts':
+        'the roadmap’s reader is a home now, copied with the homes',
+      'written · vendor/wow/roadmaps/tickets/ticketContext.ts':
+        'the roadmap’s reader is a home now, copied with the homes',
+      'written · vendor/wow/roadmaps/tickets/ticketExpand.ts':
+        'the roadmap’s reader is a home now, copied with the homes',
+      'written · vendor/wow/roadmaps/tickets/ticketKinds.ts':
+        'the roadmap’s reader is a home now, copied with the homes',
+      'written · vendor/wow/roadmaps/tickets/ticketList.ts':
+        'the roadmap’s reader is a home now, copied with the homes',
+      'written · vendor/wow/roadmaps/tickets/ticketViews.ts':
+        'the roadmap’s reader is a home now, copied with the homes',
+      'written · vendor/wow/roadmaps/tickets/ticketsTypes.ts':
+        'the roadmap’s reader is a home now, copied with the homes',
+      'written · vendor/wow/roadmaps/tracks.ts':
+        'the roadmap’s reader is a home now, copied with the homes',
+    },
+  },
 };
 
 const RELEASES: readonly Release[] = [
