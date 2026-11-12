@@ -24,7 +24,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 
 | stage | what | done | of |
 | 1 | Foundation | 7 | 7 |
-| 2 | Design clean | 20 | 25 |
+| 2 | Design clean | 22 | 25 |
 | 3 | Eagle-design | 0 | 2 |
 | 4 | Spawn design | 0 | 3 |
 
@@ -88,6 +88,8 @@ new-project guide · 3 · `argus-design` spawned and green on its first commit, 
 - 21:51 · stage 2 · 18 of 24 · the sample's feature tier in this repository's, the homes green on a product that names none; v0.16.0 out (41727fb)
 - 22:15 · stage 2 · 19 of 25 · no file the take wrote names the product, outside dev/ (task 24); v0.17.0 out (012ba31)
 - 22:21 · stage 2 · 20 of 25 · a change that holds no file runs no tool on its files (e8b33fa), eagle-design approved
+- 22:29 · stage 2 · 21 of 25 · the build empties its output only through the guard, the guard following links (53a5f5e, ba7e912), eagle-design approved
+- 22:29 · stage 2 · 22 of 25 · the checks that build a clone, a field of the scope (8736dd5), eagle-design approved
 
 ## Calls
 

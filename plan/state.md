@@ -51,12 +51,6 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
 
 - `dev/`, the build side's tree a design product takes, still names Eagle as its repository wrote it. Stage 2,
   task 24; the homes' test reads every other file the take wrote.
-- A change that holds no file still runs prettier and cspell with no file named, green by accident.
-  A home (`shared/checkTiers.ts`): stage 2, task 20.
-- `design/tools/build.ts` removes its output folder with all it holds, outside the guard. A home: stage 2,
-  task 21.
-- The checks that build in the scratch are a list in `scripts/scratch.ts`; a field of the scope would change a
-  home's type: stage 2, task 22.
 - A home's export no product reads is found by no check: knip in a product reads the taken files as entries.
 - A commit pushed straight to `main` from a clone with no hooks is checked by nothing here: a branch
   protection on the remote alone closes that.
