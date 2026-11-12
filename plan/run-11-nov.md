@@ -666,3 +666,10 @@ Each call: what, why, how to undo. None changes what the PM sees.
   product's plan (most bundle the schema's decision note), written on the release in hand.
   `docs/rules/responsibility.ts`, named by eagle-design, is a home's in the product: the take prints WoW's
   rule, which holds no pointer, so no edit is written.
+- 6d. The home's tests name no epic: the Feature view's and page's cases read every feature `features()`
+  gives, each against what its registries hold (journeys, commands, `refineSteps`, the plan's combinations),
+  the product's states through a plug; the planted ids are `E01`. The record test's eras are eagle-design's:
+  `sheet/project.ts` · `recordEras`, written by migration edits from the test's lists as they stood, a
+  required export (data with no import, read as a typed namespace; a product with no history writes four empty
+  lists), agreed by eagle-design. Tried on the gate's clone: format, tsc, ESLint, the six tests green.
+  Undo: revert the commit.

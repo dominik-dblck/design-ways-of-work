@@ -115,7 +115,7 @@ const CONTRACT: readonly ContractRow[] = [
   {
     file: 'sheet/project.ts',
     kind: 'registry',
-    what: 'its names and what its build side reads: data alone, no import',
+    what: 'its names, what its build side reads and its records’ eras: data alone, no import',
   },
   {
     file: 'sheet/requirements.ts',

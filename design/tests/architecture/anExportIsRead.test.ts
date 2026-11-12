@@ -129,7 +129,7 @@ describe('an export is read', () => {
     text: 'const P = window.Planted; P.rows;',
   };
   const ticket: Source = {
-    path: 'sheet/words/tickets/E18.js',
+    path: 'sheet/words/tickets/E01.js',
     text: "reads: ['planted.js · UNREAD']",
   };
 

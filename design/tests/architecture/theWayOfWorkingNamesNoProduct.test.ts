@@ -24,8 +24,13 @@ function namesIn(source: Source, names: readonly string[]): readonly string[] {
 }
 
 describe('the way of working names no product', () => {
-  // the build repository's paths and what it reads say where, not a name a text could carry
-  const { buildPaths: _paths, buildReads: _reads, ...named } = project;
+  // the build repository's paths, what it reads and the records' eras say where or when, not a name a text could carry
+  const {
+    buildPaths: _paths,
+    buildReads: _reads,
+    recordEras: _eras,
+    ...named
+  } = project;
   const names: readonly string[] = Object.values(named).flat();
 
   it('finds a name of the product and an epic in a planted text', () => {

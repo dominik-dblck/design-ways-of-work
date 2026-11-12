@@ -35,7 +35,7 @@ describe('a published path has one source', () => {
   });
 
   it('a new file takes the one home whose folder its path names', () => {
-    expect(sourceOf('packs/T-E99-00.md')).toBe('fixtures/packs/T-E99-00.md');
+    expect(sourceOf('packs/T-E01-00.md')).toBe('fixtures/packs/T-E01-00.md');
     expect(sourceOf('scraps/guardMap.ts')).toBe(
       'guards/__snapshots__/guardMap.ts',
     );

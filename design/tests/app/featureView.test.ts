@@ -1,7 +1,10 @@
 /**
  * - `app/workspace/featureView.ts`: one epic read whole, from the sheet lent to the page
+ * - each case reads every feature of the product, none named, its registries the truth
  */
 import { describe, expect, it } from 'vitest';
+import { combinations } from '../../docs/process/projectPlan.ts';
+import { refineSteps } from '../../docs/process/plans.ts';
 import { journeysOfEpic } from '../../sheet/cases/journeys.ts';
 import { all as COMMANDS } from '../../sheet/contract/commands.ts';
 import {
@@ -10,83 +13,92 @@ import {
   firstEpic,
 } from '../../app/workspace/featureView.ts';
 import { piecesOf } from '../../app/workspace/contractView/codeTokens.ts';
-import { productView } from '../../productView.ts';
 import type { ProductView } from '../../tools/productTypes.ts';
+
+const EPICS = features().map((tab) => tab.epic);
+const [ONE = '', OTHER = ''] = EPICS;
+
+const journeyed = EPICS.filter((epic) => journeysOfEpic(epic).length > 0);
+
+const filesOf = (epic: string): readonly string[] =>
+  combinations.filter((one) => one.epic === epic).map((one) => one.file);
 
 describe('the Feature view', () => {
   it('has a tab per feature ticket and opens on the first one not done', () => {
-    const tabs = features();
-    expect(tabs.length).toBeGreaterThan(0);
-    expect(tabs.map((tab) => tab.epic)).toContain(firstEpic());
+    expect(EPICS.length).toBeGreaterThan(0);
+    expect(EPICS).toContain(firstEpic());
   });
 
-  it('reads every journey of the epic, each step’s words filled in', () => {
-    const view = featureOf('E06');
-    expect(view.journeys.length).toBe(journeysOfEpic('E06').length);
-    const text = view.journeys
-      .flatMap((one) => one.steps.map((step) => step.does))
-      .join(' ');
-    expect(text).not.toMatch(/\{say:|\{refusal:/);
+  it('reads every journey of an epic, each step’s words filled in', () => {
+    for (const epic of journeyed) {
+      const view = featureOf(epic);
+      expect(view.journeys.length).toBe(journeysOfEpic(epic).length);
+      const text = view.journeys
+        .flatMap((one) => one.steps.map((step) => step.does))
+        .join(' ');
+      expect(text).not.toMatch(/\{say:|\{refusal:/);
+    }
   });
 
   it('covers every test case a person meets on a closed epic', () => {
-    const cover = featureOf('E06').cover;
-    expect(cover?.cases.ok).toBe(true);
-    expect(cover?.cases.share).toBe(100);
+    const closed = journeyed.filter(
+      (epic) => featureOf(epic).status === 'done',
+    );
+    for (const epic of closed) {
+      const cover = featureOf(epic).cover;
+      expect(cover?.cases.ok).toBe(true);
+      expect(cover?.cases.share).toBe(100);
+    }
   });
 
-  it('writes each of the epic’s commands as code, its route a line of its own', () => {
-    const view = featureOf('E06');
-    const mine = COMMANDS.filter((one) => one.epic === 'E06');
-    for (const command of mine) {
-      const endpoint = view.endpoints.find((one) => one.anchor === command.id);
-      expect(
-        endpoint?.lines.map((line) => line.map((piece) => piece.text).join('')),
-      ).toContain(command.route);
+  it('writes each of an epic’s commands as code, its route a line of its own', () => {
+    for (const epic of EPICS) {
+      const view = featureOf(epic);
+      for (const command of COMMANDS.filter((one) => one.epic === epic)) {
+        const endpoint = view.endpoints.find(
+          (one) => one.anchor === command.id,
+        );
+        expect(
+          endpoint?.lines.map((line) =>
+            line.map((piece) => piece.text).join(''),
+          ),
+        ).toContain(command.route);
+      }
     }
   });
 
   it('cuts a line of code into the pieces it was made of', () => {
-    const line = "  | Refused<'document.sent'>";
+    const line = "  | Refused<'record.sent'>";
     expect(
       piecesOf(line)
         .map((piece) => piece.text)
         .join(''),
     ).toBe(line);
     expect(piecesOf(line).find((piece) => piece.kind === 'str')?.text).toBe(
-      "'document.sent'",
+      "'record.sent'",
     );
   });
 
-  it('reads a feature’s standing at each refine step, and none for an epic not refined', () => {
-    const steps = featureOf('E03').steps;
-    expect(steps.map((one) => one.step)).toEqual([
-      'Contract',
-      'Test cases',
-      'Wireframe walk',
-      'Journeys',
-      'Spec rows',
-      'Feature ticket',
-      'The build-side run',
-    ]);
-    expect(steps[0]?.standing).toBe('done 24 Sep');
-    expect(featureOf('E07').steps).toEqual([]);
+  it('reads a feature’s standing at each refine step, or none for an epic not refined', () => {
+    for (const epic of EPICS)
+      expect([[], refineSteps]).toContainEqual(
+        featureOf(epic).steps.map((one) => one.step),
+      );
   });
 
-  it('names its combinations, or the states without them', () => {
-    expect(featureOf('E09').combinations.map((one) => one.file)).toEqual([
-      'roleCombinations.js',
-    ]);
-    const approvals = featureOf('E06', productView);
-    expect(approvals.combinations).toEqual([]);
-    expect(approvals.statesNamed).toBeGreaterThan(0);
-    expect(featureOf('E06').statesNamed).toBe(0);
+  it('names its combinations, and counts the states the product hands in', () => {
+    for (const epic of EPICS)
+      expect(featureOf(epic).combinations.map((one) => one.file)).toEqual(
+        filesOf(epic),
+      );
+    expect(featureOf(ONE, { statesOf: () => 3 }).statesNamed).toBe(3);
+    expect(featureOf(ONE).statesNamed).toBe(0);
   });
 
   it('draws the fields the product hands in, on their epic alone', () => {
     const plugs: ProductView = {
       fieldsOf: (epic) =>
-        epic === 'E06'
+        epic === ONE
           ? {
               kinds: [],
               options: [{ name: 'localized', ts: 'boolean', means: 'one' }],
@@ -95,13 +107,13 @@ describe('the Feature view', () => {
             }
           : undefined,
     };
-    const blocks = featureOf('E06', plugs);
+    const blocks = featureOf(ONE, plugs);
     expect(blocks.fieldOptions.map((one) => one.name)).toContain('localized');
     const code = blocks.fieldsCode.map((line) =>
       line.map((piece) => piece.text).join(''),
     );
     expect(code).toEqual(['type Field = {', '  name: string;', '};']);
-    expect(featureOf('E09', plugs).fieldsCode).toEqual([]);
-    expect(featureOf('E06').fieldOptions).toEqual([]);
+    expect(featureOf(OTHER, plugs).fieldsCode).toEqual([]);
+    expect(featureOf(ONE).fieldOptions).toEqual([]);
   });
 });

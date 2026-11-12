@@ -10,17 +10,19 @@ import { theme } from '../../app/theme/theme.ts';
 import { productView } from '../../productView.ts';
 import {
   featureOf,
+  features,
   featureWords as words,
   firstEpic,
 } from '../../app/workspace/featureView.ts';
 
+const drawn = (node: React.ReactElement): string =>
+  renderToString(<ThemeProvider theme={theme}>{node}</ThemeProvider>);
+
+const views = features().map(({ epic }) => featureOf(epic, productView));
+
 describe('the Feature page', () => {
   it('draws the epic it opens on, its journeys and its endpoints', () => {
-    const html = renderToString(
-      <ThemeProvider theme={theme}>
-        <FeaturePage plugs={productView} />
-      </ThemeProvider>,
-    );
+    const html = drawn(<FeaturePage plugs={productView} />);
     const view = featureOf(firstEpic() ?? '', productView);
     expect(html).toContain(view.title);
     expect(html).toContain(words.journeys.label);
@@ -30,16 +32,22 @@ describe('the Feature page', () => {
   });
 
   it('asks before counting a combinations file', () => {
-    const drawn = (node: React.ReactElement): string =>
-      renderToString(<ThemeProvider theme={theme}>{node}</ThemeProvider>);
-    const translations = drawn(
-      <FeaturePageCombinationsSection view={featureOf('E09', productView)} />,
-    );
-    expect(translations).toContain('roleCombinations.js');
-    expect(translations).toContain(words.combinations.count);
-    const approvals = featureOf('E06', productView);
-    expect(
-      drawn(<FeaturePageCombinationsSection view={approvals} />),
-    ).toContain(words.combinations.missing(approvals.statesNamed, 'E06'));
+    for (const view of views.filter((one) => one.combinations.length > 0)) {
+      const html = drawn(<FeaturePageCombinationsSection view={view} />);
+      for (const one of view.combinations) expect(html).toContain(one.file);
+      expect(html).toContain(words.combinations.count);
+    }
+  });
+
+  it('names the states an epic without combinations stands in, or draws nothing', () => {
+    const bare = views.filter((one) => one.combinations.length === 0);
+    for (const view of bare.filter((one) => one.statesNamed > 0))
+      expect(drawn(<FeaturePageCombinationsSection view={view} />)).toContain(
+        words.combinations.missing(view.statesNamed, view.epic),
+      );
+    for (const view of bare.filter((one) => one.statesNamed === 0))
+      expect(
+        drawn(<FeaturePageCombinationsSection view={view} />),
+      ).not.toContain('id="combinations"');
   });
 });

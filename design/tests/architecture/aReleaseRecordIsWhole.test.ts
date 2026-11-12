@@ -13,30 +13,13 @@ import { readModules } from '../../tools/releaseRecord/readModules.ts';
 import { MARK } from '../../tools/releaseRecord/recordText.ts';
 import * as PROJECT from '../../sheet/project.ts';
 
-// the records written before the tool, by hand or by a script outside the repository
-const BEFORE_THE_TOOL: readonly string[] = [
-  'release-3.md',
-  'release-3-1.md',
-  'release-3-2.md',
-  'release-3-3.md',
-  'release-3-3-1.md',
-];
-// the records the tool wrote before it named the files read whole
-const BEFORE_THE_FILES: readonly string[] = ['release-3-4.md'];
-// a record before the port's rename names a file read whole as it was named then
-const BEFORE_THE_RENAME: readonly string[] = [
-  'release-3-4-1.md',
-  'release-4.md',
-  'release-4-1.md',
-  'release-5.md',
-  'release-5-1.md',
-  'release-5-2.md',
-  'release-5-3.md',
-  'release-5-3-1.md',
-];
-const NAMED_THEN: Readonly<Record<string, string>> = {
-  'fixtures/data/blockModel.json': 'fixtures/data/block-model.json',
-};
+// the product's records written before the tool's form, each era by their names
+const {
+  beforeTheTool: BEFORE_THE_TOOL,
+  beforeTheFiles: BEFORE_THE_FILES,
+  beforeTheRename: BEFORE_THE_RENAME,
+  namedThen: NAMED_THEN,
+} = PROJECT.recordEras;
 const WRITTEN_BY = 'Written by `yarn release:record`';
 
 // a section's count in its heading against the lines it lists
