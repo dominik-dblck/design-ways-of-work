@@ -5,70 +5,81 @@
 import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
 const NEXT: Unreleased = {
-  kind: 'minor',
-  what: 'the decisions a design product took on how the way of working works stand in this register now, W32 to W103, each in its words of the day and naming the product’s row it was; the homes cite them by their W id; a product’s decision row may name the register’s row that holds it (`heldBy`)',
-  action:
-    'the migrations `ports/` names for the repository, on its checkout: `node scripts/migrate.ts <name> <checkout>`, run from this repository at the tag (for eagle-design, 72 of its decision rows gain `heldBy`, each keeping its words, its number and the cites that name it); the pin to the tag, then `yarn build`, its copies under `vendor/wow/` in the same commit',
+  kind: 'patch',
+  what: '',
+  action: 'none: move the pin to the tag',
   rules: { added: [], changed: [], removed: [] },
-  outputs: {
-    'eagle-design': {
-      'output · yarn build':
-        'the build writes again the six files whose homes cite a moved decision by its W id: the skills, the new-project page, the modes’ data',
-      'output · yarn cut-pack T-E19-00':
-        'the migration edits six decision rows files, and the build writes two files under its folders again: eight more count as uncommitted until the product commits them with its pin',
-      'dist · project/board-page.js':
-        'a bundle holding the decisions or the plans’ rules: a row’s `heldBy`, a cite by W id',
-      'dist · project/boardView.js':
-        'a bundle holding the decisions or the plans’ rules: a row’s `heldBy`, a cite by W id',
-      'dist · project/decisions.js':
-        'a bundle holding the decisions or the plans’ rules: a row’s `heldBy`, a cite by W id',
-      'dist · project/feature-page.js':
-        'a bundle holding the decisions or the plans’ rules: a row’s `heldBy`, a cite by W id',
-      'dist · project/featureView.js':
-        'a bundle holding the decisions or the plans’ rules: a row’s `heldBy`, a cite by W id',
-      'dist · project/modes.js':
-        'a bundle holding the decisions or the plans’ rules: a row’s `heldBy`, a cite by W id',
-      'dist · project/new-project.md':
-        'the page cites the moved decisions by their W ids',
-      'dist · project/packs/T-E19-00.md':
-        'the pack’s digests of the rules and decisions files the release changed',
-      'written · .claude/skills/design-answer-cc/SKILL.md':
-        'the skill cites a moved decision by its W id',
-      'written · .claude/skills/design-release/SKILL.md':
-        'the skill cites a moved decision by its W id',
-      'written · .claude/skills/design-sheet/SKILL.md':
-        'the skill cites a moved decision by its W id',
-      'written · .claude/skills/design-start/SKILL.md':
-        'the skill cites a moved decision by its W id',
-      'written · docs/process/new-project.md':
-        'the page cites the moved decisions by their W ids',
-      'written · fixtures/data/modes.json':
-        'the modes’ note cites the ticket’s mode chip by its W id',
-      'written · fixtures/packs/T-E19-00.md':
-        'the pack’s digests of the rules and decisions files the release changed',
-      'written · records/release-5-3-1.md':
-        'the record digests the decisions’ and the plans’ modules again',
-      'written · vendor/wow/docs/process/decisions/decisionTypes.ts':
-        'the vendored copy of a home the release changed: a cite by W id, or the decision type’s `heldBy`',
-      'written · vendor/wow/docs/process/modes/aboutToHoldsNote.ts':
-        'the vendored copy of a home the release changed: a cite by W id, or the decision type’s `heldBy`',
-      'written · vendor/wow/docs/process/plans.ts':
-        'the vendored copy of a home the release changed: a cite by W id, or the decision type’s `heldBy`',
-      'written · vendor/wow/docs/process/plans/checklistRules.ts':
-        'the vendored copy of a home the release changed: a cite by W id, or the decision type’s `heldBy`',
-      'written · vendor/wow/docs/process/plans/deliveryRules.ts':
-        'the vendored copy of a home the release changed: a cite by W id, or the decision type’s `heldBy`',
-      'written · vendor/wow/docs/process/plans/designRules.ts':
-        'the vendored copy of a home the release changed: a cite by W id, or the decision type’s `heldBy`',
-      'written · vendor/wow/docs/process/plans/plansTypes.ts':
-        'the vendored copy of a home the release changed: a cite by W id, or the decision type’s `heldBy`',
-      'written · vendor/wow/docs/process/plans/principleRules.ts':
-        'the vendored copy of a home the release changed: a cite by W id, or the decision type’s `heldBy`',
-    },
-  },
+  outputs: {},
 };
 
 const RELEASES: readonly Release[] = [
+  {
+    version: '0.13.0',
+    date: '2026-11-12',
+    kind: 'minor',
+    what: 'the decisions a design product took on how the way of working works stand in this register now, W32 to W103, each in its words of the day and naming the product’s row it was; the homes cite them by their W id; a product’s decision row may name the register’s row that holds it (`heldBy`)',
+    action:
+      'the migrations `ports/` names for the repository, on its checkout: `node scripts/migrate.ts <name> <checkout>`, run from this repository at the tag (for eagle-design, 72 of its decision rows gain `heldBy`, each keeping its words, its number and the cites that name it); the pin to the tag, then `yarn build`, its copies under `vendor/wow/` in the same commit',
+    rules: { added: [], changed: [], removed: [] },
+    outputs: {
+      'eagle-design': {
+        'output · yarn build':
+          'the build writes again the six files whose homes cite a moved decision by its W id: the skills, the new-project page, the modes’ data',
+        'output · yarn cut-pack T-E19-00':
+          'the migration edits six decision rows files, and the build writes two files under its folders again: eight more count as uncommitted until the product commits them with its pin',
+        'dist · project/board-page.js':
+          'a bundle holding the decisions or the plans’ rules: a row’s `heldBy`, a cite by W id',
+        'dist · project/boardView.js':
+          'a bundle holding the decisions or the plans’ rules: a row’s `heldBy`, a cite by W id',
+        'dist · project/decisions.js':
+          'a bundle holding the decisions or the plans’ rules: a row’s `heldBy`, a cite by W id',
+        'dist · project/feature-page.js':
+          'a bundle holding the decisions or the plans’ rules: a row’s `heldBy`, a cite by W id',
+        'dist · project/featureView.js':
+          'a bundle holding the decisions or the plans’ rules: a row’s `heldBy`, a cite by W id',
+        'dist · project/modes.js':
+          'a bundle holding the decisions or the plans’ rules: a row’s `heldBy`, a cite by W id',
+        'dist · project/new-project.md':
+          'the page cites the moved decisions by their W ids',
+        'dist · project/packs/T-E19-00.md':
+          'the pack’s digests of the rules and decisions files the release changed',
+        'written · .claude/skills/design-answer-cc/SKILL.md':
+          'the skill cites a moved decision by its W id',
+        'written · .claude/skills/design-release/SKILL.md':
+          'the skill cites a moved decision by its W id',
+        'written · .claude/skills/design-sheet/SKILL.md':
+          'the skill cites a moved decision by its W id',
+        'written · .claude/skills/design-start/SKILL.md':
+          'the skill cites a moved decision by its W id',
+        'written · docs/process/new-project.md':
+          'the page cites the moved decisions by their W ids',
+        'written · fixtures/data/modes.json':
+          'the modes’ note cites the ticket’s mode chip by its W id',
+        'written · fixtures/packs/T-E19-00.md':
+          'the pack’s digests of the rules and decisions files the release changed',
+        'written · records/release-5-3-1.md':
+          'the record digests the decisions’ and the plans’ modules again',
+        'written · vendor/wow/docs/process/decisions/decisionTypes.ts':
+          'the vendored copy of a home the release changed: a cite by W id, or the decision type’s `heldBy`',
+        'written · vendor/wow/docs/process/modes/aboutToHoldsNote.ts':
+          'the vendored copy of a home the release changed: a cite by W id, or the decision type’s `heldBy`',
+        'written · vendor/wow/docs/process/plans.ts':
+          'the vendored copy of a home the release changed: a cite by W id, or the decision type’s `heldBy`',
+        'written · vendor/wow/docs/process/plans/checklistRules.ts':
+          'the vendored copy of a home the release changed: a cite by W id, or the decision type’s `heldBy`',
+        'written · vendor/wow/docs/process/plans/deliveryRules.ts':
+          'the vendored copy of a home the release changed: a cite by W id, or the decision type’s `heldBy`',
+        'written · vendor/wow/docs/process/plans/designRules.ts':
+          'the vendored copy of a home the release changed: a cite by W id, or the decision type’s `heldBy`',
+        'written · vendor/wow/docs/process/plans/plansTypes.ts':
+          'the vendored copy of a home the release changed: a cite by W id, or the decision type’s `heldBy`',
+        'written · vendor/wow/docs/process/plans/principleRules.ts':
+          'the vendored copy of a home the release changed: a cite by W id, or the decision type’s `heldBy`',
+      },
+    },
+    moved: {},
+    tried: { 'eagle-design': 'fc73685' },
+  },
   {
     version: '0.12.0',
     date: '2026-11-12',
