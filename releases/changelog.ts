@@ -5,89 +5,104 @@
 import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
 const NEXT: Unreleased = {
-  kind: 'major',
-  what: 'the board’s numbers fold, the project’s and the repository’s, each number a tile with its value, the words beside it, its bar and its note; the repository now, at its last report’s commit, read from the receipts’ `RepositoryState`, and what each ticket reported at close; the contract’s shared types fold; every report ends on the repository whole at its commit, the receipt carrying it as `repository`, and the close copies it; the board names the browser tests’ tool from the product’s stack; the expected files’ text is `expectedText` and the source check’s layers `SOURCE_LAYERS`, so the theme may hold `text` and `LAYERS`; no move rewrites an epic’s notebook, markdown or data, where the product’s registry says one stands, and a migration that would move what a notebook imports is refused before anything moves; a repository takes each migration its pin is before, in release order; the tokens module types a colour as `TokenHex`, as the build side’s does; the roadmap’s eight type files (the backlog’s, the edges’, the ideas’, the notes’, the receipts’ and the repository state’s, the templates’, the tracks’) are homes, at the paths a product held them, so no import moves; a migration names the files a home holds from its release on, and refuses a copy whose text is not the home’s',
-  action:
-    'the product’s `roadmaps/receipts.ts` exports the type `RepositoryState` and a receipt’s optional `repository`; the migrations `ports/` names for the repository, on its checkout: `node scripts/migrate.ts <name> <checkout>`, run from this repository at the tag (for eagle-design, `roadmaps/tickets/ticketExpand.ts` reads `expectedText` and T18 points at `SOURCE_LAYERS`, and the roadmap’s eight type files leave its index, the take writing them back); the build’s `app/styles/tokens.ts`, which now exports `TokenHex`, committed; the pin to the tag in the same commit',
+  kind: 'patch',
+  what: '',
+  action: 'none: move the pin to the tag',
   rules: { added: [], changed: [], removed: [] },
-  outputs: {
-    'eagle-design': {
-      'dist · project/ticket-pipeline.md':
-        'every report ends on the repository whole at its commit (6b), the receipt carrying it as `repository`',
-      'written · docs/process/ticket-pipeline.md':
-        'every report ends on the repository whole at its commit (6b), the receipt carrying it as `repository`',
-      'output · yarn build':
-        'the tag’s build writes the ticket pipeline and the answer-cc skill back from its modules, which lack the repository line the trunk carries, and this one’s modules carry it; the build’s line counts two component files more, the board’s number line and share bar',
-      'output · yarn checks':
-        'the build’s line counts two component files more, the board’s number line and share bar',
-      'output · yarn spec-check':
-        'the build’s line counts two component files more, the board’s number line and share bar',
-      'output · yarn cut-pack T-E19-00':
-        'the build’s line counts two component files more, the board’s number line and share bar',
-      'output · yarn test':
-        'one test more: the board’s repository card, its state from the reports that carry it',
-      'dist · project/board-page.js':
-        'the board’s numbers fold, the project’s and the repository’s, each a tile with its value, the words beside it, its bar and its note; the contract’s shared types fold',
-      'dist · project/contract-page.js': 'the contract’s shared types fold',
-      'written · vendor/wow/roadmaps/backlog/backlogTypes.ts':
-        'the roadmap’s type file is a home now, copied with the homes',
-      'written · vendor/wow/roadmaps/edges/edgeTypes.ts':
-        'the roadmap’s type file is a home now, copied with the homes',
-      'written · vendor/wow/roadmaps/ideas/ideasTypes.ts':
-        'the roadmap’s type file is a home now, copied with the homes',
-      'written · vendor/wow/roadmaps/notes/notesTypes.ts':
-        'the roadmap’s type file is a home now, copied with the homes',
-      'written · vendor/wow/roadmaps/receipts/receiptsTypes.ts':
-        'the roadmap’s type file is a home now, copied with the homes',
-      'written · vendor/wow/roadmaps/receipts/repositoryState.ts':
-        'the roadmap’s type file is a home now, copied with the homes',
-      'written · vendor/wow/roadmaps/templates/templatesTypes.ts':
-        'the roadmap’s type file is a home now, copied with the homes',
-      'written · vendor/wow/roadmaps/tracks/tracksTypes.ts':
-        'the roadmap’s type file is a home now, copied with the homes',
-      'dist · project/contentTypeLogic.js':
-        'T18 points at the source check’s `SOURCE_LAYERS`',
-      'written · app/styles/tokens.ts':
-        'the tokens module types a colour as `TokenHex`, as the build side’s does',
-      'dist · project/contractView.js':
-        'the expected files’ text reads `expectedText`, the name the theme’s `text` frees',
-      'dist · project/expectedFiles.js':
-        'the expected files’ text reads `expectedText`, the name the theme’s `text` frees',
-      'dist · project/refineCheck.js':
-        'the expected files’ text reads `expectedText`, the name the theme’s `text` frees',
-      'dist · project/tickets.js':
-        'the expected files’ text reads `expectedText`, the name the theme’s `text` frees',
-      'dist · project/sourceCheck.js':
-        'the source check’s layers read `SOURCE_LAYERS`, the name the theme’s `LAYERS` frees',
-      'dist · project/sourceView.js':
-        'the source check’s layers read `SOURCE_LAYERS`, the name the theme’s `LAYERS` frees',
-      'dist · project/plans.js':
-        'the layers’ principle names the finding `SOURCE_LAYERS`',
-      'written · vendor/wow/guards/expectedFiles.ts':
-        'the expected files’ text reads `expectedText`, the name the theme’s `text` frees',
-      'written · vendor/wow/docs/process/plans/principleRules.ts':
-        'the layers’ principle names the finding `SOURCE_LAYERS`',
-      'dist · project/boardView.js':
-        'each number a Stat with its words, its bar and its note; the repository now from the receipts’ RepositoryState, and at close; the browser tests’ tool from the product’s stack',
-      'dist · project/featureView.js':
-        'it bundles the board’s view, whose numbers moved',
-      'dist · project/feature-page.js':
-        'it bundles the board’s view, whose numbers moved',
-      'dist · project/module-imports.json':
-        'the board’s view reads the product’s stack, docs/process/productStack.ts',
-      'dist · project/packs/T-E19-00.md':
-        'the ticket pipeline’s digest moves: every report ends on the repository',
-      'written · fixtures/packs/T-E19-00.md':
-        'the ticket pipeline’s digest moves: every report ends on the repository',
-      'written · records/release-5-3-1.md':
-        'the ticket pipeline’s digest moves: every report ends on the repository',
-      'written · .claude/skills/design-answer-cc/SKILL.md':
-        'the tag’s build writes the skill back without the close’s repository line, which the trunk carries; this one leaves it',
-    },
-  },
+  outputs: {},
 };
 
 const RELEASES: readonly Release[] = [
+  {
+    version: '0.5.0',
+    date: '2026-11-12',
+    kind: 'major',
+    what: 'the board’s numbers fold, the project’s and the repository’s, each number a tile with its value, the words beside it, its bar and its note; the repository now, at its last report’s commit, read from the receipts’ `RepositoryState`, and what each ticket reported at close; the contract’s shared types fold; every report ends on the repository whole at its commit, the receipt carrying it as `repository`, and the close copies it; the board names the browser tests’ tool from the product’s stack; the expected files’ text is `expectedText` and the source check’s layers `SOURCE_LAYERS`, so the theme may hold `text` and `LAYERS`; no move rewrites an epic’s notebook, markdown or data, where the product’s registry says one stands, and a migration that would move what a notebook imports is refused before anything moves; a repository takes each migration its pin is before, in release order; the tokens module types a colour as `TokenHex`, as the build side’s does; the roadmap’s eight type files (the backlog’s, the edges’, the ideas’, the notes’, the receipts’ and the repository state’s, the templates’, the tracks’) are homes, at the paths a product held them, so no import moves; a migration names the files a home holds from its release on, and refuses a copy whose text is not the home’s',
+    action:
+      'the product’s `roadmaps/receipts.ts` exports the type `RepositoryState` and a receipt’s optional `repository`; the migrations `ports/` names for the repository, on its checkout: `node scripts/migrate.ts <name> <checkout>`, run from this repository at the tag (for eagle-design, `roadmaps/tickets/ticketExpand.ts` reads `expectedText` and T18 points at `SOURCE_LAYERS`, and the roadmap’s eight type files leave its index, the take writing them back); the build’s `app/styles/tokens.ts`, which now exports `TokenHex`, committed; the pin to the tag in the same commit',
+    rules: { added: [], changed: [], removed: [] },
+    outputs: {
+      'eagle-design': {
+        'dist · project/ticket-pipeline.md':
+          'every report ends on the repository whole at its commit (6b), the receipt carrying it as `repository`',
+        'written · docs/process/ticket-pipeline.md':
+          'every report ends on the repository whole at its commit (6b), the receipt carrying it as `repository`',
+        'output · yarn build':
+          'the tag’s build writes the ticket pipeline and the answer-cc skill back from its modules, which lack the repository line the trunk carries, and this one’s modules carry it; the build’s line counts two component files more, the board’s number line and share bar',
+        'output · yarn checks':
+          'the build’s line counts two component files more, the board’s number line and share bar',
+        'output · yarn spec-check':
+          'the build’s line counts two component files more, the board’s number line and share bar',
+        'output · yarn cut-pack T-E19-00':
+          'the build’s line counts two component files more, the board’s number line and share bar',
+        'output · yarn test':
+          'one test more: the board’s repository card, its state from the reports that carry it',
+        'dist · project/board-page.js':
+          'the board’s numbers fold, the project’s and the repository’s, each a tile with its value, the words beside it, its bar and its note; the contract’s shared types fold',
+        'dist · project/contract-page.js': 'the contract’s shared types fold',
+        'written · vendor/wow/roadmaps/backlog/backlogTypes.ts':
+          'the roadmap’s type file is a home now, copied with the homes',
+        'written · vendor/wow/roadmaps/edges/edgeTypes.ts':
+          'the roadmap’s type file is a home now, copied with the homes',
+        'written · vendor/wow/roadmaps/ideas/ideasTypes.ts':
+          'the roadmap’s type file is a home now, copied with the homes',
+        'written · vendor/wow/roadmaps/notes/notesTypes.ts':
+          'the roadmap’s type file is a home now, copied with the homes',
+        'written · vendor/wow/roadmaps/receipts/receiptsTypes.ts':
+          'the roadmap’s type file is a home now, copied with the homes',
+        'written · vendor/wow/roadmaps/receipts/repositoryState.ts':
+          'the roadmap’s type file is a home now, copied with the homes',
+        'written · vendor/wow/roadmaps/templates/templatesTypes.ts':
+          'the roadmap’s type file is a home now, copied with the homes',
+        'written · vendor/wow/roadmaps/tracks/tracksTypes.ts':
+          'the roadmap’s type file is a home now, copied with the homes',
+        'dist · project/contentTypeLogic.js':
+          'T18 points at the source check’s `SOURCE_LAYERS`',
+        'written · app/styles/tokens.ts':
+          'the tokens module types a colour as `TokenHex`, as the build side’s does',
+        'dist · project/contractView.js':
+          'the expected files’ text reads `expectedText`, the name the theme’s `text` frees',
+        'dist · project/expectedFiles.js':
+          'the expected files’ text reads `expectedText`, the name the theme’s `text` frees',
+        'dist · project/refineCheck.js':
+          'the expected files’ text reads `expectedText`, the name the theme’s `text` frees',
+        'dist · project/tickets.js':
+          'the expected files’ text reads `expectedText`, the name the theme’s `text` frees',
+        'dist · project/sourceCheck.js':
+          'the source check’s layers read `SOURCE_LAYERS`, the name the theme’s `LAYERS` frees',
+        'dist · project/sourceView.js':
+          'the source check’s layers read `SOURCE_LAYERS`, the name the theme’s `LAYERS` frees',
+        'dist · project/plans.js':
+          'the layers’ principle names the finding `SOURCE_LAYERS`',
+        'written · vendor/wow/guards/expectedFiles.ts':
+          'the expected files’ text reads `expectedText`, the name the theme’s `text` frees',
+        'written · vendor/wow/docs/process/plans/principleRules.ts':
+          'the layers’ principle names the finding `SOURCE_LAYERS`',
+        'dist · project/boardView.js':
+          'each number a Stat with its words, its bar and its note; the repository now from the receipts’ RepositoryState, and at close; the browser tests’ tool from the product’s stack',
+        'dist · project/featureView.js':
+          'it bundles the board’s view, whose numbers moved',
+        'dist · project/feature-page.js':
+          'it bundles the board’s view, whose numbers moved',
+        'dist · project/module-imports.json':
+          'the board’s view reads the product’s stack, docs/process/productStack.ts',
+        'dist · project/packs/T-E19-00.md':
+          'the ticket pipeline’s digest moves: every report ends on the repository',
+        'written · fixtures/packs/T-E19-00.md':
+          'the ticket pipeline’s digest moves: every report ends on the repository',
+        'written · records/release-5-3-1.md':
+          'the ticket pipeline’s digest moves: every report ends on the repository',
+        'written · .claude/skills/design-answer-cc/SKILL.md':
+          'the tag’s build writes the skill back without the close’s repository line, which the trunk carries; this one leaves it',
+      },
+    },
+    moved: {
+      design: [
+        'design/app/components/organisms/BoardPage/constants/boardPageNumberGroupConstants.ts → gone',
+      ],
+    },
+    tried: { 'eagle-design': '212a690' },
+  },
   {
     version: '0.4.0',
     date: '2026-11-12',
