@@ -604,3 +604,7 @@ Each call: what, why, how to undo. None changes what the PM sees.
   JSON among the files read whole. eagle-design accepted both departures (the record's two files wait for
   its own era; the prose renames are met by the build side at the release that lands its port, said in
   that record's head, no word to eagle-dev now).
+- 5e. What a read starts from for knip, beside the entries (each page, each module printed as data, each
+  module the build side reads by name), was a line every product's `scope.ts` would write: it is the home's,
+  `tools/readStarts.ts`, and the product's scope calls it (the migration's two edits there). Tried on the
+  gate's clone: tsc, ESLint, knip, file names, 144 tests green. Undo: revert the commit.

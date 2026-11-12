@@ -134,6 +134,31 @@ ${JSON_FIXTURES.map(
       from: 'sheet/contract/*.md\n',
       to: 'sheet/contract/*.md\nfixtures/data/*.json\n',
     },
+    {
+      file: 'scope.ts',
+      from: `import { buildReads } from './sheet/project.ts';
+import {
+  emitted,
+  entryOfPart,
+  filesOf,
+  isEntry,
+  pageOf,
+} from './tools/layout.ts';
+`,
+      to: `import { entryOfPart, filesOf, isEntry } from './tools/layout.ts';
+import { readStarts } from './tools/readStarts.ts';
+`,
+    },
+    {
+      file: 'scope.ts',
+      from: `  starts: [
+    ...filesOf().filter((file) => pageOf(file) !== null),
+    ...emitted().map((one) => one.module),
+    ...Object.keys(buildReads.names),
+  ],
+`,
+      to: '  starts: readStarts(),\n',
+    },
   ],
   tree: 'ports/eagle-design/tree',
 };
