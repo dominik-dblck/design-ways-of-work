@@ -1,6 +1,7 @@
 /**
  * - `RUNS_FEATURE_LAST_ROWS` · the feature run’s last rows, in the page’s order
  */
+import { EXAMPLE_TICKET } from './modeExample.ts';
 const RUNS_FEATURE_LAST_ROWS = [
   {
     n: '6',
@@ -37,7 +38,7 @@ const RUNS_FEATURE_LAST_ROWS = [
         'STEP 0 once → five sub-agents → findings merged → the sheet’s fixes applied',
       chips: ['architecture-review', 'types-eval', 'tests-eval', 'ux-eval'],
       bullets: [
-        'arch-review-T-E03-00.md: one summary, ≤ 25 findings, one decision table',
+        `arch-review-${EXAMPLE_TICKET}.md: one summary, ≤ 25 findings, one decision table`,
         'the suite again',
         'an UNCERTAIN → the report',
       ],
@@ -60,7 +61,7 @@ const RUNS_FEATURE_LAST_ROWS = [
     cc: {
       title: 'Each verdict checked against the diff; regression written',
       chips: ['ticket-regression'],
-      bullets: ['regression-T-E03-00.md'],
+      bullets: [`regression-${EXAMPLE_TICKET}.md`],
     },
     sub: {
       count: '×4',
@@ -91,7 +92,7 @@ const RUNS_FEATURE_LAST_ROWS = [
       title: 'One report',
       chips: ['ticket-report'],
       bullets: [
-        'report-T-E03-00.md',
+        `report-${EXAMPLE_TICKET}.md`,
         'a receipt per part',
         'what differs from the contract, and why',
         'what was guessed · re-ports · cost',

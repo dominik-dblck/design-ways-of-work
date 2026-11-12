@@ -2,6 +2,8 @@
  * - `RECON_SKILL` · `ticket-recon`: the sheet read and written down
  */
 import type { DocumentSection } from '../documentTypes.ts';
+import { cite, citeLines } from '../cited.ts';
+import { buildBranch } from '../../../sheet/project.ts';
 
 export const RECON_SKILL: readonly DocumentSection[] = [
   {
@@ -15,8 +17,9 @@ export const RECON_SKILL: readonly DocumentSection[] = [
       '',
       '**Purpose.** Write down what the sheet was read to mean, and send back every place two readings',
       'survive — before any criterion is transcribed, any test named, any code written. Questions come from',
-      'writing the fields out, not from reading sentences. `why: T-E00-04` — 4 questions from reading, 5 + 2',
-      'findings from filling the table',
+      'writing the fields out, not from reading sentences.' +
+        cite('reconSkill.1'),
+      ...citeLines('reconSkill.1+'),
       '',
       '**Input.** `{ticket-id}`. Ticket is `ready`, not `blocked`; its `depends` are done.',
       '',
@@ -25,26 +28,28 @@ export const RECON_SKILL: readonly DocumentSection[] = [
       '1. Read `ticket/_shared.md`; before the first ticket of a session also `agent-instructions.md`,',
       '   `plans.ts`, `glossary.ts`, `blockModel.ts`, `backlog.ts` (header), `commands.ts` (header),',
       '   `events.ts` (the RUN)',
-      '2. Branch — `git switch feature/deblock-content && git pull --ff-only; git switch -c feature/{id}`',
+      '2. Branch — `git switch ' +
+        buildBranch +
+        ' && git pull --ff-only; git switch -c feature/{id}`',
       '3. Read the ticket with `yarn ticket:read`, then every read-list entry, section by section',
       "   A command ticket's body row is typed (`field: Type` on every field, `writes` named); a prose body",
-      '   is a Finding, never a schema to write. `why: T-E00-13`',
+      '   is a Finding, never a schema to write.' + cite('reconSkill.2'),
       '   A UI component is its row in `componentsSpec.ts` (as the pack carries it): tokens, `parts`,',
       '   `layout`, `muiPath`, `wrapper`. Nothing is inferred from prose or built without a row; a missing',
-      '   row is a question. `why: T-E01-08` — nine wrappers invented from a count',
+      '   row is a question.' + cite('reconSkill.3'),
       '   The row is read, never synced: no test asserts it, counts it or scans a wrapper against it, and the',
       "   copy is never edited to pass one; the look is the repo's and the PM checks screens by hand.",
-      "   `why: T-E02-05` — spec sync off (N40, N52), 24 of T-E01-09's 37 rows re-ported for it",
+      '  ' + cite('reconSkill.4'),
       '   A grouping or count the sheet may already hold is looked up first: `Object.keys` of every spec',
-      '   module the ticket reads, printed into the recon, before one is derived here. `why: T-E01-06` — the',
-      "   run's acts and chapters were inferred (80, ten stretches) while `Events.acts()` and `Events.phases`",
-      '   answered 77 and five',
+      '   module the ticket reads, printed into the recon, before one is derived here.' +
+        cite('reconSkill.5'),
+      ...citeLines('reconSkill.5+'),
       '3a. Read in passes where the read list splits, one at a time (`_shared.md` · One pass at a time): a pass per',
       "   area, from the pack's path, its area and the pass files before it — packages/domain, app/api and",
       '   app/services, the screens and components, the tests and fixtures, and the pack against the repository (the CHECKLIST_READ lines). Each',
       '   writes `passes/recon-{n}-{area}.md` in one shape: confirmed · contradicted · question, each with file:line.',
       '   The main agent writes the recon from the pass files; a pass sends nothing to the design side. A read list',
-      '   of under six files is read alone. `why: T-E02-04` — one reader, ~240k tokens, ~110k of them re-reading (PM, 24 Sep)',
+      '   of under six files is read alone.' + cite('reconSkill.6'),
       '4. Write `roadmaps/{epic}/{id}/recon-{id}.md` from `roadmaps/templates/ticket-recon.md`. Its',
       '   headings, in order, each filled:',
       '   - `## The reading` — one row per thing the ticket builds (type, payload, operation, rule) and',
@@ -59,18 +64,21 @@ export const RECON_SKILL: readonly DocumentSection[] = [
       "   - `## What the checklist asks` — the pack's `## Checklist, read` clauses, each **confirmed or",
       "     contradicted against the repository**, one line each; the regex lines are the pack's own",
       '     receipt (`refine-check · clean`) and are not re-answered. A contradicted clause is a finding.',
-      '     Lines 18 and 19 are listed as due at red and snapshot. `why: T-E01-10` — a 339-line recon for',
-      '     eight criteria; `why: T-E01-08` — three checklist findings in the recon, none of them a stop',
+      '     Lines 18 and 19 are listed as due at red and snapshot.' +
+        cite('reconSkill.7'),
+      ...citeLines('reconSkill.7+'),
       '5. Count: how many criteria name a key the reading table holds, and how many rows no criterion',
-      '   names. `why: T-E00-05` — `delivery.ready` escaped because nobody counted',
+      '   names.' + cite('reconSkill.8'),
       '5a. A criterion that forbids a shape is grepped against the landed tests that build that shape; each',
-      "   hit is a question under `## Questions`. `why: T-E02-01` — T-E00-13's c1 and c5 were tested through",
-      '   RenameDocument, a prose command c3 made uncompilable; found at contract, not here',
+      '   hit is a question under `## Questions`.' + cite('reconSkill.9'),
+      ...citeLines('reconSkill.9+'),
       '5b. A criterion that reads every row of a table is run against `content_test` here, and each row',
-      '   shape it meets is named under `## What has been measured` with a count. `why: T-E02-04` — seven',
-      "   store-tier plants met c13's heal at green, and three endpoint tests answered 500",
+      '   shape it meets is named under `## What has been measured` with a count.' +
+        cite('reconSkill.10'),
+      ...citeLines('reconSkill.10+'),
       '5c. An ordering word in a journey ("newest first", "last") names the stored field that orders it; a word',
-      "   with no field is a question under `## Questions`. `why: T-E04-00` — J6's newest first had no field in a bulk edit",
+      '   with no field is a question under `## Questions`.' +
+        cite('reconSkill.11'),
       '6. Present the recon to the calling mode',
       '',
       '**Does not.** Name a test or write code (standard appends its contract table to this file).',

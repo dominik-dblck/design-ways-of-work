@@ -2,6 +2,8 @@
  * - `REGRESSION_TEMPLATE` · the regression template
  */
 import type { DocumentSection } from '../documentTypes.ts';
+import { cite, citeLines } from '../cited.ts';
+import { buildBranch } from '../../../sheet/project.ts';
 
 export const REGRESSION_TEMPLATE: readonly DocumentSection[] = [
   {
@@ -11,7 +13,9 @@ export const REGRESSION_TEMPLATE: readonly DocumentSection[] = [
       '```markdown',
       '# regression-{id} · {date}',
       '',
-      '> against `feature/deblock-content` · drift {n} · suite {n} red · touched {n} files · re-ports {n}',
+      '> against `' +
+        buildBranch +
+        '` · drift {n} · suite {n} red · touched {n} files · re-ports {n}',
       '',
       '## 1 · Spec drift',
       '',
@@ -33,7 +37,9 @@ export const REGRESSION_TEMPLATE: readonly DocumentSection[] = [
       '',
       '## 3 · Touched outside scope',
       '',
-      "`git diff --name-only feature/deblock-content` minus this ticket's `touches`",
+      '`git diff --name-only ' +
+        buildBranch +
+        "` minus this ticket's `touches`",
       '',
       '| File | Owned by | Criterion re-read | unchanged / changed (how) / needs re-port |',
       '|---|---|---|---|',
@@ -48,8 +54,9 @@ export const REGRESSION_TEMPLATE: readonly DocumentSection[] = [
       '',
       'What a green suite cannot show. The worked shape: restore the replaced code beside the new,',
       'render every screen under both, fingerprint the computed properties per element, diff, and trace',
-      'every difference to the criterion that ordered it — or list it in §3. `why: T-E01-07` — 18',
-      'properties × 55 elements, one regression found (color-scheme) that no test could reach',
+      'every difference to the criterion that ordered it — or list it in §3.' +
+        cite('regressionTemplate.1'),
+      ...citeLines('regressionTemplate.1+'),
       '',
       '| Screen | Elements | Differ | Every diff traced to a criterion? |',
       '|---|---|---|---|',

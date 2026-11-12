@@ -2,6 +2,7 @@
  * - `REPORT_TEMPLATE` · the report template, and what the old skill held
  */
 import type { DocumentSection } from '../documentTypes.ts';
+import { cite } from '../cited.ts';
 
 export const REPORT_TEMPLATE: readonly DocumentSection[] = [
   {
@@ -42,7 +43,7 @@ export const REPORT_TEMPLATE: readonly DocumentSection[] = [
       '',
       '## Cost',
       '',
-      'What the session showed, not a limit. `why: T-E01-10` — recon read 240k, ~110k of it a stale copy and windows the pack now replaces',
+      'What the session showed, not a limit.' + cite('reportTemplate.1'),
       '',
       '| Step | Context at end (k tokens) | Minutes | Sheet reads |',
       '|---|---|---|---|',

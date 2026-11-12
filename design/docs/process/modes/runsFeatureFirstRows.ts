@@ -2,6 +2,7 @@
  * - `RUNS_FEATURE_FIRST_ROWS` · the feature run’s first rows, in the page’s order
  */
 import { buildBranch } from '../../../sheet/project.ts';
+import { EXAMPLE_EPIC, EXAMPLE_TICKET } from './modeExample.ts';
 
 const RUNS_FEATURE_FIRST_ROWS = [
   {
@@ -10,7 +11,7 @@ const RUNS_FEATURE_FIRST_ROWS = [
     pm: { title: 'Sends the block', bullets: ['what, how, the digests'] },
     ds: {
       title: 'Pack cut, digests into the block',
-      bullets: ['packs/T-E03-00.md · tickets.js · ticket-pipeline.md'],
+      bullets: [`packs/${EXAMPLE_TICKET}.md · tickets.js · ticket-pipeline.md`],
     },
     cc: {
       title: 'Loads ticket-feature, reads the ticket',
@@ -29,7 +30,7 @@ const RUNS_FEATURE_FIRST_ROWS = [
       title: 'Branch cut, skills synced',
       chips: ['_shared.md · Sync'],
       bullets: [
-        `feature/T-E03-00 from ${buildBranch}`,
+        `feature/${EXAMPLE_TICKET} from ${buildBranch}`,
         'ticket-pipeline.md re-copied',
         'yarn skills',
         'byte-for-byte test green',
@@ -71,7 +72,7 @@ const RUNS_FEATURE_FIRST_ROWS = [
       title: 'Five sub-agents, one per area; findings merged',
       chips: ['ticket-recon · 3a'],
       bullets: [
-        'roadmaps/E03/T-E03-00/recon-T-E03-00.md',
+        `roadmaps/${EXAMPLE_EPIC}/${EXAMPLE_TICKET}/recon-${EXAMPLE_TICKET}.md`,
         'a narrowing: written down, the run goes on',
         'a gap: “decided X because Y”, never asked',
       ],
@@ -108,7 +109,7 @@ const RUNS_FEATURE_FIRST_ROWS = [
       title: 'Every endpoint test written, all red; what it wrote sent',
       bullets: [
         'one test per [when, answer] + api-convention.md’s edge cases',
-        'contract-snapshot-T-E03-00.md: the types; per endpoint path, who, body, answer, refusals, red tests',
+        `contract-snapshot-${EXAMPLE_TICKET}.md: the types; per endpoint path, who, body, answer, refusals, red tests`,
         'every decision the sheet did not make',
         'a new event → marked NEW EVENT',
       ],

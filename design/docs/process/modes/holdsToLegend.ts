@@ -2,6 +2,7 @@
  * - `HOLDS_TO_LEGEND` · the head fields of the ticket modes' page
  * - holds, runsNote, legend
  */
+import { cite } from '../../documents/cited.ts';
 const HOLDS_TO_LEGEND = {
   holds: [
     {
@@ -96,7 +97,7 @@ const HOLDS_TO_LEGEND = {
     },
   ],
   runsNote:
-    'a row = one step · a column = who acts in it · the feature flow lived in plan-Feature flow until 25 Sep',
+    'a row = one step · a column = who acts in it' + cite('modes.runsHistory'),
   legend: [
     { sample: 'STOP', kind: 'stop', text: 'the run waits for the design side' },
     { sample: 'STOP · IF', kind: 'if', text: 'only when its condition holds' },

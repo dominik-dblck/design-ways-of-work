@@ -2,6 +2,7 @@
  * - `PIPELINE_OVERVIEW` · the opening: the modes, the sync before a ticket, the flow
  */
 import type { DocumentSection } from '../documentTypes.ts';
+import { cite, citeLines } from '../cited.ts';
 
 export const PIPELINE_OVERVIEW: readonly DocumentSection[] = [
   {
@@ -14,24 +15,30 @@ export const PIPELINE_OVERVIEW: readonly DocumentSection[] = [
       '> reports the diff; a lesson found on the repo side (`ticket-report` step 7) comes here first as a',
       '> proposed line, and lands in the skill only after it landed here. Never edit a SKILL.md directly.',
       '>',
-      '> **How the generator cuts this file (T-E01-10 c1).** A level-one heading whose whole text is a',
+      '> **How the generator cuts this file' +
+        cite('pipelineOverview.1') +
+        '.** A level-one heading whose whole text is a',
       '> backticked repo path — `# \\`.claude/skills/ticket-recon/SKILL.md\\`` — names an output file; its',
       '> section runs to the next `---` or the next path heading, and is written byte for byte, minus the',
       '> heading line. A skill section opens with a fenced block holding `name:` and `description:`;',
       '> the generator turns that block into frontmatter. A heading without a path (this one, *The flow*,',
       "> *Templates*, *What the old skill held*) is prose and generates nothing. A template's section is",
       '> one fenced `markdown` block; the fence is stripped. Fourteen outputs: 2 shared, 7 skills, 5',
-      '> templates (28 Sep, sync 6: three modes — ticket-contract, ticket-red, ticket-green and ticket-snapshot',
+      '> templates (' +
+        cite('pipelineOverview.syncDate') +
+        'sync 6: three modes — ticket-contract, ticket-red, ticket-green and ticket-snapshot',
       '> are gone, their rules that still hold moved into `_shared.md` and the modes).',
       '',
       'Replaces `.claude/skills/ticket/SKILL.md` (632 lines, four actions). Three skills are modes — they',
       'run a ticket and decide where it stops; four are blocks a mode calls. Every skill holds purpose, input,',
-      'steps, output, stop, and is measured in words (D8 · PM, 25 Oct): an entry at most 2000, a description says what and when in at most 1024 characters. Rules that hold at every stage',
+      'steps, output, stop, and is measured in words' +
+        cite('pipelineOverview.2') +
+        ': an entry at most 2000, a description says what and when in at most 1024 characters. Rules that hold at every stage',
       "live once, in `_shared.md`, and every skill's first task is to read it; the rules for writing and reviewing",
       "code live once, in `_code.md`. History lives in the ticket's",
       'own documents; a skill carries a lesson only as a one-line rule tagged `why: {ticket-id}`. This source never',
       "spells a retired command: the old actions are described by name, never as `/ticket …` (the repo's",
-      '`theOldTicketSkillIsGone` scan walks it). `why: T-E01-10` — D9',
+      '`theOldTicketSkillIsGone` scan walks it).' + cite('pipelineOverview.3'),
       '',
       '```',
       '.claude/skills/',
@@ -54,13 +61,16 @@ export const PIPELINE_OVERVIEW: readonly DocumentSection[] = [
       '',
       "Lessons from ticket N land in this file after N's report and reach the repository before N+1's",
       '',
-      "- **An epic's own rows, cases and fields (T-E09-00 · 14 Oct · rule:rows-name-their-feature).** The sheet holds later epics' contract in the same files. Emit the types of every row; build route, decide and test only for rows of your epic and earlier; take the log's events and fields up to your epic — rows by `epic`, cases by `since`, payload fields by `Payloads.all({ upTo })` (`Payloads.fieldSince` lists them). A later epic's field inside your payload is never cut by hand: say so and the sheet marks it.",
+      "- **An epic's own rows, cases and fields" +
+        cite('pipelineOverview.4') +
+        ".** The sheet holds later epics' contract in the same files. Emit the types of every row; build route, decide and test only for rows of your epic and earlier; take the log's events and fields up to your epic — rows by `epic`, cases by `since`, payload fields by `Payloads.all({ upTo })` (`Payloads.fieldSince` lists them). A later epic's field inside your payload is never cut by hand: say so and the sheet marks it.",
       'recon: the design side edits the source once (one digest), the build side re-copies the fixture,',
       'runs `yarn skills`, and the byte-for-byte test is green before `ticket-recon` starts. The sync',
       "rides in N+1's commit. No ticket starts on skills that are behind the source. The source changes",
       "mid-ticket only for a gate's question, a red test or a PM requirement (rule:mid-build-change-is-a-requirement) — never",
-      '"while I am here" — and those changes are batched into one digest. `why: T-E01-10` — sixteen',
-      'lessons and five digests in one ticket',
+      '"while I am here" — and those changes are batched into one digest.' +
+        cite('pipelineOverview.5'),
+      ...citeLines('pipelineOverview.5+'),
       '',
     ],
   },
@@ -79,10 +89,16 @@ export const PIPELINE_OVERVIEW: readonly DocumentSection[] = [
       '| **fast** | 0–1 point: a token, a copy line, one field, a UI fix inside a row that exists | build from the pack · report | after the report |',
       '',
       '**A mode only goes up.** A clause the repository contradicts moves fast to standard; nothing moves',
-      'standard further — full is gone (28 Sep). `reconStop` (E06, E13) is set on the ticket where a guess',
+      'standard further — full is gone' +
+        cite('pipelineOverview.6') +
+        '. `reconStop`' +
+        cite('pipelineOverview.7') +
+        ' is set on the ticket where a guess',
       'about rules or permissions costs most: the recon ends with a STOP and `## Questions` holds questions.',
-      'Arch-review runs before regression in every mode: it changes code, regression measures it. `why: T-E03-00`',
-      '— eight stages and five stops per ticket took 35–50% of the effort (PM, 25 Sep)',
+      'Arch-review runs before regression in every mode: it changes code, regression measures it.' +
+        cite('pipelineOverview.8'),
+      '— eight stages and five stops per ticket took 35–50% of the effort' +
+        cite('pipelineOverview.9'),
       '',
       "**Stage 0 is the design side's and happens before the pack exists.** `refineCheck.ts` runs the",
       'checklist lines a regex can read (1, 3, 4, 15, 17, 18, 20, 24, 28, 31, 32, 33) and `tools/pack.ts` cuts no',
@@ -91,9 +107,9 @@ export const PIPELINE_OVERVIEW: readonly DocumentSection[] = [
       'written by the design side at refinement. Recon **checks those clauses against the repository**',
       'instead of answering the checklist from scratch; a clause recon cannot confirm is a **finding**, and',
       'a finding on a checklist line is reported with the pick taken (rule:feature-run-never-stops) — or, under `reconStop`, sent as a',
-      'question; the sheet moves first and the pack is re-cut. `why: T-E01-08` — recon 08 answered lines 20, 23 and',
-      '28 with findings (history in c4/c6 · fingerprints taken as given · no expected files) and the',
-      'contract started over all three; the same ticket ended with 21 wrappers nobody calls.',
+      'question; the sheet moves first and the pack is re-cut.' +
+        cite('pipelineOverview.10'),
+      ...citeLines('pipelineOverview.10+'),
       '',
       '---',
       '',

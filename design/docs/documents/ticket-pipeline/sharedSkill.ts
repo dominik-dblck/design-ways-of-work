@@ -2,6 +2,7 @@
  * - `SHARED_SKILL` · `ticket/_shared.md`: what every ticket skill reads first
  */
 import type { DocumentSection } from '../documentTypes.ts';
+import { cite, citeLines } from '../cited.ts';
 
 export const SHARED_SKILL: readonly DocumentSection[] = [
   {
@@ -17,7 +18,9 @@ export const SHARED_SKILL: readonly DocumentSection[] = [
     heading: '## The repository never writes to the design project',
     lines: [
       '',
-      'The design project is the git repository `~/projects/eagle-design`, a file named by its path from its root, read at',
+      'The design project is the git repository' +
+        cite('sharedSkill.designRepository') +
+        ', a file named by its path from its root, read at',
       'the commit the design session names — `release <full sha>`, tagged `release-<yyyy-mm-dd>-<n>`, never HEAD;',
       '`git rev-parse release-<…>^{commit}` must equal it, or the run stops. A file comes through',
       '`yarn sheet:cache {file} --commit <sha>` (`cat-file blob <sha>:{file}`), a list or a size from `ls-tree`. Only read',
@@ -25,7 +28,7 @@ export const SHARED_SKILL: readonly DocumentSection[] = [
       "PreToolUse hook refuses the rest. The claude.ai artifact is the PM's render, not read here.",
       "The design session is the project's one writer (rule:build-side-never-writes-spec): `status` and `RECEIPTS` are set there, from the",
       'report. What has to change there is sent to it with `SendMessage`, never as a file; a decision only the PM',
-      'can take goes to the PM. `why:` D5, D6 (PM, 3 Nov)',
+      'can take goes to the PM.' + cite('sharedSkill.1'),
       '',
     ],
   },
@@ -40,10 +43,10 @@ export const SHARED_SKILL: readonly DocumentSection[] = [
       '   parts (`fixtures/packs/{id}.2.md` on): the first names them all, and the run reads every one before recon.',
       '   `.sheet-cache/` is gitignored, so each stage reads the pack at the named commit with',
       '   `yarn sheet:cache fixtures/packs/{id}.md --commit <sha>` before `yarn ticket:read`, which exits 1 naming',
-      '   the file when it is missing. `why: T-E01-10`',
+      '   the file when it is missing.' + cite('sharedSkill.2'),
       '1. **The section, never the file.** A read-list entry is `module · section`, the module named by its',
       "   short name and found at its path in the pack's table, The modules. Price a file by its size in",
-      '   `ls-tree -l`, then window the saved copy. `why: T-E01-05`',
+      '   `ls-tree -l`, then window the saved copy.' + cite('sharedSkill.3'),
       '2. **Never re-read what you hold.** A file is read at the named commit, then its sha256 is checked',
       '   against the digest you hold: equal, take the disk copy; different, it is a newer sheet. At a newer named',
       '   commit, `git rev-parse <sha>:{path}` gives the blob id: a stage stops only when a file it holds',
@@ -51,12 +54,13 @@ export const SHARED_SKILL: readonly DocumentSection[] = [
       "   `tickets.ts` is its entry and its parts: a ticket's row is in its epic's part, `roadmaps/EXX/EXXTickets.ts`.",
       '3. **A ticket is read with the script.** `yarn ticket:read {id} <file>` finds the row,',
       '   prints `acceptance.length`, diffs criteria against the pack the run started from, exits 1 when',
-      '   the pack is behind. Nothing else reads the sheet. `why: T-E01-05` — rows are arrays, no `id:` key',
+      '   the pack is behind. Nothing else reads the sheet.' +
+        cite('sharedSkill.4'),
       '4. **Zero is not a count.** Before a negative result becomes a finding, make the same query find',
-      '   something that must be there. `why: T-E01-05` — a blocker that did not exist reached a report',
+      '   something that must be there.' + cite('sharedSkill.5'),
       '5. **The design project is read once per stage**, at one named commit, through `yarn sheet:cache`',
       '   into `.sheet-cache/`; every later read takes the disk copy. One commit is one digest: no reader meets a',
-      '   newer sheet halfway through a run (PM, 25 Sep)',
+      '   newer sheet halfway through a run' + cite('sharedSkill.6'),
       '',
     ],
   },
@@ -67,7 +71,7 @@ export const SHARED_SKILL: readonly DocumentSection[] = [
       'A count a test or a contract depends on is extracted mechanically — `acceptance.length`, a parsed',
       "JSON grouped by kind, a fixture's own length — and checked against the criterion's literal. Nothing",
       'sent is a number read from prose or a sentence quoted from memory; both are asserted by containment',
-      'against the file first. `why: T-E00-05` — four stated numbers, four wrong',
+      'against the file first.' + cite('sharedSkill.7'),
       '',
     ],
   },
@@ -76,7 +80,7 @@ export const SHARED_SKILL: readonly DocumentSection[] = [
     lines: [
       '',
       'A count over the tree, an import, a git log — if this repository holds it, the question is a',
-      'measurement made here, not sent. `why: T-E01-08` — F1 asked which files import Box; `grep` did',
+      'measurement made here, not sent.' + cite('sharedSkill.8'),
       '',
     ],
   },
@@ -87,7 +91,7 @@ export const SHARED_SKILL: readonly DocumentSection[] = [
       'The read list and EXPECTED FILES are derived from the sheet’s data; EXPECTED',
       'FILES is a proposal recon confirms path by path. A pointer that does not resolve fails the cut on the design side.',
       'The design side re-cuts the pack in the same move as any sheet edit and sends the digest with the answer.',
-      '`why: T-E01-08` — a verified pack once lacked the sentence the answer described',
+      ...citeLines('sharedSkill.9'),
       '',
     ],
   },
@@ -98,7 +102,7 @@ export const SHARED_SKILL: readonly DocumentSection[] = [
       'The design side says what — values as tokens, states, parts, a layout line, what is forbidden. This',
       "side decides how — file, tier, props, DOM, MUI slot — from the repository's conventions. A test asserts",
       'a value or a mechanism; a shape is checked by a reader at arch-review and snapshot, never parsed. A',
-      'criterion that says how is a finding at recon. `why: T-E01-09`',
+      'criterion that says how is a finding at recon.' + cite('sharedSkill.10'),
       '',
     ],
   },
@@ -116,8 +120,9 @@ export const SHARED_SKILL: readonly DocumentSection[] = [
     lines: [
       '',
       'When a later decision changes a fact an earlier note or D-row states, edit that row — never append a',
-      'superseding entry. Git holds the history; the reader holds one document. `why: T-E01-07` — N5 kept a',
-      'replaced hash, D3 a removed mixin',
+      'superseding entry. Git holds the history; the reader holds one document.' +
+        cite('sharedSkill.11'),
+      ...citeLines('sharedSkill.11+'),
       '',
     ],
   },
@@ -127,7 +132,7 @@ export const SHARED_SKILL: readonly DocumentSection[] = [
       '',
       'Reading lives in the recon. Criteria and criterion → test live in the contract table (standard) or the',
       'contract snapshot (feature). Counts live in the report. A section that appears in two of them is fixed with a pointer, not a copy. A code comment',
-      'follows `docs/rules/comments.md`. `why: T-E00-08, T-E01-09`',
+      'follows `docs/rules/comments.md`.' + cite('sharedSkill.12'),
       '',
     ],
   },
@@ -140,8 +145,8 @@ export const SHARED_SKILL: readonly DocumentSection[] = [
       "from the pack's path, its aspect and the pass files before it, writes",
       '`roadmaps/{epic}/{id}/passes/{stage}-{n}-{aspect}.md`, and only then does the next start. A pass sends nothing to',
       "the design side. The stage's document is written from the pass files and points at them, never repeats them;",
-      'they go into the commit with it. `why:` PM, 7 Oct — one aspect at a time, nothing racing for a file, the',
-      'database or a test run',
+      'they go into the commit with it.' + cite('sharedSkill.13'),
+      ...citeLines('sharedSkill.13+'),
       '',
     ],
   },
@@ -150,9 +155,11 @@ export const SHARED_SKILL: readonly DocumentSection[] = [
     lines: [
       '',
       '- **A story quote is verbatim from backlog.ts.** If the story does not describe the ticket, quote it',
-      '  and add "placed here by the PM" — never paraphrase in a blockquote. `why: T-E01-10`',
+      '  and add "placed here by the PM" — never paraphrase in a blockquote.' +
+        cite('sharedSkill.14'),
       '- **A file is named from the repo root** — `app/api/documents/createDocumentRoute.ts`, never `createDocumentRoute.ts`; scans and',
-      '  indexes match on the path (`tests/architecture/theDocsNameRealPaths.test.ts`). `why: T-E01-10`',
+      '  indexes match on the path (`tests/architecture/theDocsNameRealPaths.test.ts`).' +
+        cite('sharedSkill.15'),
       '',
     ],
   },
@@ -162,12 +169,14 @@ export const SHARED_SKILL: readonly DocumentSection[] = [
       '',
       '- **A file the design side authors is compared, never described.** Where a criterion names one, it is read',
       '  at the release, hashed, and every count stated about it is parsed off the file',
-      '  (`tests/architecture/everyFixtureRootIsHeld.test.ts`). `why: T-E01-08`',
+      '  (`tests/architecture/everyFixtureRootIsHeld.test.ts`).' +
+        cite('sharedSkill.16'),
       '- **A criterion that reads "X, or Y" is decided, never taken in silence:** the pick and why the other',
-      '  lost go into the report as “did X because Y”. `why: T-E01-08`',
+      '  lost go into the report as “did X because Y”.' +
+        cite('sharedSkill.17'),
       '- **The decisions no criterion asked for** — every value, branch or shape chosen because the sheet was',
       '  silent, one line each with `file:line` — open the report (feature: the contract snapshot for the',
-      "  contract's). `why: T-E00-08`",
+      "  contract's)." + cite('sharedSkill.18'),
       '',
     ],
   },

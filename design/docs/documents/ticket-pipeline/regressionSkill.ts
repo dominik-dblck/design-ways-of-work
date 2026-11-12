@@ -3,6 +3,8 @@
  */
 import type { DocumentSection } from '../documentTypes.ts';
 import { NO_STOP_OF_ITS_OWN } from './noStopOfItsOwn.ts';
+import { cite, citeLines } from '../cited.ts';
+import { buildBranch } from '../../../sheet/project.ts';
 
 export const REGRESSION_SKILL: readonly DocumentSection[] = [
   {
@@ -15,8 +17,9 @@ export const REGRESSION_SKILL: readonly DocumentSection[] = [
       '```',
       '',
       "**Purpose.** Three measurements. The third is the one a green suite cannot give: a landed ticket's",
-      'behaviour that nobody tested and this ticket touched. `why: T-E01-05` — touched the directory port',
-      '(02) and loginRoute (01), seven re-ports',
+      'behaviour that nobody tested and this ticket touched.' +
+        cite('regressionSkill.1'),
+      ...citeLines('regressionSkill.1+'),
       '',
       '**Input.** Arch-review complete.',
       '',
@@ -26,18 +29,23 @@ export const REGRESSION_SKILL: readonly DocumentSection[] = [
       '2. **Spec drift** — `yarn ticket:read` against the pack the run started from. Exit 1 → list which criteria moved and what',
       '   it means for tests already written',
       "3. **Suite** — full `vitest`, all projects. Any red outside this ticket's own tests → listed with the",
-      '   owning ticket from `receipts.ts` · a test file the suite excludes is run once here and its result written: every entry of the projects’ `exclude` stands in the pass file with its result. `why: T-E06-00` — a spec test red here alone, under the exclusion',
-      '   · **coverage** reads the criteria of every part the pack merges, not the ticket’s alone: each meets a passed test by file and title, or stands in that part’s `uncovered`. `why: T-E06-00` — 13 of 13 read green while a part’s criterion had no code',
-      '4. **Touched outside scope** — `git diff --name-only feature/deblock-content`; a ticket row has no',
+      '   owning ticket from `receipts.ts` · a test file the suite excludes is run once here and its result written: every entry of the projects’ `exclude` stands in the pass file with its result.' +
+        cite('regressionSkill.2'),
+      '   · **coverage** reads the criteria of every part the pack merges, not the ticket’s alone: each meets a passed test by file and title, or stands in that part’s `uncovered`.' +
+        cite('regressionSkill.3'),
+      '4. **Touched outside scope** — `git diff --name-only ' +
+        buildBranch +
+        '`; a ticket row has no',
       '   file list, so scope is derived: a file is inside if a criterion or a contract row names it, outside',
       '   otherwise. Every outside file → `git log` names the ticket branch that last wrote it → that',
       "   ticket's criteria on the file re-read against the new code. Each: unchanged / changed (how) /",
-      '   needs re-port. `why: T-E01-07` — 63 files, 28 with an owner, two no test could see',
+      '   needs re-port.' + cite('regressionSkill.4'),
       '4a. **A scan found skipping a file kind or a folder is fixed with every scan that walks the same',
       "   way:** each architecture scan's roots and endings are grepped, and each that lacks the kind is",
-      '   named in §3. `why: T-E02-04` — the next-auth scan kept the hole c15 closed for credentials',
+      '   named in §3.' + cite('regressionSkill.5'),
       '4b. **A scan over a set the code declares reads the set off its declaration** and asserts each member is',
-      '   caught; a hand-typed list of names a source file declares is named in §3. `why: T-E04-00` — `brandsCrossOnce`',
+      '   caught; a hand-typed list of names a source file declares is named in §3.' +
+        cite('regressionSkill.6'),
       '5. Write `roadmaps/{epic}/{id}/regression-{id}.md` from `roadmaps/templates/ticket-regression.md`.',
       '   Its headings, in order, each a count or `0`:',
       '   - `## 1 · Spec drift` — step 2',
@@ -47,16 +55,18 @@ export const REGRESSION_SKILL: readonly DocumentSection[] = [
       '     `none`. One row per re-port, `{ ticket, file, where, cause, find, replace }`: `find` copied from',
       "     `.sheet-cache/{file}`, never typed, found once in that ticket's row; `file` is the path from the root,",
       "     a row's epic part `roadmaps/EXX/EXXTickets.ts` — `yarn reports:check`",
-      '     checks every row before the report. `why: T-E04-00` — 119 files over 23 tickets as prose to retype',
+      '     checks every row before the report.' + cite('regressionSkill.7'),
       '   - `## 4 · Beyond the suite (when the ticket moved a rendered value)` — the A/B shape',
       '6. Present: `{id} · regression · drift {n} · suite {n} red · touched {n} files, {n} re-ports`',
       '',
       `${NO_STOP_OF_ITS_OWN} A non-zero section goes to the report with`,
       "the re-ports file: the design side applies it by script (`tools/applyReports.ts`), and receipts are the design project's.",
       '',
-      "The criteria §3 re-reads are the sheet's at the release's commit (`git cat-file blob <sha>:{path}`), never a cached copy. Check: the digests named in §1. `why: T-E06-13` — four cached shards were six days behind the sheet",
+      "The criteria §3 re-reads are the sheet's at the release's commit (`git cat-file blob <sha>:{path}`), never a cached copy. Check: the digests named in §1." +
+        cite('regressionSkill.8'),
       '',
-      "A word the ticket renames is grepped in every scan's own word list, and a list behind it is fixed in the same pass. Check: the old word in `tests/architecture/` stands only in quoted criteria. `why: T-E06-13` — two scans kept `ceo` after the rename",
+      "A word the ticket renames is grepped in every scan's own word list, and a list behind it is fixed in the same pass. Check: the old word in `tests/architecture/` stands only in quoted criteria." +
+        cite('regressionSkill.9'),
       '',
       '---',
       '',

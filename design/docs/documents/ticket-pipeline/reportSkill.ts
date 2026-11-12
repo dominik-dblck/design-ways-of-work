@@ -2,6 +2,8 @@
  * - `REPORT_SKILL` · `ticket-report`: the report the design side reads
  */
 import type { DocumentSection } from '../documentTypes.ts';
+import { cite, citeLines } from '../cited.ts';
+import { buildBranch } from '../../../sheet/project.ts';
 
 export const REPORT_SKILL: readonly DocumentSection[] = [
   {
@@ -23,10 +25,12 @@ export const REPORT_SKILL: readonly DocumentSection[] = [
       '1. Read `ticket/_shared.md`, then `ticket/_code.md`',
       '2. Open with the decisions no criterion asked for (`_shared.md` · Decisions are written), one line',
       '   each with `file:line`',
-      '3. `yarn ticket:read` — criteria diffed against the pack one last time. `why: T-E01-05` — 16 → 20',
-      '   criteria between GREEN and report',
-      '4. Grep every contract row against the `it(…)` titles the suite holds. `why: T-E00-05` — all 18 rows',
-      '   named tests renamed at RED',
+      '3. `yarn ticket:read` — criteria diffed against the pack one last time.' +
+        cite('reportSkill.1'),
+      ...citeLines('reportSkill.1+'),
+      '4. Grep every contract row against the `it(…)` titles the suite holds.' +
+        cite('reportSkill.2'),
+      ...citeLines('reportSkill.2+'),
       '5. Write the report, one shape only:',
       '',
       '   ```',
@@ -45,14 +49,14 @@ export const REPORT_SKILL: readonly DocumentSection[] = [
       '   what a row composes from its imports, and a component the run built from its code (MUI imports, props,',
       '   layout). Every field the tree cannot see stays as the sheet wrote it: words, notes, tokens, `wireframe`,',
       '   `live`, `fingerprints`, `tests`, `changedIn`. Every row added, moved or renamed is named; the sheet',
-      '   takes the file whole (SP1). `why: T-E06-00` — the first copy started from this repository’s own, older',
-      '   than 6 Oct, and rows came back with text the sheet had moved since (the chip’s channel)',
+      '   takes the file whole (SP1).' + cite('reportSkill.3'),
+      ...citeLines('reportSkill.3+'),
       '7. **Lessons** — for every `## Notes` entry that names a stage: can it be one rule with a check?',
       '   Yes → one proposed line for that stage, tagged `why: {id}`, in the report under `## Lessons` —',
       "   it goes to the design project's `ticket-pipeline.md` first and reaches SKILL.md by sync, never",
       '   directly. No → it stays in Notes; it is a story. Zero entries → "no lessons"',
       '7a. **The track** — the one the pack names and the one the ticket ended on, each with its points.',
-      '   `why: T-E02-04` — 9 points at refinement, 15 at the report',
+      '  ' + cite('reportSkill.4'),
       '8. Write `roadmaps/{epic}/{id}/report-{id}.md` from `roadmaps/templates/ticket-report.md` — the',
       '   report shape verbatim at the top, then its headings, in order, each filled:',
       '   - `## Receipt` — step 6, and what the count is made of',
@@ -67,10 +71,14 @@ export const REPORT_SKILL: readonly DocumentSection[] = [
       '   (`{id}: {one line} · {n} tests green`, at most 72 characters with the id and the count: `checks.md`) and',
       '   the branch. Every test file the receipt counts is staged —',
       '   a test the report names and the commit leaves out is a criterion with no test in the tree.',
-      "   `why: T-E01-06` — c3's endpoint test was named and left unstaged. Repo-wide changes — skills, docs, patterns",
+      '  ' +
+        cite('reportSkill.5') +
+        ' Repo-wide changes — skills, docs, patterns',
       '   — ride with this ticket',
       '10. **STOP.** No `git commit`, no `--amend`, no `--no-verify`. Commit, merge into',
-      '    `feature/deblock-content`, push are three separate yeses, and nothing is pushed mid-ticket',
+      '    `' +
+        buildBranch +
+        '`, push are three separate yeses, and nothing is pushed mid-ticket',
       '',
       '**Stop.** Always.',
       '',

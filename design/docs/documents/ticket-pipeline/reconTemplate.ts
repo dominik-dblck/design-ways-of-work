@@ -2,6 +2,8 @@
  * - `RECON_TEMPLATE` · the templates opened, and the recon template
  */
 import type { DocumentSection } from '../documentTypes.ts';
+import { cite } from '../cited.ts';
+import { buildBranch } from '../../../sheet/project.ts';
 
 export const RECON_TEMPLATE: readonly DocumentSection[] = [
   {
@@ -26,7 +28,7 @@ export const RECON_TEMPLATE: readonly DocumentSection[] = [
       '',
       '> Epic: {epic id} {epic name} · Story: {story id} {story title} · Kind: {kind}',
       '> Read at: {date} · read {n} of the ticket · {n} criteria (acceptance.length)',
-      '> Branch: feature/{id}, cut from feature/deblock-content @ {sha}',
+      '> Branch: feature/{id}, cut from ' + buildBranch + ' @ {sha}',
       '> Status: read, before any code',
       '',
       '> Not a contract: no criterion transcribed, no test named, no line coded. Written for a reader who',
@@ -115,7 +117,9 @@ export const RECON_TEMPLATE: readonly DocumentSection[] = [
       '## What the checklist asks',
       '',
       '`plans.ts · TICKET_CHECKLIST` — every line, each one a mistake an earlier ticket made; the count is',
-      'read off the file, never typed here (26 on 21 Sep). Answered here, because nothing on this side read',
+      'read off the file, never typed here' +
+        cite('reconTemplate.1') +
+        '. Answered here, because nothing on this side read',
       'them before and every one of them is cheaper now than later.',
       '',
       '**The pack already answered the regex lines** (1, 3, 4, 15, 17, 18, 20, 24, 28 — `refineCheck.ts`,',
@@ -156,7 +160,7 @@ export const RECON_TEMPLATE: readonly DocumentSection[] = [
       '',
       '**And one the checklist does not ask.** Count the reading table against the criteria. A row the',
       'criteria delegate to the table has to be answered here; a row still carrying a question mark is a',
-      'branch nobody specified. `why: T-E00-05`',
+      'branch nobody specified.' + cite('reconTemplate.2'),
       '',
       '| Rows in the reading table | Named by a criterion | Delegated to the table | Still carrying a question |',
       '| ------------------------- | -------------------- | ---------------------- | ------------------------- |',

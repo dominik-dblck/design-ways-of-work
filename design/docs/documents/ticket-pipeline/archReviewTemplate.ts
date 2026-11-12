@@ -2,6 +2,7 @@
  * - `ARCH_REVIEW_TEMPLATE` · the arch-review template
  */
 import type { DocumentSection } from '../documentTypes.ts';
+import { buildBranch } from '../../../sheet/project.ts';
 
 export const ARCH_REVIEW_TEMPLATE: readonly DocumentSection[] = [
   {
@@ -11,7 +12,9 @@ export const ARCH_REVIEW_TEMPLATE: readonly DocumentSection[] = [
       '```markdown',
       '# arch-review-{id} · {date}',
       '',
-      '> against `feature/deblock-content` + working tree · {n} findings · {n} fix · {n} keep · {n} decided',
+      '> against `' +
+        buildBranch +
+        '` + working tree · {n} findings · {n} fix · {n} keep · {n} decided',
       '',
       '## Architecture Summary',
       '- **Layers touched:**',

@@ -2,12 +2,16 @@
  * - `ABOUT_TO_HOLDS_NOTE` · the head fields of the ticket modes' page
  * - about, eyebrow, source, intro, modesNote, modes, facts, holdsNote
  */
+import { cite, citeLines } from '../../documents/cited.ts';
 const ABOUT_TO_HOLDS_NOTE = {
   about:
-    'The three ticket modes as data (PM, 25 Sep 2026) · the ticket carries its mode as a chip (D19) · pipeline-cleanup.md moves it into ticket-pipeline.md for the agent',
-  eyebrow: 'DECIDED WITH THE PM 25 SEP · LANDED 28 SEP AS SYNC 6, BEFORE E04',
+    'The three ticket modes as data' +
+    cite('modes.decided') +
+    ' · the ticket carries its mode as a chip (D19) · pipeline-cleanup.md moves it into ticket-pipeline.md for the agent',
+  eyebrow: cite('modes.eyebrow'),
   source:
-    'data · modes.ts · rendered here · in ticket-pipeline.md since 28 Sep (sync 6)',
+    'data · modes.ts · rendered here · in ticket-pipeline.md' +
+    cite('modes.since'),
   intro: [
     'An epic → one ticket, one run',
     'Anything smaller → a light path',
@@ -15,8 +19,7 @@ const ABOUT_TO_HOLDS_NOTE = {
     'A stop → a review, never a question',
     'The full track → gone; its extra stops → one switch on feature',
   ],
-  modesNote:
-    'decided 25 Sep · landed 28 Sep (sync 6) · ticket-pipeline.md holds it for the agent',
+  modesNote: cite('modes.landed') + 'ticket-pipeline.md holds it for the agent',
   modes: [
     {
       id: 'feature',
@@ -50,7 +53,9 @@ const ABOUT_TO_HOLDS_NOTE = {
       ],
       question: [
         'Decided + written: “did X because Y” (rule:feature-run-never-stops)',
-        'reconStop (E06, E13): a stop after recon, questions instead of decisions',
+        'reconStop' +
+          cite('modes.reconStopEpics') +
+          ': a stop after recon, questions instead of decisions',
         'Why there: a guess about rules or permissions costs most',
       ],
     },
@@ -112,7 +117,7 @@ const ABOUT_TO_HOLDS_NOTE = {
         'Epic → feature, no points counted',
         'Anything else → points (tracks.js): 2+ standard · 0–1 fast',
         'Only upward: fast → standard when the pack does not hold',
-        'E06, E13 → feature + reconStop',
+        ...citeLines('modes.reconStopRow'),
       ],
     },
     {
@@ -140,9 +145,10 @@ const ABOUT_TO_HOLDS_NOTE = {
       emoji: '📍',
       title: 'WHERE IT LANDS',
       bullets: [
-        'Design side: ticket-pipeline.md (modes, skills) · plans.js rule:three-ticket-modes · tracks.js (no full, reconStop) · design-pack (step 10) · design-refine (E06, E13 + reconStop)',
+        'Design side: ticket-pipeline.md (modes, skills) · plans.js rule:three-ticket-modes · tracks.js (no full, reconStop) · design-pack (step 10) · design-refine' +
+          cite('modes.refineEpics'),
         'Build side, at the sync: yarn skills · the tests that count skills (theOldTicketSkillIsGone, everySkillIsShort, skillsAreGenerated) · CLAUDE.md · Lane A',
-        'When: after T-E03-00’s report, one move',
+        'When: ' + cite('modes.when') + 'one move',
         'Why then: skills never change under a running ticket · a plans.js change re-cuts the pack',
       ],
     },

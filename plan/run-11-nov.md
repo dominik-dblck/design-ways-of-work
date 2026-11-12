@@ -688,3 +688,13 @@ Each call: what, why, how to undo. None changes what the PM sees.
 - A correction to the note on 6a's fix: a product's file may stand in a folder that holds a home's files
   (`docs/process/` holds its decisions and its plan beside the home's plans); what it never takes is a path a
   home's file held at the pinned take, which the take lists in the clone's exclude.
+- The gate on 6c-1 (6e359a2): one difference, meant (the sheet skill's line on printed files), written on the
+  release in hand with 6c-2.
+- 6c-2. The pipeline's lessons cite Eagle's tickets and the PM's dates (118 places in 12 files, a
+  `why: T-…` with its story, a bracket holding an id or a date), and the modes' page Eagle's history and its
+  example ticket (12). A home's document asks for each by key, `cite('sharedSkill.4')` inline or
+  `...citeLines('reconSkill.5+')` for a story's lines, from eagle-design's `docs/process/documentSlots.ts`
+  (nine parts, written by script from the texts as they stood); a key a product does not hold prints
+  nothing, the example ticket `T-E01-00`. The build branch reads `sheet/project.ts` · `buildBranch`. A home
+  test fails on a row no document asks for. Tried on the gate's clone: tsc, ESLint, prettier, file names,
+  knip, the tests; `ticket-pipeline.md` and `modes.json` print byte for byte. Undo: revert the commit.
