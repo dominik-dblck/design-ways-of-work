@@ -792,3 +792,9 @@ Each call: what, why, how to undo. None changes what the PM sees.
   reads the summary as it stands; a test here holds each stack to a home's design system and its packages, so
   the files are read here too. My call, over leaving knip an exception: the repository takes none. Undo:
   revert it; the release runs again from its written row.
+- v0.4.0 out (e10877f, its tag on the remote), on the PM's A. eagle-design moves its pin when it chooses.
+- 7b, the atoms re-probed at eagle-dev's fe07f6e4 (`git archive`, read only): its nine points hold; tsc 11 → 4,
+  lint 47 → 8, none of them eagle-dev's. This side's: the theme's MUI augmentations (a badge's count, an
+  input's large size), lucide-react, the tokens file as the generator writes it, three names this side holds
+  already (radiusOf, LAYERS, text). eagle-design's: the sheet's Badge and Button, renamed in its next batch.
+  The sync script waits for the atoms on the build side's branch.
