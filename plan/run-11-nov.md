@@ -991,3 +991,8 @@ Each call: what, why, how to undo. None changes what the PM sees.
   `yarn lint:exports` was red on both sides since v0.8.0: five exports of the homes nothing reads (an
   export the split left behind each), dropped here; no gate showed it, since a red on both sides is no
   difference. The bundles, the guard's map and the record differ as `NEXT` now says. Undo: revert it.
+- The gate on f505740: red again, two of mine. The directory's types still imported `RoleKey` for the export
+  it dropped (ESLint); once dropped, the product's people file exported `RoleKey` to no reader (knip).
+  `HOME_FACTS` edits the people file's export and header too. The bundles and the pack that digest the three
+  homes differ as `NEXT` now says. Checked on the gate's clone before the commit: ESLint, tsc, knip,
+  prettier. Undo: revert it.

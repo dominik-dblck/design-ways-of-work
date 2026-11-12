@@ -4,7 +4,7 @@
  * - `Tuple` · a person in the shape gateRules.ts speaks: name, avatar, id
  */
 import type { LanguageCode } from '../languages.ts';
-import type { ApprovalGate, PersonId, RoleKey } from './people.ts';
+import type { ApprovalGate, PersonId } from './people.ts';
 
 interface Role {
   readonly label: string;
