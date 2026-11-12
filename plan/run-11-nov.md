@@ -24,7 +24,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 
 | stage | what | done | of |
 | 1 | Foundation | 7 | 7 |
-| 2 | Design clean | 12 | 20 |
+| 2 | Design clean | 13 | 20 |
 | 3 | Spawn design | 0 | 3 |
 | 4 | Eagle-design | 0 | 2 |
 
@@ -77,6 +77,7 @@ word · 2 · both design repositories pinned to one tag, the gate green on both.
 - 16:56 · stage 2 · 10 of 20 · cases readers homed: 29e9764 + 06725ea + 98ed007, gate green (17 expected), eagle-design approved
 - 17:09 · stage 2 · 11 of 20 · contract, directory, screens readers homed: 221c1dc, gate green (19 expected), eagle-design approved
 - 17:32 · stage 2 · 12 of 20 · words readers homed: 9ec4210 + 99f3506, gate green (15 expected), eagle-design approved
+- 18:31 · stage 2 · 13 of 20 · homes hold no product fact: 4780f18 + f505740 + 4b5f711, gate green (20 expected), product feature tier green; events and gates a known gap
 
 ## Calls
 
@@ -996,3 +997,6 @@ Each call: what, why, how to undo. None changes what the PM sees.
   `HOME_FACTS` edits the people file's export and header too. The bundles and the pack that digest the three
   homes differ as `NEXT` now says. Checked on the gate's clone before the commit: ESLint, tsc, knip,
   prettier. Undo: revert it.
+- Task 13 closed: the gate on 4b5f711 green, twenty differences each expected; the product's feature tier,
+  run on the gate's clone with v0.10.0 taken, green (ten of ten). Left: the product moves its drifted
+  `docs/rules/checks.md` to `legacy/` on its tree; the ticket kinds' hex waits for the theme (task 19).
