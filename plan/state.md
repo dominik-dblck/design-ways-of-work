@@ -21,8 +21,10 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
   (its fast-forward is the PM's word). The gate tries `port/wow`, taking `main` by the port's script.
 - argus-design: not spawned yet; its stack is decided, the one this repository defines (W24).
 - `examples/sample-product`: the smallest product, naming none; `yarn sample` builds it from nothing on the
-  tree's homes and runs its feature tier, ten of ten green; this repository's feature tier runs it.
-- The build side: `dev/` is copied from its repository by script; its port is parked.
+  tree's homes and runs its feature tier, ten of ten green; this repository's feature tier runs it. It takes
+  no `dev/`, as a new design product does not.
+- The build side: `dev/` is copied from its repository by script and taken by eagle-design alone; its port is
+  parked.
 
 ## What holds a change
 
@@ -49,8 +51,8 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
 
 ## Known gaps
 
-- `dev/`, the build side's tree a design product takes, still names Eagle as its repository wrote it. Stage 2,
-  task 24; the homes' test reads every other file the take wrote.
+- `dev/` is Eagle's build side as its repository wrote it, names and all; a new design product takes none of
+  it until the build side's port (the plan's stage 4) makes it any product's.
 - A home's export no product reads is found by no check: knip in a product reads the taken files as entries.
 - A commit pushed straight to `main` from a clone with no hooks is checked by nothing here: a branch
   protection on the remote alone closes that.

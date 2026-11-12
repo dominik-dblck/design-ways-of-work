@@ -85,8 +85,9 @@ const productPrints = (): readonly Emitted[] => [
 const isADocument = (file: string): boolean =>
   [...EMITTED, ...buildReads.documents].some((one) => one.module === file);
 
+// the build side's tree (`dev/`) stands only in a product that takes it: a module it lacks prints nothing
 const emitted = (): readonly Emitted[] => [
-  ...EMITTED,
+  ...EMITTED.filter((one) => fs.existsSync(path.join(ROOT, one.module))),
   ...productPrints(),
   ...dataFiles(),
 ];

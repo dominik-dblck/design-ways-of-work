@@ -6,7 +6,6 @@
   "wow": {
     "takes": [
       "design",
-      "dev",
       "shared",
       "design-system"
     ]

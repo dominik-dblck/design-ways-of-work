@@ -1184,3 +1184,9 @@ Each call: what, why, how to undo. None changes what the PM sees.
   is a type's new field. Never pushed nor tagged, its commit is reverted (no history rewritten) and the release
   goes out as 0.18.0, a minor. Why: a version is what a product's pin reads; 0.17.1 never reached one. Undo:
   none; the revert stands where it is.
+- Task 24: a new design product takes no `dev/`: the sample's `wow.takes` drops it, the spawn writes the same,
+  and the build prints the build side's map only where the product holds it. eagle-design takes `dev/` as
+  before. Why: `dev/` is Eagle's build side whole (its database, its CI, its screens as examples, its review
+  agents byte for byte), not names alone; making it any product's is the plan's build-side split (stage 4,
+  parked, and a word to eagle-dev is the PM's). The new-project guide says the pipeline names the agents the
+  build side holds. Undo: `dev` back in the sample's `wow.takes`.

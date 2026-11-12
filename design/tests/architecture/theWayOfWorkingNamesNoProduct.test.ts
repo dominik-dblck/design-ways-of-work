@@ -63,7 +63,7 @@ describe('the way of working names no product', () => {
     // the company and the stack are the way of working's own: its design system is the company's, a stack's id its word
     const { company: _company, stack: _stack, ...own } = named;
     const ownNames: readonly string[] = Object.values(own).flat();
-    // the build side's tree comes copied as its repository wrote it, and waits for that side's own port
+    // the build side's tree comes copied as its repository wrote it: a new product takes none, until that side's own port
     const taken = [...takenFiles(ROOT).keys()].filter(
       (file) =>
         !file.startsWith('dev/') &&

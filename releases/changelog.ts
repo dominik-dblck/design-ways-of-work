@@ -6,7 +6,7 @@ import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
 const NEXT: Unreleased = {
   kind: 'patch',
-  what: '',
+  what: 'a design product may take no `dev/`, the build side’s tree: the build prints the build side’s map only where the product holds it; the new-project guide says a new product takes none until its build side has its own, and that the pipeline names the review agents that side holds',
   action: 'none: move the pin to the tag',
   rules: { added: [], changed: [], removed: [] },
   outputs: {},

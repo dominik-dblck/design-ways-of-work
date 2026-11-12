@@ -17,6 +17,8 @@ again, and what is the product’s own is cut by hand. No tool writes the copy.
 - `sheet/rules.ts` · the product’s own rules, emptied, then written as the product is
   decided: domain, product, experience, architecture, quality (W58, W60).
 - `CLAUDE.md` · the design side’s role, named for the product; `package.json` · its `name`.
+- `package.json` · `wow.takes` names `design`, `shared` and `design-system`: `dev/`, the build side’s tree,
+  waits for the product’s build side. The pipeline names the review agents that side holds (`architecture-review`, `types-eval`).
 - `docs/rules/README.md` · where the code rules were adapted from.
 
 ## 3 · Cut: what is the product’s own
