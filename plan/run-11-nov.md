@@ -24,7 +24,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 
 | stage | what | done | of |
 | 1 | Foundation | 7 | 7 |
-| 2 | Design clean | 5 | 10 |
+| 2 | Design clean | 6 | 10 |
 | 3 | Spawn design | 0 | 3 |
 | 4 | Eagle-design | 0 | 2 |
 
@@ -61,6 +61,7 @@ word · 2 · both design repositories pinned to one tag, the gate green on both.
 - 17:00 · stage 2 · 3 of 10 · the gate on eagle-design's newest main, the trunk taken by the port's script; eleven differences, each a row of the release in hand; verified by eagle-design (52bf59f, 66d30f2, a8bdcc0, 7c9dbb2)
 - 17:51 · stage 2 · 4 of 10 · the first slice: the build side's read list out of the home into the product's registry, the merge keeps two changes that touch, a repository's migration by one command; v0.3.0 out; verified by eagle-design (a53a832, 3d1a872, c82439e, 272bceb)
 - 08:48 · stage 2 · 5 of 10 · task 5 · plugs and registries through the product: no home reads a product's logic, model or samples by path; the gate's 23 differences each expected; verified by eagle-design (d162c06, 69c453d, 3419ef0, 5555716, 4fc5f4f, 1bfe21a)
+- 10:15 · stage 2 · 6 of 10 · Feature and Board read a product only through its contract: the plan, the slots, the eras; 840ec79 carried; gate 79 of 79 expected; verified by eagle-design (71a83b4, 391504f, e6d0b3d, 5c1b7d0, 3f930aa, b9bf980, 6e359a2, 8660446, d593f8d, d205409, c2ea74f, 594f453)
 
 ## Calls
 
