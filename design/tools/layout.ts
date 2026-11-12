@@ -5,7 +5,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
-import { EMITTED, emitted } from './layout/emittedFiles.ts';
+import { emitted, isADocument } from './layout/emittedFiles.ts';
 import { importedEntries } from './layout/moduleImports.ts';
 import { ROOT } from './root.ts';
 import type { Emitted } from './layout/emittedFiles.ts';
@@ -174,10 +174,7 @@ function underABundlingHome(file: string): readonly string[] | null {
 
 // an entry, by its path alone: a `.ts` straight in a bundling home, no declaration, no test, no data
 function isEntry(file: string): boolean {
-  return (
-    underABundlingHome(file)?.length === 1 &&
-    !EMITTED.some((one) => one.module === file)
-  );
+  return underABundlingHome(file)?.length === 1 && !isADocument(file);
 }
 
 // the entry a part serves, by path: beside its first folder; in an epic's folder, the one its name ends with

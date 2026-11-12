@@ -1,7 +1,7 @@
 /**
  * - `ENDPOINT_SHAPE` · routes, bodies, lists and answers: how an endpoint looks
  */
-import type { DocumentSection } from '../documentTypes.ts';
+import type { DocumentSection } from '../../../docs/documents/documentTypes.ts';
 
 export const ENDPOINT_SHAPE: readonly DocumentSection[] = [
   {

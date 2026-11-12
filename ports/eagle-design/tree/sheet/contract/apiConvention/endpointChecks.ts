@@ -1,7 +1,7 @@
 /**
  * - `ENDPOINT_CHECKS` · the checks on every request; what a contract states
  */
-import type { DocumentSection } from '../documentTypes.ts';
+import type { DocumentSection } from '../../../docs/documents/documentTypes.ts';
 
 export const ENDPOINT_CHECKS: readonly DocumentSection[] = [
   {

@@ -1,7 +1,10 @@
 /**
  * - `agentInstructions` · agent-instructions.md as data, printed byte for byte
  */
-import type { DocumentFile, DocumentSection } from './documentTypes.ts';
+import type {
+  DocumentFile,
+  DocumentSection,
+} from '../documents/documentTypes.ts';
 
 const SECTIONS: readonly DocumentSection[] = [
   {

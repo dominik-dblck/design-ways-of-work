@@ -673,3 +673,18 @@ Each call: what, why, how to undo. None changes what the PM sees.
   required export (data with no import, read as a typed namespace; a product with no history writes four empty
   lists), agreed by eagle-design. Tried on the gate's clone: format, tsc, ESLint, the six tests green.
   Undo: revert the commit.
+- 6c, agreed by eagle-design: a product's facts in the home's documents leave by two roads. A document that is
+  the product's whole leaves whole; a home's document keeps its process and asks the product for its own
+  texts by key (`docs/process/documentSlots.ts`), a key the product does not hold printing nothing. Every
+  printed file of eagle-design's stays byte for byte, the gate the proof.
+- 6c-1. The API convention (Eagle's routes and refusals, the PM's decisions for its API) and the agent's
+  instructions (what Eagle is, its six first reads, its domain's rules) are eagle-design's whole: moved by
+  `scripts/move.ts` into the tree, `sheet/contract/apiConvention.ts` and `docs/process/agentInstructions.ts`,
+  printed at the same paths from `sheet/project.ts` · `buildReads.documents`, and no entry of their own, as a
+  home's document is none. My call over eagle-design's slots for the instructions: nine in ten of its lines
+  are the product's. The sheet skill says where printed files come from. Tried on the gate's clone: tsc,
+  ESLint, prettier, file names, knip, 145 tests; `api-convention.md` byte for byte, `agent-instructions.md`
+  differs by 6b's line alone. Undo: revert the commit.
+- A correction to the note on 6a's fix: a product's file may stand in a folder that holds a home's files
+  (`docs/process/` holds its decisions and its plan beside the home's plans); what it never takes is a path a
+  home's file held at the pinned take, which the take lists in the clone's exclude.

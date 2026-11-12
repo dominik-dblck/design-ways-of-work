@@ -1,6 +1,6 @@
 /**
- * - `EMITTED`, `emitted`, `Emitted` · the data the build prints, and where
- * - the product's JSON, a rule file and a document as markdown, a skill as SKILL.md
+ * - `emitted`, `Emitted`, `isADocument` · what the build prints, where; a document
+ * - the product's JSON and documents, a rule file as markdown, a skill as SKILL.md
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -24,21 +24,9 @@ const EMITTED: readonly Emitted[] = [
     print: 'document',
   },
   {
-    module: 'docs/documents/agent-instructions.ts',
-    name: 'agentInstructions',
-    fixture: 'docs/process/agent-instructions.md',
-    print: 'document',
-  },
-  {
     module: 'docs/documents/new-project.ts',
     name: 'newProject',
     fixture: 'docs/process/new-project.md',
-    print: 'document',
-  },
-  {
-    module: 'docs/documents/api-convention.ts',
-    name: 'apiConvention',
-    fixture: 'sheet/contract/api-convention.md',
     print: 'document',
   },
   {
@@ -84,20 +72,24 @@ function dataFiles(): readonly Emitted[] {
   });
 }
 
-// the data the product's build side reads by blob, each export printed as JSON at its path
-const productJson = (): readonly Emitted[] =>
-  buildReads.json.map(({ module, name, fixture }) => ({
-    module,
-    name,
-    fixture,
-    print: 'json',
-  }));
+// what the product's build side reads, each export printed at its path: its data as JSON, its documents as markdown
+const productPrints = (): readonly Emitted[] => [
+  ...buildReads.json.map((one) => ({ ...one, print: 'json' as const })),
+  ...buildReads.documents.map((one) => ({
+    ...one,
+    print: 'document' as const,
+  })),
+];
+
+// a module that is a document prints as markdown and is no entry of its own
+const isADocument = (file: string): boolean =>
+  [...EMITTED, ...buildReads.documents].some((one) => one.module === file);
 
 const emitted = (): readonly Emitted[] => [
   ...EMITTED,
-  ...productJson(),
+  ...productPrints(),
   ...dataFiles(),
 ];
 
-export { EMITTED, emitted };
+export { emitted, isADocument };
 export type { Emitted };

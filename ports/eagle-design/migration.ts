@@ -108,6 +108,11 @@ const MIGRATION: Migration = {
     readonly name: string;
     readonly fixture: string;
   }[];
+  readonly documents: readonly {
+    readonly module: string;
+    readonly name: string;
+    readonly fixture: string;
+  }[];
 `,
     },
     {
@@ -124,6 +129,19 @@ ${JSON_FIXTURES.map(
     },
 `,
 ).join('')}  ],
+  // the markdown the build prints for it, each from a module's document
+  documents: [
+    {
+      module: 'sheet/contract/apiConvention.ts',
+      name: 'apiConvention',
+      fixture: 'sheet/contract/api-convention.md',
+    },
+    {
+      module: 'docs/process/agentInstructions.ts',
+      name: 'agentInstructions',
+      fixture: 'docs/process/agent-instructions.md',
+    },
+  ],
 `,
     },
     {
