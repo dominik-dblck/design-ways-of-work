@@ -10,7 +10,18 @@ const NEXT: Unreleased = {
   action:
     'the pin to the tag; on a new machine, `node shared/user-hooks/installUserHooks.ts` (this repository: `yarn hooks:user`); a hook that differs on the machine is left as it is and reported',
   rules: { added: [], changed: [], removed: [] },
-  outputs: {},
+  outputs: {
+    'eagle-design': {
+      'output · yarn build':
+        'the build counts every file a home holds beside its TypeScript, the two user hooks’ among them: 386, not 384; neither is published',
+      'output · yarn checks':
+        'the build counts every file a home holds beside its TypeScript, the two user hooks’ among them: 386, not 384; neither is published',
+      'output · yarn spec-check':
+        'the build counts every file a home holds beside its TypeScript, the two user hooks’ among them: 386, not 384; neither is published',
+      'output · yarn cut-pack T-E19-00':
+        'the build counts every file a home holds beside its TypeScript, the two user hooks’ among them: 386, not 384; neither is published',
+    },
+  },
 };
 
 const RELEASES: readonly Release[] = [

@@ -5,8 +5,9 @@ import { scopeAt } from './scopeAt.ts';
 
 const SKILLS_WRITER = 'shared/skills/writeE2eSkills.ts';
 const TAKE = 'shared/take/takeWow.ts';
+const INSTALLER = 'shared/user-hooks/installUserHooks.ts';
 
-// the entries less the browser tier's face, its skills' writer and the take, which every scope's knip holds alike
+// the entries less the browser tier's face, its skills' writer, the take and the user hooks' installer, which every scope's knip holds alike
 const beyondTheFace = (
   entries: string | readonly string[] | undefined,
 ): readonly string[] =>
@@ -14,7 +15,8 @@ const beyondTheFace = (
     (entry) =>
       !entry.startsWith('shared/e2e/') &&
       entry !== SKILLS_WRITER &&
-      entry !== TAKE,
+      entry !== TAKE &&
+      entry !== INSTALLER,
   );
 
 describe('knip from a scope', () => {

@@ -1098,3 +1098,6 @@ Each call: what, why, how to undo. None changes what the PM sees.
   hook in byte-equal is a W30 release (W31). Left local, as gaps: `slackAtStop.py` (a person's Slack id) and
   `peerReview.py` (this repository's path and its peer by name); the hooks of other repositories (the build
   side's runs, reviews) are theirs. Undo: revert it.
+- Gate on e180349: 6 differences. knip in the product called the installer unused: it is an entry wherever
+  `shared/` is held now, beside the take's. The build counts every non-TypeScript file of a home, the two hooks
+  among them (386, not 384), and publishes neither: named in the row. eagle-design approved the piece.
