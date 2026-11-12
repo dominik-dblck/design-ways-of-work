@@ -31,11 +31,11 @@ const NEXT: Unreleased = {
       'dist · project/requirements.js':
         'the requirements’ rows, a module of their own',
       'dist · project/module-entries.json':
-        'the requirements are an entry: their rows, their cut and their types',
+        'the requirements are an entry: their rows, their cut and their types; the product’s plan an entry, its two parts and its types',
       'dist · project/sourceView.js':
         'the Source page’s guard reads the requirements’ registry',
       'written · records/release-5-3-1.md':
-        'the requirements are a module of the homes the build side reads: one module and three files more, the approval logic two files fewer; the block model’s JSON a file read whole, its digest recorded',
+        'the requirements are a module of the homes the build side reads: one module and three files more, the approval logic two files fewer; the block model’s JSON a file read whole, its digest recorded; the product’s plan a module more, the plans two files fewer, the standing words read where they stand now, under sheet/, and the tickets’ digest moved by their context and their pointers',
       'dist · project/project.js':
         'the project names the JSON its build side reads, each from a module’s export',
       'written · fixtures/data/block-model.json':
@@ -53,11 +53,51 @@ const NEXT: Unreleased = {
       'dist · project/feature-page.js':
         'the page’s entry hands the product’s view to the Feature page',
       'dist · project/featureView.js':
-        'the feature view reads no scenes and no role combinations: the page hands them in',
+        'the feature view reads no scenes and no role combinations: the page hands them in; it reads the combinations from the product’s plan',
       'dist · project/refineCheck.js':
         'the refine check reads no scenes: the pack hands the states an epic names in',
       'dist · project/module-imports.json':
-        'the feature view imports neither scenes.ts nor roleCombinations.ts, the refine check no scenes.ts; the source guard imports the requirements’ registry, not approvalLogic.ts',
+        'the feature view imports neither scenes.ts nor roleCombinations.ts, the refine check no scenes.ts; the source guard imports the requirements’ registry, not approvalLogic.ts; the feature view and the tickets import the product’s plan; the assembly logic imports the standing words from beside it',
+      'dist · project/plans.js':
+        'the plans hold the rules, the checklist and the refine steps; the spec’s files, the first read, the combinations, the drift guards and the decided points left for the product’s plan',
+      'dist · project/projectPlan.js':
+        'the product’s plan, a module of its own: the spec’s files, the first read, the combinations, the drift guards and the decided points',
+      'dist · project/tickets.js':
+        'the ticket context reads its first read from the product’s plan, bundled beside the plans’ rules; the tickets’ pointers name projectPlan.js, where the lists they point at moved',
+      'dist · project/boardView.js':
+        'the board bundles the ticket context, which reads its first read from the product’s plan; the tickets’ pointers name projectPlan.js',
+      'dist · project/board-page.js':
+        'the board bundles the ticket context, which reads its first read from the product’s plan; the tickets’ pointers name projectPlan.js',
+      'dist · project/contentTypeLogic.js':
+        'the standing words bundled from where they stand now, beside the assembly logic',
+      'dist · project/sheetStatus.js':
+        'the standing words built from where they stand now, beside the assembly logic, under the same name',
+      'dist · project/agent-instructions.md':
+        'the agent’s first read opens on the product’s plan, projectPlan.ts',
+      'written · docs/process/agent-instructions.md':
+        'the agent’s first read opens on the product’s plan, projectPlan.ts',
+      'dist · project/new-project.md':
+        'a new project empties the rows of the product’s plan, docs/process/projectPlan/',
+      'written · docs/process/new-project.md':
+        'a new project empties the rows of the product’s plan, docs/process/projectPlan/',
+      'dist · project/packs/T-E19-00.md':
+        'the digests move: the tickets’ parts by their context and their pointers, the plans’ module two parts fewer',
+      'written · fixtures/packs/T-E19-00.md':
+        'the digests move: the tickets’ parts by their context and their pointers, the plans’ module two parts fewer',
+      'written · .claude/skills/design-refine/SKILL.md':
+        'the refine skill asks for the product’s decided points in its plan, docs/process/projectPlan.ts',
+      'written · .claude/skills/design-start/SKILL.md':
+        'the start skill names the product’s decided points in its plan, docs/process/projectPlan.ts',
+      'written · vendor/wow/app/workspace/sheetStatus.ts':
+        'the standing words are the product’s own, under sheet/: the take no longer vendors them',
+      'written · vendor/wow/docs/process/plans.ts':
+        'the vendored plans hold the rules, the checklist and the refine steps alone',
+      'written · vendor/wow/docs/process/plans/driftGuards.ts':
+        'the drift guards and the decided points are the product’s plan’s: no longer vendored',
+      'written · vendor/wow/docs/process/plans/specFiles.ts':
+        'the spec’s files, the first read and the combinations are the product’s plan’s: no longer vendored',
+      'written · vendor/wow/docs/process/plans/plansTypes.ts':
+        'the plans’ types lose the five the product’s plan holds now',
     },
   },
 };

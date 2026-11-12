@@ -26,8 +26,7 @@ interface RuleRow {
 
 // a slot a product fills (D30): the question it answers, the homes that already hold it, its rules
 interface RuleSlot {
-  readonly slot:
-    'domain' | 'product' | 'experience' | 'architecture' | 'quality';
+  readonly slot: 'domain' | 'product' | 'experience' | 'architecture' | 'quality';
   readonly asks: string;
   readonly homes: readonly string[];
   readonly rows: readonly RuleRow[];

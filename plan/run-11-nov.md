@@ -647,3 +647,18 @@ Each call: what, why, how to undo. None changes what the PM sees.
   Stryker as a shared preset and run script, the product naming its folders, each folder's score a baseline
   that only rises; an epic that touched a folder's logic runs that folder before it closes, each survivor
   killed or listed with its why. Measured on Eagle: 54 folders, 11.2 h a full pass, 10 s to 14 min a folder.
+- The gate on 391504f: the migration whole; two faults. (1) The plans' types, formatted by WoW's prettier, broke
+  a line the product's prettier keeps whole: a home's file takes the product's format, so the line is whole
+  again. (2) `anExportIsRead` found the product's plan's `guards` and `spec` unread: the product's tickets,
+  edges, receipts and backlog point at them as `plans.js · GUARDS` and the like. A pointer follows what it
+  points at, as an import follows a move: a migration edit may now ask for every place its text stands, and
+  the product's ten code files name `projectPlan.js` (its pinned notebooks, prose of their day, stay). The
+  migration's edits for the plan stand in a part of it, `migration/planEdits.ts`. Undo: revert the commit.
+- eagle-design's ask on the build side's module line in `sheet/project.ts`: the port's branch holds no such
+  line (its modules are the measure and the spec check), so no edit is written; an edit would stop the
+  migration on a text that stands nowhere.
+- The PM's words for later stages, relayed by eagle-design (12 Nov): Argus is built on Eagle's stack, which
+  WoW defines as its stack part (the S rules and gates) and a product's `product.ts` names, the spawn writing
+  it (A); nothing of eagle-dev's port starts before Argus-design is spawned, then C0 first, the rest beside
+  Argus-design against v1.0.0 (B). eagle-design's derivations: E and S rules reach eagle-dev by its take of
+  WoW's tag; the flip is the port's step 5, after the spawn and C0; the coarse count runs first in stage 4.

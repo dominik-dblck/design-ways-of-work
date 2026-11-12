@@ -53,17 +53,19 @@ function followed(
     });
 }
 
-// a text found exactly once in its file, written as asked; anything else stops the migration
+// a text found exactly once in its file, or every time when asked, written as asked; anything else stops the migration
 function edited(root: string, edits: Migration['edits']): readonly string[] {
-  for (const { file, from, to } of edits ?? []) {
+  for (const { file, from, to, isEveryPlace } of edits ?? []) {
     const full = path.join(root, file);
     const text = fs.readFileSync(full, 'utf8');
     const found = text.split(from).length - 1;
-    if (found !== 1)
+    if (isEveryPlace ? found === 0 : found !== 1)
       throw new Error(`${file}: the edit’s text stands ${String(found)} times`);
     fs.writeFileSync(
       full,
-      text.replace(from, () => to),
+      isEveryPlace
+        ? text.replaceAll(from, () => to)
+        : text.replace(from, () => to),
     );
   }
   return (edits ?? []).map(({ file }) => file);

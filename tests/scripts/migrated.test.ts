@@ -24,6 +24,7 @@ describe('a migration moves files of a repository, and their imports follow', ()
     'legacy/old.ts',
     "import { rows } from '../logic/rows.ts';\n",
   );
+  clone.committed('words.ts', "'plans.js · A', 'plans.js · B'\n");
   const said = migrated({
     root: clone.root,
     wow,
@@ -38,6 +39,12 @@ describe('a migration moves files of a repository, and their imports follow', ()
           file: 'logic.ts',
           from: "export { rows } from './sheet/rows.ts';\n",
           to: '',
+        },
+        {
+          file: 'words.ts',
+          from: 'plans.js',
+          to: 'project.js',
+          isEveryPlace: true,
         },
       ],
       tree: null,
@@ -57,6 +64,10 @@ describe('a migration moves files of a repository, and their imports follow', ()
     );
   });
 
+  it('an edit asked of every place writes each place its text stands', () => {
+    expect(read('words.ts')).toBe("'project.js · A', 'project.js · B'\n");
+  });
+
   it('what is kept as it was keeps its imports', () => {
     expect(read('legacy/old.ts')).toBe(
       "import { rows } from '../logic/rows.ts';\n",
@@ -64,21 +75,28 @@ describe('a migration moves files of a repository, and their imports follow', ()
   });
 
   it('it says how many moved, followed and were edited', () => {
-    expect(said).toBe('0 removed, 2 moved, 2 following, 1 edited, 0 written');
+    expect(said).toBe('0 removed, 2 moved, 2 following, 2 edited, 0 written');
   });
 
-  it('an edit whose text is not there once stops the migration', () => {
-    expect(() =>
-      migrated({
-        root: clone.root,
-        wow,
-        migration: {
-          removes: [],
-          moves: [],
-          edits: [{ file: 'sheet/rows.ts', from: 'nowhere', to: '' }],
-          tree: null,
-        },
-      }),
-    ).toThrow('sheet/rows.ts: the edit’s text stands 0 times');
+  it('an edit whose text is not there once, or not there at all, stops the migration', () => {
+    const stopped =
+      (edit: { readonly isEveryPlace?: true }): (() => string) =>
+      () =>
+        migrated({
+          root: clone.root,
+          wow,
+          migration: {
+            removes: [],
+            moves: [],
+            edits: [
+              { file: 'sheet/rows.ts', from: 'nowhere', to: '', ...edit },
+            ],
+            tree: null,
+          },
+        });
+    for (const edit of [{}, { isEveryPlace: true } as const])
+      expect(stopped(edit)).toThrow(
+        'sheet/rows.ts: the edit’s text stands 0 times',
+      );
   });
 });

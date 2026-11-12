@@ -3,6 +3,7 @@
  * - `tree/` beside it · its own files the release asks for, at its paths
  */
 import type { Migration } from '../../scripts/migrationTypes.ts';
+import { PLAN_EDITS } from './migration/planEdits.ts';
 
 const APPROVAL = 'sheet/logic/approval/approvalLogic';
 const LOGIC_TYPES = `${APPROVAL}/approvalLogicTypes.ts`;
@@ -159,21 +160,7 @@ import { readStarts } from './tools/readStarts.ts';
 `,
       to: '  starts: readStarts(),\n',
     },
-    {
-      file: 'roadmaps/tickets/ticketContext.ts',
-      from: "import * as PLANS from '../../docs/process/plans.ts';\n",
-      to: "import * as PLANS from '../../docs/process/plans.ts';\nimport { projectContext } from '../../docs/process/projectPlan.ts';\n",
-    },
-    {
-      file: 'roadmaps/tickets/ticketContext.ts',
-      from: '    project: PLANS.projectContext,\n',
-      to: '    project: projectContext,\n',
-    },
-    ...['fileFlow', 'typeChain'].map((part) => ({
-      file: `sheet/logic/assembly/contentTypeLogic/${part}.ts`,
-      from: "from '../../../../app/workspace/sheetStatus.ts';\n",
-      to: "from '../sheetStatus.ts';\n",
-    })),
+    ...PLAN_EDITS,
   ],
   tree: 'ports/eagle-design/tree',
 };

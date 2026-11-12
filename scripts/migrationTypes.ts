@@ -2,11 +2,12 @@
  * - `Migration`, `MigrationEdit` · what a repository does to take a release
  */
 
-// a text of a file of its own, found exactly once, and what it becomes
+// a text of a file of its own, found exactly once or, when every place is asked, at least once, and what it becomes
 interface MigrationEdit {
   readonly file: string;
   readonly from: string;
   readonly to: string;
+  readonly isEveryPlace?: true;
 }
 
 interface Migration {
