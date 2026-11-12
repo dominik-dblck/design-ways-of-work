@@ -1045,3 +1045,10 @@ Each call: what, why, how to undo. None changes what the PM sees.
 - Gate on 5969551: 7 differences, each the piece's (three types the build reads vendored, 94 not 91; four homed
   files counted as uncommitted by cut-pack); the row names them. eagle-design approved it, its one nested
   ESLint config under `legacy/`, outside the lint.
+- Task 14, its second piece: the post-commit hook a home. `.husky/post-commit` runs `shared/hooks/postCommit.ts`
+  in the background; the remote is the scope's new field `backup` (`{ remote }`, or `{ none }` and why: this
+  repository's, its owner runs `yarn backup`). It bundles and pushes only where origin is that remote, both
+  read as host/owner/repo (`shared/hooks/remotes.ts`): eagle-design's SSH origin matches its HTTPS field, a
+  clone's local path never does, so a clone in `.consumers/` no longer could overwrite the product's bundle.
+  Tested on a scratch repository, its pushes to a bare one. `BACKUP_HOOK` (0.12.0) takes the product's hook
+  out and writes its remote into its scope. Undo: revert it.

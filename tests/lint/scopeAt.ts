@@ -5,6 +5,7 @@ import type { RepoScope } from '../../shared/repoScope.ts';
 
 const scopeAt = (root: string, named: Partial<RepoScope> = {}): RepoScope => ({
   root,
+  backup: { none: 'a test scope' },
   ignores: [],
   productTrees: [],
   ruleFiles: [],

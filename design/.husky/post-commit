@@ -1,0 +1,2 @@
+# each commit backed up in the background, only where origin is the scope's remote: shared/hooks/postCommit.ts
+node shared/hooks/postCommit.ts > "$(git rev-parse --git-dir)/backup.log" 2>&1 &
