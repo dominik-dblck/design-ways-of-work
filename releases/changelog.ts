@@ -5,15 +5,26 @@
 import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
 const NEXT: Unreleased = {
-  kind: 'minor',
-  what: 'a design product’s scope is a preset the way of working gives (W27): `tools/scopePreset.ts`, which a product’s `scope.ts` spreads, naming its backup, its browser and what differs; eagle-design’s scope is cut to it, the same scope resolved; the run’s example in `tools/runKeepsTheTurn.ts` is two lines joined, so no word is read across them',
-  action:
-    'the pin to the tag: its migration cuts `scope.ts` to the preset, keeping its own words, people, catalog, assets and the PM’s words; a new design product’s `scope.ts` spreads `SCOPE_PRESET`',
+  kind: 'patch',
+  what: '',
+  action: 'none: move the pin to the tag',
   rules: { added: [], changed: [], removed: [] },
   outputs: {},
 };
 
 const RELEASES: readonly Release[] = [
+  {
+    version: '0.15.0',
+    date: '2026-11-12',
+    kind: 'minor',
+    what: 'a design product’s scope is a preset the way of working gives (W27): `tools/scopePreset.ts`, which a product’s `scope.ts` spreads, naming its backup, its browser and what differs; eagle-design’s scope is cut to it, the same scope resolved; the run’s example in `tools/runKeepsTheTurn.ts` is two lines joined, so no word is read across them',
+    action:
+      'the pin to the tag: its migration cuts `scope.ts` to the preset, keeping its own words, people, catalog, assets and the PM’s words; a new design product’s `scope.ts` spreads `SCOPE_PRESET`',
+    rules: { added: [], changed: [], removed: [] },
+    outputs: {},
+    moved: {},
+    tried: { 'eagle-design': '3e48e51' },
+  },
   {
     version: '0.14.0',
     date: '2026-11-12',
