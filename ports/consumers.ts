@@ -6,6 +6,7 @@ import type { Consumer } from '../scripts/consumerTypes.ts';
 import { CARRIED } from './eagle-design/carried.ts';
 import { CASE_READERS } from './eagle-design/caseReaders.ts';
 import { CONTRACT_READERS } from './eagle-design/contractReaders.ts';
+import { COUNT_FORMS } from './eagle-design/countForms.ts';
 import { HOME_FACTS } from './eagle-design/homeFacts.ts';
 import { REWRITTEN } from './eagle-design/rewritten.ts';
 import { MIGRATION } from './eagle-design/migration.ts';
@@ -46,6 +47,7 @@ const CONSUMERS: readonly [Consumer, ...Consumer[]] = [
       CONTRACT_READERS,
       WORD_READERS,
       HOME_FACTS,
+      COUNT_FORMS,
     ],
     // its own work lands on `main`, which takes nothing yet: the branch holds `main` whole, or the gate is red
     port: {

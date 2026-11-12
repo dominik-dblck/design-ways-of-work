@@ -85,6 +85,10 @@ function countLines(run: GuardRun): readonly string[] {
       ok: !words.length,
       text: words.join(' | ') || '0',
     }),
+    lineOf('Messages.countForms', {
+      ok: true,
+      text: `${String(MESSAGES.countForms().length)} counted plurals with no singular (reported, not held)`,
+    }),
   ];
 }
 

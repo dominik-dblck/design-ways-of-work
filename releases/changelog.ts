@@ -5,11 +5,17 @@
 import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
 const NEXT: Unreleased = {
-  kind: 'patch',
-  what: '',
-  action: 'none: move the pin to the tag',
+  kind: 'minor',
+  what: 'the words’ checks report each counted plural with no singular beside it (`{key}One`, or its stem’s) and each singular that still counts, over the cells, the screen’s and the say table’s lines; the guard prints the count, never failing, until a later release holds it',
+  action:
+    'the migrations `ports/` names for the repository, on its checkout: `node scripts/migrate.ts <name> <checkout>`, run from this repository at the tag (for eagle-design, the messages’ barrel hands `countForms` on); the pin to the tag, then `yarn build`, its copies under `vendor/wow/` in the same commit; each line the report names is the product’s to mend before the release that holds it',
   rules: { added: [], changed: [], removed: [] },
-  outputs: {},
+  outputs: {
+    'eagle-design': {
+      'output · yarn checks':
+        'the guard prints one line more: the counted plurals with no singular, 14, reported and not held',
+    },
+  },
 };
 
 const RELEASES: readonly Release[] = [

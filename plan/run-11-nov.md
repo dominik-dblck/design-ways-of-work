@@ -1009,3 +1009,9 @@ Each call: what, why, how to undo. None changes what the PM sees.
   `dev/rules/checks.md` by the build side's rows alone. eagle-design moved it to `legacy/` and back (7e05c94,
   db4ae5b). Task 14 ships it as a home beside its siblings, the product's tracked copy out of the index by
   the migration. Undo: revert it.
+- R13, eagle-design's request: the words' checks report a counted plural with no singular beside it
+  (`{key}One`, or its stem's) and a singular that still counts, over the cells, the screen's and the say
+  table's lines; the guard prints the count and never fails. eagle-design's tree holds 14 today; a later
+  release holds them once mended. A count with no plural after it ("Show {count} more") asks nothing.
+  `COUNT_FORMS` (0.11.0) makes the product's barrel hand it on. Checked on the gate's clone: ESLint, tsc,
+  knip, prettier. Undo: revert it.

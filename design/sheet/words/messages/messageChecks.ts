@@ -1,6 +1,7 @@
 /**
  * - `check`, `lineFindings` · fills are data, a screen's too; no banned word
  * - `repeats`, `counts` · situations that read alike, and the tables' sizes
+ * - `countForms` · a counted plural with no singular beside it, reported
  */
 import { cells } from './messageCells.ts';
 import type { MessageCell } from './messageCells.ts';
@@ -8,6 +9,7 @@ import {
   FILLS,
   OUTCOME,
   READERS,
+  SAY,
   SCREEN,
   excusesWord,
   VALIDATOR,
@@ -38,8 +40,8 @@ const fillFindings = (lines: readonly MessageCell[]): string[] =>
       .map((found) => `${where(cell)} · fill ${found} is not data`),
   );
 
-// a screen's lines, a plural's and a keyed line's forms each by its key
-function screenLines(): readonly {
+// a table's lines, a plural's and a keyed line's forms each by its key
+function linesIn(table: object): readonly {
   readonly key: string;
   readonly line: string;
 }[] {
@@ -50,9 +52,11 @@ function screenLines(): readonly {
       for (const [inner, next] of Object.entries(node))
         walk(`${key}.${inner}`, next);
   };
-  for (const [key, words] of Object.entries(SCREEN)) walk(key, words);
+  for (const [key, words] of Object.entries(table)) walk(key, words);
   return lines;
 }
+
+const screenLines = (): ReturnType<typeof linesIn> => linesIn(SCREEN);
 
 const screenFillFindings = (): string[] =>
   screenLines().flatMap(({ key, line }) =>
@@ -114,6 +118,59 @@ function repeats(): string[] {
   });
 }
 
+// a count before a plural: a word of more than three letters ending in s, among the next three
+function countsAPlural(line: string): boolean {
+  const at = line.indexOf('{count}');
+  if (at < 0) return false;
+  const next = line
+    .slice(at + '{count}'.length)
+    .split(/[\s,.;:·—()]+/)
+    .filter(Boolean)
+    .slice(0, 3);
+  return next.some((word) => word.length > 3 && /\p{L}s$/u.test(word));
+}
+
+interface KeyedLine {
+  readonly where: string;
+  readonly key: string;
+  readonly line: string;
+}
+
+const keyedLines = (): readonly KeyedLine[] => [
+  ...cells()
+    .filter((cell) => typeof cell.line === 'string')
+    .map((cell) => ({
+      where: `${cell.table}${cell.reader ? ` ${cell.reader}` : ''}`,
+      key: cell.situation,
+      line: String(cell.line),
+    })),
+  ...screenLines().map(({ key, line }) => ({ where: 'screen', key, line })),
+  ...linesIn(SAY).map(({ key, line }) => ({ where: 'say', key, line })),
+];
+
+// a plural's singular: `{key}One`, or its stem's (`blockComments`, `blockCommentOne`)
+const singularsOf = (key: string): readonly string[] => [
+  `${key}One`,
+  `${key.replace(/e?s$/, '')}One`,
+];
+
+// never a failure yet: a counted plural with no singular beside it, and a singular that still counts
+function countForms(): string[] {
+  const lines = keyedLines();
+  const at = new Map(lines.map((one) => [`${one.where}|${one.key}`, one.line]));
+  const found = lines
+    .filter(({ line }) => countsAPlural(line))
+    .flatMap(({ where, key }) => {
+      const one = singularsOf(key).find((name) => at.has(`${where}|${name}`));
+      if (one === undefined)
+        return [`${where} · ${key} · counts a plural with no ${key}One`];
+      return at.get(`${where}|${one}`)?.includes('{count}')
+        ? [`${where} · ${one} · the singular still counts`]
+        : [];
+    });
+  return [...new Set(found)];
+}
+
 function counts(): Readonly<Record<string, number>> {
   const all = cells();
   return {
@@ -126,4 +183,4 @@ function counts(): Readonly<Record<string, number>> {
   };
 }
 
-export { check, counts, lineFindings, repeats };
+export { check, countForms, counts, lineFindings, repeats };
