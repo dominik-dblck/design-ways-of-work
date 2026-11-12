@@ -1034,7 +1034,7 @@ Each call: what, why, how to undo. None changes what the PM sees.
   `extraRoots`, eagle-design's `public`); the epic template test a home on a fixture of its own; the findings'
   sides stay the product's; `docs/rules/checks.md` a home beside its siblings. Undo: revert it.
 - Task 14, its first piece: the twelve files eagle-design's per-file list called homes as they are, copied from
-  its tree (each the same on its `main` and `port/wow`) into `design/`; `WOW_FILES` (0.12.0) takes them out of
+  its tree (each the same on its `port/wow`; its `main` holds the port's line only at stage 4) into `design/`; `WOW_FILES` (0.12.0) takes them out of
   its index as the homes' text, and its backup script out for the home's. The backup script is one file now,
   `design/tools/zipRepo.sh`, moved by `scripts/move.ts` (which moves any file git lists now, not code alone);
   it finds its repository by git, so this repository's `yarn backup` and a product's `tools/` run the same
@@ -1042,3 +1042,6 @@ Each call: what, why, how to undo. None changes what the PM sees.
   ESLint 10 configures a file by its nearest config, so a file under `design/` met the home's own config; the
   commit tier and the edit hook name the root's config now (`rootEslintConfig`, by ESLint's own names), a
   product's same file as before.
+- Gate on 5969551: 7 differences, each the piece's (three types the build reads vendored, 94 not 91; four homed
+  files counted as uncommitted by cut-pack); the row names them. eagle-design approved it, its one nested
+  ESLint config under `legacy/`, outside the lint.

@@ -10,7 +10,24 @@ const NEXT: Unreleased = {
   action:
     'the migrations `ports/` names for the repository, on its checkout: `node scripts/migrate.ts <name> <checkout>`, run from this repository at the tag (for eagle-design, twelve files leave its index as the homes’ text, `tools/zipRepo.sh` leaves for the home’s); the pin to the tag, then `yarn build`, its copies under `vendor/wow/` in the same commit',
   rules: { added: [], changed: [], removed: [] },
-  outputs: {},
+  outputs: {
+    'eagle-design': {
+      'output · yarn build':
+        'the build reads three registry types that are homes now: its copies under `vendor/wow/` are 94, not 91',
+      'output · yarn checks':
+        'the build reads three registry types that are homes now: its copies under `vendor/wow/` are 94, not 91',
+      'output · yarn spec-check':
+        'the build reads three registry types that are homes now: its copies under `vendor/wow/` are 94, not 91',
+      'output · yarn cut-pack T-E19-00':
+        'the build reads three registry types that are homes now: its copies under `vendor/wow/` are 94, not 91; the four homed files under its folders (three types, the checks page) count as uncommitted until the product commits them with its pin',
+      'written · vendor/wow/docs/process/decisions/decisionTypes.ts':
+        'the vendored copy of a type the build reads, a home now',
+      'written · vendor/wow/docs/process/projectPlan/projectPlanTypes.ts':
+        'the vendored copy of a type the build reads, a home now',
+      'written · vendor/wow/roadmaps/findings/findingTypes.ts':
+        'the vendored copy of a type the build reads, a home now',
+    },
+  },
 };
 
 const RELEASES: readonly Release[] = [
