@@ -4,8 +4,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-// a relative import, static or dynamic
-const IMPORTED = /(?:\bfrom|\bimport\s*\()\s*'(\.{1,2}\/[^']+)'/g;
+// a relative import: named, for its side effect alone, or dynamic
+const IMPORTED = /(?:\bfrom|\bimport\s*\(?)\s*'(\.{1,2}\/[^']+)'/g;
 // what a scratch copy of this repository holds of its own code: its scripts and its shared folder
 const FOLLOWED = ['scripts', 'shared'];
 
