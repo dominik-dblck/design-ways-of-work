@@ -38,7 +38,7 @@ const skill: SkillFile = {
         ),
         step(
           5,
-          'every shape the journeys touch has its `app/styles/componentsSpec.ts` row',
+          'every shape the journeys touch has its `app/styles/componentsSpec.ts` row · two components drawing one thing are one row and a prop',
         ),
         step(
           6,

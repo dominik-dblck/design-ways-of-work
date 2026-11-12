@@ -91,6 +91,7 @@ const CONTRACT: readonly ContractRow[] = [
     kind: 'registry',
     what: 'the commands',
   },
+  { file: 'sheet/contract/events.ts', kind: 'registry', what: 'the events' },
   {
     file: 'sheet/contract/ports.ts',
     kind: 'optional',

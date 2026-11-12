@@ -1,22 +1,38 @@
 /**
- * - `BoardPageStatRow` · the board's numbers side by side
- * - one under another on a phone
+ * - `BoardPageStatRow` · the board's numbers in two cards
+ * - the project, then the repository; one under the other on a phone
  */
 import Stack from '@mui/material/Stack';
+import { useMemo } from 'react';
 import type { ReactElement } from 'react';
-import type { Stat } from '../../../../workspace/boardView.ts';
-import { BoardPageStatTile } from './BoardPageStatTile.tsx';
+import {
+  project,
+  repository,
+  stats,
+  words,
+} from '../../../../workspace/boardView.ts';
+import { BoardPageNumberGroup } from './BoardPageNumberGroup.tsx';
 
-interface BoardPageStatRowProps {
-  readonly stats: readonly Stat[];
-}
-
-function BoardPageStatRow({ stats }: BoardPageStatRowProps): ReactElement {
+// the numbers read once, when the page opens
+function BoardPageStatRow(): ReactElement {
+  const counted = useMemo(
+    () => ({ plan: stats(), spec: project(), built: repository() }),
+    [],
+  );
   return (
-    <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5}>
-      {stats.map((stat) => (
-        <BoardPageStatTile key={stat.label} stat={stat} />
-      ))}
+    <Stack direction={{ xs: 'column', md: 'row' }} spacing={1.5}>
+      <BoardPageNumberGroup
+        label={words.project.label}
+        note={words.project.note}
+        lines={[counted.plan, counted.spec]}
+        share={2}
+      />
+      <BoardPageNumberGroup
+        label={words.repository.label}
+        note={words.repository.note}
+        lines={[counted.built]}
+        share={1}
+      />
     </Stack>
   );
 }

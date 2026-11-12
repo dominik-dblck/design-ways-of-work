@@ -45,7 +45,7 @@ function findingFaults(): readonly string[] {
 
 function decisionsLine(): string {
   const decided = DECISIONS.all.length;
-  const open = FINDINGS.all.length;
+  const open = FINDINGS.open.length;
   const faults = [...decisionFaults(), ...findingFaults()];
   return lineOf('decisions and findings', {
     ok: decided > 0 && !faults.length,

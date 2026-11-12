@@ -6,7 +6,7 @@
 import { all as TICKETS } from '../../roadmaps/tickets.ts';
 import { byId as EPICS } from '../../roadmaps/backlog.ts';
 import { casesOfEpic, flat, named } from '../../sheet/cases/testCases.ts';
-import { cards, ticketDetailOf } from './boardView.ts';
+import { listed, ticketDetailOf } from './boardView.ts';
 import { endpointsOf, piecesOf } from './contractView.ts';
 import { caseGroupsOf, caseKindsOf } from './featureView/featureCases.ts';
 import { coverOf } from './featureView/featureCover.ts';
@@ -21,9 +21,9 @@ import { FEATURE_WORDS } from './featureView/featureWords.ts';
 import type { ProductFields, ProductView } from '../../tools/productTypes.ts';
 import type { FeatureTab, FeatureView } from './featureView/featureTypes.ts';
 
-// every epic has its page, in the backlog's order, its status the board's column
+// every epic has its page, in the board list's order, its status the board's column
 function features(): readonly FeatureTab[] {
-  return cards().map((card) => ({ epic: card.id, status: card.column }));
+  return listed().map((card) => ({ epic: card.id, status: card.column }));
 }
 
 // the page opens on the epic in hand, else the first not done yet

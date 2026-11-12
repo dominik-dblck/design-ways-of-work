@@ -44,9 +44,6 @@ function BoardPageEpicPanel({
       </Stack>
       <TitledList label={words.epic.waits} lines={epic.waiting} />
       <TitledList label={words.epic.stories} lines={stories} />
-      {epic.prototype.map((section) => (
-        <TitledList key={section.label} {...section} />
-      ))}
     </Stack>
   );
 }

@@ -1,36 +1,44 @@
 /**
- * - `BoardPageStatTile` · one number, small: the number beside its label, its line
+ * - `BoardPageStatTile` · one number: its label in capitals, its value
+ * - `BoardPageStatTileProps` · its line on hover; a page of its own opens on a click
  */
-import Paper from '@mui/material/Paper';
+import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
+import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-import type { Stat } from '../../../../workspace/boardView.ts';
 import type { ReactElement } from 'react';
-import { radiusOf } from '../../../../theme/tokenReads.ts';
 
 interface BoardPageStatTileProps {
-  readonly stat: Stat;
+  readonly label: string;
+  readonly value: string;
+  readonly note?: string;
+  // a count with a page of its own opens it
+  readonly href?: string | null;
 }
 
-function BoardPageStatTile({ stat }: BoardPageStatTileProps): ReactElement {
-  return (
-    <Paper
-      variant="outlined"
-      sx={{ px: 1.5, py: 1, borderRadius: radiusOf('uiRContainer'), flex: 1 }}
-    >
-      <Stack direction="row" spacing={1} sx={{ alignItems: 'baseline' }}>
-        <Typography variant="subtitle1" component="div">
-          {stat.value}
-        </Typography>
-        <Typography variant="overline" color="textSecondary" component="div">
-          {stat.label}
-        </Typography>
-      </Stack>
-      <Typography variant="caption" color="textSecondary">
-        {stat.note}
+function BoardPageStatTile({
+  label,
+  value,
+  note,
+  href,
+}: BoardPageStatTileProps): ReactElement {
+  const tile = (
+    <Stack direction="row" spacing={0.75} sx={{ alignItems: 'baseline' }}>
+      <Typography variant="overline" color="textSecondary">
+        {label}
       </Typography>
-    </Paper>
+      <Typography variant="subtitle2">{value}</Typography>
+    </Stack>
   );
+  const shown = href ? (
+    <Link href={href} underline="hover" color="inherit">
+      {tile}
+    </Link>
+  ) : (
+    tile
+  );
+  return note ? <Tooltip title={note}>{shown}</Tooltip> : shown;
 }
 
 export { BoardPageStatTile };
+export type { BoardPageStatTileProps };

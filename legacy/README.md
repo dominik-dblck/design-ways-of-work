@@ -50,3 +50,5 @@ What a view stopped drawing when eagle-design's `main` changed it, kept as it st
   endpoint copy: its API section folds the contract page's endpoints
 - `design/app/components/organisms/FeaturePage/components/FeaturePageSteps.tsx` and its
   `constants/featurePageStepsConstants.ts` · a feature's standing at each refine step: that standing retired
+- `design/app/workspace/boardView/boardPrototype.ts` · how many of an epic's prototype components ship: the
+  frontend epic that held them retired, and each epic collapses its components

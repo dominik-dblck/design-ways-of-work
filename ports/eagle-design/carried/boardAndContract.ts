@@ -10,11 +10,6 @@ const BOARD_AND_CONTRACT: readonly Carried[] = [
     how: 'design/app/components/organisms/BoardPage/components/BoardPageBarLegend.tsx, its swatch a radius role',
   },
   {
-    file: 'app/pages/board/BoardPage.tsx',
-    blob: '2efd877610536d99e3db24a7ef5faa8d027de2f9',
-    how: 'design/app/components/organisms/BoardPage/BoardPage.tsx draws BoardPageEpicProgress under its numbers',
-  },
-  {
     file: 'app/pages/board/EpicProgress.tsx',
     blob: '50fd9a520224baa2bfe2b618f8cc15b8edc76905',
     how: 'design/app/components/organisms/BoardPage/components/BoardPageEpicProgress.tsx, its corner a radius role',
@@ -80,29 +75,9 @@ const BOARD_AND_CONTRACT: readonly Carried[] = [
     how: 'design/app/components/organisms/ContractPage/components/ContractPageSharedTypes.tsx',
   },
   {
-    file: 'app/workspace/board-view.ts',
-    blob: 'a483fb7075d153b8c37e508c437955408147b396',
-    how: 'design/app/workspace/boardView.ts exports progress and its types',
-  },
-  {
-    file: 'app/workspace/board-view/boardEpics.ts',
-    blob: 'f9bd4c3ceda3adfa466b1e19b7c11971e2200269',
-    how: 'design/app/workspace/boardView/boardEpics.ts · cards',
-  },
-  {
-    file: 'app/workspace/board-view/boardProgress.ts',
-    blob: '780222074aefd8b705f0d8639a65ea3e53a65fe1',
-    how: 'design/app/workspace/boardView/boardProgress.ts, word for word',
-  },
-  {
     file: 'app/workspace/board-view/boardProgressTypes.ts',
     blob: 'f386968743441264ba18dbb879c2d0966aec98dc',
     how: 'design/app/workspace/boardView/boardProgressTypes.ts, word for word',
-  },
-  {
-    file: 'app/workspace/board-view/boardWords.ts',
-    blob: '773c6f3024a3ee1e722cdfc95f0682516e07fb18',
-    how: 'design/app/workspace/boardView/boardWords.ts · progress',
   },
   {
     file: 'app/workspace/contract-view.ts',

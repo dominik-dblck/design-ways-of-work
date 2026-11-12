@@ -1,5 +1,5 @@
 /**
- * - `cards`, `columns`, `epicOf` · every epic's card in order, by column, one
+ * - `listed`, `columns`, `epicOf` · every epic as listed, by column, one
  * - `ticketLineOf` · a ticket as a list shows it: its id, title, kind and column
  */
 import { epics as EPICS } from '../../../roadmaps/backlog.ts';
@@ -7,7 +7,6 @@ import {
   all as allTickets,
   columns as COLUMNS,
 } from '../../../roadmaps/tickets.ts';
-import { prototypeOf } from './boardPrototype.ts';
 import { BOARD_WORDS } from './boardWords.ts';
 import type {
   EpicBadge,
@@ -81,7 +80,6 @@ function cardOf(epic: Epic, all: readonly BoardTicket[]): EpicCard {
     stories: epic.stories,
     feature: feature ? ticketLineOf(feature) : null,
     tickets,
-    prototype: prototypeOf(epic),
     doneCount: tickets.length - open.length,
     column: columnOfEpic(tickets),
     waiting: tickets.length ? waits : [BOARD_WORDS.noTicket],
@@ -109,4 +107,14 @@ function epicOf(id: string): EpicCard | null {
   return epic ? cardOf(epic, allTickets()) : null;
 }
 
-export { cards, columns, epicOf, ticketLineOf };
+// the closed first, then the MVP still open, then after the MVP, then the deferred; each in the backlog's order
+const LATER: Readonly<Record<string, number>> = { later: 2, deferred: 3 };
+
+const rankOf = (card: EpicCard): number =>
+  card.column === 'done' ? 0 : (LATER[card.badge.tone] ?? 1);
+
+// the order the board's list and the Feature page's tabs read the epics in
+const listed = (): readonly EpicCard[] =>
+  [...cards()].sort((one, other) => rankOf(one) - rankOf(other));
+
+export { columns, epicOf, listed, ticketLineOf };

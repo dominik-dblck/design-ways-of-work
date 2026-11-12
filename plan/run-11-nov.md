@@ -743,3 +743,10 @@ Each call: what, why, how to undo. None changes what the PM sees.
   path `legacy/legacy/…`, as the mention pass met the old path inside the import already rewritten. A path whose
   new lead already stands before it is left as moved; a test holds the case. Seen in c7098cd, where the import
   left with the retired part. Undo: revert it.
+- b153673..1683f09 carried (this commit), on eagle-design's views/feature before its main takes it, by the
+  order agreed with it: the epics listed closed first, deferred last; the board's numbers in two cards, the
+  project counted from the spec and the repository from the receipts; a line cut at middle dots keeps its
+  brackets whole (`textPoints.ts`, read by the notes and the contract's bodies); the ids typed, written by
+  `tools/ids.ts` at the build; the frontend epic's prototype reader to legacy/. 23 `CARRIED` rows at
+  1683f09's blobs. The contract gains `sheet/contract/events.ts`. Tried on the gate's clone: lint, format,
+  file names, the app tests; tsc lacks only the findings' `open`, which the trunk brings. Undo: revert it.

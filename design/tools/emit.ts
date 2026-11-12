@@ -7,6 +7,7 @@ import type { DocumentFile } from '../docs/documents/documentTypes.ts';
 import type { RuleFile } from '../docs/rules/ruleTypes.ts';
 import type { SkillFile } from '../docs/skills/skillTypes.ts';
 import { withContents } from './emit/documentContents.ts';
+import { idsText } from './ids.ts';
 import { emitted, ROOT } from './layout.ts';
 import { tokensText } from './tokens.ts';
 import type { Emitted } from './layout.ts';
@@ -118,7 +119,7 @@ function printed(one: Emitted, exported: unknown): string {
   return rulesMarkdown(exported);
 }
 
-// [the file, its text] for each module the layout lists, in its order, then the tokens
+// [the file, its text] for each module the layout lists, then the tokens and the ids
 async function emittedTexts(): Promise<readonly (readonly [string, string])[]> {
   const texts = await Promise.all(
     emitted().map(async (one) => {
@@ -129,7 +130,11 @@ async function emittedTexts(): Promise<readonly (readonly [string, string])[]> {
       return [one.fixture, printed(one, exported)] as const;
     }),
   );
-  return [...texts, ['app/styles/tokens.ts', tokensText()]];
+  return [
+    ...texts,
+    ['app/styles/tokens.ts', tokensText()],
+    ['roadmaps/ids.ts', idsText()],
+  ];
 }
 
 export { emittedTexts };

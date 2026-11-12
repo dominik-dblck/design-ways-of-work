@@ -1,9 +1,9 @@
 /**
  * - `prototypeOf` · how many of an epic's prototype components ship, and why
  */
-import type { epics as EPICS } from '../../../roadmaps/backlog.ts';
-import { BOARD_WORDS } from './boardWords.ts';
-import type { Section } from './boardTypes.ts';
+import type { epics as EPICS } from '../../../../../design/roadmaps/backlog.ts';
+import { BOARD_WORDS } from '../../../../../design/app/workspace/boardView/boardWords.ts';
+import type { Section } from '../../../../../design/app/workspace/boardView/boardTypes.ts';
 
 type Epic = (typeof EPICS)[number];
 type Group = NonNullable<Epic['components']>[number];

@@ -60,16 +60,6 @@ const ENDPOINT_FOLDS: readonly Carried[] = [
     how: 'design/app/workspace/contractView/contractWords.ts names blockModel.ts, holds no sample, and words the folds',
   },
   {
-    file: 'app/workspace/feature-view.ts',
-    blob: '4e92aa89e52a699141e63e1d0427bb35172b3f40',
-    how: 'design/app/workspace/featureView.ts: every epic a tab, the notebook by notesViewOf, no refine standing',
-  },
-  {
-    file: 'app/workspace/feature-view/featureNotes.ts',
-    blob: '796140d57a3bf358029340e7e297b06c25a56f53',
-    how: 'design/app/workspace/featureView/featureNotes.ts: a point never ends inside a bold span either, where E10’s Postmark decision split in two',
-  },
-  {
     file: 'app/workspace/feature-view/featureTypes.ts',
     blob: 'e0c418266e4b9fb8dc0a83ba83124ba1d69826f3',
     how: 'design/app/workspace/featureView/featureTypes.ts, the notebook’s types, no steps',
@@ -88,11 +78,6 @@ const ENDPOINT_FOLDS: readonly Carried[] = [
     file: 'docs/skills/publish.ts',
     blob: '82d099db13348264025659fabc9503d1d3a25957',
     how: 'design/docs/skills/publish.ts, word for word: the module maps go with any bundle',
-  },
-  {
-    file: 'docs/skills/refine.ts',
-    blob: '29fc8a8a9de04709c4ebb8125722a460b78d074c',
-    how: 'design/docs/skills/refine.ts, word for word: no status row to move before the feature ticket',
   },
   {
     file: 'tests/app/featureView.test.ts',

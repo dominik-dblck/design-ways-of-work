@@ -12,9 +12,11 @@ import {
   ideas,
   kinds,
   nextUp,
+  progress,
   stats,
   ticketDetailOf,
   velocity,
+  words,
 } from '../../app/workspace/boardView.ts';
 
 describe('the board view', () => {
@@ -86,16 +88,22 @@ describe('the board view', () => {
     expect(first?.sections.at(-1)?.lines).toEqual(idea?.questions);
   });
 
-  it('an epic with prototype components says how many ship', () => {
-    const drawn = cards.filter((card) => card.prototype.length);
-    expect(drawn.length).toBe(epics.filter((one) => one.components).length);
-    for (const card of drawn) expect(card.prototype[0]?.label).toMatch(/→/);
-  });
-
   it('a ticket opened carries each edge with its options, and every kind its line', () => {
     const edged = allTickets().find((one) => one.edges.length > 0);
     const opened = ticketDetailOf(edged?.id ?? '');
     expect(opened?.edgeSections.length).toBe(edged?.edges.length);
     expect(kinds().length).toBeGreaterThan(5);
+  });
+
+  it('the list reads the closed epics first, then the MVP still open, then after it, the deferred last', () => {
+    const rows = progress().rows;
+    const rankOf = (row: (typeof rows)[number]): number => {
+      if (row.column === 'done') return 0;
+      if (row.mvp) return 1;
+      return row.badge === words.badges.later ? 2 : 3;
+    };
+    const ranks = rows.map(rankOf);
+    expect(ranks).toEqual([...ranks].sort((one, other) => one - other));
+    expect(new Set(rows.map((row) => row.id)).size).toBe(cards.length);
   });
 });

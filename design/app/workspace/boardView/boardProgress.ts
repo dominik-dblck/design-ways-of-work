@@ -2,7 +2,7 @@
  * - `progress` · every epic's tickets by column, the MVP's whole, the line on top
  */
 import { columns as COLUMNS } from '../../../roadmaps/tickets.ts';
-import { cards } from './boardEpics.ts';
+import { listed } from './boardEpics.ts';
 import { featureHrefOf } from './boardLinks.ts';
 import { BOARD_WORDS } from './boardWords.ts';
 import type { ColumnId, EpicCard } from './boardTypes.ts';
@@ -46,7 +46,7 @@ const rowOf = (card: EpicCard): ProgressRow => ({
 });
 
 function progress(): Progress {
-  const rows = cards().map(rowOf);
+  const rows = listed().map(rowOf);
   const mvp = rows.filter((row) => row.mvp);
   const counts = mvp.map((row) => row.counts).reduce(add, NONE);
   const total = mvp.reduce((sum, row) => sum + row.total, 0);

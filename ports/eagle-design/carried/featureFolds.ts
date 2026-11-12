@@ -10,16 +10,6 @@ const FEATURE_FOLDS: readonly Carried[] = [
     how: 'design/app/components/organisms/BoardPage/components/BoardPageBarLegend.tsx reads barColourOf from design/app/theme/tones.ts',
   },
   {
-    file: 'app/pages/board/BoardPage.tsx',
-    blob: '8fbc70d828eac6d4dc31816d989af4652b4f5583',
-    how: 'design/app/components/organisms/BoardPage/BoardPage.tsx: the columns and kinds folded, BoardPagePortsSection, BoardPageContractSection drawing the ContractBody organism',
-  },
-  {
-    file: 'app/pages/board/EpicPanel.tsx',
-    blob: 'c4dbec11d87fc8f7db165de65c690b237706d5b7',
-    how: 'design/app/components/organisms/BoardPage/components/BoardPageEpicHead.tsx: the button to the epic’s Feature page, its pick remembered',
-  },
-  {
     file: 'app/pages/board/EpicProgress.tsx',
     blob: '21556927db6545dcbc58cea37ec457b317f705de',
     how: 'design/app/components/organisms/BoardPage/components/BoardPageEpicProgress.tsx: no handler, each row a link',
@@ -48,16 +38,6 @@ const FEATURE_FOLDS: readonly Carried[] = [
     file: 'app/pages/board/StackedBar.tsx',
     blob: '422b1b0c88b175de0f6bd161770161fb1b84de80',
     how: 'design/app/components/organisms/BoardPage/components/BoardPageStackedBar.tsx reads barColourOf from design/app/theme/tones.ts',
-  },
-  {
-    file: 'app/pages/board/StatRow.tsx',
-    blob: '3ee5a07668359bfd6b00469be88538121568c405',
-    how: 'design/app/components/organisms/BoardPage/components/BoardPageStatRow.tsx: a row from sm, closer',
-  },
-  {
-    file: 'app/pages/board/StatTile.tsx',
-    blob: '1abdc73f3c1ba6fd5dab7c7cbc80a447887595bf',
-    how: 'design/app/components/organisms/BoardPage/components/BoardPageStatTile.tsx: small, the number beside its label',
   },
   {
     file: 'app/pages/board/TicketPanel.tsx',
@@ -165,34 +145,14 @@ const FEATURE_FOLDS: readonly Carried[] = [
     how: 'design/app/theme/theme.ts, word for word',
   },
   {
-    file: 'app/workspace/board-view.ts',
-    blob: '8fc207388ed2ff506608150e4cd0ba934d49c02a',
-    how: 'design/app/workspace/boardView.ts exports cards, featureHrefOf, boardHref and pickedEpic; open retires',
-  },
-  {
     file: 'app/workspace/board-view/boardAside.ts',
     blob: '0b79305916c675ec0941dae4e548ec1eebb06d3d',
     how: 'design/app/workspace/boardView/boardAside.ts, word for word',
   },
   {
-    file: 'app/workspace/board-view/boardLinks.ts',
-    blob: 'fe3b41465b21fc19446ffb660d4ebbd40f0f6525',
-    how: 'design/app/workspace/boardView/boardLinks.ts, word for word',
-  },
-  {
-    file: 'app/workspace/board-view/boardProgress.ts',
-    blob: '964be5e22b3f1f7cf9b8ae6677754e7ba6495f78',
-    how: 'design/app/workspace/boardView/boardProgress.ts, word for word',
-  },
-  {
     file: 'app/workspace/board-view/boardProgressTypes.ts',
     blob: '8f245932ecd967ec199f9410f9a9c6496282a279',
     how: 'design/app/workspace/boardView/boardProgressTypes.ts, word for word',
-  },
-  {
-    file: 'app/workspace/board-view/boardWords.ts',
-    blob: '8265c666d6d1e8add2b3a5a71b20d0a8eb5fe769',
-    how: 'design/app/workspace/boardView/boardWords.ts, word for word',
   },
   {
     file: 'app/workspace/feature-view/featureJourneys.ts',

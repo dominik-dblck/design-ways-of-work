@@ -10,7 +10,6 @@ import {
   ideas,
   nextUp,
   progress,
-  stats,
   velocity,
   words,
 } from '../../../workspace/boardView.ts';
@@ -30,7 +29,6 @@ import { BoardPageVelocityPanel } from './components/BoardPageVelocityPanel.tsx'
 function BoardPage(): ReactElement {
   const board = useMemo(
     () => ({
-      stats: stats(),
       progress: progress(),
       next: nextUp(),
       columns: columns(),
@@ -41,10 +39,10 @@ function BoardPage(): ReactElement {
   );
   const opened = useBoardPageOpened();
   return (
-    <Container maxWidth="xl" sx={{ py: 5.5 }}>
+    <Container maxWidth="xl" sx={{ pt: 2, pb: 5.5 }}>
       <Stack spacing={4.5}>
         <BoardPageHead />
-        <BoardPageStatRow stats={board.stats} />
+        <BoardPageStatRow />
         <BoardPageEpicProgress progress={board.progress} />
         <BoardPageNextUp tickets={board.next} onTicket={opened.openTicket} />
         <BoardPageVelocityPanel pace={board.pace} />

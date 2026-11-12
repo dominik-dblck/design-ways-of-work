@@ -4,6 +4,7 @@
  */
 import { bodyDrafts } from '../../../sheet/contract/commands.ts';
 import type * as QUERIES from '../../../sheet/contract/queries.ts';
+import { pointsOf } from '../textPoints.ts';
 import { DRAFT_CLOSE, DRAFT_OPEN, UNTYPED } from './codeLines.ts';
 import type { EndpointState, BodyField } from './contractTypes.ts';
 
@@ -35,8 +36,7 @@ function commandField(part: string): BodyField {
 
 function commandFields(body: string): Fields {
   const text = body.trim();
-  const fields =
-    text === '—' ? [] : text.split(/(?<!\s)\s+·\s+/).map(commandField);
+  const fields = text === '—' ? [] : pointsOf(text).map(commandField);
   return { state: stateOf(fields), fields };
 }
 

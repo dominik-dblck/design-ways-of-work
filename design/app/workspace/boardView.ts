@@ -1,11 +1,13 @@
 /**
- * - `words`, `stats`, `nextUp`, `velocity`, `ideas`, `ports`, `kinds` · the parts
- * - `cards`, `columns`, `progress`, `epicOf`, `ticketDetailOf` · epics, list, one
- * - `featureHrefOf`, `boardHref`, `pickedEpic` · the links, the epic last picked
+ * - `words`, `stats`, `project`, `repository`, `nextUp`, `velocity` · the numbers
+ * - `listed`, `columns`, `progress`, `epicOf`, `ticketDetailOf` · epics, list, one
+ * - `ideas`, `ports`, `kinds`, `featureHrefOf`, `boardHref`, `pickedEpic` · links
  */
 export { kinds, ports } from './boardView/boardAside.ts';
-export { cards, columns, epicOf } from './boardView/boardEpics.ts';
+export { columns, epicOf, listed } from './boardView/boardEpics.ts';
 export { progress } from './boardView/boardProgress.ts';
+export { project } from './boardView/boardProject.ts';
+export { repository } from './boardView/boardRepository.ts';
 export { ideas } from './boardView/boardIdeas.ts';
 export {
   BOARD_HREF as boardHref,
@@ -20,6 +22,7 @@ export type {
   Column,
   EpicCard,
   IdeaCard,
+  ProjectStat,
   Reading,
   Section,
   Stat,
