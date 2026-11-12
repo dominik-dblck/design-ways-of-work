@@ -92,6 +92,14 @@ describe("a moved file's imports and paths follow it", () => {
     ).toBe('tools/b.ts, design/tools/b.ts, mytools/a.ts, tools/a.tsx');
   });
 
+  it('a path moved under a new lead, as its import already reads, is not led twice', () => {
+    expect(
+      mentioned("from '../../legacy/app/a.ts'; app/a.ts", [
+        { from: 'app/a.ts', to: 'legacy/app/a.ts' },
+      ]),
+    ).toBe("from '../../legacy/app/a.ts'; legacy/app/a.ts");
+  });
+
   it("a root's barrel names its component", () => {
     expect(barrelOf(ROOT)).toContain("export { Chip } from './Chip.tsx';");
   });

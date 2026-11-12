@@ -739,3 +739,7 @@ Each call: what, why, how to undo. None changes what the PM sees.
 - The gate on c7098cd: 3 differences unexplained. The tag's feature view reads `roadmaps/features.ts`, which
   eagle-design's main retired, so the tag's export lint fails and this commit's passes; the publish skill's new
   sentence writes its SKILL.md again. Rows say so, and the pages' rows name the folds. Undo: revert the rows.
+- `move.ts` led a retired file's importer twice (this commit): moving a file to `legacy/` wrote its importer's
+  path `legacy/legacy/…`, as the mention pass met the old path inside the import already rewritten. A path whose
+  new lead already stands before it is left as moved; a test holds the case. Seen in c7098cd, where the import
+  left with the retired part. Undo: revert it.

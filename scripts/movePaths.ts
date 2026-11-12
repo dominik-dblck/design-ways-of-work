@@ -73,16 +73,20 @@ function importsMoved(
   );
 }
 
+// a path moved under a new lead (`legacy/` and its old path) reads as moved already wherever that lead stands before it
+const leadOf = ({ from, to }: Move): string =>
+  to.endsWith(from) ? `(?<!${escaped(to.slice(0, -from.length))})` : '';
+
 // an exact path, never a longer name holding it: `tools/a.ts` in `design/tools/a.ts` is the same file; a folder's `a/` leads a path
 const mentioned = (text: string, moves: readonly Move[]): string =>
   moves.reduce(
-    (now, { from, to }) =>
+    (now, move) =>
       now.replace(
         new RegExp(
-          `(?<![\\w.-])${escaped(from)}${from.endsWith('/') ? '' : '(?![\\w-])'}`,
+          `(?<![\\w.-])${leadOf(move)}${escaped(move.from)}${move.from.endsWith('/') ? '' : '(?![\\w-])'}`,
           'g',
         ),
-        to,
+        move.to,
       ),
     text,
   );
