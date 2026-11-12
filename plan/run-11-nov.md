@@ -853,3 +853,7 @@ Each call: what, why, how to undo. None changes what the PM sees.
   own session after its audit fix; meanwhile task 8's skeleton starts (`examples/sample-product`: its package,
   scope, `product.ts`, the contract's registries, its stack), its pages after the theme lands. Undo: the
   skeleton's commits reverted, task 8 starts after task 7 closes.
+- Eagle-design approved the sample's way, with two guards. A migration names the files a home holds from its
+  release on (`homed`): untracked, left on disk, the take writes them back; refused, naming the file, when a
+  copy's text is not the home's, so an edit is never lost. The readiness checks leave `migrated.ts` for
+  `migrationReady.ts`. Undo: revert it.

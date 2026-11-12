@@ -7,7 +7,8 @@ import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { keptIn } from './keptWords.ts';
-import { importsMoved } from './movePaths.ts';
+import { assertReady, rewrites } from './migrationReady.ts';
+import type { Following, Git } from './migrationReady.ts';
 import type { Migration } from './migrationTypes.ts';
 import { childEnv } from './scratch.ts';
 
@@ -18,10 +19,6 @@ interface Migrating {
   readonly migration: Migration;
 }
 
-type Git = (args: readonly string[]) => string;
-
-const CODE = /\.(ts|tsx|mts)$/;
-
 const treeFiles = (folder: string): readonly string[] =>
   fs
     .readdirSync(folder, { recursive: true, withFileTypes: true })
@@ -29,34 +26,6 @@ const treeFiles = (folder: string): readonly string[] =>
     .map((entry) =>
       path.relative(folder, path.join(entry.parentPath, entry.name)),
     );
-
-interface Following {
-  readonly git: Git;
-  readonly moves: Migration['moves'];
-}
-
-interface Rewrite {
-  readonly now: string;
-  readonly after: string;
-}
-
-// each code file whose relative imports read otherwise around the moves, read where it stands now
-function rewrites(root: string, { git, moves }: Following): readonly Rewrite[] {
-  if (moves.length === 0) return [];
-  const forward = new Map(moves.map(([from, to]) => [from, to]));
-  const back = new Map(moves.map(([from, to]) => [to, from]));
-  const isBarrelled = (folder: string): boolean =>
-    fs.existsSync(path.join(root, folder, 'index.ts'));
-  return git(['ls-files', '-z'])
-    .split('\0')
-    .filter((now) => CODE.test(now))
-    .flatMap((now) => {
-      const text = fs.readFileSync(path.join(root, now), 'utf8');
-      const file = back.get(now) ?? now;
-      const after = importsMoved(text, { file, moves: forward, isBarrelled });
-      return after === text ? [] : [{ now, after }];
-    });
-}
 
 // a version is numbers and dots: a pre-release would order by nothing
 function partsOf(version: string): readonly number[] {
@@ -79,49 +48,6 @@ function isBefore(one: string, other: string): boolean {
 
 const isDue = (migration: Migration, pinned: string): boolean =>
   isBefore(pinned, migration.release);
-
-// a tracked file gone from the disk, and each file it removes or moves that git or the disk lacks
-function absentIn(
-  root: string,
-  { git, migration }: { readonly git: Git; readonly migration: Migration },
-): readonly string[] {
-  const tracked = new Set(git(['ls-files', '-z']).split('\0'));
-  const deleted = git(['ls-files', '--deleted', '-z']).split('\0');
-  const taken = [
-    ...migration.removes,
-    ...migration.moves.map(([from]) => from),
-  ].filter(
-    (file) => !tracked.has(file) || !fs.existsSync(path.join(root, file)),
-  );
-  return [...new Set([...deleted.filter(Boolean), ...taken])];
-}
-
-// before anything moves: the checkout whole, and no notebook, kept as written, importing what moves
-function assertReady(
-  root: string,
-  {
-    git,
-    migration,
-    isNotebook,
-  }: {
-    readonly git: Git;
-    readonly migration: Migration;
-    readonly isNotebook: (file: string) => boolean;
-  },
-): void {
-  const absent = absentIn(root, { git, migration });
-  if (absent.length > 0)
-    throw new Error(
-      `the checkout lacks what the migration takes, so nothing moved: ${absent.join(', ')}`,
-    );
-  const pinning = rewrites(root, { git, moves: migration.moves })
-    .map(({ now }) => now)
-    .filter(isNotebook);
-  if (pinning.length > 0)
-    throw new Error(
-      `a notebook keeps its words and imports what the migration moves, so nothing moved: ${pinning.join(', ')}`,
-    );
-}
 
 // the files whose imports follow the moves, written; what a product keeps as written is left
 function followed(
@@ -167,10 +93,11 @@ function migrated({ root, wow, migration }: Migrating): string {
       encoding: 'utf8',
       stdio: ['ignore', 'pipe', 'pipe'],
     });
-  const { removes, moves, tree } = migration;
+  const { removes, moves, tree, homed = [] } = migration;
   const { isKept, isNotebook } = keptIn(root);
-  assertReady(root, { git, migration, isNotebook });
+  assertReady({ root, wow, git, migration, isNotebook });
   for (const file of removes) git(['rm', '-q', '--', file]);
+  for (const file of homed) git(['rm', '-q', '--cached', '--', file]);
   for (const [from, to] of moves) {
     fs.mkdirSync(path.dirname(path.join(root, to)), { recursive: true });
     git(['mv', '--', from, to]);
@@ -187,7 +114,7 @@ function migrated({ root, wow, migration }: Migrating): string {
   }
   if (changed.length + written.length > 0)
     git(['add', '--', ...changed, ...written]);
-  return `${String(removes.length)} removed, ${String(moves.length)} moved, ${String(rewritten.length)} following, ${String(migration.edits?.length ?? 0)} edited, ${String(written.length)} written`;
+  return `${String(removes.length)} removed, ${String(moves.length)} moved, ${String(rewritten.length)} following, ${String(migration.edits?.length ?? 0)} edited, ${String(written.length)} written, ${String(homed.length)} homed`;
 }
 
 interface Due {

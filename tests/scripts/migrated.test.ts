@@ -100,7 +100,9 @@ describe('a migration moves files of a repository, and their imports follow', ()
   });
 
   it('it says how many moved, followed and were edited', () => {
-    expect(said).toBe('0 removed, 2 moved, 2 following, 2 edited, 0 written');
+    expect(said).toBe(
+      '0 removed, 2 moved, 2 following, 2 edited, 0 written, 0 homed',
+    );
   });
 
   it('an edit whose text is not there once, or not there at all, stops the migration', () => {
@@ -214,7 +216,7 @@ describe('a repository takes each migration its pin is before, in release order'
       }),
     ).toEqual([
       "migrated · nothing: its pin, v0.9.0, took v0.9.0's",
-      'migrated · 0 removed, 1 moved, 0 following, 0 edited, 0 written, for v0.10.0',
+      'migrated · 0 removed, 1 moved, 0 following, 0 edited, 0 written, 0 homed, for v0.10.0',
     ]);
     expect(fs.existsSync(path.join(clone.root, 'b.ts'))).toBe(true);
   });
@@ -223,5 +225,46 @@ describe('a repository takes each migration its pin is before, in release order'
     expect(
       migratedDue({ root: clone.root, wow, migrations: [], pinned: '0.9.0' }),
     ).toEqual(['migrated · nothing: the release in hand asks none']);
+  });
+});
+
+describe('a file a home holds from a release on leaves the repository’s index, kept on disk', () => {
+  const clone = scratchRepo({ base, name: 'homed' });
+  const home = path.join(base, 'homing');
+  const typesAt = 'roadmaps/edges/edgeTypes.ts';
+  const types = 'export type Edge = string;\n';
+  fs.mkdirSync(path.join(home, 'design', 'roadmaps', 'edges'), {
+    recursive: true,
+  });
+  fs.writeFileSync(path.join(home, 'design', typesAt), types);
+  clone.committed(NOTEBOOK_REGISTRY.file, NOTEBOOK_REGISTRY.text);
+  const homing = (): string =>
+    migrated({
+      root: clone.root,
+      wow: home,
+      migration: {
+        release: '0.1.0',
+        removes: [],
+        moves: [],
+        homed: [typesAt],
+        tree: null,
+      },
+    });
+
+  it('a copy that differs from the home is refused, nothing moved', () => {
+    clone.committed(typesAt, 'export type Edge = number;\n');
+    expect(homing).toThrow(
+      `a file a home now holds differs from the home, so nothing moved: ${typesAt}`,
+    );
+    expect(clone.git(['ls-files', typesAt])).toBe(typesAt);
+  });
+
+  it('a copy that is the home’s leaves the index and stays on disk', () => {
+    clone.committed(typesAt, types);
+    expect(homing()).toBe(
+      '0 removed, 0 moved, 0 following, 0 edited, 0 written, 1 homed',
+    );
+    expect(clone.git(['ls-files', typesAt])).toBe('');
+    expect(fs.readFileSync(path.join(clone.root, typesAt), 'utf8')).toBe(types);
   });
 });

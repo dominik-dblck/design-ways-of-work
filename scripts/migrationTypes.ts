@@ -17,6 +17,8 @@ interface Migration {
   readonly removes: readonly string[];
   // its files that move, each from and to, at its paths: every relative import follows
   readonly moves: readonly (readonly [string, string])[];
+  // its files a home holds from this release on, at the same paths: untracked, left on disk; refused unless the home's text
+  readonly homed?: readonly string[];
   // its texts written again, read after the imports followed the moves
   readonly edits?: readonly MigrationEdit[];
   // a folder here whose files are written there at the same paths, or none
