@@ -11,7 +11,7 @@ import { PRINCIPLES } from './plans/principleRules.ts';
 import { CHECKLIST_CITES, TICKET_CHECKLIST } from './plans/checklistRules.ts';
 import { REFINE_STEPS } from './plans/refineSteps.ts';
 
-// the generic rules (D31), principles first: those both sides apply
+// the generic rules (W59), principles first: those both sides apply
 const RULES: readonly RuleRow[] = [
   ...PRINCIPLES,
   ...DESIGN_RULES,

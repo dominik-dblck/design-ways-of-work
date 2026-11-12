@@ -1,10 +1,17 @@
 /**
- * - `DECISIONS` · the PM's decisions on how this repository works, by number
+ * - `DECISIONS` · the PM's decisions on how the way of working works, by number
+ * - its own first, then those a design product took first (`taken/`), W32 on
  * - a product's own decisions stand in that product; a rule stands in `CLAUDE.md`
  */
+import { PLAN } from './taken/plan.ts';
+import { REPOSITORY } from './taken/repository.ts';
+import { RESTRUCTURE } from './taken/restructure.ts';
+import { ROUND } from './taken/round.ts';
+import { SYNC } from './taken/sync.ts';
+import { TYPESCRIPT } from './taken/typescript.ts';
 import type { Decision } from '../scripts/decisionTypes.ts';
 
-const DECISIONS: readonly Decision[] = [
+const OWN: readonly Decision[] = [
   {
     id: 'W1',
     title: 'the way of working keeps its own rules',
@@ -222,6 +229,17 @@ const DECISIONS: readonly Decision[] = [
     says: 'the release that brings the work-mode hook’s source here byte-equal to the installed one, tested and installed by script, goes out under W30; a change to what the hook does (its modes, what it holds for the PM) still waits for the PM’s word (W29).',
     from: 'plan/run-11-nov.md',
   },
+];
+
+// a product's rows keep their words of the day and their order, each naming the row it was
+const DECISIONS: readonly Decision[] = [
+  ...OWN,
+  ...REPOSITORY,
+  ...TYPESCRIPT,
+  ...RESTRUCTURE,
+  ...ROUND,
+  ...SYNC,
+  ...PLAN,
 ];
 
 export { DECISIONS };

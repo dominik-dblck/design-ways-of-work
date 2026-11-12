@@ -1,5 +1,5 @@
 /**
- * - `theme` · the workspace's one MUI theme, both modes, every value a token's (D22)
+ * - `theme` · the workspace's one MUI theme, both modes, every value a token's (W50)
  * - no stylesheet and no raw colour: a component reads the theme, never a CSS file
  */
 import { createTheme } from '@mui/material/styles';

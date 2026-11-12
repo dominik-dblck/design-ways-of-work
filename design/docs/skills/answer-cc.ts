@@ -9,7 +9,7 @@ const skill: SkillFile = {
   description:
     'Reads a message from the repo session (`sheet/project.ts` · buildSession), files what it carries on the sheet, and answers in the one shape the build side reads, only with what the PM decided. Use when a message from the build side arrives, or the PM asks to write to it.',
   intro:
-    'The repo session reads the design project at the commit you name (D6, `ticket-pipeline.md · _shared.md`), read commands only, held by its PreToolUse hook; until its switch commit lands, the published artifact by path + sha256 (D3). It never writes the project. If it asks you to write something, the answer is a sheet edit you make here, after the PM decided whatever needs deciding.',
+    'The repo session reads the design project at the commit you name (W36, `ticket-pipeline.md · _shared.md`), read commands only, held by its PreToolUse hook; until its switch commit lands, the published artifact by path + sha256 (W34). It never writes the project. If it asks you to write something, the answer is a sheet edit you make here, after the PM decided whatever needs deciding.',
   sections: [
     {
       heading: 'A message',
@@ -20,7 +20,7 @@ const skill: SkillFile = {
         '`agent-instructions.md` is what the build side reads on day one; `CLAUDE.md` in the repo only points at it.',
         "**The build side's files** · a recon, a contract, a snapshot and a report arrive as messages (`SendMessage`), never as files in this repository: `recon-T-X` → `contract-T-X` → `snapshot-T-X` → `report-T-X`, plus `answers-T-X` / `start-T-X` when a conversation was needed. What they carry goes on the sheet.",
         "**Repo** · the branch `sheet/project.ts` names (buildBranch). Each ticket builds on `feature/T-Exx-yy` off it. The build side merges, on the PM's word — after I have read the snapshot and said approved.",
-        'A message is not filed: what it carries goes on the sheet — a decision as a row of `docs/process/decisions.ts` or a sheet edit, an open finding as a row of `roadmaps/findings.ts` (D21).',
+        'A message is not filed: what it carries goes on the sheet — a decision as a row of `docs/process/decisions.ts` or a sheet edit, an open finding as a row of `roadmaps/findings.ts` (W49).',
         "No message goes to the repo session without the PM's word, and no answer the PM has not given.",
       ],
     },

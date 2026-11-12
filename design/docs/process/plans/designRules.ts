@@ -1,10 +1,10 @@
 /**
  * - `DESIGN_RULES`, `DesignKey` · the design side’s rules, the checklist apart
- * - a generic group (D31): it holds for every product, cited as rule:{id}
+ * - a generic group (W59): it holds for every product, cited as rule:{id}
  */
 import type { RuleRow } from './plansTypes.ts';
 
-// each row: the rule in general words, and one sentence of the cost it avoids (D27)
+// each row: the rule in general words, and one sentence of the cost it avoids (W55)
 export const DESIGN_RULES = [
   { id: 'screen-lands-with-its-data', says: 'A screen lands with the feature that gives it its data, not with a last UI epic. It may come early when everything it shows is read from a query that exists and no button on it needs a rule to grey it; until then a control a role may not use is greyed or left out (rule:greyed-or-hidden-per-control) and the API refuses the rest. An early screen is a ticket in its feature, its criteria read off the wireframe against the spec (rule:wireframe-read-against-spec), its tests in the app project.', why: 'The seam a screen finds, a field the API does not answer or an order the list does not promise, is found the day the endpoint lands, and the PM can try the domain without curl.' },
   { id: 'grep-the-old-sentence', says: 'What a field holds is checked against every sentence that describes it, by its contents, never by the type name: a decision that changes what a field holds is followed, the same turn, by a grep for the phrase that described the old contents, and a criterion that says what a field contains is checked the same way before READY, across every file that carries prose (the glossary, the backlog’s stories, the model’s comments, ticket criteria).', why: 'A grep for the type name (rule:grep-the-contract-for-types) sees catalogs, and drift in what a field holds lives in sentences.' },

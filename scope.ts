@@ -174,7 +174,30 @@ const scope: RepoScope = {
     computed: [],
     reviewed: ['cowork'],
     onPurpose: [],
-    alsoIn: [],
+    // a product's decisions as taken, the PM's own words quoted in Polish
+    alsoIn: [
+      {
+        language: 'pl',
+        files: ['decisions/taken/**', 'scope.ts'],
+        // his words as typed, an id's letters, an error's code, an acronym
+        words: [
+          'boarda',
+          'checki',
+          'contractu',
+          'dropdowna',
+          'ostylować',
+          'scrollować',
+          'Skille',
+          'templatem',
+          'ticketu',
+          'tooltipie',
+          'dblck',
+          'EPUSH',
+          'Lqei',
+          'SSOT',
+        ],
+      },
+    ],
   },
 };
 

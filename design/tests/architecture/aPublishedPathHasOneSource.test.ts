@@ -1,5 +1,5 @@
 /**
- * - `tools/layout.ts`: each published path has one file in the repository (D18)
+ * - `tools/layout.ts`: each published path has one file in the repository (W46)
  * - a file's published path leads back to it, and no two files publish to one path
  */
 import { describe, expect, it } from 'vitest';

@@ -1,5 +1,5 @@
 /**
- * - `docs/rules/comments.md`: a rule or a checklist line carries no history (D27)
+ * - `docs/rules/comments.md`: a rule or a checklist line carries no history (W55)
  * - no date, ticket, criterion, attribution, stage, epic or finding code in its words or its why
  * - a skill's lines too, but for the stages, the words its process runs on
  */

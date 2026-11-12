@@ -7,7 +7,7 @@ const skill: SkillFile = {
   title: 'design-release · a release to the build side',
   description:
     "Releases a commit to the build side: the tag, the full sha and every file's sha256 in the message, and a commit that is never rewritten. Use when the PM says to release.",
-  intro: "A release goes out only with the PM's word (D6).",
+  intro: "A release goes out only with the PM's word (W36).",
   sections: [
     {
       heading: 'Steps',

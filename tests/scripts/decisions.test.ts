@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { DECISIONS } from '../../decisions/register.ts';
+import { CONSUMERS } from '../../ports/consumers.ts';
 import { HERE } from '../../scripts/repos.ts';
 
 const REPLACED = /replaces (W\d+)/;
@@ -13,12 +14,25 @@ describe("the register holds the PM's decisions as data", () => {
     );
   });
 
-  it('each names a note that is there, where his words stand', () => {
+  it('each names a note that is there, or the row of a product it was taken from', () => {
+    const products = new Set(CONSUMERS.map(({ name }) => name));
+    const isAProductRow = (from: string): boolean => {
+      const [product = '', row = ''] = from.split(' ');
+      return products.has(product) && /^D\d+$/.test(row);
+    };
     expect(
-      DECISIONS.filter(({ from }) => !fs.existsSync(path.join(HERE, from))).map(
-        ({ id, from }) => `${id} · ${from}`,
-      ),
+      DECISIONS.filter(
+        ({ from }) =>
+          !isAProductRow(from) && !fs.existsSync(path.join(HERE, from)),
+      ).map(({ id, from }) => `${id} · ${from}`),
     ).toEqual([]);
+  });
+
+  it('a product row is taken once', () => {
+    const taken = DECISIONS.map(({ from }) => from).filter((from) =>
+      / D\d+$/.test(from),
+    );
+    expect(taken).toEqual([...new Set(taken)]);
   });
 
   it('a decision that replaces another names one of the register, never itself', () => {

@@ -1,5 +1,5 @@
 /**
- * - `decisionsLine` · the decisions and open findings as data hold together (D21)
+ * - `decisionsLine` · the decisions and open findings as data hold together (W49)
  * - D1 on with no gap, a decision replaces only an earlier one, each finding once
  */
 import { lineOf } from './checkWorld.ts';

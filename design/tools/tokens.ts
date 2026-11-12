@@ -1,5 +1,5 @@
 /**
- * - `tokensText` · tokens.ts from design-system/ and productTokens.ts (D22)
+ * - `tokensText` · tokens.ts from design-system/ and productTokens.ts (W50)
  * - the faces, the element styles and reduced motion: no stylesheet read beside it
  * - a name the system and the product both declare is refused, never overridden
  */

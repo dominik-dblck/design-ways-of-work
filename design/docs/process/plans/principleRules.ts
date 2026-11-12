@@ -1,10 +1,10 @@
 /**
  * - `PRINCIPLES`, `PrincipleKey` · the rules both sides apply
- * - a generic group (D31): it holds for every product, cited as rule:{id}
+ * - a generic group (W59): it holds for every product, cited as rule:{id}
  */
 import type { RuleRow } from './plansTypes.ts';
 
-// each row: the rule in general words, and one sentence of the cost it avoids (D27)
+// each row: the rule in general words, and one sentence of the cost it avoids (W55)
 export const PRINCIPLES = [
   { id: 'spec-written-only-here', says: 'The specification is read where it sits and written only on the design side; a change to it is a conversation, not a commit. A ticket whose tests need a spec file as data names it and copies that one as a fixture, and nothing is copied on speculation.', why: 'A spec written from two places holds decisions nobody made in the conversation, and a copy taken on speculation drifts from its source.' },
   { id: 'ticket-id-is-a-name', says: 'A ticket id is a name, not a position. A ticket folded into another or dropped keeps its id as STATUS dropped, with one sentence saying where it went, and the tickets after it are never renumbered.', why: 'The id lives in dependencies, receipts, criteria, the repository’s folders and branch names on both sides, and a renumber has to reach every one of them.' },

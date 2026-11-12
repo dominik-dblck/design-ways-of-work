@@ -17,14 +17,14 @@ interface PlanPage {
   readonly purpose: string;
 }
 
-// a rule or a checklist line: its key says what it does, cited as rule:{id} (D29)
+// a rule or a checklist line: its key says what it does, cited as rule:{id} (W57)
 interface RuleRow {
   readonly id: string;
   readonly says: string;
   readonly why: string;
 }
 
-// a slot a product fills (D30): the question it answers, the homes that already hold it, its rules
+// a slot a product fills (W58): the question it answers, the homes that already hold it, its rules
 interface RuleSlot {
   readonly slot: 'domain' | 'product' | 'experience' | 'architecture' | 'quality';
   readonly asks: string;

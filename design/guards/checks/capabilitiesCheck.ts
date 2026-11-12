@@ -1,5 +1,5 @@
 /**
- * - `capabilitiesLine` · how the app works (D20): each pointer names a live export
+ * - `capabilitiesLine` · how the app works (W48): each pointer names a live export
  * - read by the sheet's grammar (`Tickets.filePointer`), each named bundle run
  */
 import { bareWorld, lineOf, loadAll } from './checkWorld.ts';

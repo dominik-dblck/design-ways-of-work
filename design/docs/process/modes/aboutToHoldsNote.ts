@@ -7,7 +7,7 @@ const ABOUT_TO_HOLDS_NOTE = {
   about:
     'The three ticket modes as data' +
     cite('modes.decided') +
-    ' · the ticket carries its mode as a chip (D19) · pipeline-cleanup.md moves it into ticket-pipeline.md for the agent',
+    ' · the ticket carries its mode as a chip (W47) · pipeline-cleanup.md moves it into ticket-pipeline.md for the agent',
   eyebrow: cite('modes.eyebrow'),
   source:
     'data · modes.ts · rendered here · in ticket-pipeline.md' +

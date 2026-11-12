@@ -6,12 +6,12 @@ reviewer reads only the rows marked `review`, the suite holds the rest. Adapted 
 `docs/rules/` at `359b2ac` (Q4 · A, D15): a row kept, narrowed to this project, or left out where the
 project has no such code.
 
-Each rule file is data (D21): `{concern}.ts` holds its rows, and `yarn build` writes `{concern}.md` from it
+Each rule file is data (W49): `{concern}.ts` holds its rows, and `yarn build` writes `{concern}.md` from it
 (`tools/emit.ts`), the table padded to its widest cell. Edit the `.ts`; the shared `aGeneratedFileIsAFreshEmit`
 fails on a hand-edited `.md`.
 
 Production code here is a hand-written `.ts` in a home of `tools/layout.ts` or under `tools/`, and a `.mjs` under `tools/`.
-A `.d.ts`, a test and a sheet file still in `.js` (the move to TypeScript, D12) are not.
+A `.d.ts`, a test and a sheet file still in `.js` (the move to TypeScript, W42) are not.
 
 The specification is data: a string of the sheet is its content and keeps its sources (a ticket id, an
 epic, a date, a decision). The rules below hold the code around that data, never the data's words.
@@ -26,7 +26,7 @@ epic, a date, a decision). The rules below hold the code around that data, never
 | `functions.md`      | every function                                              |
 | `types.md`          | every type                                                  |
 | `tests.md`          | every test and scan                                         |
-| `components.md`     | the React pages, once a page moves (D7)                     |
+| `components.md`     | the React pages, once a page moves (W37)                     |
 | `styling.md`        | the React pages' look                                       |
 | `checks.md`         | every rule: the tool that holds it, its gate, its scope     |
 | `constants.md`      | the React pages' words and values                           |
@@ -35,6 +35,6 @@ epic, a date, a decision). The rules below hold the code around that data, never
 
 1. **Types first** — `{home}/{name}/{area}Types.ts` (`types.md`)
 2. **The data and the rules over it** — parts in `{home}/{name}/`, each one job under 200 lines (`size.md`)
-3. **The entry** — `{home}/{name}.ts`, its named exports the API the build sets as the global (D14)
+3. **The entry** — `{home}/{name}.ts`, its named exports the API the build sets as the global (W44)
 4. **The header** — 1–3 bullets naming every exported value (`responsibility.md`)
 5. **The checks** — `yarn lint`, `yarn tsc`, `yarn test`, `yarn checks`

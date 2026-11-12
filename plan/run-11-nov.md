@@ -1071,3 +1071,14 @@ Each call: what, why, how to undo. None changes what the PM sees.
 - v0.12.0 out under W30: its tag on 5ffce8c, on the remote, at the first try (feature tier 274 s). Before it,
   the gate on ef48600 (seven differences, each expected) and the product's feature tier on the gate's clone,
   ten of ten. Task 14 closed: eagle-design approved each piece.
+- Task 15, the decisions split, on eagle-design's per-row reading (D1 to D95 on its `port/wow`): 72 rows are the
+  way of working's and join this register as W32 to W103 (`decisions/taken/`, one file per product rows file),
+  23 stay the product's. Each moved row keeps its words of the day, whole: eagle-design proposed rewording 20
+  and splitting 12 into rule and example, but a decision is the PM's word as he gave it, and rewording it would
+  change what he said; the homes' rules already hold the product-free wording. Each names the row it was
+  (`from: 'eagle-design D24'`, the register's test reads the product's name off `ports/consumers.ts`). The
+  product's row stays, its number, its words and every cite of it true, and names its row here (`heldBy`, a new
+  optional field of the home type): its decisions check asks D1 on with no gap. The homes' 72 cites of moved
+  rows are W ids now, by script; an id shown as an example and the two product rows a home cites (D15, D33) are
+  left. D96 to D101 are on eagle-design's `views/feature` alone, until the PM's fast-forward of its `main`:
+  their four of the way of working (D96, D97, D98, D99) join then. `HELD_BY` (0.13.0). Undo: revert it.

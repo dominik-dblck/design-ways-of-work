@@ -1,5 +1,5 @@
 /**
- * - `app/theme/theme.ts` (D22): every value the theme holds is a token's, both modes
+ * - `app/theme/theme.ts` (W50): every value the theme holds is a token's, both modes
  * - a MUI component renders under it, so the pages can start from it
  */
 import { Button } from '@mui/material';

@@ -1,6 +1,6 @@
 /**
  * - `rulesLine` · each rule and checklist line has a key that says what it does
- * - one key per row across both, kebab-case, a why of one sentence (D27, D29)
+ * - one key per row across both, kebab-case, a why of one sentence (W55, W57)
  */
 import { lineOf } from './checkWorld.ts';
 import * as PLANS from '../../docs/process/plans.ts';

@@ -1,5 +1,5 @@
 /**
- * - `newProject` · new-project.md as data: copy this project, fill, cut, check (D61)
+ * - `newProject` · new-project.md as data: copy this project, fill, cut, check (W82)
  */
 import type { DocumentFile } from './documentTypes.ts';
 
@@ -10,7 +10,7 @@ const newProject: DocumentFile = {
       heading: '# A new project from this one',
       lines: [
         '',
-        'The way of working travels as a copy of this repository (D28, D61): the rules, the checklist, the',
+        'The way of working travels as a copy of this repository (W56, W82): the rules, the checklist, the',
         'skills, the checks, the pages and the tools stay as they are; the product’s names are filled in',
         'again, and what is the product’s own is cut by hand. No tool writes the copy.',
         '',
@@ -33,7 +33,7 @@ const newProject: DocumentFile = {
         '- `sheet/project.ts` · the product, the company, the build side, both sessions, the build',
         '  repository, its branch and top paths, the tools its people know, the design system’s stylesheet.',
         '- `sheet/rules/` · the five slots, each file’s rows emptied, then written as the product is',
-        '  decided: domain, product, experience, architecture, quality (D30, D32).',
+        '  decided: domain, product, experience, architecture, quality (W58, W60).',
         '- `CLAUDE.md` · the design side’s role, named for the product; `package.json` · its `name`.',
         '- `docs/rules/README.md` · where the code rules were adapted from.',
         '',

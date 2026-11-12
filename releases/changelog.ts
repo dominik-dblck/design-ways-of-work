@@ -5,9 +5,10 @@
 import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
 const NEXT: Unreleased = {
-  kind: 'patch',
-  what: '',
-  action: 'none: move the pin to the tag',
+  kind: 'minor',
+  what: 'the decisions a design product took on how the way of working works stand in this register now, W32 to W103, each in its words of the day and naming the product’s row it was; the homes cite them by their W id; a product’s decision row may name the register’s row that holds it (`heldBy`)',
+  action:
+    'the migrations `ports/` names for the repository, on its checkout: `node scripts/migrate.ts <name> <checkout>`, run from this repository at the tag (for eagle-design, 72 of its decision rows gain `heldBy`, each keeping its words, its number and the cites that name it); the pin to the tag, then `yarn build`, its copies under `vendor/wow/` in the same commit',
   rules: { added: [], changed: [], removed: [] },
   outputs: {},
 };

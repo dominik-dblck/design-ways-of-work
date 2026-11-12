@@ -1,7 +1,7 @@
 /**
  * - `VENDOR`, `vendoredFiles` · the folder; the read files a take wrote
  * - `writeVendored` · each under vendor/wow/ at its own path, byte for byte
- * - a release's commit holds them, so the build side reads one sha (D6)
+ * - a release's commit holds them, so the build side reads one sha (W36)
  */
 import fs from 'node:fs';
 import path from 'node:path';

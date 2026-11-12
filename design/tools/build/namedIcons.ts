@@ -1,6 +1,6 @@
 /**
  * - `copyNamedIcons` · each lucide icon a source names, written from the package
- * - at lucide-icons/<name>.svg (D10); a name the package lacks fails the build
+ * - at lucide-icons/<name>.svg (W40); a name the package lacks fails the build
  */
 import fs from 'node:fs';
 import path from 'node:path';

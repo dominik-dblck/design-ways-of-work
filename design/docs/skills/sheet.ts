@@ -8,17 +8,17 @@ const skill: SkillFile = {
   description:
     "Edits the specification in this repository: where each file lives, what the build writes from data, the board's hand-written fields, one source of truth, and the checks after every change. Use when changing anything in `sheet/`, `roadmaps/`, `docs/`, `app/` or `guards/`.",
   intro:
-    'This repository is the source of truth (D5): the design project lives in the homes `tools/layout.ts` names (D18), and `yarn build` lays them out in `dist/project/` as the artifact holds them (`roadmaps/tickets.ts` here is `project/tickets.js` there). The PM edits nothing by hand: every change is made here.',
+    'This repository is the source of truth (W35): the design project lives in the homes `tools/layout.ts` names (W46), and `yarn build` lays them out in `dist/project/` as the artifact holds them (`roadmaps/tickets.ts` here is `project/tickets.js` there). The PM edits nothing by hand: every change is made here.',
   sections: [
     {
       heading: 'Where it lives',
       lead: null,
       first: null,
       lines: [
-        'No `.js` in git (D12): a sheet file is `{home}/{name}.ts`; `yarn build` writes `dist/project/` (outside git), which the checks run on and the artifact is published from.',
-        'The build side reads the sheet’s modules, `sheet/contract/blockModel.ts` and `app/styles/componentsSpec.ts` among them; the JSON it reads by blob is printed from the modules `sheet/project.ts` · `buildReads.json` names. The build writes `app/styles/tokens.ts` from `design-system/` and `app/styles/productTokens.ts` (`tools/tokens.ts`, D22), and each skill from `docs/skills/` (D25): edit the source, never what it writes. The markdown the build side reads is written the same way, byte for byte at its path: `ticket-pipeline.md` from `docs/documents/`, the product’s own documents (`agent-instructions.md`, `api-convention.md`) from the modules `buildReads.documents` names: edit the data, never the file.',
+        'No `.js` in git (W42): a sheet file is `{home}/{name}.ts`; `yarn build` writes `dist/project/` (outside git), which the checks run on and the artifact is published from.',
+        'The build side reads the sheet’s modules, `sheet/contract/blockModel.ts` and `app/styles/componentsSpec.ts` among them; the JSON it reads by blob is printed from the modules `sheet/project.ts` · `buildReads.json` names. The build writes `app/styles/tokens.ts` from `design-system/` and `app/styles/productTokens.ts` (`tools/tokens.ts`, W50), and each skill from `docs/skills/` (W53): edit the source, never what it writes. The markdown the build side reads is written the same way, byte for byte at its path: `ticket-pipeline.md` from `docs/documents/`, the product’s own documents (`agent-instructions.md`, `api-convention.md`) from the modules `buildReads.documents` names: edit the data, never the file.',
         "An epic's folder `roadmaps/EXX/` holds the epic whole: its notebook and its parts of the board's entries (`EXXTickets.ts`, `EXXEdges.ts`, `EXX…Receipts.ts`, each serving the entry its name ends with). A new epic's folder is started by `yarn new-epic EXX` once its backlog row stands: it writes the parts the folder lacks from `roadmaps/templates.ts` and lists each in its entry.",
-        'How the app works is `sheet/logic/capabilities.ts` (D20): per capability what it decides, its states, rules, walk and examples, each a pointer `{file}.js · {export}`; checks part a holds every pointer to a live export.',
+        'How the app works is `sheet/logic/capabilities.ts` (W48): per capability what it decides, its states, rules, walk and examples, each a pointer `{file}.js · {export}`; checks part a holds every pointer to a live export.',
         "`tools/` is this repository's tooling and is not published. `poc/` holds trials.",
       ],
     },
@@ -53,7 +53,7 @@ const skill: SkillFile = {
         "The checks read the top folder of `dist/project/` only, as Claude Design's run_script did.",
         '`guards/__snapshots__/guardMap.ts` is the guard map part a writes on every run: it moves only with a change that moves the map, and is committed and published with that change.',
         '`yarn spec-check` (`tools/specCheck.ts`) — `app/styles/componentsSpec.ts` holds together.',
-        'Every commit runs ESLint, tsc, the architecture tests and the checks (D23); a push runs every test.',
+        'Every commit runs ESLint, tsc, the architecture tests and the checks (W51); a push runs every test.',
       ],
     },
   ],

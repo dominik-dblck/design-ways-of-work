@@ -1,5 +1,5 @@
 /**
- * - the way of working names a role, never the product (D28)
+ * - the way of working names a role, never the product (W56)
  * - read in the generic rules and the skills' data, against `sheet/project.ts`
  */
 import { describe, expect, it } from 'vitest';
