@@ -140,6 +140,7 @@ describe('the gate tries the commit in hand on a repository that takes it', () =
       wow.committed(
         'ports/consumers.ts',
         portsOf({
+          release: '0.1.11',
           removes: ['package-lock.json'],
           moves: [['registry.txt', 'held/registry.txt']],
           tree: 'ports/product/tree',

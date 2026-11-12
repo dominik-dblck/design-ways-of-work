@@ -810,3 +810,8 @@ Each call: what, why, how to undo. None changes what the PM sees.
   lines, two GRIDs, `value` and an unprefixed flag, a written height) and the product's prettier; mended, the
   numbers' lines read in `utils/`, the share bar stretched in its own height as the stacked bar. The release's
   row: v0.5.0, the product's receipts export `RepositoryState`. Undo: revert it.
+- Gate on ddc9b7d against port/wow ac084f1, which took v0.4.0: it crashed running v0.4.0's migration a second
+  time (`git mv` of a file the first run moved). A migration now names the release that asks it, and the gate
+  and `migrate.ts` skip it on a pin at that release or later. Before anything moves, `migrated` asks that every
+  file it removes or moves stands in git and on disk, and refuses naming the absent ones (eagle-design's note,
+  after its first migrate stopped half way). Undo: revert it.

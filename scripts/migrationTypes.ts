@@ -11,6 +11,8 @@ interface MigrationEdit {
 }
 
 interface Migration {
+  // the release that asks it: a repository pinned there or later took it already
+  readonly release: string;
   // its files that leave its tree: a home holds them from this release on
   readonly removes: readonly string[];
   // its files that move, each from and to, at its paths: every relative import follows

@@ -25,6 +25,7 @@ describe('what the runs wrote in a clone, a migration left out', () => {
     root: clone.root,
     wow,
     migration: {
+      release: '0.1.0',
       removes: ['leaves.txt'],
       moves: [['moves.txt', 'held/moves.txt']],
       tree: 'tree',

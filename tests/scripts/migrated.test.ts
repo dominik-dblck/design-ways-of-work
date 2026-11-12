@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { afterAll, describe, expect, it } from 'vitest';
-import { migrated } from '../../scripts/migrated.ts';
+import { isDue, migrated } from '../../scripts/migrated.ts';
 import { scratchRepo } from './scratchRepo.ts';
 
 const base = fs.mkdtempSync(path.join(os.tmpdir(), 'wow-migrated-'));
@@ -29,6 +29,7 @@ describe('a migration moves files of a repository, and their imports follow', ()
     root: clone.root,
     wow,
     migration: {
+      release: '0.1.0',
       removes: [],
       moves: [
         ['logic/rows.ts', 'sheet/rows.ts'],
@@ -86,6 +87,7 @@ describe('a migration moves files of a repository, and their imports follow', ()
           root: clone.root,
           wow,
           migration: {
+            release: '0.1.0',
             removes: [],
             moves: [],
             edits: [
@@ -98,5 +100,41 @@ describe('a migration moves files of a repository, and their imports follow', ()
       expect(stopped(edit)).toThrow(
         'sheet/rows.ts: the edit’s text stands 0 times',
       );
+  });
+
+  it('a checkout that lacks a file the migration takes is refused before anything moves', () => {
+    const asked = (): string =>
+      migrated({
+        root: clone.root,
+        wow,
+        migration: {
+          release: '0.1.0',
+          removes: ['sheet/rows.ts'],
+          moves: [['logic/gone.ts', 'sheet/gone.ts']],
+          tree: null,
+        },
+      });
+    expect(asked).toThrow(
+      'the checkout lacks what the migration takes, so nothing moved: logic/gone.ts',
+    );
+    expect(fs.existsSync(path.join(clone.root, 'sheet/rows.ts'))).toBe(true);
+  });
+});
+
+describe('a migration is due on a repository pinned before its release', () => {
+  const asking = {
+    release: '0.4.0',
+    removes: [],
+    moves: [],
+    tree: null,
+  } as const;
+
+  it.each([
+    ['0.3.0', true],
+    ['0.4.0', false],
+    ['0.10.0', false],
+    ['0.3.12', true],
+  ])('pinned on %s, due: %s', (pinned, isAsked) => {
+    expect(isDue(asking, pinned)).toBe(isAsked);
   });
 });

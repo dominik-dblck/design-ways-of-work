@@ -1,6 +1,7 @@
 /**
  * - `migrated` · a checkout of a repository made ready for the release in hand
  * - its removes and moves through git, imports following; its edits; its tree
+ * - `isDue` · a repository pinned before the migration's release has not taken it
  */
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
@@ -53,6 +54,31 @@ function followed(
     });
 }
 
+// a version's numbers read left to right: the first that differs orders them
+function isBefore(one: string, other: string): boolean {
+  const left = one.split('.').map(Number);
+  const right = other.split('.').map(Number);
+  const at = left.findIndex((part, index) => part !== right[index]);
+  return at !== -1 && (left[at] ?? 0) < (right[at] ?? 0);
+}
+
+const isDue = (migration: Migration, pinned: string): boolean =>
+  isBefore(pinned, migration.release);
+
+// each file it removes or moves, where git and the disk both lack it
+function absentIn(
+  root: string,
+  { git, migration }: { readonly git: Git; readonly migration: Migration },
+): readonly string[] {
+  const tracked = new Set(git(['ls-files', '-z']).split('\0'));
+  return [
+    ...migration.removes,
+    ...migration.moves.map(([from]) => from),
+  ].filter(
+    (file) => !tracked.has(file) || !fs.existsSync(path.join(root, file)),
+  );
+}
+
 // a text found exactly once in its file, or every time when asked, written as asked; anything else stops the migration
 function edited(root: string, edits: Migration['edits']): readonly string[] {
   for (const { file, from, to, isEveryPlace } of edits ?? []) {
@@ -81,6 +107,11 @@ function migrated({ root, wow, migration }: Migrating): string {
       stdio: ['ignore', 'pipe', 'pipe'],
     });
   const { removes, moves, tree } = migration;
+  const absent = absentIn(root, { git, migration });
+  if (absent.length > 0)
+    throw new Error(
+      `the checkout lacks what the migration takes, so nothing moved: ${absent.join(', ')}`,
+    );
   for (const file of removes) git(['rm', '-q', '--', file]);
   for (const [from, to] of moves) {
     fs.mkdirSync(path.dirname(path.join(root, to)), { recursive: true });
@@ -101,4 +132,4 @@ function migrated({ root, wow, migration }: Migrating): string {
   return `${String(removes.length)} removed, ${String(moves.length)} moved, ${String(rewritten.length)} following, ${String(migration.edits?.length ?? 0)} edited, ${String(written.length)} written`;
 }
 
-export { migrated };
+export { isDue, migrated };

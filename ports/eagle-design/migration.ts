@@ -54,6 +54,7 @@ const JSON_FIXTURES = [
 ] as const;
 
 const MIGRATION: Migration = {
+  release: '0.4.0',
   removes: [],
   moves: [
     [`${APPROVAL}/requirementRows.ts`, 'sheet/requirements.ts'],
