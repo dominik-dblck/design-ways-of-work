@@ -183,6 +183,9 @@ async function worldOf(tree: RepoScope): Promise<World> {
   };
 }
 
+// the scope's world is read whole, every rule file and its gates: seconds on a busy machine
+const A_WORLD_READ = { timeout: 30_000 };
+
 describe('every rule has a gate that runs', () => {
   const world: World = {
     eslintRules: new Set(['max-lines', 'wow/one-home-per-name']),
@@ -291,20 +294,24 @@ describe('every rule has a gate that runs', () => {
     expect(globsNamingNothing(scope, scope.ruleFiles)).toEqual([]);
   });
 
-  it('every rule of the scope names a gate that runs, beyond its baseline', async () => {
-    const world = await worldOf(scope);
-    const shortfall = filesNamedBy(scope, scope.ruleFiles).flatMap((file) =>
-      shortfallOf(
-        {
-          path: file,
-          text: fs.readFileSync(path.join(scope.root, file), 'utf8'),
-        },
-        world,
-      ),
-    );
-    expect(heldToItsBaseline('everyRuleHasAGate', shortfall)).toEqual({
-      added: [],
-      fixed: [],
-    });
-  });
+  it(
+    'every rule of the scope names a gate that runs, beyond its baseline',
+    A_WORLD_READ,
+    async () => {
+      const world = await worldOf(scope);
+      const shortfall = filesNamedBy(scope, scope.ruleFiles).flatMap((file) =>
+        shortfallOf(
+          {
+            path: file,
+            text: fs.readFileSync(path.join(scope.root, file), 'utf8'),
+          },
+          world,
+        ),
+      );
+      expect(heldToItsBaseline('everyRuleHasAGate', shortfall)).toEqual({
+        added: [],
+        fixed: [],
+      });
+    },
+  );
 });

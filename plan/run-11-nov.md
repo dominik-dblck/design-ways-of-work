@@ -1000,3 +1000,6 @@ Each call: what, why, how to undo. None changes what the PM sees.
 - Task 13 closed: the gate on 4b5f711 green, twenty differences each expected; the product's feature tier,
   run on the gate's clone with v0.10.0 taken, green (ten of ten). Left: the product moves its drifted
   `docs/rules/checks.md` to `legacy/` on its tree; the ticket kinds' hex waits for the theme (task 19).
+- v0.10.0's first `yarn release` stopped at its own commit: the rule-gate test, which reads the scope's world
+  whole (about three seconds), passed vitest's five-second default only on a quiet machine; the load stood
+  at 39. It takes thirty seconds, as the tools test already does for its real runs. Undo: revert it.
