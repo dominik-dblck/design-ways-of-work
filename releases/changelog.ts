@@ -5,87 +5,111 @@
 import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
 const NEXT: Unreleased = {
-  kind: 'minor',
-  what: 'the homes are green on a product that names none, the sample: the board skips an epic whose stories wait (`storiesWait` on its row), never one named by id; the criteria skill asks the product for its own lines (`criteria.*` slots); a home test asserts the relation, never a product’s count; the pairs of blocks a product holds open stand in its `tests/architecture/openPairs.ts`; the new-project guide names only paths every product holds; knip in a product reads the files its take wrote as entries, judging its own code alone; `tools/writeGenerated.ts` writes every file the scope’s generators own',
-  action:
-    'the pin to the tag: its migration marks the push epic’s stories as waiting, writes its criteria lines and its open pairs into files of its own, and gathers the lines in its slots; the counts the homes no longer hold stand in its own tests if it wants them',
+  kind: 'patch',
+  what: '',
+  action: 'none: move the pin to the tag',
   rules: { added: [], changed: [], removed: [] },
-  outputs: {
-    'eagle-design': {
-      'output · yarn build':
-        'the build writes the new-project guide anew from its home',
-      'output · yarn cut-pack T-E19-00':
-        'the files the migration and the build changed wait uncommitted in the trial: the push epic’s row, the slots, their criteria file, the new-project guide; 7, not 3',
-      ...Object.fromEntries(
-        [
-          'agentFlow',
-          'approvalLogic',
-          'backlog',
-          'blockRules',
-          'boardView',
-          'commands',
-          'contentList',
-          'contentTypeLogic',
-          'contractView',
-          'events',
-          'expectedFiles',
-          'featureView',
-          'flowCheck',
-          'journeys',
-          'measure',
-          'payloads',
-          'projections',
-          'queries',
-          'refusals',
-          'roleCombinations',
-          'sampleRun',
-          'specCheck',
-          'testCases',
-          'translationFlow',
-        ].map((name) => [
-          `dist · project/${name}.js`,
-          'the bundle carries the backlog as the product holds it: the push epic’s row reads `storiesWait: true`',
-        ]),
-      ),
-      ...Object.fromEntries(
-        ['board-page', 'contract-page', 'feature-page'].map((name) => [
-          `dist · project/${name}.js`,
-          'the page’s bundle carries the push epic’s row with `storiesWait: true`; the minifier’s names shift with it',
-        ]),
-      ),
-      ...Object.fromEntries(
-        ['refineCheck', 'tickets'].map((name) => [
-          `dist · project/${name}.js`,
-          'the bundle carries the push epic’s row with `storiesWait: true`, and the stories without a ticket skip an epic by that flag, never by its id',
-        ]),
-      ),
-      ...Object.fromEntries(
-        ['documentSlots', 'modes'].map((name) => [
-          `dist · project/${name}.js`,
-          'the bundle carries the criteria lines from the product’s own file (`CRITERIA_CITES`), spread in its slots',
-        ]),
-      ),
-      'dist · project/module-entries.json':
-        'the criteria file is a part of the module docs/process/documentSlots.ts',
-      'dist · project/new-project.md':
-        'the new-project guide names only paths every product holds: `sheet/rules.ts`, `app/styles/componentsSpec.ts`, its logic and samples whole',
-      'dist · project/packs/T-E19-00.md':
-        'the pack’s digests cover the push epic’s row and the slots with their criteria file: one file more, 588',
-      'written · docs/process/new-project.md':
-        'the new-project guide names only paths every product holds: `sheet/rules.ts`, `app/styles/componentsSpec.ts`, its logic and samples whole',
-      'written · fixtures/packs/T-E19-00.md':
-        'the pack’s digests cover the push epic’s row and the slots with their criteria file: one file more, 588',
-      'written · records/release-5-3-1.md':
-        'the record counts the criteria file in the slots’ module, 12 files, not 11, and the backlog’s and the tickets’ digests moved',
-      'written · vendor/wow/roadmaps/backlog/backlogTypes.ts':
-        'the home in hand: an epic’s row may say its stories wait (`storiesWait`)',
-      'written · vendor/wow/roadmaps/tickets/ticketViews.ts':
-        'the home in hand: the stories without a ticket skip an epic whose stories wait',
-    },
-  },
+  outputs: {},
 };
 
 const RELEASES: readonly Release[] = [
+  {
+    version: '0.16.0',
+    date: '2026-11-12',
+    kind: 'minor',
+    what: 'the homes are green on a product that names none, the sample: the board skips an epic whose stories wait (`storiesWait` on its row), never one named by id; the criteria skill asks the product for its own lines (`criteria.*` slots); a home test asserts the relation, never a product’s count; the pairs of blocks a product holds open stand in its `tests/architecture/openPairs.ts`; the new-project guide names only paths every product holds; knip in a product reads the files its take wrote as entries, judging its own code alone; `tools/writeGenerated.ts` writes every file the scope’s generators own',
+    action:
+      'the pin to the tag: its migration marks the push epic’s stories as waiting, writes its criteria lines and its open pairs into files of its own, and gathers the lines in its slots; the counts the homes no longer hold stand in its own tests if it wants them',
+    rules: { added: [], changed: [], removed: [] },
+    outputs: {
+      'eagle-design': {
+        'output · yarn build':
+          'the build writes the new-project guide anew from its home',
+        'output · yarn cut-pack T-E19-00':
+          'the files the migration and the build changed wait uncommitted in the trial: the push epic’s row, the slots, their criteria file, the new-project guide; 7, not 3',
+        'dist · project/agentFlow.js':
+          'the bundle carries the backlog as the product holds it: the push epic’s row reads `storiesWait: true`',
+        'dist · project/approvalLogic.js':
+          'the bundle carries the backlog as the product holds it: the push epic’s row reads `storiesWait: true`',
+        'dist · project/backlog.js':
+          'the bundle carries the backlog as the product holds it: the push epic’s row reads `storiesWait: true`',
+        'dist · project/blockRules.js':
+          'the bundle carries the backlog as the product holds it: the push epic’s row reads `storiesWait: true`',
+        'dist · project/boardView.js':
+          'the bundle carries the backlog as the product holds it: the push epic’s row reads `storiesWait: true`',
+        'dist · project/commands.js':
+          'the bundle carries the backlog as the product holds it: the push epic’s row reads `storiesWait: true`',
+        'dist · project/contentList.js':
+          'the bundle carries the backlog as the product holds it: the push epic’s row reads `storiesWait: true`',
+        'dist · project/contentTypeLogic.js':
+          'the bundle carries the backlog as the product holds it: the push epic’s row reads `storiesWait: true`',
+        'dist · project/contractView.js':
+          'the bundle carries the backlog as the product holds it: the push epic’s row reads `storiesWait: true`',
+        'dist · project/events.js':
+          'the bundle carries the backlog as the product holds it: the push epic’s row reads `storiesWait: true`',
+        'dist · project/expectedFiles.js':
+          'the bundle carries the backlog as the product holds it: the push epic’s row reads `storiesWait: true`',
+        'dist · project/featureView.js':
+          'the bundle carries the backlog as the product holds it: the push epic’s row reads `storiesWait: true`',
+        'dist · project/flowCheck.js':
+          'the bundle carries the backlog as the product holds it: the push epic’s row reads `storiesWait: true`',
+        'dist · project/journeys.js':
+          'the bundle carries the backlog as the product holds it: the push epic’s row reads `storiesWait: true`',
+        'dist · project/measure.js':
+          'the bundle carries the backlog as the product holds it: the push epic’s row reads `storiesWait: true`',
+        'dist · project/payloads.js':
+          'the bundle carries the backlog as the product holds it: the push epic’s row reads `storiesWait: true`',
+        'dist · project/projections.js':
+          'the bundle carries the backlog as the product holds it: the push epic’s row reads `storiesWait: true`',
+        'dist · project/queries.js':
+          'the bundle carries the backlog as the product holds it: the push epic’s row reads `storiesWait: true`',
+        'dist · project/refusals.js':
+          'the bundle carries the backlog as the product holds it: the push epic’s row reads `storiesWait: true`',
+        'dist · project/roleCombinations.js':
+          'the bundle carries the backlog as the product holds it: the push epic’s row reads `storiesWait: true`',
+        'dist · project/sampleRun.js':
+          'the bundle carries the backlog as the product holds it: the push epic’s row reads `storiesWait: true`',
+        'dist · project/specCheck.js':
+          'the bundle carries the backlog as the product holds it: the push epic’s row reads `storiesWait: true`',
+        'dist · project/testCases.js':
+          'the bundle carries the backlog as the product holds it: the push epic’s row reads `storiesWait: true`',
+        'dist · project/translationFlow.js':
+          'the bundle carries the backlog as the product holds it: the push epic’s row reads `storiesWait: true`',
+        'dist · project/board-page.js':
+          'the page’s bundle carries the push epic’s row with `storiesWait: true`; the minifier’s names shift with it',
+        'dist · project/contract-page.js':
+          'the page’s bundle carries the push epic’s row with `storiesWait: true`; the minifier’s names shift with it',
+        'dist · project/feature-page.js':
+          'the page’s bundle carries the push epic’s row with `storiesWait: true`; the minifier’s names shift with it',
+        'dist · project/refineCheck.js':
+          'the bundle carries the push epic’s row with `storiesWait: true`, and the stories without a ticket skip an epic by that flag, never by its id',
+        'dist · project/tickets.js':
+          'the bundle carries the push epic’s row with `storiesWait: true`, and the stories without a ticket skip an epic by that flag, never by its id',
+        'dist · project/documentSlots.js':
+          'the bundle carries the criteria lines from the product’s own file (`CRITERIA_CITES`), spread in its slots',
+        'dist · project/modes.js':
+          'the bundle carries the criteria lines from the product’s own file (`CRITERIA_CITES`), spread in its slots',
+        'dist · project/module-entries.json':
+          'the criteria file is a part of the module docs/process/documentSlots.ts',
+        'dist · project/new-project.md':
+          'the new-project guide names only paths every product holds: `sheet/rules.ts`, `app/styles/componentsSpec.ts`, its logic and samples whole',
+        'dist · project/packs/T-E19-00.md':
+          'the pack’s digests cover the push epic’s row and the slots with their criteria file: one file more, 588',
+        'written · docs/process/new-project.md':
+          'the new-project guide names only paths every product holds: `sheet/rules.ts`, `app/styles/componentsSpec.ts`, its logic and samples whole',
+        'written · fixtures/packs/T-E19-00.md':
+          'the pack’s digests cover the push epic’s row and the slots with their criteria file: one file more, 588',
+        'written · records/release-5-3-1.md':
+          'the record counts the criteria file in the slots’ module, 12 files, not 11, and the backlog’s and the tickets’ digests moved',
+        'written · vendor/wow/roadmaps/backlog/backlogTypes.ts':
+          'the home in hand: an epic’s row may say its stories wait (`storiesWait`)',
+        'written · vendor/wow/roadmaps/tickets/ticketViews.ts':
+          'the home in hand: the stories without a ticket skip an epic whose stories wait',
+      },
+    },
+    moved: {},
+    tried: { 'eagle-design': 'c47fdb2' },
+  },
   {
     version: '0.15.0',
     date: '2026-11-12',
