@@ -67,6 +67,12 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
 - The gate reads a trunk's change to a home against the port's first base, so a change the port merged
   before the home was taken asks a carried row it does not need. A base per home (the trunk commit the port
   held when the home was taken) would be exact.
+- The event row's grammar holds three of a product's columns (an agent's API, a batch, a Slack line) and
+  the directory's gates are a product's approval model (a role's gate, one per offered language); a
+  product with neither fills them with nothing. Changing the row breaks each product's rows: settled when
+  a second product writes events.
+- A home reads a few of a product's rows by key (the words' empty pill) and asks a fixed count of cells
+  (three and one per reader): the contract's rows say so, no check holds a product to them yet.
 - A split's proof (each export's output dumped before and after, each import classed home or rows, lint
   with no suppression) is a script each side writes again; one product-agnostic tool here, its digest
   carried by the migration, would give both sides the same proof.

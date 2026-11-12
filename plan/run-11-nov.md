@@ -982,3 +982,7 @@ Each call: what, why, how to undo. None changes what the PM sees.
   so nothing stands unread in the product before the home reads it. A migration's tree holds a product's
   files, so `ports/*/trees/**` joins `ports/*/tree/**` outside this repository's own checks. `NEXT`'s outputs are left for the gate to
   name. Undo: revert it.
+- Task 13's call on what waits: the event row's three product columns and the directory's approval gates
+  stay, a known gap: changing the row's grammar breaks each product's rows, and no second product writes
+  events yet. The words' reads by key and fixed cell count are the contract's terms, a gap until checked.
+  Undo: revert it.
