@@ -716,3 +716,12 @@ Each call: what, why, how to undo. None changes what the PM sees.
   `NEXT` now: the contract page, its view, the board's list, the slots' module, the modes' parts, the
   answer-cc skill. The test row counts the slot test (pinned 46 files and 151 tests, now 48 and 155).
   Undo: revert the rows.
+- 8acdda4..50cd593 carried (d64f9dd): every epic its Feature page, the pages folded, the board's pick kept in
+  the browser, 51 `CARRIED` rows. Calls: `FoldSection` a molecule; `ContractBody` an organism both pages mount,
+  its parts moved and renamed by script; the five tones in `design/app/theme/tones.ts`; the pick a namespace,
+  `boardView` · `pickedEpic`, its key product-free; the wireframe sections stay out (870987c), a product slot
+  `ProductView.sections` brings them back at the flip. The home's notebook test found a bold span cut at a
+  middle dot; a point no longer ends inside one (eagle-design fixed its copy, 5a72932). Undo: revert d64f9dd.
+- The gate on d64f9dd: the tag's board reads the backlog's open list, which eagle-design's main retired, so
+  the tag's build, tsc, spec check and tests fail and this commit's pass; seven rows say so, two `exit · checks`
+  rows went stale (both sides fail the snapshot now) and leave. Undo: revert the rows.
