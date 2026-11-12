@@ -10,6 +10,7 @@ import { CONSUMERS } from '../ports/consumers.ts';
 import { followed } from './followed.ts';
 import { mapRows } from './mapRows.ts';
 import { importsAnew, namedAnew } from './portNames.ts';
+import { carriedDropped } from './portCarried.ts';
 import { gitAt, ruledOn, unmerged } from './portSettle.ts';
 import { moduleValue, snapshotTaken } from './portSnapshots.ts';
 import { snapshotText } from '../design/guards/checks/snapshotModule.ts';
@@ -92,11 +93,13 @@ async function main(): Promise<void> {
   const ruled = unmerged(git).map((conflict) =>
     ruledOn({ conflict, git, root: ROOT, port, moves }),
   );
+  const dropped = carriedDropped(git, port);
   const snapshots = rewritten(since);
   const renamed = await namedAgain(snapshots);
   // the merge wrote the trunk's copy over a file the take holds there, and settling it removed the file
   execFileSync('yarn', ['-s', 'wow'], { cwd: ROOT, env: childEnv() });
   for (const { says } of ruled) console.log(says);
+  for (const says of dropped) console.log(says);
   for (const file of snapshots)
     console.log(`REWRITTEN · ${file} · the trunk's value, as a module`);
   console.log(

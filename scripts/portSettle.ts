@@ -9,6 +9,7 @@ import path from 'node:path';
 import type { Move } from './movePaths.ts';
 import { bytesOf, isBinary, laid } from './portLaid.ts';
 import type { Laid } from './portLaid.ts';
+import { isCarried } from './portCarried.ts';
 import { movedTo } from './portNames.ts';
 import type { Port } from './portTypes.ts';
 import { childEnv } from './scratch.ts';
@@ -121,11 +122,13 @@ function bytesTaken({ git, conflict }: Settling): Ruled {
 
 // the port took the file out, the trunk changed it: the port moved it, or a home holds it now
 function takenOut(settling: Settling): Ruled {
-  const { conflict, git, root, moves } = settling;
+  const { conflict, git, root, moves, port } = settling;
   const { file, theirs } = conflict;
   const target = movedTo(file, moves);
   git(['rm', '-q', '--cached', '--', file]);
   fs.rmSync(path.join(root, file), { force: true });
+  if (isCarried(port, { file, blob: theirs }))
+    return said(`CARRIED · ${file} · its home holds the change`);
   if (target === file || !fs.existsSync(path.join(root, target)))
     return said(
       `CARRY · ${file} · blob ${theirs ?? ''} · a home holds it: its change goes there, its row to ports/`,

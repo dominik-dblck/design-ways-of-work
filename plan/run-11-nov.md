@@ -698,3 +698,9 @@ Each call: what, why, how to undo. None changes what the PM sees.
   nothing, the example ticket `T-E01-00`. The build branch reads `sheet/project.ts` · `buildBranch`. A home
   test fails on a row no document asks for. Tried on the gate's clone: tsc, ESLint, prettier, file names,
   knip, the tests; `ticket-pipeline.md` and `modes.json` print byte for byte. Undo: revert the commit.
+- The gate on 8660446 stopped at the take: eagle-design's `main` (840ec79, the board's epic list and the API
+  contract page, the PM's word for its artifact) changed a home's file, and the port's merge laid that change
+  on the home's copy, which a take never overwrites. A change a home holds is carried there in the home's
+  form, not the trunk's bytes: the merge now leaves a trunk's change whose `{ file, blob }` has a `CARRIED` row
+  to its home (not laid, and a file the trunk added dropped). Undo: revert the commit. eagle-design holds its
+  next batch until this one is carried.
