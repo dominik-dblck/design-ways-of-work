@@ -16,8 +16,35 @@ const NEXT: Unreleased = {
         'every report ends on the repository whole at its commit (6b), the receipt carrying it as `repository`',
       'written · docs/process/ticket-pipeline.md':
         'every report ends on the repository whole at its commit (6b), the receipt carrying it as `repository`',
-      'output · yarn lint:files':
-        'the workspace’s own folders as the take writes them, textPoints in and sheetStatus out: the trunk’s board-view folder is refused on both sides',
+      'output · yarn build':
+        'the tag’s build writes the ticket pipeline and the answer-cc skill back from its modules, which lack the repository line the trunk carries, and this one’s modules carry it; the build’s line counts two component files more, the board’s number line and share bar',
+      'output · yarn checks':
+        'the build’s line counts two component files more, the board’s number line and share bar',
+      'output · yarn spec-check':
+        'the build’s line counts two component files more, the board’s number line and share bar',
+      'output · yarn cut-pack T-E19-00':
+        'the build’s line counts two component files more, the board’s number line and share bar',
+      'output · yarn test':
+        'one test more: the board’s repository card, its state from the reports that carry it',
+      'dist · project/board-page.js':
+        'the board’s numbers fold, the project’s and the repository’s, each a tile with its value, the words beside it, its bar and its note; the contract’s shared types fold',
+      'dist · project/contract-page.js': 'the contract’s shared types fold',
+      'dist · project/boardView.js':
+        'each number a Stat with its words, its bar and its note; the repository now from the receipts’ RepositoryState, and at close; the browser tests’ tool from the product’s stack',
+      'dist · project/featureView.js':
+        'it bundles the board’s view, whose numbers moved',
+      'dist · project/feature-page.js':
+        'it bundles the board’s view, whose numbers moved',
+      'dist · project/module-imports.json':
+        'the board’s view reads the product’s stack, docs/process/productStack.ts',
+      'dist · project/packs/T-E19-00.md':
+        'the ticket pipeline’s digest moves: every report ends on the repository',
+      'written · fixtures/packs/T-E19-00.md':
+        'the ticket pipeline’s digest moves: every report ends on the repository',
+      'written · records/release-5-3-1.md':
+        'the ticket pipeline’s digest moves: every report ends on the repository',
+      'written · .claude/skills/design-answer-cc/SKILL.md':
+        'the tag’s build writes the skill back without the close’s repository line, which the trunk carries; this one leaves it',
     },
   },
 };
