@@ -5,6 +5,7 @@
 import { describe, expect, it } from 'vitest';
 import { epics } from '../../roadmaps/backlog.ts';
 import { all as IDEAS } from '../../roadmaps/ideas.ts';
+import { receipts } from '../../roadmaps/receipts.ts';
 import { all as allTickets } from '../../roadmaps/tickets.ts';
 import {
   columns,
@@ -13,6 +14,7 @@ import {
   kinds,
   nextUp,
   progress,
+  repository,
   stats,
   ticketDetailOf,
   velocity,
@@ -45,12 +47,10 @@ describe('the board view', () => {
         .map((one) => one.id)
         .sort(),
     );
-    const done = held.filter(
-      (id) => ticketDetailOf(id)?.column === 'done',
-    ).length;
-    expect(stats().map((stat) => stat.value)).toContain(
-      `${done} / ${held.length}`,
-    );
+    const done = held.filter((id) => ticketDetailOf(id)?.column === 'done').length;
+    const tickets = stats().find((stat) => stat.id === 'tickets');
+    expect(tickets?.value).toBe(String(done));
+    expect(tickets?.sub).toContain(String(held.length));
   });
 
   it('next up is ready tickets, and an opened ticket names its epic', () => {
@@ -105,5 +105,17 @@ describe('the board view', () => {
     const ranks = rows.map(rankOf);
     expect(ranks).toEqual([...ranks].sort((one, other) => one - other));
     expect(new Set(rows.map((row) => row.id)).size).toBe(cards.length);
+  });
+  it('the repository card sums the receipts of the board’s tickets, its state from the reports that carry it', () => {
+    const own = allTickets().flatMap((one) => receipts[one.id] ?? []);
+    const { commit, now, atClose } = repository();
+    expect(atClose.map((one) => one.value)).toEqual([
+      String(own.reduce((sum, one) => sum + (one.tests ?? 0), 0)),
+      String(own.length),
+    ]);
+    const carried = own.some((one) => one.repository);
+    expect(now.length).toBe(carried ? 3 : 0);
+    expect(commit === null).toBe(!carried);
+    expect([...now, ...atClose].every((one) => one.note)).toBe(true);
   });
 });

@@ -7,6 +7,7 @@ import { BOARD_AND_CONTRACT } from './carried/boardAndContract.ts';
 import { BOARD_NUMBERS } from './carried/boardNumbers.ts';
 import { ENDPOINT_FOLDS } from './carried/endpointFolds.ts';
 import { FEATURE_FOLDS } from './carried/featureFolds.ts';
+import { REPOSITORY_LINE } from './carried/repositoryLine.ts';
 
 const CARRIED: readonly Carried[] = [
   {
@@ -26,8 +27,8 @@ const CARRIED: readonly Carried[] = [
   },
   {
     file: 'tests/architecture/aClosedNotebookIsFrozen.test.ts',
-    blob: '14591e9d875ab117e2a69fe545527b6768aed39b',
-    how: 'the pins stand in the migration’s roadmaps/notes/frozenNotebooks.ts, the newest among them',
+    blob: 'bb5280c09aa1c5291c2b0d727767667ab113d696',
+    how: 'the pins stand in the product’s roadmaps/notes/frozenNotebooks.ts, E10’s among them: the home’s test is as it was',
   },
   {
     file: 'tests/architecture/anExportIsRead.test.ts',
@@ -38,6 +39,7 @@ const CARRIED: readonly Carried[] = [
   ...FEATURE_FOLDS,
   ...ENDPOINT_FOLDS,
   ...BOARD_NUMBERS,
+  ...REPOSITORY_LINE,
 ];
 
 export { CARRIED };

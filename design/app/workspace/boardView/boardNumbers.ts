@@ -11,21 +11,39 @@ import type { Stat, TicketLine } from './boardTypes.ts';
 function stats(): readonly Stat[] {
   const backlog = backlogCounts();
   const tickets = ticketCounts();
-  const { stats: words } = BOARD_WORDS;
+  const { stats: words, units } = BOARD_WORDS;
+  const done = tickets.done ?? 0;
+  const total = tickets.total ?? 0;
+  const plain = { sub: null, share: null, href: null };
   return [
     {
+      ...plain,
       ...words.epics,
-      value: `${backlog.epics} · ${backlog.stories} stories`,
+      id: 'epics',
+      value: String(backlog.epics),
+      sub: `${backlog.stories} ${units.stories}`,
     },
     {
+      ...plain,
       ...words.mvp,
-      value: `${backlog.mvpEpics} · ${backlog.mvpStories} stories`,
+      id: 'mvp',
+      value: String(backlog.mvpEpics),
+      sub: `${backlog.mvpStories} ${units.stories}`,
     },
     {
+      ...plain,
       ...words.tickets,
-      value: `${tickets['done'] ?? 0} / ${tickets['total'] ?? 0}`,
+      id: 'tickets',
+      value: String(done),
+      sub: `${units.of} ${total}`,
+      share: total ? done / total : null,
     },
-    { ...words.ready, value: String(tickets['ready'] ?? 0) },
+    {
+      ...plain,
+      ...words.ready,
+      id: 'ready',
+      value: String(tickets.ready ?? 0),
+    },
   ];
 }
 

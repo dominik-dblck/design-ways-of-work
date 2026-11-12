@@ -1,6 +1,10 @@
 /**
  * - `BOARD_WORDS` · every word the Board page shows that no row of the sheet holds
  */
+import { productStack } from '../../../docs/process/productStack.ts';
+
+// the browser tests' tool, as the product's stack names it
+const BROWSER = productStack.browserTests.name;
 
 const BOARD_WORDS = {
   title: 'Board',
@@ -15,8 +19,34 @@ const BOARD_WORDS = {
   ports: { label: 'PORTS', note: 'what the outside still has to tell us, each behind a mock' },
   noTicket: 'no ticket yet',
   badges: { mvp: 'MVP', later: 'AFTER MVP', deferred: 'DEFERRED' },
-  project: { label: 'PROJECT', note: 'the plan and the spec, read from the sheet', endpoints: 'endpoints', typed: 'typed', cases: 'test cases', journeys: 'journeys', criteria: 'criteria', refusals: 'refusals', events: 'events', decisions: 'decisions', findings: 'open findings' },
-  repository: { label: 'REPOSITORY', note: 'what the build side reported, ticket by ticket', tests: 'tests reported', tickets: 'tickets reported' },
+  units: { stories: 'stories', of: 'of', typed: 'typed', skipped: 'skipped', lines: 'of lines' },
+  project: {
+    label: 'PROJECT', note: 'the plan and the spec, read from the sheet', plan: 'PLAN', spec: 'SPEC',
+    endpoints: 'endpoints', cases: 'test cases', journeys: 'journeys', criteria: 'criteria', refusals: 'refusals', events: 'events', decisions: 'decisions', findings: 'open findings',
+    notes: {
+      endpoints: 'every command and query in the contract, and how many have every field typed',
+      cases: 'every test case the contract rows generate: a case, a refusal, a field check, a shared case',
+      journeys: `every journey written, one ${BROWSER} flow each`,
+      criteria: 'every acceptance criterion of every ticket, open and closed',
+      refusals: 'every refusal a command or query can answer with',
+      events: 'every event the commands append',
+      decisions: 'every decision on how the design project works',
+      findings: 'what the design side and the build side hold open',
+    },
+  },
+  repository: {
+    label: 'REPOSITORY', note: 'the build side’s code', now: 'NOW', atClose: 'AT CLOSE', waiting: 'its tests, e2e and coverage come with the next report',
+    tests: 'suite tests', e2e: 'e2e', coverage: 'coverage', reportedTests: 'acceptance tests', reportedTickets: 'tickets',
+    notes: {
+      now: 'the repository whole, as its last report read it',
+      tests: 'every test yarn test passes at that commit, units to acceptance, beside the ones it skips and its change since the report before',
+      e2e: `every ${BROWSER} test yarn e2e --list counts`,
+      coverage: 'lines covered, from the last coverage run',
+      atClose: 'what each ticket reported the day it closed: history, never recounted',
+      reportedTests: 'one test per criterion, summed over the tickets’ receipts; a test rewritten since keeps its count',
+      reportedTickets: 'tickets on the board whose report gave a receipt',
+    },
+  },
   stats: {
     epics: { label: 'EPICS', note: 'the deferred push left out' },
     mvp: { label: 'MVP', note: 'from creation to send, translations included' },

@@ -51,7 +51,7 @@ const skill: SkillFile = {
         "**Architecture review** · The build side's own reviewer reads the diff against the repo's patterns; HIGH findings and UNCERTAIN ones come to me as a decision table. I pick per finding, on an axis, and write the pick into the criterion.",
         '**Snapshot** (`snapshot-T-X`) · opens with the decisions no criterion asked for, one line each with file:line located by content. I review; collisions go back as C1, C2…; caveats and `reported:` lines on earlier receipts come from here.',
         '**Report** (`report-T-X`) · one of three shapes: `done` (criteria · built against · tests · skipped · uncovered · notes), `blocked`, `spec wrong`. A contradiction is stopped and said, never fixed quietly.',
-        '**Close** · only with the report (`report-T-X`) in hand. Then `RECEIPTS[id]` (numbers copied from the file), `CAVEATS[id]` with `until:` pointing at a ticket that exists, `STATUS: done`, next ticket → `doing`. A summary of a report is not a report.',
+        '**Close** · only with the report (`report-T-X`) in hand. Then `RECEIPTS[id]` (numbers copied from the file, its `repository` line too), `CAVEATS[id]` with `until:` pointing at a ticket that exists, `STATUS: done`, next ticket → `doing`. A summary of a report is not a report.',
       ],
     },
   ],

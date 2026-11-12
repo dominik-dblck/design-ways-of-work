@@ -1,44 +1,49 @@
 /**
- * - `BoardPageStatTile` · one number: its label in capitals, its value
- * - `BoardPageStatTileProps` · its line on hover; a page of its own opens on a click
+ * - `BoardPageStatTile` · one number: its value large, the words beside it, its bar
+ * - its line on hover; a page of its own opens on a click
  */
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
+import type { Stat } from '../../../../workspace/boardView.ts';
+import { VALUE } from '../constants/boardPageStatTileConstants.ts';
+import { BoardPageShareBar } from './BoardPageShareBar.tsx';
 
 interface BoardPageStatTileProps {
-  readonly label: string;
-  readonly value: string;
-  readonly note?: string;
-  // a count with a page of its own opens it
-  readonly href?: string | null;
+  readonly stat: Stat;
 }
 
-function BoardPageStatTile({
-  label,
-  value,
-  note,
-  href,
-}: BoardPageStatTileProps): ReactElement {
+function BoardPageStatTile({ stat }: BoardPageStatTileProps): ReactElement {
+  const { label, value, sub, share, note, href } = stat;
   const tile = (
-    <Stack direction="row" spacing={0.75} sx={{ alignItems: 'baseline' }}>
-      <Typography variant="overline" color="textSecondary">
+    <Stack spacing={0.5} sx={{ minWidth: 0 }}>
+      <Typography variant="overline" color="textSecondary" noWrap>
         {label}
       </Typography>
-      <Typography variant="subtitle2">{value}</Typography>
+      <Stack direction="row" spacing={0.75} sx={{ alignItems: 'baseline' }}>
+        <Typography variant="h5" component="span" sx={VALUE}>
+          {value}
+        </Typography>
+        {sub === null ? null : (
+          <Typography variant="caption" color="textSecondary" noWrap>
+            {sub}
+          </Typography>
+        )}
+      </Stack>
+      {share === null ? null : <BoardPageShareBar share={share} />}
     </Stack>
   );
-  const shown = href ? (
-    <Link href={href} underline="hover" color="inherit">
-      {tile}
-    </Link>
-  ) : (
-    tile
-  );
-  return note ? <Tooltip title={note}>{shown}</Tooltip> : shown;
+  const shown =
+    href === null ? (
+      tile
+    ) : (
+      <Link href={href} underline="none" color="inherit">
+        {tile}
+      </Link>
+    );
+  return <Tooltip title={note ?? ''}>{shown}</Tooltip>;
 }
 
 export { BoardPageStatTile };
-export type { BoardPageStatTileProps };

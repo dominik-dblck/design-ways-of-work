@@ -1,0 +1,52 @@
+/**
+ * - `BoardPageNumberLine` · one line of numbers under its name, what it means on hover
+ * - `BoardPageNumberLineProps` · its name, its meaning, the commit it was read at
+ */
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
+import type { ReactElement } from 'react';
+import type { Stat } from '../../../../workspace/boardView.ts';
+import { GRID } from '../constants/boardPageNumberLineConstants.ts';
+import { BoardPageStatTile } from './BoardPageStatTile.tsx';
+
+interface BoardPageNumberLineProps {
+  readonly name: string;
+  readonly means: string | null;
+  // the commit the line was read at, beside its name
+  readonly at?: string | null;
+  readonly numbers: readonly Stat[];
+}
+
+function BoardPageNumberLine({
+  name,
+  means,
+  at = null,
+  numbers,
+}: BoardPageNumberLineProps): ReactElement {
+  return (
+    <Stack spacing={1}>
+      <Tooltip title={means ?? ''}>
+        <Stack direction="row" spacing={1} sx={{ alignItems: 'baseline' }}>
+          <Typography variant="overline" sx={{ fontWeight: 'fontWeightBold' }}>
+            {name}
+          </Typography>
+          {at === null ? null : (
+            <Typography variant="caption" color="textSecondary">
+              {at}
+            </Typography>
+          )}
+        </Stack>
+      </Tooltip>
+      <Box sx={GRID}>
+        {numbers.map((one) => (
+          <BoardPageStatTile key={one.id} stat={one} />
+        ))}
+      </Box>
+    </Stack>
+  );
+}
+
+export { BoardPageNumberLine };
+export type { BoardPageNumberLineProps };

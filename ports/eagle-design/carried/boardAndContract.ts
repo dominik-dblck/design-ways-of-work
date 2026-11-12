@@ -71,8 +71,8 @@ const BOARD_AND_CONTRACT: readonly Carried[] = [
   },
   {
     file: 'app/pages/contract/SharedTypes.tsx',
-    blob: '414f7790ca0629c5ad9c8785bf1fb19d76695e54',
-    how: 'design/app/components/organisms/ContractPage/components/ContractPageSharedTypes.tsx',
+    blob: '891db4a7995c487ccfc9e6a0522a92d9b6c85243',
+    how: 'design/app/components/organisms/ContractBody/components/ContractBodySharedTypes.tsx: folded under FoldSection, its notes asked',
   },
   {
     file: 'app/workspace/board-view/boardProgressTypes.ts',

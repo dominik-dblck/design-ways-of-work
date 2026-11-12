@@ -1,5 +1,5 @@
 /**
- * - `project` · what the spec holds, counted, and the page each count opens on
+ * - `project` · what the spec holds, counted, and where each opens
  */
 import { all as DECISIONS } from '../../../docs/process/decisions.ts';
 import { epics as EPICS } from '../../../roadmaps/backlog.ts';
@@ -12,12 +12,7 @@ import { refusalRows } from '../../../sheet/contract/refusals.ts';
 import { contractPage } from '../contractView.ts';
 import { CONTRACT_HREF, FEATURE_HREF } from './boardLinks.ts';
 import { BOARD_WORDS } from './boardWords.ts';
-import type { ProjectStat } from './boardTypes.ts';
-
-type Counted = Exclude<
-  keyof typeof BOARD_WORDS.project,
-  'label' | 'note' | 'endpoints' | 'typed'
->;
+import type { Stat } from './boardTypes.ts';
 
 // the contract page's own count of its endpoints, and of the typed ones
 function endpointCounts(): { readonly all: number; readonly typed: number } {
@@ -30,6 +25,11 @@ function endpointCounts(): { readonly all: number; readonly typed: number } {
 // each test case and journey counted once, on the epic whose row holds it
 const perEpic = (count: (epic: string) => number): number =>
   EPICS.reduce((sum, epic) => sum + count(epic.id), 0);
+
+type Counted = Exclude<
+  keyof typeof BOARD_WORDS.project,
+  'label' | 'note' | 'plan' | 'spec' | 'notes' | 'endpoints'
+>;
 
 // what each chip counts, in the order the board reads them
 const COUNTS: readonly (readonly [Counted, () => number])[] = [
@@ -50,20 +50,26 @@ const OPENS: Readonly<Partial<Record<Counted, string>>> = {
   journeys: FEATURE_HREF,
 };
 
-function project(): readonly ProjectStat[] {
+function project(): readonly Stat[] {
   const words = BOARD_WORDS.project;
   const endpoints = endpointCounts();
   const counted = COUNTS.map(([id, count]) => ({
     id,
     value: String(count()),
+    sub: null,
+    share: null,
     label: words[id],
+    note: words.notes[id],
     href: OPENS[id] ?? null,
   }));
   return [
     {
       id: 'endpoints',
-      value: `${endpoints.all} · ${endpoints.typed} ${words.typed}`,
+      value: String(endpoints.all),
+      sub: `${endpoints.typed} ${BOARD_WORDS.units.typed}`,
+      share: endpoints.all ? endpoints.typed / endpoints.all : null,
       label: words.endpoints,
+      note: words.notes.endpoints,
       href: CONTRACT_HREF,
     },
     ...counted,

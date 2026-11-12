@@ -798,3 +798,10 @@ Each call: what, why, how to undo. None changes what the PM sees.
   input's large size), lucide-react, the tokens file as the generator writes it, three names this side holds
   already (radiusOf, LAYERS, text). eagle-design's: the sheet's Badge and Button, renamed in its next batch.
   The sync script waits for the atoms on the build side's branch.
+- The next view batch, carried (eagle-design main 1683f09..a99e6b1): the board's numbers fold, each a tile with
+  its words, its bar and its note (D87–D91), the repository now at its commit and at close, read from the
+  receipts' `RepositoryState`; the contract's SHARED folds (D95); every report ends on the repository (pipeline
+  6b, the receipt's line, answer-cc's close). Main's files merged by `git merge-file` onto the homes, the pages
+  translated into the organism's parts. The stack names the browser tests' tool in the board's words. One row
+  per file in `ports/`, a row that stood moved to the new blob; `LINE` retired to `legacy/`. E10's frozen pin is
+  the product's registry's. Undo: revert it.

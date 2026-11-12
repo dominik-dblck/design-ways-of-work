@@ -16,18 +16,18 @@ const BOARD_NUMBERS: readonly Carried[] = [
   },
   {
     file: 'app/pages/board/StatRow.tsx',
-    blob: 'b0d2bf745ca7ce6f473518bc079f38691376c234',
-    how: 'design/app/components/organisms/BoardPage/components/BoardPageStatRow.tsx: two cards, the project and the repository, each a BoardPageNumberGroup, its line in constants/boardPageNumberGroupConstants.ts',
+    blob: '47c22572e3de2c545e8a6f5c39b11dced0d7d840',
+    how: 'design/app/components/organisms/BoardPage/components/BoardPageStatRow.tsx: two folds, the project and the repository, each a BoardPageNumberGroup on FoldSection; its lines BoardPageNumberLine, their grid in constants/boardPageNumberLineConstants.ts; the repository now at its commit, and at close',
   },
   {
     file: 'app/pages/board/StatTile.tsx',
-    blob: 'a673a94329ea895772503aa706e1afb1456d04e0',
-    how: 'design/app/components/organisms/BoardPage/components/BoardPageStatTile.tsx: a label and its value, its line on hover, a link where it opens a page',
+    blob: '8ac54deb3f4f8aa65b5d5382edecc075647e9468',
+    how: 'design/app/components/organisms/BoardPage/components/BoardPageStatTile.tsx: one Stat, its value large, the words beside it, its bar (BoardPageShareBar), its line on hover, a link where it opens a page; its value and a share’s whole in constants/boardPageStatTileConstants.ts',
   },
   {
     file: 'app/workspace/board-view.ts',
-    blob: 'b13e939dc490d6f41989e3cdc800ccb9723bbba2',
-    how: 'design/app/workspace/boardView.ts: listed, project and repository; ProjectStat in boardView/boardTypes.ts',
+    blob: '22901b563fa784737e650251ca9111e215e743db',
+    how: 'design/app/workspace/boardView.ts: RepositoryNumbers exported beside repository',
   },
   {
     file: 'app/workspace/board-view/boardEpics.ts',
@@ -46,23 +46,23 @@ const BOARD_NUMBERS: readonly Carried[] = [
   },
   {
     file: 'app/workspace/board-view/boardProject.ts',
-    blob: 'fb6c1888ee54724d46008dc7b9850138f5ae74e5',
-    how: 'design/app/workspace/boardView/boardProject.ts, its ProjectStat in boardTypes.ts, the cases read from sheet/cases/testCases.ts',
+    blob: '33eca1a1b82d956ba97b6ea64f2217e25e3e9035',
+    how: 'design/app/workspace/boardView/boardProject.ts: each count a Stat with its note; ProjectStat retired from boardTypes.ts',
   },
   {
     file: 'app/workspace/board-view/boardRepository.ts',
-    blob: 'e05ec1f97f40ba11cfed154778d64d41bc00c87d',
-    how: 'design/app/workspace/boardView/boardRepository.ts, its ProjectStat in boardTypes.ts',
+    blob: '6ef533e649cefa666a0d0a451c1422916f72dc50',
+    how: 'design/app/workspace/boardView/boardRepository.ts: the repository now from the receipts’ RepositoryState, its change since the report before, and at close',
   },
   {
     file: 'app/workspace/board-view/boardTypes.ts',
-    blob: '189c0531d66aecb7d4ba2cfef232dd4b3e694f49',
-    how: 'design/app/workspace/boardView/boardTypes.ts: no prototype; ProjectStat',
+    blob: 'cda405ac70fc509eca8c5c095578ea276e7d56c9',
+    how: 'design/app/workspace/boardView/boardTypes.ts: Stat with its sub, share, note and href; no ProjectStat',
   },
   {
     file: 'app/workspace/board-view/boardWords.ts',
-    blob: '7ef3be1bc64941e4ca3bbe8b1697cbce935debc5',
-    how: 'design/app/workspace/boardView/boardWords.ts: the project’s and the repository’s words; the epic’s prototype words gone',
+    blob: '4b5dfcbb1305ecd67240e1fd2bb6552b2bbd116b',
+    how: 'design/app/workspace/boardView/boardWords.ts: the units, each number’s note; the browser tests’ tool named by the product’s stack (productStack), not written',
   },
   {
     file: 'app/workspace/contract-view/bodyFields.ts',
@@ -101,8 +101,8 @@ const BOARD_NUMBERS: readonly Carried[] = [
   },
   {
     file: 'tests/app/boardView.test.ts',
-    blob: '17b50c4ec3731a80694e703906adb9437b4b9683',
-    how: 'design/tests/app/boardView.test.ts: the prototype case retired, the list’s order case read through a function',
+    blob: 'd06d4b42abb861db6c3ee223bd752fa16268d460',
+    how: 'design/tests/app/boardView.test.ts: the tickets’ number and its whole read apart, by ticketDetailOf',
   },
   {
     file: 'tests/architecture/aNamedTicketExists.test.ts',

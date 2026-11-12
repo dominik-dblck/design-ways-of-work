@@ -8,6 +8,7 @@ export { columns, epicOf, listed } from './boardView/boardEpics.ts';
 export { progress } from './boardView/boardProgress.ts';
 export { project } from './boardView/boardProject.ts';
 export { repository } from './boardView/boardRepository.ts';
+export type { RepositoryNumbers } from './boardView/boardRepository.ts';
 export { ideas } from './boardView/boardIdeas.ts';
 export {
   BOARD_HREF as boardHref,
@@ -22,7 +23,6 @@ export type {
   Column,
   EpicCard,
   IdeaCard,
-  ProjectStat,
   Reading,
   Section,
   Stat,

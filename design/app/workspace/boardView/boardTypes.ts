@@ -1,7 +1,7 @@
 /**
  * - `ColumnId`, `Column`, `EpicBadge` · where a card stands, a column, a badge
  * - `TicketLine`, `EpicCard`, `TicketDetail`, `Section` · a ticket, an epic, a group
- * - `Stat`, `ProjectStat`, `IdeaCard`, `Velocity`, `VelocityDay` · counts, pace
+ * - `Stat`, `IdeaCard`, `Velocity`, `VelocityDay` · counts, pace
  */
 type ColumnId = 'blocked' | 'ready' | 'doing' | 'done';
 
@@ -78,17 +78,17 @@ interface TicketDetail extends TicketLine {
   }[];
 }
 
+// one number of the board: its value, a few words beside it, what it counts on hover
 interface Stat {
-  readonly label: string;
-  readonly value: string;
-  readonly note: string;
-}
-
-// a count of the spec or of the build side's reports, and the page it opens on, when it has one
-interface ProjectStat {
   readonly id: string;
-  readonly value: string;
   readonly label: string;
+  readonly value: string;
+  // its whole, its parts or its change
+  readonly sub: string | null;
+  // how much of its whole it is, drawn as a bar
+  readonly share: number | null;
+  readonly note: string | null;
+  // the page it opens on, when it has one
   readonly href: string | null;
 }
 
@@ -125,7 +125,6 @@ export type {
   EpicCard,
   IdeaCard,
   Reading,
-  ProjectStat,
   Section,
   Stat,
   TicketDetail,
