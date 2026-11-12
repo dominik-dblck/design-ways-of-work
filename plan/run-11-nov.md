@@ -24,7 +24,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 
 | stage | what | done | of |
 | 1 | Foundation | 7 | 7 |
-| 2 | Design clean | 15 | 20 |
+| 2 | Design clean | 16 | 20 |
 | 3 | Spawn design | 0 | 3 |
 | 4 | Eagle-design | 0 | 2 |
 
@@ -80,6 +80,7 @@ word · 2 · both design repositories pinned to one tag, the gate green on both.
 - 18:31 · stage 2 · 13 of 20 · homes hold no product fact: 4780f18 + f505740 + 4b5f711, gate green (20 expected), product feature tier green; events and gates a known gap
 - 19:40 · stage 2 · 14 of 20 · way-of-working files homed: configs, settings, types, backup, post-commit held to the scope's remote, tsconfig from the scope, epic test on its own registry; gate green (7 expected), eagle-design approved (5969551, 04aabd3, 98da1da, 82c851f, ef48600; v0.12.0)
 - 20:10 · stage 2 · 15 of 20 · decisions split: 72 way-of-working rows join the register as W32 to W103, verbatim, the product's rows name them by heldBy, the homes cite W ids; gate green (26 expected), eagle-design approved (f8d1871, c38e5a1; v0.13.0)
+- 20:25 · stage 2 · 16 of 20 · user hooks homed: workMode and runBars byte-equal in shared/user-hooks, tested on a home of their own, installed by a script that never overwrites; gate green (4 expected), eagle-design approved (e180349, d03eee1; v0.14.0)
 
 ## Calls
 
@@ -1101,3 +1102,5 @@ Each call: what, why, how to undo. None changes what the PM sees.
 - Gate on e180349: 6 differences. knip in the product called the installer unused: it is an entry wherever
   `shared/` is held now, beside the take's. The build counts every non-TypeScript file of a home, the two hooks
   among them (386, not 384), and publishes neither: named in the row. eagle-design approved the piece.
+- v0.14.0 out under W30: its tag on ca3766a, on the remote, at the first try (feature tier 279 s); the gate on
+  d03eee1 green, the product's feature tier on the gate's clone ten of ten. Task 16 closed.
