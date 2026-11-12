@@ -20,8 +20,12 @@ describe('a repository whose work lands on a branch that takes nothing yet', () 
   product.committed('tools/check.ts', 'a check\n');
   product.committed('data/guard-map.json', '{ "files": ["one", "two"] }\n');
   product.committed('sheet/gate-rules.ts', 'rows\n');
+  product.committed('data/says.json', '{ "said": "once" }\n');
   const shared = product.committed('sheet/kept.ts', 'kept\n');
   product.git(['checkout', '-q', '-b', 'port']);
+  // a snapshot the port holds as a module: the JSON leaves, the module comes
+  product.git(['rm', '-q', 'data/says.json']);
+  product.committed('data/says.ts', "export const says = { said: 'once' };\n");
   product.git(['rm', '-q', 'tools/check.ts']);
   fs.mkdirSync(path.join(product.root, 'legacy'));
   product.git(['mv', 'data/guard-map.json', 'legacy/guard-map.json']);
@@ -48,7 +52,9 @@ describe('a repository whose work lands on a branch that takes nothing yet', () 
         moves: 'moves.tsv',
         carried,
         kept: [],
-        rewritten: [],
+        rewritten: [
+          { from: 'data/says.json', to: 'data/says.ts', name: 'says' },
+        ],
         names: [],
       },
     };
@@ -65,6 +71,11 @@ describe('a repository whose work lands on a branch that takes nothing yet', () 
     product.committed('sheet/kept.ts', 'kept, and more\n');
     product.committed('sheet/gate-rules.ts', 'rows, and one more\n');
     product.committed('data/guard-map.json', '{ "files": ["one"] }\n');
+    expect(faults()).toEqual([]);
+  });
+
+  it('a trunk change to a snapshot the port holds as a module is none: the merge writes its values', () => {
+    product.committed('data/says.json', '{ "said": "twice" }\n');
     expect(faults()).toEqual([]);
   });
 

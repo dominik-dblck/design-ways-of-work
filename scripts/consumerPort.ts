@@ -76,6 +76,8 @@ function removedBy({ source, ref, port }: Tried): ReadonlySet<string> {
 function toCarry(tried: Tried): readonly string[] {
   const { source, ref, port, wow } = tried;
   const git = gitIn(source);
+  // a snapshot the port holds as a module is none: the merge writes the trunk's values into it
+  const asModules = new Set(port.rewritten.map(({ from }) => from));
   const moved = new Map(
     mapRows(path.join(wow, port.moves)).map(([from = '', to = '']) => [
       from,
@@ -99,6 +101,7 @@ function toCarry(tried: Tried): readonly string[] {
   );
   return changed
     .filter((file) => removed.has(file) && !held.has(moved.get(file) ?? file))
+    .filter((file) => !asModules.has(file))
     .filter((file) => {
       const blob = git(['rev-parse', `${port.trunk}:${file}`]);
       return !port.carried.some(
