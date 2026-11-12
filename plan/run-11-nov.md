@@ -24,7 +24,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 
 | stage | what | done | of |
 | 1 | Foundation | 7 | 7 |
-| 2 | Design clean | 8 | 20 |
+| 2 | Design clean | 9 | 20 |
 | 3 | Spawn design | 0 | 3 |
 | 4 | Eagle-design | 0 | 2 |
 
@@ -73,6 +73,7 @@ word · 2 · both design repositories pinned to one tag, the gate green on both.
 - 10:15 · stage 2 · 6 of 10 · Feature and Board read a product only through its contract: the plan, the slots, the eras; 840ec79 carried; gate 79 of 79 expected; verified by eagle-design (71a83b4, 391504f, e6d0b3d, 5c1b7d0, 3f930aa, b9bf980, 6e359a2, 8660446, d593f8d, d205409, c2ea74f, 594f453)
 - 15:36 · stage 2 · 7 of 17 · the stack a parameter, the theme's names freed, TokenHex (a48f904, 225f0a5, eb98097; v0.5.0)
 - 15:36 · stage 2 · 8 of 17 · the roadmap's eight types are homes, homed by the migration (368914f, d89ea49; v0.5.0, gate green on 212a690)
+- 16:17 · stage 2 · 9 of 20 · roadmap readers homed: c1fe8e2 + 2c6ccc0, gate green (20 expected), eagle-design approved
 
 ## Calls
 
@@ -909,3 +910,10 @@ Each call: what, why, how to undo. None changes what the PM sees.
   d81fcef (rows split, no suppression); the contract trades the five readers it named for the seven files
   that gather the rows; v0.6.0's migration `ROADMAP_READERS` names the sixteen homed. Edges, receipts,
   findings and ideas stay the product's registries (eagle-design's check). Undo: revert it.
+- Task 9 closed: the gate on 2c6ccc0 green, twenty differences each expected, 2c6ccc0 approved by
+  eagle-design. The work-mode hook's question is struck from the PM's list: W29 answered it.
+- Task 10, the cases' readers: thirteen files of `sheet/cases/` asked of eagle-design as homes, split first
+  on its port (the journeys' rows and walked prints, the states' index, the refusals' reach, the roles'
+  count to its own files; the criterion's cite of a PM date dropped). Its migration joins v0.6.0, unreleased,
+  so the product takes one major for both areas. Undo: revert it; the cases' migration then gets its own
+  release.
