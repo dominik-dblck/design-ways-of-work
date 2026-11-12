@@ -5,32 +5,43 @@
 import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
 const NEXT: Unreleased = {
-  kind: 'major',
-  what: 'a design product’s way-of-working files are homes: the six tools’ configs and vitest’s, the session’s hooks (`.claude/settings.json`), the findings’, decisions’ and project plan’s types, the rules’ checks page; the backup script is one, found by git at whatever depth, for this repository and each product; the post-commit hook is a home (`shared/hooks/postCommit.ts`): every ref bundled under ~/backups and the branch pushed to the remote a new scope field names (`backup`), only where origin is that remote, read as host/owner/repo, so a clone does nothing; a design product’s `tsconfig.json` is written from its scope by the home `tools/writeTsconfig.ts` (the design layout, the homes taken, the scope’s new `extraRoots`); prettier’s ignore file names each line once; knip reads a git hook’s runs; the epic template’s test is a home, on a registry of its own',
-  action:
-    'the migrations `ports/` names for the repository, on its checkout: `node scripts/migrate.ts <name> <checkout>`, run from this repository at the tag (for eagle-design, twelve files leave its index as the homes’ text, `tools/zipRepo.sh`, `.husky/post-commit` and `tests/sheet/epicTemplate.test.ts` leave for the homes’, its scope names its remote in `backup`, its `extraRoots` and the tsconfig’s writer, its ignore file written again); a product with no backup names `backup: { none: <why> }`, one with no TypeScript beyond the layout `extraRoots: []`; the pin to the tag, then `yarn build`, its copies under `vendor/wow/` in the same commit',
+  kind: 'patch',
+  what: '',
+  action: 'none: move the pin to the tag',
   rules: { added: [], changed: [], removed: [] },
-  outputs: {
-    'eagle-design': {
-      'output · yarn build':
-        'the build reads three registry types that are homes now: its copies under `vendor/wow/` are 94, not 91',
-      'output · yarn checks':
-        'the build reads three registry types that are homes now: its copies under `vendor/wow/` are 94, not 91',
-      'output · yarn spec-check':
-        'the build reads three registry types that are homes now: its copies under `vendor/wow/` are 94, not 91',
-      'output · yarn cut-pack T-E19-00':
-        'the build reads three registry types that are homes now: its copies under `vendor/wow/` are 94, not 91; the four homed files under its folders (three types, the checks page) count as uncommitted until the product commits them with its pin',
-      'written · vendor/wow/docs/process/decisions/decisionTypes.ts':
-        'the vendored copy of a type the build reads, a home now',
-      'written · vendor/wow/docs/process/projectPlan/projectPlanTypes.ts':
-        'the vendored copy of a type the build reads, a home now',
-      'written · vendor/wow/roadmaps/findings/findingTypes.ts':
-        'the vendored copy of a type the build reads, a home now',
-    },
-  },
+  outputs: {},
 };
 
 const RELEASES: readonly Release[] = [
+  {
+    version: '0.12.0',
+    date: '2026-11-12',
+    kind: 'major',
+    what: 'a design product’s way-of-working files are homes: the six tools’ configs and vitest’s, the session’s hooks (`.claude/settings.json`), the findings’, decisions’ and project plan’s types, the rules’ checks page; the backup script is one, found by git at whatever depth, for this repository and each product; the post-commit hook is a home (`shared/hooks/postCommit.ts`): every ref bundled under ~/backups and the branch pushed to the remote a new scope field names (`backup`), only where origin is that remote, read as host/owner/repo, so a clone does nothing; a design product’s `tsconfig.json` is written from its scope by the home `tools/writeTsconfig.ts` (the design layout, the homes taken, the scope’s new `extraRoots`); prettier’s ignore file names each line once; knip reads a git hook’s runs; the epic template’s test is a home, on a registry of its own',
+    action:
+      'the migrations `ports/` names for the repository, on its checkout: `node scripts/migrate.ts <name> <checkout>`, run from this repository at the tag (for eagle-design, twelve files leave its index as the homes’ text, `tools/zipRepo.sh`, `.husky/post-commit` and `tests/sheet/epicTemplate.test.ts` leave for the homes’, its scope names its remote in `backup`, its `extraRoots` and the tsconfig’s writer, its ignore file written again); a product with no backup names `backup: { none: <why> }`, one with no TypeScript beyond the layout `extraRoots: []`; the pin to the tag, then `yarn build`, its copies under `vendor/wow/` in the same commit',
+    rules: { added: [], changed: [], removed: [] },
+    outputs: {
+      'eagle-design': {
+        'output · yarn build':
+          'the build reads three registry types that are homes now: its copies under `vendor/wow/` are 94, not 91',
+        'output · yarn checks':
+          'the build reads three registry types that are homes now: its copies under `vendor/wow/` are 94, not 91',
+        'output · yarn spec-check':
+          'the build reads three registry types that are homes now: its copies under `vendor/wow/` are 94, not 91',
+        'output · yarn cut-pack T-E19-00':
+          'the build reads three registry types that are homes now: its copies under `vendor/wow/` are 94, not 91; the four homed files under its folders (three types, the checks page) count as uncommitted until the product commits them with its pin',
+        'written · vendor/wow/docs/process/decisions/decisionTypes.ts':
+          'the vendored copy of a type the build reads, a home now',
+        'written · vendor/wow/docs/process/projectPlan/projectPlanTypes.ts':
+          'the vendored copy of a type the build reads, a home now',
+        'written · vendor/wow/roadmaps/findings/findingTypes.ts':
+          'the vendored copy of a type the build reads, a home now',
+      },
+    },
+    moved: {},
+    tried: { 'eagle-design': 'f44929d' },
+  },
   {
     version: '0.11.0',
     date: '2026-11-12',
