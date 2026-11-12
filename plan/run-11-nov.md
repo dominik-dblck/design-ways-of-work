@@ -946,3 +946,7 @@ Each call: what, why, how to undo. None changes what the PM sees.
 - eagle-design took v0.6.0 at a6abea2; its first commit failed its release-record test, the sixteen vendored
   copies missing: the action named the pin's commit, not the build that writes `vendor/wow/`. v0.7.0's action
   now says the build and its copies go into that commit; each later action says the same. Undo: revert it.
+- The gate on 06725ea, against eagle-design at its v0.6.0 pin: the thirteen homed, the outputs as `NEXT`
+  says, but one broken: `main` changed `roadmaps/notes.ts` (E22's notebook, f07c9e7), a home since v0.6.0.
+  The port already gathers E22 in `notes/notesRows.ts`, so the home stays; `CARRIED` names main's blob.
+  Undo: revert it.

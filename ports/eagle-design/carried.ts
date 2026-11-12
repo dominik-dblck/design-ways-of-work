@@ -26,6 +26,11 @@ const CARRIED: readonly Carried[] = [
     how: 'design/guards/checks/journeysPart.ts: the epics off the backlog, a journey that waits',
   },
   {
+    file: 'roadmaps/notes.ts',
+    blob: '2c8f3b6ff3d476989ac87293fe0b296e3852bcf1',
+    how: 'the E22 notebook main lists here stands in the product’s roadmaps/notes/notesRows.ts on its port: the home reads that file, as it was',
+  },
+  {
     file: 'tests/architecture/aClosedNotebookIsFrozen.test.ts',
     blob: 'bb5280c09aa1c5291c2b0d727767667ab113d696',
     how: 'the pins stand in the product’s roadmaps/notes/frozenNotebooks.ts, E10’s among them: the home’s test is as it was',
