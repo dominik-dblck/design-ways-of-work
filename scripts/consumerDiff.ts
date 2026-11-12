@@ -1,13 +1,15 @@
 /**
  * - `Run`, `Sides` · a script's exit and output; a thing held once a clone
  * - `runDifferences`, `mapDifferences` · the two clones' runs and files, compared
- * - `explained`, `isHalted`, `unwrittenOnTag` · each difference with its row; a halt
+ * - `explained`, `haltedOnTag`, `unwrittenOnTag` · each difference's row; a halt
  */
 
 interface Run {
   readonly command: string;
   readonly status: number | null;
   readonly output: string;
+  // the differences standing once it ended, where its caller asked
+  readonly standing?: ReadonlySet<string>;
 }
 
 // pinned: the repository on its tag; next: the same with the commit in hand taken
@@ -52,9 +54,24 @@ function mapDifferences<T>(
     .map((key) => `${name} · ${key}`);
 }
 
-// a run the tag's side failed and the commit's passed: what the tag's side never wrote is that halt's
-const isHalted = ({ pinned, next }: Sides<readonly Run[]>): boolean =>
-  pinned.some((run, at) => run.status !== 0 && next[at]?.status === 0);
+// the runs the tag's side failed where the commit's passed
+const haltedAt = ({ pinned, next }: Sides<readonly Run[]>): readonly number[] =>
+  pinned.flatMap((run, at) =>
+    run.status !== 0 && next[at]?.status === 0 ? [at] : [],
+  );
+
+// of what the tag's side never wrote, what a run it halted on first wrote on the commit's side
+function haltedOnTag(
+  runs: Sides<readonly Run[]>,
+  unwritten: readonly string[],
+): readonly string[] {
+  const halted = haltedAt(runs);
+  return unwritten.filter((difference) =>
+    halted.includes(
+      runs.next.findIndex((run) => run.standing?.has(difference) === true),
+    ),
+  );
+}
 
 function unwrittenOnTag<T>(
   name: string,
@@ -66,7 +83,7 @@ function unwrittenOnTag<T>(
 }
 
 const HALTED =
-  'the tag’s side never wrote it: a run of its failed where this one passed';
+  'the tag’s side never wrote it: the run that first writes it failed there and passed here';
 
 // a row ending in `*` expects every difference it opens
 const isExpectedBy = (row: string, difference: string): boolean =>
@@ -84,7 +101,7 @@ function explained({
   readonly expected: Readonly<Record<string, string>>;
   // rows of the releases put out since the repository's pin: each explains, none is stale
   readonly allowed: Readonly<Record<string, string>>;
-  // what the tag's side never wrote while a run of its halted: a row may still say more
+  // what a run the tag's side halted on first wrote on the commit's: a row may still say more
   readonly halted?: ReadonlySet<string>;
 }): Explained {
   const rows = Object.entries(expected);
@@ -112,5 +129,11 @@ function explained({
   };
 }
 
-export { explained, isHalted, mapDifferences, runDifferences, unwrittenOnTag };
+export {
+  explained,
+  haltedOnTag,
+  mapDifferences,
+  runDifferences,
+  unwrittenOnTag,
+};
 export type { Run, Sides };

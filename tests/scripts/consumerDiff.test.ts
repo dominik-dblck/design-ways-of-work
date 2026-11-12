@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   explained,
-  isHalted,
+  haltedOnTag,
   mapDifferences,
   runDifferences,
   unwrittenOnTag,
@@ -115,20 +115,31 @@ describe('a difference is expected by a row of the release, or it is red', () =>
     ]);
   });
 
-  it('what a halted tag never wrote explains itself; a row on it still says more', () => {
+  it('what a run the tag halted on first wrote explains itself; a row on it still says more', () => {
     const failed: Run = { ...build, status: 1 };
-    const runs = { pinned: [failed], next: [build] };
+    const left = (...files: readonly string[]): Run => ({
+      ...build,
+      standing: new Set(files.map((file) => `dist · ${file}`)),
+    });
+    const runs = {
+      pinned: [failed, build],
+      next: [
+        left('a.js', 'b.js', 'c.js'),
+        left('a.js', 'b.js', 'c.js', 'd.js'),
+      ],
+    };
     const files = {
       pinned: new Map([['a.js', '1']]),
       next: new Map([
         ['a.js', '2'],
         ['b.js', '3'],
         ['c.js', '4'],
+        ['d.js', '5'],
       ]),
     };
-    expect(isHalted(runs)).toBe(true);
-    expect(isHalted({ pinned: [build], next: [failed] })).toBe(false);
-    const halted = new Set(unwrittenOnTag('dist', files));
+    const unwritten = unwrittenOnTag('dist', files);
+    expect(unwritten).toEqual(['dist · b.js', 'dist · c.js', 'dist · d.js']);
+    const halted = new Set(haltedOnTag(runs, unwritten));
     expect([...halted]).toEqual(['dist · b.js', 'dist · c.js']);
     const { unexplained, stale, lines } = explained({
       found: mapDifferences('dist', files),
@@ -136,11 +147,20 @@ describe('a difference is expected by a row of the release, or it is red', () =>
       allowed: {},
       halted,
     });
-    expect(unexplained).toEqual(['dist · a.js']);
+    expect(unexplained).toEqual(['dist · a.js', 'dist · d.js']);
     expect(stale).toEqual([]);
-    expect(lines.slice(1)).toEqual([
-      'EXPECTED · dist · b.js · the tag’s side never wrote it: a run of its failed where this one passed',
+    expect(lines.slice(1, 3)).toEqual([
+      'EXPECTED · dist · b.js · the tag’s side never wrote it: the run that first writes it failed there and passed here',
       'EXPECTED · dist · c.js · a page more',
     ]);
+  });
+
+  it('a run that passed on the tag and failed here halts nothing', () => {
+    const failed: Run = { ...build, status: 1 };
+    const runs = {
+      pinned: [build],
+      next: [{ ...failed, standing: new Set(['dist · b.js']) }],
+    };
+    expect(haltedOnTag(runs, ['dist · b.js'])).toEqual([]);
   });
 });

@@ -768,3 +768,8 @@ Each call: what, why, how to undo. None changes what the PM sees.
   gate's clone: 11 tsc errors, 47 lint findings under this side's rules (eagle runs its own config). Sent to
   eagle-dev on the PM's word, nine points with file and line; the sync script waits for its sha. The sheet's
   `Button` and `Badge` types rename on eagle-design's side (cf4530c), the atoms keep the design system's names.
+- Gate, the halt narrowed (eagle-design's note on 8fbf131): a file the tag's side never wrote was explained
+  whenever any run of its failed. Now the commit's side reads what each run left, and only a file first written
+  by a run that failed on the tag and passed here is explained. My call, over a coarse line in HALTED: a coarse
+  explanation would let an unrelated new file through. Cost: one folder digest and one git status per run on
+  one side. Undo: revert it.

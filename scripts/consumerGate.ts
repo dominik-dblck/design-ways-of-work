@@ -18,7 +18,7 @@ import {
 import { explained } from './consumerDiff.ts';
 import type { Run, Sides } from './consumerDiff.ts';
 import { portFaults, trunkTaken } from './consumerPort.ts';
-import { differencesOf, standing } from './consumerFiles.ts';
+import { differencesOf, standing, standingOn } from './consumerFiles.ts';
 import { ranIn } from './consumerRuns.ts';
 import type { Consumer } from './consumerTypes.ts';
 import { migrated } from './migrated.ts';
@@ -132,14 +132,23 @@ function readied({
   return { sides, untaken, resolved };
 }
 
-// both clones run at once: each holds its own tree, and a run waits on nothing of the other's
-async function ranBoth(
-  sides: Sides<string>,
-  commands: Consumer['commands'],
-): Promise<Sides<readonly Run[]>> {
+// both at once, each its own tree; the commit's side keeps what each run left, for a halt
+async function ranBoth({
+  consumer,
+  sides,
+  before,
+}: {
+  readonly consumer: Consumer;
+  readonly sides: Sides<string>;
+  readonly before: Sides<ReadonlyMap<string, string>>;
+}): Promise<Sides<readonly Run[]>> {
+  const { commands } = consumer;
+  const root = sides.next;
+  const after = (): ReadonlySet<string> =>
+    standingOn({ consumer, root, before: before.next });
   const [pinned, next] = await Promise.all([
     ranIn({ root: sides.pinned, commands }),
-    ranIn({ root: sides.next, commands }),
+    ranIn({ root, commands, after }),
   ]);
   for (const run of pinned)
     console.log(`  ran · yarn ${run.command} · exit ${String(run.status)}`);
@@ -158,7 +167,7 @@ async function tried({
   // a repository that pins an older tag meets each release since: their rows explain as this one's do
   const allowed = rowsSince(released, versionTaken(sides.pinned));
   const before = standing(sides);
-  const runs = await ranBoth(sides, consumer.commands);
+  const runs = await ranBoth({ consumer, sides, before });
   const { found, halted } = differencesOf({
     consumer,
     sides,

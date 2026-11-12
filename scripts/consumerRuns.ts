@@ -1,5 +1,5 @@
 /**
- * - `ranIn` · a clone's package scripts run in order, each exit and output kept
+ * - `ranIn` · a clone's package scripts in order: each exit, output, what it left
  * - `settled` · an output with its root and its timings out: two clones print alike
  */
 import { spawn } from 'node:child_process';
@@ -51,17 +51,20 @@ const ran = (root: string, command: readonly string[]): Promise<Run> =>
     });
   });
 
-// one after another: a script reads what the one before it built
+// one after another: a script reads what the one before it built; `after` reads what each left
 const ranIn = ({
   root,
   commands,
+  after,
 }: {
   readonly root: string;
   readonly commands: readonly (readonly string[])[];
+  readonly after?: () => ReadonlySet<string>;
 }): Promise<readonly Run[]> =>
-  commands.reduce<Promise<readonly Run[]>>(
-    async (before, command) => [...(await before), await ran(root, command)],
-    Promise.resolve([]),
-  );
+  commands.reduce<Promise<readonly Run[]>>(async (before, command) => {
+    const done = await before;
+    const run = await ran(root, command);
+    return [...done, after === undefined ? run : { ...run, standing: after() }];
+  }, Promise.resolve([]));
 
 export { ranIn, settled };
