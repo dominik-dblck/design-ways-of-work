@@ -1,6 +1,6 @@
 /**
  * - `features`, `firstEpic`, `featureOf` · the tabs, the one opened, one epic
- * - `featureOf` takes the product's states and counters from the page that runs it
+ * - `featureOf` takes the product's view from the page that runs it
  * - `featureWords` · the page's own words; the view's types
  */
 import { all as TICKETS } from '../../roadmaps/tickets.ts';
@@ -9,15 +9,9 @@ import { stepsOf } from '../../roadmaps/features.ts';
 import { notesOf } from '../../roadmaps/notes.ts';
 import { casesOfEpic, flat, named } from '../../sheet/cases/testCases.ts';
 import { ticketDetailOf } from './boardView.ts';
-import { endpointsOf } from './contractView.ts';
+import { endpointsOf, piecesOf } from './contractView.ts';
 import { caseGroupsOf, caseKindsOf } from './featureView/featureCases.ts';
 import { coverOf } from './featureView/featureCover.ts';
-import {
-  docTypesOf,
-  fieldKindsOf,
-  fieldOptionsOf,
-  fieldsCodeOf,
-} from './featureView/featureFields.ts';
 import { journeysOf } from './featureView/featureJourneys.ts';
 import {
   combinationsOf,
@@ -25,7 +19,7 @@ import {
   statesNamed,
 } from './featureView/featureCombinations.ts';
 import { FEATURE_WORDS } from './featureView/featureWords.ts';
-import type { ProductView } from '../../tools/productTypes.ts';
+import type { ProductFields, ProductView } from '../../tools/productTypes.ts';
 import type { FeatureTab, FeatureView } from './featureView/featureTypes.ts';
 
 // a feature is an epic's one ticket, numbered 00
@@ -51,6 +45,23 @@ const readOf = (
   ticket: ReturnType<typeof TICKETS>[number] | undefined,
 ): readonly string[] => ticket?.read ?? [];
 
+type FieldsView = Pick<
+  FeatureView,
+  'docTypes' | 'fieldKinds' | 'fieldOptions' | 'fieldsCode'
+>;
+
+// the fields the product hands in for the epic, its code split into lines to draw
+function fieldsView(fields: ProductFields | undefined): FieldsView {
+  if (!fields)
+    return { fieldKinds: [], fieldOptions: [], fieldsCode: [], docTypes: [] };
+  return {
+    fieldKinds: fields.kinds,
+    fieldOptions: fields.options,
+    fieldsCode: fields.code.split('\n').map(piecesOf),
+    docTypes: fields.docTypes,
+  };
+}
+
 function featureOf(epic: string, plugs: ProductView = {}): FeatureView {
   const ticket = TICKETS().find((one) => one.id === `T-${epic}-00`);
   const read = readOf(ticket);
@@ -66,10 +77,7 @@ function featureOf(epic: string, plugs: ProductView = {}): FeatureView {
     endpoints: endpointsOf(epic, read),
     caseGroups,
     caseKinds: caseKindsOf(caseGroups),
-    fieldKinds: fieldKindsOf(epic),
-    fieldOptions: fieldOptionsOf(epic),
-    fieldsCode: fieldsCodeOf(epic),
-    docTypes: docTypesOf(epic),
+    ...fieldsView(plugs.fieldsOf?.(epic)),
     decisions: ticket ? (ticketDetailOf(ticket.id)?.edgeSections ?? []) : [],
     notes: notesOf(epic),
     combinations: combinationsOf(epic),
@@ -79,5 +87,4 @@ function featureOf(epic: string, plugs: ProductView = {}): FeatureView {
 }
 
 export type * from './featureView/featureTypes.ts';
-export type * from './featureView/featureFieldTypes.ts';
 export { featureOf, features, FEATURE_WORDS as featureWords, firstEpic };

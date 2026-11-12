@@ -1,8 +1,13 @@
 /**
  * - `Product` · what a product plugs into the way of working, in its `product.ts`
- * - `CheckPart` · a part of the checks: its lines over the built mirror
- * - `ProductScreens`, `ProductView` · part w's screens; what the pages plug in
+ * - `CheckPart`, `ProductScreens` · a part of the checks; part w's screens
+ * - `ProductView`, `ProductFields` · what the pages plug in; an epic's fields
  */
+import type {
+  DocTypeView,
+  FieldKindView,
+  FieldOptionView,
+} from '../app/workspace/featureFieldTypes.ts';
 import type { Mirror } from '../guards/checks/checkWorld.ts';
 import type { MapMove, SourceFinding } from '../guards/sourceCheck.ts';
 
@@ -23,6 +28,13 @@ interface SweptFrame {
 interface CombinationTally {
   readonly total: number;
   readonly byKind: Readonly<Record<string, number>>;
+}
+
+interface ProductFields {
+  readonly kinds: readonly FieldKindView[];
+  readonly options: readonly FieldOptionView[];
+  readonly code: string;
+  readonly docTypes: readonly DocTypeView[];
 }
 
 interface ProductScreens {
@@ -51,6 +63,7 @@ interface ProductView {
   readonly statesOf?: (epic: string) => number;
   // each combinations file's counter, by the file a combinations row names
   readonly counters?: Readonly<Record<string, () => CombinationTally>>;
+  readonly fieldsOf?: (epic: string) => ProductFields | undefined;
 }
 
-export type { CheckPart, Product, ProductScreens, ProductView };
+export type { CheckPart, Product, ProductFields, ProductScreens, ProductView };

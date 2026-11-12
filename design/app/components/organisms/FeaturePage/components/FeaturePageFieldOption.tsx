@@ -5,7 +5,7 @@ import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
-import type { FieldOptionView } from '../../../../workspace/featureView.ts';
+import type { FieldOptionView } from '../../../../workspace/featureFieldTypes.ts';
 import { radiusOf } from '../../../../theme/tokenReads.ts';
 
 function FeaturePageFieldOption({

@@ -10,7 +10,7 @@ import type {
   DocTypeView,
   FieldKindView,
   FieldOptionView,
-} from './featureFieldTypes.ts';
+} from '../featureFieldTypes.ts';
 import type { Section } from '../boardView.ts';
 
 interface FeatureTab {

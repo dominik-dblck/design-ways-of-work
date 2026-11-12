@@ -8,7 +8,7 @@ import { callOf, usesOf } from './fileUses.ts';
 import { exportsOf } from './bundleExports.ts';
 import { copies, findingCounts } from './ratchet.ts';
 import { targets } from './requirementReads.ts';
-import { LAYERS, layerOf, readsOf } from './sourceLayers.ts';
+import { LAYER_NAMES, LAYERS, layerOf, readsOf } from './sourceLayers.ts';
 import { MAP, SCOPE } from './sourceScope.ts';
 import type {
   DrawnFiles,
@@ -93,7 +93,6 @@ function architecture(
     texts,
     names,
     moves,
-    layerNames,
   }: MapOptions & { readonly texts: Texts; readonly names?: readonly string[] },
 ): GuardMap {
   const reads = readsOf(texts);
@@ -111,7 +110,7 @@ function architecture(
     files,
     links: linksOf(drawn, { known, pairs, moves }),
     moves: moves ?? [],
-    layerNames: layerNames ?? {},
+    layerNames: LAYER_NAMES,
     quiet: (names ?? []).filter((file) => !known.has(file)),
     counts: findingCounts(copied),
   };

@@ -103,11 +103,6 @@ const CONTRACT: readonly ContractRow[] = [
     what: 'logic of the product’s own',
   },
   {
-    file: 'sheet/logic/assembly/contentTypeLogic.ts',
-    kind: 'plug',
-    what: 'logic of the product’s own',
-  },
-  {
     file: 'sheet/logic/capabilities.ts',
     kind: 'registry',
     what: 'the capabilities',
@@ -118,21 +113,11 @@ const CONTRACT: readonly ContractRow[] = [
     what: 'the people and the roles',
   },
   {
-    file: 'sheet/model/fieldKinds.ts',
-    kind: 'plug',
-    what: 'a model of the product’s own',
-  },
-  {
     file: 'sheet/project.ts',
     kind: 'registry',
     what: 'its names and what its build side reads: data alone, no import',
   },
   { file: 'sheet/rules.ts', kind: 'registry', what: 'the rules’ rows' },
-  {
-    file: 'sheet/samples/blocks.ts',
-    kind: 'plug',
-    what: 'samples of the product’s own',
-  },
   {
     file: 'sheet/screens/wireframes.ts',
     kind: 'optional',

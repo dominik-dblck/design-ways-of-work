@@ -559,3 +559,19 @@ Each call: what, why, how to undo. None changes what the PM sees.
   check through its cut; with none, a criterion's DONE count is not held against a count. The leaf test holds
   every file of kind `product`; knip starts from both. The rows of the scenes and the role combinations
   leave the contract. Undo: revert the commit. Why not one file: the page's bundle would pull in `node:fs`.
+- The gate on 5b: four of the product's bundles differ, each meant (the feature view and the refine check
+  import no scenes and no role combinations), written on the release in hand. eagle-design's review of 5a:
+  the two new files' headers split a sentence across bullets, mended; the assembly's copy of V8's message
+  stays for parity, a message of its own later.
+- 5c. Three plug rows leave the contract. The seven layers' names: the home's, beside the layers
+  (`LAYER_NAMES`), the map draws them with no read of the product. The fields an epic decided:
+  `ProductView.fieldsOf`, typed `ProductFields` here; the feature view splits their code into lines, the
+  product's `productView/productFields.ts` builds them (moved there by `scripts/move.ts`), with a test of its
+  own; the home's test draws a stub. The field view types move up to an entry of their own
+  (`app/workspace/featureFieldTypes.ts`): the product's types read no part, and no barrel re-exports
+  another. Undo: revert the commit.
+- 5c2, the requirements, waits for the product: a registry, `sheet/requirements.ts`, the source guard reads
+  by path (it reads them deep in its scan, where no entry point hands anything in). Tried in the gate's
+  clone with a registry that re-exports the rows: the rule that a barrel re-exports its own folder alone
+  refuses it, and rightly, a registry holds its rows. So eagle-design moves its rows there on its `main`,
+  then the home reads them.

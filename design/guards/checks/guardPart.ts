@@ -12,7 +12,6 @@ import type { Mirror } from './checkWorld.ts';
 import { guardRun } from './runChecks.ts';
 import type { GuardRun } from './runChecks.ts';
 import type { Product } from '../../tools/productTypes.ts';
-import * as CONTENT_TYPE_LOGIC from '../../sheet/logic/assembly/contentTypeLogic.ts';
 import * as MESSAGES from '../../sheet/words/messages.ts';
 import * as WIREFRAMES from '../../sheet/screens/wireframes.ts';
 
@@ -31,7 +30,6 @@ function mapLine(
     texts: { ...run.fileTexts, ...run.layered },
     names: run.list,
     ...(moves === undefined ? {} : { moves: moves() }),
-    layerNames: Reflect.get(CONTENT_TYPE_LOGIC, 'layers'),
   });
   const map = {
     ...drawn,

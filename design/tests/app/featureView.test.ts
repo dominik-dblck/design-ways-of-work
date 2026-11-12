@@ -4,7 +4,6 @@
 import { describe, expect, it } from 'vitest';
 import { journeysOfEpic } from '../../sheet/cases/journeys.ts';
 import { all as COMMANDS } from '../../sheet/contract/commands.ts';
-import { decidedIn } from '../../sheet/model/fieldKinds.ts';
 import {
   featureOf,
   features,
@@ -12,6 +11,7 @@ import {
 } from '../../app/workspace/featureView.ts';
 import { piecesOf } from '../../app/workspace/contractView/codeTokens.ts';
 import { productView } from '../../productView.ts';
+import type { ProductView } from '../../tools/productTypes.ts';
 
 describe('the Feature view', () => {
   it('has a tab per feature ticket and opens on the first one not done', () => {
@@ -83,15 +83,25 @@ describe('the Feature view', () => {
     expect(featureOf('E06').statesNamed).toBe(0);
   });
 
-  it('shows the field kinds on the epic that decided them, and only there', () => {
-    expect(featureOf(decidedIn).fieldKinds.length).toBeGreaterThan(0);
-    expect(featureOf('E06').fieldKinds).toEqual([]);
-    const blocks = featureOf(decidedIn);
+  it('draws the fields the product hands in, on their epic alone', () => {
+    const plugs: ProductView = {
+      fieldsOf: (epic) =>
+        epic === 'E06'
+          ? {
+              kinds: [],
+              options: [{ name: 'localized', ts: 'boolean', means: 'one' }],
+              code: 'type Field = {\n  name: string;\n};',
+              docTypes: [],
+            }
+          : undefined,
+    };
+    const blocks = featureOf('E06', plugs);
     expect(blocks.fieldOptions.map((one) => one.name)).toContain('localized');
     const code = blocks.fieldsCode.map((line) =>
       line.map((piece) => piece.text).join(''),
     );
-    expect(code).toContain('type Field =');
-    expect(featureOf('E06').fieldsCode).toEqual([]);
+    expect(code).toEqual(['type Field = {', '  name: string;', '};']);
+    expect(featureOf('E09', plugs).fieldsCode).toEqual([]);
+    expect(featureOf('E06').fieldOptions).toEqual([]);
   });
 });

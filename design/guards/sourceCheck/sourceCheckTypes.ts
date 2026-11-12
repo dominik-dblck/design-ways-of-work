@@ -142,7 +142,6 @@ interface FileLink extends MapMove {
 
 interface MapOptions {
   readonly moves?: readonly MapMove[];
-  readonly layerNames?: Readonly<Record<string, unknown>>;
 }
 
 interface GuardMap {

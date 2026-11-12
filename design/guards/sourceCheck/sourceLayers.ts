@@ -1,5 +1,5 @@
 /**
- * - `LAYERS`, `layerOf`, `readsOf`, `layersCheck` · seven layers, each reads lower
+ * - `LAYERS`, `LAYER_NAMES`, `layerOf`, `readsOf`, `layersCheck` · the layers
  * - `branchesCheck`, `codeLines` · a rule or a view branching on a type's name
  * - `exampleRow`, `readable` · a test's example row, the files a copy is read in
  */
@@ -56,6 +56,17 @@ const LAYERS: Readonly<Record<string, number | undefined>> = {
   'screenView.js': 7.3,
   'contentList.js': 7.15,
   'sourceCheck.js': 7.9,
+};
+
+// each layer by its whole number, as the architecture map names it
+const LAYER_NAMES: Readonly<Record<string, string>> = {
+  1: 'words',
+  2: 'look',
+  3: 'contract',
+  4: 'facts',
+  5: 'rules',
+  6: 'examples and tests',
+  7: 'views',
 };
 
 const TYPE_NAMES: readonly string[] = [
@@ -184,6 +195,7 @@ function readable(texts: Texts): readonly string[] {
 export {
   branchesCheck,
   exampleRow,
+  LAYER_NAMES,
   LAYERS,
   layerOf,
   layersCheck,
