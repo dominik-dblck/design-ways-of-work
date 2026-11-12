@@ -1052,3 +1052,10 @@ Each call: what, why, how to undo. None changes what the PM sees.
   clone's local path never does, so a clone in `.consumers/` no longer could overwrite the product's bundle.
   Tested on a scratch repository, its pushes to a bare one. `BACKUP_HOOK` (0.12.0) takes the product's hook
   out and writes its remote into its scope. Undo: revert it.
+- Task 14, its third piece: the product's `.prettierignore` was already its scope's, written by the shared
+  writer; the lines eagle-design saw twice were the writer's (a glob both `generated` and a generator's), so it
+  names each line once now, in the first group that names it (this repository's file loses one line too). Its
+  `tsconfig.json` is written from the scope by the home `tools/writeTsconfig.ts`: the design layout, the homes
+  taken, the scope's new `extraRoots` (eagle-design's `public`, its assets' manifest); the writer's output is
+  the product's file byte for byte. `GENERATED_FILES` (0.12.0) names the writer and the root in its scope and
+  writes its ignore file again, so its freshness test stays green. Undo: revert it.

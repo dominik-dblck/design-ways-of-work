@@ -58,6 +58,7 @@ interface Spelling {
 interface RepoScope {
   readonly root: string;
   readonly backup: { readonly remote: string } | { readonly none: string };
+  readonly extraRoots: readonly string[];
   readonly ignores: readonly string[];
   // the trees a product checks: held here, skipped by its lint and exports, read by a glob naming one
   readonly productTrees: readonly string[];

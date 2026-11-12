@@ -5,6 +5,8 @@ const scope: RepoScope = {
   root: import.meta.dirname,
   // no post-commit hook here: `yarn backup` after each commit
   backup: { none: 'its owner runs `yarn backup` after each commit' },
+  // its tsconfig is its own: no design layout to add folders to
+  extraRoots: [],
   // it holds the browser tier's framework and gates; a product runs them
   browser: {
     none: 'the way of working holds the framework, shared/e2e/, and a product runs it',

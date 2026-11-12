@@ -63,9 +63,18 @@ function prettierIgnoreOf(scope: Formatted): string {
       ([glob, why]) => [why, [glob]] as const,
     ),
   ];
-  return `${groups
-    .filter(([, globs]) => globs.length > 0)
-    .map(([why, globs]) => [`# ${why}`, ...globs.map(asIgnored)].join('\n'))
+  // each line once, in the first group that names it
+  const seen = new Set<string>();
+  const kept = groups.map(([why, globs]) => {
+    const fresh = [...new Set(globs.map(asIgnored))].filter(
+      (line) => !seen.has(line),
+    );
+    for (const line of fresh) seen.add(line);
+    return [why, fresh] as const;
+  });
+  return `${kept
+    .filter(([, lines]) => lines.length > 0)
+    .map(([why, lines]) => [`# ${why}`, ...lines].join('\n'))
     .join('\n')}\n`;
 }
 

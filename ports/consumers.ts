@@ -10,6 +10,7 @@ import { COUNT_FORMS } from './eagle-design/countForms.ts';
 import { HOME_FACTS } from './eagle-design/homeFacts.ts';
 import { WOW_FILES } from './eagle-design/wowFiles.ts';
 import { BACKUP_HOOK } from './eagle-design/backupHook.ts';
+import { GENERATED_FILES } from './eagle-design/generatedFiles.ts';
 import { REWRITTEN } from './eagle-design/rewritten.ts';
 import { MIGRATION } from './eagle-design/migration.ts';
 import { ROADMAP_READERS } from './eagle-design/roadmapReaders.ts';
@@ -52,6 +53,7 @@ const CONSUMERS: readonly [Consumer, ...Consumer[]] = [
       COUNT_FORMS,
       WOW_FILES,
       BACKUP_HOOK,
+      GENERATED_FILES,
     ],
     // its own work lands on `main`, which takes nothing yet: the branch holds `main` whole, or the gate is red
     port: {
