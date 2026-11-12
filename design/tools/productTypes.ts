@@ -1,7 +1,7 @@
 /**
  * - `Product` · what a product plugs into the way of working, in its `product.ts`
  * - `CheckPart` · a part of the checks: its lines over the built mirror
- * - `ProductScreens`, `SweptFrame`, `FrameGap` · part w's screens: swept, viewed
+ * - `ProductScreens` · part w's screens: each swept, each seen in the editor
  */
 import type { Mirror } from '../guards/checks/checkWorld.ts';
 import type { MapMove, SourceFinding } from '../guards/sourceCheck.ts';
@@ -41,4 +41,4 @@ interface Product {
   readonly screens?: ProductScreens;
 }
 
-export type { CheckPart, FrameGap, Product, ProductScreens, SweptFrame };
+export type { CheckPart, Product, ProductScreens };

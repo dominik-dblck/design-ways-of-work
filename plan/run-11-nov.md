@@ -546,3 +546,8 @@ Each call: what, why, how to undo. None changes what the PM sees.
   tail of part a; the assembly's findings), new files, no rows. `guards/sourceCheck.ts` exports its finding
   and map-move types, so a product reads them through the entry. Tried by hand in the gate's clone first:
   its tsc and ESLint clean, `yarn checks` the same output line for line. Undo: revert the commit.
+- The gate on 5a read nine differences, each mended but one: the product's prettier formats `design/`, which
+  this repository's ignores, so a home's file is formatted here with no ignore file; the guard's header kept
+  as it was (the map and the bundle record a header); the two screen types stay inside their file (the
+  product's knip read them as unused exports); the export test counts `product.ts` a reader, as it counts
+  the tools' configs. The one meant: the pack counts the migration's two new files as not committed yet.

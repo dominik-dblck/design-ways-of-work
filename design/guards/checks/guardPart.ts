@@ -22,7 +22,10 @@ type GuardPlugs = Pick<Product, 'guardFindings' | 'guardLines' | 'mapMoves'>;
 // the architecture map's data: this run's findings, never counted again
 function mapLine(
   run: GuardRun,
-  { mirror, moves }: { readonly mirror: Mirror; readonly moves: GuardPlugs['mapMoves'] },
+  {
+    mirror,
+    moves,
+  }: { readonly mirror: Mirror; readonly moves: GuardPlugs['mapMoves'] },
 ): string {
   const drawn = run.guard.architecture(run.found, {
     texts: { ...run.fileTexts, ...run.layered },

@@ -10,7 +10,12 @@ const NEXT: Unreleased = {
   action:
     'the migration `ports/` names for the repository, on its checkout: `node scripts/migrate.ts <name> <checkout>`, run from this repository at the tag; the pin to the tag in the same commit',
   rules: { added: [], changed: [], removed: [] },
-  outputs: {},
+  outputs: {
+    'eagle-design': {
+      'output · yarn cut-pack T-E19-00':
+        'the migration’s two new files of the product’s own, under guards/, wait to be committed with the pack',
+    },
+  },
 };
 
 const RELEASES: readonly Release[] = [

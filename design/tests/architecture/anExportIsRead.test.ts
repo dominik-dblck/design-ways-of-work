@@ -99,10 +99,11 @@ function unreadIn(
 }
 
 // the repository's own configs read code too: eslint.config.ts reads the shared lint config
+// the root's tool configs, and `product.ts`, through which the product plugs its own code in
 const rootConfigs = (): readonly Source[] =>
   fs
     .readdirSync(ROOT)
-    .filter((file) => /\.config\.m?ts$/.test(file))
+    .filter((file) => file === 'product.ts' || /\.config\.m?ts$/.test(file))
     .map((file) => ({
       path: file,
       text: fs.readFileSync(path.join(ROOT, file), 'utf8'),

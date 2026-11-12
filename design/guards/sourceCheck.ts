@@ -1,6 +1,6 @@
 /**
  * - `codeScan`, `ownModules`, `twiceCheck`, `fileHeads` · copies
- * - `contentCheck`, `architecture`, types · the content's findings, the files' map
+ * - `contentCheck`, `architecture` · the content's findings, the view of it all
  * - `sourceLayers`, `requirementReads`, `ratchet`, `sourceScope` · layers, counts
  */
 export { architecture } from './sourceCheck/architecture.ts';
