@@ -583,3 +583,8 @@ Each call: what, why, how to undo. None changes what the PM sees.
   from the logic's into the registry's folder (the tree), the logic's export and header, the registry's
   export named `requirements`. The home reads the registry; the requirements' built file is their prose,
   every line of it exempt; its text is of the sheet's kind (eagle-design's catch). Undo: revert the commit.
+- The gate on 5c2: the migration whole on a fresh clone (2 moved, 3 following, 9 edited, 7 written); eleven
+  differences, each meant and written on the release in hand: the requirements a module of their own (one
+  script, an entry, a module of the release record), the approval logic without their rows, the Source
+  page's guard reading the registry, and the content types' snapshot, whose files key holds the map: one link
+  fewer, retaken on the product's side at its take, on the PM's word there (eagle-design's reading, the same).

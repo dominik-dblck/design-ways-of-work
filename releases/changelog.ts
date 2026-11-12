@@ -14,6 +14,28 @@ const NEXT: Unreleased = {
     'eagle-design': {
       'output · yarn cut-pack T-E19-00':
         'the migration’s two new files of the product’s own, under guards/, wait to be committed with the pack',
+      'output · yarn build':
+        'the requirements are a module of their own: one script more',
+      'output · yarn spec-check':
+        'the requirements are a module of their own: one script more',
+      'output · yarn checks':
+        'one script more, the requirements’; the content types’ snapshot holds the map of the files, where the source guard now reads the requirements’ registry, a file no type is made of: one link fewer, its files key moved, retaken on the product’s side at its take',
+      'exit · yarn checks · 0 → 1':
+        'the content types’ snapshot holds the map of the files, where the source guard now reads the requirements’ registry, a file no type is made of: one link fewer, its files key moved, retaken on the product’s side at its take',
+      'output · yarn checks:gate':
+        'the content types’ snapshot holds the map of the files, where the source guard now reads the requirements’ registry, a file no type is made of: one link fewer, its files key moved, retaken on the product’s side at its take',
+      'exit · yarn checks:gate · 0 → 1':
+        'the content types’ snapshot holds the map of the files, where the source guard now reads the requirements’ registry, a file no type is made of: one link fewer, its files key moved, retaken on the product’s side at its take',
+      'dist · project/approvalLogic.js':
+        'the approval logic no longer holds the requirements’ rows',
+      'dist · project/requirements.js':
+        'the requirements’ rows, a module of their own',
+      'dist · project/module-entries.json':
+        'the requirements are an entry: their rows, their cut and their types',
+      'dist · project/sourceView.js':
+        'the Source page’s guard reads the requirements’ registry',
+      'written · records/release-5-3-1.md':
+        'the requirements are a module of the homes the build side reads: one module and three files more, the approval logic two files fewer',
       'output · yarn test':
         'the product’s own test of its fields: one file and one test more',
       'dist · project/sourceCheck.js':
@@ -27,7 +49,7 @@ const NEXT: Unreleased = {
       'dist · project/refineCheck.js':
         'the refine check reads no scenes: the pack hands the states an epic names in',
       'dist · project/module-imports.json':
-        'the feature view imports neither scenes.ts nor roleCombinations.ts, the refine check no scenes.ts',
+        'the feature view imports neither scenes.ts nor roleCombinations.ts, the refine check no scenes.ts; the source guard imports the requirements’ registry, not approvalLogic.ts',
     },
   },
 };
