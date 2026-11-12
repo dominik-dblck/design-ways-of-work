@@ -14,6 +14,7 @@ import { scratchRepo } from '../scripts/scratchRepo.ts';
 import type { ScratchRepo } from '../scripts/scratchRepo.ts';
 import { NOTEBOOK_REGISTRY } from '../scripts/notebookRegistry.ts';
 import { callsIn, stubbed, stubEnv } from '../scripts/stubs.ts';
+import { sharedReadBy } from './sharedReadBy.ts';
 
 const VERSION = '0.1.10';
 // a product's own take, as one that takes the way of working writes it
@@ -113,12 +114,19 @@ function hooked(wow: ScratchRepo): void {
   wow.git(['config', 'commit.gpgsign', 'false']);
 }
 
-// this repository's scripts and its take, homes of its own, a manifest, the ports of a test
+// this repository's scripts, its take and each shared file they read, homes of its own, a manifest, the ports of a test
 function written(wow: ScratchRepo): void {
   const at = (...steps: readonly string[]): string =>
     path.join(wow.root, ...steps);
-  for (const folder of ['scripts', path.join('shared', 'take')])
-    fs.cpSync(path.join(HERE, folder), at(folder), { recursive: true });
+  const code = ['scripts', path.join('shared', 'take')];
+  const starts = code.flatMap((folder) =>
+    fs
+      .readdirSync(path.join(HERE, folder), { recursive: true })
+      .map((file) => path.join(folder, String(file)))
+      .filter((file) => file.endsWith('.ts')),
+  );
+  for (const part of [...code, ...sharedReadBy(HERE, starts)])
+    fs.cpSync(path.join(HERE, part), at(part), { recursive: true });
   for (const folder of ['design', 'ports', 'releases', 'node_modules'])
     fs.mkdirSync(at(folder));
   fs.symlinkSync(

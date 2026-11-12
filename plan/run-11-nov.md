@@ -1177,3 +1177,10 @@ Each call: what, why, how to undo. None changes what the PM sees.
 - `dev/` comes copied as the build side's repository wrote it, and a design product takes it (`dev/claude/**`):
   its names would reach argus-design. It is task 24 now, before v1.0.0 (25), on eagle-design's word. Why: the
   spawn must not carry Eagle. Undo: the table at 24, the row dropped.
+- Tasks 20 to 22 go out in one release; each counts once eagle-design reads its commit. Why: no product's
+  output moves between them, and one gate reads all three. Undo: none needed.
+- The release of 0.17.1 stopped at its push: the gate's own test builds a scratch copy of this repository
+  without `shared/emptied.ts`, which the scripts now read. It was written as a patch, though `checks.cloning`
+  is a type's new field. Never pushed nor tagged, its commit is reverted (no history rewritten) and the release
+  goes out as 0.18.0, a minor. Why: a version is what a product's pin reads; 0.17.1 never reached one. Undo:
+  none; the revert stands where it is.

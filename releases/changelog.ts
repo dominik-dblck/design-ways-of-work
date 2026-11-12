@@ -5,7 +5,7 @@
 import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
 const NEXT: Unreleased = {
-  kind: 'patch',
+  kind: 'minor',
   what: 'a commit whose change holds no file runs no formatter and no spelling check on it: a tool handed no file runs none; the build empties its output folder only through the guard that refuses a folder not below the repository (`shared/emptied.ts`); a scope names the feature end’s checks that build a clone (`checks.cloning`), the preset none',
   action: 'none: move the pin to the tag',
   rules: { added: [], changed: [], removed: [] },
