@@ -169,6 +169,11 @@ import { readStarts } from './tools/readStarts.ts';
       from: '    project: PLANS.projectContext,\n',
       to: '    project: projectContext,\n',
     },
+    ...['fileFlow', 'typeChain'].map((part) => ({
+      file: `sheet/logic/assembly/contentTypeLogic/${part}.ts`,
+      from: "from '../../../../app/workspace/sheetStatus.ts';\n",
+      to: "from '../sheetStatus.ts';\n",
+    })),
   ],
   tree: 'ports/eagle-design/tree',
 };

@@ -636,3 +636,14 @@ Each call: what, why, how to undo. None changes what the PM sees.
   in WoW with no scope exception, and the build side's imports get their extension in one scripted commit
   of their own at the port (A); `knowledge/ux` moves to WoW as the UX check's reference, `ux-eval.md`
   repointed, and `knowledge/ai` goes to `legacy/` with step 0c of `architecture-review.md` (B).
+- The gate on 6b stopped at the migration: 6a's tree file stood at `app/workspace/sheetStatus.ts`, inside a
+  home's folder, which the pinned take lists in `.git/info/exclude`; `git add` refused it. A product's file
+  never stands in a home's folder: it moves to `sheet/logic/assembly/sheetStatus.ts`, an entry beside
+  `contentTypeLogic.ts`, its one reader, so its module keeps the name `sheetStatus.js` the source guard reads;
+  its two parts' imports follow by migration edits. Undo: revert the commit.
+- eagle-design's ask on 6b, taken: the spec's map names `projectPlan.js` as this file and `plans.js` as how
+  we work, and the first read opens on `projectPlan.js`; written in the tree's file, so it lands with the move.
+- The PM's word on mutation tests for stage 4, relayed by eagle-design (12 Nov · B, "wedle uznania"): WoW ships
+  Stryker as a shared preset and run script, the product naming its folders, each folder's score a baseline
+  that only rises; an epic that touched a folder's logic runs that folder before it closes, each survivor
+  killed or listed with its why. Measured on Eagle: 54 folders, 11.2 h a full pass, 10 s to 14 min a folder.

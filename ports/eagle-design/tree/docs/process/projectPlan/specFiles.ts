@@ -95,7 +95,11 @@ export const SPEC: readonly FileRow[] = [
     holds:
       'the tickets, their tests, and the one hand-written field: status · reads the two above',
   },
-  { file: 'plans.js', holds: 'this file · the map of the rest' },
+  { file: 'projectPlan.js', holds: 'this file · the map of the rest' },
+  {
+    file: 'plans.js',
+    holds: 'how we work: the rules, the ticket checklist and the refine steps',
+  },
   {
     file: 'agent-instructions.md',
     holds:
@@ -111,7 +115,7 @@ export const SPEC: readonly FileRow[] = [
 // the reading order for an agent before its first ticket · short on purpose: everything else is reached from a ticket’s own read list
 export const PROJECT_CONTEXT: readonly ContextRead[] = [
   {
-    read: 'plans.js · this file',
+    read: 'projectPlan.js · this file',
     why: 'what exists and which of it is the spec',
   },
   {
