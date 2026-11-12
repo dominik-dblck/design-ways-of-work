@@ -24,6 +24,32 @@ const parentOf = (folder: string): string =>
 const escaped = (name: string): string =>
   name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
+// a folder the build prints JSON into holds each file by the name its row gives, kind by kind
+function fixtureFolders(): Readonly<Record<string, FolderRules>> {
+  const folders = new Map<string, Record<string, string[]>>();
+  for (const one of emitted().filter((row) => row.print === 'json')) {
+    const name = path.posix.basename(one.fixture);
+    const [stem, kind] = [
+      name.slice(0, name.indexOf('.')),
+      name.slice(name.indexOf('.')),
+    ];
+    const kinds = folders.get(path.posix.dirname(one.fixture)) ?? {};
+    kinds[kind] = [...(kinds[kind] ?? []), stem];
+    folders.set(path.posix.dirname(one.fixture), kinds);
+  }
+  return Object.fromEntries(
+    [...folders].map(([folder, kinds]) => [
+      folder,
+      Object.fromEntries(
+        Object.entries(kinds).map(([kind, stems]) => [
+          kind,
+          `regex:^(?:${stems.map(escaped).join('|')})$`,
+        ]),
+      ),
+    ]),
+  );
+}
+
 // a home that bundles names its folders, its child homes and its entries'; any other home is free below
 function folderRules(): Readonly<Record<string, FolderRules>> {
   // a module straight in a bundling home has its folder: an entry, or one written as JSON
@@ -31,12 +57,14 @@ function folderRules(): Readonly<Record<string, FolderRules>> {
     ...filesOf().filter(isEntry),
     ...emitted().map((one) => one.module),
   ].map((file) => file.replace(/\.ts$/, ''));
+  const fixtures = fixtureFolders();
   const free = [
     ...homes()
       .filter((home) => !home.bundles)
       .map((home) => home.source),
     ...OWN_FOLDERS,
     ...entries,
+    ...Object.keys(fixtures),
   ];
   const named = [...homes().map((home) => home.source), ...free];
   // the root, each folder on the way to a named one, and each home that bundles
@@ -60,7 +88,7 @@ function folderRules(): Readonly<Record<string, FolderRules>> {
         '.dir': `regex:^(?:${[...(folder === '' ? [] : [path.posix.basename(folder)]), ...childrenOf(folder)].map(escaped).join('|')})$`,
       },
     ]),
-    ...free.map((folder) => [folder, ANY_NAME]),
+    ...free.map((folder) => [folder, fixtures[folder] ?? ANY_NAME]),
   ]);
 }
 

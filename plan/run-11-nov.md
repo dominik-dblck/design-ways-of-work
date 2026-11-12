@@ -588,3 +588,14 @@ Each call: what, why, how to undo. None changes what the PM sees.
   script, an entry, a module of the release record), the approval logic without their rows, the Source
   page's guard reading the registry, and the content types' snapshot, whose files key holds the map: one link
   fewer, retaken on the product's side at its take, on the PM's word there (eagle-design's reading, the same).
+- 5d. The block model is data (`as const`): its contract row is a registry, no code moves. The gap of the
+  port named on 11 Nov closes: the three JSON files the build side reads by blob (`fixtures/data/`
+  block-model, components.spec, modes) come back, listed in the product's `sheet/project.ts` ·
+  `buildReads.json` (module, export, path). The release record holds the block model's digest, as main's
+  does; the other two wait: eagle-design asked for all three, but every record already written would then
+  lack two files, and the record test's eras are a product's facts in a home (task 6 moves them). The home
+  prints them as JSON, two spaces and a newline; the folder they land in holds each file by the name its
+  row gives. The migration edits the product's project, its emitter's globs in `scope.ts` and the
+  `.prettierignore` that scope writes. Printed on the
+  gate's clone, each differs from main's blob at 03ea42c by the port's renames in prose alone (26, 20 and 8
+  lines: `gate-rules.ts` to `gateRules.ts` and the like). Undo: revert the commit.

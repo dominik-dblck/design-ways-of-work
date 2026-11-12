@@ -31,6 +31,25 @@ interface Requirement {
 
 `;
 
+// the JSON its build side reads by blob, from the modules that hold the data
+const JSON_FIXTURES = [
+  {
+    module: 'sheet/contract/blockModel.ts',
+    name: 'blockModel',
+    fixture: 'fixtures/data/block-model.json',
+  },
+  {
+    module: 'app/styles/componentsSpec.ts',
+    name: 'componentsSpec',
+    fixture: 'fixtures/data/components.spec.json',
+  },
+  {
+    module: 'docs/process/modes.ts',
+    name: 'modesPage',
+    fixture: 'fixtures/data/modes.json',
+  },
+] as const;
+
 const MIGRATION: Migration = {
   removes: [],
   moves: [
@@ -77,6 +96,43 @@ const MIGRATION: Migration = {
       file: 'sheet/requirements/requirementsCut.ts',
       from: `from '../logic/approval/approvalLogic/approvalLogicTypes.ts';`,
       to: `from './requirementTypes.ts';`,
+    },
+    {
+      file: 'sheet/project.ts',
+      from: '  readonly files: readonly string[];\n',
+      to: `  readonly files: readonly string[];
+  readonly json: readonly {
+    readonly module: string;
+    readonly name: string;
+    readonly fixture: string;
+  }[];
+`,
+    },
+    {
+      file: 'sheet/project.ts',
+      from: "  files: ['docs/process/ticket-pipeline.md'],\n",
+      to: `  files: ['docs/process/ticket-pipeline.md', '${JSON_FIXTURES[0].fixture}'],
+  // the JSON the build prints for it, each from a module's export
+  json: [
+${JSON_FIXTURES.map(
+  (one) => `    {
+      module: '${one.module}',
+      name: '${one.name}',
+      fixture: '${one.fixture}',
+    },
+`,
+).join('')}  ],
+`,
+    },
+    {
+      file: 'scope.ts',
+      from: "        'sheet/contract/*.md',\n",
+      to: "        'sheet/contract/*.md',\n        'fixtures/data/*.json',\n",
+    },
+    {
+      file: '.prettierignore',
+      from: 'sheet/contract/*.md\n',
+      to: 'sheet/contract/*.md\nfixtures/data/*.json\n',
     },
   ],
   tree: 'ports/eagle-design/tree',

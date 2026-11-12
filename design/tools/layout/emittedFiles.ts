@@ -1,10 +1,11 @@
 /**
  * - `EMITTED`, `emitted`, `Emitted` · the data the build prints, and where
- * - a JSON module, every rule file and document as its markdown, a skill as SKILL.md
+ * - the product's JSON, a rule file and a document as markdown, a skill as SKILL.md
  */
 import fs from 'node:fs';
 import path from 'node:path';
 import { ROOT } from '../root.ts';
+import { buildReads } from '../../sheet/project.ts';
 
 interface Emitted {
   readonly module: string;
@@ -83,7 +84,20 @@ function dataFiles(): readonly Emitted[] {
   });
 }
 
-const emitted = (): readonly Emitted[] => [...EMITTED, ...dataFiles()];
+// the data the product's build side reads by blob, each export printed as JSON at its path
+const productJson = (): readonly Emitted[] =>
+  buildReads.json.map(({ module, name, fixture }) => ({
+    module,
+    name,
+    fixture,
+    print: 'json',
+  }));
+
+const emitted = (): readonly Emitted[] => [
+  ...EMITTED,
+  ...productJson(),
+  ...dataFiles(),
+];
 
 export { EMITTED, emitted };
 export type { Emitted };

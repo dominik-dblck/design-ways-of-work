@@ -6,7 +6,7 @@ import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
 const NEXT: Unreleased = {
   kind: 'major',
-  what: 'a product plugs its own code in through its `product.ts`, and its pure code through its `productView.ts`: the checks’ parts a and w, the pack’s refine check and the Feature page take what is the product’s from their entry point, and no home reads those files; the Feature page takes an epic’s fields from it too, and the source guard names the seven layers itself and reads the requirements from their registry, `sheet/requirements.ts`, where the migration moves their rows; a migration’s moves carry the imports with them, and it may edit a text of a file found exactly once',
+  what: 'a product plugs its own code in through its `product.ts`, and its pure code through its `productView.ts`: the checks’ parts a and w, the pack’s refine check and the Feature page take what is the product’s from their entry point, and no home reads those files; the Feature page takes an epic’s fields from it too, and the source guard names the seven layers itself and reads the requirements from their registry, `sheet/requirements.ts`, where the migration moves their rows; a migration’s moves carry the imports with them, and it may edit a text of a file found exactly once; the block model is a registry, and the build prints as JSON what the product’s `sheet/project.ts` · `buildReads.json` names, each file held by the name its row gives',
   action:
     'the migration `ports/` names for the repository, on its checkout: `node scripts/migrate.ts <name> <checkout>`, run from this repository at the tag; the pin to the tag in the same commit',
   rules: { added: [], changed: [], removed: [] },

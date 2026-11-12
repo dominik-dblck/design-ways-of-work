@@ -78,8 +78,8 @@ const CONTRACT: readonly ContractRow[] = [
   },
   {
     file: 'sheet/contract/blockModel.ts',
-    kind: 'plug',
-    what: 'a model of the product’s own',
+    kind: 'registry',
+    what: 'the contract’s model: its types, each a name and its source',
   },
   {
     file: 'sheet/contract/commands.ts',
