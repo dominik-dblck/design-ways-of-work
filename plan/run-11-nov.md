@@ -24,7 +24,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 
 | stage | what | done | of |
 | 1 | Foundation | 7 | 7 |
-| 2 | Design clean | 17 | 20 |
+| 2 | Design clean | 17 | 24 |
 | 3 | Spawn design | 0 | 3 |
 | 4 | Eagle-design | 0 | 2 |
 
@@ -48,8 +48,11 @@ homes: the root configs, the settings' hooks, the post-commit hook, the backup, 
 decisions split: the way of working's rows join this register · 16 · the hooks are homes: the user hooks' sources
 here, tested, installed by script, a person's own data in a local file (W28, W29) · 17 ·
 `examples/sample-product`, rows and templates alone, each file of the contract · 18 · its check in the
-feature tier: the homes green on a product that names none (the no-product test) · 19 · the build side's theme
-and atoms held here (W25, W26), once it frees them · 20 · v1.0.0 (the PM's word).
+feature tier: the homes green on a product that names none (the no-product test) · 19 · the homes free of the
+product's names: its ids, names and paths in their texts · 20 · a change that holds no file runs no formatter ·
+21 · the build's output folder removed within the guard · 22 · the checks that build in the scratch, a field of
+the scope · 23 · the build side's theme and atoms held here (W25, W26), once it frees them · 24 · v1.0.0 (the
+PM's word).
 
 Stage 3, the plan's stage 3: 1 · `yarn spawn design <path> <name>`, the hooks installed with it · 2 · the new-project guide · 3 · `argus-design`
 spawned and green on its first commit, the PM's word.
@@ -1152,3 +1155,9 @@ Each call: what, why, how to undo. None changes what the PM sees.
   (a home) runs every generator of the scope; `yarn sample` fails on a generated file gone stale and
   `yarn sample --emit` writes them back. The sample caught a home's header past its width that no check here
   reads: the reason it runs.
+- The four gaps the state marked stage 2 with no task are tasks now, before the theme and v1.0.0: 19 the homes
+  free of the product's names, 20 no formatter on a change of no file, 21 the build's output folder within the
+  guard, 22 the checks that build in the scratch as a scope field; the theme is 23, v1.0.0 24. Why: the PM asked
+  what is left of the way of working, and stage 2 cannot close with its own gaps open. Undo: the table at 20.
+- Task 18, piece b: `yarn sample` in this repository's feature tier, before the fresh clone and the gate; a
+  clone's own run never builds the sample again (`CLONING`).

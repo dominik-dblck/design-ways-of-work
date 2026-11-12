@@ -30,6 +30,8 @@ A repository takes it at a tag; nothing of it enters that repository's history.
 - a commit · the commit tier on the files it touches, and the tree where a check costs seconds
 - a push · the feature tier, when it carries a commit the remote lacks: the tree whole, then
   - `yarn test:mechanism` · the release and the gate, as scripts, on a scratch way of working
+  - `yarn sample` (`scripts/sample.ts`) · `examples/sample-product`, a product that names none, built from nothing on
+    the homes in hand: its generated files current (`--emit` writes them), then its feature tier
   - `yarn fresh` (`scripts/fresh.ts`) · its own checks on a fresh clone of the commit: red on a file only this machine holds
   - `yarn consumers` (`scripts/consumers.ts`) · the gate: the commit tried on a fresh clone of each repository that
     takes it, against the same clone on its pinned tag. A difference is a row of the release in hand, or red.
