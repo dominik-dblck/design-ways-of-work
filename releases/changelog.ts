@@ -25,6 +25,68 @@ const RELEASES: readonly Release[] = [
       'eagle-design': {
         'output · yarn checks':
           'the guard prints one line more: the counted plurals with no singular, 14, reported and not held',
+        'output · yarn cut-pack T-E19-00':
+          'the migration edits the messages’ barrel: one file more counts as uncommitted until the product commits it with its pin',
+        'dist · project/agentFlow.js':
+          'a bundle holding the words’ checks: `countForms` and the lines it reads',
+        'dist · project/approvalLogic.js':
+          'a bundle holding the words’ checks: `countForms` and the lines it reads',
+        'dist · project/blockRules.js':
+          'a bundle holding the words’ checks: `countForms` and the lines it reads',
+        'dist · project/board-page.js':
+          'a bundle holding the words’ checks: `countForms` and the lines it reads',
+        'dist · project/boardView.js':
+          'a bundle holding the words’ checks: `countForms` and the lines it reads',
+        'dist · project/contentList.js':
+          'a bundle holding the words’ checks: `countForms` and the lines it reads',
+        'dist · project/contentTypeLogic.js':
+          'a bundle holding the words’ checks: `countForms` and the lines it reads',
+        'dist · project/contract-page.js':
+          'a bundle holding the words’ checks: `countForms` and the lines it reads',
+        'dist · project/contractView.js':
+          'a bundle holding the words’ checks: `countForms` and the lines it reads',
+        'dist · project/expectedFiles.js':
+          'a bundle holding the words’ checks: `countForms` and the lines it reads',
+        'dist · project/feature-page.js':
+          'a bundle holding the words’ checks: `countForms` and the lines it reads',
+        'dist · project/featureView.js':
+          'a bundle holding the words’ checks: `countForms` and the lines it reads',
+        'dist · project/flowCheck.js':
+          'a bundle holding the words’ checks: `countForms` and the lines it reads',
+        'dist · project/gateRules.js':
+          'a bundle holding the words’ checks: `countForms` and the lines it reads',
+        'dist · project/journeys.js':
+          'a bundle holding the words’ checks: `countForms` and the lines it reads',
+        'dist · project/messages.js':
+          'a bundle holding the words’ checks: `countForms` and the lines it reads',
+        'dist · project/packs/T-E19-00.md':
+          'the pack’s digest of the messages’ barrel and its parts',
+        'dist · project/refineCheck.js':
+          'a bundle holding the words’ checks: `countForms` and the lines it reads',
+        'dist · project/roleCombinations.js':
+          'a bundle holding the words’ checks: `countForms` and the lines it reads',
+        'dist · project/scenes.js':
+          'a bundle holding the words’ checks: `countForms` and the lines it reads',
+        'dist · project/screenView.js':
+          'a bundle holding the words’ checks: `countForms` and the lines it reads',
+        'dist · project/sourceCheck.js':
+          'a bundle holding the words’ checks: `countForms` and the lines it reads',
+        'dist · project/sourceView.js':
+          'a bundle holding the words’ checks: `countForms` and the lines it reads',
+        'dist · project/specCheck.js':
+          'a bundle holding the words’ checks: `countForms` and the lines it reads',
+        'dist · project/tickets.js':
+          'a bundle holding the words’ checks: `countForms` and the lines it reads',
+        'dist · project/translationFlow.js':
+          'a bundle holding the words’ checks: `countForms` and the lines it reads',
+        'written · fixtures/packs/T-E19-00.md':
+          'the pack’s digest of the messages’ barrel and its parts',
+        'written · guards/__snapshots__/guardMap.ts':
+          'the messages’ bundle hands `countForms` on, and its lines move',
+        'written · records/release-5-3-1.md':
+          'the record digests the messages’ barrel and its checks again',
+        'written · vendor/wow/sheet/words/messages/messageChecks.ts':
+          'the vendored copy of the home the release changed',
       },
     },
     moved: {},
