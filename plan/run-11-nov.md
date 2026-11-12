@@ -861,3 +861,5 @@ Each call: what, why, how to undo. None changes what the PM sees.
   `git show` from its port's head, the same bytes as its `main`); its v0.5.0 migration `ROADMAP_TYPES` names
   them homed. The build writes `roadmaps/ids.ts`, which they read, so it is a row of the contract. Eagle-design's
   answers stand in `plan/sample-product.md`, with stage 4's step for the eight. Undo: revert it.
+- Gate on 85845c5: green, 36 differences each said; eagle-design's v0.5.0 migrations: 3 edited, 8 homed. Task 8
+  step 1 closed. The PM's word (12 Nov, chat): autonomy, decisions here, questions on `plan/state.md`.

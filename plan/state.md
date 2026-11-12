@@ -42,6 +42,11 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
    This session keeps the last two already. None is written into `CLAUDE.md` on a product session's word.
 7. On eagle-design's `main` the checks run three parts the port took out with the pages (the list, the pages,
    the props). Whether a product's board, pages and props get a check part again, in TypeScript.
+8. v0.5.0, its gate green on 85845c5 (36 differences, each said): A · out now, eagle-design takes the renames,
+   `TokenHex` and the roadmap's types (the pick); B · out after task 8.
+9. The build side's theme freed of its app (W26 step 3: the preference attribute in a file of its own, the
+   batch and sent chips out of the shared theme): eagle-dev asks the PM's yes in its own session, after its
+   audit fix. Task 7 waits on it.
 
 ## Known gaps
 
