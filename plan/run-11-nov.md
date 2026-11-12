@@ -25,8 +25,8 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 | stage | what | done | of |
 | 1 | Foundation | 7 | 7 |
 | 2 | Design clean | 17 | 24 |
-| 3 | Spawn design | 0 | 3 |
-| 4 | Eagle-design | 0 | 2 |
+| 3 | Eagle-design | 0 | 2 |
+| 4 | Spawn design | 0 | 3 |
 
 Stage 1, the plan's stage 1: 1 · the repositories that take the way of working named in `ports/`, the paths out
 of the scripts · 2 · the gate `yarn consumers`, run for real: "no difference" on a clone of eagle-design's
@@ -54,11 +54,11 @@ product's names: its ids, names and paths in their texts · 20 · a change that 
 the scope · 23 · the build side's theme and atoms held here (W25, W26), once it frees them · 24 · v1.0.0 (the
 PM's word).
 
-Stage 3, the plan's stage 3: 1 · `yarn spawn design <path> <name>`, the hooks installed with it · 2 · the new-project guide · 3 · `argus-design`
-spawned and green on its first commit, the PM's word.
-
-Stage 4, the design half of the plan's stage 5: 1 · eagle-design takes v1 by the rehearsed migration, the PM's
+Stage 3, the design half of the plan's stage 5: 1 · eagle-design takes v1 by the rehearsed migration, the PM's
 word · 2 · both design repositories pinned to one tag, the gate green on both.
+
+Stage 4, the plan's stage 3: 1 · `yarn spawn design <path> <name>`, the hooks installed with it · 2 · the
+new-project guide · 3 · `argus-design` spawned and green on its first commit, the PM's word.
 
 ## History
 - 12:25 · stage 1 · 1 of 7 · ports/consumers.ts names the repositories; build path mended to ../eagle (c4c82da)
@@ -1161,3 +1161,6 @@ Each call: what, why, how to undo. None changes what the PM sees.
   what is left of the way of working, and stage 2 cannot close with its own gaps open. Undo: the table at 20.
 - Task 18, piece b: `yarn sample` in this repository's feature tier, before the fresh clone and the gate; a
   clone's own run never builds the sample again (`CLONING`).
+- The PM, 12 Nov: eagle-design takes v1 before the spawn ("bo przy eagle design v1 na pewno jeszcze cos
+  wyjdzie"); stage 3 is eagle-design, stage 4 the spawn. Why: v1 meets a real product first, and what it finds
+  is mended before a new product is made from it. Undo: the two rows and their two paragraphs swapped back.

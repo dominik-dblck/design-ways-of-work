@@ -123,7 +123,7 @@ Costs are estimates of this session's working time. ✋ marks the PM's word.
 - `examples/sample-build`, a blank build repository green on every shared check, in the gate; `spawn build`.
 - ✋ Done when: the PM says spawn, and `argus-dev` is green on its first commit.
 
-### Stage 5 · Eagle catches up · later, on the PM's word
+### Stage 5 · Eagle catches up · its design half before stage 3, the rest later · on the PM's word
 
 - eagle-design takes v1 by the migration script rehearsed since stage 2.
 - eagle-dev's port: its `scope.ts`, the take, a baseline for every new rule's findings, the code mended by script
@@ -131,8 +131,10 @@ Costs are estimates of this session's working time. ✋ marks the PM's word.
 
 ### The order, and why
 
-1 → 2 → 3 → Argus-design starts → 4 → Argus-dev starts → 5. The design side goes first because it writes what the
-build side builds: Argus-dev has nothing to build until Argus-design has cut a ticket.
+1 → 2 → eagle-design takes v1 (5, its design half) → 3 → Argus-design starts → 4 → Argus-dev starts → eagle-dev's
+port (5, the rest). The design side goes first because it writes what the build side builds: Argus-dev has nothing
+to build until Argus-design has cut a ticket. eagle-design takes v1 before the spawn (the PM, 12 Nov): v1 meets a
+real product first, and what it finds is mended before a new one is made from it.
 
 Before Argus-design: stages 1 to 3, 5–8 days. Before Argus-dev: stage 4 more, 9–15 days in all.
 
