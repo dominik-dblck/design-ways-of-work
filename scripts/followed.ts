@@ -17,10 +17,10 @@ const hasScope = (loaded: unknown): loaded is { readonly scope: RepoScope } =>
 // the tree's tracked text, but what it keeps as it was: a note, a record, a port
 async function followed({
   root,
-  kept,
+  isKept,
 }: {
   readonly root: string;
-  readonly kept: RegExp;
+  readonly isKept: (file: string) => boolean;
 }): Promise<readonly string[]> {
   const loaded: unknown = await import(
     pathToFileURL(path.join(root, 'scope.ts')).href
@@ -32,7 +32,7 @@ async function followed({
     encoding: 'utf8',
   })
     .split('\0')
-    .filter((file) => TEXT.test(file) && !kept.test(file))
+    .filter((file) => TEXT.test(file) && !isKept(file))
     .filter((file) => !PROSE.test(file) || isNamedBy(file, docs));
 }
 

@@ -7,7 +7,7 @@ import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { followed } from './followed.ts';
-import { KEPT_IN_A_PRODUCT } from './keptWords.ts';
+import { keptIn } from './keptWords.ts';
 import { mapRows } from './mapRows.ts';
 import {
   barrelOf,
@@ -119,7 +119,7 @@ function expanded(rows: readonly Move[]): readonly Move[] {
 const productFiles = (): Promise<readonly string[]> =>
   PRODUCT === null
     ? Promise.resolve([])
-    : followed({ root: PRODUCT, kept: KEPT_IN_A_PRODUCT });
+    : followed({ root: PRODUCT, isKept: keptIn(PRODUCT).isKept });
 
 async function main(): Promise<void> {
   const moves = expanded(
@@ -127,7 +127,7 @@ async function main(): Promise<void> {
   );
   const here: Tree = {
     root: HERE,
-    files: await followed({ root: HERE, kept: KEPT }),
+    files: await followed({ root: HERE, isKept: (file) => KEPT.test(file) }),
     moves,
   };
   const there: Tree = {

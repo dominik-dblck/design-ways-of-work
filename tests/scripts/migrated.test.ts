@@ -3,6 +3,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { afterAll, describe, expect, it } from 'vitest';
 import { isDue, migrated } from '../../scripts/migrated.ts';
+import { NOTEBOOK_REGISTRY } from './notebookRegistry.ts';
 import { scratchRepo } from './scratchRepo.ts';
 
 const base = fs.mkdtempSync(path.join(os.tmpdir(), 'wow-migrated-'));
@@ -25,10 +26,7 @@ describe('a migration moves files of a repository, and their imports follow', ()
     "import { rows } from '../logic/rows.ts';\n",
   );
   clone.committed('words.ts', "'plans.js · A', 'plans.js · B'\n");
-  clone.committed(
-    'roadmaps/E10/E10Notes.ts',
-    "import { rows } from '../../logic/rows.ts';\n",
-  );
+  clone.committed(NOTEBOOK_REGISTRY.file, NOTEBOOK_REGISTRY.text);
   const said = migrated({
     root: clone.root,
     wow,
@@ -73,13 +71,32 @@ describe('a migration moves files of a repository, and their imports follow', ()
     expect(read('words.ts')).toBe("'project.js · A', 'project.js · B'\n");
   });
 
-  it('what is kept as it was keeps its imports, an epic’s notebook too', () => {
+  it('what is kept as it was keeps its imports', () => {
     expect(read('legacy/old.ts')).toBe(
       "import { rows } from '../logic/rows.ts';\n",
     );
-    expect(read('roadmaps/E10/E10Notes.ts')).toBe(
-      "import { rows } from '../../logic/rows.ts';\n",
+  });
+
+  it('a move of what an epic’s notebook imports is refused before anything moves', () => {
+    clone.committed(
+      'roadmaps/E10/E10Notes.ts',
+      "import { rows } from '../../sheet/rows.ts';\n",
     );
+    const asked = (): string =>
+      migrated({
+        root: clone.root,
+        wow,
+        migration: {
+          release: '0.1.0',
+          removes: [],
+          moves: [['sheet/rows.ts', 'sheet/table.ts']],
+          tree: null,
+        },
+      });
+    expect(asked).toThrow(
+      'a notebook keeps its words and imports what the migration moves, so nothing moved: roadmaps/E10/E10Notes.ts',
+    );
+    expect(fs.existsSync(path.join(clone.root, 'sheet/rows.ts'))).toBe(true);
   });
 
   it('it says how many moved, followed and were edited', () => {

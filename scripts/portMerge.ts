@@ -15,7 +15,7 @@ import { gitAt, ruledOn, unmerged } from './portSettle.ts';
 import { moduleValue, snapshotTaken } from './portSnapshots.ts';
 import { snapshotText } from '../design/guards/checks/snapshotModule.ts';
 import { HERE } from './repos.ts';
-import { KEPT_IN_A_PRODUCT } from './keptWords.ts';
+import { keptIn } from './keptWords.ts';
 import { childEnv } from './scratch.ts';
 
 const [NAME = '', HANDED = ''] = process.argv.slice(2);
@@ -62,7 +62,7 @@ async function namedAgain(skipped: readonly string[]): Promise<number> {
       .split('\n')
       .filter((file) => file !== '' && !skipped.includes(file)),
   );
-  const texts = (await followed({ root: ROOT, kept: KEPT_IN_A_PRODUCT }))
+  const texts = (await followed({ root: ROOT, isKept: keptIn(ROOT).isKept }))
     .filter((file) => brought.has(file))
     .map((file) => {
       const before = fs.readFileSync(at(file), 'utf8');

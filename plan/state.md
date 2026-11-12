@@ -57,5 +57,7 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
 - A port that takes its trunk takes the trunk's generated copies too (`vendor/wow/`, the emitted skills):
   the port's build writes them back from its pin, so they settle at the next take. `scripts/portMerge.ts`
   could keep the port's side for what a build writes.
+- `scripts/move.ts` keeps a product's notebooks as written but does not refuse a move of what one imports,
+  as the migration does: the clone's tsc shows it.
 - A halt explains a file by the command that first wrote it: a new file of a halted `yarn build` passes as
   the halt's, not as its own.

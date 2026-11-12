@@ -4,6 +4,7 @@ import path from 'node:path';
 import { afterAll, describe, expect, it } from 'vitest';
 import { since, writtenIn } from '../../scripts/digests.ts';
 import { migrated } from '../../scripts/migrated.ts';
+import { NOTEBOOK_REGISTRY } from './notebookRegistry.ts';
 import { scratchRepo } from './scratchRepo.ts';
 
 const base = fs.mkdtempSync(path.join(os.tmpdir(), 'wow-written-'));
@@ -19,6 +20,7 @@ describe('what the runs wrote in a clone, a migration left out', () => {
   clone.committed('kept.txt', 'kept\n');
   clone.committed('leaves.txt', 'leaves\n');
   clone.committed('moves.txt', 'moves\n');
+  clone.committed(NOTEBOOK_REGISTRY.file, NOTEBOOK_REGISTRY.text);
   fs.mkdirSync(path.join(wow, 'tree', 'folder'), { recursive: true });
   fs.writeFileSync(path.join(wow, 'tree', 'folder', 'asked.txt'), 'asked\n');
   const said = migrated({
@@ -36,7 +38,12 @@ describe('what the runs wrote in a clone, a migration left out', () => {
   it('a migration removes, moves and writes through the index, and says how many', () => {
     expect(said).toBe('1 removed, 1 moved, 0 following, 0 edited, 1 written');
     expect(clone.git(['ls-files'])).toBe(
-      ['folder/asked.txt', 'held/moves.txt', 'kept.txt'].join('\n'),
+      [
+        'folder/asked.txt',
+        'held/moves.txt',
+        'kept.txt',
+        NOTEBOOK_REGISTRY.file,
+      ].join('\n'),
     );
     expect([...before.keys()].sort()).toEqual([
       'folder/asked.txt',

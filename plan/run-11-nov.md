@@ -831,3 +831,9 @@ Each call: what, why, how to undo. None changes what the PM sees.
   pin moved. What a move never rewrites in a product has one home, `scripts/keptWords.ts`: a legacy copy, a
   record, a note, an epic's notebook (`roadmaps/E*/E*Notes.ts`); the migration, the move and the port's merge
   read it. Undo: revert it.
+- Eagle-design's review of c6ee654: a closed notebook may be markdown (five frozen pins are), and a kept
+  notebook that imports a moved file leaves the product's checks red, mended only by moving its pin. Where a
+  notebook stands is the product's fact, in the registry the contract names (`roadmaps/notes/frozenNotebooks.ts`
+  · `A_NOTEBOOK`): `keptIn(root)` reads it in a node of its own, so the move, the port's merge and the migration
+  keep both shapes. The migration refuses, before anything moves, a move of what a notebook imports, and names
+  the notebook. Undo: revert it.
