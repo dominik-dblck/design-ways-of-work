@@ -119,6 +119,27 @@ describe('a migration moves files of a repository, and their imports follow', ()
     );
     expect(fs.existsSync(path.join(clone.root, 'sheet/rows.ts'))).toBe(true);
   });
+
+  it('a checkout missing any tracked file is refused, a file the migration never names too', () => {
+    clone.committed('kept/built.ts', 'export const built = 1;\n');
+    fs.unlinkSync(path.join(clone.root, 'kept/built.ts'));
+    const asked = (): string =>
+      migrated({
+        root: clone.root,
+        wow,
+        migration: {
+          release: '0.1.0',
+          removes: [],
+          moves: [['sheet/rows.ts', 'sheet/moved.ts']],
+          tree: null,
+        },
+      });
+    expect(asked).toThrow(
+      'the checkout lacks what the migration takes, so nothing moved: kept/built.ts',
+    );
+    expect(fs.existsSync(path.join(clone.root, 'sheet/rows.ts'))).toBe(true);
+    clone.git(['checkout', '--', 'kept/built.ts']);
+  });
 });
 
 describe('a migration is due on a repository pinned before its release', () => {
@@ -134,7 +155,15 @@ describe('a migration is due on a repository pinned before its release', () => {
     ['0.4.0', false],
     ['0.10.0', false],
     ['0.3.12', true],
+    ['0.4', false],
+    ['0.3', true],
   ])('pinned on %s, due: %s', (pinned, isAsked) => {
     expect(isDue(asking, pinned)).toBe(isAsked);
+  });
+
+  it('a version that is not numbers and dots is refused, never ordered', () => {
+    expect(() => isDue(asking, '0.5.0-rc.1')).toThrow(
+      '0.5.0-rc.1: a version is numbers and dots',
+    );
   });
 });

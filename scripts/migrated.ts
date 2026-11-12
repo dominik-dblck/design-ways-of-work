@@ -54,29 +54,42 @@ function followed(
     });
 }
 
-// a version's numbers read left to right: the first that differs orders them
+// a version is numbers and dots: a pre-release would order by nothing
+function partsOf(version: string): readonly number[] {
+  const parts = version.split('.').map(Number);
+  if (parts.some((part) => !Number.isInteger(part)))
+    throw new Error(`${version}: a version is numbers and dots`);
+  return parts;
+}
+
+// read left to right, a part a version lacks being 0: the first that differs orders them
 function isBefore(one: string, other: string): boolean {
-  const left = one.split('.').map(Number);
-  const right = other.split('.').map(Number);
-  const at = left.findIndex((part, index) => part !== right[index]);
-  return at !== -1 && (left[at] ?? 0) < (right[at] ?? 0);
+  const [left, right] = [partsOf(one), partsOf(other)];
+  const places = Array.from(
+    { length: Math.max(left.length, right.length) },
+    (_, at) => [left[at] ?? 0, right[at] ?? 0] as const,
+  );
+  const differs = places.find(([mine, theirs]) => mine !== theirs);
+  return differs !== undefined && differs[0] < differs[1];
 }
 
 const isDue = (migration: Migration, pinned: string): boolean =>
   isBefore(pinned, migration.release);
 
-// each file it removes or moves, where git and the disk both lack it
+// a tracked file gone from the disk, and each file it removes or moves that git or the disk lacks
 function absentIn(
   root: string,
   { git, migration }: { readonly git: Git; readonly migration: Migration },
 ): readonly string[] {
   const tracked = new Set(git(['ls-files', '-z']).split('\0'));
-  return [
+  const deleted = git(['ls-files', '--deleted', '-z']).split('\0');
+  const taken = [
     ...migration.removes,
     ...migration.moves.map(([from]) => from),
   ].filter(
     (file) => !tracked.has(file) || !fs.existsSync(path.join(root, file)),
   );
+  return [...new Set([...deleted.filter(Boolean), ...taken])];
 }
 
 // a text found exactly once in its file, or every time when asked, written as asked; anything else stops the migration

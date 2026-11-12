@@ -815,3 +815,7 @@ Each call: what, why, how to undo. None changes what the PM sees.
   and `migrate.ts` skip it on a pin at that release or later. Before anything moves, `migrated` asks that every
   file it removes or moves stands in git and on disk, and refuses naming the absent ones (eagle-design's note,
   after its first migrate stopped half way). Undo: revert it.
+- Eagle-design's review of 7a3d04d: its half-run migrate stopped in the imports' rewrite, on a tracked file its
+  build had deleted that the migration never names. `migrated` now refuses a checkout missing any tracked file
+  (`git ls-files --deleted`), before anything moves; a version is numbers and dots, a missing part reads 0.
+  Undo: revert it.
