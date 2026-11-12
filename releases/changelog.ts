@@ -70,7 +70,7 @@ const NEXT: Unreleased = {
       'written · records/release-5-3-1.md':
         'the requirements are a module of the homes the build side reads: one module and three files more, the approval logic two files fewer; the block model’s JSON a file read whole, its digest recorded; the product’s plan a module more, the plans two files fewer, the standing words read where they stand now, under sheet/, and the tickets’ digest moved by their context and their pointers',
       'dist · project/project.js':
-        'the project names the JSON its build side reads, each from a module’s export',
+        'the project names the JSON its build side reads, each from a module’s export, and the eras of its release records',
       'written · fixtures/data/block-model.json':
         'the block model as JSON, back where the build side reads it by blob; its prose names files by the port’s names',
       'written · fixtures/data/components.spec.json':
@@ -78,7 +78,7 @@ const NEXT: Unreleased = {
       'written · fixtures/data/modes.json':
         'the ticket modes as JSON, back where the build side reads it by blob; its prose names files by the port’s names',
       'output · yarn test':
-        'the product’s own test of its fields: one file and one test more',
+        'the product’s own test of its fields: one file and one test more; the Feature page’s combinations read in two cases, one more',
       'dist · project/sourceCheck.js':
         'the source guard holds the seven layers’ names, which the map draws',
       'written · guards/__snapshots__/guardMap.ts':
