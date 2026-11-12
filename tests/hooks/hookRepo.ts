@@ -24,7 +24,7 @@ const BINS = ['prettier', 'eslint', 'cspell'];
 
 const SCOPE = `const scope = {
   ignores: ['fixtures/**'],
-  checks: { commit: ['own:commit'], featureEnd: ['own:end'] },
+  checks: { commit: ['own:commit'], featureEnd: ['own:end'], cloning: [] },
 };
 
 export { scope };

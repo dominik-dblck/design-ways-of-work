@@ -33,7 +33,7 @@ const scopeAt = (root: string, named: Partial<RepoScope> = {}): RepoScope => ({
   components: [],
   renderers: [],
   generators: [],
-  checks: { commit: [], featureEnd: [] },
+  checks: { commit: [], featureEnd: [], cloning: [] },
   runsCode: {},
   tables: [],
   unformatted: {},

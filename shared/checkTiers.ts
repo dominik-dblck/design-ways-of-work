@@ -16,6 +16,8 @@ interface TierCheck {
 interface CheckTiers {
   readonly commit: readonly string[];
   readonly featureEnd: readonly string[];
+  // the feature end's checks that build a clone: a clone's own run never runs them again
+  readonly cloning: readonly string[];
 }
 
 const TYPESCRIPT = /\.(ts|tsx|mts)$/;

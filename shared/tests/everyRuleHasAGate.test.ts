@@ -276,7 +276,7 @@ describe('every rule has a gate that runs', () => {
         production: ['**/*.ts', '!tests/**'],
         react: [],
         tests: [],
-        checks: { commit: ['check'], featureEnd: [] },
+        checks: { commit: ['check'], featureEnd: [], cloning: [] },
       });
       expect(world).toEqual({
         eslintRules: new Set(['no-console', 'no-alert']),

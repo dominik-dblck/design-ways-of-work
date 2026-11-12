@@ -4,7 +4,7 @@ import path from 'node:path';
 import { afterAll, describe, expect, it } from 'vitest';
 import { scope } from '../../scope.ts';
 import { HERE } from '../../scripts/repos.ts';
-import { childEnv, CLONING } from '../../scripts/scratch.ts';
+import { childEnv } from '../../scripts/scratch.ts';
 import { emptied } from '../../shared/emptied.ts';
 
 const base = fs.mkdtempSync(path.join(os.tmpdir(), 'wow-scratch-'));
@@ -78,9 +78,9 @@ describe('a check that clones is named, so a clone never clones again', () => {
     );
   };
 
-  it('each check of the feature end that names the scratch is one of them', () => {
+  it('each check of the feature end that names the scratch is one the scope names, and no other', () => {
     expect(scope.checks.featureEnd.filter(namesTheScratch).sort()).toEqual(
-      [...CLONING].sort(),
+      [...scope.checks.cloning].sort(),
     );
   });
 });

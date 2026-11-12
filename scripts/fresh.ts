@@ -10,7 +10,7 @@ import { COMMIT, FEATURE_END } from '../shared/checkTiers.ts';
 import { ranIn } from './consumerRuns.ts';
 import { HERE } from './repos.ts';
 import { emptied } from '../shared/emptied.ts';
-import { childEnv, CLONING, SCRATCH } from './scratch.ts';
+import { childEnv, SCRATCH } from './scratch.ts';
 
 const BUFFER = 1 << 28;
 
@@ -42,7 +42,7 @@ const scripts = [
   ...[...COMMIT, ...FEATURE_END].map(({ script }) => script),
   ...scope.checks.commit,
   ...scope.checks.featureEnd,
-].filter((script) => !CLONING.has(script));
+].filter((script) => !scope.checks.cloning.includes(script));
 
 const runs = await ranIn({
   root: cloned(),

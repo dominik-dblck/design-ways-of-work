@@ -113,6 +113,7 @@ const scope: RepoScope = {
       'lint:kept',
     ],
     featureEnd: ['test:mechanism', 'sample', 'fresh', 'consumers'],
+    cloning: ['sample', 'fresh', 'consumers'],
   },
   // no file of its own runs code it built
   runsCode: {},

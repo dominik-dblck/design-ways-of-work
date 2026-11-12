@@ -84,6 +84,7 @@ const SCOPE_PRESET: Preset = {
   checks: {
     commit: ['test:architecture', 'checks:gate'],
     featureEnd: ['test'],
+    cloning: [],
   },
   runsCode: {
     'guards/checks/checkWorld.ts':
