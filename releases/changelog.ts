@@ -5,52 +5,63 @@
 import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
 const NEXT: Unreleased = {
-  kind: 'major',
-  what: 'the cases’ readers are homes, at the paths a product held them: the journeys’ barrel, reads, check, words and types, the test cases’ barrel, baseline, reach, text, endpoint cases and types, the shared cases’ reader and types; a product holds their rows apart, each gathered in a file the contract names (the journeys with their walked prints and the states they walk, the shared cases with the roles’ count, the refusals’ reach)',
-  action:
-    'the product’s rows split from the cases’ readers on its own tree first, the readers byte-equal to the homes; the migrations `ports/` names for the repository, on its checkout: `node scripts/migrate.ts <name> <checkout>`, run from this repository at the tag (for eagle-design, the thirteen readers leave its index, the take writing them back); the pin to the tag, then `yarn build`, its copies under `vendor/wow/` in the same commit',
+  kind: 'patch',
+  what: '',
+  action: 'none: move the pin to the tag',
   rules: { added: [], changed: [], removed: [] },
-  outputs: {
-    'eagle-design': {
-      'output · yarn build':
-        'the build side reads thirteen files more in vendor/wow/: the cases’ readers, homes now',
-      'output · yarn checks':
-        'the build side reads thirteen files more in vendor/wow/: the cases’ readers, homes now',
-      'output · yarn spec-check':
-        'the build side reads thirteen files more in vendor/wow/: the cases’ readers, homes now',
-      'output · yarn cut-pack T-E19-00':
-        'the build side reads thirteen files more in vendor/wow/: the cases’ readers, homes now; the thirteen the migration takes out of the index count as uncommitted until the product commits them with its pin',
-      'written · vendor/wow/sheet/cases/journeys.ts':
-        'the cases’ reader is a home now, copied with the homes',
-      'written · vendor/wow/sheet/cases/journeys/journeyCheck.ts':
-        'the cases’ reader is a home now, copied with the homes',
-      'written · vendor/wow/sheet/cases/journeys/journeyReads.ts':
-        'the cases’ reader is a home now, copied with the homes',
-      'written · vendor/wow/sheet/cases/journeys/journeyTypes.ts':
-        'the cases’ reader is a home now, copied with the homes',
-      'written · vendor/wow/sheet/cases/journeys/journeyWords.ts':
-        'the cases’ reader is a home now, copied with the homes',
-      'written · vendor/wow/sheet/cases/sharedCases.ts':
-        'the cases’ reader is a home now, copied with the homes',
-      'written · vendor/wow/sheet/cases/sharedCases/sharedCasesTypes.ts':
-        'the cases’ reader is a home now, copied with the homes',
-      'written · vendor/wow/sheet/cases/testCases.ts':
-        'the cases’ reader is a home now, copied with the homes',
-      'written · vendor/wow/sheet/cases/testCases/caseBaseline.ts':
-        'the cases’ reader is a home now, copied with the homes',
-      'written · vendor/wow/sheet/cases/testCases/caseReach.ts':
-        'the cases’ reader is a home now, copied with the homes',
-      'written · vendor/wow/sheet/cases/testCases/caseText.ts':
-        'the cases’ reader is a home now, copied with the homes',
-      'written · vendor/wow/sheet/cases/testCases/endpointCases.ts':
-        'the cases’ reader is a home now, copied with the homes',
-      'written · vendor/wow/sheet/cases/testCases/testCasesTypes.ts':
-        'the cases’ reader is a home now, copied with the homes',
-    },
-  },
+  outputs: {},
 };
 
 const RELEASES: readonly Release[] = [
+  {
+    version: '0.7.0',
+    date: '2026-11-12',
+    kind: 'major',
+    what: 'the cases’ readers are homes, at the paths a product held them: the journeys’ barrel, reads, check, words and types, the test cases’ barrel, baseline, reach, text, endpoint cases and types, the shared cases’ reader and types; a product holds their rows apart, each gathered in a file the contract names (the journeys with their walked prints and the states they walk, the shared cases with the roles’ count, the refusals’ reach)',
+    action:
+      'the product’s rows split from the cases’ readers on its own tree first, the readers byte-equal to the homes; the migrations `ports/` names for the repository, on its checkout: `node scripts/migrate.ts <name> <checkout>`, run from this repository at the tag (for eagle-design, the thirteen readers leave its index, the take writing them back); the pin to the tag, then `yarn build`, its copies under `vendor/wow/` in the same commit',
+    rules: { added: [], changed: [], removed: [] },
+    outputs: {
+      'eagle-design': {
+        'output · yarn build':
+          'the build side reads thirteen files more in vendor/wow/: the cases’ readers, homes now',
+        'output · yarn checks':
+          'the build side reads thirteen files more in vendor/wow/: the cases’ readers, homes now',
+        'output · yarn spec-check':
+          'the build side reads thirteen files more in vendor/wow/: the cases’ readers, homes now',
+        'output · yarn cut-pack T-E19-00':
+          'the build side reads thirteen files more in vendor/wow/: the cases’ readers, homes now; the thirteen the migration takes out of the index count as uncommitted until the product commits them with its pin',
+        'written · vendor/wow/sheet/cases/journeys.ts':
+          'the cases’ reader is a home now, copied with the homes',
+        'written · vendor/wow/sheet/cases/journeys/journeyCheck.ts':
+          'the cases’ reader is a home now, copied with the homes',
+        'written · vendor/wow/sheet/cases/journeys/journeyReads.ts':
+          'the cases’ reader is a home now, copied with the homes',
+        'written · vendor/wow/sheet/cases/journeys/journeyTypes.ts':
+          'the cases’ reader is a home now, copied with the homes',
+        'written · vendor/wow/sheet/cases/journeys/journeyWords.ts':
+          'the cases’ reader is a home now, copied with the homes',
+        'written · vendor/wow/sheet/cases/sharedCases.ts':
+          'the cases’ reader is a home now, copied with the homes',
+        'written · vendor/wow/sheet/cases/sharedCases/sharedCasesTypes.ts':
+          'the cases’ reader is a home now, copied with the homes',
+        'written · vendor/wow/sheet/cases/testCases.ts':
+          'the cases’ reader is a home now, copied with the homes',
+        'written · vendor/wow/sheet/cases/testCases/caseBaseline.ts':
+          'the cases’ reader is a home now, copied with the homes',
+        'written · vendor/wow/sheet/cases/testCases/caseReach.ts':
+          'the cases’ reader is a home now, copied with the homes',
+        'written · vendor/wow/sheet/cases/testCases/caseText.ts':
+          'the cases’ reader is a home now, copied with the homes',
+        'written · vendor/wow/sheet/cases/testCases/endpointCases.ts':
+          'the cases’ reader is a home now, copied with the homes',
+        'written · vendor/wow/sheet/cases/testCases/testCasesTypes.ts':
+          'the cases’ reader is a home now, copied with the homes',
+      },
+    },
+    moved: {},
+    tried: { 'eagle-design': 'a6abea2' },
+  },
   {
     version: '0.6.0',
     date: '2026-11-12',
