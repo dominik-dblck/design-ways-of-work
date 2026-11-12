@@ -14,6 +14,14 @@ const NEXT: Unreleased = {
     'eagle-design': {
       'output · yarn cut-pack T-E19-00':
         'the migration’s two new files of the product’s own, under guards/, wait to be committed with the pack',
+      'dist · project/feature-page.js':
+        'the page’s entry hands the product’s view to the Feature page',
+      'dist · project/featureView.js':
+        'the feature view reads no scenes and no role combinations: the page hands them in',
+      'dist · project/refineCheck.js':
+        'the refine check reads no scenes: the pack hands the states an epic names in',
+      'dist · project/module-imports.json':
+        'the feature view imports neither scenes.ts nor roleCombinations.ts, the refine check no scenes.ts',
     },
   },
 };

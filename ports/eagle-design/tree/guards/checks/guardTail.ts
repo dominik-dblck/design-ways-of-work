@@ -1,6 +1,5 @@
 /**
- * - `guardTail` · part a's last lines, this product's own: its types' words, its
- * - pools against their snapshot, Measure.run
+ * - `guardTail` · part a's last lines: its types' words, its pools, Measure.run
  */
 import { lineOf } from './checkWorld.ts';
 import type { Mirror } from './checkWorld.ts';

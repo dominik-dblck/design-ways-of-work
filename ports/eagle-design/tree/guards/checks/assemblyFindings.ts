@@ -1,6 +1,6 @@
 /**
- * - `assemblyFindings` · the content types' assembly and the content's checks, as
- * - findings of the source guard: each type's slots and parity, a part used twice
+ * - `assemblyFindings` · the content types' assembly, as source guard findings
+ * - each type's slots and parity, a part used twice, the content's checks
  */
 import { contentCheck } from '../sourceCheck.ts';
 import type { SourceFinding } from '../sourceCheck.ts';
