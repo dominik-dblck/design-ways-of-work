@@ -5,7 +5,6 @@
 import type { Consumer } from '../scripts/consumerTypes.ts';
 import { CARRIED } from './eagle-design/carried.ts';
 import { REWRITTEN } from './eagle-design/rewritten.ts';
-import { MIGRATION } from './eagle-design/migration.ts';
 
 // one at least: a release is tried on a repository, never on none
 const CONSUMERS: readonly [Consumer, ...Consumer[]] = [
@@ -30,7 +29,7 @@ const CONSUMERS: readonly [Consumer, ...Consumer[]] = [
       ['lint:exports'],
     ],
     folders: ['dist'],
-    migration: MIGRATION,
+    migration: null,
     // its own work lands on `main`, which takes nothing yet: the branch holds `main` whole, or the gate is red
     port: {
       trunk: 'main',

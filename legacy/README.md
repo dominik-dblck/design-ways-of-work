@@ -30,3 +30,10 @@ The build side's skills and evaluations the PM retired (8 Nov: unused; moved 9 N
   orchestration, their gates and the orchestrator), and the knowledge base's mind maps (create-mindmap,
   integrate-knowledge)
 - `evaluations/` · the gates only those skills read: discovery, plan, orchestration, architecture, web search
+
+## Migrations taken
+
+A migration is what a repository does to take one release; once its branch holds it, the gate stops running it.
+
+- `ports/eagle-design/migration.ts` and its `tree/` · v0.3.0: eagle-design's `product.ts` and the frozen
+  notebooks' registry, written on its checkout; its `port/wow` holds them since 88f5d3e

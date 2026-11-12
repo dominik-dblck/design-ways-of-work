@@ -11,6 +11,10 @@ the release of v0.2.0 with them, and stage 2 run without a stop. v1.0.0 stays th
 The PM, 11 Nov, later: "A moze byc" on a release between v0.2.0 and v1.0.0 (v0.3.0, W23), and "jak skonczysz 4
 to zatrzymaj sie prosze": the run stops when task 4 of stage 2 is closed.
 
+The PM, 12 Nov: "pomimo formularza kontynnuj robote", "czyli pokaz formularz ale pozniej go usun i kontynnuuj":
+the run goes on past task 4. A stop that asks the PM leaves a Slack DM of status and a push, and the work goes
+on meanwhile on the pick, written here with its why and undo; what is held for the PM still waits for them.
+
 Held for the PM: the first push and every tag (a release), a merge, a snapshot retaken, a message to eagle-dev,
 Argus's stack, the spawn of `argus-design`. The product repositories are read only from here.
 
@@ -512,3 +516,9 @@ Each call: what, why, how to undo. None changes what the PM sees.
   from the contract. For the PM's open question on pages (state, 8): the pack of E19 points at two pages
   the port's tree no longer holds, so cutting it is refused there. Its own, on its `main`: a hook that
   writes into `.git` as a folder, which a worktree does not have.
+- eagle-design's commit landed on its `port/wow` on the PM's word there (88f5d3e, local): the merge of its
+  `main` 98deb53, the pin to v0.3.0, the migration. The migration is spent: its file and its tree go to
+  `legacy/`, and the gate runs none (`migration: null`). Why: run again, it would write the pins as they stood
+  at v0.3.0 over the product's own, which change as it closes epics. Undo: move them back, name it again.
+- The run goes on, on the PM's word of 12 Nov, with task 5; the pick on "leć" or "tylko porządki" is the
+  first, "leć" (undo: stop after this tidying).
