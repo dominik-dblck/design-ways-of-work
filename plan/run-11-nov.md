@@ -599,3 +599,8 @@ Each call: what, why, how to undo. None changes what the PM sees.
   `.prettierignore` that scope writes. Printed on the
   gate's clone, each differs from main's blob at 03ea42c by the port's renames in prose alone (26, 20 and 8
   lines: `gate-rules.ts` to `gateRules.ts` and the like). Undo: revert the commit.
+- The gate on 5d: the migration whole (13 edits); four differences, each meant and written on the release
+  in hand: the project's built file, and the three JSON files written. The record holds the block model's
+  JSON among the files read whole. eagle-design accepted both departures (the record's two files wait for
+  its own era; the prose renames are met by the build side at the release that lands its port, said in
+  that record's head, no word to eagle-dev now).

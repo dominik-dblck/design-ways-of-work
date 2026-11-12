@@ -35,7 +35,15 @@ const NEXT: Unreleased = {
       'dist · project/sourceView.js':
         'the Source page’s guard reads the requirements’ registry',
       'written · records/release-5-3-1.md':
-        'the requirements are a module of the homes the build side reads: one module and three files more, the approval logic two files fewer',
+        'the requirements are a module of the homes the build side reads: one module and three files more, the approval logic two files fewer; the block model’s JSON a file read whole, its digest recorded',
+      'dist · project/project.js':
+        'the project names the JSON its build side reads, each from a module’s export',
+      'written · fixtures/data/block-model.json':
+        'the block model as JSON, back where the build side reads it by blob; its prose names files by the port’s names',
+      'written · fixtures/data/components.spec.json':
+        'the components’ spec as JSON, back where the build side reads it by blob; its prose names files by the port’s names',
+      'written · fixtures/data/modes.json':
+        'the ticket modes as JSON, back where the build side reads it by blob; its prose names files by the port’s names',
       'output · yarn test':
         'the product’s own test of its fields: one file and one test more',
       'dist · project/sourceCheck.js':
