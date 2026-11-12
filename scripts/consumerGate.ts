@@ -93,6 +93,15 @@ function reported({
   return isClean;
 }
 
+// a branch that did not take its trunk is tried no further: what the script left is the trial's fault
+const untakenOnly = (consumer: Consumer, untaken: readonly string[]): boolean =>
+  reported({
+    consumer,
+    found: [],
+    broken: untaken,
+    rows: { expected: {}, allowed: {} },
+  });
+
 interface Readied {
   readonly sides: Sides<string>;
   // what the port's script could not settle when a clone took the trunk
@@ -113,7 +122,7 @@ function readied({
   );
   if (consumer.port !== null)
     console.log(`  taken · ${consumer.port.trunk}, by the port's script`);
-  if (consumer.migration !== null) {
+  if (consumer.migration !== null && untaken.length === 0) {
     const { migration } = consumer;
     console.log(
       `  migrated · ${migrated({ root: sides.next, wow, migration })}`,
@@ -145,6 +154,7 @@ async function tried({
   released,
 }: Trial): Promise<boolean> {
   const { sides, untaken, resolved } = readied({ consumer, wow, scratch });
+  if (untaken.length > 0) return untakenOnly(consumer, untaken);
   // a repository that pins an older tag meets each release since: their rows explain as this one's do
   const allowed = rowsSince(released, versionTaken(sides.pinned));
   const before = standing(sides);

@@ -750,3 +750,10 @@ Each call: what, why, how to undo. None changes what the PM sees.
   `tools/ids.ts` at the build; the frontend epic's prototype reader to legacy/. 23 `CARRIED` rows at
   1683f09's blobs. The contract gains `sheet/contract/events.ts`. Tried on the gate's clone: lint, format,
   file names, the app tests; tsc lacks only the findings' `open`, which the trunk brings. Undo: revert it.
+- The gate on fb2bb0a stopped in the migration (this commit fixes the stop): port/wow could not take main
+  1683f09 by the port's script, five of its own files left to lay (`.prettierignore`, `eslint.config.ts`,
+  `roadmaps/backlog/backlogTypes.ts`, two files main removed under E15), and the migration then threw on a text
+  the half-taken tree no longer held. Now a branch that did not take its trunk is tried no further: its
+  migration is skipped and what the script left is the trial's BROKEN lines. eagle-design lays the five on
+  port/wow. Open: the scratch tests hold no port with a trunk yet, so this path has no mechanism test; one
+  is a task of its own. Undo: revert it.
