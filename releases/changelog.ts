@@ -11,7 +11,6 @@ const POINTING = [
   'blockRules',
   'commands',
   'contentList',
-  'contractView',
   'dbSchema',
   'edges',
   'events',
@@ -31,9 +30,19 @@ const POINTING = [
   'translationFlow',
 ];
 
+// the modes' parts that ask the product for a text by key
+const MODE_PARTS = [
+  'aboutToHoldsNote',
+  'holdsToLegend',
+  'modeExample',
+  'runsFeature',
+  'runsFeatureFirstRows',
+  'runsFeatureLastRows',
+];
+
 const NEXT: Unreleased = {
   kind: 'major',
-  what: 'a product plugs its own code in through its `product.ts`, and its pure code through its `productView.ts`: the checks’ parts a and w, the pack’s refine check and the Feature page take what is the product’s from their entry point, and no home reads those files; the Feature page takes an epic’s fields from it too, and the source guard names the seven layers itself and reads the requirements from their registry, `sheet/requirements.ts`, where the migration moves their rows; a migration’s moves carry the imports with them, and it may edit a text of a file found exactly once; the block model is a registry, and the build prints as JSON what the product’s `sheet/project.ts` · `buildReads.json` names, each file held by the name its row gives; what knip starts from beside the entries is the home’s `tools/readStarts.ts`, which a product’s scope calls; the spec’s files, the first read, the fact combinations, the drift guards and the decided points are the product’s, a registry, `docs/process/projectPlan.ts`, where the migration moves their rows, and the skills name it; a pointer of the product’s at one of those lists names the plan, and a migration edit may ask for every place its text stands; the eras of a product’s release records are its own, `sheet/project.ts` · `recordEras`, and the home’s tests read every feature by what its registries hold, naming none; a product’s own documents, its API convention and its agent’s instructions, are its modules, printed at their paths from `sheet/project.ts` · `buildReads.documents`; a home’s document asks a product for its own texts by key, `docs/process/documentSlots.ts` · `cites` (a lesson’s reason, a decision’s date, an example), a key it does not hold printing nothing or the home’s example',
+  what: 'a product plugs its own code in through its `product.ts`, and its pure code through its `productView.ts`: the checks’ parts a and w, the pack’s refine check and the Feature page take what is the product’s from their entry point, and no home reads those files; the Feature page takes an epic’s fields from it too, and the source guard names the seven layers itself and reads the requirements from their registry, `sheet/requirements.ts`, where the migration moves their rows; a migration’s moves carry the imports with them, and it may edit a text of a file found exactly once; the block model is a registry, and the build prints as JSON what the product’s `sheet/project.ts` · `buildReads.json` names, each file held by the name its row gives; what knip starts from beside the entries is the home’s `tools/readStarts.ts`, which a product’s scope calls; the spec’s files, the first read, the fact combinations, the drift guards and the decided points are the product’s, a registry, `docs/process/projectPlan.ts`, where the migration moves their rows, and the skills name it; a pointer of the product’s at one of those lists names the plan, and a migration edit may ask for every place its text stands; the eras of a product’s release records are its own, `sheet/project.ts` · `recordEras`, and the home’s tests read every feature by what its registries hold, naming none; a product’s own documents, its API convention and its agent’s instructions, are its modules, printed at their paths from `sheet/project.ts` · `buildReads.documents`; a home’s document asks a product for its own texts by key, `docs/process/documentSlots.ts` · `cites` (a lesson’s reason, a decision’s date, an example), a key it does not hold printing nothing or the home’s example; the board opens with each epic’s tickets by column, the MVP’s whole on top, and the API contract page, `Contract.html`, shows every endpoint as TypeScript (the `ContractPage` organism, `contractView` · `contractPage`), `CodePieces` an atom and `CodeBlock`, which draws it, a molecule; a port leaves a change of its trunk’s that a home holds to the home, by its `CARRIED` row',
   action:
     'the migration `ports/` names for the repository, on its checkout: `node scripts/migrate.ts <name> <checkout>`, run from this repository at the tag; the pin to the tag in the same commit',
   rules: { added: [], changed: [], removed: [] },
@@ -78,7 +87,7 @@ const NEXT: Unreleased = {
       'written · fixtures/data/modes.json':
         'the ticket modes as JSON, back where the build side reads it by blob; its prose names files by the port’s names',
       'output · yarn test':
-        'the product’s own test of its fields: one file and one test more; the Feature page’s combinations read in two cases, one more',
+        'the product’s own test of its fields and the home’s test that each slot row is asked: two files and three tests more; the Feature page’s combinations read in two cases, one more',
       'dist · project/sourceCheck.js':
         'the source guard holds the seven layers’ names, which the map draws',
       'written · guards/__snapshots__/guardMap.ts':
@@ -98,9 +107,29 @@ const NEXT: Unreleased = {
       'dist · project/tickets.js':
         'the ticket context reads its first read from the product’s plan, bundled beside the plans’ rules; the tickets’ pointers name projectPlan.js, where the lists they point at moved',
       'dist · project/boardView.js':
-        'the board bundles the ticket context, which reads its first read from the product’s plan; the tickets’ pointers name projectPlan.js',
+        'the board bundles the ticket context, which reads its first read from the product’s plan; the tickets’ pointers name projectPlan.js; the view counts every epic’s tickets by column, the list on top',
       'dist · project/board-page.js':
-        'the board bundles the ticket context, which reads its first read from the product’s plan; the tickets’ pointers name projectPlan.js',
+        'the board bundles the ticket context, which reads its first read from the product’s plan; the tickets’ pointers name projectPlan.js; the board opens with each epic’s tickets by column, the MVP’s whole on top',
+      'dist · project/contractView.js':
+        'a pointer it holds names the product’s plan, projectPlan.js; the view builds the contract page, bundling the backlog, the tickets, the block model and the refusals it reads',
+      'dist · project/contract-page.js':
+        'the API contract page’s script: every endpoint as TypeScript, the numbers, the legend, the filters and what every endpoint shares',
+      'dist · project/Contract.html':
+        'the API contract page, a page of its own',
+      'dist · project/documentSlots.js':
+        'the product’s own texts a home’s document asks for by key, a module of its own',
+      'dist · project/modes.js':
+        'the modes ask the product for their story, their dates and their example ticket by key, its texts bundled with them',
+      'written · .claude/skills/design-answer-cc/SKILL.md':
+        'a lesson lands in two places: the way of working’s rule in the pipeline’s data, the product’s cite in docs/process/documentSlots.ts',
+      'written · vendor/wow/docs/documents/cited.ts':
+        'the helper a home’s document asks a product’s text through, cite and citeLines: vendored with the documents',
+      ...Object.fromEntries(
+        MODE_PARTS.map((name) => [
+          `written · vendor/wow/docs/process/modes/${name}.ts`,
+          'the part asks the product for its story, its date or its example by key: the modes print as before',
+        ]),
+      ),
       'dist · project/contentTypeLogic.js':
         'the standing words bundled from where they stand now, beside the assembly logic',
       'dist · project/sheetStatus.js':

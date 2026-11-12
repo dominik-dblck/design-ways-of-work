@@ -704,3 +704,14 @@ Each call: what, why, how to undo. None changes what the PM sees.
   form, not the trunk's bytes: the merge now leaves a trunk's change whose `{ file, blob }` has a `CARRIED` row
   to its home (not laid, and a file the trunk added dropped). Undo: revert the commit. eagle-design holds its
   next batch until this one is carried.
+- 840ec79 carried (d205409): the board's epic list and the contract page rebuilt in the homes' form, 25
+  `CARRIED` rows at `main` 8acdda4's blobs. The lint asked for four calls: `CodeBlock` draws the `CodePieces`
+  atom, so it is a molecule (an atom composes nothing); the page's type is `ContractPageView` (one name, one
+  home); the legend's samples are the model's first two aliases (GroupId, DocumentId: eagle-design agreed);
+  the alias split searches for `//` without backtracking. Undo: revert d205409, and the take stops again.
+- answer-cc (c2ea74f): a lesson lands in two places, the rule in the pipeline's data, the cite in the
+  product's slots. Undo: revert it.
+- The gate on c2ea74f passed the take: 12 differences unexplained, 0 stale, 0 broken. Each is written in
+  `NEXT` now: the contract page, its view, the board's list, the slots' module, the modes' parts, the
+  answer-cc skill. The test row counts the slot test (pinned 46 files and 151 tests, now 48 and 155).
+  Undo: revert the rows.
