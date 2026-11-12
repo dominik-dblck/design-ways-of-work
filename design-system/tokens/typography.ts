@@ -11,7 +11,7 @@ const typography: readonly TokenGroup[] = [
   },
   {
     title: 'DENSE TYPE · the tool runs one step below the mobile app',
-    intro: 'No new sizes: Eagle reads the DS scale from body-sm down.\nMUI slot        size / weight / line-height / tracking         DS var',
+    intro: 'No new sizes: the tool reads the DS scale from body-sm down.\nMUI slot        size / weight / line-height / tracking         DS var',
     entries: [
       { name: '--ui-title', light: '20px', why: 'h4        · 500 · 1.15 · -0.02em      --t-h4' },
       { name: '--ui-heading', light: '16px', why: 'h5        · 500 · 1.15 · -0.02em      --t-body' },

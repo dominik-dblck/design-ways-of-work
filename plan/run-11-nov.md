@@ -24,7 +24,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 
 | stage | what | done | of |
 | 1 | Foundation | 7 | 7 |
-| 2 | Design clean | 4 | 10 |
+| 2 | Design clean | 5 | 10 |
 | 3 | Spawn design | 0 | 3 |
 | 4 | Eagle-design | 0 | 2 |
 
@@ -60,6 +60,7 @@ word · 2 · both design repositories pinned to one tag, the gate green on both.
 - 15:10 · stage 2 · 2 of 10 · product.ts typed here, the checks' own parts through it; the gate migrates the clone that takes the commit; NO DIFFERENCE on eagle-design (b5b6c4c, 8223828)
 - 17:00 · stage 2 · 3 of 10 · the gate on eagle-design's newest main, the trunk taken by the port's script; eleven differences, each a row of the release in hand; verified by eagle-design (52bf59f, 66d30f2, a8bdcc0, 7c9dbb2)
 - 17:51 · stage 2 · 4 of 10 · the first slice: the build side's read list out of the home into the product's registry, the merge keeps two changes that touch, a repository's migration by one command; v0.3.0 out; verified by eagle-design (a53a832, 3d1a872, c82439e, 272bceb)
+- 08:48 · stage 2 · 5 of 10 · task 5 · plugs and registries through the product: no home reads a product's logic, model or samples by path; the gate's 23 differences each expected; verified by eagle-design (d162c06, 69c453d, 3419ef0, 5555716, 4fc5f4f, 1bfe21a)
 
 ## Calls
 
@@ -612,3 +613,16 @@ Each call: what, why, how to undo. None changes what the PM sees.
   each expected, none unexplained. eagle-design reviewed every piece (5a to 5e) and accepted each. Task 5
   closes: no home reads a product's logic, model or samples by path; what a product plugs in comes through
   `product.ts` and `productView.ts`, and its rows through registries.
+- Task 6, measured: 40 files of the homes name Eagle, its repositories, or an epic's or ticket's id; beside
+  them, Eagle's file names stand in the source guard and the layout's homes. My reading, a call: "Deblock" in
+  `design-system/` is the company that owns the design system, not a product, and stays; Eagle's name, its
+  repositories' names, its ids as a lesson's reason or a label, and its file names leave. A generic example
+  names the sample product's first epic, `E01` (task 8 gives it that id). Pieces, each through the gate and
+  eagle-design: 6a the few lines and the sheet's standing words; 6b the process data's examples; 6c the
+  documents' slots (the repository's path, a lesson's reason, the convention's examples); 6d the tests; the
+  source guard's facts go with the views task's point 1 (the PM's word asked) or, without it, here.
+- 6a. The sheet's standing words (`app/workspace/sheetStatus.ts`: `MOVES IN E18`, `E10`) are read by the
+  product's content type logic alone: the file moves to the product by `scripts/move.ts`, the migration
+  writes it at the same path. "Eagle reads the DS scale" reads "the tool"; the pack's usage names
+  `<ticket id>`; the names rule's examples are a home's module and `E01.ts`, its markdown written by the
+  product's emitter on the gate's clone and brought back. Undo: revert the commit.

@@ -117,7 +117,7 @@ function uncommitted(): string {
 function main(): number {
   const ids = process.argv.slice(2);
   if (!ids.length) {
-    console.error('usage: node tools/pack.ts T-E18-00 [more ids]');
+    console.error('usage: node tools/pack.ts <ticket id> [more ids]');
     return 2;
   }
   const mirror = mirrorAt(builtRoot(), { mode: 'cut', copyTo: sourceOf });

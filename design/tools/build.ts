@@ -36,7 +36,7 @@ function bannerOf(file: string): string {
   return head.replace(FIRST_LINE_NAME, '$1.js').trimEnd();
 }
 
-// the pages read an entry under its PascalCase name: sheetStatus.ts is SheetStatus
+// the pages read an entry under its PascalCase name: featureView.ts is FeatureView
 function globalOf(file: string): string {
   return path
     .basename(file, '.ts')
