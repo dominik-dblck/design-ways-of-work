@@ -29,6 +29,22 @@ const NEXT: Unreleased = {
       'dist · project/board-page.js':
         'the board’s numbers fold, the project’s and the repository’s, each a tile with its value, the words beside it, its bar and its note; the contract’s shared types fold',
       'dist · project/contract-page.js': 'the contract’s shared types fold',
+      'written · vendor/wow/roadmaps/backlog/backlogTypes.ts':
+        'the roadmap’s type file is a home now, copied with the homes',
+      'written · vendor/wow/roadmaps/edges/edgeTypes.ts':
+        'the roadmap’s type file is a home now, copied with the homes',
+      'written · vendor/wow/roadmaps/ideas/ideasTypes.ts':
+        'the roadmap’s type file is a home now, copied with the homes',
+      'written · vendor/wow/roadmaps/notes/notesTypes.ts':
+        'the roadmap’s type file is a home now, copied with the homes',
+      'written · vendor/wow/roadmaps/receipts/receiptsTypes.ts':
+        'the roadmap’s type file is a home now, copied with the homes',
+      'written · vendor/wow/roadmaps/receipts/repositoryState.ts':
+        'the roadmap’s type file is a home now, copied with the homes',
+      'written · vendor/wow/roadmaps/templates/templatesTypes.ts':
+        'the roadmap’s type file is a home now, copied with the homes',
+      'written · vendor/wow/roadmaps/tracks/tracksTypes.ts':
+        'the roadmap’s type file is a home now, copied with the homes',
       'dist · project/contentTypeLogic.js':
         'T18 points at the source check’s `SOURCE_LAYERS`',
       'written · app/styles/tokens.ts':
