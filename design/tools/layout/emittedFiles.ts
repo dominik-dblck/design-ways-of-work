@@ -1,5 +1,6 @@
 /**
  * - `emitted`, `Emitted`, `isADocument` · what the build prints, where; a document
+ * - `present` · the rows a product holds: an optional one it lacks left out, another refused
  * - the product's JSON and documents, a rule file as markdown, a skill as SKILL.md
  */
 import fs from 'node:fs';
@@ -12,6 +13,23 @@ interface Emitted {
   readonly name: string;
   readonly fixture: string;
   readonly print: 'json' | 'rules' | 'skill' | 'document';
+  // the build side's tree (`dev/`), which a product holds only once it takes it
+  readonly optional?: true;
+}
+
+// each row whose file the product holds; one it lacks prints nothing when optional, and stops the build when not
+function present<Row extends { readonly optional?: true }>(
+  rows: readonly Row[],
+  root: string,
+  fileOf: (row: Row) => string,
+): readonly Row[] {
+  return rows.filter((row) => {
+    if (fs.existsSync(path.join(root, fileOf(row)))) return true;
+    if (row.optional) return false;
+    throw new Error(
+      `${fileOf(row)} · the build prints it, and the product holds none`,
+    );
+  });
 }
 
 // a module whose data the build prints, committed so a release's commit holds it
@@ -34,42 +52,58 @@ const EMITTED: readonly Emitted[] = [
     name: 'directoryMap',
     fixture: 'dev/map.md',
     print: 'document',
+    optional: true,
   },
 ];
 
-// a folder whose every data file prints as one markdown file: [its export, how it prints, where]
-const DATA_FOLDERS: readonly (readonly [
-  string,
-  string,
-  Emitted['print'],
-  (base: string) => string,
-])[] = [
-  ['docs/rules', 'rules', 'rules', (base) => `docs/rules/${base}.md`],
-  ['dev/rules', 'rules', 'rules', (base) => `dev/rules/${base}.md`],
-  [
-    'docs/skills',
-    'skill',
-    'skill',
-    (base) => `.claude/skills/design-${base}/SKILL.md`,
-  ],
+// a folder whose every data file prints as one markdown file
+interface DataFolder {
+  readonly folder: string;
+  readonly name: string;
+  readonly print: Emitted['print'];
+  readonly fixtureOf: (base: string) => string;
+  readonly optional?: true;
+}
+
+const DATA_FOLDERS: readonly DataFolder[] = [
+  {
+    folder: 'docs/rules',
+    name: 'rules',
+    print: 'rules',
+    fixtureOf: (base) => `docs/rules/${base}.md`,
+  },
+  {
+    folder: 'dev/rules',
+    name: 'rules',
+    print: 'rules',
+    fixtureOf: (base) => `dev/rules/${base}.md`,
+    optional: true,
+  },
+  {
+    folder: 'docs/skills',
+    name: 'skill',
+    print: 'skill',
+    fixtureOf: (base) => `.claude/skills/design-${base}/SKILL.md`,
+  },
 ];
 
 // every data file of the folders, a type file left out, with the markdown it prints as
 function dataFiles(): readonly Emitted[] {
-  return DATA_FOLDERS.flatMap(([folder, name, print, fixtureOf]) => {
-    const full = path.join(ROOT, folder);
-    if (!fs.existsSync(full)) return [];
-    return fs
-      .readdirSync(full)
-      .filter((file) => file.endsWith('.ts') && !file.endsWith('Types.ts'))
-      .sort()
-      .map((file) => ({
-        module: `${folder}/${file}`,
-        name,
-        fixture: fixtureOf(file.replace(/\.ts$/, '')),
-        print,
-      }));
-  });
+  return present(DATA_FOLDERS, ROOT, (one) => one.folder).flatMap(
+    ({ folder, name, print, fixtureOf }) => {
+      const full = path.join(ROOT, folder);
+      return fs
+        .readdirSync(full)
+        .filter((file) => file.endsWith('.ts') && !file.endsWith('Types.ts'))
+        .sort()
+        .map((file) => ({
+          module: `${folder}/${file}`,
+          name,
+          fixture: fixtureOf(file.replace(/\.ts$/, '')),
+          print,
+        }));
+    },
+  );
 }
 
 // what the product's build side reads, each export printed at its path: its data as JSON, its documents as markdown
@@ -85,12 +119,11 @@ const productPrints = (): readonly Emitted[] => [
 const isADocument = (file: string): boolean =>
   [...EMITTED, ...buildReads.documents].some((one) => one.module === file);
 
-// the build side's tree (`dev/`) stands only in a product that takes it: a module it lacks prints nothing
 const emitted = (): readonly Emitted[] => [
-  ...EMITTED.filter((one) => fs.existsSync(path.join(ROOT, one.module))),
+  ...present(EMITTED, ROOT, (one) => one.module),
   ...productPrints(),
   ...dataFiles(),
 ];
 
-export { emitted, isADocument };
+export { emitted, isADocument, present };
 export type { Emitted };
