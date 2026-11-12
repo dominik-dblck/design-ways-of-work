@@ -6,7 +6,7 @@ import { wireframesSnapshot } from '../__snapshots__/wireframesSnapshot.ts';
 import { lineOf, errorMessageOf } from './checkWorld.ts';
 import type { Mirror } from './checkWorld.ts';
 import { snapshotRecord, snapshotText } from './snapshotModule.ts';
-import * as SCREEN_VIEW from '../../sheet/screens/screenView.ts';
+import type { ProductScreens } from '../../tools/productTypes.ts';
 import * as WIREFRAMES from '../../sheet/screens/wireframes.ts';
 
 // every wireframe's data is in the samples: the gaps are held at none
@@ -18,10 +18,8 @@ interface Swept {
   readonly views: Readonly<Record<string, unknown>>;
 }
 
-type View = typeof SCREEN_VIEW;
-
-function sweepFaults(view: View): Pick<Swept, 'errors' | 'gaps'> {
-  const swept = Object.values(view.sweep());
+function sweepFaults(screens: ProductScreens): Pick<Swept, 'errors' | 'gaps'> {
+  const swept = screens.sweep();
   return {
     errors: swept.flatMap((one) =>
       one.error ? [`${one.num} ${one.error}`] : [],
@@ -35,14 +33,14 @@ function sweepFaults(view: View): Pick<Swept, 'errors' | 'gaps'> {
   };
 }
 
-function swept(): Swept {
-  const { errors: sweepErrors, gaps } = sweepFaults(SCREEN_VIEW);
+function swept(screens: ProductScreens): Swept {
+  const { errors: sweepErrors, gaps } = sweepFaults(screens);
   const errors = [...sweepErrors];
   const views = new Map<string, unknown>();
   for (const frame of WIREFRAMES.all)
     try {
       const drawn = JSON.stringify(
-        SCREEN_VIEW.editorView(frame.num),
+        screens.editorView(frame.num),
         (_, drawnValue: unknown) =>
           typeof drawnValue === 'function' ? undefined : drawnValue,
       );
@@ -79,8 +77,13 @@ function viewsLine(
   });
 }
 
-function wireframesPart(mirror: Mirror): readonly string[] {
-  const { errors, gaps, views } = swept();
+// the screens come from the product's entry point: a product with none runs no line here
+function wireframesPart(
+  mirror: Mirror,
+  screens?: ProductScreens,
+): readonly string[] {
+  if (screens === undefined) return [];
+  const { errors, gaps, views } = swept(screens);
   return [
     lineOf('wireframes · errors', {
       ok: !errors.length,

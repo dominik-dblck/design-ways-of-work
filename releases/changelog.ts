@@ -5,9 +5,10 @@
 import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
 const NEXT: Unreleased = {
-  kind: 'patch',
-  what: '',
-  action: 'none: move the pin to the tag',
+  kind: 'major',
+  what: 'a product plugs its own code in through its `product.ts` alone: the checks’ parts a and w take its lines, findings, map moves and screens from the entry point, and no home reads those files',
+  action:
+    'the migration `ports/` names for the repository, on its checkout: `node scripts/migrate.ts <name> <checkout>`, run from this repository at the tag; the pin to the tag in the same commit',
   rules: { added: [], changed: [], removed: [] },
   outputs: {},
 };

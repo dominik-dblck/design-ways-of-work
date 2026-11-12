@@ -4,8 +4,6 @@
  */
 import { ownText } from './bundleText.ts';
 import type { Mirror } from './checkWorld.ts';
-import * as CONTENT_CHECK from '../../sheet/logic/assembly/contentCheck.ts';
-import * as CONTENT_TYPE_LOGIC from '../../sheet/logic/assembly/contentTypeLogic.ts';
 import * as SOURCE_CHECK from '../sourceCheck.ts';
 
 type Guard = typeof SOURCE_CHECK;
@@ -21,62 +19,6 @@ interface GuardRun {
   readonly layered: Texts;
   readonly list: readonly string[];
   readonly fileTexts: Texts;
-}
-
-const assemblyFinding = (row: string, text: string): Finding => ({
-  kind: 'assembly',
-  row,
-  file: 'contentTypeLogic.js',
-  line: 0,
-  text,
-});
-
-// a type's parity with today: the lines that differ, when it differs
-function parityLines(parity: unknown): readonly unknown[] {
-  const lines: unknown = Reflect.get(Object(parity), 'lines');
-  return Reflect.get(Object(parity), 'state') === 'differs' &&
-    Array.isArray(lines)
-    ? lines
-    : [];
-}
-
-function assemblyFindings(guard: Guard): readonly Finding[] {
-  const assembly = CONTENT_TYPE_LOGIC.assembly;
-  const typed = assembly.types.flatMap((type) => {
-    const built = assembly.assemble(type.slug);
-    if (!built)
-      throw new TypeError("Cannot read properties of null (reading 'issues')");
-    return [
-      ...built.issues.map((issue) =>
-        assemblyFinding(
-          'the skeleton’s slots (T28)',
-          `${type.slug} · ${issue}`,
-        ),
-      ),
-      ...parityLines(built.parity).map((one) =>
-        assemblyFinding(
-          'parity with today (T23)',
-          `${type.slug} · ${String(one)}`,
-        ),
-      ),
-    ];
-  });
-  return [
-    ...typed,
-    ...assembly
-      .usage()
-      .filter((use) => !use.ok)
-      .map((use) =>
-        assemblyFinding(
-          'a part used twice (T23b)',
-          `${use.key} used by ${use.by.length}`,
-        ),
-      ),
-    ...assembly
-      .conflicts()
-      .map((one) => assemblyFinding('no field set by two parts (T23b)', one)),
-    ...guard.contentCheck({ ContentCheck: CONTENT_CHECK }),
-  ];
 }
 
 function counted(
@@ -101,15 +43,17 @@ function textsOf(
   );
 }
 
-// the scan over the guard's list and the layered files
+// the scan over the guard's list and the layered files, the product's own findings last
 function guardFindings({
   guard,
   files,
   layered,
+  own,
 }: {
   readonly guard: Guard;
   readonly files: Texts;
   readonly layered: Texts;
+  readonly own: () => readonly Finding[];
 }): readonly Finding[] {
   const both = { ...files, ...layered };
   return [
@@ -118,11 +62,15 @@ function guardFindings({
     ...guard.branchesCheck(both),
     ...guard.twiceCheck(both),
     ...guard.aboutCheck(both),
-    ...assemblyFindings(guard),
+    ...own(),
   ];
 }
 
-function guardRun(mirror: Mirror): GuardRun {
+// the product's own findings come from its entry point, never from a file read here
+function guardRun(
+  mirror: Mirror,
+  own: () => readonly Finding[] = () => [],
+): GuardRun {
   const guard: Guard = SOURCE_CHECK;
   const readList = guard.readList();
   const files = textsOf(mirror, { files: readList, fallback: '' });
@@ -130,7 +78,7 @@ function guardRun(mirror: Mirror): GuardRun {
     files: Object.keys(guard.layers),
     fallback: null,
   });
-  const found = guardFindings({ guard, files, layered });
+  const found = guardFindings({ guard, files, layered, own });
   const scope = new Set([...guard.scope, ...guard.targets(), 'messages.js']);
   return {
     guard,

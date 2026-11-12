@@ -28,16 +28,6 @@ const CONTRACT: readonly ContractRow[] = [
     what: 'the wireframes as last checked, held with the wireframes',
   },
   {
-    file: 'guards/checks/measureCheck.ts',
-    kind: 'plug',
-    what: 'the product’s half of Measure',
-  },
-  {
-    file: 'guards/checks/parsePools.ts',
-    kind: 'plug',
-    what: 'a check part of the product’s own',
-  },
-  {
     file: 'product.ts',
     kind: 'product',
     what: 'what the product plugs in: code alone, read by what it runs',
@@ -118,11 +108,6 @@ const CONTRACT: readonly ContractRow[] = [
     what: 'logic of the product’s own',
   },
   {
-    file: 'sheet/logic/assembly/contentCheck.ts',
-    kind: 'plug',
-    what: 'logic of the product’s own',
-  },
-  {
     file: 'sheet/logic/assembly/contentTypeLogic.ts',
     kind: 'plug',
     what: 'logic of the product’s own',
@@ -154,22 +139,12 @@ const CONTRACT: readonly ContractRow[] = [
     what: 'samples of the product’s own',
   },
   {
-    file: 'sheet/screens/screenView.ts',
-    kind: 'plug',
-    what: 'a view part of the product’s own',
-  },
-  {
     file: 'sheet/screens/wireframes.ts',
     kind: 'optional',
     what: 'the screens and their wireframes',
   },
   { file: 'sheet/words/glossary.ts', kind: 'registry', what: 'the glossary' },
   { file: 'sheet/words/messages.ts', kind: 'registry', what: 'the messages' },
-  {
-    file: 'sheet/words/messagesContent.ts',
-    kind: 'plug',
-    what: 'words of the product’s own, and their check',
-  },
 ];
 
 export { CONTRACT };

@@ -1,6 +1,6 @@
 /**
  * - `guardPart` · part a: the guard's map and ratchet, screens' keys, copied rules,
- * - the words' checks, the pools and Measure.run
+ * - the words' checks, then the product's own lines
  */
 import { capabilitiesLine } from './capabilitiesCheck.ts';
 import { lineOf } from './checkWorld.ts';
@@ -9,21 +9,25 @@ import { modesLine } from './modesCheck.ts';
 import { rulesLine } from './rulesCheck.ts';
 import { snapshotText } from './snapshotModule.ts';
 import type { Mirror } from './checkWorld.ts';
-import { measureLines } from './measureCheck.ts';
-import { poolsLine } from './parsePools.ts';
 import { guardRun } from './runChecks.ts';
 import type { GuardRun } from './runChecks.ts';
+import type { Product } from '../../tools/productTypes.ts';
 import * as CONTENT_TYPE_LOGIC from '../../sheet/logic/assembly/contentTypeLogic.ts';
 import * as MESSAGES from '../../sheet/words/messages.ts';
-import * as MESSAGES_CONTENT from '../../sheet/words/messagesContent.ts';
 import * as WIREFRAMES from '../../sheet/screens/wireframes.ts';
 
+// what part a takes from the product, handed in by the entry point
+type GuardPlugs = Pick<Product, 'guardFindings' | 'guardLines' | 'mapMoves'>;
+
 // the architecture map's data: this run's findings, never counted again
-function mapLine(run: GuardRun, mirror: Mirror): string {
+function mapLine(
+  run: GuardRun,
+  { mirror, moves }: { readonly mirror: Mirror; readonly moves: GuardPlugs['mapMoves'] },
+): string {
   const drawn = run.guard.architecture(run.found, {
     texts: { ...run.fileTexts, ...run.layered },
     names: run.list,
-    moves: CONTENT_TYPE_LOGIC.factMoves(),
+    ...(moves === undefined ? {} : { moves: moves() }),
     layerNames: Reflect.get(CONTENT_TYPE_LOGIC, 'layers'),
   });
   const map = {
@@ -63,7 +67,6 @@ function countLines(run: GuardRun): readonly string[] {
   const kind = (name: string): readonly string[] =>
     run.found.filter((one) => one.kind === name).map((one) => one.text);
   const words = MESSAGES.messageRowsCheck();
-  const typeWords = MESSAGES_CONTENT.typeWordsCheck();
   return [
     lineOf('layers', {
       ok: true,
@@ -81,17 +84,13 @@ function countLines(run: GuardRun): readonly string[] {
       ok: !words.length,
       text: words.join(' | ') || '0',
     }),
-    lineOf('MessagesContent.typeWordsCheck', {
-      ok: !typeWords.length,
-      text: typeWords.join(' | ') || '0',
-    }),
   ];
 }
 
-function guardPart(mirror: Mirror): readonly string[] {
-  const run = guardRun(mirror);
+function guardPart(mirror: Mirror, plugs: GuardPlugs = {}): readonly string[] {
+  const run = guardRun(mirror, plugs.guardFindings);
   return [
-    mapLine(run, mirror),
+    mapLine(run, { mirror, moves: plugs.mapMoves }),
     lineOf('ratchet', {
       ok: !run.ratchet.length,
       text: run.ratchet.length ? JSON.stringify(run.ratchet) : '0',
@@ -102,8 +101,7 @@ function guardPart(mirror: Mirror): readonly string[] {
     modesLine(mirror),
     rulesLine(),
     ...countLines(run),
-    poolsLine(mirror),
-    ...measureLines(mirror),
+    ...(plugs.guardLines?.(mirror) ?? []),
   ];
 }
 

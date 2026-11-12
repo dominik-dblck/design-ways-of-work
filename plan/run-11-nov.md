@@ -532,3 +532,17 @@ Each call: what, why, how to undo. None changes what the PM sees.
   chat's language the PM's own; and, for every project on the PM's machine, in the user-level
   `~/.claude/CLAUDE.md`, outside every repository. A design repository spawned in stage 3 carries the same
   lines in the `CLAUDE.md` its spawn writes.
+- The PM, 12 Nov: "lec do konca design caly i wtedy wrzuc mi formularz": the rest of stage 2 runs with no stop,
+  and its end raises the PM's form; v1.0.0 is asked there.
+- Task 5 goes in four pieces, each through the gate: (a) parts a and w take the product's code from its entry
+  point; (b) the states an epic names and the counters; (c) the rows that move to the product's registries,
+  moved by eagle-design on its `main` and carried here; (d) the pack reads the emitted block model.
+- 5a. `Product` gains four optional fields: `guardLines` (part a's last lines, the product's own),
+  `guardFindings` (the guard's findings over its own logic), `mapMoves` (the facts the map draws moving),
+  `screens` (part w's sweep and editor view). `tools/checks.ts`, the entry point, hands them to `guardPart`,
+  `guardRun` and `wireframesPart`, which read no file of the product's for them any more; a product with no
+  screens runs no line of part w. The five plug rows nothing reads leave the contract. The product's side is
+  the migration: its `product.ts` wires the four, and two files of its own hold what left the homes (the
+  tail of part a; the assembly's findings), new files, no rows. `guards/sourceCheck.ts` exports its finding
+  and map-move types, so a product reads them through the entry. Tried by hand in the gate's clone first:
+  its tsc and ESLint clean, `yarn checks` the same output line for line. Undo: revert the commit.

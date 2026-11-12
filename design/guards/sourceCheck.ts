@@ -1,6 +1,6 @@
 /**
  * - `codeScan`, `ownModules`, `twiceCheck`, `fileHeads` · copies
- * - `contentCheck`, `architecture` · the content's findings, the view of it all
+ * - `contentCheck`, `architecture`, types · the content's findings, the files' map
  * - `sourceLayers`, `requirementReads`, `ratchet`, `sourceScope` · layers, counts
  */
 export { architecture } from './sourceCheck/architecture.ts';
@@ -29,3 +29,4 @@ export {
 } from './sourceCheck/sourceLayers.ts';
 export { MAP as map, SCOPE as scope } from './sourceCheck/sourceScope.ts';
 export { twiceCheck } from './sourceCheck/twiceCheck.ts';
+export type { MapMove, SourceFinding } from './sourceCheck/sourceCheckTypes.ts';

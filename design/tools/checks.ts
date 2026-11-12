@@ -15,11 +15,11 @@ import { wireframesPart } from '../guards/checks/wireframesPart.ts';
 import type { CheckPart } from './productTypes.ts';
 import { builtRoot } from './root.ts';
 
-// the parts every product runs
+// the parts every product runs, each handed what it takes from the product
 const STANDARD: Readonly<Record<string, CheckPart>> = {
-  a: guardPart,
+  a: (mirror) => guardPart(mirror, product),
   g: journeysPart,
-  w: wireframesPart,
+  w: (mirror) => wireframesPart(mirror, product.screens),
 };
 
 // with the product's own: a letter of the standard ones stays theirs
