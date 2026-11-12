@@ -880,9 +880,9 @@ Each call: what, why, how to undo. None changes what the PM sees.
   answers stand in `plan/sample-product.md`, with stage 4's step for the eight. Undo: revert it.
 - Gate on 85845c5: green, 36 differences each said; eagle-design's v0.5.0 migrations: 3 edited, 8 homed. Task 8
   step 1 closed. The PM's word (12 Nov, chat): autonomy, decisions here, questions on `plan/state.md`.
-- The PM set the flag (12 Nov 15:18): `work-mode autonomy`, his pick by form that the flag, not a chat word,
-  sets every session's mode. Under it: messages to eagle-dev need no word of his; each call logged here; a
-  backup (`yarn backup`) after every chunk, his word; a long run under `caffeinate`. Held for him still: a
+- The PM set the flag (12 Nov 15:18): `work-mode autonomy`, the PM's pick by form that the flag, not a chat word,
+  sets every session's mode. Under it: messages to eagle-dev need no word of the PM's; each call logged here; a
+  backup (`yarn backup`) after every chunk, the PM's word; a long run under `caffeinate`. Held for the PM still: a
   release, a merge, a push of the build branch, a snapshot retaken, a page deleted, a sheet row's meaning.
 - Task 8 step 2's probe: the homes alone give 366 tsc errors; they call about 80 functions through the
   registries, from 37 of eagle-design's files that import its row files by name. The call (autonomy): the way
@@ -905,7 +905,7 @@ Each call: what, why, how to undo. None changes what the PM sees.
 - Gate on 133e942 against eagle-design's port at df692e3 (v0.5.0 taken, the roadmap's rows split from their
   readers): NO DIFFERENCE. The PM's picks by form: every hook comes from here, a person's data local (W28, A);
   the mode's hook too, changed by release alone, the installed copy and its flag closed to every agent (W29, B,
-  `CLAUDE.md`'s rule rewritten); his word: a spawned product gets the same hooks. Stage 2 gains task 16, the
+  `CLAUDE.md`'s rule rewritten); the PM's word: a spawned product gets the same hooks. Stage 2 gains task 16, the
   hooks; it is 20 tasks. Undo: revert it; the rule and the table as they stood.
 
 - eagle-design's port at d81fcef verified on a clone: the six readers bound for the homes pass ESLint with no
@@ -933,14 +933,14 @@ Each call: what, why, how to undo. None changes what the PM sees.
 - The PM's word here (12 Nov): "ale czemu mnie pytasz o release nie mozesz sam robic?", then "masz zgode na
   releasy az do 1.0.0", and eagle-design relayed the same (its D98: each only once its checks are green). W30:
   each release up to and with 1.0.0 is this session's call once pre-push is green; a change to the work-mode
-  hook still waits for him (W29). `CLAUDE.md`'s held list and step 3 say so. His next word: "zapisuj decyzje
-  i zapisuj pytania, dogadamy jak skonczycie": no form; each question goes on the state's list for his
-  return. Undo: revert it; the releases wait for his word again.
+  hook still waits for the PM (W29). `CLAUDE.md`'s held list and step 3 say so. The PM's next word: "zapisuj decyzje
+  i zapisuj pytania, dogadamy jak skonczycie": no form; each question goes on the state's list for the PM's
+  return. Undo: revert it; the releases wait for the PM's word again.
 - v0.6.0 out under W30: main 86ab23f and its tag on the remote, pre-push green (feature tier 327 s, the
   fresh clone, the gate against eagle-design's port at d86ecb2).
 - The PM's pick A, asked in chat what the hook's exception means: task 16's release, the work-mode hook's
   source brought in byte-equal, tested and installed by script, is a W30 release (W31); a change to what it
-  does waits for him. Undo: revert it; task 16's release waits for his word.
+  does waits for the PM. Undo: revert it; task 16's release waits for the PM's word.
 - Task 10 re-applied for v0.7.0: 1cf84ac's homes, contract rows and `CASE_READERS` taken back from it by
   `git checkout`, the migration's release 0.7.0; `NEXT` written against a pin at v0.6.0 (thirteen homed, the
   four outputs thirteen files more). Its gate runs once eagle-design's v0.6.0 take is committed. One release
@@ -1074,11 +1074,16 @@ Each call: what, why, how to undo. None changes what the PM sees.
 - Task 15, the decisions split, on eagle-design's per-row reading (D1 to D95 on its `port/wow`): 72 rows are the
   way of working's and join this register as W32 to W103 (`decisions/taken/`, one file per product rows file),
   23 stay the product's. Each moved row keeps its words of the day, whole: eagle-design proposed rewording 20
-  and splitting 12 into rule and example, but a decision is the PM's word as he gave it, and rewording it would
-  change what he said; the homes' rules already hold the product-free wording. Each names the row it was
+  and splitting 12 into rule and example, but a decision is the PM's word as given, and rewording it would
+  change what the PM said; the homes' rules already hold the product-free wording. Each names the row it was
   (`from: 'eagle-design D24'`, the register's test reads the product's name off `ports/consumers.ts`). The
   product's row stays, its number, its words and every cite of it true, and names its row here (`heldBy`, a new
   optional field of the home type): its decisions check asks D1 on with no gap. The homes' 72 cites of moved
   rows are W ids now, by script; an id shown as an example and the two product rows a home cites (D15, D33) are
   left. D96 to D101 are on eagle-design's `views/feature` alone, until the PM's fast-forward of its `main`:
   their four of the way of working (D96, D97, D98, D99) join then. `HELD_BY` (0.13.0). Undo: revert it.
+- Gate on f8d1871: 26 differences, each the piece's (bundles holding the decisions and the plans' rules,
+  skills and pages citing W ids, digests, vendored copies, cut-pack's count), named in the row; one broken:
+  eagle-design's `main` added `roadmaps/ids.ts` to its old config's generated list (49cdbb9), which the home
+  config holds through the scope's `generated`, carried. eagle-design approved the piece; the PM named, never
+  "he", in the notes and the scope, as it asked; the end state of the moved rows' words in the state's gaps.

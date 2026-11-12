@@ -75,6 +75,8 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
 - A split's proof (each export's output dumped before and after, each import classed home or rows, lint
   with no suppression) is a script each side writes again; one product-agnostic tool here, its digest
   carried by the migration, would give both sides the same proof.
-- The register is not shipped: a product reads a home's W id only by its own row that names it (`heldBy`).
-  Shipping `decisions/` as a home, or a page of it, lets a new product read the way of working's decisions.
+- The register is not shipped: a product reads a home's W id only by its own row that names it (`heldBy`),
+  and a moved row's words stand twice, the product's row and the register's. Once `decisions/` ships in the
+  package, a moved row shrinks to `{ id, heldBy }` and the product's board and decisions check read its words
+  through `heldBy`: the register alone holds them.
 - D96 to D101 of eagle-design wait on the PM's fast-forward of its `main`; D96 to D99 then join the register.

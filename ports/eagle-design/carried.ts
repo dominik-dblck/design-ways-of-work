@@ -12,6 +12,11 @@ import { SPLIT_HOMES } from './carried/splitHomes.ts';
 
 const CARRIED: readonly Carried[] = [
   {
+    file: 'eslint.config.ts',
+    blob: '5b84668b84bb619586da3979b932ca3471668a77',
+    how: 'design/eslint.config.ts reads the scope: roadmaps/ids.ts stands in its `generated`, which the shared config leaves out of the size rules',
+  },
+  {
     file: 'docs/documents/api-convention/apiConventionOne.ts',
     blob: '3a2af9e0eeec9748ba8d559d60e493cbed8b505c',
     how: 'word for word in design/docs/documents/api-convention: the sixth check of endpointChecks.ts, the 502 row of endpointShape.ts',

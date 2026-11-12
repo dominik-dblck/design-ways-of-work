@@ -179,7 +179,7 @@ const scope: RepoScope = {
       {
         language: 'pl',
         files: ['decisions/taken/**', 'scope.ts'],
-        // his words as typed, an id's letters, an error's code, an acronym
+        // the PM's words as typed, an id's letters, an error's code, an acronym
         words: [
           'boarda',
           'checki',
