@@ -782,3 +782,7 @@ Each call: what, why, how to undo. None changes what the PM sees.
 - Gate on 7ca0dcc: two left on the commit's side. The sheet held 11 comment lines of 10: `stack` goes without
   its comment, the header names it. The product's `.prettierignore` is written from its scope, and the scope
   now lists `roadmaps/ids.ts` under the emit: a migration edit writes the same line. Undo: revert it.
+- Gate on 984865d green, port/wow 29fdc87: 129 differences, each expected. The release's rows say the board's
+  numbers, the ids the build writes and the stack, five new files each with its row, and the tag's exits by
+  what main retired. Two gaps written in `plan/state.md`: a port takes its trunk's generated copies; a halt's
+  grain is the command. Undo: revert it.

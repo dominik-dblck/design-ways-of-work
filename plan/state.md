@@ -16,8 +16,8 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
 ## Who takes it
 
 - `ports/consumers.ts` names each repository the gate tries, and the branch it tries.
-- eagle-design: its branch `port/wow` takes the tag v0.3.0 and holds its `main` up to 98deb53, in one commit
-  of its session's (88f5d3e, not pushed yet); its `main` still runs on its own copies. The gate tries it on
+- eagle-design: its branch `port/wow` takes the tag v0.3.0 and holds its `main` up to 1683f09, in a merge
+  of its session's (29fdc87, not pushed yet); its `main` still runs on its own copies. The gate tries it on
   its newest `main` (W22): each clone takes the trunk by the port's script. No migration is in hand.
 - argus-design: not spawned yet; its stack is decided, the one this repository defines (W24).
 - The build side: `dev/` is copied from its repository by script; its port is parked.
@@ -54,3 +54,8 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
 - A commit pushed straight to `main` from a clone with no hooks is checked by nothing here: a branch
   protection on the remote alone closes that.
 - The hooks outside every repository (the work mode, the run bars) are not versioned or tested here.
+- A port that takes its trunk takes the trunk's generated copies too (`vendor/wow/`, the emitted skills):
+  the port's build writes them back from its pin, so they settle at the next take. `scripts/portMerge.ts`
+  could keep the port's side for what a build writes.
+- A halt explains a file by the command that first wrote it: a new file of a halted `yarn build` passes as
+  the halt's, not as its own.
