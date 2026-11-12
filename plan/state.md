@@ -49,7 +49,8 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
 
 ## Known gaps
 
-- The homes still name Eagle: its ids, names and paths, in the files the plan counted. Stage 2, task 19.
+- `dev/`, the build side's tree a design product takes, still names Eagle as its repository wrote it. Stage 2,
+  task 24; the homes' test reads every other file the take wrote.
 - A change that holds no file still runs prettier and cspell with no file named, green by accident.
   A home (`shared/checkTiers.ts`): stage 2, task 20.
 - `design/tools/build.ts` removes its output folder with all it holds, outside the guard. A home: stage 2,

@@ -3,6 +3,7 @@
  * - about, eyebrow, source, intro, modesNote, modes, facts, holdsNote
  */
 import { cite, citeLines } from '../../documents/cited.ts';
+import { buildSide } from '../../../sheet/project.ts';
 const ABOUT_TO_HOLDS_NOTE = {
   about:
     'The three ticket modes as data' +
@@ -15,7 +16,7 @@ const ABOUT_TO_HOLDS_NOTE = {
   intro: [
     'An epic → one ticket, one run',
     'Anything smaller → a light path',
-    'A mode → where CC stops',
+    `A mode → where ${buildSide} stops`,
     'A stop → a review, never a question',
     'The full track → gone; its extra stops → one switch on feature',
   ],

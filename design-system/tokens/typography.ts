@@ -20,7 +20,7 @@ const typography: readonly TokenGroup[] = [
       { name: '--ui-dense', light: '12px', why: 'body2     · 400 · 1.35                --t-caption · list rows, menus, breadcrumbs' },
       { name: '--ui-label', light: '12px', why: 'subtitle2 · 500 · 1.2                 --t-caption · a name over a role' },
       { name: '--ui-caption', light: '10px', why: 'caption   · 400 · 1.2                 --t-micro   · the role under a name' },
-      { name: '--ui-eyebrow', light: '10px', why: 'overline  · 500 · 1 · 0.08em · mono · uppercase · --t-micro · IN THIS CAMPAIGN, state chips' },
+      { name: '--ui-eyebrow', light: '10px', why: 'overline  · 500 · 1 · 0.08em · mono · uppercase · --t-micro · IN THIS SECTION, state chips' },
       { name: '--ui-eyebrow-font', light: 'var(--font-mono)' },
     ],
   },

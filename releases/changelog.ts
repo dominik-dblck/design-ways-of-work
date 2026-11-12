@@ -5,8 +5,8 @@
 import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
 const NEXT: Unreleased = {
-  kind: 'patch',
-  what: '',
+  kind: 'minor',
+  what: 'no file the take wrote names the product: a home test reads each one outside `dev/` against `sheet/project.ts`, its company and its stack apart; the modes’ and the ticket pipeline’s texts name the build side by the product’s `buildSide`; the design system’s token notes, the criteria skill’s example and the preset’s naming example name no product and carry no date',
   action: 'none: move the pin to the tag',
   rules: { added: [], changed: [], removed: [] },
   outputs: {},

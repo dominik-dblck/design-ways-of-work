@@ -2,7 +2,7 @@
 
 > **Source of truth.** This file lives in the design project and is edited there, in conversation.
 > The repository's `.claude/skills/ticket-*/SKILL.md`, `ticket/_shared.md`, `ticket/_code.md` and
-> `roadmaps/templates/ticket-*.md` are derived from it — CC syncs them when this file changes and
+> `roadmaps/templates/ticket-*.md` are derived from it — Acme Build syncs them when this file changes and
 > reports the diff; a lesson found on the repo side (`ticket-report` step 7) comes here first as a
 > proposed line, and lands in the skill only after it landed here. Never edit a SKILL.md directly.
 >

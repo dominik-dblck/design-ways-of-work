@@ -12,7 +12,7 @@ const inks: readonly TokenGroup[] = [
   },
   {
     title: 'TWO DS ROLES THAT ARE NOT TEXT INK HERE',
-    intro: "--fg-regular (#848d9c) and --fg-normal (#707b8c) are legible on the mobile app's warm canvas at\n16px. This tool runs at 12, and measured against every surface we own they read:\n   fg-regular   2.94 – 3.35 light   3.44 – 4.90 dark\n   fg-normal    3.76 – 4.28 light   4.40 – 6.27 dark\nNeither clears 4.5 in light on any surface, so neither is a small-text ink in Eagle:\nmuted body text takes --fg-tertiary (5.23 – 5.96 light, 7.47 – 10.64 dark). 198 uses moved\n18 Sep. The two roles stay legal for non-text — a hairline, a 24px+ heading, an inactive glyph.",
+    intro: "--fg-regular (#848d9c) and --fg-normal (#707b8c) are legible on the mobile app's warm canvas at\n16px. An internal tool runs at 12, and measured against every surface it owns they read:\n   fg-regular   2.94 – 3.35 light   3.44 – 4.90 dark\n   fg-normal    3.76 – 4.28 light   4.40 – 6.27 dark\nNeither clears 4.5 in light on any surface, so neither is a small-text ink in a tool:\nmuted body text takes --fg-tertiary (5.23 – 5.96 light, 7.47 – 10.64 dark).\nThe two roles stay legal for non-text — a hairline, a 24px+ heading, an inactive glyph.",
     entries: [],
   },
   {

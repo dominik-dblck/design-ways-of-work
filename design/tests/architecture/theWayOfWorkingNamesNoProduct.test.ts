@@ -1,14 +1,18 @@
 /**
  * - the way of working names a role, never the product (W56)
- * - read in the generic rules and the skills' data, against `sheet/project.ts`
+ * - read in every file the take wrote, the rules and the skills' data, against `sheet/project.ts`
  */
+import fs from 'node:fs';
+import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { rules, ticketChecklist } from '../../docs/process/plans.ts';
+import { takenFiles } from '../../shared/take/takeRecord.ts';
 import * as project from '../../sheet/project.ts';
-import { textsUnder } from './tree.ts';
+import { ROOT, textsUnder } from './tree.ts';
 import type { Source } from './tree.ts';
 
 const AN_EPIC_OR_TICKET = /\b(?:T-)?E\d{2}(?:-\d{2})?\b/g;
+const TEXTS = ['.ts', '.tsx', '.md'];
 
 const escaped = (word: string): string =>
   word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -16,11 +20,18 @@ const escaped = (word: string): string =>
 const aWhole = (word: string): RegExp =>
   new RegExp(`(?<![\\w-])${escaped(word)}(?![\\w-])`);
 
+/** Each product name a text holds, as `path · name`. */
+const wordsIn = (source: Source, names: readonly string[]): readonly string[] =>
+  names
+    .filter((name) => aWhole(name).test(source.text))
+    .map((name) => `${source.path} · ${name}`);
+
 /** Each product name or epic a text holds, as `path · name`. */
 function namesIn(source: Source, names: readonly string[]): readonly string[] {
-  const words = names.filter((name) => aWhole(name).test(source.text));
-  const ids = [...source.text.matchAll(AN_EPIC_OR_TICKET)].map(([id]) => id);
-  return [...words, ...ids].map((name) => `${source.path} · ${name}`);
+  const ids = [...source.text.matchAll(AN_EPIC_OR_TICKET)].map(
+    ([id]) => `${source.path} · ${id}`,
+  );
+  return [...wordsIn(source, names), ...ids];
 }
 
 describe('the way of working names no product', () => {
@@ -36,16 +47,33 @@ describe('the way of working names no product', () => {
   it('finds a name of the product and an epic in a planted text', () => {
     const planted = {
       path: 'planted.ts',
-      text: [
-        'Ask CC on E0',
-        '6 in Notion; design-answer-cc and Payloads pass',
-      ].join(''),
+      text: ['Ask Kestrel on E0', '6 in Ledger; kestrel-dev and Wikis pass'].join(
+        '',
+      ),
     };
-    expect(namesIn(planted, ['CC', 'Notion', 'Payload'])).toEqual([
-      'planted.ts · CC',
-      'planted.ts · Notion',
+    expect(namesIn(planted, ['Kestrel', 'Ledger', 'Wiki'])).toEqual([
+      'planted.ts · Kestrel',
+      'planted.ts · Ledger',
       'planted.ts · E06',
     ]);
+  });
+
+  it('no file the take wrote names the product', () => {
+    // the company and the stack are the way of working's own: its design system is the company's, a stack's id its word
+    const { company: _company, stack: _stack, ...own } = named;
+    const ownNames: readonly string[] = Object.values(own).flat();
+    // the build side's tree comes copied as its repository wrote it, and waits for that side's own port
+    const taken = [...takenFiles(ROOT).keys()].filter(
+      (file) =>
+        !file.startsWith('dev/') &&
+        TEXTS.some((ending) => file.endsWith(ending)),
+    );
+    expect(taken.length).toBeGreaterThan(0);
+    const texts = taken.map((file) => ({
+      path: file,
+      text: fs.readFileSync(path.join(ROOT, file), 'utf8'),
+    }));
+    expect(texts.flatMap((one) => wordsIn(one, ownNames))).toEqual([]);
   });
 
   it('no generic rule, checklist line or skill names the product', () => {

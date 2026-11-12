@@ -3,6 +3,7 @@
  * - holds, runsNote, legend
  */
 import { cite } from '../../documents/cited.ts';
+import { buildSide } from '../../../sheet/project.ts';
 const HOLDS_TO_LEGEND = {
   holds: [
     {
@@ -10,7 +11,7 @@ const HOLDS_TO_LEGEND = {
       title: 'A question never stops the run',
       rule: 'rule:feature-run-never-stops',
       bullets: [
-        'CC decides → “did X because Y”',
+        `${buildSide} decides → “did X because Y”`,
         'Contract decisions → the snapshot (feature) or the recon message (standard)',
         'Everything else → the report',
         'A new event or payload key → marked NEW EVENT (the log keeps it once merged)',
@@ -62,7 +63,7 @@ const HOLDS_TO_LEGEND = {
       emoji: '📦',
       title: 'No commits in the run',
       bullets: [
-        'CC writes code, no commits',
+        `${buildSide} writes code, no commits`,
         'At the report: one commit, approved by the PM',
         'Then the push, then the merge · three approvals',
       ],

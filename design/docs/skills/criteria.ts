@@ -42,7 +42,7 @@ const skill: SkillFile = {
         "Every colour is a role; a chip's pair flips together; under 12px the floor is 7:1 (`--ink-micro`); a strong outline is `--bd-strong`. `design-system/`",
         'One hover: the fill arrives (`--ui-hover-fill`), nothing else moves; a filled control darkens. 16px boxes take a 28 halo; inside a row the row owns it. `design-system/tokens/hover.ts`',
         'Buttons are never pills; menus, popovers and dialogs share one paper; four z-layers. `design-system/`',
-        'A component an organism owns is `{Organism}{Part}` (`campaigns-header`); a shared one has no prefix and `scope: global`. `rule:part-named-after-its-organism`',
+        'A component an organism owns is `{Organism}{Part}` (`settings-header`); a shared one has no prefix and `scope: global`. `rule:part-named-after-its-organism`',
         ...citeLines('criteria.parts'),
         'One smart organism per screen; every other component is dumb and gets its props from the organism’s adapters. `rule:one-smart-component-per-screen`',
         'Every test is seen red once: domain / endpoint RED before GREEN; app / browser / infra after GREEN with a planted fault; measured = a dated fact, no test. `rule:every-test-seen-red`',

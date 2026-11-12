@@ -24,7 +24,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 
 | stage | what | done | of |
 | 1 | Foundation | 7 | 7 |
-| 2 | Design clean | 18 | 24 |
+| 2 | Design clean | 18 | 25 |
 | 3 | Eagle-design | 0 | 2 |
 | 4 | Spawn design | 0 | 3 |
 
@@ -51,8 +51,8 @@ here, tested, installed by script, a person's own data in a local file (W28, W29
 feature tier: the homes green on a product that names none (the no-product test) · 19 · the homes free of the
 product's names: its ids, names and paths in their texts · 20 · a change that holds no file runs no formatter ·
 21 · the build's output folder removed within the guard · 22 · the checks that build in the scratch, a field of
-the scope · 23 · the build side's theme and atoms held here (W25, W26), once it frees them · 24 · v1.0.0 (the
-PM's word).
+the scope · 23 · the build side's theme and atoms held here (W25, W26), once it frees them · 24 · `dev/`, the
+build side's tree a design product takes, free of the product's names · 25 · v1.0.0 (the PM's word).
 
 Stage 3, the design half of the plan's stage 5: 1 · eagle-design takes v1 by the rehearsed migration, the PM's
 word · 2 · both design repositories pinned to one tag, the gate green on both.
@@ -1165,3 +1165,11 @@ Each call: what, why, how to undo. None changes what the PM sees.
 - The PM, 12 Nov: eagle-design takes v1 before the spawn ("bo przy eagle design v1 na pewno jeszcze cos
   wyjdzie"); stage 3 is eagle-design, stage 4 the spawn. Why: v1 meets a real product first, and what it finds
   is mended before a new product is made from it. Undo: the two rows and their two paragraphs swapped back.
+- Task 19: a home test reads every file the take wrote, outside `dev/`, against the product's names in
+  `sheet/project.ts`, its company and its stack apart. Why: the company's design system and a stack's id are the
+  way of working's own words, and every product shares them (W26). Measured on eagle-design's clone first: 30
+  files, 9 in `dev/`, 4 holding only the stack's id. The modes' and the ticket pipeline's texts name the build
+  side by the product's `buildSide`, so a product's rendered text keeps its own name. Undo: revert the commit.
+- `dev/` comes copied as the build side's repository wrote it, and a design product takes it (`dev/claude/**`):
+  its names would reach argus-design. It is task 24 now, before v1.0.0 (25), on eagle-design's word. Why: the
+  spawn must not carry Eagle. Undo: the table at 24, the row dropped.

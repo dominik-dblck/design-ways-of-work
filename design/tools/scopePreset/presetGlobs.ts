@@ -58,7 +58,7 @@ const NAME_CASES: readonly NameCase[] = [
       '.ts': 'regex:^E\\d{2}[A-Za-z0-9]*$',
       '.md': 'regex:^(?:[a-z]+-)?E\\d{2}$ | regex:^T-E\\d{2}-\\d{2}$',
     },
-    why: 'a record is named by its id: an epic (`E04Tickets.ts`, `feature-E04.md`), a ticket (`T-E18-00.md`)',
+    why: 'a record is named by its id: an epic (`E01Tickets.ts`, `feature-E01.md`), a ticket (`T-E01-00.md`)',
   },
 ];
 

@@ -1,7 +1,7 @@
 /**
  * - `RUNS_FEATURE_FIRST_ROWS` · the feature run’s first rows, in the page’s order
  */
-import { buildBranch } from '../../../sheet/project.ts';
+import { buildBranch, buildSide } from '../../../sheet/project.ts';
 import { EXAMPLE_EPIC, EXAMPLE_TICKET } from './modeExample.ts';
 
 const RUNS_FEATURE_FIRST_ROWS = [
@@ -57,7 +57,7 @@ const RUNS_FEATURE_FIRST_ROWS = [
       title: 'Nothing to do here',
       muted: true,
       bullets: [
-        'every gap decided by CC, with its why',
+        `every gap decided by ${buildSide}, with its why`,
         'read at the snapshot',
       ],
     },
@@ -95,7 +95,7 @@ const RUNS_FEATURE_FIRST_ROWS = [
     name: 'Endpoint tests + contract snapshot',
     pm: {
       title: 'Types and endpoints reviewed',
-      bullets: ['in TypeScript, as CC wrote them'],
+      bullets: [`in TypeScript, as ${buildSide} wrote them`],
     },
     ds: {
       title: 'Snapshot vs our rows',
