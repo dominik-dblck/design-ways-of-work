@@ -5,27 +5,38 @@
 import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
 const NEXT: Unreleased = {
-  kind: 'minor',
-  what: 'a design product may take no `dev/`, the build side’s tree: the build prints the build side’s map and rules only where the product holds them (`optional` rows), and stops, naming the file, when any other module it prints is missing; the new-project guide says a new product takes none until its build side has its own, and that the pipeline names the review agents that side holds',
+  kind: 'patch',
+  what: '',
   action: 'none: move the pin to the tag',
   rules: { added: [], changed: [], removed: [] },
-  outputs: {
-    'eagle-design': {
-      'output · yarn build':
-        'the build writes the new-project guide anew: one line on `wow.takes` and the build side’s agents',
-      'output · yarn cut-pack T-E19-00':
-        'the new-project guide the build wrote waits uncommitted in the trial: 4 files, not 3',
-      'output · yarn test':
-        'one test file more, its two tests: the build refuses a missing module it prints unless the row is optional',
-      'dist · project/new-project.md':
-        'the new-project guide says a new product takes no `dev/` until its build side has its own, and names the review agents that side holds',
-      'written · docs/process/new-project.md':
-        'the new-project guide says a new product takes no `dev/` until its build side has its own, and names the review agents that side holds',
-    },
-  },
+  outputs: {},
 };
 
 const RELEASES: readonly Release[] = [
+  {
+    version: '0.19.0',
+    date: '2026-11-12',
+    kind: 'minor',
+    what: 'a design product may take no `dev/`, the build side’s tree: the build prints the build side’s map and rules only where the product holds them (`optional` rows), and stops, naming the file, when any other module it prints is missing; the new-project guide says a new product takes none until its build side has its own, and that the pipeline names the review agents that side holds',
+    action: 'none: move the pin to the tag',
+    rules: { added: [], changed: [], removed: [] },
+    outputs: {
+      'eagle-design': {
+        'output · yarn build':
+          'the build writes the new-project guide anew: one line on `wow.takes` and the build side’s agents',
+        'output · yarn cut-pack T-E19-00':
+          'the new-project guide the build wrote waits uncommitted in the trial: 4 files, not 3',
+        'output · yarn test':
+          'one test file more, its two tests: the build refuses a missing module it prints unless the row is optional',
+        'dist · project/new-project.md':
+          'the new-project guide says a new product takes no `dev/` until its build side has its own, and names the review agents that side holds',
+        'written · docs/process/new-project.md':
+          'the new-project guide says a new product takes no `dev/` until its build side has its own, and names the review agents that side holds',
+      },
+    },
+    moved: {},
+    tried: { 'eagle-design': '04628ac' },
+  },
   {
     version: '0.18.0',
     date: '2026-11-12',
