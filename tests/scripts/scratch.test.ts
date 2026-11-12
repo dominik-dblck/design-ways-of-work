@@ -42,6 +42,24 @@ describe('a folder is emptied below the scratch alone', () => {
     expect(fs.existsSync(path.join(scratch, 'file.txt'))).toBe(true);
     expect(fs.existsSync(path.join(outside, 'file.txt'))).toBe(true);
   });
+
+  it('a folder whose name starts with two dots is below, and made new', () => {
+    const folder = holding(path.join(scratch, '..cache'));
+    expect(emptied({ within: scratch, folder })).toBe(folder);
+    expect(fs.readdirSync(folder)).toEqual([]);
+  });
+
+  it('a link below the scratch that leads out of it is refused, and nothing is removed', () => {
+    holding(scratch);
+    const kept = holding(path.join(outside, 'x'));
+    const link = path.join(scratch, 'link');
+    fs.symlinkSync(outside, link);
+    expect(() =>
+      emptied({ within: scratch, folder: path.join(link, 'x') }),
+    ).toThrow('nothing removed');
+    expect(fs.existsSync(path.join(kept, 'file.txt'))).toBe(true);
+    fs.unlinkSync(link);
+  });
 });
 
 describe("a child's environment holds none of git's names for one repository", () => {
