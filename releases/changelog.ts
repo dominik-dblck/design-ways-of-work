@@ -5,48 +5,59 @@
 import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
 const NEXT: Unreleased = {
-  kind: 'major',
-  what: 'the words’ readers are homes, at the paths a product held them: the glossary’s reader and types, the messages’ live words, say word, situations, refusals, words, cells, checks, usage and types; a product holds their rows apart, each gathered in a file the contract names (the glossary’s terms, the messages’ rows and tables, the screen’s words); the messages’ barrel stays the product’s, its exports naming its own words',
-  action:
-    'the product’s rows split from the words’ readers on its own tree first, the readers byte-equal to the homes; the migrations `ports/` names for the repository, on its checkout: `node scripts/migrate.ts <name> <checkout>`, run from this repository at the tag (for eagle-design, the eleven readers leave its index, the take writing them back); the pin to the tag, then `yarn build`, its copies under `vendor/wow/` in the same commit',
+  kind: 'patch',
+  what: '',
+  action: 'none: move the pin to the tag',
   rules: { added: [], changed: [], removed: [] },
-  outputs: {
-    'eagle-design': {
-      'output · yarn build':
-        'the build side reads eleven files more in vendor/wow/: the words’ readers, homes now',
-      'output · yarn checks':
-        'the build side reads eleven files more in vendor/wow/: the words’ readers, homes now',
-      'output · yarn spec-check':
-        'the build side reads eleven files more in vendor/wow/: the words’ readers, homes now',
-      'output · yarn cut-pack T-E19-00':
-        'the build side reads eleven files more in vendor/wow/: the words’ readers, homes now; the eleven the migration takes out of the index count as uncommitted until the product commits them with its pin',
-      'written · vendor/wow/sheet/words/glossary.ts':
-        'the words’ reader is a home now, copied with the homes',
-      'written · vendor/wow/sheet/words/glossary/glossaryTypes.ts':
-        'the words’ reader is a home now, copied with the homes',
-      'written · vendor/wow/sheet/words/messages/liveWords.ts':
-        'the words’ reader is a home now, copied with the homes',
-      'written · vendor/wow/sheet/words/messages/messageCells.ts':
-        'the words’ reader is a home now, copied with the homes',
-      'written · vendor/wow/sheet/words/messages/messageChecks.ts':
-        'the words’ reader is a home now, copied with the homes',
-      'written · vendor/wow/sheet/words/messages/messageUsage.ts':
-        'the words’ reader is a home now, copied with the homes',
-      'written · vendor/wow/sheet/words/messages/messagesTypes.ts':
-        'the words’ reader is a home now, copied with the homes',
-      'written · vendor/wow/sheet/words/messages/refusals.ts':
-        'the words’ reader is a home now, copied with the homes',
-      'written · vendor/wow/sheet/words/messages/sayWord.ts':
-        'the words’ reader is a home now, copied with the homes',
-      'written · vendor/wow/sheet/words/messages/situations.ts':
-        'the words’ reader is a home now, copied with the homes',
-      'written · vendor/wow/sheet/words/messages/words.ts':
-        'the words’ reader is a home now, copied with the homes',
-    },
-  },
+  outputs: {},
 };
 
 const RELEASES: readonly Release[] = [
+  {
+    version: '0.9.0',
+    date: '2026-11-12',
+    kind: 'major',
+    what: 'the words’ readers are homes, at the paths a product held them: the glossary’s reader and types, the messages’ live words, say word, situations, refusals, words, cells, checks, usage and types; a product holds their rows apart, each gathered in a file the contract names (the glossary’s terms, the messages’ rows and tables, the screen’s words); the messages’ barrel stays the product’s, its exports naming its own words',
+    action:
+      'the product’s rows split from the words’ readers on its own tree first, the readers byte-equal to the homes; the migrations `ports/` names for the repository, on its checkout: `node scripts/migrate.ts <name> <checkout>`, run from this repository at the tag (for eagle-design, the eleven readers leave its index, the take writing them back); the pin to the tag, then `yarn build`, its copies under `vendor/wow/` in the same commit',
+    rules: { added: [], changed: [], removed: [] },
+    outputs: {
+      'eagle-design': {
+        'output · yarn build':
+          'the build side reads eleven files more in vendor/wow/: the words’ readers, homes now',
+        'output · yarn checks':
+          'the build side reads eleven files more in vendor/wow/: the words’ readers, homes now',
+        'output · yarn spec-check':
+          'the build side reads eleven files more in vendor/wow/: the words’ readers, homes now',
+        'output · yarn cut-pack T-E19-00':
+          'the build side reads eleven files more in vendor/wow/: the words’ readers, homes now; the eleven the migration takes out of the index count as uncommitted until the product commits them with its pin',
+        'written · vendor/wow/sheet/words/glossary.ts':
+          'the words’ reader is a home now, copied with the homes',
+        'written · vendor/wow/sheet/words/glossary/glossaryTypes.ts':
+          'the words’ reader is a home now, copied with the homes',
+        'written · vendor/wow/sheet/words/messages/liveWords.ts':
+          'the words’ reader is a home now, copied with the homes',
+        'written · vendor/wow/sheet/words/messages/messageCells.ts':
+          'the words’ reader is a home now, copied with the homes',
+        'written · vendor/wow/sheet/words/messages/messageChecks.ts':
+          'the words’ reader is a home now, copied with the homes',
+        'written · vendor/wow/sheet/words/messages/messageUsage.ts':
+          'the words’ reader is a home now, copied with the homes',
+        'written · vendor/wow/sheet/words/messages/messagesTypes.ts':
+          'the words’ reader is a home now, copied with the homes',
+        'written · vendor/wow/sheet/words/messages/refusals.ts':
+          'the words’ reader is a home now, copied with the homes',
+        'written · vendor/wow/sheet/words/messages/sayWord.ts':
+          'the words’ reader is a home now, copied with the homes',
+        'written · vendor/wow/sheet/words/messages/situations.ts':
+          'the words’ reader is a home now, copied with the homes',
+        'written · vendor/wow/sheet/words/messages/words.ts':
+          'the words’ reader is a home now, copied with the homes',
+      },
+    },
+    moved: {},
+    tried: { 'eagle-design': 'b908e81' },
+  },
   {
     version: '0.8.0',
     date: '2026-11-12',
