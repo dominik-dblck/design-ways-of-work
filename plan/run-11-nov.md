@@ -943,3 +943,6 @@ Each call: what, why, how to undo. None changes what the PM sees.
 - eagle-design's task 11 split, d86ecb2, verified on a fresh clone (tsc, ESLint whole, twenty-four files
   unsuppressed, 57 tests). Two findings for task 13: the event row carries three of the product's columns
   (an agent's API, a batch, a Slack line); the directory's gates are the product's approval model.
+- eagle-design took v0.6.0 at a6abea2; its first commit failed its release-record test, the sixteen vendored
+  copies missing: the action named the pin's commit, not the build that writes `vendor/wow/`. v0.7.0's action
+  now says the build and its copies go into that commit; each later action says the same. Undo: revert it.

@@ -8,7 +8,7 @@ const NEXT: Unreleased = {
   kind: 'major',
   what: 'the cases’ readers are homes, at the paths a product held them: the journeys’ barrel, reads, check, words and types, the test cases’ barrel, baseline, reach, text, endpoint cases and types, the shared cases’ reader and types; a product holds their rows apart, each gathered in a file the contract names (the journeys with their walked prints and the states they walk, the shared cases with the roles’ count, the refusals’ reach)',
   action:
-    'the product’s rows split from the cases’ readers on its own tree first, the readers byte-equal to the homes; the migrations `ports/` names for the repository, on its checkout: `node scripts/migrate.ts <name> <checkout>`, run from this repository at the tag (for eagle-design, the thirteen readers leave its index, the take writing them back); the pin to the tag in the same commit',
+    'the product’s rows split from the cases’ readers on its own tree first, the readers byte-equal to the homes; the migrations `ports/` names for the repository, on its checkout: `node scripts/migrate.ts <name> <checkout>`, run from this repository at the tag (for eagle-design, the thirteen readers leave its index, the take writing them back); the pin to the tag, then `yarn build`, its copies under `vendor/wow/` in the same commit',
   rules: { added: [], changed: [], removed: [] },
   outputs: {
     'eagle-design': {
