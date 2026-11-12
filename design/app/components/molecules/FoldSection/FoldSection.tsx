@@ -1,14 +1,10 @@
 /**
  * - `FoldSection` · a section folded under its head and count; a link to it opens it
  */
-import Accordion from '@mui/material/Accordion';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import AccordionSummary from '@mui/material/AccordionSummary';
 import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
 import type { ReactElement, ReactNode } from 'react';
+import { Fold } from '../../atoms/Fold/index.ts';
 import { SectionHead } from '../../atoms/SectionHead/index.ts';
-import { ROUNDED } from './constants/foldSectionRoundedConstants.ts';
 import { useFoldSectionOpened } from './hooks/useFoldSectionOpened.ts';
 
 interface FoldSectionProps {
@@ -31,26 +27,19 @@ function FoldSection({
 }: FoldSectionProps): ReactElement {
   const [isOpen, toggle] = useFoldSectionOpened(id);
   return (
-    <Accordion
+    <Fold
       id={id}
-      expanded={isOpen}
-      onChange={(_, isNext) => toggle(isNext)}
-      variant="outlined"
-      disableGutters
-      sx={ROUNDED}
-    >
-      <AccordionSummary
-        expandIcon={<Typography color="textSecondary">▾</Typography>}
-      >
+      isOpen={isOpen}
+      onOpen={toggle}
+      head={
         <SectionHead
           label={count === undefined ? label : `${label} · ${count}`}
           note={note}
         />
-      </AccordionSummary>
-      <AccordionDetails>
-        <Stack spacing={spacing}>{children}</Stack>
-      </AccordionDetails>
-    </Accordion>
+      }
+    >
+      <Stack spacing={spacing}>{children}</Stack>
+    </Fold>
   );
 }
 

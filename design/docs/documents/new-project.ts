@@ -44,8 +44,7 @@ const newProject: DocumentFile = {
       lines: [
         '',
         '- `roadmaps/E*/` · every epic’s folder. The registries keep their shape with no items:',
-        '  `roadmaps/tickets/ticketList.ts`, `roadmaps/edges.ts`, `roadmaps/receipts.ts`, `roadmaps/notes.ts`,',
-        '  `roadmaps/features/featureRows.ts`.',
+        '  `roadmaps/tickets/ticketList.ts`, `roadmaps/edges.ts`, `roadmaps/receipts.ts`, `roadmaps/notes.ts`.',
         '- `roadmaps/backlog/`, `roadmaps/ideas/`, `roadmaps/findings/`, `roadmaps/tracks.ts` · their rows.',
         '- `sheet/` · each entry’s rows: the contract, the cases, the words, the model, the screens;',
         '  `sheet/logic/` and `sheet/samples/` whole, being the product’s behaviour and its samples.',

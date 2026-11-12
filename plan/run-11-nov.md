@@ -730,3 +730,9 @@ Each call: what, why, how to undo. None changes what the PM sees.
   for it. Why: the tag's build halts part way with its bundles built side by side, so which modules it wrote
   varies run to run, and a row per module went stale on the next gate (072e22f). The halted run's own exit
   stays a difference a row must explain. Undo: revert the commit and row each module again.
+- 50cd593..b153673 carried (this commit): the endpoints and the cases folded, the refine standing retired, 19
+  `CARRIED` rows at `main` b153673's blobs. Calls: one `Fold` atom holds the rounded frame and its mark, so
+  `FoldSection` and the new `FoldList` molecule share it (one name, one home); `EndpointFolds` an organism,
+  since the contract body and the Feature page both draw it, its head moved and renamed by script from
+  `ContractBodyEndpointCard`; `FeaturePageEndpointItem` and `FeaturePageSteps` retire to legacy/; the
+  contract's registry row for `roadmaps/features.ts` leaves, as the trunk retired that file. Undo: revert it.

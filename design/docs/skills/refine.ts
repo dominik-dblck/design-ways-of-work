@@ -86,7 +86,7 @@ const skill: SkillFile = {
         '**The contract moves through the whole feature.** The walk, the journeys and the spec rows correct it where they find a gap — the sheet first, then the wireframe, journey or row, then one line in the notebook.',
         '**Sections, in this order, each a `kind`:** Carried in (`carriedIn`) · Found on the first read (`found`) · Contract queue (`contractQueue`) · Decisions (`decisions`) · Check against the sheet (`check`) · Test cases (`testCases`) · Wireframe walk (`wireframeWalk`) · Journeys (`journeys`) · Spec rows (`specRows`); an ask, a principle, the points, the steps, the next and the scope have their kinds too (`roadmaps/notes/notesTypes.ts`).',
         '**Every decision:** id, pick, who and when (“**B3 · B**”, then the PM and the day), what it changes in the sheet.',
-        '**Before the feature ticket:** a second pass over every decision against the later picks (step 10), and the status row below moved.',
+        '**Before the feature ticket:** a second pass over every decision against the later picks (step 10).',
         '**A question to the PM** is the proposal above, whole and in its order (The proposal), drawn first where it is hard to picture.',
         "A line carried to another epic goes into that epic's notebook, under Carried in — never in this skill.",
       ],

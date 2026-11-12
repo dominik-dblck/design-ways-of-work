@@ -1,6 +1,6 @@
 /**
  * - `FeaturePageHead` · the way back, the epic tabs, the title
- * - its source check folded, its steps
+ * - its source check folded
  */
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
@@ -11,7 +11,6 @@ import { featureWords as words } from '../../../../workspace/featureView.ts';
 import type { FeatureView } from '../../../../workspace/featureView.ts';
 import { FeaturePageEpicTabs } from './FeaturePageEpicTabs.tsx';
 import { FeaturePageSourceSection } from './FeaturePageSourceSection.tsx';
-import { FeaturePageSteps } from './FeaturePageSteps.tsx';
 
 interface FeaturePageHeadProps {
   readonly view: FeatureView;
@@ -34,7 +33,6 @@ function FeaturePageHead({ view, onEpic }: FeaturePageHeadProps): ReactElement {
         {view.title}
       </Typography>
       <FeaturePageSourceSection />
-      <FeaturePageSteps steps={view.steps} />
     </Stack>
   );
 }

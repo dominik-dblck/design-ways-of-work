@@ -75,11 +75,6 @@ const FEATURE_FOLDS: readonly Carried[] = [
     how: 'design/app/components/atoms/CodePieces/constants/codePiecesInkConstants.ts: the theme’s code inks',
   },
   {
-    file: 'app/pages/common/FoldSection.tsx',
-    blob: '21f4ba2844a96e05bb43da9b5027250ae335c4d9',
-    how: 'design/app/components/molecules/FoldSection: a molecule, its hook and its rounding in their folders',
-  },
-  {
     file: 'app/pages/common/pickedEpic.ts',
     blob: 'bdc8dee414d7320146b7f88b401144df933afa13',
     how: 'design/app/workspace/boardView/boardPick.ts, exported as boardView · pickedEpic (remember, remembered, onRemembered); its key names no product',
@@ -88,11 +83,6 @@ const FEATURE_FOLDS: readonly Carried[] = [
     file: 'app/pages/common/tones.ts',
     blob: '8e60a12499afff2de8d48d38075ea29a7148ff37',
     how: 'design/app/theme/tones.ts, every tone with reachToneOf and caseKindToneOf',
-  },
-  {
-    file: 'app/pages/contract/ContractBody.tsx',
-    blob: 'b0b6d909d44c59d3d25753e9d99c341f633e6a33',
-    how: 'design/app/components/organisms/ContractBody/ContractBody.tsx, an organism the contract page and the board mount; its parts moved from ContractPage',
   },
   {
     file: 'app/pages/contract/ContractHead.tsx',
@@ -110,21 +100,6 @@ const FEATURE_FOLDS: readonly Carried[] = [
     how: 'design/app/components/organisms/ContractBody/components/ContractBodyStats.tsx',
   },
   {
-    file: 'app/pages/feature/ApiSection.tsx',
-    blob: '209137fddf0c92a9396aa0e85f12396dacd105ae',
-    how: 'design/app/components/organisms/FeaturePage/components/FeaturePageApiSection.tsx, folded with its count',
-  },
-  {
-    file: 'app/pages/feature/CaseTable.tsx',
-    blob: '9ebf41054dff446cb664b49debbcd8eea84f01e6',
-    how: 'design/app/components/organisms/FeaturePage/components/FeaturePageCaseTable.tsx, its kind and reach in FeaturePageCaseChips',
-  },
-  {
-    file: 'app/pages/feature/CasesSection.tsx',
-    blob: '73eb3e2b8a5a2bd58a9c836c14d33b43ec96dcc6',
-    how: 'design/app/components/organisms/FeaturePage/components/FeaturePageCasesSection.tsx, folded with its count',
-  },
-  {
     file: 'app/pages/feature/CombinationsSection.tsx',
     blob: '7556e30163d9f1dd4a0fbc6fcaa438cb7986cb2d',
     how: 'design/app/components/organisms/FeaturePage/components/FeaturePageCombinationsSection.tsx, folded with its count',
@@ -138,16 +113,6 @@ const FEATURE_FOLDS: readonly Carried[] = [
     file: 'app/pages/feature/DecisionsSection.tsx',
     blob: '9af5897399201cc4c758c9c47ed3112e20734fae',
     how: 'design/app/components/organisms/FeaturePage/components/FeaturePageDecisionsSection.tsx, folded with its count',
-  },
-  {
-    file: 'app/pages/feature/FeatureHead.tsx',
-    blob: '6bd30f4672d1086c4509b3f7cb90f2dc2d155963',
-    how: 'design/app/components/organisms/FeaturePage/components/FeaturePageHead.tsx: the way back, FeaturePageEpicTabs, the source check folded; the jumps retired to legacy/',
-  },
-  {
-    file: 'app/pages/feature/FeaturePage.tsx',
-    blob: '7f43c50e266c06da2065388373e524dd4f5c036d',
-    how: 'design/app/components/organisms/FeaturePage/FeaturePage.tsx: the epic opened by hooks/useFeaturePageEpic.ts, from the address, then the pick',
   },
   {
     file: 'app/pages/feature/FieldsSection.tsx',
@@ -230,34 +195,9 @@ const FEATURE_FOLDS: readonly Carried[] = [
     how: 'design/app/workspace/boardView/boardWords.ts, word for word',
   },
   {
-    file: 'app/workspace/feature-view.ts',
-    blob: 'aa9c054dc848d8fd0938f4023dee10f51c454568',
-    how: 'design/app/workspace/featureView.ts: every epic a tab, the notebook by notesViewOf',
-  },
-  {
     file: 'app/workspace/feature-view/featureJourneys.ts',
     blob: '63fd6f848b28934ef95cebbe8dc2f8f1c2a3d699',
     how: 'design/app/workspace/featureView/featureJourneys.ts, word for word',
-  },
-  {
-    file: 'app/workspace/feature-view/featureNotes.ts',
-    blob: '6eb3921dbacab64006250f3d5b93024fb14b0511',
-    how: 'design/app/workspace/featureView/featureNotes.ts: a point never ends inside a bold span either, where E10’s Postmark decision split in two',
-  },
-  {
-    file: 'app/workspace/feature-view/featureTypes.ts',
-    blob: 'cc570a53995ae9d8a074a1221600331341e82ee0',
-    how: 'design/app/workspace/featureView/featureTypes.ts, the notebook’s types',
-  },
-  {
-    file: 'app/workspace/feature-view/featureWords.ts',
-    blob: '8907cecb7a690c5437329cce2fe56fd8016399f2',
-    how: 'design/app/workspace/featureView/featureWords.ts, word for word',
-  },
-  {
-    file: 'tests/app/featureView.test.ts',
-    blob: '0ab2864aa3b9785473238fb2e6aa54d96cf3011f',
-    how: 'design/tests/app/featureView.test.ts reads every epic’s notebook: no star left, a source unbracketed; the case naming one epic’s decision is the product’s to keep',
   },
 ];
 

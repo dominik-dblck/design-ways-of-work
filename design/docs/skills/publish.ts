@@ -16,7 +16,7 @@ const skill: SkillFile = {
       first: 1,
       lines: [
         'Commit first. The files to publish are those `git diff --name-only <last published-* tag> HEAD` names in the homes, each at its published path (`tools/layout.ts · publishedOf`, under `project/`).',
-        '`yarn build`, then one Artifact call: `url` as above, `root: "dist"`, `file_path: "dist/project/compat.json"` (always, unchanged unless pages are added, removed or reordered — keep its `report` as it is), `files:` every file changed, `{"project/tickets.js": "project/tickets.js"}`; a removed file `null`. Never write `index.html`, `SKILL.md` or `artifact-type/`.',
+        '`yarn build`, then one Artifact call: `url` as above, `root: "dist"`, `file_path: "dist/project/compat.json"` (always, unchanged unless pages are added, removed or reordered — keep its `report` as it is), `files:` every file changed, `{"project/tickets.js": "project/tickets.js"}`; a removed file `null`. With any bundle, `project/module-entries.json` and `project/module-imports.json` go too: the build writes them outside git, and without them the source check reads each bundle whole and counts every import again. Never write `index.html`, `SKILL.md` or `artifact-type/`.',
         'Tag the commit `published-<version id>` from the result.',
         'Refused with "You haven\'t viewed the latest version" (a new session, or after a compaction): a plain `read` of the url (no `path`/`paths`) counts as viewing it, a `paths` read does not; then publish again.',
       ],

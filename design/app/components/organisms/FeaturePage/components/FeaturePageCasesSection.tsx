@@ -1,12 +1,15 @@
 /**
- * - `FeaturePageCasesSection` · the epic's test cases by endpoint
- * - or of the one kind picked
+ * - `FeaturePageCasesSection` · the epic's test cases, folded by endpoint
+ * - narrowed to a kind when one is picked
  */
 import { useState } from 'react';
 import type { ReactElement } from 'react';
+import { contractWords } from '../../../../workspace/contractView.ts';
 import { featureWords as words } from '../../../../workspace/featureView.ts';
 import type { CaseGroup } from '../../../../workspace/featureView.ts';
+import { FoldList } from '../../../molecules/FoldList/index.ts';
 import { FoldSection } from '../../../molecules/FoldSection/index.ts';
+import { FeaturePageCaseHead } from './FeaturePageCaseHead.tsx';
 import { FeaturePageCaseTable } from './FeaturePageCaseTable.tsx';
 import { FeaturePageKindChips } from './FeaturePageKindChips.tsx';
 
@@ -35,9 +38,14 @@ function FeaturePageCasesSection({
       count={total}
     >
       <FeaturePageKindChips kinds={kinds} kind={kind} onPick={setKind} />
-      {shown.map((group) => (
-        <FeaturePageCaseTable key={group.endpoint} group={group} />
-      ))}
+      <FoldList
+        {...contractWords.folds}
+        folds={shown.map((group) => ({
+          id: `cases-${group.endpoint}`,
+          head: <FeaturePageCaseHead group={group} />,
+          body: <FeaturePageCaseTable group={group} />,
+        }))}
+      />
     </FoldSection>
   );
 }

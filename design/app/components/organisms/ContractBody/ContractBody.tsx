@@ -10,7 +10,7 @@ import {
   contractWords as words,
 } from '../../../workspace/contractView.ts';
 import { SectionHead } from '../../atoms/SectionHead/index.ts';
-import { ContractBodyEndpointCard } from './components/ContractBodyEndpointCard.tsx';
+import { EndpointFolds } from '../EndpointFolds/index.ts';
 import { ContractBodyFilters } from './components/ContractBodyFilters.tsx';
 import { ContractBodyLegend } from './components/ContractBodyLegend.tsx';
 import { ContractBodySharedTypes } from './components/ContractBodySharedTypes.tsx';
@@ -35,9 +35,7 @@ function ContractBody(): ReactElement {
         {shown.length === 0 ? (
           <Typography color="textSecondary">{words.nothing}</Typography>
         ) : null}
-        {shown.map((endpoint) => (
-          <ContractBodyEndpointCard key={endpoint.anchor} endpoint={endpoint} />
-        ))}
+        <EndpointFolds endpoints={shown} />
       </Stack>
     </Stack>
   );

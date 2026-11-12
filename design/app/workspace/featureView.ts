@@ -5,7 +5,6 @@
  */
 import { all as TICKETS } from '../../roadmaps/tickets.ts';
 import { byId as EPICS } from '../../roadmaps/backlog.ts';
-import { stepsOf } from '../../roadmaps/features.ts';
 import { casesOfEpic, flat, named } from '../../sheet/cases/testCases.ts';
 import { cards, ticketDetailOf } from './boardView.ts';
 import { endpointsOf, piecesOf } from './contractView.ts';
@@ -67,7 +66,6 @@ function featureOf(epic: string, plugs: ProductView = {}): FeatureView {
     epic,
     title: `${epic} · ${EPICS[epic]?.name ?? ticket?.title ?? ''}`,
     status: ticket?.status ?? '—',
-    steps: stepsOf(epic),
     journeys: journeysOf(epic, flat(groups)),
     cover: coverOf(epic, groups),
     endpoints: endpointsOf(epic, read),

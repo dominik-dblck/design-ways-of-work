@@ -20,10 +20,6 @@ function FeaturePageCaseTable({
 }): ReactElement {
   return (
     <TableContainer component={Paper} variant="outlined">
-      <Typography
-        variant="subtitle2"
-        sx={{ px: 2, pt: 1.5 }}
-      >{`${group.endpoint} · ${group.route}`}</Typography>
       <Table size="small">
         <TableBody>
           {group.cases.map((one) => (

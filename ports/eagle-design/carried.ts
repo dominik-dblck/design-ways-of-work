@@ -4,6 +4,7 @@
  */
 import type { Carried } from '../../scripts/portTypes.ts';
 import { BOARD_AND_CONTRACT } from './carried/boardAndContract.ts';
+import { ENDPOINT_FOLDS } from './carried/endpointFolds.ts';
 import { FEATURE_FOLDS } from './carried/featureFolds.ts';
 
 const CARRIED: readonly Carried[] = [
@@ -34,6 +35,7 @@ const CARRIED: readonly Carried[] = [
   },
   ...BOARD_AND_CONTRACT,
   ...FEATURE_FOLDS,
+  ...ENDPOINT_FOLDS,
 ];
 
 export { CARRIED };

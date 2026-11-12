@@ -4,7 +4,6 @@
  */
 import { describe, expect, it } from 'vitest';
 import { combinations } from '../../docs/process/projectPlan.ts';
-import { refineSteps } from '../../docs/process/plans.ts';
 import { journeysOfEpic } from '../../sheet/cases/journeys.ts';
 import { all as COMMANDS } from '../../sheet/contract/commands.ts';
 import {
@@ -78,13 +77,6 @@ describe('the Feature view', () => {
     expect(piecesOf(line).find((piece) => piece.kind === 'str')?.text).toBe(
       "'record.sent'",
     );
-  });
-
-  it('reads a feature’s standing at each refine step, or none for an epic not refined', () => {
-    for (const epic of EPICS)
-      expect([[], refineSteps]).toContainEqual(
-        featureOf(epic).steps.map((one) => one.step),
-      );
   });
 
   it('names its combinations, and counts the states the product hands in', () => {

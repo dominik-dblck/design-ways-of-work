@@ -120,11 +120,6 @@ const BOARD_AND_CONTRACT: readonly Carried[] = [
     how: 'design/app/workspace/contractView/contractPageTypes.ts, the page’s type named ContractPageView',
   },
   {
-    file: 'app/workspace/contract-view/contractWords.ts',
-    blob: 'd90c7caa19c47abdcb7b7c547e6dc58783ed3911',
-    how: 'design/app/workspace/contractView/contractWords.ts names blockModel.ts and holds no sample',
-  },
-  {
     file: 'app/workspace/contract-view/sharedCode.ts',
     blob: '7affde9c9726fde682519bf8354549ea8267ea42',
     how: 'design/app/workspace/contractView/sharedCode.ts reads blockModel.ts, the aliases’ names by aliasNames',

@@ -5,9 +5,9 @@ import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
-import { featureWords as words } from '../../../../workspace/featureView.ts';
-import type { EndpointCode } from '../../../../workspace/contractView.ts';
-import { CodeBlock } from '../../../molecules/CodeBlock/index.ts';
+import { featureWords as words } from '../../../../../../../design/app/workspace/featureView.ts';
+import type { EndpointCode } from '../../../../../../../design/app/workspace/contractView.ts';
+import { CodeBlock } from '../../../../../../../design/app/components/molecules/CodeBlock/index.ts';
 
 function FeaturePageEndpointItem({
   endpoint,

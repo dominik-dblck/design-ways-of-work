@@ -40,9 +40,13 @@ A migration is what a repository does to take one release; once its branch holds
 
 ## The views' retired parts
 
-What a view stopped drawing when eagle-design's `main` changed it (50cd593), kept as it stood in its home.
+What a view stopped drawing when eagle-design's `main` changed it, kept as it stood in its home.
 
 - `design/app/components/organisms/BoardPage/components/BoardPageOutsideAndOpen.tsx` · the ports and the
   backlog's open points under one head: the ports fold on their own, the open points went to their tickets
 - `design/app/components/organisms/FeaturePage/utils/featurePageHeadJumpUtils.ts` · the Feature page's jump
   chips: every section folds and counts itself
+- `design/app/components/organisms/FeaturePage/components/FeaturePageEndpointItem.tsx` · the Feature page's own
+  endpoint copy: its API section folds the contract page's endpoints
+- `design/app/components/organisms/FeaturePage/components/FeaturePageSteps.tsx` and its
+  `constants/featurePageStepsConstants.ts` · a feature's standing at each refine step: that standing retired

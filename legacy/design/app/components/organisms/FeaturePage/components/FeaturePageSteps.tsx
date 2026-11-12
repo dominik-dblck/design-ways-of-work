@@ -6,8 +6,8 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
-import type { FeatureView } from '../../../../workspace/featureView.ts';
-import { radiusOf } from '../../../../theme/tokenReads.ts';
+import type { FeatureView } from '../../../../../../../design/app/workspace/featureView.ts';
+import { radiusOf } from '../../../../../../../design/app/theme/tokenReads.ts';
 import { NOT_BEGUN } from '../constants/featurePageStepsConstants.ts';
 
 function FeaturePageSteps({

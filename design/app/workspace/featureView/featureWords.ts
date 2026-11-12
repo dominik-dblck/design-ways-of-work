@@ -26,8 +26,6 @@ const FEATURE_WORDS = {
   api: {
     label: 'API',
     note: 'the endpoints, as the build side types them',
-    draft: 'drafted from the model',
-    todo: 'not typed yet',
   },
   cases: {
     label: 'Test cases',

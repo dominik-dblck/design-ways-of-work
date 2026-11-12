@@ -26,12 +26,12 @@ function FeaturePage({ plugs }: { readonly plugs: ProductView }): ReactElement {
       <Stack spacing={1.5}>
         <FeaturePageHead view={view} onEpic={openEpic} />
         <FeaturePageJourneysSection view={view} />
-        <FeaturePageApiSection endpoints={view.endpoints} />
         <FeaturePageCasesSection
           key={view.epic}
           groups={view.caseGroups}
           kinds={view.caseKinds}
         />
+        <FeaturePageApiSection endpoints={view.endpoints} />
         <FeaturePageFieldsSection view={view} />
         <FeaturePageDecisionsSection sections={view.decisions} />
         <FeaturePageNotesSection notes={view.notes} />

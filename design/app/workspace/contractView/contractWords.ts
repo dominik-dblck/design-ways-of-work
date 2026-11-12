@@ -35,6 +35,7 @@ const CONTRACT_WORDS = {
   },
   kinds: { command: 'COMMAND', query: 'QUERY', port: 'PORT' },
   nothing: 'No endpoint matches these filters.',
+  folds: { showAll: 'Show all', hideAll: 'Hide all' },
 } as const;
 
 export { CONTRACT_WORDS };

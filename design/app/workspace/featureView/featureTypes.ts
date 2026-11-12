@@ -3,7 +3,6 @@
  * - `JourneyCard`, `JourneyStepView`, `StepCover`, `CoverView`, `CoverLine` · walks
  * - `CaseGroup`, `CaseRow`, `NoteLine`, `NotePoint`, `NotesView` · cases, notes
  */
-import type { FeatureStep } from '../../../roadmaps/features.ts';
 import type { CodeLine, EndpointCode } from '../contractView.ts';
 import type {
   DocTypeView,
@@ -104,7 +103,6 @@ interface FeatureView {
   readonly epic: string;
   readonly title: string;
   readonly status: string;
-  readonly steps: readonly FeatureStep[];
   readonly notes: NotesView | null;
   readonly journeys: readonly JourneyCard[];
   readonly cover: CoverView | null;
