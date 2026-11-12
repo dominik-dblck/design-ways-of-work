@@ -147,7 +147,7 @@ describe('the gate tries the commit in hand on a repository that takes it', () =
       );
       const given = tried(['product']);
       expect(given.stdout).toContain(
-        'migrated · 1 removed, 1 moved, 1 written',
+        'migrated · 1 removed, 1 moved, 0 following, 0 edited, 1 written',
       );
       expect(given.stdout).toContain(
         '1 differences, each expected · product on the commit in hand',
@@ -161,7 +161,9 @@ describe('the gate tries the commit in hand on a repository that takes it', () =
     const run = (root: string): ReturnType<typeof scratch.ran> =>
       scratch.ran({ script: 'migrate.ts', args: ['product', root] });
     const own = run(product.root);
-    expect(own.stdout).toContain('migrated · 1 removed, 1 moved, 1 written');
+    expect(own.stdout).toContain(
+      'migrated · 1 removed, 1 moved, 0 following, 0 edited, 1 written',
+    );
     expect(own.status).toBe(0);
     const held = (file: string): boolean =>
       fs.existsSync(path.join(product.root, file));

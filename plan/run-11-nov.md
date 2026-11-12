@@ -786,3 +786,9 @@ Each call: what, why, how to undo. None changes what the PM sees.
   numbers, the ids the build writes and the stack, five new files each with its row, and the tag's exits by
   what main retired. Two gaps written in `plan/state.md`: a port takes its trunk's generated copies; a halt's
   grain is the command. Undo: revert it.
+- Release v0.4.0, on the PM's A: its row and version committed (4977923), the push refused by pre-push. The
+  mechanism test still read the migration's summary of before its moves and edits; knip here found
+  `shared/stack/` read by nothing, its one reader in `design/`, which it reads in a product. Mended: the test
+  reads the summary as it stands; a test here holds each stack to a home's design system and its packages, so
+  the files are read here too. My call, over leaving knip an exception: the repository takes none. Undo:
+  revert it; the release runs again from its written row.
