@@ -55,6 +55,11 @@ const CONTRACT: readonly ContractRow[] = [
   { file: 'roadmaps/edges.ts', kind: 'registry', what: 'a ticket’s edges' },
   { file: 'roadmaps/findings.ts', kind: 'registry', what: 'the findings' },
   { file: 'roadmaps/ideas.ts', kind: 'registry', what: 'the ideas' },
+  {
+    file: 'roadmaps/ids.ts',
+    kind: 'registry',
+    what: 'every id the backlog and the tickets hold, written by the build',
+  },
   { file: 'roadmaps/notes.ts', kind: 'registry', what: 'an epic’s notes' },
   {
     file: 'roadmaps/notes/frozenNotebooks.ts',

@@ -857,3 +857,7 @@ Each call: what, why, how to undo. None changes what the PM sees.
   release on (`homed`): untracked, left on disk, the take writes them back; refused, naming the file, when a
   copy's text is not the home's, so an edit is never lost. The readiness checks leave `migrated.ts` for
   `migrationReady.ts`. Undo: revert it.
+- Task 8, step 1: the roadmap's eight type files are homes at the paths eagle-design held them (copied by
+  `git show` from its port's head, the same bytes as its `main`); its v0.5.0 migration `ROADMAP_TYPES` names
+  them homed. The build writes `roadmaps/ids.ts`, which they read, so it is a row of the contract. Eagle-design's
+  answers stand in `plan/sample-product.md`, with stage 4's step for the eight. Undo: revert it.
