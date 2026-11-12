@@ -24,7 +24,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 
 | stage | what | done | of |
 | 1 | Foundation | 7 | 7 |
-| 2 | Design clean | 14 | 20 |
+| 2 | Design clean | 15 | 20 |
 | 3 | Spawn design | 0 | 3 |
 | 4 | Eagle-design | 0 | 2 |
 
@@ -79,6 +79,7 @@ word · 2 · both design repositories pinned to one tag, the gate green on both.
 - 17:32 · stage 2 · 12 of 20 · words readers homed: 9ec4210 + 99f3506, gate green (15 expected), eagle-design approved
 - 18:31 · stage 2 · 13 of 20 · homes hold no product fact: 4780f18 + f505740 + 4b5f711, gate green (20 expected), product feature tier green; events and gates a known gap
 - 19:40 · stage 2 · 14 of 20 · way-of-working files homed: configs, settings, types, backup, post-commit held to the scope's remote, tsconfig from the scope, epic test on its own registry; gate green (7 expected), eagle-design approved (5969551, 04aabd3, 98da1da, 82c851f, ef48600; v0.12.0)
+- 20:10 · stage 2 · 15 of 20 · decisions split: 72 way-of-working rows join the register as W32 to W103, verbatim, the product's rows name them by heldBy, the homes cite W ids; gate green (26 expected), eagle-design approved (f8d1871, c38e5a1; v0.13.0)
 
 ## Calls
 
@@ -1087,3 +1088,5 @@ Each call: what, why, how to undo. None changes what the PM sees.
   eagle-design's `main` added `roadmaps/ids.ts` to its old config's generated list (49cdbb9), which the home
   config holds through the scope's `generated`, carried. eagle-design approved the piece; the PM named, never
   "he", in the notes and the scope, as it asked; the end state of the moved rows' words in the state's gaps.
+- v0.13.0 out under W30: its tag on e021f38, on the remote, at the first try (feature tier 281 s); the gate on
+  c38e5a1 green, the product's feature tier on the gate's clone ten of ten. Task 15 closed.
