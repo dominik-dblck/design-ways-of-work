@@ -180,6 +180,13 @@ const DECISIONS: readonly Decision[] = [
     says: 'the build side mends its atoms to this repository’s rules on its own tree, then a script copies them here unchanged, never a hand copy, until its port turns the direction.',
     from: 'plan/run-11-nov.md',
   },
+  {
+    id: 'W26',
+    title: 'one theme, the internal apps’',
+    held: '12 Nov · the PM’s word',
+    says: 'every product is an internal app, so there is one theme and every app looks the same: the theme the build side runs, held here with its atoms, the design pages drawn with it; the build side takes it from here once its port turns the direction.',
+    from: 'plan/run-11-nov.md',
+  },
 ];
 
 export { DECISIONS };

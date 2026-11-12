@@ -819,3 +819,11 @@ Each call: what, why, how to undo. None changes what the PM sees.
   build had deleted that the migration never names. `migrated` now refuses a checkout missing any tracked file
   (`git ls-files --deleted`), before anything moves; a version is numbers and dots, a missing part reads 0.
   Undo: revert it.
+- W26, one theme (the PM's word, 12 Nov: "mamy tylko jeden motyw bo produkt jest projektowany pod internal
+  apps", "wiec beda wygladaly tak samo", "a pozniej eagle ma uzywac tego motywu"): the theme the build side runs
+  is held here with its atoms and draws the design pages; the build side takes it back once its port turns.
+  The plan, in steps: the build side frees its theme of its own app (the preference attribute out of the
+  cookie and domain code, the content states' chip families out of the shared ones); a script copies the
+  theme and the atoms here at a named sha; this side's names that clash leave (the source check's `LAYERS`,
+  the measure's `text`); this side's thin theme retires to `legacy/`, the pages read the copied one, the token
+  variables at each page's root; the tokens type `TokenHex`; the products add lucide-react. Undo: revert it.
