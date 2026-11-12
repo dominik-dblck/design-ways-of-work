@@ -1,0 +1,30 @@
+# what the lint leaves aside
+dist/
+node_modules/
+.artifact/
+vendor/
+legacy/
+guards/__snapshots__/
+# a product's tree, formatted in its product
+dev/claude/
+# a file a tool writes keeps the tool's layout
+app/styles/tokens.ts
+roadmaps/ids.ts
+.prettierignore
+tsconfig.json
+docs/rules/*.md
+dev/rules/*.md
+dev/map.md
+docs/process/*.md
+sheet/contract/*.md
+fixtures/data/*.json
+.claude/skills/*/SKILL.md
+vendor/wow/
+# prose keeps the layout its writer gave it
+**/*.md
+# a release's record, as it was written
+records/
+# packs as cut, data as emitted, screens as taken
+fixtures/
+# a session's settings, and the skills the build writes
+.claude/

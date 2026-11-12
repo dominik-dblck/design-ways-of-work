@@ -1,0 +1,11 @@
+# build and tooling
+node_modules/
+dist/
+.DS_Store
+
+# a copy of the artifact, read to compare it with the repository
+.artifact/
+
+# Claude Code settings of one machine
+.claude/settings.local.json
+.claude/run.json

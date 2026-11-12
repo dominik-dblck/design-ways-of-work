@@ -1,0 +1,31 @@
+{
+  "extends": "./shared/tsconfig.base.json",
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "types": ["node", "vitest/globals"],
+    "jsx": "react-jsx",
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true
+  },
+  "include": [
+    "sheet/**/*.ts",
+    "roadmaps/**/*.ts",
+    "docs/**/*.ts",
+    "guards/**/*.ts",
+    "app/**/*.ts",
+    "app/**/*.tsx",
+    "tools/**/*.ts",
+    "tests/**/*.ts",
+    "tests/**/*.tsx",
+    "*.config.ts",
+    "*.config.mts",
+    "dev/**/*.ts",
+    "shared/**/*.ts",
+    "design-system/**/*.ts"
+  ],
+  "exclude": ["node_modules", "dist", ".artifact"]
+}

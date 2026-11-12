@@ -1104,3 +1104,27 @@ Each call: what, why, how to undo. None changes what the PM sees.
   among them (386, not 384), and publishes neither: named in the row. eagle-design approved the piece.
 - v0.14.0 out under W30: its tag on ca3766a, on the remote, at the first try (feature tier 279 s); the gate on
   d03eee1 green, the product's feature tier on the gate's clone ten of ten. Task 16 closed.
+- Task 17, piece a, the scope's preset (W27): `tools/scopePreset.ts` holds a design product's scope, the layout's
+  globs, generators, names and checks; it leaves out the backup and the browser tier, so tsc asks a product for
+  the two a preset cannot know. Why: W27, and the sample and `yarn spawn` start from it. eagle-design's scope is
+  cut to it by its migration (`SCOPE_PRESET_CUT`, two edits ending before its words on purpose, so this
+  repository never quotes a misspelling): resolved on its `port/wow`, the object holds the same entries, in
+  another order in four places, and one rule's why without "(D29)", a product's decision a home never names.
+  The run's example in `tools/runKeepsTheTurn.ts` is two strings joined: cspell read "npartia" across the break.
+  Undo: revert d6fc33d; the migration's edits are its own undo.
+- Task 17, piece b, `examples/sample-product`: a product named Acme, a placeholder, holding the contract's 46
+  files and its root (package and lock without the way of working's dependency, `scope.ts` spreading the preset,
+  `CLAUDE.md`, tsconfig and the ignore file as the generators write them). Its rows are the fewest the homes take:
+  one epic, story and ticket (a union of no id is no TypeScript), one decision, one capability and one rule of its
+  own (the checks fail on none: a loader that returns nothing looks the same), the rest empty. Its build branch is
+  `acme-build`: `main` stands in a skill's text. `scripts/sample.ts` (`yarn sample`) builds it from nothing in
+  `.consumers/sample`, takes the homes of the tree in hand, installs from its lock offline, then runs its feature
+  tier or the scripts named. Undo: revert it.
+- The sample's feature tier, from nothing on 0c78a82's homes: six of ten green (`lint:files`, `lint:deps`,
+  `format:check`, `lint`, `tsc`, `checks:gate`). The four red are task 18's list, each a home that still
+  holds a product's fact or reaches only a product's code: `lint:words`, an id of eagle-design's in
+  `roadmaps/tickets/ticketViews.ts`; `lint:exports`, two homes and 21 exports that only a product's code reads
+  (the screens', the messages' and the contract's readers and types), so knip's reading of a home's API in a
+  product is task 18's call; the tests, seven asking a product's counts or files (rules over 90, cites over 20,
+  `records/`, the skills citing nine of its rules, the open pairs naming its files, `new-project.md` naming four
+  of its paths, a command ticket on the board and the panel).

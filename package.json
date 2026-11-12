@@ -31,6 +31,7 @@
     "reads": "node scripts/productReads.ts",
     "fresh": "node scripts/fresh.ts",
     "consumers": "node scripts/consumers.ts",
+    "sample": "node scripts/sample.ts",
     "release": "node scripts/release.ts",
     "hooks": "husky",
     "hooks:user": "node shared/user-hooks/installUserHooks.ts",
