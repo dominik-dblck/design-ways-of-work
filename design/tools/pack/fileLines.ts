@@ -7,11 +7,14 @@ import { bytesOf, sha256 } from './packSources.ts';
 import type { Source, SourceReader } from './packSources.ts';
 import type { Found } from './sheetSections.ts';
 import { MAX_LINES } from './tsSections.ts';
+import type { ProductView } from '../productTypes.ts';
 
 interface Cut {
   readonly reader: SourceReader;
   readonly epic: string | null;
   readonly miss: (text: string) => void;
+  // the product's count of an epic's states, handed in by the pack's entry
+  readonly statesOf: ProductView['statesOf'];
 }
 
 const FENCES: readonly (readonly [RegExp, string])[] = [

@@ -29,7 +29,11 @@ function FeaturePageCombinationsSection({
         </Typography>
       ) : null}
       {view.combinations.map((one) => (
-        <FeaturePageCombinationFileItem key={one.file} one={one} />
+        <FeaturePageCombinationFileItem
+          key={one.file}
+          one={one}
+          countOf={view.countOf}
+        />
       ))}
     </Stack>
   );

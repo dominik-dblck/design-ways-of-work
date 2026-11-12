@@ -38,6 +38,7 @@ describe('knip from a scope', () => {
       '*.config.{ts,mts}',
       'scope.ts',
       'product.ts',
+      'productView.ts',
     ]);
     expect(config.project).toEqual(
       expect.arrayContaining(['sheet/**/*.ts', 'tests/**', 'scope.ts']),
@@ -67,6 +68,7 @@ describe('knip from a scope', () => {
       '*.config.{ts,mts}',
       'scope.ts',
       'product.ts',
+      'productView.ts',
     ]);
   });
 });

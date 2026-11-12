@@ -97,6 +97,8 @@ interface FeatureView {
   readonly decisions: readonly Section[];
   readonly combinations: readonly CombinationView[];
   readonly statesNamed: number;
+  // a combinations file counted, seconds long, so run when asked
+  readonly countOf: (file: string) => string;
 }
 
 export type {

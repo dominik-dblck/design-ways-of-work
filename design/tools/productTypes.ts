@@ -1,7 +1,7 @@
 /**
  * - `Product` · what a product plugs into the way of working, in its `product.ts`
  * - `CheckPart` · a part of the checks: its lines over the built mirror
- * - `ProductScreens` · part w's screens: each swept, each seen in the editor
+ * - `ProductScreens`, `ProductView` · part w's screens; what the pages plug in
  */
 import type { Mirror } from '../guards/checks/checkWorld.ts';
 import type { MapMove, SourceFinding } from '../guards/sourceCheck.ts';
@@ -20,9 +20,13 @@ interface SweptFrame {
   readonly gaps?: readonly FrameGap[];
 }
 
+interface CombinationTally {
+  readonly total: number;
+  readonly byKind: Readonly<Record<string, number>>;
+}
+
 interface ProductScreens {
   readonly sweep: () => readonly SweptFrame[];
-  // one wireframe as the editor shows it, by its number
   readonly editorView: (num: string) => unknown;
 }
 
@@ -41,4 +45,12 @@ interface Product {
   readonly screens?: ProductScreens;
 }
 
-export type { CheckPart, Product, ProductScreens };
+// pure code a browser runs, in the product's `productView.ts`: its pages read it, and the pack
+interface ProductView {
+  // how many states an epic names, for a count a criterion or a page holds against
+  readonly statesOf?: (epic: string) => number;
+  // each combinations file's counter, by the file a combinations row names
+  readonly counters?: Readonly<Record<string, () => CombinationTally>>;
+}
+
+export type { CheckPart, Product, ProductScreens, ProductView };

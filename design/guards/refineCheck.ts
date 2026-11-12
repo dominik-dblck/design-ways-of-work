@@ -1,7 +1,7 @@
 /**
  * - `run`, `report` · the ticket checklist's mechanical half, by script
  * - a ticket with findings is not READY, and the pack generator refuses its pack
- * - a line no pattern reads stays the reader's
+ * - a line no pattern reads stays the reader's; the caller hands the states in
  */
 import {
   criterionFindings,
@@ -22,11 +22,17 @@ import {
 } from './refineCheck/sheetFindings.ts';
 import * as EDGES from '../roadmaps/edges.ts';
 import * as TICKETS from '../roadmaps/tickets.ts';
+import type { ProductView } from '../tools/productTypes.ts';
+
+type StatesOf = ProductView['statesOf'];
 
 const FOLDED = /^FOLDED into (T-E\d\d-\d\d)/;
 
 // a folded ticket is refined where it was folded: read that one, and fail only if it is missing or not clean
-function foldedFindings(tickets: SheetTickets, into: string): Finding[] {
+function foldedFindings(
+  tickets: SheetTickets,
+  { into, statesOf }: { readonly into: string; readonly statesOf: StatesOf },
+): Finding[] {
   if (!tickets.byId[into]) {
     return [
       {
@@ -36,7 +42,7 @@ function foldedFindings(tickets: SheetTickets, into: string): Finding[] {
       },
     ];
   }
-  return run(into).map((finding) => ({
+  return run(into, statesOf).map((finding) => ({
     ...finding,
     where: `${into} · ${finding.where}`,
   }));
@@ -53,12 +59,19 @@ function ticketOf(tickets: SheetTickets, id: string): SheetTicket {
 
 function findingsOf(
   ticket: SheetTicket,
-  edges: readonly SheetEdge[],
+  {
+    edges,
+    statesOf,
+  }: { readonly edges: readonly SheetEdge[]; readonly statesOf: StatesOf },
 ): Finding[] {
   const read = ticket.touches;
   const isPlaceholder = /^PLACEHOLDER/.test(ticket.acceptance[0] || '');
   return [
-    ...criterionFindings(ticket, { edges, placeholder: isPlaceholder }),
+    ...criterionFindings(ticket, {
+      edges,
+      placeholder: isPlaceholder,
+      statesOf,
+    }),
     ...edges.flatMap((edge, index) =>
       edgeFindings(edge, {
         where: `E${index + 1}`,
@@ -73,17 +86,18 @@ function findingsOf(
   ];
 }
 
-function run(id: string): Finding[] {
+function run(id: string, statesOf?: StatesOf): Finding[] {
   const ticket = ticketOf(TICKETS, id);
   const fold = FOLDED.exec(ticket.acceptance[0] || '')?.[1];
-  if (fold !== undefined) return foldedFindings(TICKETS, fold);
-  return findingsOf(ticket, EDGES.byTicket[id] ?? []);
+  if (fold !== undefined)
+    return foldedFindings(TICKETS, { into: fold, statesOf });
+  return findingsOf(ticket, { edges: EDGES.byTicket[id] ?? [], statesOf });
 }
 
-function report(ids: readonly string[]): string {
+function report(ids: readonly string[], statesOf?: StatesOf): string {
   return ids
     .flatMap((id) => {
-      const findings = run(id);
+      const findings = run(id, statesOf);
       return [
         `${id} · ${findings.length ? `${findings.length} findings` : 'clean'}`,
         ...findings.map(

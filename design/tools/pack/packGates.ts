@@ -28,8 +28,8 @@ function refineFails(
 ): readonly string[] {
   const ticket = ticketOf(cut, id);
   const refine = REFINE_CHECK;
-  if (!refine?.run(id).length) return [];
-  const report = refine.report([id]);
+  if (!refine?.run(id, cut.statesOf).length) return [];
+  const report = refine.report([id], cut.statesOf);
   if (held(ticket))
     log(`refine-check · ${ticket.status}, reported not refused:\n${report}`);
   const clauses: Readonly<Partial<Record<ReadyKey, string>>> =

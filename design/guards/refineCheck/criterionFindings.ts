@@ -15,7 +15,7 @@ import {
   testClause,
   WHY,
 } from './refineRules.ts';
-import * as SCENES from '../../sheet/logic/approval/scenes.ts';
+import type { ProductView } from '../../tools/productTypes.ts';
 
 const DONE_COUNT = /^DONE · [^']*?stateIndex — (\d+), counted/;
 
@@ -76,16 +76,22 @@ function historyFindings(criterion: string, where: string): Finding[] {
   return out;
 }
 
-// DONE's count of states against Scenes · stateIndex for the ticket's epic
+// DONE's count of states against the product's own count for the ticket's epic, when it has one
 function doneCount(
   criterion: string,
-  { where, epic }: { readonly where: string; readonly epic: string },
+  {
+    where,
+    epic,
+    statesOf,
+  }: {
+    readonly where: string;
+    readonly epic: string;
+    readonly statesOf: ProductView['statesOf'];
+  },
 ): Finding[] {
   const found = DONE_COUNT.exec(criterion);
-  if (!found) return [];
-  const have = SCENES.stateIndex().filter(
-    (state) => state.epic === epic,
-  ).length;
+  if (!found || statesOf === undefined) return [];
+  const have = statesOf(epic);
   if (have === Number(found[1])) return [];
   return [
     {
@@ -101,7 +107,12 @@ function criterionFindings(
   {
     edges,
     placeholder,
-  }: { readonly edges: readonly SheetEdge[]; readonly placeholder: boolean },
+    statesOf,
+  }: {
+    readonly edges: readonly SheetEdge[];
+    readonly placeholder: boolean;
+    readonly statesOf: ProductView['statesOf'];
+  },
 ): Finding[] {
   const edgeOn = new Map<number, number>();
   edges.forEach((edge) => edgeOn.set(edge.on, (edgeOn.get(edge.on) ?? 0) + 1));
@@ -120,7 +131,7 @@ function criterionFindings(
             },
           ]
         : []),
-      ...doneCount(criterion, { where, epic: ticket.epic }),
+      ...doneCount(criterion, { where, epic: ticket.epic, statesOf }),
     ];
   });
 }

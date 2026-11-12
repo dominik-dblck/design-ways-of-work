@@ -7,17 +7,22 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
 import { featureWords as words } from '../../../../workspace/featureView.ts';
-import type { CombinationView } from '../../../../workspace/featureView.ts';
+import type {
+  CombinationView,
+  FeatureView,
+} from '../../../../workspace/featureView.ts';
 import { radiusOf } from '../../../../theme/tokenReads.ts';
 import { useFeaturePageCount } from '../hooks/useFeaturePageCount.ts';
 import { FeaturePageCombinationTitle } from './FeaturePageCombinationTitle.tsx';
 
 function FeaturePageCombinationFileItem({
   one,
+  countOf,
 }: {
   readonly one: CombinationView;
+  readonly countOf: FeatureView['countOf'];
 }): ReactElement {
-  const [line, count] = useFeaturePageCount(one.file);
+  const [line, count] = useFeaturePageCount(one.file, countOf);
   return (
     <Paper
       variant="outlined"

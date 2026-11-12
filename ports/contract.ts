@@ -33,6 +33,11 @@ const CONTRACT: readonly ContractRow[] = [
     what: 'what the product plugs in: code alone, read by what it runs',
   },
   {
+    file: 'productView.ts',
+    kind: 'product',
+    what: 'what the product plugs into its pages: pure code, read in a browser too',
+  },
+  {
     file: 'roadmaps/backlog.ts',
     kind: 'registry',
     what: 'the backlog and its epics',
@@ -94,16 +99,6 @@ const CONTRACT: readonly ContractRow[] = [
   },
   {
     file: 'sheet/logic/approval/approvalLogic.ts',
-    kind: 'plug',
-    what: 'logic of the product’s own',
-  },
-  {
-    file: 'sheet/logic/approval/roleCombinations.ts',
-    kind: 'plug',
-    what: 'logic of the product’s own',
-  },
-  {
-    file: 'sheet/logic/approval/scenes.ts',
     kind: 'plug',
     what: 'logic of the product’s own',
   },

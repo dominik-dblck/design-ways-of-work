@@ -6,6 +6,7 @@ import Stack from '@mui/material/Stack';
 import { useMemo, useState } from 'react';
 import type { ReactElement } from 'react';
 import { featureOf, firstEpic } from '../../../workspace/featureView.ts';
+import type { ProductView } from '../../../../tools/productTypes.ts';
 import { FeaturePageApiSection } from './components/FeaturePageApiSection.tsx';
 import { FeaturePageCasesSection } from './components/FeaturePageCasesSection.tsx';
 import { FeaturePageCombinationsSection } from './components/FeaturePageCombinationsSection.tsx';
@@ -16,9 +17,10 @@ import { FeaturePageJourneysSection } from './components/FeaturePageJourneysSect
 import { FeaturePageNotesSection } from './components/FeaturePageNotesSection.tsx';
 import { FeaturePageSourceSection } from './components/FeaturePageSourceSection.tsx';
 
-function FeaturePage(): ReactElement {
+// the product's states and counters come from the page's entry, never read here
+function FeaturePage({ plugs }: { readonly plugs: ProductView }): ReactElement {
   const [epic, setEpic] = useState(firstEpic() ?? '');
-  const view = useMemo(() => featureOf(epic), [epic]);
+  const view = useMemo(() => featureOf(epic, plugs), [epic, plugs]);
   return (
     <Container maxWidth="xl" sx={{ py: 4 }}>
       <Stack spacing={4}>

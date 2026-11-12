@@ -15,9 +15,12 @@ describe('the contract names each file of a product the homes read', () => {
     expect(CONTRACT.filter(({ what }) => what === '')).toEqual([]);
   });
 
-  it('`product.ts` is read by what a product runs alone: no file of a home imports its reader', () => {
+  it('what a product plugs in is read by what it runs alone: no file of a home imports its reader', () => {
+    const plugged = new Set(
+      CONTRACT.filter(({ kind }) => kind === 'product').map(({ file }) => file),
+    );
     const readers = reads
-      .filter(({ file }) => file === 'product.ts')
+      .filter(({ file }) => plugged.has(file))
       .map(({ reader }) => reader);
     const imported = new Set(homeReads(HERE).map(({ file }) => file));
     expect(readers).not.toEqual([]);

@@ -16,6 +16,7 @@ import { refineGate, sourceFails, typesFails } from './pack/packGates.ts';
 import { sourceReader } from './pack/packSources.ts';
 import type { SourceReader } from './pack/packSources.ts';
 import { packText, ticketOf } from './pack/packText.ts';
+import { productView } from '../productView.ts';
 import { selfFails } from './pack/selfCheck.ts';
 import { builtRoot } from './root.ts';
 
@@ -64,7 +65,7 @@ function cutOne(
 }
 
 function cutAll(ids: readonly string[], run: Run): readonly string[] {
-  const base = { reader: run.reader };
+  const base = { reader: run.reader, statesOf: productView.statesOf };
   refineGate(ids, {
     cut: { ...base, epic: null, miss: () => {} },
     log: run.log,

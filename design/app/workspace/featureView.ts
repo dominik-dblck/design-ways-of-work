@@ -1,6 +1,6 @@
 /**
  * - `features`, `firstEpic`, `featureOf` · the tabs, the one opened, one epic
- * - `countLine` · a combinations file counted, seconds long, so run when asked
+ * - `featureOf` takes the product's states and counters from the page that runs it
  * - `featureWords` · the page's own words; the view's types
  */
 import { all as TICKETS } from '../../roadmaps/tickets.ts';
@@ -25,6 +25,7 @@ import {
   statesNamed,
 } from './featureView/featureCombinations.ts';
 import { FEATURE_WORDS } from './featureView/featureWords.ts';
+import type { ProductView } from '../../tools/productTypes.ts';
 import type { FeatureTab, FeatureView } from './featureView/featureTypes.ts';
 
 // a feature is an epic's one ticket, numbered 00
@@ -50,7 +51,7 @@ const readOf = (
   ticket: ReturnType<typeof TICKETS>[number] | undefined,
 ): readonly string[] => ticket?.read ?? [];
 
-function featureOf(epic: string): FeatureView {
+function featureOf(epic: string, plugs: ProductView = {}): FeatureView {
   const ticket = TICKETS().find((one) => one.id === `T-${epic}-00`);
   const read = readOf(ticket);
   const groups = casesOfEpic(epic, named(read));
@@ -72,16 +73,11 @@ function featureOf(epic: string): FeatureView {
     decisions: ticket ? (ticketDetailOf(ticket.id)?.edgeSections ?? []) : [],
     notes: notesOf(epic),
     combinations: combinationsOf(epic),
-    statesNamed: statesNamed(epic),
+    statesNamed: statesNamed(epic, plugs.statesOf),
+    countOf: (file) => countLine(file, plugs.counters),
   };
 }
 
 export type * from './featureView/featureTypes.ts';
 export type * from './featureView/featureFieldTypes.ts';
-export {
-  countLine,
-  featureOf,
-  features,
-  FEATURE_WORDS as featureWords,
-  firstEpic,
-};
+export { featureOf, features, FEATURE_WORDS as featureWords, firstEpic };

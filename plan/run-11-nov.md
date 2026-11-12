@@ -551,3 +551,11 @@ Each call: what, why, how to undo. None changes what the PM sees.
   as it was (the map and the bundle record a header); the two screen types stay inside their file (the
   product's knip read them as unused exports); the export test counts `product.ts` a reader, as it counts
   the tools' configs. The one meant: the pack counts the migration's two new files as not committed yet.
+- 5b. The states an epic names and the combinations' counters. `product.ts` reaches the disk (the checks'
+  world reads it), so a page cannot bundle it: a second file a product plugs in, `productView.ts`, of pure
+  code a browser runs, typed `ProductView` here (`statesOf`, `counters`), a row of kind `product` in the
+  contract. The Feature page's entry reads it and hands it to `featureOf`; the view carries `countOf`, so the
+  count's hook takes it from the view, never from a file. The pack's entry hands `statesOf` to the refine
+  check through its cut; with none, a criterion's DONE count is not held against a count. The leaf test holds
+  every file of kind `product`; knip starts from both. The rows of the scenes and the role combinations
+  leave the contract. Undo: revert the commit. Why not one file: the page's bundle would pull in `node:fs`.

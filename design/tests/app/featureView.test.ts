@@ -11,6 +11,7 @@ import {
   firstEpic,
 } from '../../app/workspace/featureView.ts';
 import { piecesOf } from '../../app/workspace/contractView/codeTokens.ts';
+import { productView } from '../../productView.ts';
 
 describe('the Feature view', () => {
   it('has a tab per feature ticket and opens on the first one not done', () => {
@@ -76,9 +77,10 @@ describe('the Feature view', () => {
     expect(featureOf('E09').combinations.map((one) => one.file)).toEqual([
       'roleCombinations.js',
     ]);
-    const approvals = featureOf('E06');
+    const approvals = featureOf('E06', productView);
     expect(approvals.combinations).toEqual([]);
     expect(approvals.statesNamed).toBeGreaterThan(0);
+    expect(featureOf('E06').statesNamed).toBe(0);
   });
 
   it('shows the field kinds on the epic that decided them, and only there', () => {

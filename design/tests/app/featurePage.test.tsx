@@ -7,6 +7,7 @@ import { describe, expect, it } from 'vitest';
 import { FeaturePageCombinationsSection } from '../../app/components/organisms/FeaturePage/components/FeaturePageCombinationsSection.tsx';
 import { FeaturePage } from '../../app/components/organisms/FeaturePage/index.ts';
 import { theme } from '../../app/theme/theme.ts';
+import { productView } from '../../productView.ts';
 import {
   featureOf,
   featureWords as words,
@@ -17,10 +18,10 @@ describe('the Feature page', () => {
   it('draws the epic it opens on, its journeys and its endpoints', () => {
     const html = renderToString(
       <ThemeProvider theme={theme}>
-        <FeaturePage />
+        <FeaturePage plugs={productView} />
       </ThemeProvider>,
     );
-    const view = featureOf(firstEpic() ?? '');
+    const view = featureOf(firstEpic() ?? '', productView);
     expect(html).toContain(view.title);
     expect(html).toContain(words.journeys.label);
     for (const journey of view.journeys) expect(html).toContain(journey.id);
@@ -32,11 +33,11 @@ describe('the Feature page', () => {
     const drawn = (node: React.ReactElement): string =>
       renderToString(<ThemeProvider theme={theme}>{node}</ThemeProvider>);
     const translations = drawn(
-      <FeaturePageCombinationsSection view={featureOf('E09')} />,
+      <FeaturePageCombinationsSection view={featureOf('E09', productView)} />,
     );
     expect(translations).toContain('roleCombinations.js');
     expect(translations).toContain(words.combinations.count);
-    const approvals = featureOf('E06');
+    const approvals = featureOf('E06', productView);
     expect(
       drawn(<FeaturePageCombinationsSection view={approvals} />),
     ).toContain(words.combinations.missing(approvals.statesNamed, 'E06'));

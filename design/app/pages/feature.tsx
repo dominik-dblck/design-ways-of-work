@@ -7,6 +7,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { theme } from '../theme/theme.ts';
 import { FeaturePage } from '../components/organisms/FeaturePage/index.ts';
+import { productView } from '../../productView.ts';
 
 const root = document.getElementById('root');
 if (root)
@@ -14,7 +15,7 @@ if (root)
     <StrictMode>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <FeaturePage />
+        <FeaturePage plugs={productView} />
       </ThemeProvider>
     </StrictMode>,
   );

@@ -14,7 +14,12 @@ const A_RUN =
   /\b(?:node|tsx)(?:\s+--?\S+)*\s+["']?(?:\$\{?CLAUDE_PROJECT_DIR\}?["']?\/)?([\w./-]+\.(?:ts|mts|js|mjs))\b/g;
 const SETTINGS = ['settings.json', 'settings.local.json'];
 // the root's own files: each tool's config, the scope, and what a product plugs in, where one does
-const CONFIGS = ['*.config.{ts,mts}', 'scope.ts', 'product.ts'];
+const CONFIGS = [
+  '*.config.{ts,mts}',
+  'scope.ts',
+  'product.ts',
+  'productView.ts',
+];
 
 // every string a parsed settings file holds: a command, unescaped
 function stringsIn(setting: unknown): readonly string[] {

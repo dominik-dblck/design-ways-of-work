@@ -63,7 +63,7 @@ function trackOf(cut: Cut, ticket: Ticket): string {
 function headLines(cut: Cut, ticket: Ticket): readonly string[] {
   const sources = cut.reader.sourcesOf('tickets.ts');
   const bytes = sources.reduce((sum, one) => sum + bytesOf(one.text), 0);
-  const found = REFINE_CHECK.run(ticket.id) ?? [];
+  const found = REFINE_CHECK.run(ticket.id, cut.statesOf) ?? [];
   const refined = found.length
     ? `${found.length} findings (${ticket.status}, reported not refused — the design side owes them before the next stage)`
     : 'clean';
