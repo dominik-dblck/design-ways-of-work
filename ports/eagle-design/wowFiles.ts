@@ -3,10 +3,10 @@
  */
 import type { Migration } from '../../scripts/migrationTypes.ts';
 
-// the tools' configs, the session's hooks, three registry types and the rules' checks page leave its index, each the home's text; the backup takes the home's version
+// the tools' configs, the session's hooks, three registry types and the rules' checks page leave its index, each the home's text; the backup and the epic template's test take the home's version
 const WOW_FILES: Migration = {
   release: '0.12.0',
-  removes: ['tools/zipRepo.sh'],
+  removes: ['tools/zipRepo.sh', 'tests/sheet/epicTemplate.test.ts'],
   moves: [],
   homed: [
     'commitlint.config.ts',

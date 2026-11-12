@@ -1062,3 +1062,8 @@ Each call: what, why, how to undo. None changes what the PM sees.
 - Gate on 98da1da: 2 differences, knip in the product calling `shared/hooks/postCommit.ts` and `remotes.ts`
   unused: it reads the Claude Code settings' runs, not a git hook's lines. `knipConfig` reads each file of
   `.husky/` too; knip green again on the gate's clone. Undo: revert it.
+- Task 14, its fourth piece: the epic template's test a home (`design/tests/sheet/epicTemplate.test.ts`). It
+  starts E02 between neighbours of its own, E01 and E03, in a registry the test writes, so it reads no
+  product's epics (eagle-design's asked E16 and E18); it still asks that each registry the template names
+  exists, a standard registry every design product holds. Green, lint and tsc clean on the gate's clone.
+  `WOW_FILES` takes the product's copy out. Undo: revert it.
