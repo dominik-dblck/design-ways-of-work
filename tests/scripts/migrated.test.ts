@@ -25,6 +25,10 @@ describe('a migration moves files of a repository, and their imports follow', ()
     "import { rows } from '../logic/rows.ts';\n",
   );
   clone.committed('words.ts', "'plans.js · A', 'plans.js · B'\n");
+  clone.committed(
+    'roadmaps/E10/E10Notes.ts',
+    "import { rows } from '../../logic/rows.ts';\n",
+  );
   const said = migrated({
     root: clone.root,
     wow,
@@ -69,9 +73,12 @@ describe('a migration moves files of a repository, and their imports follow', ()
     expect(read('words.ts')).toBe("'project.js · A', 'project.js · B'\n");
   });
 
-  it('what is kept as it was keeps its imports', () => {
+  it('what is kept as it was keeps its imports, an epic’s notebook too', () => {
     expect(read('legacy/old.ts')).toBe(
       "import { rows } from '../logic/rows.ts';\n",
+    );
+    expect(read('roadmaps/E10/E10Notes.ts')).toBe(
+      "import { rows } from '../../logic/rows.ts';\n",
     );
   });
 

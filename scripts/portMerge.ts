@@ -15,12 +15,11 @@ import { gitAt, ruledOn, unmerged } from './portSettle.ts';
 import { moduleValue, snapshotTaken } from './portSnapshots.ts';
 import { snapshotText } from '../design/guards/checks/snapshotModule.ts';
 import { HERE } from './repos.ts';
+import { KEPT_IN_A_PRODUCT } from './keptWords.ts';
 import { childEnv } from './scratch.ts';
 
 const [NAME = '', HANDED = ''] = process.argv.slice(2);
 const ROOT = path.resolve(HANDED);
-// what a move never rewrites there: a record, a note, a legacy copy
-const KEPT = /^(legacy|records|notes)\//;
 
 function refused(why: string): never {
   console.error(`portMerge · ${why}`);
@@ -63,7 +62,7 @@ async function namedAgain(skipped: readonly string[]): Promise<number> {
       .split('\n')
       .filter((file) => file !== '' && !skipped.includes(file)),
   );
-  const texts = (await followed({ root: ROOT, kept: KEPT }))
+  const texts = (await followed({ root: ROOT, kept: KEPT_IN_A_PRODUCT }))
     .filter((file) => brought.has(file))
     .map((file) => {
       const before = fs.readFileSync(at(file), 'utf8');

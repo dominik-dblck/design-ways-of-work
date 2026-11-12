@@ -827,3 +827,7 @@ Each call: what, why, how to undo. None changes what the PM sees.
   theme and the atoms here at a named sha; this side's names that clash leave (the source check's `LAYERS`,
   the measure's `text`); this side's thin theme retires to `legacy/`, the pages read the copied one, the token
   variables at each page's root; the tokens type `TokenHex`; the products add lucide-react. Undo: revert it.
+- Eagle-design's note on the port's E10 hash: a migration rewrote an epic's notebook's imports, so its frozen
+  pin moved. What a move never rewrites in a product has one home, `scripts/keptWords.ts`: a legacy copy, a
+  record, a note, an epic's notebook (`roadmaps/E*/E*Notes.ts`); the migration, the move and the port's merge
+  read it. Undo: revert it.

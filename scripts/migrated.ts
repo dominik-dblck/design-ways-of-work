@@ -6,6 +6,7 @@
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
+import { KEPT_IN_A_PRODUCT } from './keptWords.ts';
 import { importsMoved } from './movePaths.ts';
 import type { Migration } from './migrationTypes.ts';
 import { childEnv } from './scratch.ts';
@@ -20,8 +21,6 @@ interface Migrating {
 type Git = (args: readonly string[]) => string;
 
 const CODE = /\.(ts|tsx|mts)$/;
-// what a repository keeps as it was: what retired, a release's record, a note
-const KEPT = /^(legacy|records|notes)\//;
 
 const treeFiles = (folder: string): readonly string[] =>
   fs
@@ -43,7 +42,7 @@ function followed(
     fs.existsSync(path.join(root, folder, 'index.ts'));
   return git(['ls-files', '-z'])
     .split('\0')
-    .filter((file) => CODE.test(file) && !KEPT.test(file))
+    .filter((file) => CODE.test(file) && !KEPT_IN_A_PRODUCT.test(file))
     .filter((now) => {
       const full = path.join(root, now);
       const text = fs.readFileSync(full, 'utf8');

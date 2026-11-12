@@ -7,6 +7,7 @@ import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { followed } from './followed.ts';
+import { KEPT_IN_A_PRODUCT } from './keptWords.ts';
 import { mapRows } from './mapRows.ts';
 import {
   barrelOf,
@@ -118,7 +119,7 @@ function expanded(rows: readonly Move[]): readonly Move[] {
 const productFiles = (): Promise<readonly string[]> =>
   PRODUCT === null
     ? Promise.resolve([])
-    : followed({ root: PRODUCT, kept: KEPT });
+    : followed({ root: PRODUCT, kept: KEPT_IN_A_PRODUCT });
 
 async function main(): Promise<void> {
   const moves = expanded(
