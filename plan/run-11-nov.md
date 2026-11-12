@@ -522,3 +522,13 @@ Each call: what, why, how to undo. None changes what the PM sees.
   at v0.3.0 over the product's own, which change as it closes epics. Undo: move them back, name it again.
 - The run goes on, on the PM's word of 12 Nov, with task 5; the pick on "leć" or "tylko porządki" is the
   first, "leć" (undo: stop after this tidying).
+- The gate on the product's merged branch (88f5d3e, its trunk at 30d978a) read three snapshots as carries:
+  the merge gave their legacy copies the trunk's values, git no longer reads them as moved, and the check took
+  them for files the port took out. The port holds each as a module the merge writes; such a snapshot is no
+  carry now (9e5e4e9, red proof on a scratch port). Undo: revert it. Then NO DIFFERENCE, nothing broken.
+- The PM, 12 Nov: "odpowiadaj do mnie prosze w stylu bullet points z emocji, tabele porownawcze z emoji itp,
+  rownowazniki zdan, tak techniczie - same konkrety", and "dodaj to do claude.md tak zeby wszystkie proejkty
+  tak odpisywaly (w jezyku usera) nie definiuj na ten moemnt". Written in this repository's `CLAUDE.md`, the
+  chat's language the PM's own; and, for every project on the PM's machine, in the user-level
+  `~/.claude/CLAUDE.md`, outside every repository. A design repository spawned in stage 3 carries the same
+  lines in the `CLAUDE.md` its spawn writes.

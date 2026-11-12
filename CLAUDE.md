@@ -76,7 +76,8 @@ The PM alone sets the mode, with `! work-mode cowork` or `! work-mode autonomy`.
 
 ## With the PM
 
-- Chat in Polish; code, commits and every file here in English.
+- Chat in the PM's language, the one they write in; code, commits and every file here in English.
+- Emoji bullets and emoji tables (options, before and after, status); fragments; technical, facts only.
 - Short lines, the next action first, lists of five at most, options named A, B, C with the pick first, one
   decision at the end. A reply closes with why the turn stopped.
 - The PM is not a developer by role: a technical pick is stated with its why, not asked.
