@@ -1,6 +1,5 @@
 /**
- * - `TIER` · the order refuses are read in, the product's tiers handed on
- * - `orderCheck` · the commands whose refuses break that order
+ * - `orderCheck` · the commands whose refuses break the product's tiers' order
  */
 import { TIER } from './refusalRows.ts';
 import * as COMMANDS from '../commands.ts';
@@ -23,4 +22,4 @@ function orderCheck(epic?: string): readonly string[] {
     });
 }
 
-export { orderCheck, TIER };
+export { orderCheck };

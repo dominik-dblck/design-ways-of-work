@@ -1,5 +1,5 @@
 /**
- * - `EventRow`, `Producer`, `Batch`, `TargetKey`, `ActorKey` · an event as written
+ * - `EventRow`, `Producer` · an event as written
  * - `EventType`, `EventGroup`, `EventProducer` · an event type as everyone reads it
  * - `Actor`, `Target`, `Mention` · who acts, who is told, and a mention listed
  */
@@ -71,8 +71,6 @@ interface Mention {
 
 export type {
   Actor,
-  ActorKey,
-  Batch,
   EventGroup,
   EventProducer,
   EventRow,
@@ -80,5 +78,4 @@ export type {
   Mention,
   Producer,
   Target,
-  TargetKey,
 };

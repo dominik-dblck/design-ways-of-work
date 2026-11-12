@@ -1,5 +1,5 @@
 /**
- * - `Role`, `RoleKey` · a role: its label, its gate, the catalog's word for it
+ * - `Role` · a role: its label, its gate, the catalog's word for it
  * - `Person`, `PersonRow`, `Gate`, `GateKey` · a person as written and read; a gate
  * - `Tuple` · a person in the shape gateRules.ts speaks: name, avatar, id
  */
@@ -42,4 +42,4 @@ interface Gate {
 
 type Tuple = readonly [name: string, avatar: string | null, id: string];
 
-export type { Gate, GateKey, Person, PersonRow, Role, RoleKey, Tuple };
+export type { Gate, GateKey, Person, PersonRow, Role, Tuple };

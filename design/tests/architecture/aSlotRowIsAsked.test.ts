@@ -1,5 +1,5 @@
 /**
- * - `docs/process/documentSlots.ts`: each of the product's rows is asked by a home's document
+ * - `docs/process/documentSlots.ts`: each of the product's rows is asked by a home's document or skill
  */
 import { describe, expect, it } from 'vitest';
 import { cites } from '../../docs/process/documentSlots.ts';
@@ -23,8 +23,8 @@ describe('a slot row is asked', () => {
 
   it('no row of the product waits for a document that asks for none', () => {
     const asked = new Set(
-      ['docs/documents', 'docs/process/modes'].flatMap((folder) =>
-        textsUnder(folder, ['.ts']).flatMap(askedIn),
+      ['docs/documents', 'docs/process/modes', 'docs/skills'].flatMap(
+        (folder) => textsUnder(folder, ['.ts']).flatMap(askedIn),
       ),
     );
     expect(Object.keys(cites).filter((key) => !asked.has(key))).toEqual([]);

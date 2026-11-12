@@ -986,3 +986,8 @@ Each call: what, why, how to undo. None changes what the PM sees.
   stay, a known gap: changing the row's grammar breaks each product's rows, and no second product writes
   events yet. The words' reads by key and fixed cell count are the contract's terms, a gap until checked.
   Undo: revert it.
+- The gate on 1d8e842: red. The slots' test read the documents' asks, not the skills', so `publish.artifact`
+  stood unasked: the home test reads `docs/skills/` too. The publish skill wanted the product's prettier.
+  `yarn lint:exports` was red on both sides since v0.8.0: five exports of the homes nothing reads (an
+  export the split left behind each), dropped here; no gate showed it, since a red on both sides is no
+  difference. The bundles, the guard's map and the record differ as `NEXT` now says. Undo: revert it.

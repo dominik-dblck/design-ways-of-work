@@ -8,8 +8,7 @@ const skill: SkillFile = {
   title: 'design-publish · the artifact',
   description:
     "Publishes the design project to the artifact, the PM's render and, until the switch commit lands, the release the build side reads: commit, build, one Artifact call, the tag. Use when a change has to reach the PM's view or the build side's read.",
-  intro:
-    `The artifact is the PM's render and the release the build side reads: ${cite('publish.artifact', 'the address the product names')}. What is not published, the build side does not see. Publishing goes only from here.`,
+  intro: `The artifact is the PM's render and the release the build side reads: ${cite('publish.artifact', 'the address the product names')}. What is not published, the build side does not see. Publishing goes only from here.`,
   sections: [
     {
       heading: 'Steps',
