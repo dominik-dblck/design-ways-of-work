@@ -4,6 +4,33 @@
  */
 import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
+// the built modules whose rows, or the decision note of the schema they bundle, point at the product's plan
+const POINTING = [
+  'agentFlow',
+  'backlog',
+  'blockRules',
+  'commands',
+  'contentList',
+  'contractView',
+  'dbSchema',
+  'edges',
+  'events',
+  'expectedFiles',
+  'flowCheck',
+  'journeys',
+  'measure',
+  'payloads',
+  'projections',
+  'queries',
+  'receipts',
+  'refusals',
+  'roleCombinations',
+  'sampleRun',
+  'specCheck',
+  'testCases',
+  'translationFlow',
+];
+
 const NEXT: Unreleased = {
   kind: 'major',
   what: 'a product plugs its own code in through its `product.ts`, and its pure code through its `productView.ts`: the checks’ parts a and w, the pack’s refine check and the Feature page take what is the product’s from their entry point, and no home reads those files; the Feature page takes an epic’s fields from it too, and the source guard names the seven layers itself and reads the requirements from their registry, `sheet/requirements.ts`, where the migration moves their rows; a migration’s moves carry the imports with them, and it may edit a text of a file found exactly once; the block model is a registry, and the build prints as JSON what the product’s `sheet/project.ts` · `buildReads.json` names, each file held by the name its row gives; what knip starts from beside the entries is the home’s `tools/readStarts.ts`, which a product’s scope calls; the spec’s files, the first read, the fact combinations, the drift guards and the decided points are the product’s, a registry, `docs/process/projectPlan.ts`, where the migration moves their rows, and the skills name it',
@@ -12,6 +39,12 @@ const NEXT: Unreleased = {
   rules: { added: [], changed: [], removed: [] },
   outputs: {
     'eagle-design': {
+      ...Object.fromEntries(
+        POINTING.map((name) => [
+          `dist · project/${name}.js`,
+          'a pointer it holds or bundles names the product’s plan, projectPlan.js, where it named plans.js: nothing else moves',
+        ]),
+      ),
       'output · yarn cut-pack T-E19-00':
         'the migration’s two new files of the product’s own, under guards/, wait to be committed with the pack',
       'output · yarn build':

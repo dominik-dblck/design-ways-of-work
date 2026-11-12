@@ -662,3 +662,7 @@ Each call: what, why, how to undo. None changes what the PM sees.
   it (A); nothing of eagle-dev's port starts before Argus-design is spawned, then C0 first, the rest beside
   Argus-design against v1.0.0 (B). eagle-design's derivations: E and S rules reach eagle-dev by its take of
   WoW's tag; the flip is the port's step 5, after the spawn and C0; the coarse count runs first in stage 4.
+- The gate on e6d0b3d: every command ends as it did; 23 built modules differ only by a pointer renamed to the
+  product's plan (most bundle the schema's decision note), written on the release in hand.
+  `docs/rules/responsibility.ts`, named by eagle-design, is a home's in the product: the take prints WoW's
+  rule, which holds no pointer, so no edit is written.
