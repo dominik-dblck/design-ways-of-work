@@ -736,3 +736,6 @@ Each call: what, why, how to undo. None changes what the PM sees.
   since the contract body and the Feature page both draw it, its head moved and renamed by script from
   `ContractBodyEndpointCard`; `FeaturePageEndpointItem` and `FeaturePageSteps` retire to legacy/; the
   contract's registry row for `roadmaps/features.ts` leaves, as the trunk retired that file. Undo: revert it.
+- The gate on c7098cd: 3 differences unexplained. The tag's feature view reads `roadmaps/features.ts`, which
+  eagle-design's main retired, so the tag's export lint fails and this commit's passes; the publish skill's new
+  sentence writes its SKILL.md again. Rows say so, and the pages' rows name the folds. Undo: revert the rows.

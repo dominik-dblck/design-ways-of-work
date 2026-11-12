@@ -42,7 +42,7 @@ const MODE_PARTS = [
 
 const NEXT: Unreleased = {
   kind: 'major',
-  what: 'a product plugs its own code in through its `product.ts`, and its pure code through its `productView.ts`: the checks’ parts a and w, the pack’s refine check and the Feature page take what is the product’s from their entry point, and no home reads those files; the Feature page takes an epic’s fields from it too, and the source guard names the seven layers itself and reads the requirements from their registry, `sheet/requirements.ts`, where the migration moves their rows; a migration’s moves carry the imports with them, and it may edit a text of a file found exactly once; the block model is a registry, and the build prints as JSON what the product’s `sheet/project.ts` · `buildReads.json` names, each file held by the name its row gives; what knip starts from beside the entries is the home’s `tools/readStarts.ts`, which a product’s scope calls; the spec’s files, the first read, the fact combinations, the drift guards and the decided points are the product’s, a registry, `docs/process/projectPlan.ts`, where the migration moves their rows, and the skills name it; a pointer of the product’s at one of those lists names the plan, and a migration edit may ask for every place its text stands; the eras of a product’s release records are its own, `sheet/project.ts` · `recordEras`, and the home’s tests read every feature by what its registries hold, naming none; a product’s own documents, its API convention and its agent’s instructions, are its modules, printed at their paths from `sheet/project.ts` · `buildReads.documents`; a home’s document asks a product for its own texts by key, `docs/process/documentSlots.ts` · `cites` (a lesson’s reason, a decision’s date, an example), a key it does not hold printing nothing or the home’s example; the board opens with each epic’s tickets by column, the MVP’s whole on top, and the API contract page, `Contract.html`, shows every endpoint as TypeScript (the `ContractPage` organism, `contractView` · `contractPage`), `CodePieces` an atom and `CodeBlock`, which draws it, a molecule; a port leaves a change of its trunk’s that a home holds to the home, by its `CARRIED` row; every epic has its Feature page, the pages fold their sections under counted heads (`FoldSection`, a molecule), the contract’s body is an organism the board mounts too (`ContractBody`), the tones and the code inks are the theme’s, and the board’s pick travels to the Feature page in the browser (`boardView` · `pickedEpic`)',
+  what: 'a product plugs its own code in through its `product.ts`, and its pure code through its `productView.ts`: the checks’ parts a and w, the pack’s refine check and the Feature page take what is the product’s from their entry point, and no home reads those files; the Feature page takes an epic’s fields from it too, and the source guard names the seven layers itself and reads the requirements from their registry, `sheet/requirements.ts`, where the migration moves their rows; a migration’s moves carry the imports with them, and it may edit a text of a file found exactly once; the block model is a registry, and the build prints as JSON what the product’s `sheet/project.ts` · `buildReads.json` names, each file held by the name its row gives; what knip starts from beside the entries is the home’s `tools/readStarts.ts`, which a product’s scope calls; the spec’s files, the first read, the fact combinations, the drift guards and the decided points are the product’s, a registry, `docs/process/projectPlan.ts`, where the migration moves their rows, and the skills name it; a pointer of the product’s at one of those lists names the plan, and a migration edit may ask for every place its text stands; the eras of a product’s release records are its own, `sheet/project.ts` · `recordEras`, and the home’s tests read every feature by what its registries hold, naming none; a product’s own documents, its API convention and its agent’s instructions, are its modules, printed at their paths from `sheet/project.ts` · `buildReads.documents`; a home’s document asks a product for its own texts by key, `docs/process/documentSlots.ts` · `cites` (a lesson’s reason, a decision’s date, an example), a key it does not hold printing nothing or the home’s example; the board opens with each epic’s tickets by column, the MVP’s whole on top, and the API contract page, `Contract.html`, shows every endpoint as TypeScript (the `ContractPage` organism, `contractView` · `contractPage`), `CodePieces` an atom and `CodeBlock`, which draws it, a molecule; a port leaves a change of its trunk’s that a home holds to the home, by its `CARRIED` row; every epic has its Feature page, the pages fold their sections under counted heads (`FoldSection`, a molecule), the contract’s body is an organism the board mounts too (`ContractBody`), the tones and the code inks are the theme’s, and the board’s pick travels to the Feature page in the browser (`boardView` · `pickedEpic`); every endpoint and each endpoint’s test cases fold, shown or hidden all at once (`FoldList`, a molecule on the `Fold` atom; `EndpointFolds`, an organism), and the features’ refine standing is retired',
   action:
     'the migration `ports/` names for the repository, on its checkout: `node scripts/migrate.ts <name> <checkout>`, run from this repository at the tag; the pin to the tag in the same commit',
   rules: { added: [], changed: [], removed: [] },
@@ -89,9 +89,9 @@ const NEXT: Unreleased = {
       'written · guards/__snapshots__/guardMap.ts':
         'the source guard’s built file holds the seven layers’ names: the lines of its findings there move by nine',
       'dist · project/feature-page.js':
-        'the page’s entry hands the product’s view to the Feature page; every epic is a tab with its status, each section folds under its count, journeys and cases read as chips, the notebook as bullets, and the epic opens from the address or the board’s pick',
+        'the page’s entry hands the product’s view to the Feature page; every epic is a tab with its status, each section folds under its count, journeys and cases read as chips, the notebook as bullets, and the epic opens from the address or the board’s pick; the test cases fold by endpoint, before the API, whose endpoints fold as the contract page’s; the refine standing is gone',
       'dist · project/featureView.js':
-        'the feature view reads no scenes and no role combinations: the page hands them in; it reads the combinations from the product’s plan; every epic is a tab, its status its board column; the notebook reads as head, source and points, a point never ending inside brackets or bold',
+        'the feature view reads no scenes and no role combinations: the page hands them in; it reads the combinations from the product’s plan; every epic is a tab, its status its board column; the notebook reads as head, source and points, a point never ending inside brackets or bold; no refine standing',
       'dist · project/refineCheck.js':
         'the refine check reads no scenes: the pack hands the states an epic names in',
       'dist · project/module-imports.json':
@@ -105,11 +105,11 @@ const NEXT: Unreleased = {
       'dist · project/boardView.js':
         'the board bundles the ticket context, which reads its first read from the product’s plan; the tickets’ pointers name projectPlan.js; the view counts every epic’s tickets by column, the list on top; each epic links to its Feature page, the pick kept in the browser; the backlog’s open list is no longer read',
       'dist · project/board-page.js':
-        'the board bundles the ticket context, which reads its first read from the product’s plan; the tickets’ pointers name projectPlan.js; the board opens with each epic’s tickets by column, the MVP’s whole on top; each row and epic panel opens the Feature page; the columns, the ports and the whole API contract fold; the title stands alone, the numbers small',
+        'the board bundles the ticket context, which reads its first read from the product’s plan; the tickets’ pointers name projectPlan.js; the board opens with each epic’s tickets by column, the MVP’s whole on top; each row and epic panel opens the Feature page; the columns, the ports and the whole API contract fold, each endpoint in it too; the title stands alone, the numbers small',
       'dist · project/contractView.js':
         'a pointer it holds names the product’s plan, projectPlan.js; the view builds the contract page, bundling the backlog, the tickets, the block model and the refusals it reads',
       'dist · project/contract-page.js':
-        'the API contract page’s script: every endpoint as TypeScript, the numbers, the legend, the filters and what every endpoint shares; the contract’s body is an organism the board mounts too; the code drawn in the palette’s code inks',
+        'the API contract page’s script: every endpoint as TypeScript, the numbers, the legend, the filters and what every endpoint shares; the contract’s body is an organism the board mounts too; each endpoint folds under its head, all shown or hidden at once; the code drawn in the palette’s code inks',
       'exit · yarn build · 1 → 0':
         'the tag’s board reads the backlog’s open list, which eagle-design’s main retired (50cd593): the tag’s build fails, this one passes',
       'exit · yarn spec-check · 1 → 0':
@@ -120,6 +120,12 @@ const NEXT: Unreleased = {
         'the tag’s board reads the backlog’s open list, which eagle-design’s main retired: tsc fails on the tag, passes here',
       'exit · yarn test · 1 → 0':
         'the tag’s board reads the backlog’s open list, which eagle-design’s main retired: the board’s test fails on the tag, passes here',
+      'output · yarn lint:exports':
+        'the tag’s feature view reads the features’ steps, roadmaps/features.ts, which eagle-design’s main retired: two unresolved imports on the tag, none here',
+      'exit · yarn lint:exports · 1 → 0':
+        'the tag’s feature view reads the features’ steps, which eagle-design’s main retired: the export lint fails on the tag, passes here',
+      'written · .claude/skills/design-publish/SKILL.md':
+        'the publish skill sends the module maps with any bundle, so the source check never reads a bundle whole',
       'dist · project/Contract.html':
         'the API contract page, a page of its own',
       'dist · project/documentSlots.js':
@@ -145,15 +151,15 @@ const NEXT: Unreleased = {
       'written · docs/process/agent-instructions.md':
         'the agent’s first read opens on the product’s plan, projectPlan.ts',
       'dist · project/new-project.md':
-        'a new project empties the rows of the product’s plan, docs/process/projectPlan/',
+        'a new project empties the rows of the product’s plan, docs/process/projectPlan/; the features’ rows are no registry to cut',
       'written · docs/process/new-project.md':
-        'a new project empties the rows of the product’s plan, docs/process/projectPlan/',
+        'a new project empties the rows of the product’s plan, docs/process/projectPlan/; the features’ rows are no registry to cut',
       'dist · project/packs/T-E19-00.md':
         'the digests move: the tickets’ parts by their context and their pointers, the plans’ module two parts fewer',
       'written · fixtures/packs/T-E19-00.md':
         'the digests move: the tickets’ parts by their context and their pointers, the plans’ module two parts fewer',
       'written · .claude/skills/design-refine/SKILL.md':
-        'the refine skill asks for the product’s decided points in its plan, docs/process/projectPlan.ts',
+        'the refine skill asks for the product’s decided points in its plan, docs/process/projectPlan.ts; no status row to move before the feature ticket',
       'written · .claude/skills/design-start/SKILL.md':
         'the start skill names the product’s decided points in its plan, docs/process/projectPlan.ts',
       'written · vendor/wow/app/workspace/sheetStatus.ts':
