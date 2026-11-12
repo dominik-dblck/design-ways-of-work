@@ -333,12 +333,8 @@ const BODY_AFTER = `const scope: RepoScope = {
     'sheet/screens/screenView/screenViewTypes.ts': ['Gaps'],
   },
   unformatted: {
-    '**/*.md': 'prose keeps the layout its writer gave it',
-    'legacy/**': 'kept as it was (D24)',
-    'records/**': "a release's record, as it was written",
-    'fixtures/**': 'packs as cut, data as emitted, screens as taken',
+    ...SCOPE_PRESET.unformatted,
     'public/**': 'assets as their source gives them',
-    '.claude/**': "a session's settings, and the skills the build writes",
     'eslint-suppressions.json':
       'ESLint writes its known fails (\`--suppress-rule\`, \`--prune-suppressions\`)',
   },
@@ -378,6 +374,11 @@ const BODY_AFTER = `const scope: RepoScope = {
     reviewed: SHEET_WORDS,
 `;
 
+// its ignore file as the writer writes it: its assets' group after the preset's own
+const SETTINGS =
+  "# a session's settings, and the skills the build writes\n.claude/\n";
+const ASSETS = '# assets as their source gives them\npublic/\n';
+
 const SCOPE_PRESET_CUT: Migration = {
   release: '0.15.0',
   removes: [],
@@ -385,6 +386,11 @@ const SCOPE_PRESET_CUT: Migration = {
   edits: [
     { file: SCOPE, from: HEAD_BEFORE, to: HEAD_AFTER },
     { file: SCOPE, from: BODY_BEFORE, to: BODY_AFTER },
+    {
+      file: '.prettierignore',
+      from: `${ASSETS}${SETTINGS}`,
+      to: `${SETTINGS}${ASSETS}`,
+    },
   ],
   tree: null,
 };
