@@ -917,3 +917,9 @@ Each call: what, why, how to undo. None changes what the PM sees.
   count to its own files; the criterion's cite of a PM date dropped). Its migration joins v0.6.0, unreleased,
   so the product takes one major for both areas. Undo: revert it; the cases' migration then gets its own
   release.
+- Task 10: the cases' thirteen readers are homes at eagle-design's paths, taken by `git show` at its port's
+  8de80db (rows split, eight suppressions mended, the cite dropped), verified on a fresh clone: tsc, ESLint
+  whole and the fifteen files with no suppression. The contract trades the journeys' and the test cases'
+  barrels for the three files that gather their rows; `CASE_READERS` joins v0.6.0. Eagle-design's pick: the
+  roles' count is a row beside the shared cases, since counting it from the directory reads upwards. Undo:
+  revert it.

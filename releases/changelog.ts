@@ -6,20 +6,20 @@ import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
 const NEXT: Unreleased = {
   kind: 'major',
-  what: 'the roadmap’s readers are homes, at the paths a product held them: the backlog’s, the notes’, the templates’ and the new epic’s files, the tracks’, the tickets’ barrel, kinds, types, list, board, views, context, receipt flags, pointers and command tickets; a product holds their rows apart, each gathered in a file the contract names (the backlog’s, the notes’, the pointers’, the tickets’, the checklist’s reads, the commands’ states, the tracks)',
+  what: 'the roadmap’s readers are homes, at the paths a product held them: the backlog’s, the notes’, the templates’ and the new epic’s files, the tracks’, the tickets’ barrel, kinds, types, list, board, views, context, receipt flags, pointers and command tickets; a product holds their rows apart, each gathered in a file the contract names (the backlog’s, the notes’, the pointers’, the tickets’, the checklist’s reads, the commands’ states, the tracks); the cases’ readers are homes too: the journeys’ barrel, reads, check, words and types, the test cases’ barrel, baseline, reach, text, endpoint cases and types, the shared cases’ reader and types, their rows gathered apart (the journeys with their walked prints and states, the refusals’ reach, the shared cases with the roles’ count)',
   action:
-    'the product’s rows split from the roadmap’s readers on its own tree first, the readers byte-equal to the homes; the migrations `ports/` names for the repository, on its checkout: `node scripts/migrate.ts <name> <checkout>`, run from this repository at the tag (for eagle-design, the sixteen readers leave its index, the take writing them back); the pin to the tag in the same commit',
+    'the product’s rows split from the roadmap’s readers on its own tree first, the readers byte-equal to the homes; the migrations `ports/` names for the repository, on its checkout: `node scripts/migrate.ts <name> <checkout>`, run from this repository at the tag (for eagle-design, the roadmap’s sixteen readers and the cases’ thirteen leave its index, the take writing them back); the pin to the tag in the same commit',
   rules: { added: [], changed: [], removed: [] },
   outputs: {
     'eagle-design': {
       'output · yarn build':
-        'the build side reads sixteen files more in vendor/wow/: the roadmap’s readers, homes now',
+        'the build side reads twenty-nine files more in vendor/wow/: the roadmap’s readers and the cases’, homes now',
       'output · yarn checks':
-        'the build side reads sixteen files more in vendor/wow/: the roadmap’s readers, homes now',
+        'the build side reads twenty-nine files more in vendor/wow/: the roadmap’s readers and the cases’, homes now',
       'output · yarn spec-check':
-        'the build side reads sixteen files more in vendor/wow/: the roadmap’s readers, homes now',
+        'the build side reads twenty-nine files more in vendor/wow/: the roadmap’s readers and the cases’, homes now',
       'output · yarn cut-pack T-E19-00':
-        'the build side reads sixteen files more in vendor/wow/: the roadmap’s readers, homes now; the sixteen the migration takes out of the index count as uncommitted until the product commits them with its pin',
+        'the build side reads twenty-nine files more in vendor/wow/: the roadmap’s readers and the cases’, homes now; the twenty-nine the migration takes out of the index count as uncommitted until the product commits them with its pin',
       'written · vendor/wow/roadmaps/backlog.ts':
         'the roadmap’s reader is a home now, copied with the homes',
       'written · vendor/wow/roadmaps/notes.ts':
@@ -52,6 +52,32 @@ const NEXT: Unreleased = {
         'the roadmap’s reader is a home now, copied with the homes',
       'written · vendor/wow/roadmaps/tracks.ts':
         'the roadmap’s reader is a home now, copied with the homes',
+      'written · vendor/wow/sheet/cases/journeys.ts':
+        'the cases’ reader is a home now, copied with the homes',
+      'written · vendor/wow/sheet/cases/journeys/journeyCheck.ts':
+        'the cases’ reader is a home now, copied with the homes',
+      'written · vendor/wow/sheet/cases/journeys/journeyReads.ts':
+        'the cases’ reader is a home now, copied with the homes',
+      'written · vendor/wow/sheet/cases/journeys/journeyTypes.ts':
+        'the cases’ reader is a home now, copied with the homes',
+      'written · vendor/wow/sheet/cases/journeys/journeyWords.ts':
+        'the cases’ reader is a home now, copied with the homes',
+      'written · vendor/wow/sheet/cases/sharedCases.ts':
+        'the cases’ reader is a home now, copied with the homes',
+      'written · vendor/wow/sheet/cases/sharedCases/sharedCasesTypes.ts':
+        'the cases’ reader is a home now, copied with the homes',
+      'written · vendor/wow/sheet/cases/testCases.ts':
+        'the cases’ reader is a home now, copied with the homes',
+      'written · vendor/wow/sheet/cases/testCases/caseBaseline.ts':
+        'the cases’ reader is a home now, copied with the homes',
+      'written · vendor/wow/sheet/cases/testCases/caseReach.ts':
+        'the cases’ reader is a home now, copied with the homes',
+      'written · vendor/wow/sheet/cases/testCases/caseText.ts':
+        'the cases’ reader is a home now, copied with the homes',
+      'written · vendor/wow/sheet/cases/testCases/endpointCases.ts':
+        'the cases’ reader is a home now, copied with the homes',
+      'written · vendor/wow/sheet/cases/testCases/testCasesTypes.ts':
+        'the cases’ reader is a home now, copied with the homes',
     },
   },
 };
