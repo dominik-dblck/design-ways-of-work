@@ -779,3 +779,6 @@ Each call: what, why, how to undo. None changes what the PM sees.
   lines: the json and documents reads share one local `PrintedRead`, and `stack` takes no import (the
   contract says data alone; `STACKS[stack]` still checks the key). The product's scope did not list
   `roadmaps/ids.ts` under the emit that now writes it: a migration edit lists it. Undo: revert it.
+- Gate on 7ca0dcc: two left on the commit's side. The sheet held 11 comment lines of 10: `stack` goes without
+  its comment, the header names it. The product's `.prettierignore` is written from its scope, and the scope
+  now lists `roadmaps/ids.ts` under the emit: a migration edit writes the same line. Undo: revert it.

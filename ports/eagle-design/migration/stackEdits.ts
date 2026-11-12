@@ -12,7 +12,7 @@ const STACK_EDITS: readonly MigrationEdit[] = [
   {
     file: 'sheet/project.ts',
     from: "const buildSide = 'CC';\n",
-    to: "const buildSide = 'CC';\n// what its build side builds on: a key of the way of working's stacks\nconst stack = 'web';\n",
+    to: "const buildSide = 'CC';\nconst stack = 'web';\n",
   },
   {
     file: 'sheet/project.ts',

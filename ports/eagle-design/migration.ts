@@ -160,6 +160,11 @@ ${JSON_FIXTURES.map(
     },
     {
       file: '.prettierignore',
+      from: 'app/styles/tokens.ts\nvendor/wow/\n',
+      to: 'app/styles/tokens.ts\nroadmaps/ids.ts\nvendor/wow/\n',
+    },
+    {
+      file: '.prettierignore',
       from: 'sheet/contract/*.md\n',
       to: 'sheet/contract/*.md\nfixtures/data/*.json\n',
     },
