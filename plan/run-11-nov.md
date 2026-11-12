@@ -24,7 +24,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 
 | stage | what | done | of |
 | 1 | Foundation | 7 | 7 |
-| 2 | Design clean | 6 | 10 |
+| 2 | Design clean | 8 | 17 |
 | 3 | Spawn design | 0 | 3 |
 | 4 | Eagle-design | 0 | 2 |
 
@@ -35,12 +35,18 @@ of the scripts · 2 · the gate `yarn consumers`, run for real: "no difference" 
 the gate, the release and the three hooks · 6 · `CLAUDE.md`, `README.md`, one state file, the decisions as data ·
 7 · v0.2.0 out through the new gate, the PM's word (the first push and tag).
 
-Stage 2, the plan's stage 2: 1 · the contract table, row by row with eagle-design · 2 · `product.ts` typed here ·
-3 · the gate on eagle-design's newest `main`, its migration rehearsed there (the plan's last task, first by the
-PM's word, 11 Nov · A) · 4 · the first slice: the frozen notebooks, the featured epics, the epics · 5 · the
-registry readers through the contract, the files that read more split · 6 · the facts in the 33 files leave ·
-7 · the stack a parameter of the product · 8 · `examples/sample-product` and the way of working's own checks
-on `design/` there · 9 · the no-product test over every home · 10 · v1.0.0 (the PM's word).
+Stage 2, the plan's stage 2, rebuilt on the PM's word (12 Nov: "przebuduj progress zgodnie z prawda"): 1 · the
+contract table, row by row with eagle-design · 2 · `product.ts` typed here · 3 · the gate on eagle-design's
+newest `main`, its migration rehearsed there (the plan's last task, first by the PM's word, 11 Nov · A) · 4 · the
+first slice: the frozen notebooks, the featured epics, the epics · 5 · the registry readers through the
+contract, the files that read more split · 6 · the facts in the 33 files leave · 7 · the stack a parameter of
+the product, the names the theme takes freed, `TokenHex` · 8 · the roadmap's types are homes · 9 · the
+readers of the roadmap are homes, its rows split from them · 10 · the cases' readers · 11 · the contract's,
+the directory's and the screens' readers · 12 · the words' readers · 13 · the homes no longer call the
+product's own logic; the mixed grammars settled · 14 · `examples/sample-product`, rows alone, each file of the
+contract · 15 · its check in the feature tier: the homes green on a product that names none (the no-product
+test) · 16 · the build side's theme and atoms held here (W25, W26), once it frees them · 17 · v1.0.0 (the PM's
+word).
 
 Stage 3, the plan's stage 3: 1 · `yarn spawn design <path> <name>` · 2 · the new-project guide · 3 · `argus-design`
 spawned and green on its first commit, the PM's word.
@@ -62,6 +68,8 @@ word · 2 · both design repositories pinned to one tag, the gate green on both.
 - 17:51 · stage 2 · 4 of 10 · the first slice: the build side's read list out of the home into the product's registry, the merge keeps two changes that touch, a repository's migration by one command; v0.3.0 out; verified by eagle-design (a53a832, 3d1a872, c82439e, 272bceb)
 - 08:48 · stage 2 · 5 of 10 · task 5 · plugs and registries through the product: no home reads a product's logic, model or samples by path; the gate's 23 differences each expected; verified by eagle-design (d162c06, 69c453d, 3419ef0, 5555716, 4fc5f4f, 1bfe21a)
 - 10:15 · stage 2 · 6 of 10 · Feature and Board read a product only through its contract: the plan, the slots, the eras; 840ec79 carried; gate 79 of 79 expected; verified by eagle-design (71a83b4, 391504f, e6d0b3d, 5c1b7d0, 3f930aa, b9bf980, 6e359a2, 8660446, d593f8d, d205409, c2ea74f, 594f453)
+- 15:36 · stage 2 · 7 of 17 · the stack a parameter, the theme's names freed, TokenHex (a48f904, 225f0a5, eb98097; v0.5.0)
+- 15:36 · stage 2 · 8 of 17 · the roadmap's eight types are homes, homed by the migration (368914f, d89ea49; v0.5.0, gate green on 212a690)
 
 ## Calls
 
@@ -875,3 +883,8 @@ Each call: what, why, how to undo. None changes what the PM sees.
 - The 37 readers marked by eagle-design and checked here on the parse (each file's top-level tables against
   its functions): three of its sixteen W hold the product's keys or tables, so 13 W, 3 E, 21 M. The 3 E are
   task 9's findings. The roadmap area goes first. Undo: revert it.
+- The progress rebuilt on the PM's word: stage 2's ten tasks were short of the work the run found (the theme
+  and atoms of W25 and W26, the 37 readers behind the registries). Stage 2 is 17 tasks: 7 closes on the stack,
+  the names and `TokenHex`; 8 on the roadmap's types (gate green on 85845c5, v0.5.0 out); the theme is task 16.
+  Undo: the table and the list as they stood (10 tasks).
+
