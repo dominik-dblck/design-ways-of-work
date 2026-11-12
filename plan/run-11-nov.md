@@ -872,3 +872,6 @@ Each call: what, why, how to undo. None changes what the PM sees.
   of working's readers become homes at their paths, split from the rows the product gathers in one file; the
   sample writes rows alone; no stub that copies logic. Eagle-design marks the 37 first. It widens task 8 by
   about two to four days. Undo: revert it; the sample then writes the readers itself.
+- The 37 readers marked by eagle-design and checked here on the parse (each file's top-level tables against
+  its functions): three of its sixteen W hold the product's keys or tables, so 13 W, 3 E, 21 M. The 3 E are
+  task 9's findings. The roadmap area goes first. Undo: revert it.

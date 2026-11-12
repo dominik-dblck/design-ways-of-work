@@ -53,6 +53,25 @@ The way, step 2 widened:
 4. The sample then writes rows alone. Area by area, each its release: the roadmap, the cases, the
    contract, the words.
 
+### The 37 marked (eagle-design's reading, checked here on the parse: 13 W, 3 E, 21 M)
+
+- W, a reader holding no rows: `roadmaps/templates.ts` (with `templates/epicFiles.ts`), `roadmaps/tracks.ts`
+  (its factors are the method), `roadmaps/tickets/` `receiptFlags`, `ticketBoard`, `ticketContext`,
+  `ticketExpand`, `ticketViews`; `sheet/cases/journeys/journeyCheck.ts` (once its walked prints come through
+  the contract), `sheet/cases/testCases.ts`, `testCases/caseBaseline.ts`, `caseText.ts`, `endpointCases.ts`;
+  `sheet/words/messages/liveWords.ts`, `sayWord.ts`.
+- E, the product's own: `sheet/contract/refusals/refusalActors.ts`, `sheet/screens/wireframes/screenContracts.ts`,
+  `sheet/words/messages/modules.ts`. The homes call them (`actorKey`, `editorScreenOf`, `deliveryWord`): task 9's
+  findings, through `product.ts` or no longer called.
+- M, rows | readers: `roadmaps/backlog.ts`, `notes.ts`, `tickets/pointerResolve.ts`; `sheet/cases/journeys/
+  journeyReads.ts`, `testCases/caseReach.ts`; `sheet/contract/commands.ts`, `events.ts`, `queries.ts`,
+  `refusals.ts`, `refusals/refusalCatalog.ts`, `refusalOrder.ts`, `refusalSentences.ts`; `sheet/model/
+  directory.ts`; `sheet/screens/wireframes/screenRows.ts`; `sheet/words/glossary.ts`, `messages/messageCells.ts`,
+  `messageChecks.ts`, `messageUsage.ts`, `refusals.ts`, `situations.ts`, `words.ts`. Each split line stands in
+  eagle-design's message of 12 Nov; three marks moved from W on the parse (`caseReach`, `refusalSentences`,
+  `messageUsage` hold the product's keys and tables).
+- First area: the roadmap.
+
 ## Eagle-design's review (10bf0ef)
 
 - The eight are the way of working's: shape alone. Two fields carry a product's history, the backlog's `code`
