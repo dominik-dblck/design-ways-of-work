@@ -1033,3 +1033,12 @@ Each call: what, why, how to undo. None changes what the PM sees.
   overwrite the product's bundle); `.prettierignore` and `tsconfig.json` written from the scope (its
   `extraRoots`, eagle-design's `public`); the epic template test a home on a fixture of its own; the findings'
   sides stay the product's; `docs/rules/checks.md` a home beside its siblings. Undo: revert it.
+- Task 14, its first piece: the twelve files eagle-design's per-file list called homes as they are, copied from
+  its tree (each the same on its `main` and `port/wow`) into `design/`; `WOW_FILES` (0.12.0) takes them out of
+  its index as the homes' text, and its backup script out for the home's. The backup script is one file now,
+  `design/tools/zipRepo.sh`, moved by `scripts/move.ts` (which moves any file git lists now, not code alone);
+  it finds its repository by git, so this repository's `yarn backup` and a product's `tools/` run the same
+  bytes. Undo: revert it.
+  ESLint 10 configures a file by its nearest config, so a file under `design/` met the home's own config; the
+  commit tier and the edit hook name the root's config now (`rootEslintConfig`, by ESLint's own names), a
+  product's same file as before.

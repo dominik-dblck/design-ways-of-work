@@ -4,7 +4,8 @@
 # - restore: unzip, then `git clone {name}.bundle restored` · the index is not kept
 set -euo pipefail
 
-repo=${0:A:h:h}
+# the repository the script stands in, at whatever depth: a product's tools/, this repository's design/tools/
+repo=$(git -C ${0:A:h} rev-parse --show-toplevel)
 name=${repo:t}
 parent=${repo:h}
 stamp=$(date +%Y-%m-%d-%H%M)

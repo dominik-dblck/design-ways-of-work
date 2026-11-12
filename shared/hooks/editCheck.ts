@@ -8,6 +8,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { ESLint } from 'eslint';
 import * as prettier from 'prettier';
+import { rootEslintConfig } from '../checkTiers.ts';
 
 const ROOT = process.cwd();
 const LINTED = /\.(ts|tsx|mts)$/;
@@ -32,7 +33,13 @@ async function formatOne(file: string): Promise<void> {
 }
 
 async function lintOne(file: string): Promise<readonly string[]> {
-  const eslint = new ESLint({ cwd: ROOT, fix: true, applySuppressions: true });
+  const config = rootEslintConfig(ROOT);
+  const eslint = new ESLint({
+    cwd: ROOT,
+    ...(config === undefined ? {} : { overrideConfigFile: config }),
+    fix: true,
+    applySuppressions: true,
+  });
   if (!LINTED.test(file) || (await eslint.isPathIgnored(file))) return [];
   const fileResults = await eslint.lintFiles([file]);
   await ESLint.outputFixes(fileResults);

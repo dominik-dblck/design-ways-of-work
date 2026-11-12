@@ -5,9 +5,10 @@
 import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
 const NEXT: Unreleased = {
-  kind: 'patch',
-  what: '',
-  action: 'none: move the pin to the tag',
+  kind: 'major',
+  what: 'a design product’s way-of-working files are homes: the six tools’ configs and vitest’s, the session’s hooks (`.claude/settings.json`), the findings’, decisions’ and project plan’s types, the rules’ checks page; the backup script is one, found by git at whatever depth, for this repository and each product',
+  action:
+    'the migrations `ports/` names for the repository, on its checkout: `node scripts/migrate.ts <name> <checkout>`, run from this repository at the tag (for eagle-design, twelve files leave its index as the homes’ text, `tools/zipRepo.sh` leaves for the home’s); the pin to the tag, then `yarn build`, its copies under `vendor/wow/` in the same commit',
   rules: { added: [], changed: [], removed: [] },
   outputs: {},
 };

@@ -22,13 +22,14 @@ describe('the backup zips the repository beside itself', () => {
   repo.committed('dist/built.txt', 'built');
   fs.writeFileSync(path.join(repo.root, 'new.txt'), 'not yet tracked');
   fs.writeFileSync(path.join(repo.root, '.env'), 'SECRET=1');
-  fs.mkdirSync(path.join(repo.root, 'scripts'));
+  // where a product takes it: its tools/
+  fs.mkdirSync(path.join(repo.root, 'tools'));
   fs.copyFileSync(
-    path.join(HERE, 'scripts', 'zipRepo.sh'),
-    path.join(repo.root, 'scripts', 'zipRepo.sh'),
+    path.join(HERE, 'design', 'tools', 'zipRepo.sh'),
+    path.join(repo.root, 'tools', 'zipRepo.sh'),
   );
   fs.mkdirSync(bundles);
-  execFileSync('zsh', [path.join(repo.root, 'scripts', 'zipRepo.sh')], {
+  execFileSync('zsh', [path.join(repo.root, 'tools', 'zipRepo.sh')], {
     cwd: base,
     env: { ...childEnv(), TMPDIR: bundles },
   });

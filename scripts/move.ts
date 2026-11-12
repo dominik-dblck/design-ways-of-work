@@ -100,7 +100,7 @@ function movedByGit(moves: readonly Move[]): void {
   }
 }
 
-// a folder's row moves each file in it; a module's row, its parts' folder of its name too
+// a folder's row moves each file in it; a module's row, its parts' folder of its name too; any other file git lists, itself
 function expanded(rows: readonly Move[]): readonly Move[] {
   const files = execFileSync('git', ['ls-files', '-z'], {
     cwd: HERE,
@@ -111,7 +111,9 @@ function expanded(rows: readonly Move[]): readonly Move[] {
     const inside = files
       .filter((file) => file.startsWith(`${was}/`))
       .map((file) => ({ from: file, to: `${is}${file.slice(was.length)}` }));
-    return CODE.test(from) ? [{ from, to }, ...inside] : inside;
+    return CODE.test(from) || files.includes(from)
+      ? [{ from, to }, ...inside]
+      : inside;
   });
 }
 

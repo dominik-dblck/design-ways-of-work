@@ -8,6 +8,7 @@ import { CASE_READERS } from './eagle-design/caseReaders.ts';
 import { CONTRACT_READERS } from './eagle-design/contractReaders.ts';
 import { COUNT_FORMS } from './eagle-design/countForms.ts';
 import { HOME_FACTS } from './eagle-design/homeFacts.ts';
+import { WOW_FILES } from './eagle-design/wowFiles.ts';
 import { REWRITTEN } from './eagle-design/rewritten.ts';
 import { MIGRATION } from './eagle-design/migration.ts';
 import { ROADMAP_READERS } from './eagle-design/roadmapReaders.ts';
@@ -48,6 +49,7 @@ const CONSUMERS: readonly [Consumer, ...Consumer[]] = [
       WORD_READERS,
       HOME_FACTS,
       COUNT_FORMS,
+      WOW_FILES,
     ],
     // its own work lands on `main`, which takes nothing yet: the branch holds `main` whole, or the gate is red
     port: {
