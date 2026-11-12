@@ -88,7 +88,7 @@ defined, refined, packed and released.
   `findingSides`, `projectPlanTypes`), the epic templates' test.
 - Split (stage 2, task 15): `docs/process/decisions.ts`' rows that are the way of working's join this
   register; the product keeps its own, a new one starts empty. Eagle-design marks them.
-- The product's own, a template the sample holds and spawn copies (tasks 16, stage 3): `.gitignore`,
+- The product's own, a template the sample holds and spawn copies (task 17, stage 3): `.gitignore`,
   `.nvmrc`, `sheet/rules/`' five slots, `docs/process/documentSlots.ts` and its cites (empty or a neutral
   default), `docs/process/projectPlan.ts`' rows, `sheet/project.ts` (the product's identity, filled from
   spawn's questions), `product.ts` and `productView.ts` with empty plugs, `legacy/compat.json`'s three pages.
@@ -97,8 +97,8 @@ defined, refined, packed and released.
 - Findings for task 13: `docs/rules/checks.md` in the product is a drifted copy of `dev/rules/checks.md` (one
   home, this one's); `docs/skills/publish.ts` holds a product's artifact address, to read from
   `sheet/project.ts`; the ticket kinds' raw hex until the theme.
-- A home takes no suppression (W1): the six roadmap readers that carry ten in the product's file are mended on
-  its tree before they are homed.
+- A home takes no suppression (W1): the six roadmap readers carried eleven in the product's file, mended on
+  its tree (d81fcef, lint and tsc clean on a clone) before they are homed.
 
 ## Eagle-design's review (10bf0ef)
 

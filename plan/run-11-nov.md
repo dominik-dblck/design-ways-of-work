@@ -902,3 +902,6 @@ Each call: what, why, how to undo. None changes what the PM sees.
   `CLAUDE.md`'s rule rewritten); his word: a spawned product gets the same hooks. Stage 2 gains task 16, the
   hooks; it is 20 tasks. Undo: revert it; the rule and the table as they stood.
 
+- eagle-design's port at d81fcef verified on a clone: the six readers bound for the homes pass ESLint with no
+  suppression and tsc whole; its findings on 133e942 and a4d990d mended (eleven, not ten; the theme is task
+  19, the sample 17). Task 9's homes come next. Undo: revert it.

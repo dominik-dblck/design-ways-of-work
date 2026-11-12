@@ -43,7 +43,7 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
    the props). Whether a product's board, pages and props get a check part again, in TypeScript.
 7. The build side's theme freed of its app (W26 step 3: the preference attribute in a file of its own, the
    batch and sent chips out of the shared theme): eagle-dev asks the PM's yes in its own session, after its
-   audit fix. Task 16 waits on it.
+   audit fix. Task 19 waits on it.
 
 ## Known gaps
 
