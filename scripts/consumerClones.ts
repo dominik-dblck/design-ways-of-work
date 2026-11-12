@@ -11,7 +11,8 @@ import { HOMES } from '../shared/take/takeHomes.ts';
 import { takenFiles } from '../shared/take/takeRecord.ts';
 import type { Sides } from './consumerDiff.ts';
 import type { Consumer } from './consumerTypes.ts';
-import { childEnv, emptied } from './scratch.ts';
+import { emptied } from '../shared/emptied.ts';
+import { childEnv } from './scratch.ts';
 
 const PACKAGE = 'design-ways-of-work';
 const BUFFER = 1 << 28;

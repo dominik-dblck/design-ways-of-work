@@ -9,7 +9,8 @@ import { scope } from '../scope.ts';
 import { COMMIT, FEATURE_END } from '../shared/checkTiers.ts';
 import { ranIn } from './consumerRuns.ts';
 import { HERE } from './repos.ts';
-import { childEnv, CLONING, emptied, SCRATCH } from './scratch.ts';
+import { emptied } from '../shared/emptied.ts';
+import { childEnv, CLONING, SCRATCH } from './scratch.ts';
 
 const BUFFER = 1 << 28;
 

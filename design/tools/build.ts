@@ -21,6 +21,7 @@ import {
 import type { Page } from './layout.ts';
 import { BUILT, ROOT } from './root.ts';
 import { headerOf } from '../shared/lint/header.ts';
+import { emptied } from '../shared/emptied.ts';
 
 const OUT = BUILT;
 
@@ -162,7 +163,7 @@ async function emitFixtures(): Promise<void> {
 
 await emitFixtures();
 const vendored = writeVendored({ root: ROOT, out: ROOT });
-fs.rmSync(OUT, { recursive: true, force: true });
+emptied({ within: ROOT, folder: OUT });
 const copied = copyFiles();
 const icons = copyNamedIcons(OUT);
 const scripts = filesOf().filter(isEntry);

@@ -6,7 +6,8 @@ import { execFileSync, spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { HERE } from './repos.ts';
-import { childEnv, emptied, SCRATCH } from './scratch.ts';
+import { emptied } from '../shared/emptied.ts';
+import { childEnv, SCRATCH } from './scratch.ts';
 
 const SAMPLE = path.join(HERE, 'examples', 'sample-product');
 const ROOT = path.join(SCRATCH, 'sample');

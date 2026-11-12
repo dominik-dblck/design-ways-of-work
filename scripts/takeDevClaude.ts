@@ -9,7 +9,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { BUILD_REPO, HERE, repoAt } from './repos.ts';
 import { isRetired } from './retired.ts';
-import { emptied } from './scratch.ts';
+import { emptied } from '../shared/emptied.ts';
 
 const SOURCE = repoAt(BUILD_REPO);
 const TO = path.join(HERE, 'dev', 'claude');

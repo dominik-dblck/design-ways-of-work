@@ -4,7 +4,8 @@ import path from 'node:path';
 import { afterAll, describe, expect, it } from 'vitest';
 import { scope } from '../../scope.ts';
 import { HERE } from '../../scripts/repos.ts';
-import { childEnv, CLONING, emptied } from '../../scripts/scratch.ts';
+import { childEnv, CLONING } from '../../scripts/scratch.ts';
+import { emptied } from '../../shared/emptied.ts';
 
 const base = fs.mkdtempSync(path.join(os.tmpdir(), 'wow-scratch-'));
 const scratch = path.join(base, 'scratch');
