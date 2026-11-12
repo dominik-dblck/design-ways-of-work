@@ -29,6 +29,10 @@ const NEXT: Unreleased = {
       'dist · project/board-page.js':
         'the board’s numbers fold, the project’s and the repository’s, each a tile with its value, the words beside it, its bar and its note; the contract’s shared types fold',
       'dist · project/contract-page.js': 'the contract’s shared types fold',
+      'dist · project/contentTypeLogic.js':
+        'T18 points at the source check’s `SOURCE_LAYERS`',
+      'written · app/styles/tokens.ts':
+        'the tokens module types a colour as `TokenHex`, as the build side’s does',
       'dist · project/contractView.js':
         'the expected files’ text reads `expectedText`, the name the theme’s `text` frees',
       'dist · project/expectedFiles.js':
