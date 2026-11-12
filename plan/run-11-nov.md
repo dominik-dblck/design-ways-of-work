@@ -936,3 +936,10 @@ Each call: what, why, how to undo. None changes what the PM sees.
 - The PM's pick A, asked in chat what the hook's exception means: task 16's release, the work-mode hook's
   source brought in byte-equal, tested and installed by script, is a W30 release (W31); a change to what it
   does waits for him. Undo: revert it; task 16's release waits for his word.
+- Task 10 re-applied for v0.7.0: 1cf84ac's homes, contract rows and `CASE_READERS` taken back from it by
+  `git checkout`, the migration's release 0.7.0; `NEXT` written against a pin at v0.6.0 (thirteen homed, the
+  four outputs thirteen files more). Its gate runs once eagle-design's v0.6.0 take is committed. One release
+  per area from here (the PM's A on stability): v0.8.0 is task 11's. Undo: revert it.
+- eagle-design's task 11 split, d86ecb2, verified on a fresh clone (tsc, ESLint whole, twenty-four files
+  unsuppressed, 57 tests). Two findings for task 13: the event row carries three of the product's columns
+  (an agent's API, a batch, a Slack line); the directory's gates are the product's approval model.
