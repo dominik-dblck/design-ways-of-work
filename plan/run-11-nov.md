@@ -1020,3 +1020,16 @@ Each call: what, why, how to undo. None changes what the PM sees.
   no plural. Still 14 on the gate's clone. Before the release that holds it, the mend form for cells is settled
   with eagle-design: its pick, a fill-level form (`{count|block|blocks}`, resolved by the fill) for cells and
   `{key}One` for keyed lines, so a cell needs no second situation row. Undo: revert it.
+- v0.11.0 out under W30: its tag on fd2a74f, on the remote, at the second try. The first push stopped at the
+  gate on 31 differences in eagle-design's outputs, each a consequence (bundles holding the words' checks,
+  digests, the guard map, the vendored copy, cut-pack's count); the row names each now. Before the tag, the
+  product's feature tier on the gate's clone: green but for the vendored copy a hand copy skipped and the
+  take's build writes.
+- Task 14 settled with eagle-design, file by file: homes as they are in `design/` (the six tool configs,
+  vitest's, `.claude/settings.json`, three registry types, `tools/zipRepo.sh` at this repository's version);
+  `.husky/post-commit` a home that runs `shared/hooks/postCommit.ts`, the remote a scope field
+  (`backup.remote`), the backup done only when origin is that remote, both read as host/owner/repo (an SSH
+  origin matches its HTTPS field, a clone's local path never does: a clone in `.consumers/` would otherwise
+  overwrite the product's bundle); `.prettierignore` and `tsconfig.json` written from the scope (its
+  `extraRoots`, eagle-design's `public`); the epic template test a home on a fixture of its own; the findings'
+  sides stay the product's; `docs/rules/checks.md` a home beside its siblings. Undo: revert it.
