@@ -1367,3 +1367,8 @@ Each call: what, why, how to undo. None changes what the PM sees.
   all. The design pages draw icons as `lucide-react` components already; the paths stand only in 8 rows of
   eagle-design's data. Eagle-design names those icons for `lucide-react`, then the build's SVG writer goes to
   `legacy/`, in v1.1.0. Undo: the writer brought back from `legacy/`.
+- The gate on 55ca926 against eagle-design's main: its build failed, "lucide-react has no triangle-alert", the
+  writer's own error for a name its import did not find. Eagle-design, by script: nothing reads
+  `dist/project/lucide-icons/`, its rows keep the path strings (a contract field, held for the PM to change).
+  The PM: "wszystko na react leci te htmls to legacy sa". Call: the SVG writer goes to `legacy/` now, the build
+  writes no `lucide-icons/`; its error message is not mended, the writer leaves. Undo: the writer brought back.

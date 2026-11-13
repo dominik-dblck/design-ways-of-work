@@ -38,6 +38,13 @@ A migration is what a repository does to take one release; once its branch holds
 - `ports/eagle-design/migration.ts` and its `tree/` · v0.3.0: eagle-design's `product.ts` and the frozen
   notebooks' registry, written on its checkout; its `port/wow` holds them since 88f5d3e
 
+## The icons' SVG files
+
+Retired when every page drew its icons as `lucide-react` components (W109): no page reads an SVG file.
+
+- `design/tools/build/namedIcons.ts` · each `lucide-icons/<name>.svg` a source named, written into
+  `dist/project/` from `lucide-react`'s icon data
+
 ## eagle-design's port
 
 Retired when eagle-design's `main` took v1.0.0 from `port/wow` (its 614cb70): the gate tries `main` itself.
