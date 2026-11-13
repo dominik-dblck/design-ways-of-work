@@ -25,8 +25,11 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 | stage | what | done | of |
 | 1 | Foundation | 7 | 7 |
 | 2 | Design clean | 26 | 26 |
-| 3 | Eagle-design | 0 | 2 |
+| 3 | Eagle-design | 1 | 2 |
 | 4 | Spawn design | 2 | 3 |
+| 5 | Eagle-dev takes WoW | 0 | 4 |
+| 6 | Argus build | 0 | 2 |
+| 7 | Improvement loop | 0 | 2 |
 
 Stage 1, the plan's stage 1: 1 · the repositories that take the way of working named in `ports/`, the paths out
 of the scripts · 2 · the gate `yarn consumers`, run for real: "no difference" on a clone of eagle-design's
@@ -61,6 +64,16 @@ word · 2 · both design repositories pinned to one tag, the gate green on both.
 
 Stage 4, the plan's stage 3: 1 · `yarn spawn design <path> <name>`, the hooks installed with it · 2 · the
 new-project guide · 3 · `argus-design` spawned and green on its first commit, the PM's word.
+
+Stage 5, the PM's architecture (W110, W111; the plan's stages 4 and 5, its build half): 1 · the plan sent to
+eagle-dev · 2 · its theme, atoms and molecules taken by tag, its copies made taken files by migration · 3 · the
+build side's rules, process tools and skills taken, `dev/` cleaned of the product · 4 · the gate tries eagle-dev.
+
+Stage 6: 1 · `spawn build` from a blank build repository green on every shared check · 2 · `argus-dev` spawned and
+green on its first commit, the PM's word.
+
+Stage 7: 1 · one register of the products' requests in this repository · 2 · a product's component promoted
+through it, end to end (W110).
 
 ## History
 - 12:25 · stage 1 · 1 of 7 · ports/consumers.ts names the repositories; build path mended to ../eagle (c4c82da)
@@ -98,6 +111,7 @@ new-project guide · 3 · `argus-design` spawned and green on its first commit, 
 - 08:37 · stage 2 · 24 of 26 · the build side's theme and atoms copied by script at its reviewed sha eed29307, the pages on the shared theme; v0.21.0 out (1ea139e, 719c249, a621fcb)
 - 12:12 · stage 2 · 25 of 26 · the build side's architecture guard on the homes: the homes are the tree, a sha synced only reviewed, one home per name in every product, the review rows' skill (v0.22.0, v0.23.0, 729870d), eagle-design approved
 - 12:29 · stage 2 · 26 of 26 · v1.0.0 out (4cb1b34): the gate green on eagle-design's port/wow holding its main, the release naming 1.0.0
+- 13:37 · stage 3 · 1 of 2 · eagle-design's main holds v1.0.0
 
 ## Calls
 
@@ -1378,3 +1392,11 @@ Each call: what, why, how to undo. None changes what the PM sees.
   first; the sync then still refused it, since its check read the record alone. Call: a gone file stops the sync
   only while it stands in the home (`leftStanding`, tested). Sample green, 804 files. Undo: the copy set's seeds
   and `taken.ts` back to 38a280f9, `yarn sync:theme` at it, fades.ts brought back.
+- The PM, 13 Nov, on where shared components live: A of three (W110), then "produkty tez moga miec swoje i
+  rozszerzac obecne … produkt moze requestowac o dodanie do globalnej (WoW)"; eagle-dev heard "A" from the PM
+  itself. On the PM's architecture (Eagle → the way of working → a tagged release → product pairs, a spawner,
+  an improvement loop): A of two (W111), "WoW jest zrodlem prawdy dla obu". Call: the run gains three stages
+  after stage 4, the architecture's own: 5 · eagle-dev takes the way of working (the UI home first, then the
+  build side's rules, tools and skills, then its gate), 6 · Argus's build repository, 7 · a register of the
+  products' requests. Status against the architecture is a page the PM reads, republished at each milestone.
+  Undo: the rows and the three stages out of the table.

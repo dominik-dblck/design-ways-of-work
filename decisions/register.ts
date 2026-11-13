@@ -277,6 +277,21 @@ const SINCE: readonly Decision[] = [
     says: 'one icon package, `lucide-react`, the one the React code draws with; no icon is an SVG file: the build writes none, and a row a legacy HTML page reads keeps its path as a string until that page retires; `lucide-static` leaves every repository, by migration.',
     from: 'plan/run-11-nov.md',
   },
+  {
+    id: 'W110',
+    title: 'the way of working holds the theme, atoms and molecules',
+    held: '13 Nov · the PM’s word, here, and to eagle-dev',
+    says: 'after v1.1.0 this repository holds the originals of the theme, the atoms and the molecules, and no product is their source: the sync from the build side ends. A product keeps its own components and extends a shared one by composition under its own name or by its theme layer, never by editing a taken file; a component a product wants shared is asked of this repository, passes an architecture review (W105) and the gate on every product, and goes out in a tag.',
+    from: 'plan/run-11-nov.md',
+  },
+  {
+    id: 'W111',
+    title:
+      'every product repository takes the way of working, design and build',
+    held: '13 Nov · the PM’s word, here',
+    says: 'each product is a pair of repositories, its design and its build, and both pin a tag of this repository, the one source of truth for both; the gate tries both.',
+    from: 'plan/run-11-nov.md',
+  },
 ];
 
 // a product's rows keep their words of the day and their order, each naming the row it was

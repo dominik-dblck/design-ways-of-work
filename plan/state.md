@@ -40,7 +40,10 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
 
 ## Open for the PM
 
-Nothing open. The PM's word of 13 Nov on the icons (W109): `lucide-react` alone, and no SVG file; eagle-design
+Nothing open. The PM's word of 13 Nov on shared components (W110): after v1.1.0 this repository holds the
+theme, atoms and molecules, a product keeps and extends its own and asks for one to be shared; and (W111) both
+repositories of every product, design and build, take a tag, the run's stages 5 to 7 following the PM's
+architecture. The PM's word of 13 Nov on the icons (W109): `lucide-react` alone, and no SVG file; eagle-design
 names its last 8 icon paths for `lucide-react`, the build's SVG writer retires, and `lucide-static` leaves
 every repository by migration, in v1.1.0 with the molecules.
 
