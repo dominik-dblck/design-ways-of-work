@@ -42,12 +42,12 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
 
 One point: W112's timing, as eagle-dev relayed the PM's word (a product builds a missing piece without asking
 first, asks only "do you have something like it?" during the work, and proposes it once, at its pull request),
-waits for the PM's yes here. v1.2.0 waits for the PM's word: the WCAG fixes and the committed take (W113), both
-reviewed, the gate on eagle-design's main with nothing broken and each difference a row.
+waits for the PM's yes here. v1.2.0 is out: the WCAG fixes and the committed take (W113).
 
-The PM's word of 13 Nov: the app shell, the sign-in page and the side nav join the shared components, so a new
-app starts with them. The build side frees its four (AppShell, SideNav, LoginForm, SignedOutScreen) of the
-product, its binding kept in its own wrappers; they are copied here at its reviewed sha, for v1.3.0.
+The PM's word of 13 Nov (W114): the app's skeleton joins the shared components, so a new app starts with it. The
+build side frees its seven (AppShell, SideNav, LoginForm, SignedOutScreen, Breadcrumbs, PageHeader,
+PersonaStrip) of the product, its binding kept in its own wrappers; they are copied here at its two reviewed
+shas. They go out as v1.3.0 with eagle-design's D108, one batch (W115).
 
 The PM's word of 13 Nov on shared components (W110): after v1.1.0 this repository holds the
 theme, atoms and molecules, a product keeps and extends its own and asks for one to be shared; and (W111) both

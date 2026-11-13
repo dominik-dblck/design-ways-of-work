@@ -308,6 +308,20 @@ const SINCE: readonly Decision[] = [
     says: 'a build repository pins no dependency on this repository and runs no postinstall from it: a person runs the take script at a tag, its files written and committed, each recorded by digest, and a check refuses a taken file edited. Its supply-chain check flags nothing, its CI needs no access to this repository, and its code owners review every change a tag brings.',
     from: 'plan/run-11-nov.md',
   },
+  {
+    id: 'W114',
+    title: 'the app’s skeleton is the design system’s',
+    held: '13 Nov · the PM’s word, here',
+    says: 'a new app starts with its skeleton: the app shell, the side nav, the sign-in card and page, the breadcrumbs, the page header and the persona dial join the shared components. The build side frees its own of the product, its binding kept in its own wrappers, and they are copied here at its reviewed sha (W107, W108).',
+    from: 'plan/run-11-nov.md',
+  },
+  {
+    id: 'W115',
+    title: 'releases go out in batches, on this session’s call',
+    held: '13 Nov · the PM’s word, here, its pick A',
+    says: 'a release carries a milestone, or what a product waits on, at most one or two a day, one gate for the batch. Once the gate is green and the reviews are clean it is this session’s call past 1.0.0 too (W30), and the PM reads a summary after. A change to what the work-mode hook does still waits for the PM (W29).',
+    from: 'plan/run-11-nov.md',
+  },
 ];
 
 // a product's rows keep their words of the day and their order, each naming the row it was

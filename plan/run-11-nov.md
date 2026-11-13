@@ -1452,3 +1452,15 @@ Each call: what, why, how to undo. None changes what the PM sees.
   `wow.lock` and `shared/take/`. F3 (minor, a product file inside a taken folder is not flagged): as meant, a
   home lands on folders the product also writes (design's on its root); a file the lock does not name is the
   product's. Undo: revert the commit; no lock exists yet.
+- v1.2.0 out at 9ea9509 on the PM's word: the WCAG fixes and the committed take, the gate on eagle-design's main
+  with nothing broken and its sixteen differences rows.
+- The PM, 13 Nov: the app shell, the sign-in page and the side nav, then the breadcrumbs with the page header and
+  the persona dial, join the shared components, so a new app starts with its skeleton (W114). Call: the build
+  side frees its seven of the product in its repository, its binding kept in its own wrappers, in two reviewed
+  shas; they are copied here by `yarn sync:theme`, the copy set gaining their seeds. Undo: the row out of the
+  register; nothing copied yet.
+- The PM, 13 Nov, the release taking longer than the work, picked A (W115): a release carries a batch, a
+  milestone or what a product waits on, one gate for it; once green and reviewed it is this session's call, the
+  PM reading a summary after. Call: eagle-design's D108 (a feature page read through its tickets when its epic
+  has no feature ticket) rides with the skeleton as v1.3.0. Undo: the row out of the register; `CLAUDE.md`'s
+  release line back to W30's.
