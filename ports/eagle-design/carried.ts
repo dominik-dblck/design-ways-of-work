@@ -38,8 +38,8 @@ const CARRIED: readonly Carried[] = [
   },
   {
     file: 'tests/architecture/aClosedNotebookIsFrozen.test.ts',
-    blob: 'bb5280c09aa1c5291c2b0d727767667ab113d696',
-    how: 'the pins stand in the product’s roadmaps/notes/frozenNotebooks.ts, E10’s among them: the home’s test is as it was',
+    blob: 'a945a952e0939e1c8a93a7a0c8021ae6159baa40',
+    how: 'the pins stand in the product’s roadmaps/notes/frozenNotebooks.ts, E10’s and E11’s among them: the home’s test is as it was',
   },
   {
     file: 'tests/architecture/anExportIsRead.test.ts',
