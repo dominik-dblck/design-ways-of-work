@@ -21,6 +21,8 @@ interface Migration {
   readonly homed?: readonly string[];
   // its texts written again, read after the imports followed the moves
   readonly edits?: readonly MigrationEdit[];
+  // the packages it adds, each at one version: yarn writes the manifest and the lock, no script run
+  readonly dependencies?: Readonly<Record<string, string>>;
   // a folder here whose files are written there at the same paths, or none
   readonly tree: string | null;
 }

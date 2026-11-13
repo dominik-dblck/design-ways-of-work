@@ -1,10 +1,11 @@
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { afterAll, describe, expect, it } from 'vitest';
+import { afterAll, describe, expect, it, vi } from 'vitest';
 import { isDue, migrated, migratedDue } from '../../scripts/migrated.ts';
 import { NOTEBOOK_REGISTRY } from './notebookRegistry.ts';
 import { scratchRepo } from './scratchRepo.ts';
+import { callsIn, stubbed, stubEnv } from './stubs.ts';
 
 const base = fs.mkdtempSync(path.join(os.tmpdir(), 'wow-migrated-'));
 const wow = path.join(base, 'wow');
@@ -266,5 +267,41 @@ describe('a file a home holds from a release on leaves the repository’s index,
     );
     expect(clone.git(['ls-files', typesAt])).toBe('');
     expect(fs.readFileSync(path.join(clone.root, typesAt), 'utf8')).toBe(types);
+  });
+});
+
+describe('a package the homes read is added as yarn adds it', () => {
+  const clone = scratchRepo({ base, name: 'added' });
+  const bin = path.join(base, 'added-bin');
+  const calls = path.join(base, 'added-calls.txt');
+  stubbed(bin, ['yarn']);
+  fs.writeFileSync(calls, '');
+  clone.committed(NOTEBOOK_REGISTRY.file, NOTEBOOK_REGISTRY.text);
+  clone.committed('package.json', '{ "name": "a" }\n');
+  clone.committed('yarn.lock', '');
+
+  it('each at its version, exact, no script of the repository run', () => {
+    vi.stubEnv('PATH', `${bin}${path.delimiter}${String(process.env.PATH)}`);
+    for (const [name, setting] of Object.entries(stubEnv({ calls })))
+      vi.stubEnv(name, setting);
+    expect(
+      migrated({
+        root: clone.root,
+        wow,
+        migration: {
+          release: '0.1.0',
+          removes: [],
+          moves: [],
+          dependencies: { 'lucide-react': '1.69.0' },
+          tree: null,
+        },
+      }),
+    ).toBe(
+      '0 removed, 0 moved, 0 following, 0 edited, 0 written, 0 homed, 1 added',
+    );
+    vi.unstubAllEnvs();
+    expect(callsIn(calls)).toEqual([
+      'yarn add --exact --ignore-scripts --silent lucide-react@1.69.0',
+    ]);
   });
 });

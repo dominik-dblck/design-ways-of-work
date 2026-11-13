@@ -84,6 +84,23 @@ function edited(root: string, edits: Migration['edits']): readonly string[] {
   return (edits ?? []).map(({ file }) => file);
 }
 
+// a package the release's homes read, added as yarn adds it: its manifest and its lock, no script of the repository run
+function addedTo(
+  root: string,
+  dependencies: Readonly<Record<string, string>> = {},
+): number {
+  const added = Object.entries(dependencies).map(
+    ([name, version]) => `${name}@${version}`,
+  );
+  if (added.length > 0)
+    execFileSync(
+      'yarn',
+      ['add', '--exact', '--ignore-scripts', '--silent', ...added],
+      { cwd: root, env: childEnv(), stdio: ['ignore', 'pipe', 'pipe'] },
+    );
+  return added.length;
+}
+
 // through git's index and never a commit: the repository's hooks and its history stay its own
 function migrated({ root, wow, migration }: Migrating): string {
   const git: Git = (args) =>
@@ -114,7 +131,10 @@ function migrated({ root, wow, migration }: Migrating): string {
   }
   if (changed.length + written.length > 0)
     git(['add', '--', ...changed, ...written]);
-  return `${String(removes.length)} removed, ${String(moves.length)} moved, ${String(rewritten.length)} following, ${String(migration.edits?.length ?? 0)} edited, ${String(written.length)} written, ${String(homed.length)} homed`;
+  const added = addedTo(root, migration.dependencies);
+  if (added > 0) git(['add', '--', 'package.json', 'yarn.lock']);
+  const summary = `${String(removes.length)} removed, ${String(moves.length)} moved, ${String(rewritten.length)} following, ${String(migration.edits?.length ?? 0)} edited, ${String(written.length)} written, ${String(homed.length)} homed`;
+  return added > 0 ? `${summary}, ${String(added)} added` : summary;
 }
 
 interface Due {
