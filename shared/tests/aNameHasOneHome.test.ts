@@ -1,6 +1,6 @@
 /**
  * - an exported name is declared in one file, a home's and the product's alike
- * - an entry's API and a family's one name are its repository's to name
+ * - an entry's API is its repository's to name; a family's files are one home
  * - a re-export, a declaration file and a file a tool writes declare nothing here
  */
 import fs from 'node:fs';
@@ -11,7 +11,8 @@ import { declaredNamesOf } from '../lint/exportedNames.ts';
 import { isGenerated } from '../lint/header.ts';
 import { scope } from '../../scope.ts';
 import type { RepoScope } from '../repoScope.ts';
-import { filesNamedBy, isNamedBy } from './globs.ts';
+import { nameHomeOf } from '../lint/rules/oneHomePerName.ts';
+import { filesNamedBy } from './globs.ts';
 
 interface Source {
   readonly path: string;
@@ -22,16 +23,7 @@ type Kept = Pick<RepoScope, 'entries' | 'families'>;
 
 const A_SOURCE = /(?<!\.d)\.tsx?$/;
 
-// the rule's own reading: a family's one name in a file of the family is the family's
-const isFamilyName = (
-  kept: Kept,
-  { file, name }: { readonly file: string; readonly name: string },
-): boolean =>
-  kept.families.some(
-    (family) => family.names.includes(name) && isNamedBy(file, [family.files]),
-  );
-
-// each exported name declared in more than one file, with its files
+// each exported name declared in more than one home, with its homes
 function namesWithTwoHomes(
   sources: readonly Source[],
   kept: Kept,
@@ -48,8 +40,12 @@ function namesWithTwoHomes(
       source.path.endsWith('.tsx') ? ts.ScriptKind.TSX : ts.ScriptKind.TS,
     );
     for (const { text: name } of declaredNamesOf(tree))
-      if (!isFamilyName(kept, { file: source.path, name }))
-        homes.set(name, (homes.get(name) ?? new Set()).add(source.path));
+      homes.set(
+        name,
+        (homes.get(name) ?? new Set()).add(
+          nameHomeOf(kept.families, { file: source.path, name }),
+        ),
+      );
   }
   return Object.fromEntries(
     [...homes]
@@ -105,23 +101,42 @@ describe('an exported name has one home', () => {
     });
   });
 
-  it("two entries' API and a family's one name are kept; the same name outside the family is found", () => {
-    const sources: readonly Source[] = [
+  it("two entries' API are kept, two families naming one name are one home, a third file is a second", () => {
+    const inFamilies: readonly Source[] = [
       { path: 'sheet/planted/a.ts', text: 'export const all = [];' },
       { path: 'sheet/planted/b.ts', text: 'export const all = [];' },
       { path: 'rules/planted/a.ts', text: 'export const rules = [];' },
       { path: 'rules/planted/b.ts', text: 'export const rules = [];' },
-      { path: 'tools/planted.ts', text: 'export const rules = [];' },
+      { path: 'dev/planted/a.ts', text: 'export const rules = [];' },
     ];
+    const outside: Source = {
+      path: 'tools/planted.ts',
+      text: 'export const rules = [];',
+    };
+    const kept: Kept = {
+      entries: ['sheet/planted/a.ts', 'sheet/planted/b.ts'],
+      families: [
+        { files: 'rules/planted/*.ts', names: ['rules'] },
+        { files: 'dev/planted/*.ts', names: ['rules'] },
+      ],
+    };
+    expect(namesWithTwoHomes(inFamilies, kept)).toStrictEqual({});
+    expect(namesWithTwoHomes([...inFamilies, outside], kept)).toStrictEqual({
+      rules: [
+        'family:rules/planted/*.ts · dev/planted/*.ts',
+        'tools/planted.ts',
+      ],
+    });
     expect(
-      namesWithTwoHomes(sources, {
-        entries: ['sheet/planted/a.ts', 'sheet/planted/b.ts'],
-        families: [{ files: 'rules/planted/*.ts', names: ['rules'] }],
-      }),
-    ).toStrictEqual({});
-    expect(namesWithTwoHomes(sources, NOTHING_KEPT)).toStrictEqual({
+      namesWithTwoHomes([...inFamilies, outside], NOTHING_KEPT),
+    ).toStrictEqual({
       all: ['sheet/planted/a.ts', 'sheet/planted/b.ts'],
-      rules: ['rules/planted/a.ts', 'rules/planted/b.ts', 'tools/planted.ts'],
+      rules: [
+        'dev/planted/a.ts',
+        'rules/planted/a.ts',
+        'rules/planted/b.ts',
+        'tools/planted.ts',
+      ],
     });
   });
 

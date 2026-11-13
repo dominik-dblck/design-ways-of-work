@@ -10,7 +10,10 @@ const OPTIONS = [
     files: [`${AT}/**/*.ts`],
     ignores: [],
     entries: [`${AT}/sheet/words.ts`],
-    families: [{ files: `${AT}/docs/rules/*.ts`, names: ['rules'] }],
+    families: [
+      { files: `${AT}/docs/rules/*.ts`, names: ['rules'] },
+      { files: `${AT}/docs/skills/*.ts`, names: ['skill'] },
+    ],
   },
 ] as const;
 const fixture = (file: string) => ({
@@ -41,6 +44,21 @@ typedTester.run('one-home-per-name', oneHomePerName, {
       name: 'a type and a value of one name, in two files',
       ...fixture('app/journeyTypes.ts'),
       errors: [twice('JourneyStep', 'tools/barrel.ts')],
+    },
+    {
+      name: "a family's one name declared again outside it: the family's file sees the other",
+      ...fixture('docs/skills/start.ts'),
+      errors: [twice('skill', 'tools/skillList.ts')],
+    },
+    {
+      name: "a family's one name declared again outside it: the other file sees the family",
+      ...fixture('tools/skillList.ts'),
+      errors: [
+        {
+          messageId: 'twice' as const,
+          data: { name: 'skill', other: `family:${AT}/docs/skills/*.ts` },
+        },
+      ],
     },
   ],
 });

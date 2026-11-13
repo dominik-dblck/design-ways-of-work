@@ -1,6 +1,7 @@
 /**
  * - `oneHomePerName` · an exported value, type or component is declared in one file
- * - an entry's API and a family's one name are its repository's to name
+ * - `nameHomeOf` · a name's home: its file, or the families that name it as one
+ * - an entry's API is its repository's to name
  */
 import { ESLintUtils } from '@typescript-eslint/utils';
 import type ts from 'typescript';
@@ -20,7 +21,7 @@ interface Scope {
   readonly families: readonly Family[];
 }
 
-type Homes = ReadonlyMap<string, readonly string[]>;
+type Homes = ReadonlyMap<string, ReadonlySet<string>>;
 
 const isCounted = (file: string, scope: Scope): boolean =>
   !file.startsWith('..') &&
@@ -29,18 +30,16 @@ const isCounted = (file: string, scope: Scope): boolean =>
   !matchesAny(file, scope.ignores) &&
   !scope.entries.includes(file);
 
-// the names a file declares that count: a family's one name is the family's
-const countedIn = (
-  { file, syntax }: { readonly file: string; readonly syntax: ts.SourceFile },
-  scope: Scope,
-): readonly ts.Identifier[] =>
-  declaredNamesOf(syntax).filter(
-    (name) =>
-      !scope.families.some(
-        (family) =>
-          family.names.includes(name.text) && matchesAny(file, [family.files]),
-      ),
-  );
+// a name's home: its file, or, in a family's file, every family naming it as one home
+const nameHomeOf = (
+  families: readonly Family[],
+  { file, name }: { readonly file: string; readonly name: string },
+): string => {
+  const naming = families.filter((family) => family.names.includes(name));
+  return naming.some((family) => matchesAny(file, [family.files]))
+    ? `family:${naming.map((family) => family.files).join(' · ')}`
+    : file;
+};
 
 const indexed = new WeakMap<ts.Program, Homes>();
 
@@ -53,14 +52,17 @@ function homesIn(
 ): Homes {
   const kept = indexed.get(program);
   if (kept !== undefined) return kept;
-  const homes = new Map<string, string[]>();
+  const homes = new Map<string, Set<string>>();
   for (const syntax of program.getSourceFiles()) {
     const file = pathOf(context, syntax.fileName);
     if (syntax.isDeclarationFile || !isCounted(file, scope)) continue;
-    for (const name of new Set(
-      countedIn({ file, syntax }, scope).map((one) => one.text),
-    ))
-      homes.set(name, [...(homes.get(name) ?? []), file]);
+    for (const { text: name } of declaredNamesOf(syntax))
+      homes.set(
+        name,
+        (homes.get(name) ?? new Set()).add(
+          nameHomeOf(scope.families, { file, name }),
+        ),
+      );
   }
   indexed.set(program, homes);
   return homes;
@@ -108,8 +110,11 @@ const oneHomePerName = createRule<[Scope], 'twice'>({
         const syntax = program.getSourceFile(context.filename);
         if (syntax === undefined || !isCounted(file, scope)) return;
         const homes = homesIn({ program, context }, scope);
-        for (const name of countedIn({ file, syntax }, scope)) {
-          const other = homes.get(name.text)?.find((one) => one !== file);
+        for (const name of declaredNamesOf(syntax)) {
+          const home = nameHomeOf(scope.families, { file, name: name.text });
+          const other = [...(homes.get(name.text) ?? [])].find(
+            (one) => one !== home,
+          );
           if (other !== undefined)
             context.report({
               loc: {
@@ -127,5 +132,5 @@ const oneHomePerName = createRule<[Scope], 'twice'>({
   },
 });
 
-export { oneHomePerName };
+export { nameHomeOf, oneHomePerName };
 export type { Family };
