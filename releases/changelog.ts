@@ -9,7 +9,18 @@ const NEXT: Unreleased = {
   what: 'a new design product is spawned from the sample at the version’s tag (`yarn spawn design`, this repository’s own script), and the new-project guide is rewritten around it; the commit tier and the chunk check read a branch with no commit yet, so a repository’s first commit passes through its hooks',
   action: 'none: move the pin to the tag',
   rules: { added: [], changed: [], removed: [] },
-  outputs: {},
+  outputs: {
+    'eagle-design': {
+      'output · yarn build':
+        'the build writes the new-project guide anew: it starts from the spawn',
+      'output · yarn cut-pack T-E19-00':
+        'the new-project guide the build wrote waits uncommitted in the trial: 3 files, not 2',
+      'dist · project/new-project.md':
+        'the new-project guide starts from `yarn spawn design`, then the product’s names and rules, its row in the gate and its first epic',
+      'written · docs/process/new-project.md':
+        'the new-project guide starts from `yarn spawn design`, then the product’s names and rules, its row in the gate and its first epic',
+    },
+  },
 };
 
 const RELEASES: readonly Release[] = [

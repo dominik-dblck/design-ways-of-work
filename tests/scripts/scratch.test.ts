@@ -5,7 +5,7 @@ import { afterAll, describe, expect, it } from 'vitest';
 import { scope } from '../../scope.ts';
 import { HERE } from '../../scripts/repos.ts';
 import { childEnv } from '../../scripts/scratch.ts';
-import { emptied } from '../../shared/emptied.ts';
+import { belowOf, emptied } from '../../shared/emptied.ts';
 
 const base = fs.mkdtempSync(path.join(os.tmpdir(), 'wow-scratch-'));
 const scratch = path.join(base, 'scratch');
@@ -58,6 +58,29 @@ describe('a folder is emptied below the scratch alone', () => {
       emptied({ within: scratch, folder: path.join(link, 'x') }),
     ).toThrow('nothing removed');
     expect(fs.existsSync(path.join(kept, 'file.txt'))).toBe(true);
+    fs.unlinkSync(link);
+  });
+});
+
+describe('where a folder stands within another', () => {
+  it.each([
+    ['the folder itself', scratch, ''],
+    ['a folder below it', path.join(scratch, 'one'), 'one'],
+    ['a name with two dots first', path.join(scratch, '..new'), '..new'],
+    ['a folder beside it', outside, null],
+    ['a path that climbs out of it', path.join(scratch, '..', 'kept'), null],
+  ])('%s', (_, folder, below) => {
+    holding(scratch);
+    expect(belowOf({ within: scratch, folder })).toBe(below);
+  });
+
+  it('a link outside that leads into it stands where it leads', () => {
+    holding(path.join(scratch, 'deep'));
+    const link = path.join(base, 'into');
+    fs.symlinkSync(path.join(scratch, 'deep'), link);
+    expect(belowOf({ within: scratch, folder: path.join(link, 'new') })).toBe(
+      path.join('deep', 'new'),
+    );
     fs.unlinkSync(link);
   });
 });

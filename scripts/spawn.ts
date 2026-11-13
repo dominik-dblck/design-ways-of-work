@@ -6,6 +6,7 @@
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
+import { belowOf } from '../shared/emptied.ts';
 import { stepIn } from './ran.ts';
 import { HERE } from './repos.ts';
 import { namesRefused, packageSource, spawnedTexts } from './spawnTexts.ts';
@@ -28,6 +29,7 @@ const git = (args: readonly string[]): string =>
 
 const args = process.argv.slice(2);
 const companyAt = args.indexOf('--company');
+const company = companyAt === -1 ? undefined : args[companyAt + 1];
 const [kind, place, product] = args.filter(
   (_, at) => companyAt === -1 || (at !== companyAt && at !== companyAt + 1),
 );
@@ -40,7 +42,7 @@ refused(
       ],
 );
 refused(
-  place === undefined || product === undefined || companyAt === -1
+  place === undefined || product === undefined || company === undefined
     ? ['yarn spawn design <path> <Product> --company <Company>']
     : [],
 );
@@ -49,9 +51,9 @@ const ROOT = path.resolve(process.env.INIT_CWD ?? process.cwd(), String(place));
 const names = {
   repository: path.basename(ROOT),
   product: String(product),
-  company: String(args[companyAt + 1]),
+  company: String(company),
 };
-const isInside = !path.relative(HERE, ROOT).startsWith('..');
+const isInside = belowOf({ within: HERE, folder: ROOT }) !== null;
 const isTaken = fs.existsSync(ROOT) && fs.readdirSync(ROOT).length > 0;
 const version = String(
   Object(JSON.parse(fs.readFileSync(path.join(HERE, 'package.json'), 'utf8')))
