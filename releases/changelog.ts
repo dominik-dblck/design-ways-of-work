@@ -5,8 +5,8 @@
 import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
 const NEXT: Unreleased = {
-  kind: 'patch',
-  what: '',
+  kind: 'minor',
+  what: 'a new design product is spawned from the sample at the version’s tag (`yarn spawn design`, this repository’s own script), and the new-project guide is rewritten around it; the commit tier and the chunk check read a branch with no commit yet, so a repository’s first commit passes through its hooks',
   action: 'none: move the pin to the tag',
   rules: { added: [], changed: [], removed: [] },
   outputs: {},

@@ -24,6 +24,10 @@ A repository takes it at a tag; nothing of it enters that repository's history.
    recorded by digest, and hidden from its git. A file it edited is never overwritten: the take stops.
 4. To move to a later tag it moves the pin and installs. The release's row says what it must do beside.
 
+A new design product is written by `yarn spawn design <path> <Product> --company <Company>` (`scripts/spawn.ts`):
+the sample at the version's tag, its names filled in, pinned to that tag, installed, its first commit through its
+hooks, then its feature tier. Its row in `ports/consumers.ts` follows, so the gate tries it.
+
 ## What holds a change here
 
 - `yarn hooks` · once a clone: git then runs the checks at each commit and each push; no install sets them

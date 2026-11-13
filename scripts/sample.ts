@@ -2,30 +2,19 @@
  * - `node scripts/sample.ts [--emit] [script…]` · the sample on the homes in hand
  * - from nothing; its generated files current (`--emit` writes them); its scripts
  */
-import { execFileSync, spawnSync } from 'node:child_process';
+import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { HERE } from './repos.ts';
 import { emptied } from '../shared/emptied.ts';
+import { stepIn } from './ran.ts';
 import { childEnv, SCRATCH } from './scratch.ts';
 
 const SAMPLE = path.join(HERE, 'examples', 'sample-product');
 const ROOT = path.join(SCRATCH, 'sample');
 // git's names for the sample's one commit: no person's
 const AUTHOR = ['-c', 'user.name=sample', '-c', 'user.email=sample@invalid'];
-
-// a step that fails stops the run: what follows reads what it left
-function ran(command: string, args: readonly string[]): void {
-  const done = spawnSync(command, args, {
-    cwd: ROOT,
-    env: childEnv(),
-    stdio: 'inherit',
-  });
-  if (done.status !== 0) {
-    console.log(`sample · ${[command, ...args].join(' ')} · failed`);
-    process.exit(done.status ?? 1);
-  }
-}
+const ran = stepIn({ root: ROOT, label: 'sample' });
 
 // what the generators changed or added: the taken files are git's excluded ones
 const changedFiles = (): readonly string[] =>

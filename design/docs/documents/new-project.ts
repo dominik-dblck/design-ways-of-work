@@ -1,5 +1,5 @@
 /**
- * - `newProject` · new-project.md as data: copy this project, fill, cut, check (W82)
+ * - `newProject` · new-project.md as data: spawn, fill, name it, the first epic
  */
 import type { DocumentFile } from './documentTypes.ts';
 
@@ -7,22 +7,25 @@ const newProject: DocumentFile = {
   path: 'docs/process/new-project.md',
   sections: [
     {
-      heading: '# A new project from this one',
+      heading: '# A new design project',
       lines: [
         '',
-        'The way of working travels as a copy of this repository (W56, W82): the rules, the checklist, the',
-        'skills, the checks, the pages and the tools stay as they are; the product’s names are filled in',
-        'again, and what is the product’s own is cut by hand. No tool writes the copy.',
+        'A design project starts as the way of working’s sample, written by one command: the homes are taken',
+        'at a tag and never edited; the project’s own files hold its names and its rows alone.',
         '',
       ],
     },
     {
-      heading: '## 1 · Copy',
+      heading: '## 1 · Spawn',
       lines: [
         '',
-        '- Copy the tree without `.git/`, `dist/` and `node_modules/`, then `git init` and `yarn install`.',
-        '- The design system is never copied: `design-system/` comes from the way of working, and the',
-        '  product keeps only the tokens it alone holds, in `app/styles/productTokens.ts` (PM, 8 Nov).',
+        '- In `design-ways-of-work`: `yarn spawn design <path> <Product> --company <Company>`.',
+        '- It writes the sample at the tag of the version in hand, the product’s names filled in',
+        '  (`sheet/project.ts`, `CLAUDE.md`, `package.json` · `name`), and pins `design-ways-of-work` to that tag.',
+        '- Then `git init`, the install (its `postinstall` takes the homes, its `prepare` wires the git hooks),',
+        '  the generated files, a first commit through the hooks, and the feature tier, all green.',
+        '- `wow.takes` names `design`, `shared` and `design-system`: `dev/`, the build side’s tree, waits for',
+        '  the build side’s port. The pipeline names the review agents that side holds (`architecture-review`, `types-eval`).',
         '',
       ],
     },
@@ -30,51 +33,40 @@ const newProject: DocumentFile = {
       heading: '## 2 · Fill: the product’s names and rules',
       lines: [
         '',
-        '- `sheet/project.ts` · the product, the company, the build side, both sessions, the build',
-        '  repository, its branch and top paths, the tools its people know, the design system’s stylesheet.',
-        '- `sheet/rules.ts` · the product’s own rules, emptied, then written as the product is',
-        '  decided: domain, product, experience, architecture, quality (W58, W60).',
-        '- `CLAUDE.md` · the design side’s role, named for the product; `package.json` · its `name`.',
-        '- `package.json` · `wow.takes` names `design`, `shared` and `design-system`: `dev/`, the build side’s tree,',
-        '  waits for the product’s build side. The pipeline names the review agents that side holds (`architecture-review`, `types-eval`).',
-        '- `docs/rules/README.md` · where the code rules were adapted from.',
+        '- `sheet/project.ts` · the build side, both sessions, the build repository, its branch and top paths,',
+        '  the tools its people know: the spawn writes them from the product’s name, the PM sets them.',
+        '- `sheet/rules.ts` · the product’s own rules, written as the product is decided: domain, product,',
+        '  experience, architecture, quality.',
+        '- `scope.ts` · `backup` names the remote once the repository has one; `browser`, a page of its own',
+        '  once it runs one.',
+        '- `app/styles/productTokens.ts` · the tokens the product alone holds: the design system is taken, never copied.',
         '',
       ],
     },
     {
-      heading: '## 3 · Cut: what is the product’s own',
+      heading: '## 3 · Name it to the way of working',
       lines: [
         '',
-        '- `roadmaps/E*/` · every epic’s folder. The registries keep their shape with no items:',
-        '  `roadmaps/tickets/ticketList.ts`, `roadmaps/edges.ts`, `roadmaps/receipts.ts`, `roadmaps/notes.ts`.',
-        '- `roadmaps/backlog/`, `roadmaps/ideas/`, `roadmaps/findings/`, `roadmaps/tracks.ts` · their rows.',
-        '- `sheet/` · each entry’s rows: the contract, the cases, the words, the model, the screens;',
-        '  its logic and its samples whole, being the product’s behaviour.',
-        '- `docs/process/decisions/` · its rows: decisions are the project’s data, not the way of working.',
-        '- `docs/process/projectPlan/` and `docs/process/plans/planPages.ts` · their rows.',
-        '- `app/styles/componentsSpec.ts` · its rows, and the looks the product alone holds.',
-        '- `legacy/`, `records/`, `notes/`, `fixtures/`, `poc/`, `guards/__snapshots__/`, `public/assets/` · whole.',
+        '- Its row in `ports/consumers.ts` of `design-ways-of-work`: the gate then tries every later release on it.',
+        '- A later tag is taken by moving the pin and installing; the release’s row says what it asks beside.',
         '',
       ],
     },
     {
-      heading: '## 4 · Check',
+      heading: '## 4 · The first epic',
       lines: [
         '',
-        '- `npx tsc --noEmit` names each file that read what was cut: a check or a test of the product’s',
-        '  own logic goes with it; a file of the way of working is changed to read nothing of the product.',
-        '- Then `yarn build`, `npx eslint .`, `npx vitest run` and `yarn checks:gate`, all green.',
-        '- The first epic: its row in `roadmaps/backlog/`, then `yarn new-epic E01`.',
+        '- Refined with the PM (`/design-refine`), then its row in `roadmaps/backlog/` and `yarn new-epic E01`.',
         '',
       ],
     },
     {
-      heading: '## What stays as it is',
+      heading: '## What it never holds',
       lines: [
         '',
-        '- `tools/`, `guards/` (the checks), `tests/architecture/`, the configs at the root.',
-        '- `docs/rules/`, `docs/skills/`, `docs/process/plans/` (the rules and the checklist), `docs/documents/`.',
-        '- `app/pages/`, `app/theme/`, `app/workspace/`, `roadmaps/templates.ts`.',
+        '- A home’s file edited: the take writes the homes at each install, hidden from git, and stops on one',
+        '  it finds edited.',
+        '- A copy of another product: its rows, its decisions and its epics stay in that product.',
         '',
       ],
     },

@@ -64,9 +64,12 @@ describe('the way of working names no product', () => {
     const { company: _company, stack: _stack, ...own } = named;
     const ownNames: readonly string[] = Object.values(own).flat();
     // the build side's tree comes copied as its repository wrote it: a new product takes none, until that side's own port
+    // this file plants names on purpose: a product of one of them is still read everywhere else
+    const itself = path.relative(ROOT, import.meta.filename);
     const taken = [...takenFiles(ROOT).keys()].filter(
       (file) =>
         !file.startsWith('dev/') &&
+        file !== itself &&
         TEXTS.some((ending) => file.endsWith(ending)),
     );
     expect(taken.length).toBeGreaterThan(0);

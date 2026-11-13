@@ -10,6 +10,7 @@ import type { Unreleased } from '../../scripts/changelogTypes.ts';
 import type { Migration } from '../../scripts/migrationTypes.ts';
 import { HERE } from '../../scripts/repos.ts';
 import { childEnv } from '../../scripts/scratch.ts';
+import { TAKE_SCRIPTS } from '../../scripts/spawnTexts.ts';
 import { scratchRepo } from '../scripts/scratchRepo.ts';
 import type { ScratchRepo } from '../scripts/scratchRepo.ts';
 import { NOTEBOOK_REGISTRY } from '../scripts/notebookRegistry.ts';
@@ -17,9 +18,6 @@ import { callsIn, stubbed, stubEnv } from '../scripts/stubs.ts';
 import { sharedReadBy } from './sharedReadBy.ts';
 
 const VERSION = '0.1.10';
-// a product's own take, as one that takes the way of working writes it
-const TAKE =
-  'T=$(mktemp -d) && cp -R node_modules/design-ways-of-work/shared/take "$T" && node "$T/take/takeWow.ts"';
 
 // the one repository a test's way of working names, and what the release in hand asks of it
 const portsOf = (
@@ -176,7 +174,7 @@ function producing(base: string, remote: string): ScratchRepo {
       license: 'UNLICENSED',
       type: 'module',
       wow: { takes: ['design', 'shared'] },
-      scripts: { wow: TAKE, postinstall: 'yarn -s wow', says: 'cat says.txt' },
+      scripts: { ...TAKE_SCRIPTS, says: 'cat says.txt' },
       dependencies: {
         'design-ways-of-work': `git+file://${remote}#v${VERSION}`,
       },

@@ -173,9 +173,9 @@ const scope: RepoScope = {
       // notes about the products, in their words, and the PM's own, quoted in Polish
       '!plan/**',
     ],
-    // the way of working's own words are WOW_WORDS, in every repository; here, the name of a mode
+    // the way of working's own words are WOW_WORDS, in every repository; here, a mode's name and a shell's tool
     computed: [],
-    reviewed: ['cowork'],
+    reviewed: ['cowork', 'mktemp'],
     onPurpose: [],
     // a product's decisions as taken, the PM's own words quoted in Polish
     alsoIn: [

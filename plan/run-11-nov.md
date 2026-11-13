@@ -1197,3 +1197,24 @@ Each call: what, why, how to undo. None changes what the PM sees.
 - eagle-design rehearsed stage 3 in a scratch clone (its `views/feature` merged into `port/wow`): one conflict,
   the frozen notebooks' test (kept deleted; E11's digest joins its product registry), and three words its
   spelling never read. Its recipe waits for the port's merge, which waits on the PM's fast-forward of `main`.
+- The PM, 13 Nov, by eagle-design: eagle-dev was never asked for task 23. My state wrote "eagle-dev asks the
+  PM's yes in its own session", and no one carried the ask; the run stood on it. Read only: eagle's tree holds
+  W26 step 3 uncommitted on `feature/W26-shared-theme` (12 files, `app/styles/preference.ts` new, `sent` and
+  `batch` out of the shared chips), one suppression in it. Task 23 needs one sha on that branch, nothing merged:
+  the sync reads it by `git archive`. eagle-design sends eagle-dev the ask in its words. Why: an ask with no
+  carrier is no ask. Undo: none; the state's item says who carries it.
+- Stage 4 tasks 1 and 2 (the spawn and its guide) go on while task 23 waits: neither reads the theme, and the
+  spawn of argus-design itself (task 3) stays the PM's word. Why: the run stood still 7 h on a form once; the
+  tool is ready the day v1.0.0 is. Undo: leave the tool unused, its script and guide reverted.
+- Stage 4, task 1: `yarn spawn design <path> <Product> --company <Company>` (`scripts/spawn.ts`). It writes the
+  sample as the version's tag holds it (`git ls-tree` and `cat-file`, since the archive's attributes cut
+  `examples/`), fills the names (`sheet/project.ts`, `CLAUDE.md`'s head, `scope.ts`'s two reasons,
+  `package.json` · `name`), pins `design-ways-of-work` to the tag at the origin's address, then `git init`, the
+  install (take and git hooks), the generated files, the first commit through the hooks, the feature tier. Calls:
+  the company is a flag, never guessed from the product; the product's row in `ports/` is printed, not written,
+  since it is task 3's and the PM's; the first epic is the PM's refine, not the spawn's. A text the sample no
+  longer holds stops the spawn, and its test reads the sample as it stands. Undo: revert the commit.
+- A probe spawn (`kestrel-design`, the scratchpad) found two of the homes' faults no check here read: the commit
+  tier asked git for the branch before any commit existed (f6c2ea4), and the names test read its own planted
+  names, so a product named as one of them was red. Both mended; the spawn is proved again from the next tag,
+  nothing patched. Undo: revert each.
