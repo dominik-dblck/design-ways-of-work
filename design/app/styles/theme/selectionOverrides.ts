@@ -51,12 +51,13 @@ export const SELECTION_OVERRIDES: ThemeOptions['components'] = {
         padding: 0,
         overflow: 'visible',
         '&:hover .MuiSwitch-track': { backgroundColor: colour('fgTertiary') },
+        // a checked track holds 3:1 against its ground and its white thumb: g-500, 3.06 – 3.19
         '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-          backgroundColor: colour('bgSuccess'),
+          backgroundColor: colour('g500'),
           opacity: SWITCH.opaque,
         },
         '&:hover .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-          backgroundColor: colour('g500'),
+          backgroundColor: colour('g600'),
         },
       },
       switchBase: {

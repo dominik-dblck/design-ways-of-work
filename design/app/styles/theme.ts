@@ -3,7 +3,7 @@
 /**
  * - `themeWith`, `AppLayer` · the one theme, an app's layer added to it
  * - both schemes under `data-theme`, every value read off `tokens.ts`
- * - `tokenSheetOf` · every token as its CSS variable, per mode, for a page
+ * - `tokenSheetOf`, `muiDarkOf` · every token as its CSS variable, per mode
  */
 import {
   createTheme,
@@ -75,4 +75,4 @@ declare module '@mui/material/styles' {
   }
 }
 
-export { tokenSheetOf } from './theme/cssVariables.ts';
+export { muiDarkOf, tokenSheetOf } from './theme/tokenSheet.ts';

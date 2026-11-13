@@ -23,7 +23,12 @@ const intentsOf = (read: Read) => ({
     dark: read('r500'),
     contrastText: read('dbkWhite'),
   },
-  warning: { main: read('y300'), contrastText: read('dbkBlack') },
+  // dark is the warning's line on a ground, 3.69 – 3.84 light · its fill reads 1.65
+  warning: {
+    main: read('y300'),
+    dark: read('y500'),
+    contrastText: read('dbkBlack'),
+  },
   success: { main: read('g400'), contrastText: read('dbkBlack') },
   info: {
     main: read('b300'),

@@ -10,7 +10,7 @@ export const INPUT_STATE_SX: Readonly<
   // yellow while typed in too · the focused edge would otherwise hide it until the field is left
   warn: {
     '& .MuiOutlinedInput-notchedOutline, &:hover .MuiOutlinedInput-notchedOutline, &.Mui-focused .MuiOutlinedInput-notchedOutline':
-      { borderColor: 'warning.main' },
+      { borderColor: 'warning.dark' },
   },
   readonly: {
     bgcolor: 'background.container',

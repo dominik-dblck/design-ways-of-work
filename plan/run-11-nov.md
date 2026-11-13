@@ -1423,3 +1423,10 @@ Each call: what, why, how to undo. None changes what the PM sees.
   with no app layer (eagle-dev's caution), mounted by the three pages. The slider's thumb (42 px through its
   `::after`) and the hidden file input were the harness's misreads, not failures. Undo: revert the commit; the
   tokens and overrides return to their v1.1.0 values.
+- Eagle-dev's review of b542843: a dark OS with no mode chosen got the dark tokens and MUI's light palette, since
+  MUI writes its dark block under `data-theme` alone. Call: `TokenVariables` reads the theme it renders under and
+  `muiDarkOf` puts MUI's dark block in the system-dark scope beside the tokens, the sheet in its own part
+  (`theme/tokenSheet.ts`), its constant retired to `legacy/`. The after-run left two light edges under 3:1, a
+  warned field (y-300, 1.65) and a checked switch (g-400, 1.87): `warning.dark` is y-500 for the line, g-500 the
+  checked track. The bare `#7a5c00` number ink stays, as `--ink-removed` and `--ink-proposed` are bare: the ramp
+  stops at y-500. Undo: revert the commit.
