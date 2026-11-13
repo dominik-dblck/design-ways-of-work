@@ -5,19 +5,30 @@
 import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
 const NEXT: Unreleased = {
-  kind: 'minor',
-  what: 'one home per name held in the homes and the products (W105): `aNameHasOneHome` is a shared test every product runs on its production files, an entry’s API kept and a family’s files one home of its name, and `wow/one-home-per-name` reads a family alike, so a family’s name declared outside it is found; the shared tests’ `leavesOf` and `sectionOf` are `registryLeavesOf` and `statusSectionOf`; the one-home rule row names the test as its second gate; `yarn sample` builds before its checks and holds a home’s emitted file current',
+  kind: 'patch',
+  what: '',
   action: 'none: move the pin to the tag',
   rules: { added: [], changed: [], removed: [] },
-  outputs: {
-    'eagle-design': {
-      'output · yarn test':
-        'one test file more, its three tests: an exported name has one home',
-    },
-  },
+  outputs: {},
 };
 
 const RELEASES: readonly Release[] = [
+  {
+    version: '0.23.0',
+    date: '2026-11-13',
+    kind: 'minor',
+    what: 'one home per name held in the homes and the products (W105): `aNameHasOneHome` is a shared test every product runs on its production files, an entry’s API kept and a family’s files one home of its name, and `wow/one-home-per-name` reads a family alike, so a family’s name declared outside it is found; the shared tests’ `leavesOf` and `sectionOf` are `registryLeavesOf` and `statusSectionOf`; the one-home rule row names the test as its second gate; `yarn sample` builds before its checks and holds a home’s emitted file current',
+    action: 'none: move the pin to the tag',
+    rules: { added: [], changed: [], removed: [] },
+    outputs: {
+      'eagle-design': {
+        'output · yarn test':
+          'one test file more, its three tests: an exported name has one home',
+      },
+    },
+    moved: {},
+    tried: { 'eagle-design': 'c881e8d' },
+  },
   {
     version: '0.22.0',
     date: '2026-11-13',
