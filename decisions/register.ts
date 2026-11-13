@@ -300,6 +300,14 @@ const SINCE: readonly Decision[] = [
     says: 'each product, design and build, draws its views and artifacts from the design system’s components. A piece the system lacks is built in the product under its own name, whenever it is needed, without asking first; during the work a product may only ask this repository "do you have something like it?". The proposal to share it comes once, at its pull request, to this repository and the product’s other side; a piece they find useful moves here by W110: the architecture review, the gate, a tag.',
     from: 'plan/run-11-nov.md',
   },
+  {
+    id: 'W113',
+    title:
+      'a build repository takes the way of working by a script, its files committed',
+    held: '13 Nov · the PM’s word, here, on eagle-dev’s two points',
+    says: 'a build repository pins no dependency on this repository and runs no postinstall from it: a person runs the take script at a tag, its files written and committed, each recorded by digest, and a check refuses a taken file edited. Its supply-chain check flags nothing, its CI needs no access to this repository, and its code owners review every change a tag brings.',
+    from: 'plan/run-11-nov.md',
+  },
 ];
 
 // a product's rows keep their words of the day and their order, each naming the row it was

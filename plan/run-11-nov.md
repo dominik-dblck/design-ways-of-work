@@ -1430,3 +1430,8 @@ Each call: what, why, how to undo. None changes what the PM sees.
   warned field (y-300, 1.65) and a checked switch (g-400, 1.87): `warning.dark` is y-500 for the line, g-500 the
   checked track. The bare `#7a5c00` number ink stays, as `--ink-removed` and `--ink-proposed` are bare: the ramp
   stops at y-500. Undo: revert the commit.
+- Eagle-dev on the stage 5 plan: its repository's supply-chain check and security owners refuse a git dependency
+  whose postinstall writes source, its CI could not reach a private repository, and a hidden take hides a UI
+  change from its code owners. The PM picked A of three (W113): a build repository takes by a script a person
+  runs, its files committed and recorded by digest. Call: the script comes first, in `shared/take/`, as stage 5's
+  slice 0. Undo: the row out of the register.

@@ -40,10 +40,6 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
 
 ## Open for the PM
 
-Two points from eagle-dev for stage 5: its repository's "Supply Chain Policy" and security CODEOWNERS refuse a git
-dependency whose postinstall writes source, and CI would need access to a private repository; and a take hidden
-from git hides a UI change from its CODEOWNERS. Both wait for the PM's word.
-
 One point: W112's timing, as eagle-dev relayed the PM's word (a product builds a missing piece without asking
 first, asks only "do you have something like it?" during the work, and proposes it once, at its pull request),
 waits for the PM's yes here. v1.1.0 waits on eagle-dev's sha: seven headers of its molecules name the product.
