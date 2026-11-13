@@ -10,7 +10,7 @@ function ContractPageHead(): ReactElement {
   return (
     <Stack spacing={1} sx={{ maxWidth: 900 }}>
       <Typography variant="overline" color="textSecondary">
-        {words.eyebrow}
+        {words.label}
       </Typography>
       <Typography variant="h3" component="h1">
         {words.title}

@@ -20,8 +20,6 @@ const HELD: readonly string[] = [
   'app/components/atoms/ChoiceCardGroup/types/choiceCardGroupTypes.ts',
   'app/components/atoms/Divider/Divider.tsx',
   'app/components/atoms/Divider/index.ts',
-  'app/components/atoms/Eyebrow/Eyebrow.tsx',
-  'app/components/atoms/Eyebrow/index.ts',
   'app/components/atoms/FileInput/FileInput.tsx',
   'app/components/atoms/FileInput/index.ts',
   'app/components/atoms/Glyph/constants/glyphSetConstants.ts',

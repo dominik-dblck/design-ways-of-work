@@ -18,16 +18,16 @@ export type HintCardRow = {
 };
 
 export type HintCardSection = {
-  readonly eyebrow: string;
+  readonly label: string;
   readonly rows: readonly HintCardRow[];
 };
 
 /** The count is how far the list has come; head stands over it, the rest under it. */
 export type HintCardProps = {
-  readonly eyebrow: string;
+  readonly label: string;
   readonly count?: string;
   readonly rows: readonly HintCardRow[];
-  readonly head?: { readonly eyebrow: string; readonly row: HintCardRow };
+  readonly head?: { readonly label: string; readonly row: HintCardRow };
   readonly tail?: HintCardSection;
   readonly sections?: readonly HintCardSection[];
   readonly width: 296 | 340;

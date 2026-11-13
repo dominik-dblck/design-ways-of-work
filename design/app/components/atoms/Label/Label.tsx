@@ -1,6 +1,6 @@
 /**
- * - `Label` · a field's name over its control, as written, on a tone
- * - a required label ends in a red asterisk
+ * - `Label` · a short name over a thing (a field, a section, a card), on a tone
+ * - one look, the type scale's overline; a required one ends in a red asterisk
  */
 import Box from '@mui/material/Box';
 import type { SxProps, Theme } from '@mui/material/styles';
@@ -30,7 +30,7 @@ export function Label({
       id={id}
       sx={sx}
       data-testid={testId}
-      variant="subtitle2"
+      variant="overline"
       component="span"
       color={toneInk[tone]}
     >

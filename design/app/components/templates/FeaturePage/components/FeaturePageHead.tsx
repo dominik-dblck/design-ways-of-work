@@ -26,7 +26,7 @@ function FeaturePageHead({ view, onEpic }: FeaturePageHeadProps): ReactElement {
         sx={{ alignSelf: 'flex-start' }}
       >{`← ${words.board}`}</Button>
       <Typography variant="overline" color="textSecondary">
-        {words.eyebrow}
+        {words.label}
       </Typography>
       <FeaturePageEpicTabs epic={view.epic} onEpic={onEpic} />
       <Typography variant="h3" component="h1">

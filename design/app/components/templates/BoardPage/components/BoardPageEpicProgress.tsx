@@ -8,11 +8,12 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
 import type { Progress } from '../../../../workspace/boardView.ts';
-import { SectionHead } from '../../../atoms/SectionHead/index.ts';
+import { Heading } from '../../../atoms/Heading/index.ts';
 import { BoardPageBarLegend } from './BoardPageBarLegend.tsx';
 import { BoardPageEpicProgressRow } from './BoardPageEpicProgressRow.tsx';
 import { BoardPageStackedBar } from './BoardPageStackedBar.tsx';
 import { radiusOf } from '../../../../styles/scales.ts';
+import { MVP_LINE } from '../constants/boardPageEpicProgressConstants.ts';
 
 interface BoardPageEpicProgressProps {
   readonly progress: Progress;
@@ -24,14 +25,12 @@ function BoardPageEpicProgress({
   const { mvp } = progress;
   return (
     <Stack spacing={1.5}>
-      <SectionHead label={progress.label} note={progress.note} />
+      <Heading level={2} quiet note={progress.note}>
+        {progress.label}
+      </Heading>
       <Paper variant="outlined" sx={{ borderRadius: radiusOf('uiRContainer') }}>
         <Stack spacing={1.25} sx={{ p: 2 }}>
-          <Stack
-            direction="row"
-            spacing={2}
-            sx={{ justifyContent: 'space-between', alignItems: 'baseline' }}
-          >
+          <Stack direction="row" spacing={2} sx={MVP_LINE}>
             <Typography variant="subtitle1">{mvp.label}</Typography>
             <Typography variant="subtitle1">
               {`${mvp.percent} `}

@@ -322,6 +322,13 @@ const SINCE: readonly Decision[] = [
     says: 'a release carries a milestone, or what a product waits on, at most one or two a day, one gate for the batch. Once the gate is green and the reviews are clean it is this session’s call past 1.0.0 too (W30), and the PM reads a summary after. A change to what the work-mode hook does still waits for the PM (W29).',
     from: 'plan/run-11-nov.md',
   },
+  {
+    id: 'W116',
+    title: 'no capitals, and one component per job among the atoms',
+    held: '13 Nov · the PM’s word, here, its pick A',
+    says: 'the theme’s overline is a quiet label: the body face, the words as written, no letter spacing. Three names, each one thing: Heading titles a page or a section, Text holds words, Label is a short name over a thing (a field, a section, a card), its look defined once. Eyebrow and SectionHead retire, Text’s `overline` goes, HintCard’s `eyebrow` becomes `label`. One Slider takes a number or a list, and SplitSlider retires; BadgeDot and FailingMark draw Badge’s dot. All four go out in v1.4.0 with the skeleton; a product’s sheet rows that name them are its own to move.',
+    from: 'plan/run-11-nov.md',
+  },
 ];
 
 // a product's rows keep their words of the day and their order, each naming the row it was

@@ -37,7 +37,7 @@ export function ChoiceCardFace({
         </Text>
         {caption === undefined ? null : <Text tone="micro">{caption}</Text>}
         {note === undefined ? null : (
-          <Text variant="overline" tone="micro">
+          <Text tone="micro" strong>
             {note}
           </Text>
         )}

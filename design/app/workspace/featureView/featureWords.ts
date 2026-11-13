@@ -2,7 +2,7 @@
  * - `FEATURE_WORDS` · every word the Feature page says that is not the sheet's own
  */
 const FEATURE_WORDS = {
-  eyebrow: 'Feature · one epic, read whole',
+  label: 'Feature · one epic, read whole',
   board: 'Back to the board',
   journeys: {
     label: 'Journeys',

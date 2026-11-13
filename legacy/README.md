@@ -82,3 +82,11 @@ Retired when the build side's theme came here by script (W25, W26): the design p
 - `design/app/components/atoms/TokenVariables/constants/tokenVariablesConstants.ts` · the token sheet as a
   constant, built once without the theme: a dark OS with no mode chosen got the dark tokens and MUI's light
   palette (eagle-dev's review); the atom now builds the sheet from the theme it renders under
+
+## The labels in capitals
+
+Retired when the PM picked three names, each one thing (W116): Heading, Text and Label; nothing shouts.
+
+- `design/app/components/atoms/Eyebrow/` · the code face's label in capitals over a thing: `Label` draws it
+- `design/app/components/atoms/SectionHead/` · a section's label in capitals and its note: a `Heading`,
+  `quiet`, with its `note`

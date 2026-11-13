@@ -3,7 +3,7 @@
  */
 
 const CONTRACT_WORDS = {
-  eyebrow: 'PLAN · API CONTRACT',
+  label: 'Plan · API contract',
   title: 'Every endpoint, as TypeScript',
   intro:
     'Read live from the contract’s rows: commands.ts, queries.ts, ports.ts, refusals.ts and blockModel.ts. What every endpoint shares is typed once, in the first block; each endpoint then names its body and its whole answer.',
@@ -20,9 +20,9 @@ const CONTRACT_WORDS = {
     todo: 'no type yet',
   },
   states: { all: 'All', typed: 'Typed', draft: 'Draft', todo: 'To type' },
-  allEpics: 'ALL',
+  allEpics: 'All',
   shared: {
-    label: 'SHARED',
+    label: 'Shared',
     note: 'What every endpoint uses',
     aliases: '// the model’s aliases · blockModel.ts',
     refusals: '// every refusal key · refusals.ts',
@@ -30,10 +30,10 @@ const CONTRACT_WORDS = {
     hideNotes: 'Hide the notes',
   },
   endpoints: {
-    label: 'ENDPOINTS',
+    label: 'Endpoints',
     note: 'each with its body and its whole answer, in the backlog’s order',
   },
-  kinds: { command: 'COMMAND', query: 'QUERY', port: 'PORT' },
+  kinds: { command: 'Command', query: 'Query', port: 'Port' },
   nothing: 'No endpoint matches these filters.',
   folds: { showAll: 'Show all', hideAll: 'Hide all' },
 } as const;

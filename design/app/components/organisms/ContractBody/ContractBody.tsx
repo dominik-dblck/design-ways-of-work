@@ -9,7 +9,7 @@ import {
   contractPage,
   contractWords as words,
 } from '../../../workspace/contractView.ts';
-import { SectionHead } from '../../atoms/SectionHead/index.ts';
+import { Heading } from '../../atoms/Heading/index.ts';
 import { EndpointFolds } from '../EndpointFolds/index.ts';
 import { ContractBodyFilters } from './components/ContractBodyFilters.tsx';
 import { ContractBodyLegend } from './components/ContractBodyLegend.tsx';
@@ -28,10 +28,13 @@ function ContractBody(): ReactElement {
       <ContractBodyFilters page={page} picked={picked} onPick={setPicked} />
       <ContractBodySharedTypes shared={page.shared} />
       <Stack spacing={3}>
-        <SectionHead
-          label={words.endpoints.label}
+        <Heading
+          level={2}
+          quiet
           note={`${shown.length} · ${words.endpoints.note}`}
-        />
+        >
+          {words.endpoints.label}
+        </Heading>
         {shown.length === 0 ? (
           <Typography color="textSecondary">{words.nothing}</Typography>
         ) : null}

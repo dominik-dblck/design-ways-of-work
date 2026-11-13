@@ -1,8 +1,8 @@
 /**
- * - `HintCardSectionRows` · a section under the list: a line, its eyebrow, its rows
+ * - `HintCardSectionRows` · a section under the list: a line, its label, its rows
  */
 import Box from '@mui/material/Box';
-import { Eyebrow } from '../../../atoms/Eyebrow/index.ts';
+import { Label } from '../../../atoms/Label/index.ts';
 import {
   HINT_CARD_RULE_SX,
   HINT_CARD_SX,
@@ -21,7 +21,7 @@ export function HintCardSectionRows({
   return (
     <Box sx={HINT_CARD_SX}>
       <Box sx={HINT_CARD_RULE_SX} />
-      <Eyebrow>{section.eyebrow}</Eyebrow>
+      <Label>{section.label}</Label>
       {section.rows.map((row) => (
         <HintCardLine key={row.title} {...row} />
       ))}

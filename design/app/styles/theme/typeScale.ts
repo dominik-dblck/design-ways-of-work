@@ -3,7 +3,6 @@
  */
 import type { ThemeOptions } from '@mui/material/styles';
 import type { LightToken } from '../tokens.ts';
-import { monoFamily } from '../monoFamily.ts';
 import { length } from '../tokenReads.ts';
 
 const SNUG = length('lhSnug');
@@ -42,12 +41,12 @@ export const TYPOGRAPHY: ThemeOptions['typography'] = {
   body1: { fontSize: '14px', fontWeight: 400, lineHeight: NORMAL },
   body2: { fontSize: '12px', fontWeight: 400, lineHeight: NORMAL },
   caption: { fontSize: '10px', fontWeight: 400, lineHeight: 1.2 },
+  // the small label over a thing: the body face, its words as written, never in capitals
   overline: {
-    fontSize: '10px',
-    fontWeight: 500,
-    lineHeight: 1,
-    letterSpacing: '0.08em',
-    textTransform: 'uppercase',
-    fontFamily: monoFamily,
+    fontSize: '12px',
+    fontWeight: 600,
+    lineHeight: 1.2,
+    letterSpacing: 0,
+    textTransform: 'none',
   },
 };

@@ -1,8 +1,8 @@
 /**
- * - `HintCardHead` · the section over the list: its eyebrow, one row, a line under
+ * - `HintCardHead` · the section over the list: its label, one row, a line under
  */
 import Box from '@mui/material/Box';
-import { Eyebrow } from '../../../atoms/Eyebrow/index.ts';
+import { Label } from '../../../atoms/Label/index.ts';
 import { HINT_CARD_RULE_SX } from '../constants/hintCardConstants.ts';
 import type { HintCardProps } from '../types/hintCardTypes.ts';
 import { HintCardLine } from './HintCardLine.tsx';
@@ -15,7 +15,7 @@ type HintCardHeadProps = {
 export function HintCardHead({ head }: HintCardHeadProps): React.ReactElement {
   return (
     <>
-      <Eyebrow>{head.eyebrow}</Eyebrow>
+      <Label>{head.label}</Label>
       <HintCardLine {...head.row} />
       <Box sx={HINT_CARD_RULE_SX} />
     </>

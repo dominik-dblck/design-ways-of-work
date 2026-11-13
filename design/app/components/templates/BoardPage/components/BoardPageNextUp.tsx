@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
 import { words } from '../../../../workspace/boardView.ts';
 import type { TicketLine } from '../../../../workspace/boardView.ts';
-import { SectionHead } from '../../../atoms/SectionHead/index.ts';
+import { Heading } from '../../../atoms/Heading/index.ts';
 import { BoardPageTicketRow } from './BoardPageTicketRow.tsx';
 import { radiusOf } from '../../../../styles/scales.ts';
 
@@ -24,7 +24,9 @@ function BoardPageNextUp({
 }: BoardPageNextUpProps): ReactElement {
   return (
     <Stack spacing={1.5}>
-      <SectionHead {...words.nextUp} />
+      <Heading level={2} quiet note={words.nextUp.note}>
+        {words.nextUp.label}
+      </Heading>
       <Paper
         variant="outlined"
         sx={{ borderRadius: radiusOf('uiRContainer'), p: 1 }}

@@ -7,12 +7,14 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
 import { kinds, words } from '../../../../workspace/boardView.ts';
-import { SectionHead } from '../../../atoms/SectionHead/index.ts';
+import { Heading } from '../../../atoms/Heading/index.ts';
 
 function BoardPageKindLegend(): ReactElement {
   return (
     <Stack spacing={1.5}>
-      <SectionHead {...words.kinds} />
+      <Heading level={2} quiet note={words.kinds.note}>
+        {words.kinds.label}
+      </Heading>
       <Box
         sx={{
           display: 'grid',

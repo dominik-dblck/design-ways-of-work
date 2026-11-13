@@ -8,7 +8,7 @@ import type { ReactElement } from 'react';
 import { featureWords as words } from '../../../../workspace/featureView.ts';
 import type { FeatureView } from '../../../../workspace/featureView.ts';
 import { CodeBlock } from '../../../molecules/CodeBlock/index.ts';
-import { SectionHead } from '../../../atoms/SectionHead/index.ts';
+import { Heading } from '../../../atoms/Heading/index.ts';
 import { FeaturePageFieldOptions } from './FeaturePageFieldOptions.tsx';
 import { FeaturePageFieldKindTable } from './FeaturePageFieldKindTable.tsx';
 import { FeaturePageFieldTable } from './FeaturePageFieldTable.tsx';
@@ -38,7 +38,9 @@ function FeaturePageFieldsSection({
           <CodeBlock lines={view.fieldsCode} />
         </Stack>
       ) : null}
-      <SectionHead label={words.docTypes.label} note={words.docTypes.note} />
+      <Heading level={2} quiet note={words.docTypes.note}>
+        {words.docTypes.label}
+      </Heading>
       {view.docTypes
         .flatMap((type) => type.groups)
         .map((group) => (

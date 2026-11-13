@@ -11,7 +11,7 @@ import { textSxOf } from './utils/textSxUtils.ts';
 export type TextProps = {
   readonly children: React.ReactNode;
   readonly tone?: Tone;
-  readonly variant?: 'caption' | 'body2' | 'body1' | 'overline';
+  readonly variant?: 'caption' | 'body2' | 'body1';
   readonly strong?: boolean;
   // one line, cut with an ellipsis
   readonly line?: boolean;

@@ -3,8 +3,8 @@
  */
 import type { SxProps, Theme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import { toneInk } from '../../../styles/tones.ts';
-import type { Tone } from '../../../styles/tones.ts';
+import { toneInk } from '../../../../../../design/app/styles/tones.ts';
+import type { Tone } from '../../../../../../design/app/styles/tones.ts';
 
 export type EyebrowProps = {
   readonly children: React.ReactNode;

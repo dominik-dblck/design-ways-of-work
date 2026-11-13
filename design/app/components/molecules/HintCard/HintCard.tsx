@@ -11,7 +11,7 @@ import { HintCardTitle } from './components/HintCardTitle.tsx';
 
 /** A tail with no rows draws nothing; every other section draws its eyebrow. */
 export function HintCard({
-  eyebrow,
+  label,
   count,
   rows,
   head,
@@ -31,12 +31,12 @@ export function HintCard({
       sx={{ ...HINT_CARD_SX, width }}
     >
       {head === undefined ? null : <HintCardHead head={head} />}
-      <HintCardTitle eyebrow={eyebrow} count={count} />
+      <HintCardTitle label={label} count={count} />
       {rows.map((row) => (
         <HintCardLine key={row.title} {...row} />
       ))}
       {shown.map((section) => (
-        <HintCardSectionRows key={section.eyebrow} section={section} />
+        <HintCardSectionRows key={section.label} section={section} />
       ))}
     </Paper>
   );

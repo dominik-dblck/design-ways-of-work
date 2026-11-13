@@ -1476,3 +1476,12 @@ Each call: what, why, how to undo. None changes what the PM sees.
   stamp of the skeleton's second sha samples this repository's last tag and the copy set left `atoms/Link`
   there. Call: `left` keeps the app's mark and name alone; Link, now an `a` unless a component is handed in,
   comes with that sha. Undo: Link back in `left`'s pattern.
+- The PM, 13 Nov, on the proposal page "Atoms to merge", picked A (W116): capitals, labels, sliders and dots,
+  all four in v1.4.0; then, relayed by eagle-design and asked here, A again: Eyebrow's uses become the Label
+  atom, a short name over a thing, and Text keeps no variant of its own for it. Calls: Label draws the type
+  scale's overline, so a field's name and a card's label share one look; ChoiceCard's note is a strong Text; a
+  section's head is a `Heading` with `quiet` (the overline's face, its level still the outline's) and a `note`
+  beside it, so the seven SectionHead places keep their h2 and their look; the words the home wrote in capitals
+  (the board's, the contract's) are written in sentence case by a script, MVP, API and LGL kept; the skeleton's
+  second sha is copied as eagle-dev stamped it, then moved off Eyebrow here in the same commit. Undo: each
+  retired atom back from `legacy/` by `scripts/move.ts`, the type scale's overline as it was.

@@ -4,7 +4,7 @@
 import Stack from '@mui/material/Stack';
 import type { ReactElement, ReactNode } from 'react';
 import { Fold } from '../../atoms/Fold/index.ts';
-import { SectionHead } from '../../atoms/SectionHead/index.ts';
+import { Heading } from '../../atoms/Heading/index.ts';
 import { useFoldSectionOpened } from './hooks/useFoldSectionOpened.ts';
 
 interface FoldSectionProps {
@@ -32,10 +32,9 @@ function FoldSection({
       isOpen={isOpen}
       onOpen={toggle}
       head={
-        <SectionHead
-          label={count === undefined ? label : `${label} · ${count}`}
-          note={note}
-        />
+        <Heading level={2} quiet note={note}>
+          {count === undefined ? label : `${label} · ${count}`}
+        </Heading>
       }
     >
       <Stack spacing={spacing}>{children}</Stack>
