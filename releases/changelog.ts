@@ -5,26 +5,37 @@
 import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
 const NEXT: Unreleased = {
-  kind: 'minor',
-  what: 'one heavy run on a machine at a time (W106): `machineLock.py run <label> -- <command>`, a user hook every session runs, waits while a live run holds the machine, takes over a dead one’s lock and holds it while its command lives; the build side’s architecture guard comes to the homes (W105): a design product’s homes are its tree, each file under a home’s first folder in a home the layout names or written by the build, and an exported name of this repository’s own code is declared once (the status file’s `bulletsOf` is `sectionBulletsOf`); `yarn sync:theme` copies only a sha whose review record, committed on the build side, names it and passes it; the shared theme at 565dfa9b',
-  action:
-    'none: move the pin to the tag; once a machine, `yarn hooks:user` in this repository at the tag installs the lock',
+  kind: 'patch',
+  what: '',
+  action: 'none: move the pin to the tag',
   rules: { added: [], changed: [], removed: [] },
-  outputs: {
-    'eagle-design': {
-      'output · yarn test':
-        'one test file more, its two tests: the homes are the tree',
-      'dist · project/theme.js':
-        'the chip families’ pair is `chipPairOf`, as the build side named it',
-      'written · records/release-5-3-1.md':
-        'the chip families’ file the build side reads, at its new digest',
-      'written · vendor/wow/app/styles/theme/chipFamilies.ts':
-        'the build side’s copy at 565dfa9b: `pairOf` named `chipPairOf`',
-    },
-  },
+  outputs: {},
 };
 
 const RELEASES: readonly Release[] = [
+  {
+    version: '0.22.0',
+    date: '2026-11-13',
+    kind: 'minor',
+    what: 'one heavy run on a machine at a time (W106): `machineLock.py run <label> -- <command>`, a user hook every session runs, waits while a live run holds the machine, takes over a dead one’s lock and holds it while its command lives; the build side’s architecture guard comes to the homes (W105): a design product’s homes are its tree, each file under a home’s first folder in a home the layout names or written by the build, and an exported name of this repository’s own code is declared once (the status file’s `bulletsOf` is `sectionBulletsOf`); `yarn sync:theme` copies only a sha whose review record, committed on the build side, names it and passes it; the shared theme at 565dfa9b',
+    action:
+      'none: move the pin to the tag; once a machine, `yarn hooks:user` in this repository at the tag installs the lock',
+    rules: { added: [], changed: [], removed: [] },
+    outputs: {
+      'eagle-design': {
+        'output · yarn test':
+          'one test file more, its two tests: the homes are the tree',
+        'dist · project/theme.js':
+          'the chip families’ pair is `chipPairOf`, as the build side named it',
+        'written · records/release-5-3-1.md':
+          'the chip families’ file the build side reads, at its new digest',
+        'written · vendor/wow/app/styles/theme/chipFamilies.ts':
+          'the build side’s copy at 565dfa9b: `pairOf` named `chipPairOf`',
+      },
+    },
+    moved: {},
+    tried: { 'eagle-design': '9f548b0' },
+  },
   {
     version: '0.21.0',
     date: '2026-11-13',
