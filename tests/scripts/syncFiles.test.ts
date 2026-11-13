@@ -126,12 +126,25 @@ describe('a file the last copy took and this sha drops is retired first', () => 
   const copied = ['app/styles/theme.ts', 'app/styles/fades.ts'];
 
   it('still in the home: it stops the copy', () => {
-    expect(leftStanding({ taken, copied, stands: () => true })).toEqual([
-      'app/styles/theme/fades.ts',
-    ]);
+    expect(
+      leftStanding({ taken, copied, provided: [], stands: () => true }),
+    ).toEqual(['app/styles/theme/fades.ts']);
   });
 
   it('retired to legacy/: the copy goes', () => {
-    expect(leftStanding({ taken, copied, stands: () => false })).toEqual([]);
+    expect(
+      leftStanding({ taken, copied, provided: [], stands: () => false }),
+    ).toEqual([]);
+  });
+
+  it('held here since: it stays, this side’s own', () => {
+    expect(
+      leftStanding({
+        taken,
+        copied,
+        provided: ['app/styles/theme/fades.ts'],
+        stands: () => true,
+      }),
+    ).toEqual([]);
   });
 });

@@ -1,5 +1,5 @@
 /**
- * - `node scripts/syncTheme.ts <sha>` · the build side's theme and atoms, copied
+ * - `node scripts/syncTheme.ts <sha>` · a reviewed move from the build side, copied
  * - read at a sha its review passed, read only; only the imports are rewritten
  * - its record, `ports/build-theme/taken.ts`, written by it: the sha and each file
  */
@@ -77,6 +77,7 @@ const copied = copiedFrom({ set: BUILD_THEME, read, files });
 const gone = leftStanding({
   taken: TAKEN.files,
   copied,
+  provided: BUILD_THEME.provided,
   stands: (file) => fs.existsSync(path.join(HERE, BUILD_THEME.into, file)),
 });
 for (const file of gone)

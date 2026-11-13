@@ -1468,3 +1468,7 @@ Each call: what, why, how to undo. None changes what the PM sees.
   BoardPage, ContractPage and FeaturePage, each a page whole, move from organisms to templates by
   `scripts/move.ts` (78 files, their importers followed); ContractBody and EndpointFolds stay organisms. The
   tier lint already knows templates. Undo: the map run back.
+- Eagle-dev, 13 Nov: its sha 1 failed the sample because the sync copied its `theme.ts` over the one this
+  repository changed after W110. Call: the copy set's seeds become the skeleton alone; the 207 files the last
+  take recorded are held here (`ports/build-theme/held.ts`), imported where they stand and never copied or
+  reported gone. Undo: the copy set's old seeds back, `held.ts` to `legacy/`.

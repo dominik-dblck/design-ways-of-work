@@ -1,7 +1,7 @@
 /**
  * - `copiedFrom` · the files a sha gives the theme and its atoms, their closure
  * - `specified` · a file's imports written for this side: relative, with extension
- * - `reviewRefusal`, `leftStanding` · a review refusing; a gone file kept
+ * - `reviewRefusal`, `leftStanding` · a review refusing; a dropped file not held
  */
 import path from 'node:path';
 
@@ -124,17 +124,22 @@ function specified({
   });
 }
 
-// a file the last copy wrote that this one does not and that still stands: retired first, never dropped
+// a dropped copy still standing is retired first; a held one is ours
 function leftStanding({
   taken,
   copied,
+  provided,
   stands,
 }: {
   readonly taken: readonly string[];
   readonly copied: readonly string[];
+  readonly provided: readonly string[];
   readonly stands: (file: string) => boolean;
 }): readonly string[] {
-  return taken.filter((file) => !copied.includes(file) && stands(file));
+  return taken.filter(
+    (file) =>
+      !copied.includes(file) && !provided.includes(file) && stands(file),
+  );
 }
 
 export { copiedFrom, leftStanding, reviewRefusal, specified };
