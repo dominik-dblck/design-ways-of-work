@@ -24,7 +24,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 
 | stage | what | done | of |
 | 1 | Foundation | 7 | 7 |
-| 2 | Design clean | 23 | 26 |
+| 2 | Design clean | 24 | 26 |
 | 3 | Eagle-design | 0 | 2 |
 | 4 | Spawn design | 2 | 3 |
 
@@ -95,6 +95,7 @@ new-project guide · 3 · `argus-design` spawned and green on its first commit, 
 - 23:10 · stage 2 · 23 of 25 · a new design product takes no dev/, the build side's tree (a9988e1, a0716b6, 8805001), eagle-design approved
 - 07:28 · stage 4 · 1 of 3 · yarn spawn design, the hooks wired by its install; proved from v0.20.0 with nothing patched, heron-design green on its first commit and its feature tier (4446d76, cc1b562, f6c2ea4)
 - 07:28 · stage 4 · 2 of 3 · the new-project guide rewritten around the spawn (4446d76), out in v0.20.0
+- 08:37 · stage 2 · 24 of 26 · the build side's theme and atoms copied by script at its reviewed sha eed29307, the pages on the shared theme; v0.21.0 out (1ea139e, 719c249, a621fcb)
 
 ## Calls
 
