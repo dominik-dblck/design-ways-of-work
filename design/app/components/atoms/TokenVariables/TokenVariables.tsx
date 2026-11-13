@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * - `TokenVariables` · every token as its CSS variable, per mode, on the page
  */
