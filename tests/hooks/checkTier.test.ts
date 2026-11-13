@@ -115,6 +115,27 @@ describe('the commit tier reads the files a change holds', () => {
   });
 });
 
+describe('a first commit, on a branch with none yet', () => {
+  const repo = hookRepo({ base, name: 'first', isFirst: true });
+
+  it('staged, every file it holds is read', () => {
+    const said = repo.ran({ hook: HOOK, args: ['commit', '--staged'] });
+    expect(said.status).toBe(0);
+    expect(handed(said.calls, 'prettier')).toBe(
+      'prettier --check --ignore-unknown --log-level warn .gitignore package.json scope.ts',
+    );
+  });
+
+  it('a chunk reads the index and what is new beside it', () => {
+    fs.writeFileSync(path.join(repo.root, 'new.md'), '# new\n');
+    const said = repo.ran({ hook: HOOK, args: ['commit'] });
+    expect(said.status).toBe(0);
+    expect(handed(said.calls, 'prettier')).toBe(
+      'prettier --check --ignore-unknown --log-level warn .gitignore package.json scope.ts new.md',
+    );
+  });
+});
+
 describe('a commit writes what it can fix', () => {
   const repo = hookRepo({ base, name: 'write' });
   repo.committed('whole.ts', 'export const whole = 1;\n');

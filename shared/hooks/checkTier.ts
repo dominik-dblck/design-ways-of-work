@@ -32,6 +32,11 @@ interface Ran {
 const git = (args: readonly string[]): string =>
   execFileSync('git', args, { cwd: ROOT, encoding: 'utf8' });
 
+// a branch with no commit yet, the first one in hand: every file it holds is new
+const isBorn =
+  spawnSync('git', ['rev-parse', '-q', '--verify', 'HEAD'], { cwd: ROOT })
+    .status === 0;
+
 // git's names with -z: split on NUL, never quoted
 const listed = (text: string): readonly string[] =>
   text.split('\0').filter((file) => file !== '');
@@ -42,7 +47,9 @@ function changedFiles(isStaged: boolean): readonly string[] {
     ? listed(git(['diff', '--cached', '--name-only', '-z', '--diff-filter=d']))
     : [
         ...listed(
-          git(['diff', '--name-only', '-z', '--diff-filter=d', 'HEAD']),
+          isBorn
+            ? git(['diff', '--name-only', '-z', '--diff-filter=d', 'HEAD'])
+            : git(['ls-files', '-z', '--cached']),
         ),
         ...listed(git(['ls-files', '-z', '--others', '--exclude-standard'])),
       ];
@@ -115,7 +122,12 @@ if (
   console.error('checkTier: commit [--staged [--write]] | feature');
   process.exit(2);
 }
-const branch = git(['rev-parse', '--abbrev-ref', 'HEAD']).trim();
+// born or not, the branch by its name; a detached head reads HEAD
+const branch =
+  spawnSync('git', ['symbolic-ref', '--short', '-q', 'HEAD'], {
+    cwd: ROOT,
+    encoding: 'utf8',
+  }).stdout.trim() || 'HEAD';
 if (SPIKE.test(branch)) {
   console.log(
     `${branch} is a spike: a merge commit or the push checks its work`,

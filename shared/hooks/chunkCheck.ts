@@ -26,7 +26,16 @@ function workKey(): string | null {
     .filter(Boolean);
   if (entries.length === 0) return null;
   const hash = crypto.createHash('sha256').update(entries.join('\n'));
-  hash.update(git(['diff', 'HEAD', '--binary']));
+  // a branch with no commit yet compares its index with nothing
+  const isBorn =
+    spawnSync('git', ['rev-parse', '-q', '--verify', 'HEAD'], { cwd: ROOT })
+      .status === 0;
+  hash.update(
+    git(
+      isBorn ? ['diff', 'HEAD', '--binary'] : ['diff', '--cached', '--binary'],
+    ),
+  );
+  if (!isBorn) hash.update(git(['diff', '--binary']));
   for (const entry of entries.filter((one) => one.startsWith('?? ')))
     hash.update(fs.readFileSync(path.join(ROOT, entry.slice(3))));
   return hash.digest('hex');

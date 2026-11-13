@@ -1,7 +1,7 @@
 /**
  * - `hookRepo` · a scratch repository that took the shared home, its tools stubs
  * - `ran` on it · a hook run there: its exit, what it printed, each tool's call
- * - with `isReal`, prettier, ESLint and cspell are this repository's own
+ * - `isReal` · this repository's prettier, ESLint, cspell; `isFirst` · nothing committed
  */
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
@@ -72,10 +72,13 @@ function hookRepo({
   base,
   name,
   isReal = false,
+  isFirst = false,
 }: {
   readonly base: string;
   readonly name: string;
   readonly isReal?: boolean;
+  // its first commit in hand: its files staged, none committed
+  readonly isFirst?: boolean;
 }): HookRepo {
   const repo = scratchRepo({ base, name });
   const modules = path.join(repo.root, 'node_modules');
@@ -103,7 +106,8 @@ function hookRepo({
   );
   fs.writeFileSync(path.join(repo.root, 'scope.ts'), SCOPE);
   repo.git(['add', '--', '.gitignore', 'package.json', 'scope.ts']);
-  repo.git(['commit', '-q', '-m', 'a repository that took the shared home']);
+  if (!isFirst)
+    repo.git(['commit', '-q', '-m', 'a repository that took the shared home']);
   const ran = ({
     hook,
     args = [],

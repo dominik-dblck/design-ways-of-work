@@ -43,6 +43,17 @@ describe('a chunk ends on work that was checked', () => {
   });
 });
 
+describe('a chunk before the first commit', () => {
+  const repo = hookRepo({ base, name: 'first', isFirst: true });
+
+  it('its staged work is checked once, then a change to it again', () => {
+    expect(repo.ran({ hook: HOOK, input: '{}' }).calls).toEqual(CHECK);
+    expect(repo.ran({ hook: HOOK, input: '{}' }).calls).toEqual([]);
+    fs.appendFileSync(path.join(repo.root, 'scope.ts'), '// more\n');
+    expect(repo.ran({ hook: HOOK, input: '{}' }).calls).toEqual(CHECK);
+  });
+});
+
 describe('a chunk that ends red is held once', () => {
   const repo = hookRepo({ base, name: 'red' });
   const lines = Array.from({ length: 50 }, (_, at) => `line ${String(at + 1)}`);
