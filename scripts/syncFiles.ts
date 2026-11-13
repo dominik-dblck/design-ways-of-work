@@ -1,6 +1,7 @@
 /**
  * - `copiedFrom` · the files a sha gives the theme and its atoms, their closure
  * - `specified` · a file's imports written for this side: relative, with extension
+ * - `reviewRefusal` · why a sha's review record refuses its copy; null, it passes
  */
 import path from 'node:path';
 
@@ -12,6 +13,32 @@ interface CopySet {
   // imported where it stands, never copied: the product holds its own
   readonly provided: readonly string[];
   readonly left: readonly RegExp[];
+  // the architecture review a sha passed there, `{sha}` its first eight characters
+  readonly reviewed: string;
+}
+
+const A_FIELD = /^([a-z][\w-]*):\s*(\S+)\s*$/gm;
+
+// a sha leaves the build side reviewed (W105): its record names it as its head, and passes it
+function reviewRefusal({
+  record,
+  sha,
+}: {
+  readonly record: string | null;
+  readonly sha: string;
+}): string | null {
+  if (record === null) return 'no architecture review record';
+  const fields = new Map(
+    [...record.matchAll(A_FIELD)].map(([, key = '', value = '']) => [
+      key,
+      value,
+    ]),
+  );
+  if (fields.get('head') !== sha)
+    return `its review record's head is ${fields.get('head') ?? 'unnamed'}`;
+  if (fields.get('verdict') !== 'pass')
+    return `its review's verdict is ${fields.get('verdict') ?? 'unwritten'}`;
+  return null;
 }
 
 const SOURCE = /\.(?:ts|tsx)$/;
@@ -97,5 +124,5 @@ function specified({
   });
 }
 
-export { copiedFrom, specified };
+export { copiedFrom, reviewRefusal, specified };
 export type { CopySet };

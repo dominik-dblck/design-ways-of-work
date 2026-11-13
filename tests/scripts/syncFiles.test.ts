@@ -1,5 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { copiedFrom, specified } from '../../scripts/syncFiles.ts';
+import {
+  copiedFrom,
+  reviewRefusal,
+  specified,
+} from '../../scripts/syncFiles.ts';
 import type { CopySet } from '../../scripts/syncFiles.ts';
 
 const SOURCES: Readonly<Record<string, string>> = {
@@ -28,6 +32,7 @@ const SET: CopySet = {
     /^app\/components\/atoms\/Mark\//,
     /^app\/styles\/appTheme\.ts$/,
   ],
+  reviewed: 'moves/review-{sha}.md',
 };
 
 describe('the copy is its seeds and what they import', () => {
@@ -84,5 +89,33 @@ describe('an import is written as this side reads it', () => {
   it('a package keeps its name', () => {
     const text = "import { styled } from '@mui/material/styles';\n";
     expect(specified({ file: 'app/utils/sx.ts', text, files })).toBe(text);
+  });
+});
+
+describe('a sha comes only with its architecture review passed', () => {
+  const SHA = 'eed29307104349896b424a72f12e5230e1570c06';
+  const recordOf = (head: string, verdict: string): string =>
+    `# Architecture review\n\nbase: 3407b251\nhead: ${head}\nverdict: ${verdict}\n\n- Reviewed: one file.\n`;
+
+  it('a record naming the sha as its head, passed: the copy goes', () => {
+    expect(
+      reviewRefusal({ record: recordOf(SHA, 'pass'), sha: SHA }),
+    ).toBeNull();
+  });
+
+  it.each([
+    ['no record', null, 'no architecture review record'],
+    [
+      'a record of another head',
+      recordOf('782e7b77', 'pass'),
+      "its review record's head is 782e7b77",
+    ],
+    [
+      'a record that does not pass',
+      recordOf(SHA, 'findings'),
+      "its review's verdict is findings",
+    ],
+  ])('%s: refused, saying why', (_, record, said) => {
+    expect(reviewRefusal({ record, sha: SHA })).toBe(said);
   });
 });

@@ -1,5 +1,5 @@
 /**
- * - `ChipFamily`, `ChipPair`, `pairOf` · chip rows by key, a pair, its pair
+ * - `ChipFamily`, `ChipPair`, `chipPairOf` · chip rows by key, a pair, its pair
  * - `AppStateChips`, `AppStatePairs` · state keys an app augments, its pairs
  * - `chipVariantsOf`, `sharedChipVariants`, `chipPairsWith` · variants, pairs
  */
@@ -49,7 +49,7 @@ export type AppStatePairs = Readonly<
 >;
 
 /** `['stDraftBg', 'stDraftFg']` → `{ bg, fg }` · each a variable with its light value as floor. */
-export const pairOf = ([bg, fg]: ChipTokens): ChipPair => ({
+export const chipPairOf = ([bg, fg]: ChipTokens): ChipPair => ({
   bg: colour(bg),
   fg: colour(fg),
 });
@@ -90,12 +90,12 @@ export const chipPairsWith = (
   appStates: AppStatePairs,
 ): Pick<Palette, 'state' | 'diff'> => ({
   state: {
-    draft: pairOf(STATE_CHIPS.draft),
-    review: pairOf(STATE_CHIPS.review),
-    ready: pairOf(STATE_CHIPS.ready),
+    draft: chipPairOf(STATE_CHIPS.draft),
+    review: chipPairOf(STATE_CHIPS.review),
+    ready: chipPairOf(STATE_CHIPS.ready),
     ...appStates,
   },
-  diff: { then: pairOf(DIFF_SIDES.then), now: pairOf(DIFF_SIDES.now) },
+  diff: { then: chipPairOf(DIFF_SIDES.then), now: chipPairOf(DIFF_SIDES.now) },
 });
 
 declare module '@mui/material/styles' {

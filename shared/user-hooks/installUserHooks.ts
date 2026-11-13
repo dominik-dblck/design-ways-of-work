@@ -7,7 +7,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 
-const HOOKS = ['workMode.py', 'runBars.py'];
+const HOOKS = ['workMode.py', 'runBars.py', 'machineLock.py'];
 const INSTALLED = path.join(os.homedir(), '.claude', 'hooks');
 
 // the hook as it stands here, against the one the machine runs

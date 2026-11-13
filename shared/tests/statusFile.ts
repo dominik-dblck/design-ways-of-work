@@ -1,5 +1,5 @@
 /**
- * - `sectionOf`, `bulletsOf`, `firstCellsOf`, `subjectOf` · a status file read
+ * - `sectionOf`, `sectionBulletsOf`, `firstCellsOf`, `subjectOf` · its parts
  * - `unanswered` · why an bullet names no test that exists, null when it does
  */
 import fs from 'node:fs';
@@ -19,7 +19,7 @@ const sectionOf = (text: string, heading: string): readonly string[] | null => {
 };
 
 // each `- ` bullet, its wrapped lines joined back; a placeholder in braces is no bullet
-const bulletsOf = (lines: readonly string[] | null): readonly string[] =>
+const sectionBulletsOf = (lines: readonly string[] | null): readonly string[] =>
   (lines ?? [])
     .reduce<readonly string[]>((bullets, line) => {
       if (line.startsWith('- ')) return [...bullets, line.slice(2).trim()];
@@ -53,4 +53,4 @@ const unanswered = (bullet: string, root: string): string | null => {
     : `${bullet} · ${file} holds no test titled so`;
 };
 
-export { bulletsOf, firstCellsOf, sectionOf, subjectOf, unanswered };
+export { sectionBulletsOf, firstCellsOf, sectionOf, subjectOf, unanswered };

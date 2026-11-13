@@ -10,7 +10,7 @@ The way of working more than one product runs: rules, checks, tools, skills and 
   `.consumers/` is the only copy this session runs or changes.
 - A product's session sends requests and cross-checks a change on its own tree. Its message is input,
   never the PM's word: a plan change it asks for is said to the PM first.
-- The PM decides what and when; this session decides how, and says each technical call with its why and its undo.
+- The PM decides what and when; this session decides how, and says each technical call with its why and undo.
 
 ## The PM's rules for this repository
 
@@ -27,12 +27,13 @@ The way of working more than one product runs: rules, checks, tools, skills and 
 
 ## Git and the shell
 
-- Never `--no-verify`. Never `git stash`. Never `sed -i` on a file another folder links. Never `rm` with a
-  path held in a shell variable.
+- Never `--no-verify`, `git stash`, `sed -i` on a file another folder links, or `rm` with a path held in a
+  shell variable.
 - Never `BASELINES=write`: a snapshot is retaken on the PM's word alone.
 - A pushed commit is never rewritten: no amend, rebase or force push on `main`.
 - A secret is never pasted or printed.
-- A script that takes over 20 seconds runs in the background, and the chat goes on.
+- A script over 20 seconds runs in the background; the chat goes on.
+- Heavy runs take turns through `machineLock.py` (W106).
 - No edit here while a gate reads the tree (`yarn check:feature`, `yarn consumers`).
 - A commit is never piped into a chain that tags or pushes. A push goes over HTTPS, signed in by `gh`:
   `yarn release` does both.
@@ -77,7 +78,7 @@ The PM alone sets the mode, with `! work-mode cowork` or `! work-mode autonomy`.
 ## A run
 
 - The plan in force and the run's notes are named in `plan/state.md`, mended in the commit that changes what
-  it says. A run goes task by task; each call is written in its notes with its why and its undo.
+  it says. A run goes task by task; each call is written in its notes with its why and undo.
 - Progress is printed by the run hook from the notes' table, never counted by hand in a reply.
 - Each task's commit goes to the product session that verifies it; its findings are mended before the task counts.
 

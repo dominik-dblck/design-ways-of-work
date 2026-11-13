@@ -8,7 +8,7 @@ import { FLOW_PATHS } from '../e2e/flowPaths.ts';
 import type { Catalog } from './browserScreens.ts';
 import { codeOf } from './codeText.ts';
 import {
-  bulletsOf,
+  sectionBulletsOf,
   firstCellsOf,
   sectionOf,
   subjectOf,
@@ -35,7 +35,7 @@ const unwalkedOf = (catalog: Catalog, status: string): readonly string[] => {
   const walked = new Set(
     Object.values(catalog).flatMap((entry) => entry.paths),
   );
-  const waived = bulletsOf(sectionOf(status, WAIVED)).map(subjectOf);
+  const waived = sectionBulletsOf(sectionOf(status, WAIVED)).map(subjectOf);
   return [
     ...FLOW_PATHS.filter((kind) => !walked.has(kind) && !waived.includes(kind)),
     ...waived
@@ -55,7 +55,9 @@ function rolesMissingOf({
   readonly status: string;
 }): readonly string[] {
   const taken = new Set(Object.values(catalog).map(({ userType }) => userType));
-  const waived = bulletsOf(sectionOf(status, ROLES_WAIVED)).map(subjectOf);
+  const waived = sectionBulletsOf(sectionOf(status, ROLES_WAIVED)).map(
+    subjectOf,
+  );
   return [
     ...roles.filter((role) => !taken.has(role) && !waived.includes(role)),
     ...waived
@@ -67,7 +69,7 @@ function rolesMissingOf({
 // a red table of one row a flow, a flow in both lists, done claimed while one was never seen red
 function redFaultsOf(catalog: Catalog, status: string): readonly string[] {
   const red = firstCellsOf(sectionOf(status, RED));
-  const notYet = bulletsOf(sectionOf(status, NOT_YET)).map(subjectOf);
+  const notYet = sectionBulletsOf(sectionOf(status, NOT_YET)).map(subjectOf);
   const listed = [...red, ...notYet].sort().join(', ');
   const keys = Object.keys(catalog).sort().join(', ');
   return [
@@ -93,7 +95,7 @@ const statusFaultsOf = ({
   readonly root: string;
 }): readonly string[] => [
   ...ANSWERED.flatMap((heading) =>
-    bulletsOf(sectionOf(status, heading)).map((bullet) =>
+    sectionBulletsOf(sectionOf(status, heading)).map((bullet) =>
       unanswered(bullet, root),
     ),
   ).filter((why) => why !== null),

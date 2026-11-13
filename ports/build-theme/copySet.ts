@@ -23,6 +23,8 @@ const BUILD_THEME: CopySet = {
     /^app\/components\/atoms\/(?:AppMark|Link|Wordmark)\//,
     /^app\/styles\/(?:appChips|appTheme|appearance)\.ts$/,
   ],
+  // its own record of a move's review, written there before a sha comes here
+  reviewed: 'roadmaps/moves/arch-review-{sha}.md',
 };
 
 export { BUILD_THEME };

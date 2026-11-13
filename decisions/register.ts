@@ -240,6 +240,29 @@ const SINCE: readonly Decision[] = [
     says: 'v1.0.0 goes out once the build side’s theme and atoms are in and the gates are green; the rules of `CLAUDE.md` that reached this session relayed stand, with three more (no `BASELINES=write`, no pushed commit rewritten, no secret pasted or printed); this session talks to the build side’s session directly; `.rehearsal/` leaves the disk; a product’s board, pages and props get a check part; eagle-design takes v1 onto its `main`. The spawn of argus-design waits on the PM’s own word.',
     from: 'eagle-design D103',
   },
+  {
+    id: 'W105',
+    title:
+      'a move is reviewed for architecture, and the build side’s guard comes here',
+    held: '13 Nov · the PM’s word, here',
+    says: 'a move of files across repositories gets an architecture review before its sha leaves; the scans and the review the build side runs come to the homes, those not held here yet, before v1.0.0.',
+    from: 'plan/run-11-nov.md',
+  },
+  {
+    id: 'W106',
+    title: 'one heavy run on the machine at a time',
+    held: '13 Nov · the PM’s word, here',
+    says: 'the sessions on one machine take turns at heavy runs (a full suite, a sample, a gate, a release, an end-to-end run): one that runs is let finish before another starts, through one lock all of them take (`machineLock.py`).',
+    from: 'plan/run-11-nov.md',
+  },
+  {
+    id: 'W107',
+    title:
+      'the shared atoms stay whole, the build side’s glyph sets and states with them',
+    held: '13 Nov · the PM’s word, here',
+    says: 'the atoms and theme copied from the build side stay as copied, the editor’s and the phone preview’s glyph sets, the approval states and the version sides included; a product that needs more extends them, the way of working staying the same.',
+    from: 'plan/run-11-nov.md',
+  },
 ];
 
 // a product's rows keep their words of the day and their order, each naming the row it was

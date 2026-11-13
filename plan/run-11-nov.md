@@ -1268,3 +1268,29 @@ Each call: what, why, how to undo. None changes what the PM sees.
 - 782e7b77 taken: the five mended, the sample red on one comment left above another (a rule eagle-dev's own
   checker lacked); eed29307 mends it, its review record passing, the sample green. Suggested to eagle-dev:
   WoW's own eslint config run over the copy set before a sha leaves. Undo: the commit reverted.
+- v0.21.0 out (a621fcb); eagle-design took it on port/wow (9f548b0). The PM's two words of the day are W105 (the
+  architecture review of a move, the build side's guard before v1.0.0) and W106.
+- The PM, 13 Nov: "synchronizujcie sobie testy, ze jak na przyklad jeden agent puszcza swoje i obciaza maszyne
+  to zeby dac mu dokonczyc jego czesc i nie obciazac swoimi testami" (W106). Call: one lock file for the
+  machine, `~/.claude/locks/heavy.json`, taken atomically by `machineLock.py run <label> -- <command>`; a run
+  waits while a live process holds it, a nested run passes by its environment, a dead holder's lock is taken
+  over under a cleaner's own lock. Python, a user hook installed with the others, so the build side, which
+  takes nothing of this repository, runs the same file. Until it is installed, the sessions announce a heavy
+  run by message and wait for its "done". Undo: the hook's row out of the installer, the file to `legacy/`.
+- The PM asked whether the copied atoms are product agnostic. Read, nothing changed: 22 of 24 are plain UI;
+  `Glyph` carries the editor's and the phone preview's sets beside the interface's, `StateChip` the approval
+  states, the theme the version sides and the phone preview's light block; Eagle's mark, name, link and
+  document chips stayed there. The PM: "A lecmy najwyzej bedziemy rozszerzac, bo styl pracy dalej bedize ten
+  sam" (W107): they stay as copied.
+- Task 25, its first half (v0.22.0): `aNameHasOneHome` on this repository's own code (one name found, `bulletsOf`
+  twice, the status file's renamed `sectionBulletsOf` by script); `theHomesAreTheTree`, a design test: a file
+  git holds under a home's first folder stands in a home `tools/layout.ts` names or is one the build writes
+  (green on eagle-design's clone); `yarn sync:theme` refuses a sha whose review record does not name it as its
+  head and pass it (the wow-sample stamp is not asked: the build side's mirror runs this script before it
+  stamps). Undo: each reverted.
+- Call: `aNameHasOneHome` stays off the products for this release. Tried on eagle-design's clone it finds 24
+  names: most a shape many modules export on purpose (an entry's `all`, `byId`, `rows`; a rule file's `rules`;
+  a skill's `skill`), four duplicates inside this repository's design home (`SourceFinding`, `endpointsOf`,
+  `leavesOf`, `sectionOf`), the rest the product's own. Taking it now holds v0.22.0, and the lock with it,
+  behind a product's renames. The second half: the scan on the homes with the scope's entries left out, the
+  four renamed here, the product's list to eagle-design. Undo: the test back under `shared/tests/`.

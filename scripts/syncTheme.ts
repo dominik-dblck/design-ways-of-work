@@ -1,6 +1,6 @@
 /**
  * - `node scripts/syncTheme.ts <sha>` · the build side's theme and atoms, copied
- * - read at a sha of its repository, read only; only the imports are rewritten
+ * - read at a sha its review passed, read only; only the imports are rewritten
  * - its record, `ports/build-theme/taken.ts`, written by it: the sha and each file
  */
 import { execFileSync } from 'node:child_process';
@@ -11,7 +11,7 @@ import { BUILD_THEME } from '../ports/build-theme/copySet.ts';
 import { TAKEN } from '../ports/build-theme/taken.ts';
 import { prettierConfigOf } from '../shared/lint/prettierConfig.ts';
 import { BUILD_REPO, HERE } from './repos.ts';
-import { copiedFrom, specified } from './syncFiles.ts';
+import { copiedFrom, reviewRefusal, specified } from './syncFiles.ts';
 import { quoted } from './tsLiteral.ts';
 
 const RECORD = path.join(HERE, 'ports', 'build-theme', 'taken.ts');
@@ -37,6 +37,20 @@ const git = (args: readonly string[]): string =>
     maxBuffer: 1 << 28,
   });
 const full = git(['rev-parse', '--verify', `${sha}^{commit}`]).trim();
+const recordFile = path.join(
+  BUILD_REPO,
+  BUILD_THEME.reviewed.replace('{sha}', full.slice(0, 8)),
+);
+const refusal = reviewRefusal({
+  record: fs.existsSync(recordFile)
+    ? fs.readFileSync(recordFile, 'utf8')
+    : null,
+  sha: full,
+});
+if (refusal !== null) {
+  console.log(`syncTheme · ${full} · ${refusal}: review it there first (W105)`);
+  process.exit(1);
+}
 const files = new Set(
   git(['ls-tree', '-r', '-z', '--name-only', full]).split('\0').filter(Boolean),
 );
