@@ -1,6 +1,7 @@
 /**
  * - `node scripts/sample.ts [--emit] [script…]` · the sample on the homes in hand
- * - from nothing; its generated files current (`--emit` writes them); its scripts
+ * - from nothing; its generated files and a home's emitted ones current
+ * - `--emit` writes them; else its scripts, by default its build and checks
  */
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
@@ -11,6 +12,7 @@ import { stepIn } from './ran.ts';
 import { childEnv, SCRATCH } from './scratch.ts';
 
 const SAMPLE = path.join(HERE, 'examples', 'sample-product');
+const DESIGN = path.join(HERE, 'design');
 const ROOT = path.join(SCRATCH, 'sample');
 // git's names for the sample's one commit: no person's
 const AUTHOR = ['-c', 'user.name=sample', '-c', 'user.email=sample@invalid'];
@@ -26,6 +28,23 @@ const changedFiles = (): readonly string[] =>
     .split('\0')
     .filter(Boolean)
     .map((line) => line.slice(3));
+
+// a design home's file the sample's build wrote otherwise: the home holds a stale emit
+const staleHomeFiles = (): readonly string[] =>
+  execFileSync(
+    'git',
+    ['ls-files', '-z', '--cached', '--others', '--exclude-standard', '.'],
+    { cwd: DESIGN, encoding: 'utf8', env: childEnv() },
+  )
+    .split('\0')
+    .filter(Boolean)
+    .filter((file) => {
+      const built = path.join(ROOT, file);
+      return (
+        fs.existsSync(built) &&
+        !fs.readFileSync(built).equals(fs.readFileSync(path.join(DESIGN, file)))
+      );
+    });
 
 emptied({ within: SCRATCH, folder: ROOT });
 fs.cpSync(SAMPLE, ROOT, { recursive: true });
@@ -54,12 +73,25 @@ for (const file of changed) {
     });
   console.log(`sample · ${isEmit ? 'written' : 'stale'} · ${file}`);
 }
-if (isEmit) process.exit(0);
+if (isEmit) {
+  ran('yarn', ['-s', 'build']);
+  for (const file of staleHomeFiles()) {
+    fs.copyFileSync(path.join(ROOT, file), path.join(DESIGN, file));
+    console.log(`sample · written · design/${file}`);
+  }
+  process.exit(0);
+}
 if (changed.length > 0) {
   console.log('sample · its generated files are stale: yarn sample --emit');
   process.exit(1);
 }
 const named = process.argv.slice(2).filter((arg) => !arg.startsWith('--'));
-for (const script of named.length === 0 ? ['check:feature'] : named)
+for (const script of named.length === 0 ? ['build', 'check:feature'] : named)
   ran('yarn', ['-s', script]);
+const stale = staleHomeFiles();
+for (const file of stale) console.log(`sample · stale · design/${file}`);
+if (stale.length > 0) {
+  console.log("sample · a home's emitted file is stale: yarn sample --emit");
+  process.exit(1);
+}
 console.log('sample · green');

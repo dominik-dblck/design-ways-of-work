@@ -1311,3 +1311,12 @@ Each call: what, why, how to undo. None changes what the PM sees.
   guard's finding type instead of deriving its own. The move rewrote two paths inside the test's planted texts,
   mended after it (a known gap). The sample was red once on two renamed files left unformatted, then green.
   Undo: the commit reverted.
+- 23dabb0 reviewed by eagle-design, one finding: the test, and the lint rule alike, dropped a family's name in
+  its files, so the name declared once more outside stood alone. 7670a98: a family's files are one home of the
+  name, keyed by the globs of every family naming it (two families sharing `rules` stay one home). Undo: the
+  commit reverted.
+- The gate on 23dabb0, red: eagle-design's build wrote `docs/rules/one-home.md` from the row this commit
+  changed, over the home's copy the take wrote. A home's emitted file is the build's output, and nothing here
+  held it current. Call: `yarn sample` runs the build before its feature tier and refuses a design home file
+  its build writes otherwise; `yarn sample --emit` writes it into the home. Only that file differed. Told to
+  eagle-dev, whose mirror runs the sample. Undo: the commit reverted.
