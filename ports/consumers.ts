@@ -3,7 +3,6 @@
  * - `BUILD_SOURCE` · the build repository `dev/` is taken from, by script
  */
 import type { Consumer } from '../scripts/consumerTypes.ts';
-import { CARRIED } from './eagle-design/carried.ts';
 import { CASE_READERS } from './eagle-design/caseReaders.ts';
 import { CONTRACT_READERS } from './eagle-design/contractReaders.ts';
 import { COUNT_FORMS } from './eagle-design/countForms.ts';
@@ -13,7 +12,6 @@ import { BACKUP_HOOK } from './eagle-design/backupHook.ts';
 import { BUILD_THEME_TAKEN } from './eagle-design/buildTheme.ts';
 import { GENERATED_FILES } from './eagle-design/generatedFiles.ts';
 import { HELD_BY } from './eagle-design/heldBy.ts';
-import { REWRITTEN } from './eagle-design/rewritten.ts';
 import { SCOPE_PRESET_CUT } from './eagle-design/scopePresetCut.ts';
 import { ICON_PACKAGE } from './eagle-design/iconPackage.ts';
 import { MIGRATION } from './eagle-design/migration.ts';
@@ -28,7 +26,7 @@ const CONSUMERS: readonly [Consumer, ...Consumer[]] = [
   {
     name: 'eagle-design',
     path: '../eagle-design',
-    ref: 'port/wow',
+    ref: 'main',
     commands: [
       ['build'],
       ['checks'],
@@ -65,17 +63,8 @@ const CONSUMERS: readonly [Consumer, ...Consumer[]] = [
       BUILD_THEME_TAKEN,
       ICON_PACKAGE,
     ],
-    // its own work lands on `main`, which takes nothing yet: the branch holds `main` whole, or the gate is red
-    port: {
-      trunk: 'main',
-      base: '8e031ff6f80c8a25127c9fc214c5859f84477f03',
-      moves: 'ports/eagle-design/moves.tsv',
-      carried: CARRIED,
-      kept: ['legacy/'],
-      rewritten: REWRITTEN,
-      // the block model's data became a module: a row names it so
-      names: [['block-model.json', 'blockModel.ts']],
-    },
+    // its `main` takes the tags itself: no branch stands between it and the gate
+    port: null,
   },
 ];
 

@@ -1360,3 +1360,10 @@ Each call: what, why, how to undo. None changes what the PM sees.
   so eagle-design's static files keep their paths; a migration may drop a package now (`dropped`, `yarn
   remove`), and eagle-design's drops `lucide-static` at 1.1.0; this repository and the sample drop it by yarn.
   It goes out with the molecules in v1.1.0 (W108). Undo: the commit reverted, the package added back.
+- Stage 3, task 1: eagle-design's `main` holds v1.0.0 (614cb70, fast-forwarded from `port/wow`). Call: the gate
+  tries `main` with no port; the port's carried rows, rewritten snapshots and moves go to `legacy/` by script,
+  `tree/` stays for the migrations that read it. Undo: the files moved back, `ref: 'port/wow'` and its port.
+- The PM, 13 Nov, on the SVG files: "jezeli mamy react to po co mamy wychodzic do svg?". Call: no SVG file at
+  all. The design pages draw icons as `lucide-react` components already; the paths stand only in 8 rows of
+  eagle-design's data. Eagle-design names those icons for `lucide-react`, then the build's SVG writer goes to
+  `legacy/`, in v1.1.0. Undo: the writer brought back from `legacy/`.

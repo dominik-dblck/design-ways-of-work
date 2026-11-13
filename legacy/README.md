@@ -38,6 +38,15 @@ A migration is what a repository does to take one release; once its branch holds
 - `ports/eagle-design/migration.ts` and its `tree/` · v0.3.0: eagle-design's `product.ts` and the frozen
   notebooks' registry, written on its checkout; its `port/wow` holds them since 88f5d3e
 
+## eagle-design's port
+
+Retired when eagle-design's `main` took v1.0.0 from `port/wow` (its 614cb70): the gate tries `main` itself.
+
+- `ports/eagle-design/carried.ts` and its `carried/` · each change of `main` to a home file, carried onto
+  the port by the gate's merge
+- `ports/eagle-design/rewritten.ts` · the snapshots the port held as modules while `main` held their JSON
+- `ports/eagle-design/moves.tsv` · the port's moves, applied to `main`'s change before the merge
+
 ## The views' retired parts
 
 What a view stopped drawing when eagle-design's `main` changed it, kept as it stood in its home.

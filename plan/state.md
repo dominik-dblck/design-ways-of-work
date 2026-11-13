@@ -16,9 +16,8 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
 ## Who takes it
 
 - `ports/consumers.ts` names each repository the gate tries, and the branch it tries.
-- eagle-design: its branch `port/wow` takes the tags, each by its migrations (v0.23.0 at 7021c4e, its main
-  346a633 merged at 13b9ea7); v1.0.0 is out for it to take, with its base branch `main`. Its `main` still runs on its own copies and takes the port's line at stage 3
-  (its fast-forward is the PM's word). The gate tries `port/wow`, taking `main` by the port's script.
+- eagle-design: its `main` takes the tags, each by its migrations; it holds v1.0.0 since 614cb70, taken on
+  `port/wow` and fast-forwarded. The gate tries `main` with no port: the port's files are in `legacy/`.
 - argus-design: not spawned yet; its stack is decided, the one this repository defines (W24).
 - `examples/sample-product`: the smallest product, naming none; `yarn sample` builds it from nothing on the
   tree's homes and runs its feature tier, ten of ten green; this repository's feature tier runs it. It takes
@@ -41,8 +40,8 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
 
 ## Open for the PM
 
-Nothing open. The PM's word of 13 Nov on the icons (W109): `lucide-react` alone; a static file that names an
-icon by its SVG path keeps it, the build writing the SVG from `lucide-react`'s data; `lucide-static` leaves
+Nothing open. The PM's word of 13 Nov on the icons (W109): `lucide-react` alone, and no SVG file; eagle-design
+names its last 8 icon paths for `lucide-react`, the build's SVG writer retires, and `lucide-static` leaves
 every repository by migration, in v1.1.0 with the molecules.
 
 The PM's word of 13 Nov (W104) settled the rest: the relayed rules stand with three more, this session talks to
@@ -90,4 +89,4 @@ batch by eagle-dev. Heavy runs take turns on the machine through `~/.claude/hook
   and a moved row's words stand twice, the product's row and the register's. Once `decisions/` ships in the
   package, a moved row shrinks to `{ id, heldBy }` and the product's board and decisions check read its words
   through `heldBy`: the register alone holds them.
-- D96 to D101 of eagle-design wait on the PM's fast-forward of its `main`; D96 to D99 then join the register.
+- D96 to D99 of eagle-design join the register: its `main` is fast-forwarded, nothing holds them now.
