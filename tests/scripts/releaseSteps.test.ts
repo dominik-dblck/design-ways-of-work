@@ -6,6 +6,7 @@ import {
   bumped,
   changelogText,
   leftSince,
+  versionOf,
 } from '../../scripts/releaseSteps.ts';
 import { scratchRepo } from './scratchRepo.ts';
 
@@ -34,6 +35,16 @@ describe('the version a release takes', () => {
 
   it('a version that is not three numbers is refused', () => {
     expect(() => bumped('1.0', 'patch')).toThrow('no version of three numbers');
+  });
+
+  it('1.0.0 is named from below it and refused past it; any other is counted', () => {
+    expect(versionOf('0.23.0', { kind: 'major', named: '1.0.0' })).toBe(
+      '1.0.0',
+    );
+    expect(versionOf('0.23.0', { kind: 'minor' })).toBe('0.24.0');
+    expect(() => versionOf('1.0.0', { kind: 'major', named: '1.0.0' })).toThrow(
+      'named once, from below it',
+    );
   });
 });
 

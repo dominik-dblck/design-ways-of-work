@@ -12,7 +12,7 @@ import { NEXT, RELEASES } from '../releases/changelog.ts';
 import { HOMES } from '../shared/take/takeHomes.ts';
 import type { Release } from './changelogTypes.ts';
 import { hooksInstalled } from './hooksInstalled.ts';
-import { bumped, changelogText, leftSince } from './releaseSteps.ts';
+import { changelogText, leftSince, versionOf } from './releaseSteps.ts';
 import { overHttps, versioned } from './releaseTexts.ts';
 import { HERE } from './repos.ts';
 import { childEnv } from './scratch.ts';
@@ -136,7 +136,7 @@ async function main(): Promise<void> {
     pushed(url, last);
     return;
   }
-  const version = bumped(last, NEXT.kind);
+  const version = versionOf(last, NEXT);
   await written(version, last);
   committed(version);
   pushed(url, version);

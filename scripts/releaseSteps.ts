@@ -1,5 +1,5 @@
 /**
- * - `bumped` · the version a release of a kind takes after another
+ * - `bumped`, `versionOf` · a release's version, by its kind or 1.0.0 named
  * - `leftSince` · by home, each path that moved or left since a tag
  * - `changelogText` · the changelog's file, its releases written, none in hand
  */
@@ -23,6 +23,20 @@ function bumped(version: string, kind: Unreleased['kind']): string {
       return place === at ? one + 1 : 0;
     })
     .join('.');
+}
+
+// 1.0.0 is named by the release that takes it, once and from below; every other version is counted
+function versionOf(
+  last: string,
+  next: Pick<Unreleased, 'kind' | 'named'>,
+): string {
+  const counted = bumped(last, next.kind);
+  if (next.named === undefined) return counted;
+  if (!last.startsWith('0.'))
+    throw new Error(
+      `${next.named} is named once, from below it: ${last} is past it`,
+    );
+  return next.named;
 }
 
 // git's own names: R for a path that moved, D for one that left; a file only changed is no move
@@ -88,4 +102,4 @@ const changelogText = (releases: readonly Release[]): string =>
     '',
   ].join('\n');
 
-export { bumped, changelogText, leftSince };
+export { bumped, changelogText, leftSince, versionOf };

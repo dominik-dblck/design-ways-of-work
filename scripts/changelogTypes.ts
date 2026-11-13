@@ -13,6 +13,8 @@ interface RuleKeys {
 interface Unreleased {
   // patch: nothing a repository sees; minor: more, nothing to do; major: an action
   readonly kind: 'patch' | 'minor' | 'major';
+  // the one version a release names instead of counting, from below it
+  readonly named?: '1.0.0';
   readonly what: string;
   // what a repository does to take it, beside moving its pin
   readonly action: string;
