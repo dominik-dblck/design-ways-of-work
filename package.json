@@ -33,6 +33,7 @@
     "consumers": "node scripts/consumers.ts",
     "sample": "node scripts/sample.ts",
     "spawn": "node scripts/spawn.ts",
+    "sync:theme": "node scripts/syncTheme.ts",
     "release": "node scripts/release.ts",
     "hooks": "husky",
     "hooks:user": "node shared/user-hooks/installUserHooks.ts",
