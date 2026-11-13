@@ -263,6 +263,13 @@ const SINCE: readonly Decision[] = [
     says: 'the atoms and theme copied from the build side stay as copied, the editor’s and the phone preview’s glyph sets, the approval states and the version sides included; a product that needs more extends them, the way of working staying the same.',
     from: 'plan/run-11-nov.md',
   },
+  {
+    id: 'W108',
+    title: 'v1.0.0 now, the build side’s plain molecules after it as v1.1',
+    held: '13 Nov · the PM’s word, here',
+    says: 'v1.0.0 goes out without molecules; the build side’s plain molecules (about 22, with the utils they read) move in one batch, its words made props with defaults, one review, one record, one sha, the whole e2e at its end, and go out as v1.1.0; the molecules reading the product’s domain and its previews stay the product’s.',
+    from: 'plan/run-11-nov.md',
+  },
 ];
 
 // a product's rows keep their words of the day and their order, each naming the row it was

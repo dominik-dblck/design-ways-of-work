@@ -35,8 +35,9 @@ function namesIn(source: Source, names: readonly string[]): readonly string[] {
 }
 
 describe('the way of working names no product', () => {
-  // the build repository's paths, what it reads and the records' eras say where or when, not a name a text could carry
+  // the build repository's paths, branch, reads and the records' eras say where or when, not a name a text could carry
   const {
+    buildBranch: _branch,
     buildPaths: _paths,
     buildReads: _reads,
     recordEras: _eras,

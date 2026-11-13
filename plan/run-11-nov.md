@@ -1334,3 +1334,13 @@ Each call: what, why, how to undo. None changes what the PM sees.
   co mozna reuzyc i warto przeniesc z designem tez mozesz zagadac". By imports, of 43: about 27 plain UI, 12
   reading Eagle's domain, 4 Eagle's own. Eagle-design: a molecule moves once a second product reads it
   (Segmented and Drawer now). Eagle-dev's view asked; the list goes to the PM for one decision.
+- Eagle-dev's read: about 22 plain (some after a small untangle: Eagle's words as props with defaults, Dialog's
+  test ids out of `e2e/`, a brand as a number), about 19 Eagle's own, 2 dead. The PM chose B (W108): v1.0.0 now,
+  the plain molecules in one batch after it as v1.1.0, by eagle-dev's cadence (move it all, one review, one
+  record, one sha, the whole e2e at the end). The register row was written while the gate on 729870d ran, against
+  this repository's rule; the gate reads the commit by `git archive HEAD`, so its result stands.
+- The gate on 729870d, red: eagle-design's release 5.4.6 changed eight files of `main` the homes hold (the base
+  branch is main; its D106; its E23 notebook). Six read the branch or the notebook off the product's own files
+  already; its D106 lesson is the product's, in its `codeSkill.8+` slot, not a rule for every product; the
+  no-product test leaves `buildBranch` out of the names, as main's does, since `main` is no product's name.
+  Rows in `ports/eagle-design/carried/baseBranch.ts`. Undo: the commit reverted.

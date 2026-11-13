@@ -3,6 +3,7 @@
  * - carried into that home: the file there, its blob there, where the change stands
  */
 import type { Carried } from '../../scripts/portTypes.ts';
+import { BASE_BRANCH } from './carried/baseBranch.ts';
 import { BOARD_AND_CONTRACT } from './carried/boardAndContract.ts';
 import { BOARD_NUMBERS } from './carried/boardNumbers.ts';
 import { ENDPOINT_FOLDS } from './carried/endpointFolds.ts';
@@ -52,6 +53,7 @@ const CARRIED: readonly Carried[] = [
   ...SPLIT_HOMES,
   ...BOARD_NUMBERS,
   ...REPOSITORY_LINE,
+  ...BASE_BRANCH,
 ];
 
 export { CARRIED };
