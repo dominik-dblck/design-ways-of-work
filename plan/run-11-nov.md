@@ -24,7 +24,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 
 | stage | what | done | of |
 | 1 | Foundation | 7 | 7 |
-| 2 | Design clean | 25 | 26 |
+| 2 | Design clean | 26 | 26 |
 | 3 | Eagle-design | 0 | 2 |
 | 4 | Spawn design | 2 | 3 |
 
@@ -97,6 +97,7 @@ new-project guide · 3 · `argus-design` spawned and green on its first commit, 
 - 07:28 · stage 4 · 2 of 3 · the new-project guide rewritten around the spawn (4446d76), out in v0.20.0
 - 08:37 · stage 2 · 24 of 26 · the build side's theme and atoms copied by script at its reviewed sha eed29307, the pages on the shared theme; v0.21.0 out (1ea139e, 719c249, a621fcb)
 - 12:12 · stage 2 · 25 of 26 · the build side's architecture guard on the homes: the homes are the tree, a sha synced only reviewed, one home per name in every product, the review rows' skill (v0.22.0, v0.23.0, 729870d), eagle-design approved
+- 12:29 · stage 2 · 26 of 26 · v1.0.0 out (4cb1b34): the gate green on eagle-design's port/wow holding its main, the release naming 1.0.0
 
 ## Calls
 

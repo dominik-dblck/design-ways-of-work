@@ -16,7 +16,8 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
 ## Who takes it
 
 - `ports/consumers.ts` names each repository the gate tries, and the branch it tries.
-- eagle-design: its branch `port/wow` takes the tags, each by its migrations (v0.22.0 at c881e8d). Its `main` still runs on its own copies and takes the port's line at stage 3
+- eagle-design: its branch `port/wow` takes the tags, each by its migrations (v0.23.0 at 7021c4e, its main
+  346a633 merged at 13b9ea7); v1.0.0 is out for it to take, with its base branch `main`. Its `main` still runs on its own copies and takes the port's line at stage 3
   (its fast-forward is the PM's word). The gate tries `port/wow`, taking `main` by the port's script.
 - argus-design: not spawned yet; its stack is decided, the one this repository defines (W24).
 - `examples/sample-product`: the smallest product, naming none; `yarn sample` builds it from nothing on the
