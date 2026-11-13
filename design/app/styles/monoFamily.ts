@@ -3,5 +3,5 @@
  */
 import { asVariable } from './tokenReads.ts';
 
-/** The code face · a mono eyebrow, a count, a code. */
+/** The code face · a count, a code. */
 export const monoFamily = `var(${asVariable('fontMono')})`;

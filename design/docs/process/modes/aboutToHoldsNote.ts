@@ -1,6 +1,6 @@
 /**
  * - `ABOUT_TO_HOLDS_NOTE` · the head fields of the ticket modes' page
- * - about, eyebrow, source, intro, modesNote, modes, facts, holdsNote
+ * - about, label, source, intro, modesNote, modes, facts, holdsNote
  */
 import { cite, citeLines } from '../../documents/cited.ts';
 import { buildSide } from '../../../sheet/project.ts';
@@ -9,7 +9,7 @@ const ABOUT_TO_HOLDS_NOTE = {
     'The three ticket modes as data' +
     cite('modes.decided') +
     ' · the ticket carries its mode as a chip (W47) · pipeline-cleanup.md moves it into ticket-pipeline.md for the agent',
-  eyebrow: cite('modes.eyebrow'),
+  label: cite('modes.label'),
   source:
     'data · modes.ts · rendered here · in ticket-pipeline.md' +
     cite('modes.since'),

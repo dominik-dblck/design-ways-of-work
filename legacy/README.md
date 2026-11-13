@@ -90,3 +90,5 @@ Retired when the PM picked three names, each one thing (W116): Heading, Text and
 - `design/app/components/atoms/Eyebrow/` · the code face's label in capitals over a thing: `Label` draws it
 - `design/app/components/atoms/SectionHead/` · a section's label in capitals and its note: a `Heading`,
   `quiet`, with its `note`
+- the tokens `--ui-eyebrow` (10px) and `--ui-eyebrow-font` (`var(--font-mono)`), rows of
+  `design-system/tokens/typography.ts` no code read: the label's size is `--ui-label`, its face the body's

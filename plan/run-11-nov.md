@@ -1491,3 +1491,7 @@ Each call: what, why, how to undo. None changes what the PM sees.
   Eyebrow's two files) as provided, so a copy never brings it back; the mode picker's head became a Label and
   the side nav's default words left their capitals, here, after the copy. Undo: the copied files out by
   `git rm`, `taken.ts` and the copy set as they were.
+- Eagle-design's review of 7902819: four places still named the eyebrow. Calls: its two tokens retire, as no
+  code read them (listed in `legacy/README.md`); the modes page's field and cite key become `label`, and
+  eagle-design's migration for 1.4.0 (`ports/eagle-design/modesLabel.ts`) moves its key, as a key the
+  product does not hold prints nothing; two comments mended. Undo: revert the commit.
