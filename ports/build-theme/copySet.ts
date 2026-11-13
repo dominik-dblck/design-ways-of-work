@@ -17,11 +17,11 @@ const BUILD_THEME: CopySet = {
   ],
   // imported where it stands: the product's tokens, and what this repository holds
   provided: ['app/styles/tokens.ts', ...HELD],
-  // never copied, never imported: tests, the app's mark, name and router link, its own layer
+  // never copied, never imported: tests, the app's mark and name, its own layer
   left: [
     /\/__tests__\//,
     /\.test\.tsx?$/,
-    /^app\/components\/atoms\/(?:AppMark|Link|Wordmark)\//,
+    /^app\/components\/atoms\/(?:AppMark|Wordmark)\//,
     /^app\/styles\/(?:appChips|appTheme|appearance)\.ts$/,
   ],
   // its own record of a move's review, written there before a sha comes here

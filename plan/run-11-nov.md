@@ -1472,3 +1472,7 @@ Each call: what, why, how to undo. None changes what the PM sees.
   repository changed after W110. Call: the copy set's seeds become the skeleton alone; the 207 files the last
   take recorded are held here (`ports/build-theme/held.ts`), imported where they stand and never copied or
   reported gone. Undo: the copy set's old seeds back, `held.ts` to `legacy/`.
+- The PM, 13 Nov, picked A: a third release today, v1.3.1, once past W115's one or two a day, as eagle-dev's
+  stamp of the skeleton's second sha samples this repository's last tag and the copy set left `atoms/Link`
+  there. Call: `left` keeps the app's mark and name alone; Link, now an `a` unless a component is handed in,
+  comes with that sha. Undo: Link back in `left`'s pattern.
