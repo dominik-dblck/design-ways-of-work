@@ -19,7 +19,7 @@ export type ButtonProps = Omit<
   readonly startIcon?: React.ReactNode;
   readonly disabled?: boolean;
   readonly greyed?: boolean;
-  readonly describedBy?: string;
+  readonly describedBy?: string | undefined;
   readonly labelledBy?: string;
   // its state in a sentence · read to a screen reader, never shown on hover
   readonly description?: string;
@@ -30,8 +30,8 @@ export type ButtonProps = Omit<
   readonly pressed?: boolean;
   readonly onClick?: () => void;
   readonly children: React.ReactNode;
-  readonly testId?: string;
-  readonly sx?: SxProps<Theme>;
+  readonly testId?: string | undefined;
+  readonly sx?: SxProps<Theme> | undefined;
 };
 
 /** What reaches the split: its look, and what a wrapping hint hands the element. */

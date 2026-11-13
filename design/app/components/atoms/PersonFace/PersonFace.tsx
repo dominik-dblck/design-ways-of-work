@@ -16,7 +16,7 @@ export type PersonFaceProps = Omit<
   readonly face: string | null;
   readonly name: string;
   readonly describe: boolean;
-  readonly testId?: string;
+  readonly testId?: string | undefined;
   readonly sx?: SxProps<Theme>;
 };
 

@@ -10,7 +10,7 @@ import type { Tone } from '../../../styles/tones.ts';
 
 export type LabelProps = {
   readonly children: React.ReactNode;
-  readonly id?: string;
+  readonly id?: string | undefined;
   readonly tone?: Tone;
   readonly required?: boolean;
   readonly testId?: string;

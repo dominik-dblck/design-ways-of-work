@@ -14,7 +14,7 @@ export type StateChipProps = {
   readonly trail?: React.ReactElement;
   // medium where a state stands on its own: the bar, a row, a group's head
   readonly size?: 'small' | 'medium';
-  readonly testId?: string;
+  readonly testId?: string | undefined;
   readonly sx?: SxProps<Theme>;
 };
 

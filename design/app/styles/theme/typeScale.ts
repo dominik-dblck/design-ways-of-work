@@ -1,13 +1,10 @@
 /**
  * - `TYPOGRAPHY` · the type scale on the brand font
- * - `MONO_FAMILY` · the code face, as its token's variable
  */
 import type { ThemeOptions } from '@mui/material/styles';
 import type { LightToken } from '../tokens.ts';
-import { asVariable, length } from '../tokenReads.ts';
-
-/** The code face · a mono eyebrow, a count, a code. */
-export const MONO_FAMILY = `var(${asVariable('fontMono')})`;
+import { monoFamily } from '../monoFamily.ts';
+import { length } from '../tokenReads.ts';
 
 const SNUG = length('lhSnug');
 const NORMAL = length('lhNormal');
@@ -51,6 +48,6 @@ export const TYPOGRAPHY: ThemeOptions['typography'] = {
     lineHeight: 1,
     letterSpacing: '0.08em',
     textTransform: 'uppercase',
-    fontFamily: MONO_FAMILY,
+    fontFamily: monoFamily,
   },
 };

@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 
 export type WhyProps = {
   readonly id: string;
-  readonly testId?: string;
+  readonly testId?: string | undefined;
   readonly children: React.ReactNode;
 };
 

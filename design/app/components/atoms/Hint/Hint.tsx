@@ -11,14 +11,14 @@ export type HintProps = {
   readonly title: string | React.ReactElement | null;
   readonly children: React.ReactElement;
   // in ms · the theme's when absent
-  readonly delay?: number;
+  readonly delay?: number | undefined;
   // shows nothing, and closes one already open
-  readonly quiet?: boolean;
+  readonly quiet?: boolean | undefined;
   // the title draws its own surface; the tooltip's paper goes
   readonly bare?: boolean;
   // the theme's, under the child, when absent
   readonly placement?: TooltipProps['placement'];
-  readonly testId?: string;
+  readonly testId?: string | undefined;
   readonly sx?: SxProps<Theme>;
   // what a group that clones its children hands this one, passed on
   readonly className?: string;

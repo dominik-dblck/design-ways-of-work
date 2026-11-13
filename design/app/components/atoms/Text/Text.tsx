@@ -20,8 +20,8 @@ export type TextProps = {
   // said as it appears: a line that arrived after the screen was drawn
   readonly alert?: boolean;
   readonly id?: string;
-  readonly testId?: string;
-  readonly sx?: SxProps<Theme>;
+  readonly testId?: string | undefined;
+  readonly sx?: SxProps<Theme> | undefined;
 };
 
 export function Text({

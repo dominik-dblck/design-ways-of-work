@@ -1,7 +1,7 @@
 /**
  * - `copiedFrom` · the files a sha gives the theme and its atoms, their closure
  * - `specified` · a file's imports written for this side: relative, with extension
- * - `reviewRefusal` · why a sha's review record refuses its copy; null, it passes
+ * - `reviewRefusal`, `leftStanding` · a review refusing; a gone file kept
  */
 import path from 'node:path';
 
@@ -124,5 +124,18 @@ function specified({
   });
 }
 
-export { copiedFrom, reviewRefusal, specified };
+// a file the last copy wrote that this one does not and that still stands: retired first, never dropped
+function leftStanding({
+  taken,
+  copied,
+  stands,
+}: {
+  readonly taken: readonly string[];
+  readonly copied: readonly string[];
+  readonly stands: (file: string) => boolean;
+}): readonly string[] {
+  return taken.filter((file) => !copied.includes(file) && stands(file));
+}
+
+export { copiedFrom, leftStanding, reviewRefusal, specified };
 export type { CopySet };

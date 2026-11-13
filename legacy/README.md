@@ -77,3 +77,5 @@ Retired when the build side's theme came here by script (W25, W26): the design p
 
 - `design/app/theme/theme.ts` and `design/app/theme/palette.ts` · this side's own MUI theme and palette, read
   off the same tokens: `design/app/theme/pagesTheme.ts` builds on the shared theme, code's type and inks added
+- `design/app/styles/theme/fades.ts` · the theme's fades, retired when the build side moved them to
+  `design/app/styles/fades.ts` as `fades` (its 360cb0b, copied with the molecules)

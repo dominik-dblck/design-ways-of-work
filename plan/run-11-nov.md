@@ -1372,3 +1372,9 @@ Each call: what, why, how to undo. None changes what the PM sees.
   `dist/project/lucide-icons/`, its rows keep the path strings (a contract field, held for the PM to change).
   The PM: "wszystko na react leci te htmls to legacy sa". Call: the SVG writer goes to `legacy/` now, the build
   writes no `lucide-icons/`; its error message is not mended, the writer leaves. Undo: the writer brought back.
+- W108, the molecules: eagle-dev's 360cb0b (its review record passed, its mirror's sample green) synced, 200
+  files: 24 molecule seeds in `ports/build-theme/copySet.ts`, their closure (4 constants, 4 utils, `fades.ts`,
+  `monoFamily.ts`), the atoms re-synced. `design/app/styles/theme/fades.ts`, gone at that sha, went to `legacy/`
+  first; the sync then still refused it, since its check read the record alone. Call: a gone file stops the sync
+  only while it stands in the home (`leftStanding`, tested). Sample green, 804 files. Undo: the copy set's seeds
+  and `taken.ts` back to 38a280f9, `yarn sync:theme` at it, fades.ts brought back.

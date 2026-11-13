@@ -9,7 +9,7 @@ export type SwitchProps = {
   readonly disabled?: boolean;
   readonly label?: string;
   readonly onChange?: (checked: boolean) => void;
-  readonly testId?: string;
+  readonly testId?: string | undefined;
   readonly sx?: SxProps<Theme>;
 };
 

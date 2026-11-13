@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   copiedFrom,
+  leftStanding,
   reviewRefusal,
   specified,
 } from '../../scripts/syncFiles.ts';
@@ -117,5 +118,20 @@ describe('a sha comes only with its architecture review passed', () => {
     ],
   ])('%s: refused, saying why', (_, record, said) => {
     expect(reviewRefusal({ record, sha: SHA })).toBe(said);
+  });
+});
+
+describe('a file the last copy took and this sha drops is retired first', () => {
+  const taken = ['app/styles/theme/fades.ts', 'app/styles/theme.ts'];
+  const copied = ['app/styles/theme.ts', 'app/styles/fades.ts'];
+
+  it('still in the home: it stops the copy', () => {
+    expect(leftStanding({ taken, copied, stands: () => true })).toEqual([
+      'app/styles/theme/fades.ts',
+    ]);
+  });
+
+  it('retired to legacy/: the copy goes', () => {
+    expect(leftStanding({ taken, copied, stands: () => false })).toEqual([]);
   });
 });

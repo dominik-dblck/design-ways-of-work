@@ -12,10 +12,10 @@ export type ListItemProps = {
   readonly disabled?: boolean;
   readonly describedBy?: string;
   readonly icon?: React.ReactNode;
-  readonly tone?: ListItemTone;
+  readonly tone?: ListItemTone | undefined;
   readonly dense?: boolean;
-  readonly onClick?: () => void;
-  readonly testId?: string;
+  readonly onClick?: (() => void) | undefined;
+  readonly testId?: string | undefined;
   readonly sx?: SxProps<Theme>;
   readonly children: React.ReactNode;
 };

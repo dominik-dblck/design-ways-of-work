@@ -19,13 +19,13 @@ export type IconButtonProps = Omit<
   readonly size?: IconButtonSize;
   readonly disabled?: boolean;
   readonly greyed?: boolean;
-  readonly describedBy?: string;
+  readonly describedBy?: string | undefined;
   readonly pressed?: boolean;
   readonly expanded?: boolean;
   readonly onClick?: () => void;
   readonly children: React.ReactNode;
-  readonly testId?: string;
-  readonly sx?: SxProps<Theme>;
+  readonly testId?: string | undefined;
+  readonly sx?: SxProps<Theme> | undefined;
 };
 
 /** A look prop arrives absent, or present and undefined, as a destructured prop does. */

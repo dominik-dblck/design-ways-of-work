@@ -11,7 +11,12 @@ import { BUILD_THEME } from '../ports/build-theme/copySet.ts';
 import { TAKEN } from '../ports/build-theme/taken.ts';
 import { prettierConfigOf } from '../shared/lint/prettierConfig.ts';
 import { BUILD_REPO, HERE } from './repos.ts';
-import { copiedFrom, reviewRefusal, specified } from './syncFiles.ts';
+import {
+  copiedFrom,
+  leftStanding,
+  reviewRefusal,
+  specified,
+} from './syncFiles.ts';
 import { quoted } from './tsLiteral.ts';
 
 const RECORD = path.join(HERE, 'ports', 'build-theme', 'taken.ts');
@@ -69,8 +74,11 @@ const files = new Set(
 const read = (file: string): string => git(['show', `${full}:${file}`]);
 const copied = copiedFrom({ set: BUILD_THEME, read, files });
 
-// a file the last copy wrote that this one does not: retired to legacy/ by script first, never dropped here
-const gone = TAKEN.files.filter((file) => !copied.includes(file));
+const gone = leftStanding({
+  taken: TAKEN.files,
+  copied,
+  stands: (file) => fs.existsSync(path.join(HERE, BUILD_THEME.into, file)),
+});
 for (const file of gone)
   console.log(`syncTheme · ${file} · gone at ${full}: retire it first`);
 if (gone.length > 0) process.exit(1);
