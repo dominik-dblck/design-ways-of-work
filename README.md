@@ -23,7 +23,8 @@ A repository takes it at a tag; nothing of it enters that repository's history.
 3. Its `postinstall` runs `shared/take/takeWow.ts`: each file of the homes it names is written onto its own paths,
    recorded by digest, and hidden from its git. A file it edited is never overwritten: the take stops.
 4. To move to a later tag it runs the migrations its row names first, `node scripts/migrate.ts <name> <checkout>`
-   from this repository at the tag, then moves the pin and installs, then checks: a check between the two can be
+   from this repository at the tag, its checkout on the branch `ports/consumers.ts` names for it (any other
+   stops), then moves the pin and installs, then checks: a check between the two can be
    red, as the migrated files and the taken ones meet only once the install lands. The row says what else it does.
 
 A build repository takes by commit instead (W113): no dependency, no `postinstall`.
