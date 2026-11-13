@@ -14,7 +14,7 @@ const skill: SkillFile = {
       lead: null,
       first: 1,
       lines: [
-        'A release is a pushed commit on `main`: tag it `release-<yyyy-mm-dd>-<what>`, `<what>` a few words in kebab case naming what it carries, and name it in the message as `release <full sha>`, with the sha256 of every file the message is about (`shasum -a 256 <its repository path>`).',
+        'A release is a pushed commit on `main`: tag it `release-<yyyy-mm-dd>-<what>`, `<what>` one to three lowercase words joined by hyphens, saying what the release does, and name it in the message as `release <full sha>`, with the sha256 of every file the message is about (`shasum -a 256 <its repository path>`).',
         'Its record is `records/release-<version>.md`: write its head (the title, What it carries), then `yarn release:record <version>` writes every module the build side reads (`sheet/project.ts` · buildReads) with every module they import, and every file of each, each with its digest, and reads them back from the tree. Nothing below the head is written by hand.',
         "The build side reads `git cat-file blob <sha>:{file}`, the path from the repository's root, and nothing it was not named; it takes a digest from a record alone.",
       ],
