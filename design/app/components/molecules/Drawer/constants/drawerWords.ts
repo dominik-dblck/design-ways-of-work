@@ -1,5 +1,5 @@
 /**
- * - `DRAWER_WORDS` · Eagle's word for the close button
+ * - `DRAWER_WORDS` · the default word for the close button
  */
 import { CONTROL_LABELS } from '../../../../constants/controlLabelsConstants.ts';
 import type { DrawerWords } from '../types/drawerTypes.ts';

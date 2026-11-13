@@ -1,5 +1,5 @@
 /**
- * - `PaginationWords` · the two ends' names, a product's own or Eagle's
+ * - `PaginationWords` · the two ends' names, a product's own or the default
  */
 export type PaginationWords = {
   readonly previous: string;

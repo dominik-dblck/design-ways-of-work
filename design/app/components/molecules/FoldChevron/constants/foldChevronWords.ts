@@ -1,5 +1,5 @@
 /**
- * - `FOLD_CHEVRON_WORDS` · Eagle's words for the chevron, open and shut
+ * - `FOLD_CHEVRON_WORDS` · the default words for the chevron, open and shut
  */
 import { CONTROL_LABELS } from '../../../../constants/controlLabelsConstants.ts';
 import type { FoldChevronWords } from '../types/foldChevronTypes.ts';

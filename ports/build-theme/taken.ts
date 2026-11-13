@@ -2,7 +2,7 @@
  * - `TAKEN` · the build side's sha the theme and atoms were copied at, each file
  */
 const TAKEN: { readonly sha: string; readonly files: readonly string[] } = {
-  sha: '91b9a95de082b75b4e9107fb50996a1cec82070f',
+  sha: '7d8b3dd5ade338eb368337ae12219312b2afa103',
   files: [
     'app/components/atoms/AppIconTile/AppIconTile.tsx',
     'app/components/atoms/AppIconTile/constants/appIconTileConstants.ts',

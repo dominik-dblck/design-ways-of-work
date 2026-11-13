@@ -1,5 +1,5 @@
 /**
- * - `FoldChevronWords` · the chevron's words, a product's or Eagle's
+ * - `FoldChevronWords` · the chevron's words, a product's or the default
  */
 export type FoldChevronWords = {
   readonly collapse: string;
