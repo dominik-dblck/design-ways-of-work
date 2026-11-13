@@ -70,9 +70,10 @@ export const SELECTION_OVERRIDES: ThemeOptions['components'] = {
         boxShadow: 'none',
         backgroundColor: colour('bgSecondary'),
       },
+      // an empty track is the switch's one mark, at 3:1 against its ground (WCAG 1.4.11)
       track: {
         borderRadius: length('uiRPill'),
-        backgroundColor: colour('bgDivider'),
+        backgroundColor: colour('bdControl'),
         opacity: SWITCH.opaque,
       },
     },

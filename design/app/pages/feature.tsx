@@ -6,6 +6,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { pagesTheme } from '../theme/pagesTheme.ts';
+import { TokenVariables } from '../components/atoms/TokenVariables/index.ts';
 import { FeaturePage } from '../components/organisms/FeaturePage/index.ts';
 import { productView } from '../../productView.ts';
 
@@ -15,6 +16,7 @@ if (root)
     <StrictMode>
       <ThemeProvider theme={pagesTheme}>
         <CssBaseline />
+        <TokenVariables />
         <FeaturePage plugs={productView} />
       </ThemeProvider>
     </StrictMode>,

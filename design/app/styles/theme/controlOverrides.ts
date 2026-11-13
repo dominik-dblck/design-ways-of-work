@@ -126,8 +126,9 @@ export const CONTROL_OVERRIDES: ThemeOptions['components'] = {
       root: {
         borderRadius: length('uiRControl'),
         backgroundColor: colour('bgSecondary'),
+        // a field's one mark of being there, at 3:1 against its ground (WCAG 1.4.11)
         '& .MuiOutlinedInput-notchedOutline': {
-          borderColor: colour('bdNeutral'),
+          borderColor: colour('bdControl'),
         },
         height: controlHeight.medium,
         '&.MuiInputBase-sizeSmall': { height: controlHeight.small },

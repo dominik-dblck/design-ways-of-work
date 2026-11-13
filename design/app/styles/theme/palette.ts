@@ -61,6 +61,7 @@ const rolesOf = (read: Read) => ({
     disabled: read('fgDisabled'),
     micro: read('inkMicro'),
     danger: read('inkDanger'),
+    ready: read('inkReady'),
     empty: read('fgEmpty'),
     link: read('inkLink'),
   },
@@ -74,6 +75,14 @@ const rolesOf = (read: Read) => ({
     hover: read('uiHoverFill'),
     selected: read('bgPrimary'),
     disabledBackground: read('bgSubtle'),
+  },
+  // a line of code's inks, a step per mode, each ≥ 4.5 on every surface
+  code: {
+    keyword: read('inkCodeKeyword'),
+    type: read('inkCodeType'),
+    string: read('inkCodeString'),
+    number: read('inkCodeNumber'),
+    comment: read('inkCodeComment'),
   },
 });
 
@@ -95,11 +104,20 @@ export const paletteFor = (mode: Mode, read: Read): PaletteOptions => ({
 });
 
 declare module '@mui/material/styles' {
+  interface CodeInks {
+    keyword: string;
+    type: string;
+    string: string;
+    number: string;
+    comment: string;
+  }
   interface Palette {
     border: { soft: string; neutral: string; strong: string };
+    code: CodeInks;
   }
   interface PaletteOptions {
     border?: { soft: string; neutral: string; strong: string };
+    code?: CodeInks;
   }
   interface TypeBackground {
     subtle: string;
@@ -110,6 +128,7 @@ declare module '@mui/material/styles' {
   interface TypeText {
     micro: string;
     danger: string;
+    ready: string;
     empty: string;
     link: string;
   }

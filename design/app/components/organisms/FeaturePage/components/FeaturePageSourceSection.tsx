@@ -22,7 +22,9 @@ function FeaturePageSourceSection(): ReactElement {
     >
       <Typography
         variant="body2"
-        sx={{ color: standing?.rises.length ? 'error.main' : 'text.secondary' }}
+        sx={{
+          color: standing?.rises.length ? 'text.danger' : 'text.secondary',
+        }}
       >
         {standing ? words.source.line(standing) : words.source.running}
       </Typography>

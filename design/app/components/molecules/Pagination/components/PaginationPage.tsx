@@ -2,7 +2,7 @@
  * - `PaginationPage` · one page number as a button, the current one marked
  */
 import { Button } from '../../../atoms/Button/index.ts';
-import { PAGE_CURRENT_SX } from '../constants/paginationConstants.ts';
+import { PAGE_CURRENT_SX, PAGE_SX } from '../constants/paginationConstants.ts';
 
 type PaginationPageProps = {
   readonly page: number | null;
@@ -25,7 +25,7 @@ export function PaginationPage({
       testId={testId}
       current={selected}
       onClick={onPress}
-      sx={selected ? PAGE_CURRENT_SX : undefined}
+      sx={selected ? PAGE_CURRENT_SX : PAGE_SX}
     >
       {String(page)}
     </Button>

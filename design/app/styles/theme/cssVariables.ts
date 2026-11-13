@@ -1,5 +1,5 @@
 /**
- * - `variablesOf`, `tokenEntriesOf` · a token block as its CSS variables
+ * - `variablesOf`, `tokenEntriesOf`, `tokenSheetOf` · blocks as CSS variables
  * - `DARK_SELECTOR`, `LIGHT_SELECTOR` · where a chosen mode applies, a part's too
  * - `SYSTEM_DARK_SELECTOR`, `SYSTEM_DARK_SCOPE` · dark when nobody chose a mode
  */
@@ -41,3 +41,17 @@ export const SYSTEM_DARK_SELECTOR = '@media (prefers-color-scheme: dark)';
 
 /** A reader who chose light stays light under a dark OS, and outranks bare `:root`. */
 export const SYSTEM_DARK_SCOPE = `:root:not([${preferenceAttribute}="light"])`;
+
+/** The page's sheet: light on `:root` as the floor, dark where it is chosen or where the system asks. */
+export const tokenSheetOf = (
+  light: TokenBlock,
+  dark: TokenBlock,
+): Record<
+  string,
+  Record<string, string> | Record<string, Record<string, string>>
+> => ({
+  ':root': variablesOf(light),
+  [DARK_SELECTOR]: variablesOf(dark),
+  [LIGHT_SELECTOR]: variablesOf(light),
+  [SYSTEM_DARK_SELECTOR]: { [SYSTEM_DARK_SCOPE]: variablesOf(dark) },
+});

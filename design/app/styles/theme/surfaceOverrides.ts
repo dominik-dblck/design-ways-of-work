@@ -1,7 +1,8 @@
 /**
- * - `SURFACE_OVERRIDES` · menus, popovers, dialogs, tooltips and papers
+ * - `SURFACE_OVERRIDES` · menus, popovers, dialogs, tooltips, papers, notices
  * - each surface sits on its layer and carries its own radius, padding and shadow
  */
+import type { AlertColor } from '@mui/material/Alert';
 import type { PaperPropsVariantOverrides } from '@mui/material/Paper';
 import type { ThemeOptions } from '@mui/material/styles';
 import type { LightToken } from '../tokens.ts';
@@ -37,6 +38,15 @@ const paperVariant = (
     backgroundImage: 'none',
   },
 });
+
+// a severity's fill and its ink: n-925 on y-300 11.19, on g-400 9.47 · white on r-500 5.03, on b-300 4.68
+const SIGNAL_PAIRS: readonly (readonly [AlertColor, LightToken, LightToken])[] =
+  [
+    ['error', 'bgDangerSolid', 'inkOnDanger'],
+    ['warning', 'y300', 'inkOnSignal'],
+    ['success', 'g400', 'inkOnSignal'],
+    ['info', 'b300', 'dbkWhite'],
+  ];
 
 /** The overrides of every surface that floats over the page or holds a part of it. */
 export const SURFACE_OVERRIDES: ThemeOptions['components'] = {
@@ -122,6 +132,13 @@ export const SURFACE_OVERRIDES: ThemeOptions['components'] = {
   },
   MuiCard: {
     styleOverrides: { root: { borderRadius: length('uiRControl') } },
+  },
+  // a filled notice on the system's own signal pairs, the same in both modes · white on r-400 reads 3.33
+  MuiAlert: {
+    variants: SIGNAL_PAIRS.map(([severity, fill, ink]) => ({
+      props: { variant: 'filled', severity },
+      style: { backgroundColor: colour(fill), color: colour(ink) },
+    })),
   },
 };
 

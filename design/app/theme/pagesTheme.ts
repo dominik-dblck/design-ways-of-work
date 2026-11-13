@@ -1,19 +1,10 @@
 /**
- * - `pagesTheme` · the pages' theme: the shared one, with code's type and inks
+ * - `pagesTheme` · the pages' theme: the shared one, with code's type
  */
 import type { Theme } from '@mui/material/styles';
 import type { CSSProperties } from 'react';
 import { themeWith } from '../styles/theme.ts';
-import { colourOf, lengthOf, tokenTextOf } from './tokenReads.ts';
-
-// TypeScript as the original drew it: keywords blue, type names amber, strings green · one ramp in both modes
-const CODE_INKS = {
-  keyword: colourOf('b300'),
-  type: colourOf('o500'),
-  string: colourOf('g600'),
-  number: colourOf('y500'),
-  comment: colourOf('n500'),
-};
+import { lengthOf, tokenTextOf } from './tokenReads.ts';
 
 const CODE_TYPE: CSSProperties = {
   fontFamily: tokenTextOf('fontMono'),
@@ -22,12 +13,12 @@ const CODE_TYPE: CSSProperties = {
   whiteSpace: 'pre',
 };
 
-// the pages draw no state of their own: the shared states and chips alone, code's inks the one slot added
+// the pages draw no state of their own: the shared states, chips and code inks alone
 const shared = themeWith({
   statePairs: {},
   chips: {},
   chipVariants: [],
-  palette: { code: CODE_INKS },
+  palette: {},
 });
 
 // the code variant joins the shared type; the theme is otherwise as built
@@ -38,26 +29,13 @@ const pagesTheme: Theme = {
 
 export { pagesTheme };
 
-// its type carries the code variant and the code inks
+// its type carries the code variant
 declare module '@mui/material/styles' {
   interface TypographyVariants {
     code: CSSProperties;
   }
   interface TypographyVariantsOptions {
     code?: CSSProperties;
-  }
-  interface CodeInks {
-    keyword: string;
-    type: string;
-    string: string;
-    number: string;
-    comment: string;
-  }
-  interface Palette {
-    code: CodeInks;
-  }
-  interface PaletteOptions {
-    code?: CodeInks;
   }
 }
 

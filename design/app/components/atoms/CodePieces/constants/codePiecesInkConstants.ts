@@ -11,7 +11,7 @@ const INK: Readonly<Record<TokenKind, string>> = {
   str: 'code.string',
   num: 'code.number',
   txt: 'text.primary',
-  warn: 'error.main',
+  warn: 'text.danger',
 };
 
 export { INK };

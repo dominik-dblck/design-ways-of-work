@@ -1,5 +1,5 @@
 /**
- * - `inks` · the inks no role holds: micro, annotation, link, signal
+ * - `inks` · the inks no role holds: micro, annotation, link, signal, code
  */
 import type { TokenGroup } from '../designTypes.ts';
 
@@ -29,6 +29,17 @@ const inks: readonly TokenGroup[] = [
       { name: '--bg-danger-solid', light: 'var(--r-500)', why: 'r-500 · --bg-danger (r-400) is a wash-weight fill' },
       { name: '--ink-on-danger', light: 'var(--dbk-white)', why: '5.03 on r-500 · fixed, because a danger fill is dark red in both modes: --fg-secondary flips to black and reads 4.17' },
       { name: '--wash-proposed-deep', light: '#f3d9c6', dark: '#4a3220', why: 'the same wash one step down, for a nested proposal row' },
+    ],
+  },
+  {
+    title: 'CODE INKS · a line of code read on any surface, in either mode',
+    intro: 'Code was drawn with one ramp step per kind in both modes: b-300, o-500, g-600, y-500, n-500.\nMeasured 13 Nov on our surfaces, light: type 3.17, number 3.69, comment 4.11, keyword 4.49;\ndark: string 2.80 – 3.32, keyword 3.79. No one step clears 4.5 on a near-white and a near-black\nground, so each kind is a role with a step per mode, all ≥ 4.5 on white, the canvas and the\ncontainer. The ramps stop at y-500 (3.84), so number takes a gold of its own.',
+    entries: [
+      { name: '--ink-code-keyword', light: 'var(--b-400)', dark: 'var(--b-100)', why: '6.36 – 6.63', whyDark: '8.60 – 10.17' },
+      { name: '--ink-code-type', light: 'var(--ink-proposed)', dark: 'var(--o-300)', why: '5.79 – 6.09 · o-500 reads 3.31', whyDark: '9.54 – 11.28' },
+      { name: '--ink-code-string', light: 'var(--g-600)', dark: 'var(--g-200)', why: '6.08 – 6.33', whyDark: '12.07 – 12.54' },
+      { name: '--ink-code-number', light: '#7a5c00', dark: 'var(--y-200)', why: '5.94 – 6.25 · y-500 reads 3.84', whyDark: '12.12 – 14.33' },
+      { name: '--ink-code-comment', light: 'var(--n-600)', dark: 'var(--n-300)', why: '5.67 – 5.96', whyDark: '8.99 – 10.64' },
     ],
   },
 ];

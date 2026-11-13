@@ -101,6 +101,11 @@ const NON_CHIP_MARKS: ThemeOptions['components'] = {
   MuiAvatar: {
     styleOverrides: {
       root: { ...AVATAR_SIZE, fontSize: length('uiCaption') },
+      // initials on n-600 read 5.96 in both modes · the grey MUI picks reads 3.21 – 3.52
+      colorDefault: {
+        backgroundColor: colour('n600'),
+        color: colour('dbkWhite'),
+      },
     },
   },
   MuiAvatarGroup: {

@@ -1413,3 +1413,13 @@ Each call: what, why, how to undo. None changes what the PM sees.
   molecules copied from eagle-dev say "Eagle's", and the take's files name no product. Call: mended at the source
   (W107 keeps a copy whole), with SaveState's index exporting `SaveStateWords` (eagle-design's low finding); v1.1.0
   waits for eagle-dev's sha. Undo: none needed, nothing taken yet.
+- SaveState's index exported `SaveStateWords` all along (eagle-design's finding read one line of a wrapped export);
+  eagle-dev's 7d8b3dd mended the seven headers, resynced whole, and v1.1.0 went out at 363da94, the gate green.
+- The PM, 13 Nov, after visual tests of the 55 components ("popatrz na score i popraw wedlug wymagan"): every
+  WCAG 2.2 AA failure measured is mended with the design system's own tokens. Calls: the code inks become palette
+  roles with a step per mode (no one step clears 4.5 on both grounds); a control's edge takes a new `--bd-control`
+  (n-400, 3:1 in both modes) where `--bd-neutral` drew 1.31 – 1.66; filled notices wear the signal pairs the inks
+  file already names; initials sit on n-600; a faded stack dims only a photo; `TokenVariables` is a shared atom
+  with no app layer (eagle-dev's caution), mounted by the three pages. The slider's thumb (42 px through its
+  `::after`) and the hidden file input were the harness's misreads, not failures. Undo: revert the commit; the
+  tokens and overrides return to their v1.1.0 values.
