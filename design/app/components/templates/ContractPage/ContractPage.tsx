@@ -4,7 +4,7 @@
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import type { ReactElement } from 'react';
-import { ContractBody } from '../ContractBody/index.ts';
+import { ContractBody } from '../../organisms/ContractBody/index.ts';
 import { ContractPageHead } from './components/ContractPageHead.tsx';
 
 function ContractPage(): ReactElement {

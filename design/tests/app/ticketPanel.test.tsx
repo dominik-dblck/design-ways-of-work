@@ -4,7 +4,7 @@
 import { ThemeProvider } from '@mui/material/styles';
 import { renderToString } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
-import { BoardPageTicketPanel } from '../../app/components/organisms/BoardPage/components/BoardPageTicketPanel.tsx';
+import { BoardPageTicketPanel } from '../../app/components/templates/BoardPage/components/BoardPageTicketPanel.tsx';
 import { pagesTheme } from '../../app/theme/pagesTheme.ts';
 import { ticketDetailOf, words } from '../../app/workspace/boardView.ts';
 import { all as allTickets } from '../../roadmaps/tickets.ts';

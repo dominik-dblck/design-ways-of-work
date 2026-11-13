@@ -1464,3 +1464,7 @@ Each call: what, why, how to undo. None changes what the PM sees.
   PM reading a summary after. Call: eagle-design's D108 (a feature page read through its tickets when its epic
   has no feature ticket) rides with the skeleton as v1.3.0. Undo: the row out of the register; `CLAUDE.md`'s
   release line back to W30's.
+- The PM, 13 Nov: the skeleton goes to templates and will grow there, so what fits templates moves there. Call:
+  BoardPage, ContractPage and FeaturePage, each a page whole, move from organisms to templates by
+  `scripts/move.ts` (78 files, their importers followed); ContractBody and EndpointFolds stay organisms. The
+  tier lint already knows templates. Undo: the map run back.

@@ -7,7 +7,7 @@ import type { ReactElement } from 'react';
 import { featureWords as words } from '../../../../workspace/featureView.ts';
 import type { EndpointCode } from '../../../../workspace/contractView.ts';
 import { FoldSection } from '../../../molecules/FoldSection/index.ts';
-import { EndpointFolds } from '../../EndpointFolds/index.ts';
+import { EndpointFolds } from '../../../organisms/EndpointFolds/index.ts';
 
 function FeaturePageApiSection({
   endpoints,

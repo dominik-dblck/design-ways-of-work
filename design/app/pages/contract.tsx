@@ -7,7 +7,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { pagesTheme } from '../theme/pagesTheme.ts';
 import { TokenVariables } from '../components/atoms/TokenVariables/index.ts';
-import { ContractPage } from '../components/organisms/ContractPage/index.ts';
+import { ContractPage } from '../components/templates/ContractPage/index.ts';
 
 const root = document.getElementById('root');
 if (root)
