@@ -1405,3 +1405,11 @@ Each call: what, why, how to undo. None changes what the PM sees.
   (W110) and its review covers it. Eagle-dev's 91b9a95 (review passed, its mirror green): five molecules take a
   `words` prop, Eagle's constants the defaults; FilterMenu and FieldLabel draw only the words handed in. Resynced,
   207 files; sample green. Undo: `yarn sync:theme` at 360cb0b.
+- The PM, 13 Nov: views and artifacts are drawn from the design system, a missing piece built in the product and
+  reported (W112). Eagle-dev relayed the PM's timing: build without asking first, propose once at the pull
+  request, ask only "do you have something like it?" during the work. Call: W112's row carries both, the timing
+  marked as relayed and put to the PM. Undo: the row out of the register.
+- The gate on 0f2dc13 at eagle-design's main: 0 broken, 46 unexplained, its `yarn test` red. Seven headers of the
+  molecules copied from eagle-dev say "Eagle's", and the take's files name no product. Call: mended at the source
+  (W107 keeps a copy whole), with SaveState's index exporting `SaveStateWords` (eagle-design's low finding); v1.1.0
+  waits for eagle-dev's sha. Undo: none needed, nothing taken yet.

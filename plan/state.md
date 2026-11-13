@@ -40,7 +40,11 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
 
 ## Open for the PM
 
-Nothing open. The PM's word of 13 Nov on shared components (W110): after v1.1.0 this repository holds the
+One point: W112's timing, as eagle-dev relayed the PM's word (a product builds a missing piece without asking
+first, asks only "do you have something like it?" during the work, and proposes it once, at its pull request),
+waits for the PM's yes here. v1.1.0 waits on eagle-dev's sha: seven headers of its molecules name the product.
+
+The PM's word of 13 Nov on shared components (W110): after v1.1.0 this repository holds the
 theme, atoms and molecules, a product keeps and extends its own and asks for one to be shared; and (W111) both
 repositories of every product, design and build, take a tag, the run's stages 5 to 7 following the PM's
 architecture. The PM's word of 13 Nov on the icons (W109): `lucide-react` alone, and no SVG file; eagle-design

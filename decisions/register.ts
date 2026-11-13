@@ -292,6 +292,14 @@ const SINCE: readonly Decision[] = [
     says: 'each product is a pair of repositories, its design and its build, and both pin a tag of this repository, the one source of truth for both; the gate tries both.',
     from: 'plan/run-11-nov.md',
   },
+  {
+    id: 'W112',
+    title:
+      'a view is drawn from the design system; a missing piece is built where it is needed',
+    held: '13 Nov · the PM’s word, here; its timing the PM’s word to eagle-dev, as relayed',
+    says: 'each product, design and build, draws its views and artifacts from the design system’s components. A piece the system lacks is built in the product under its own name, whenever it is needed, without asking first; during the work a product may only ask this repository "do you have something like it?". The proposal to share it comes once, at its pull request, to this repository and the product’s other side; a piece they find useful moves here by W110: the architecture review, the gate, a tag.',
+    from: 'plan/run-11-nov.md',
+  },
 ];
 
 // a product's rows keep their words of the day and their order, each naming the row it was
