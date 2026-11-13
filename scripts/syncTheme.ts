@@ -37,12 +37,13 @@ const git = (args: readonly string[]): string =>
     maxBuffer: 1 << 28,
   });
 const full = git(['rev-parse', '--verify', `${sha}^{commit}`]).trim();
-// the record as committed there, on any branch: an uncommitted or edited one decides nothing
+// the record as committed there, on a branch: an uncommitted, edited or stashed one decides nothing
 const recordFile = BUILD_THEME.reviewed.replace('{sha}', full.slice(0, 8));
 const recordAt = git([
   'log',
   '-1',
-  '--all',
+  '--branches',
+  '--remotes',
   '--format=%H',
   '--',
   recordFile,

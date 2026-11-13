@@ -54,7 +54,9 @@ def is_alive(process):
         return False
     except PermissionError:
         pass
-    return started(pid) == process.get("started")
+    # a start not read when the lock was taken is unknown: the pid's life decides alone
+    recorded = process.get("started")
+    return recorded is None or started(pid) == recorded
 
 
 # held while the wrapper or its command lives: a killed wrapper leaves its command holding

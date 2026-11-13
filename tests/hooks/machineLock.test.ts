@@ -55,7 +55,9 @@ const startOf = (pid: number): string =>
     encoding: 'utf8',
   }).trim();
 
-const held = (processes: readonly { pid: number; started: string }[]): void => {
+const held = (
+  processes: readonly { pid: number; started: string | null }[],
+): void => {
   fs.mkdirSync(path.dirname(lock), { recursive: true });
   fs.writeFileSync(
     lock,
@@ -127,6 +129,11 @@ describe('one heavy run on the machine at a time', () => {
     const said = locked(['run', 'mine', '--', ...marking()]);
     expect(said.out).toContain('another run left a stale lock: taken over');
     expect(fs.existsSync(marker)).toBe(true);
+  });
+
+  it('a live holder whose start was not read: held, its pid alone deciding', () => {
+    held([{ pid: process.pid, started: null }]);
+    expect(locked(['status']).out).toContain('another run holds the machine');
   });
 
   it('a killed wrapper whose command still runs: the machine stays held', () => {
