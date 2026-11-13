@@ -5,11 +5,67 @@
 import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
 const NEXT: Unreleased = {
-  kind: 'patch',
-  what: '',
-  action: 'none: move the pin to the tag',
+  kind: 'minor',
+  what: 'nothing shouts, and one component per job (W116, the PM’s pick): `Label` names a thing, 12px, 600, the body face, never in capitals, and Eyebrow retires; `Heading` takes `quiet` and `note`, and SectionHead retires; `Text` draws caption, body2 and body1; HintCard’s `eyebrow` reads `label`; the tokens `--ui-eyebrow` and `--ui-eyebrow-font` retire; `Slider` takes one value or a list of cuts, and SplitSlider retires; `Badge` takes `tone` and draws BadgeDot’s dot, the theme’s own dot variant retired, `BadgeDotTone` homed in the Badge atom; the board’s, the contract’s and the feature’s words in sentence case; `TitledList` is a molecule; the app skeleton is the design system’s, copied at the build side’s 2fee053 (W114): AppShell, SignedOutScreen, SideNav, LoginForm, Breadcrumbs, Link, PageHeader, PersonaStrip, DialogContentWrapper and `useScrollFade`',
+  action:
+    'none: move the pin to the tag; the take’s migration renames the modes page’s cite key `modes.eyebrow` to `modes.label` in `docs/process/documentSlots/modesCites.ts`; a repository whose own code reads a retired name moves to its heir: Eyebrow to Label, SectionHead to `Heading quiet note`, SplitSlider to Slider, Text’s overline to Label, HintCard’s `eyebrow` to `label`, `BadgeDotTone` from the Badge atom',
   rules: { added: [], changed: [], removed: [] },
-  outputs: {},
+  outputs: {
+    'eagle-design': {
+      'output · yarn build':
+        'two files written from their modules: the modes’ data and the tokens',
+      'output · yarn cut-pack T-E19-00':
+        'three files more not committed: the two the build writes and the pack',
+      'dist · project/board-page.js':
+        'a label draws `Label` or `Heading quiet`, never a raw overline, its words in sentence case (W116)',
+      'dist · project/boardView.js':
+        'the board’s words in sentence case: nothing in capitals (W116)',
+      'dist · project/contract-page.js':
+        'a label draws `Label` or `Heading quiet`, never a raw overline, its words in sentence case (W116)',
+      'dist · project/contractView.js':
+        'the contract’s words in sentence case: nothing in capitals (W116)',
+      'dist · project/documentSlots.js':
+        'the cite key `modes.eyebrow` reads `modes.label`, by the take’s migration',
+      'dist · project/feature-page.js':
+        'a label draws `Label` or `Heading quiet`, never a raw overline, its words in sentence case (W116)',
+      'dist · project/featureView.js':
+        'the feature’s words in sentence case: nothing in capitals (W116)',
+      'dist · project/modes.js':
+        'the modes page’s head reads its label from `modes.label`',
+      'dist · project/module-imports.json':
+        'the type scale no longer reads the code face’s file',
+      'dist · project/monoFamily.js':
+        'the eyebrow’s two tokens gone; the code face names no eyebrow',
+      'dist · project/packs/T-E19-00.md':
+        'the tokens file’s size and digest: the eyebrow’s two rows gone',
+      'dist · project/scales.js':
+        'the eyebrow’s two tokens gone: `--ui-eyebrow`, `--ui-eyebrow-font`',
+      'dist · project/specCheck.js':
+        'the eyebrow’s two tokens gone: `--ui-eyebrow`, `--ui-eyebrow-font`',
+      'dist · project/theme.js':
+        'the overline is the label’s face: 12px, 600, line 1.2, no spacing, no capitals, the body face; the Badge dot variant gone, the Badge atom draws its dot',
+      'dist · project/tokenReads.js':
+        'the eyebrow’s two tokens gone: `--ui-eyebrow`, `--ui-eyebrow-font`',
+      'dist · project/tokens.js':
+        'the eyebrow’s two tokens gone: `--ui-eyebrow`, `--ui-eyebrow-font`',
+      'written · app/styles/tokens.ts':
+        'the eyebrow’s two tokens gone: `--ui-eyebrow`, `--ui-eyebrow-font`',
+      'written · fixtures/data/modes.json':
+        'the key `eyebrow` reads `label`, by the take’s migration',
+      'written · fixtures/packs/T-E19-00.md':
+        'the tokens file’s size and digest: the eyebrow’s two rows gone',
+      'written · records/release-5-3-1.md':
+        'the digests of the theme, the code face and the tokens',
+      'written · vendor/wow/app/styles/monoFamily.ts':
+        'the code face names no eyebrow',
+      'written · vendor/wow/app/styles/theme/markOverrides.ts':
+        'the Badge dot variant gone: the Badge atom draws BadgeDot’s dot',
+      'written · vendor/wow/app/styles/theme/typeScale.ts':
+        'the overline is the label’s face: 12px, 600, the body face, no capitals',
+      'written · vendor/wow/docs/process/modes/aboutToHoldsNote.ts':
+        'its field `eyebrow` reads `label`, its cite `modes.label`',
+    },
+  },
 };
 
 const RELEASES: readonly Release[] = [
