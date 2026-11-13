@@ -1,5 +1,6 @@
 /**
  * - `paletteFor` · one palette shape, resolved per mode from the roles that flip
+ * - `SharedSlot` · the slots it fills, which an app's layer may not set again
  */
 import type { PaletteOptions } from '@mui/material/styles';
 import type { LightToken, Mode } from '../tokens.ts';
@@ -75,6 +76,15 @@ const rolesOf = (read: Read) => ({
     disabledBackground: read('bgSubtle'),
   },
 });
+
+/** Every palette slot the shared theme fills, the chip pairs' too. */
+export type SharedSlot =
+  | 'mode'
+  | 'grey'
+  | 'state'
+  | 'diff'
+  | keyof ReturnType<typeof intentsOf>
+  | keyof ReturnType<typeof rolesOf>;
 
 /** The palette for a mode · `read` resolves a role, so a role dark leaves out is light's. */
 export const paletteFor = (mode: Mode, read: Read): PaletteOptions => ({

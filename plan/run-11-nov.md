@@ -1264,3 +1264,6 @@ Each call: what, why, how to undo. None changes what the PM sees.
 - Eagle-dev's review of W26 at e5988895: five findings, four in the copy set (a test of the shared theme built
   with an empty layer, an app layer that cannot overwrite a shared palette role, two names, one comment). By
   the PM's word relayed by eagle-dev, all five go in before v0.21.0; the release waits for its sha.
+- 782e7b77 taken: the five mended, the sample red on one comment left above another (a rule eagle-dev's own
+  checker lacked); eed29307 mends it, its review record passing, the sample green. Suggested to eagle-dev:
+  WoW's own eslint config run over the copy set before a sha leaves. Undo: the commit reverted.

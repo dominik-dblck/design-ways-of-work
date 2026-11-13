@@ -17,7 +17,7 @@ import {
   type ChipFamily,
 } from './theme/chipFamilies.ts';
 import { markOverridesWith, type ChipVariants } from './theme/markOverrides.ts';
-import { paletteFor } from './theme/palette.ts';
+import { paletteFor, type SharedSlot } from './theme/palette.ts';
 import { spacingPx } from './scales.ts';
 import { MIXINS, SHADOWS, Z_INDEX } from './theme/mixins.ts';
 import { SELECTION_OVERRIDES } from './theme/selectionOverrides.ts';
@@ -31,13 +31,13 @@ export interface AppLayer {
   readonly statePairs: AppStatePairs;
   readonly chips: ChipFamily;
   readonly chipVariants: ChipVariants;
-  readonly palette: PaletteOptions;
+  readonly palette: Omit<PaletteOptions, SharedSlot>;
 }
 
-const READS = { light: lightColour, dark: darkColour } as const;
+const COLOUR_READ_OF = { light: lightColour, dark: darkColour } as const;
 
 const paletteOf = (layer: AppLayer, mode: Mode): PaletteOptions => ({
-  ...paletteFor(mode, READS[mode]),
+  ...paletteFor(mode, COLOUR_READ_OF[mode]),
   ...chipPairsWith(layer.statePairs),
   ...layer.palette,
 });

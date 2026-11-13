@@ -41,7 +41,7 @@ export const unitsOf = (px: number): number => px / spacingPx;
 export const radiusOf = (key: RadiusToken): number =>
   length(key) / length('uiRControl');
 
-/** The four layers · sticky, menu, overlay, dialog. */
+/** The z-step a surface sits on · MUI's own slots map onto these four in the theme. */
 export const layers = {
   sticky: length('uiZSticky'),
   menu: length('uiZMenu'),

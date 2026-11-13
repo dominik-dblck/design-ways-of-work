@@ -63,7 +63,7 @@ const CHIP_VARIANTS: ChipVariants = [
   },
 ];
 
-const OTHER_MARKS: ThemeOptions['components'] = {
+const NON_CHIP_MARKS: ThemeOptions['components'] = {
   MuiBadge: {
     styleOverrides: {
       badge: { fontSize: length('uiCaption'), borderRadius: length('uiRTag') },
@@ -135,7 +135,7 @@ export const markOverridesWith = (
       ...appVariants,
     ],
   },
-  ...OTHER_MARKS,
+  ...NON_CHIP_MARKS,
 });
 
 declare module '@mui/material/Badge' {
