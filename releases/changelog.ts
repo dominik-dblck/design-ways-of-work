@@ -15,7 +15,7 @@ const NEXT: Unreleased = {
       'output · yarn build':
         'two files written from their modules: the modes’ data and the tokens',
       'output · yarn cut-pack T-E19-00':
-        'three files more not committed: the two the build writes and the pack',
+        'the gate’s probe: three files more not committed, the two the build writes and the pack',
       'dist · project/board-page.js':
         'a label draws `Label` or `Heading quiet`, never a raw overline, its words in sentence case (W116)',
       'dist · project/boardView.js':
@@ -37,7 +37,7 @@ const NEXT: Unreleased = {
       'dist · project/monoFamily.js':
         'the eyebrow’s two tokens gone; the code face names no eyebrow',
       'dist · project/packs/T-E19-00.md':
-        'the tokens file’s size and digest: the eyebrow’s two rows gone',
+        'by the gate’s probe, the tokens file’s size and digest; the take leaves the pack as released',
       'dist · project/scales.js':
         'the eyebrow’s two tokens gone: `--ui-eyebrow`, `--ui-eyebrow-font`',
       'dist · project/specCheck.js':
@@ -53,9 +53,9 @@ const NEXT: Unreleased = {
       'written · fixtures/data/modes.json':
         'the key `eyebrow` reads `label`, by the take’s migration',
       'written · fixtures/packs/T-E19-00.md':
-        'the tokens file’s size and digest: the eyebrow’s two rows gone',
+        'by the gate’s probe, the tokens file’s size and digest; the take leaves the pack as released',
       'written · records/release-5-3-1.md':
-        'the digests of the theme, the code face and the tokens',
+        'by the gate’s probe, the digests of the theme, the code face and the tokens; the take leaves the record as released',
       'written · vendor/wow/app/styles/monoFamily.ts':
         'the code face names no eyebrow',
       'written · vendor/wow/app/styles/theme/markOverrides.ts':
