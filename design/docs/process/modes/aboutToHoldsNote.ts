@@ -26,7 +26,7 @@ const ABOUT_TO_HOLDS_NOTE = {
       id: 'feature',
       emoji: '🧩',
       name: 'feature',
-      stops: '2 STOPS · 3 WITH reconStop',
+      stops: '2 stops · 3 with reconStop',
       skills: [
         'ticket-recon',
         'ticket-feature',
@@ -43,14 +43,14 @@ const ABOUT_TO_HOLDS_NOTE = {
         { text: 'Recon: five sub-agents by area' },
         {
           text: 'Endpoint tests, all red + the contract snapshot',
-          stop: 'STOP',
+          stop: 'Stop',
         },
         { text: 'Domain and routes, part by part → green' },
         { text: 'Screens from the spec rows' },
         { text: 'Journeys: e2e-discovery → e2e-category' },
         { text: 'Arch-review: one sub-agent per step' },
         { text: 'Regression: sub-agents by slice' },
-        { text: 'Report → the PM’s one commit, push, merge', stop: 'STOP' },
+        { text: 'Report → the PM’s one commit, push, merge', stop: 'Stop' },
       ],
       question: [
         'Decided + written: “did X because Y” (rule:feature-run-never-stops)',
@@ -64,7 +64,7 @@ const ABOUT_TO_HOLDS_NOTE = {
       id: 'standard',
       emoji: '🔧',
       name: 'standard',
-      stops: '2 STOPS',
+      stops: '2 stops',
       skills: [
         'ticket-recon',
         'ticket-standard',
@@ -78,10 +78,10 @@ const ABOUT_TO_HOLDS_NOTE = {
         'Two points or more',
       ],
       steps: [
-        { text: 'Recon + contract table, one message', stop: 'STOP' },
+        { text: 'Recon + contract table, one message', stop: 'Stop' },
         { text: 'Red → green, no stop · every test red once' },
         { text: 'Arch-review + regression, one pass' },
-        { text: 'Report with “did X because Y”', stop: 'STOP' },
+        { text: 'Report with “did X because Y”', stop: 'Stop' },
       ],
       question: [
         'Decided + written, as in feature',
@@ -92,7 +92,7 @@ const ABOUT_TO_HOLDS_NOTE = {
       id: 'fast',
       emoji: '⚡',
       name: 'fast',
-      stops: '1 STOP',
+      stops: '1 stop',
       skills: ['ticket-fast', 'ticket-report'],
       when: [
         'A small ticket: a token, a line of copy, one field, a UI fix inside an existing spec row',
@@ -102,7 +102,7 @@ const ABOUT_TO_HOLDS_NOTE = {
         {
           text: 'Build from the pack · every test red once · the suite at zero',
         },
-        { text: 'Report', stop: 'STOP' },
+        { text: 'Report', stop: 'Stop' },
       ],
       question: [
         'A clause the repo contradicts → up to standard',
@@ -113,7 +113,7 @@ const ABOUT_TO_HOLDS_NOTE = {
   facts: [
     {
       emoji: '🎯',
-      title: 'HOW A TICKET GETS ITS MODE',
+      title: 'How a ticket gets its mode',
       bullets: [
         'Epic → feature, no points counted',
         'Anything else → points (tracks.js): 2+ standard · 0–1 fast',
@@ -123,7 +123,7 @@ const ABOUT_TO_HOLDS_NOTE = {
     },
     {
       emoji: '🗑️',
-      title: 'GOES',
+      title: 'Goes',
       bullets: [
         'The full track: eight stages, five stops',
         'ticket-contract, ticket-red, ticket-green, ticket-snapshot as stages of their own',
@@ -133,7 +133,7 @@ const ABOUT_TO_HOLDS_NOTE = {
     },
     {
       emoji: '🧱',
-      title: 'STAYS AS BLOCKS · 11 SKILLS → 7',
+      title: 'Stays as blocks · 11 skills → 7',
       bullets: [
         'ticket-recon · ticket-arch-review (+ architecture-review.md) · ticket-regression · ticket-report',
         'Called by the modes, no STOP of their own',
@@ -144,7 +144,7 @@ const ABOUT_TO_HOLDS_NOTE = {
     },
     {
       emoji: '📍',
-      title: 'WHERE IT LANDS',
+      title: 'Where it lands',
       bullets: [
         'Design side: ticket-pipeline.md (modes, skills) · plans.js rule:three-ticket-modes · tracks.js (no full, reconStop) · design-pack (step 10) · design-refine' +
           cite('modes.refineEpics'),

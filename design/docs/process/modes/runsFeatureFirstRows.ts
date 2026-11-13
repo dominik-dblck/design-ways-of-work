@@ -47,7 +47,7 @@ const RUNS_FEATURE_FIRST_ROWS = [
         'hashes.json → emitter → commandBodies.ts, queryIds.ts, queryParams.ts',
         'a test against a fresh emit',
       ],
-      stop: { label: 'STOP · IF A DIGEST DIFFERS', kind: 'if' },
+      stop: { label: 'Stop · if a digest differs', kind: 'if' },
     },
   },
   {
@@ -113,7 +113,7 @@ const RUNS_FEATURE_FIRST_ROWS = [
         'every decision the sheet did not make',
         'a new event → marked NEW EVENT',
       ],
-      stop: { label: 'STOP · ALWAYS', kind: 'stop' },
+      stop: { label: 'Stop · always', kind: 'stop' },
     },
   },
   {

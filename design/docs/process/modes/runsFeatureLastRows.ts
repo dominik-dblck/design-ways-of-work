@@ -98,7 +98,7 @@ const RUNS_FEATURE_LAST_ROWS = [
         'what differs from the contract, and why',
         'what was guessed · re-ports · cost',
       ],
-      stop: { label: 'STOP · ALWAYS', kind: 'stop' },
+      stop: { label: 'Stop · always', kind: 'stop' },
     },
   },
 ] as const;

@@ -90,8 +90,7 @@ const elements: readonly ElementStyle[] = [
     style: [
       ['font-size', 'var(--t-micro)'],
       ['line-height', '1.2'],
-      ['letter-spacing', 'var(--tr-loose)'],
-      ['text-transform', 'uppercase'],
+      ['letter-spacing', 'var(--tr-normal)'],
       ['color', 'var(--fg-regular)'],
     ],
   },

@@ -5,12 +5,12 @@ const RUNS_FEATURE_LOADS = {
   title: '📚 What loads when · feature',
   note: 'only the main agent reads the design project · sub-agents: the repository + the cached pack',
   phases: [
-    { label: 'PREPARE', span: 3, tone: 'subtle' },
-    { label: 'READ', span: 1, tone: 'info' },
-    { label: 'CONTRACT', span: 1, tone: 'review' },
-    { label: 'BUILD', span: 3, tone: 'ready' },
-    { label: 'REVIEW', span: 2, tone: 'subtle' },
-    { label: 'CLOSE', span: 1, tone: 'review' },
+    { label: 'Prepare', span: 3, tone: 'subtle' },
+    { label: 'Read', span: 1, tone: 'info' },
+    { label: 'Contract', span: 1, tone: 'review' },
+    { label: 'Build', span: 3, tone: 'ready' },
+    { label: 'Review', span: 2, tone: 'subtle' },
+    { label: 'Close', span: 1, tone: 'review' },
   ],
   steps: [
     { n: '0', name: 'hand-off' },
@@ -96,7 +96,7 @@ const RUNS_FEATURE_LOADS = {
       at: { '8': '×1' },
     },
     { name: 'types-eval.md', note: 'STEPS 1 and 3', at: { '8': '×2' } },
-    { name: 'tests-eval.md', note: 'STEP 4', at: { '8': '×1' } },
+    { name: 'tests-eval.md', note: 'Step 4', at: { '8': '×1' } },
     {
       name: 'ux-eval.md',
       note: 'STEP 5, beside the wireframes',

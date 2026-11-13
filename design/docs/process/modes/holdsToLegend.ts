@@ -100,8 +100,8 @@ const HOLDS_TO_LEGEND = {
   runsNote:
     'a row = one step · a column = who acts in it' + cite('modes.runsHistory'),
   legend: [
-    { sample: 'STOP', kind: 'stop', text: 'the run waits for the design side' },
-    { sample: 'STOP · IF', kind: 'if', text: 'only when its condition holds' },
+    { sample: 'Stop', kind: 'stop', text: 'the run waits for the design side' },
+    { sample: 'Stop · if', kind: 'if', text: 'only when its condition holds' },
     { sample: '×5', kind: 'count', text: 'sub-agents in parallel' },
     {
       sample: 'skill',

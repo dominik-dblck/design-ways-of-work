@@ -617,7 +617,7 @@ export const elements = [
   { selector: "p, .dbk-body", style: [["font-size","var(--t-body)"],["line-height","var(--lh-normal)"],["letter-spacing","var(--tr-normal)"],["margin","0"]] },
   { selector: ".dbk-body-sm", style: [["font-size","var(--t-body-sm)"],["line-height","var(--lh-normal)"],["letter-spacing","var(--tr-normal)"]] },
   { selector: ".dbk-caption", style: [["font-size","var(--t-caption)"],["line-height","var(--lh-normal)"],["letter-spacing","var(--tr-normal)"],["color","var(--fg-tertiary)"]] },
-  { selector: ".dbk-micro", style: [["font-size","var(--t-micro)"],["line-height","1.2"],["letter-spacing","var(--tr-loose)"],["text-transform","uppercase"],["color","var(--fg-regular)"]] },
+  { selector: ".dbk-micro", style: [["font-size","var(--t-micro)"],["line-height","1.2"],["letter-spacing","var(--tr-normal)"],["color","var(--fg-regular)"]] },
   { selector: ".dbk-mono", style: [["font-family","var(--font-mono)"],["font-variant-numeric","tabular-nums"]] },
   { selector: ".dbk-amount", style: [["font-family","var(--font-sans)"],["font-weight","500"],["font-size","var(--t-display-lg)"],["letter-spacing","var(--tr-tight)"],["font-variant-numeric","tabular-nums"]] },
 ] as const;

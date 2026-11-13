@@ -1510,3 +1510,7 @@ Each call: what, why, how to undo. None changes what the PM sees.
   whose own code reads a retired name is told its heir in the row's action; the release, queued for the lock,
   was stopped before it ran so eagle-design's wording note on the probe rows went in first. Undo: a patch
   release puts back what a product needs, as a pushed tag is never moved.
+- The PM, 13 Nov, picked A: v1.4.1, W116's leftovers inside this repository. Calls: the build side's styling
+  rule names Text or Label; the modes page's 28 labels in sentence case by a script, a camelCase name kept and
+  `NEW EVENT` kept as the log's own marker; `.dbk-micro` drops its capitals and takes the normal tracking;
+  `scripts/move.ts` takes away each parent a move leaves empty. Undo: revert each commit.
