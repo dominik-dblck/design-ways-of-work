@@ -9,7 +9,8 @@ import path from 'node:path';
 import { CONSUMERS } from '../ports/consumers.ts';
 import { followed } from './followed.ts';
 import { mapRows } from './mapRows.ts';
-import { importsAnew, namedAnew } from './portNames.ts';
+import { importsAnew, namedAnew, standingMoves } from './portNames.ts';
+import type { Move } from './movePaths.ts';
 import { carriedDropped } from './portCarried.ts';
 import { gitAt, ruledOn, unmerged } from './portSettle.ts';
 import { moduleValue, snapshotTaken } from './portSnapshots.ts';
@@ -33,11 +34,17 @@ const moves = mapRows(path.join(HERE, port.moves)).map(
   ([from = '', to = '']) => ({ from, to }),
 );
 const at = (file: string): string => path.join(ROOT, file);
+// read once the merge stands: a move the port has since undone names nothing
+const standing = (): readonly Move[] =>
+  standingMoves(moves, (file) => fs.existsSync(at(file)));
 
 // each snapshot the trunk moved since the branch last took it, written as the module the port holds
 function rewritten(since: string): readonly string[] {
+  const held = standing();
   const named = (taken: unknown): unknown =>
-    JSON.parse(namedAnew(JSON.stringify(taken), { moves, names: port.names }));
+    JSON.parse(
+      namedAnew(JSON.stringify(taken), { moves: held, names: port.names }),
+    );
   const heldAt = (commit: string, file: string): unknown =>
     JSON.parse(git(['show', `${commit}:${file}`]));
   return port.rewritten.flatMap(({ from, to, name }) => {
@@ -62,15 +69,16 @@ async function namedAgain(skipped: readonly string[]): Promise<number> {
       .split('\n')
       .filter((file) => file !== '' && !skipped.includes(file)),
   );
+  const held = standing();
   const texts = (await followed({ root: ROOT, isKept: keptIn(ROOT).isKept }))
     .filter((file) => brought.has(file))
     .map((file) => {
       const before = fs.readFileSync(at(file), 'utf8');
       const exists = (one: string): boolean => fs.existsSync(at(one));
-      const after = namedAnew(importsAnew(before, { file, moves, exists }), {
-        moves,
-        names: port.names,
-      });
+      const after = namedAnew(
+        importsAnew(before, { file, moves: held, exists }),
+        { moves: held, names: port.names },
+      );
       return { file, before, after };
     })
     .filter(({ before, after }) => before !== after);

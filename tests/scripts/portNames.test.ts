@@ -4,6 +4,7 @@ import {
   movedFrom,
   movedTo,
   namedAnew,
+  standingMoves,
 } from '../../scripts/portNames.ts';
 
 const moves = [
@@ -26,6 +27,30 @@ describe('a path of before the port, as after it', () => {
       'app/styles/componentsSpec/moleculesTag.ts',
     );
     expect(movedTo('sheet/logic/kept.ts', moves)).toBe('sheet/logic/kept.ts');
+  });
+
+  it('a move the tree has undone since names nothing; one it stands on, or one that left, still does', () => {
+    const undone = {
+      from: 'fixtures/data/block-model.json',
+      to: 'fixtures/data/blockModel.json',
+    };
+    const kept = {
+      from: 'sheet/logic/gate-rules.ts',
+      to: 'sheet/logic/gateRules.ts',
+    };
+    const left = {
+      from: 'app/view/index-page.ts',
+      to: 'app/view/indexPage.ts',
+    };
+    const tree = new Set([
+      'fixtures/data/block-model.json',
+      'sheet/logic/gateRules.ts',
+    ]);
+    const held = standingMoves([undone, kept, left], (file) => tree.has(file));
+    expect(held).toStrictEqual([kept, left]);
+    expect(
+      namedAnew("fixture: 'fixtures/data/block-model.json'", { moves: held }),
+    ).toBe("fixture: 'fixtures/data/block-model.json'");
   });
 
   it('and back', () => {

@@ -1,7 +1,7 @@
 /**
  * - `movedTo`, `movedFrom` · a product's path after the moves of its port, before
- * - `namedAnew` · a text from before them: its paths and file names as after
- * - `importsAnew` · its relative imports, from where the file stands now
+ * - `standingMoves` · the moves the port's tree stands on, none undone since
+ * - `namedAnew`, `importsAnew` · an old text's paths and imports, as after them
  */
 import path from 'node:path';
 import { escaped, mentioned } from './movePaths.ts';
@@ -32,6 +32,12 @@ function movedTo(file: string, moves: readonly Move[]): string {
   const folder = folderMoves(moves).find(({ from }) => file.startsWith(from));
   return folder ? `${folder.to}${file.slice(folder.from.length)}` : file;
 }
+
+// a move whose old path the tree holds and whose new one it does not was undone since: naming by it would point nowhere
+const standingMoves = (
+  moves: readonly Move[],
+  holds: (file: string) => boolean,
+): readonly Move[] => moves.filter(({ from, to }) => holds(to) || !holds(from));
 
 const turned = (moves: readonly Move[]): readonly Move[] =>
   moves.map(({ from, to }) => ({ from: to, to: from }));
@@ -116,4 +122,4 @@ function importsAnew(text: string, { file, moves, exists }: Standing): string {
   );
 }
 
-export { importsAnew, movedFrom, movedTo, namedAnew };
+export { importsAnew, movedFrom, movedTo, namedAnew, standingMoves };
