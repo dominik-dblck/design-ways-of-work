@@ -8,7 +8,7 @@ import path from 'node:path';
 import { build } from 'rolldown';
 import type { InputOptions } from 'rolldown';
 import { moduleEntries, moduleImports } from '../guards/sourceCheck.ts';
-import { copyNamedIcons } from './build/namedIcons.ts';
+import { writeNamedIcons } from './build/namedIcons.ts';
 import { writeVendored } from './build/vendored.ts';
 import { emittedTexts } from './emit.ts';
 import {
@@ -170,7 +170,7 @@ await emitFixtures();
 const vendored = writeVendored({ root: ROOT, out: ROOT });
 emptied({ within: ROOT, folder: OUT });
 const copied = copyFiles();
-const icons = copyNamedIcons(OUT);
+const icons = await writeNamedIcons(OUT);
 const scripts = filesOf().filter(isEntry);
 const pages = filesOf().flatMap((file) => {
   const page = pageOf(file);
@@ -185,7 +185,7 @@ await Promise.all(pages.map(({ file, page }) => bundlePage(file, page)));
 writeModuleEntries();
 writeModuleImports();
 console.log(
-  `dist/project · ${scripts.length} scripts, ${pages.length} pages built, ${copied} files copied, ${icons} icons from lucide-static`,
+  `dist/project · ${scripts.length} scripts, ${pages.length} pages built, ${copied} files copied, ${icons} icons from lucide-react`,
 );
 if (vendored > 0)
   console.log(`vendor/wow · ${vendored} files the build side reads, as taken`);

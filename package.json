@@ -68,7 +68,6 @@
     "jscpd": "5.4.3",
     "jsdom": "30.0.1",
     "knip": "6.44.2",
-    "lucide-static": "1.69.0",
     "minimatch": "10.2.6",
     "postcss": "8.5.28",
     "prettier": "3.9.6",

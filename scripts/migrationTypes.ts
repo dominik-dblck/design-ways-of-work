@@ -23,6 +23,8 @@ interface Migration {
   readonly edits?: readonly MigrationEdit[];
   // the packages it adds, each at one version: yarn writes the manifest and the lock, no script run
   readonly dependencies?: Readonly<Record<string, string>>;
+  // the packages no home reads any longer, removed where the manifest holds them: yarn writes both files
+  readonly dropped?: readonly string[];
   // a folder here whose files are written there at the same paths, or none
   readonly tree: string | null;
 }

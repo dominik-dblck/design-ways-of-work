@@ -41,9 +41,9 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
 
 ## Open for the PM
 
-1. `CLAUDE.md` says icons come from `lucide-static`; the build side's atoms draw with `lucide-react` behind
-   one wrapper (eagle-design's D10: a static page reads the first, a React component the second). The rule's
-   words: one package, or the split. The copy carries `lucide-react` meanwhile.
+Nothing open. The PM's word of 13 Nov on the icons (W109): `lucide-react` alone; a static file that names an
+icon by its SVG path keeps it, the build writing the SVG from `lucide-react`'s data; `lucide-static` leaves
+every repository by migration, in v1.1.0 with the molecules.
 
 The PM's word of 13 Nov (W104) settled the rest: the relayed rules stand with three more, this session talks to
 the build side's session directly, `.rehearsal/` is in this machine's Trash, and a product's board, pages and

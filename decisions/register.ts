@@ -270,6 +270,13 @@ const SINCE: readonly Decision[] = [
     says: 'v1.0.0 goes out without molecules; the build side’s plain molecules (about 22, with the utils they read) move in one batch, its words made props with defaults, one review, one record, one sha, the whole e2e at its end, and go out as v1.1.0; the molecules reading the product’s domain and its previews stay the product’s.',
     from: 'plan/run-11-nov.md',
   },
+  {
+    id: 'W109',
+    title: 'icons come from lucide-react alone',
+    held: '13 Nov · the PM’s word, here',
+    says: 'one icon package, `lucide-react`, the one the React code draws with; a static file that names an icon by its SVG path keeps it, the build writing that SVG from `lucide-react`’s data; `lucide-static` leaves every repository, by migration.',
+    from: 'plan/run-11-nov.md',
+  },
 ];
 
 // a product's rows keep their words of the day and their order, each naming the row it was

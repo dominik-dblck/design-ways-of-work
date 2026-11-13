@@ -19,7 +19,7 @@ The way of working more than one product runs: rules, checks, tools, skills and 
 - It keeps the rules it defines: its own code takes no exemption, suppression or scope switch.
 - Everything by script, nothing rewritten by hand: a file moves with `scripts/move.ts`, a name with
   `scripts/rename.ts`.
-- Data is TypeScript. No HTML, no CSS, no `.dc.html`, no file named by a number; icons come from `lucide-static`.
+- Data is TypeScript. No HTML, no CSS, no `.dc.html`, no file named by a number; icons come from `lucide-react`.
 - Nothing is deleted: what retires goes to `legacy/`, listed in `legacy/README.md`.
 - Correct before fast: a check runs whole and from nothing, never cached, never partly skipped.
 - A comment carries no history (no date, no epic, no person); a `//` comment is one line.

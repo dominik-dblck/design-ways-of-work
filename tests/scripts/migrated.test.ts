@@ -305,3 +305,52 @@ describe('a package the homes read is added as yarn adds it', () => {
     ]);
   });
 });
+
+describe('a package no home reads any longer is removed as yarn removes it', () => {
+  const clone = scratchRepo({ base, name: 'dropped' });
+  const bin = path.join(base, 'dropped-bin');
+  const calls = path.join(base, 'dropped-calls.txt');
+  stubbed(bin, ['yarn']);
+  clone.committed(NOTEBOOK_REGISTRY.file, NOTEBOOK_REGISTRY.text);
+  clone.committed('yarn.lock', '');
+  const dropping = (): string => {
+    fs.writeFileSync(calls, '');
+    vi.stubEnv('PATH', `${bin}${path.delimiter}${String(process.env.PATH)}`);
+    for (const [name, setting] of Object.entries(stubEnv({ calls })))
+      vi.stubEnv(name, setting);
+    const said = migrated({
+      root: clone.root,
+      wow: base,
+      migration: {
+        release: '0.1.0',
+        removes: [],
+        moves: [],
+        dropped: ['lucide-static'],
+        tree: null,
+      },
+    });
+    vi.unstubAllEnvs();
+    return said;
+  };
+
+  it('one the manifest holds: removed, no script of the repository run', () => {
+    clone.committed(
+      'package.json',
+      '{ "name": "a", "dependencies": { "lucide-static": "1.69.0" } }\n',
+    );
+    expect(dropping()).toBe(
+      '0 removed, 0 moved, 0 following, 0 edited, 0 written, 0 homed, 1 dropped',
+    );
+    expect(callsIn(calls)).toEqual([
+      'yarn remove --ignore-scripts --silent lucide-static',
+    ]);
+  });
+
+  it('one the manifest no longer holds: nothing run', () => {
+    clone.committed('package.json', '{ "name": "a" }\n');
+    expect(dropping()).toBe(
+      '0 removed, 0 moved, 0 following, 0 edited, 0 written, 0 homed',
+    );
+    expect(callsIn(calls)).toEqual([]);
+  });
+});

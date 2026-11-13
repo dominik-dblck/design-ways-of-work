@@ -101,6 +101,26 @@ function addedTo(
   return added.length;
 }
 
+// a package no home reads any longer, removed as yarn removes it, where the manifest still holds it
+function droppedFrom(root: string, dropped: readonly string[] = []): number {
+  if (dropped.length === 0) return 0;
+  const manifest: Readonly<Record<string, unknown>> = JSON.parse(
+    fs.readFileSync(path.join(root, 'package.json'), 'utf8'),
+  );
+  const held = dropped.filter((name) =>
+    ['dependencies', 'devDependencies'].some(
+      (field) => Reflect.get(Object(manifest[field]), name) !== undefined,
+    ),
+  );
+  if (held.length > 0)
+    execFileSync('yarn', ['remove', '--ignore-scripts', '--silent', ...held], {
+      cwd: root,
+      env: childEnv(),
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
+  return held.length;
+}
+
 // through git's index and never a commit: the repository's hooks and its history stay its own
 function migrated({ root, wow, migration }: Migrating): string {
   const git: Git = (args) =>
@@ -132,9 +152,14 @@ function migrated({ root, wow, migration }: Migrating): string {
   if (changed.length + written.length > 0)
     git(['add', '--', ...changed, ...written]);
   const added = addedTo(root, migration.dependencies);
-  if (added > 0) git(['add', '--', 'package.json', 'yarn.lock']);
+  const dropped = droppedFrom(root, migration.dropped);
+  if (added + dropped > 0) git(['add', '--', 'package.json', 'yarn.lock']);
   const summary = `${String(removes.length)} removed, ${String(moves.length)} moved, ${String(rewritten.length)} following, ${String(migration.edits?.length ?? 0)} edited, ${String(written.length)} written, ${String(homed.length)} homed`;
-  return added > 0 ? `${summary}, ${String(added)} added` : summary;
+  return [
+    summary,
+    ...(added > 0 ? [`${String(added)} added`] : []),
+    ...(dropped > 0 ? [`${String(dropped)} dropped`] : []),
+  ].join(', ');
 }
 
 interface Due {

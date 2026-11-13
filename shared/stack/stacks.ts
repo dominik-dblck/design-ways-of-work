@@ -14,7 +14,7 @@ const STACKS: Readonly<Record<StackKey, Stack>> = {
     browserTests: { name: 'Playwright', packages: ['@playwright/test'] },
     mutationTests: { name: 'Stryker', packages: ['@stryker-mutator/core'] },
     database: { name: 'Postgres', packages: ['pg'] },
-    icons: { name: 'Lucide', packages: ['lucide-react', 'lucide-static'] },
+    icons: { name: 'Lucide', packages: ['lucide-react'] },
     charts: { name: 'Recharts', packages: ['recharts'] },
     designSystem: 'design-system/',
   },

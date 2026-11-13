@@ -1355,3 +1355,8 @@ Each call: what, why, how to undo. None changes what the PM sees.
   v0.23.1. Undo: none needed, the order alone.
 - Task 26: `yarn release` names 1.0.0 (e5563b7, `NEXT.named`, from below it only). The gate on f18af6e against
   port/wow 13b9ea7: 0 broken, 0 stale, two differences, the new skill and its line in the build's output.
+- The PM, 13 Nov, on the icons: "Ilony które lepsze? Uzywamy react", then B of three (W109): `lucide-react`
+  alone. Call: the build writes each `lucide-icons/<name>.svg` a source names from `lucide-react`'s icon data,
+  so eagle-design's static files keep their paths; a migration may drop a package now (`dropped`, `yarn
+  remove`), and eagle-design's drops `lucide-static` at 1.1.0; this repository and the sample drop it by yarn.
+  It goes out with the molecules in v1.1.0 (W108). Undo: the commit reverted, the package added back.

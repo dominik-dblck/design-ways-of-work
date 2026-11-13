@@ -15,6 +15,7 @@ import { GENERATED_FILES } from './eagle-design/generatedFiles.ts';
 import { HELD_BY } from './eagle-design/heldBy.ts';
 import { REWRITTEN } from './eagle-design/rewritten.ts';
 import { SCOPE_PRESET_CUT } from './eagle-design/scopePresetCut.ts';
+import { ICON_PACKAGE } from './eagle-design/iconPackage.ts';
 import { MIGRATION } from './eagle-design/migration.ts';
 import { PRODUCT_HALVES } from './eagle-design/productHalves.ts';
 import { ROADMAP_READERS } from './eagle-design/roadmapReaders.ts';
@@ -62,6 +63,7 @@ const CONSUMERS: readonly [Consumer, ...Consumer[]] = [
       SCOPE_PRESET_CUT,
       PRODUCT_HALVES,
       BUILD_THEME_TAKEN,
+      ICON_PACKAGE,
     ],
     // its own work lands on `main`, which takes nothing yet: the branch holds `main` whole, or the gate is red
     port: {
