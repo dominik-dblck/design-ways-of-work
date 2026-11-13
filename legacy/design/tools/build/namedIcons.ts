@@ -5,8 +5,8 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
-import { filesOf } from '../layout.ts';
-import { ROOT } from '../root.ts';
+import { filesOf } from '../../../../design/tools/layout.ts';
+import { ROOT } from '../../../../design/tools/root.ts';
 
 const NAMED = /lucide-icons\/([a-z0-9-]+)\.svg/g;
 
