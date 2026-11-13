@@ -5,22 +5,33 @@
 import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
 const NEXT: Unreleased = {
-  kind: 'minor',
-  named: '1.0.0',
-  what: 'the way of working a design product takes whole, the build side’s architecture guard on its homes (W105): the rows no check holds read by the `design-review` skill before a commit; a port merge names nothing by a move undone since; eagle-design’s base branch, main, carried, the no-product test leaving `buildBranch` out of the names; `yarn release` names 1.0.0; the build side’s plain molecules follow as v1.1.0 (W108)',
+  kind: 'patch',
+  what: '',
   action: 'none: move the pin to the tag',
   rules: { added: [], changed: [], removed: [] },
-  outputs: {
-    'eagle-design': {
-      'output · yarn build':
-        'one line more: the `design-review` skill written from its module',
-      'written · .claude/skills/design-review/SKILL.md':
-        'the new skill: the rows no check holds, read against a change before its commit',
-    },
-  },
+  outputs: {},
 };
 
 const RELEASES: readonly Release[] = [
+  {
+    version: '1.0.0',
+    date: '2026-11-13',
+    kind: 'minor',
+    named: '1.0.0',
+    what: 'the way of working a design product takes whole, the build side’s architecture guard on its homes (W105): the rows no check holds read by the `design-review` skill before a commit; a port merge names nothing by a move undone since; eagle-design’s base branch, main, carried, the no-product test leaving `buildBranch` out of the names; `yarn release` names 1.0.0; the build side’s plain molecules follow as v1.1.0 (W108)',
+    action: 'none: move the pin to the tag',
+    rules: { added: [], changed: [], removed: [] },
+    outputs: {
+      'eagle-design': {
+        'output · yarn build':
+          'one line more: the `design-review` skill written from its module',
+        'written · .claude/skills/design-review/SKILL.md':
+          'the new skill: the rows no check holds, read against a change before its commit',
+      },
+    },
+    moved: {},
+    tried: { 'eagle-design': '13b9ea7' },
+  },
   {
     version: '0.23.0',
     date: '2026-11-13',
