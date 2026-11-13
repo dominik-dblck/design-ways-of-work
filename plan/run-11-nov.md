@@ -24,7 +24,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 
 | stage | what | done | of |
 | 1 | Foundation | 7 | 7 |
-| 2 | Design clean | 24 | 26 |
+| 2 | Design clean | 25 | 26 |
 | 3 | Eagle-design | 0 | 2 |
 | 4 | Spawn design | 2 | 3 |
 
@@ -96,6 +96,7 @@ new-project guide · 3 · `argus-design` spawned and green on its first commit, 
 - 07:28 · stage 4 · 1 of 3 · yarn spawn design, the hooks wired by its install; proved from v0.20.0 with nothing patched, heron-design green on its first commit and its feature tier (4446d76, cc1b562, f6c2ea4)
 - 07:28 · stage 4 · 2 of 3 · the new-project guide rewritten around the spawn (4446d76), out in v0.20.0
 - 08:37 · stage 2 · 24 of 26 · the build side's theme and atoms copied by script at its reviewed sha eed29307, the pages on the shared theme; v0.21.0 out (1ea139e, 719c249, a621fcb)
+- 12:12 · stage 2 · 25 of 26 · the build side's architecture guard on the homes: the homes are the tree, a sha synced only reviewed, one home per name in every product, the review rows' skill (v0.22.0, v0.23.0, 729870d), eagle-design approved
 
 ## Calls
 
@@ -1344,3 +1345,12 @@ Each call: what, why, how to undo. None changes what the PM sees.
   already; its D106 lesson is the product's, in its `codeSkill.8+` slot, not a rule for every product; the
   no-product test leaves `buildBranch` out of the names, as main's does, since `main` is no product's name.
   Rows in `ports/eagle-design/carried/baseBranch.ts`. Undo: the commit reverted.
+- The gate on 0c6adcc, red: the trial merge of main into port/wow stopped on two READ items, and the port merge's
+  renaming pointed eagle-design's sheet/project.ts at `blockModel.json`, a move of the port's undone since
+  (f18af6e: a move whose old path the tree holds and whose new one it does not names nothing). Eagle-design's
+  commit tier refused its merge while its base branch read `main` at v0.23.0's no-product test, so no release
+  of this side could pass the gate first. Call: eagle-design merged main with the old base branch (13b9ea7,
+  pushed), the gate tried v1.0.0's candidate on it, and its take of v1.0.0 sets the branch to `main`. No
+  v0.23.1. Undo: none needed, the order alone.
+- Task 26: `yarn release` names 1.0.0 (e5563b7, `NEXT.named`, from below it only). The gate on f18af6e against
+  port/wow 13b9ea7: 0 broken, 0 stale, two differences, the new skill and its line in the build's output.

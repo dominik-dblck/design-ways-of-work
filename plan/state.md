@@ -51,7 +51,9 @@ copied at eagle-dev's eed29307 on `feature/W26-shared-theme`, after its architec
 there. The PM's word of 13 Nov puts the build side's architecture guard on the homes before v1.0.0 (W105, the
 run's task 25): its first half is out in v0.22.0 (the homes are the tree, one home per name on this
 repository's code, a sha synced only reviewed); in its second half one home per name is a shared test every
-product runs, and the rows held by `review` get their skill. Heavy runs take turns on the machine through `~/.claude/hooks/machineLock.py` (W106), installed here.
+product runs (v0.23.0), and the rows held by `review` get their skill, `design-review`. The PM's word of 13 Nov
+(W108): v1.0.0 goes out without molecules, and the build side's plain molecules follow as v1.1.0, moved in one
+batch by eagle-dev. Heavy runs take turns on the machine through `~/.claude/hooks/machineLock.py` (W106), installed here.
 
 ## Known gaps
 
