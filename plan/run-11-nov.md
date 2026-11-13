@@ -26,7 +26,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 | 1 | Foundation | 7 | 7 |
 | 2 | Design clean | 23 | 25 |
 | 3 | Eagle-design | 0 | 2 |
-| 4 | Spawn design | 0 | 3 |
+| 4 | Spawn design | 2 | 3 |
 
 Stage 1, the plan's stage 1: 1 · the repositories that take the way of working named in `ports/`, the paths out
 of the scripts · 2 · the gate `yarn consumers`, run for real: "no difference" on a clone of eagle-design's
@@ -91,6 +91,8 @@ new-project guide · 3 · `argus-design` spawned and green on its first commit, 
 - 22:29 · stage 2 · 21 of 25 · the build empties its output only through the guard, the guard following links (53a5f5e, ba7e912), eagle-design approved
 - 22:29 · stage 2 · 22 of 25 · the checks that build a clone, a field of the scope (8736dd5), eagle-design approved
 - 23:10 · stage 2 · 23 of 25 · a new design product takes no dev/, the build side's tree (a9988e1, a0716b6, 8805001), eagle-design approved
+- 07:28 · stage 4 · 1 of 3 · yarn spawn design, the hooks wired by its install; proved from v0.20.0 with nothing patched, heron-design green on its first commit and its feature tier (4446d76, cc1b562, f6c2ea4)
+- 07:28 · stage 4 · 2 of 3 · the new-project guide rewritten around the spawn (4446d76), out in v0.20.0
 
 ## Calls
 
@@ -1218,3 +1220,8 @@ Each call: what, why, how to undo. None changes what the PM sees.
   tier asked git for the branch before any commit existed (f6c2ea4), and the names test read its own planted
   names, so a product named as one of them was red. Both mended; the spawn is proved again from the next tag,
   nothing patched. Undo: revert each.
+- The PM, 13 Nov, in this session: "Potwierdzam zgody ze 103" and "23 tak" (W104, eagle-design's D103). Done
+  at once: the three rules in `CLAUDE.md`, the direct line to eagle-dev, `.rehearsal/` moved to this machine's
+  Trash (Finder refused the call; a `mv` into `~/.Trash` keeps it recoverable, the hard links leave this
+  repository's files whole). Undo: each line of `CLAUDE.md` struck, the folder dragged back.
+- v0.20.0 out (0e4329d): the spawn, the guide, the commit tier on a branch with no commit, `belowOf`.

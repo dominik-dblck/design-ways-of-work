@@ -29,6 +29,9 @@ The way of working more than one product runs: rules, checks, tools, skills and 
 
 - Never `--no-verify`. Never `git stash`. Never `sed -i` on a file another folder links. Never `rm` with a
   path held in a shell variable.
+- Never `BASELINES=write`: a snapshot is retaken on the PM's word alone.
+- A pushed commit is never rewritten: no amend, rebase or force push on `main`.
+- A secret is never pasted or printed.
 - A script that takes over 20 seconds runs in the background, and the chat goes on.
 - No edit here while a gate reads the tree (`yarn check:feature`, `yarn consumers`).
 - A commit is never piped into a chain that tags or pushes. A push goes over HTTPS, signed in by `gh`:
@@ -43,7 +46,7 @@ The PM alone sets the mode, with `! work-mode cowork` or `! work-mode autonomy`.
 - autonomy: decisions come from the plan, each written down (what, why, how to undo); open questions go on a
   list for the PM's return.
 - Held for the PM in both: a merge, a snapshot retaken, a page deleted, a sheet row whose meaning changes.
-  A message to the build side's session goes on the PM's word.
+  This session talks to the build side's session directly (W104).
 - A release up to and with 1.0.0 is this session's call once its checks are green (W30); one after 1.0.0
   waits for the PM's word.
 - The mode's hook has its source here (W29): a change to what it does goes out only in a release, on the PM's

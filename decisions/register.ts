@@ -1,6 +1,6 @@
 /**
  * - `DECISIONS` · the PM's decisions on how the way of working works, by number
- * - its own first, then those a design product took first (`taken/`), W32 on
+ * - its own, those a design product took first (`taken/`), then its own again
  * - a product's own decisions stand in that product; a rule stands in `CLAUDE.md`
  */
 import { PLAN } from './taken/plan.ts';
@@ -231,6 +231,17 @@ const OWN: readonly Decision[] = [
   },
 ];
 
+// the PM's word given after the taken rows, numbered on from them
+const SINCE: readonly Decision[] = [
+  {
+    id: 'W104',
+    title: 'the run’s holds given, all but the spawn of argus-design',
+    held: '13 Nov · the PM’s word, here',
+    says: 'v1.0.0 goes out once the build side’s theme and atoms are in and the gates are green; the rules of `CLAUDE.md` that reached this session relayed stand, with three more (no `BASELINES=write`, no pushed commit rewritten, no secret pasted or printed); this session talks to the build side’s session directly; `.rehearsal/` leaves the disk; a product’s board, pages and props get a check part; eagle-design takes v1 onto its `main`. The spawn of argus-design waits on the PM’s own word.',
+    from: 'eagle-design D103',
+  },
+];
+
 // a product's rows keep their words of the day and their order, each naming the row it was
 const DECISIONS: readonly Decision[] = [
   ...OWN,
@@ -240,6 +251,7 @@ const DECISIONS: readonly Decision[] = [
   ...ROUND,
   ...SYNC,
   ...PLAN,
+  ...SINCE,
 ];
 
 export { DECISIONS };

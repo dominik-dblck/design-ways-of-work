@@ -37,18 +37,14 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
 
 ## Open for the PM
 
-1. The rules in `CLAUDE.md` reached this session relayed, on 11 Nov: read once, confirm or strike.
-2. A word to talk to the build side's session, before its stage starts.
-3. `.rehearsal/` on this machine's disk, 191 MB of the extraction's copies, ignored by git: remove or keep.
-4. Three rules eagle-design says the PM holds there and `CLAUDE.md` lacks: never `BASELINES=write`; a pushed
-   commit is never rewritten (no amend, rebase or force push on `main`); a secret is never pasted or printed.
-   This session keeps the last two already. None is written into `CLAUDE.md` on a product session's word.
-5. On eagle-design's `main` the checks run three parts the port took out with the pages (the list, the pages,
-   the props). Whether a product's board, pages and props get a check part again, in TypeScript.
-6. The build side's theme freed of its app (W26 step 3: the preference attribute in a file of its own, the
-   batch and sent chips out of the shared theme), committed at a sha on its branch: the sync copies theme and
-   atoms from that sha, read only, nothing merged. eagle-dev was never asked; eagle-design sends it the ask
-   (13 Nov). Task 23 waits on that sha.
+1. `CLAUDE.md` says icons come from `lucide-static`; the build side's atoms draw with `lucide-react` behind
+   one wrapper (eagle-design's D10: a static page reads the first, a React component the second). The rule's
+   words: one package, or the split. The copy carries `lucide-react` meanwhile.
+
+The PM's word of 13 Nov (W104) settled the rest: the relayed rules stand with three more, this session talks to
+the build side's session directly, `.rehearsal/` is in this machine's Trash, and a product's board, pages and
+props get a check part (a task after v1.0.0). Task 23 has its sha: eagle-dev's 1491dd3d on
+`feature/W26-shared-theme`, read by `git archive`, nothing merged.
 
 ## Known gaps
 
