@@ -6,6 +6,7 @@ import PaginationItem from '@mui/material/PaginationItem';
 import type { PaginationRenderItemParams } from '@mui/material/Pagination';
 import { PaginationEnd } from '../components/PaginationEnd.tsx';
 import { PaginationPage } from '../components/PaginationPage.tsx';
+import type { PaginationWords } from '../types/paginationTypes.ts';
 
 /** MUI decides which pages show and where the gaps fall. */
 export const pageItemOf = (
@@ -13,6 +14,7 @@ export const pageItemOf = (
   at: {
     readonly handOn: (next: number | null) => void;
     readonly testId: string | undefined;
+    readonly words: PaginationWords;
   },
 ): React.ReactElement => {
   if (slot.type === 'previous' || slot.type === 'next')
@@ -20,6 +22,7 @@ export const pageItemOf = (
       <PaginationEnd
         end={slot.type}
         disabled={slot.disabled}
+        label={at.words[slot.type]}
         onPress={() => at.handOn(slot.page)}
       />
     );

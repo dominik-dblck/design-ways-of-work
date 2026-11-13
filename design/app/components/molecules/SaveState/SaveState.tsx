@@ -5,7 +5,8 @@
 import Box from '@mui/material/Box';
 import { Text } from '../../atoms/Text/index.ts';
 import { Glyph } from '../../atoms/Glyph/index.ts';
-import type { SaveStateShown } from './types/saveStateTypes.ts';
+import { SAVE_STATE_WORDS } from './constants/saveStateWords.ts';
+import type { SaveStateShown, SaveStateWords } from './types/saveStateTypes.ts';
 import { saveStateLineOf, saveLineSxOf } from './utils/saveStateLineUtils.ts';
 import { SaveStateLost } from './components/SaveStateLost.tsx';
 
@@ -13,16 +14,18 @@ export type SaveStateProps = SaveStateShown & {
   readonly onRetry: () => void;
   readonly testId?: string;
   readonly retryTestId?: string;
+  readonly words?: SaveStateWords | undefined;
 };
 
 /** A failed save is read out as it lands; the rest is a quiet status. */
 export function SaveState(props: SaveStateProps): React.ReactElement {
-  const { testId } = props;
+  const { testId, words = SAVE_STATE_WORDS } = props;
   const hasFailed = props.state !== 'saved' && props.state !== 'saving';
   if (props.state === 'lost')
     return (
       <SaveStateLost
-        line={saveStateLineOf(props)}
+        line={saveStateLineOf(props, words)}
+        retryLabel={words.retry}
         onRetry={props.onRetry}
         testId={testId}
         retryTestId={props.retryTestId}
@@ -37,7 +40,7 @@ export function SaveState(props: SaveStateProps): React.ReactElement {
     >
       {hasFailed ? <Glyph name="triangleAlert" size="inline" /> : null}
       <Text variant="caption" tone="inherit">
-        {saveStateLineOf(props)}
+        {saveStateLineOf(props, words)}
       </Text>
     </Box>
   );

@@ -9,18 +9,21 @@ import Box from '@mui/material/Box';
 import { HintIconButton } from '../HintIconButton/index.ts';
 import { Glyph } from '../../atoms/Glyph/index.ts';
 import { DRAWER_WIDTH } from './constants/drawerConstants.ts';
-import { CONTROL_LABELS } from '../../../constants/controlLabelsConstants.ts';
+import { DRAWER_WORDS } from './constants/drawerWords.ts';
+import type { DrawerWords } from './types/drawerTypes.ts';
 
 export type DrawerProps = {
   readonly open: boolean;
   readonly onClose: () => void;
   readonly children?: ReactNode;
+  readonly words?: DrawerWords | undefined;
 };
 
 export const Drawer = ({
   open,
   onClose,
   children,
+  words = DRAWER_WORDS,
 }: DrawerProps): React.ReactElement => {
   return (
     <MuiDrawer
@@ -38,7 +41,7 @@ export const Drawer = ({
         }}
       >
         <HintIconButton
-          label={CONTROL_LABELS.close}
+          label={words.close}
           variant="ghost"
           size="sm"
           onClick={onClose}

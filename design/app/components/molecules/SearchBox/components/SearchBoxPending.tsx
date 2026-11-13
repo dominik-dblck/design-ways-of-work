@@ -3,19 +3,20 @@
  */
 import CircularProgress from '@mui/material/CircularProgress';
 import { controlGlyph } from '../../../../styles/scales.ts';
-import { SEARCH_BOX_WORDS } from '../constants/searchBoxWords.ts';
 
 export function SearchBoxPending({
   testId,
+  label,
 }: {
   readonly testId?: string | undefined;
+  readonly label: string;
 }): React.ReactElement {
   return (
     <CircularProgress
       data-testid={testId}
       size={controlGlyph.small}
       color="inherit"
-      aria-label={SEARCH_BOX_WORDS.pending}
+      aria-label={label}
       sx={{ color: 'text.secondary', flexShrink: 0 }}
     />
   );

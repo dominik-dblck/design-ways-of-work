@@ -5,10 +5,10 @@ import Box from '@mui/material/Box';
 import { RetryLine } from '../../RetryLine/index.ts';
 import { Glyph } from '../../../atoms/Glyph/index.ts';
 import { SAVE_LOST_SX } from '../constants/saveStateConstants.ts';
-import { SAVE_STATE_WORDS } from '../constants/saveStateWords.ts';
 
 type SaveStateLostProps = {
   readonly line: string;
+  readonly retryLabel: string;
   readonly onRetry: () => void;
   readonly testId?: string | undefined;
   readonly retryTestId?: string | undefined;
@@ -17,6 +17,7 @@ type SaveStateLostProps = {
 /** The text stays in the field · Retry sends it again. */
 export function SaveStateLost({
   line,
+  retryLabel,
   onRetry,
   testId,
   retryTestId,
@@ -26,7 +27,7 @@ export function SaveStateLost({
       <Glyph name="triangleAlert" size="inline" />
       <RetryLine
         line={line}
-        retryLabel={SAVE_STATE_WORDS.retry}
+        retryLabel={retryLabel}
         onRetry={onRetry}
         tone="danger"
         retryTestId={retryTestId}

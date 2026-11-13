@@ -7,6 +7,8 @@ import {
   PAGINATION_INLINE_SX,
   PAGINATION_SX,
 } from './constants/paginationConstants.ts';
+import { PAGINATION_WORDS } from './constants/paginationWords.ts';
+import type { PaginationWords } from './types/paginationTypes.ts';
 import { pageItemOf } from './utils/paginationItemUtils.tsx';
 
 export type PaginationProps<Page extends number = number> = {
@@ -19,6 +21,7 @@ export type PaginationProps<Page extends number = number> = {
   readonly pageTestId?: string;
   // inside another line's band, which pads it
   readonly inline?: boolean;
+  readonly words?: PaginationWords | undefined;
 };
 
 /** A page that is not a page number goes nowhere. */
@@ -30,6 +33,7 @@ export function Pagination<Page extends number = number>({
   testId,
   pageTestId,
   inline = false,
+  words = PAGINATION_WORDS,
 }: PaginationProps<Page>): React.ReactElement {
   const handOn = (next: number | null): void => {
     const at = pageOf(next);
@@ -44,7 +48,9 @@ export function Pagination<Page extends number = number>({
         page={page}
         count={pageCount}
         onChange={(_event, next) => handOn(next)}
-        renderItem={(slot) => pageItemOf(slot, { handOn, testId: pageTestId })}
+        renderItem={(slot) =>
+          pageItemOf(slot, { handOn, testId: pageTestId, words })
+        }
       />
     </Box>
   );

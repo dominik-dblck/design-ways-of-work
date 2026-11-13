@@ -1400,3 +1400,8 @@ Each call: what, why, how to undo. None changes what the PM sees.
   build side's rules, tools and skills, then its gate), 6 · Argus's build repository, 7 · a register of the
   products' requests. Status against the architecture is a page the PM reads, republished at each milestone.
   Undo: the rows and the three stages out of the table.
+- Eagle-design's review of 31451d3: seven molecules held fixed words, against W108's "its words made props with
+  defaults". Call: mended at the source before v1.1.0, since the build side is the molecules' source until then
+  (W110) and its review covers it. Eagle-dev's 91b9a95 (review passed, its mirror green): five molecules take a
+  `words` prop, Eagle's constants the defaults; FilterMenu and FieldLabel draw only the words handed in. Resynced,
+  207 files; sample green. Undo: `yarn sync:theme` at 360cb0b.

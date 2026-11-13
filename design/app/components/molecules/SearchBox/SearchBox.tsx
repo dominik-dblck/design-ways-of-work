@@ -1,11 +1,12 @@
 /**
  * - `SearchBox` · a search field; a spinner while an answer is out
  */
-import Box from '@mui/material/Box';
 import { Input } from '../../atoms/Input/index.ts';
 import type { InputProps } from '../../atoms/Input/index.ts';
-import { Glyph } from '../../atoms/Glyph/index.ts';
+import { SearchBoxGlyph } from './components/SearchBoxGlyph.tsx';
 import { SearchBoxPending } from './components/SearchBoxPending.tsx';
+import { SEARCH_BOX_WORDS } from './constants/searchBoxWords.ts';
+import type { SearchBoxWords } from './types/searchBoxTypes.ts';
 
 export type SearchBoxProps = {
   readonly value: string;
@@ -18,6 +19,7 @@ export type SearchBoxProps = {
   readonly pending?: boolean;
   readonly testId?: string | undefined;
   readonly pendingTestId?: string;
+  readonly words?: SearchBoxWords | undefined;
 };
 
 export function SearchBox({
@@ -30,6 +32,7 @@ export function SearchBox({
   pending = false,
   testId,
   pendingTestId,
+  words = SEARCH_BOX_WORDS,
 }: SearchBoxProps): React.ReactElement {
   return (
     <Input
@@ -39,17 +42,11 @@ export function SearchBox({
       {...(size === undefined ? {} : { size })}
       onChange={onQuery}
       state={disabled ? 'locked' : 'default'}
-      startAdornment={
-        <Box
-          component="span"
-          aria-hidden
-          sx={{ display: 'inline-flex', color: 'text.secondary', mr: 1 }}
-        >
-          <Glyph name="search" size="medium" />
-        </Box>
-      }
+      startAdornment={<SearchBoxGlyph />}
       endAdornment={
-        pending ? <SearchBoxPending testId={pendingTestId} /> : undefined
+        pending ? (
+          <SearchBoxPending testId={pendingTestId} label={words.pending} />
+        ) : undefined
       }
       testId={testId}
       sx={

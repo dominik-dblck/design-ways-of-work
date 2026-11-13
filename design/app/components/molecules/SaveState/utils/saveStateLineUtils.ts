@@ -3,24 +3,27 @@
  * - `saveLineSxOf` · the foot's look: a danger rule once it failed, else quiet
  */
 import type { SxProps, Theme } from '@mui/material/styles';
-import { SAVE_STATE_WORDS } from '../constants/saveStateWords.ts';
-import type { SaveStateShown } from '../types/saveStateTypes.ts';
+import type {
+  SaveStateShown,
+  SaveStateWords,
+} from '../types/saveStateTypes.ts';
 
 /** A saved draft with no time is one not saved yet. */
-export const saveStateLineOf = (shown: SaveStateShown): string => {
+export const saveStateLineOf = (
+  shown: SaveStateShown,
+  words: SaveStateWords,
+): string => {
   switch (shown.state) {
     case 'saved':
-      return shown.at === undefined
-        ? SAVE_STATE_WORDS.unsaved
-        : SAVE_STATE_WORDS.saved(shown.at);
+      return shown.at === undefined ? words.unsaved : words.saved(shown.at);
     case 'saving':
-      return SAVE_STATE_WORDS.saving;
+      return words.saving;
     case 'retrying':
-      return SAVE_STATE_WORDS.retrying;
+      return words.retrying;
     case 'taken':
-      return SAVE_STATE_WORDS.taken(shown.takenLine);
+      return words.taken(shown.takenLine);
     case 'lost':
-      return SAVE_STATE_WORDS.lost;
+      return words.lost;
   }
 };
 

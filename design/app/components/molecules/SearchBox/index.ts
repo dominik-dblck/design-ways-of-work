@@ -3,3 +3,4 @@
  */
 export { SearchBox } from './SearchBox.tsx';
 export type { SearchBoxProps } from './SearchBox.tsx';
+export type { SearchBoxWords } from './types/searchBoxTypes.ts';

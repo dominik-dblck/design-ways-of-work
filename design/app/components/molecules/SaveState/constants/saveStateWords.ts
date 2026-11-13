@@ -2,6 +2,7 @@
  * - `SAVE_STATE_WORDS` · what the foot says in each state, and the retry's word
  */
 import { CONTROL_LABELS } from '../../../../constants/controlLabelsConstants.ts';
+import type { SaveStateWords } from '../types/saveStateTypes.ts';
 
 export const SAVE_STATE_WORDS = {
   saved: (at: string) => `Autosaved ${at}`,
@@ -11,4 +12,4 @@ export const SAVE_STATE_WORDS = {
   lost: 'Your changes are not saved. Check your connection.',
   retry: CONTROL_LABELS.retry,
   taken: (line: string) => `Not saved · ${line}`,
-} as const;
+} as const satisfies SaveStateWords;
