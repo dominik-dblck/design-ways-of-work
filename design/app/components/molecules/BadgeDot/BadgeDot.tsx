@@ -5,8 +5,8 @@ import Box from '@mui/material/Box';
 import { Hint } from '../../atoms/Hint/index.ts';
 import { HintLines } from '../HintLines/index.ts';
 import type { HintLinesProps } from '../HintLines/index.ts';
-import type { BadgeDotAt, BadgeDotTone } from './types/badgeDotTypes.ts';
-import { badgeDotSxOf } from './utils/badgeDotSxUtils.ts';
+import { badgeDotSxOf } from '../../atoms/Badge/index.ts';
+import type { BadgeDotAt, BadgeDotTone } from '../../atoms/Badge/index.ts';
 
 /** On a corner it is ringed off what it sits on; inline it is small and plain. */
 export type BadgeDotProps = {

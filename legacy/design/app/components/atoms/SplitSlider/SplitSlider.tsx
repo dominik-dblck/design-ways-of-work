@@ -3,8 +3,8 @@
  */
 import type { SxProps, Theme } from '@mui/material/styles';
 import MuiSlider from '@mui/material/Slider';
-import { sxListOf } from '../../../utils/sxListUtils.ts';
-import { SLIDER_INSIDE_SX } from '../../../constants/sliderConstants.ts';
+import { sxListOf } from '../../../../../../design/app/utils/sxListUtils.ts';
+import { SLIDER_INSIDE_SX } from '../../../../../../design/app/constants/sliderConstants.ts';
 import { thumbsOf } from './utils/splitSliderValueUtils.ts';
 
 export type SplitSliderProps = {

@@ -1,58 +1,38 @@
 /**
- * - `Slider` · a number picked along its range, in its steps
+ * - `Slider` · a number picked along its range, or a range cut at each thumb
+ * - a list of cuts draws a thumb at each, never passing the next
  */
-import type { SxProps, Theme } from '@mui/material/styles';
 import MuiSlider from '@mui/material/Slider';
 import { sxListOf } from '../../../utils/sxListUtils.ts';
 import { SLIDER_INSIDE_SX } from '../../../constants/sliderConstants.ts';
-import { single } from './utils/sliderValueUtils.ts';
+import { handlersOf, isOneThumb } from './utils/sliderValueUtils.ts';
+import type { SliderBase, SliderCuts, SliderOne } from './types/sliderTypes.ts';
 
-export type SliderProps = {
-  readonly value: number;
-  readonly min: number;
-  readonly max: number;
-  readonly step: number;
-  readonly label: string;
-  // the value as a person reads it, its unit with it
-  readonly format: (value: number) => string;
-  readonly disabled?: boolean;
-  readonly onChange?: (value: number) => void;
-  // the hand let go, on this value
-  readonly onCommit?: (value: number) => void;
-  readonly testId?: string;
-  readonly sx?: SxProps<Theme>;
-};
+/** One number, one thumb; a list of cuts, a thumb at each. */
+export type SliderProps = SliderBase & (SliderOne | SliderCuts);
 
-export function Slider({
-  value,
-  min,
-  max,
-  step,
-  label,
-  format,
-  disabled = false,
-  onChange,
-  onCommit,
-  testId,
-  sx,
-}: SliderProps): React.ReactElement {
+export function Slider(props: SliderProps): React.ReactElement {
+  const { min, max, step, label, format, testId, sx } = props;
+  const isDisabled = props.disabled ?? false;
+  // one thumb names its input; cuts name each thumb and never swap
+  const named = isOneThumb(props)
+    ? { value: props.value, slotProps: { input: { 'aria-label': label } } }
+    : { value: [...props.value], getAriaLabel: () => label, disableSwap: true };
   return (
     <MuiSlider
       data-testid={testId}
       sx={[SLIDER_INSIDE_SX, ...sxListOf(sx)]}
       size="small"
-      value={value}
       min={min}
       max={max}
       step={step}
       marks
-      disabled={disabled}
+      disabled={isDisabled}
       valueLabelDisplay="auto"
       valueLabelFormat={format}
       getAriaValueText={format}
-      slotProps={{ input: { 'aria-label': label } }}
-      onChange={single(onChange)}
-      onChangeCommitted={single(onCommit)}
+      {...named}
+      {...handlersOf(props)}
     />
   );
 }

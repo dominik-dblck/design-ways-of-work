@@ -92,3 +92,12 @@ Retired when the PM picked three names, each one thing (W116): Heading, Text and
   `quiet`, with its `note`
 - the tokens `--ui-eyebrow` (10px) and `--ui-eyebrow-font` (`var(--font-mono)`), rows of
   `design-system/tokens/typography.ts` no code read: the label's size is `--ui-label`, its face the body's
+
+## One component per job
+
+Retired by the same pick (W116): two components with the same props, one of them goes.
+
+- `design/app/components/atoms/SplitSlider/` · a range cut at each thumb: `Slider` takes a list of cuts, its
+  props the same
+- the theme's dot variant of `MuiBadge` in `design/app/styles/theme/markOverrides.ts` (danger fill, 1.5px
+  neutral ring, `--ui-mark-dot`): Badge's dot is BadgeDot's face, `dotFaceOf` in the Badge atom

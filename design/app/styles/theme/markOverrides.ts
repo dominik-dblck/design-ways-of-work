@@ -68,21 +68,8 @@ const NON_CHIP_MARKS: ThemeOptions['components'] = {
     styleOverrides: {
       badge: { fontSize: length('uiCaption'), borderRadius: length('uiRTag') },
     },
-    // a dot says something happened and a count says how many · two shapes
+    // a count says how many; the dot's face is BadgeDot's, drawn by the Badge atom
     variants: [
-      {
-        props: { variant: 'dot' },
-        style: {
-          '& .MuiBadge-badge': {
-            backgroundColor: colour('bgDangerSolid'),
-            color: colour('bgDangerSolid'),
-            border: `1.5px solid ${colour('bdNeutralSoft')}`,
-            borderRadius: length('uiRPill'),
-            minWidth: length('uiMarkDot'),
-            height: length('uiMarkDot'),
-          },
-        },
-      },
       {
         props: { variant: 'count' },
         style: {

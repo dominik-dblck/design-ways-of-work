@@ -9,6 +9,11 @@ import { HELD } from './held.ts';
 const RETIRED = [
   'app/components/atoms/Eyebrow/index.ts',
   'app/components/atoms/Eyebrow/Eyebrow.tsx',
+  'app/components/atoms/SplitSlider/index.ts',
+  'app/components/atoms/SplitSlider/SplitSlider.tsx',
+  'app/components/atoms/SplitSlider/utils/splitSliderValueUtils.ts',
+  'app/components/molecules/BadgeDot/types/badgeDotTypes.ts',
+  'app/components/molecules/BadgeDot/utils/badgeDotSxUtils.ts',
 ];
 
 const BUILD_THEME: CopySet = {

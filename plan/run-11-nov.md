@@ -1500,3 +1500,8 @@ Each call: what, why, how to undo. None changes what the PM sees.
   moves to molecules by `scripts/move.ts`, as it now composes Heading and an atom composes none; seven comments
   mended. A rule that only Label and Heading read the overline waits: a shared rule needs a gate on both sides.
   Undo: revert the commit, TitledList back by the map run back.
+- W116's sliders and dots. Calls: one Slider whose props are one thumb's or a list of cuts' (`SliderOne`,
+  `SliderCuts`), a list never swapping its thumbs, SplitSlider to `legacy/`; the dot's face (`dotFaceOf`) and
+  its types move from BadgeDot into the Badge atom by `scripts/move.ts`, Badge's dot draws it with a `tone`, and
+  the theme's own dot variant retires, so one size and one ring hold both. The copy set's `RETIRED` names the
+  old paths, so a sync never copies them back. Undo: revert the commit, the map run back.
