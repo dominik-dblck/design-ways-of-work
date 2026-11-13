@@ -1444,3 +1444,11 @@ Each call: what, why, how to undo. None changes what the PM sees.
   folder included. A hidden take that turns committed keeps its files: the hidden record is read until the lock
   is written, and its exclude block goes. Design products stay hidden. Undo: revert the commit; no product
   holds a lock yet.
+- Eagle-dev's review of 4f05c3c: F1 (high) a tag is a name that moves, so `--tag` alone could run other code on
+  the next machine than a reviewer saw. Call: `--tag` takes only with `--sha <the tag's commit>`, or the commit
+  `wow.lock` already names for the same tag; a clone standing elsewhere writes nothing and exits 1. The lock's
+  first line names the commit beside the version. The committed path moved whole into `takeTag.ts`, loaded only
+  there. F2 (minor, the check runs from the tree it checks): no change here, the repository's code owners hold
+  `wow.lock` and `shared/take/`. F3 (minor, a product file inside a taken folder is not flagged): as meant, a
+  home lands on folders the product also writes (design's on its root); a file the lock does not name is the
+  product's. Undo: revert the commit; no lock exists yet.

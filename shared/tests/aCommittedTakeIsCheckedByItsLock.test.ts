@@ -35,6 +35,9 @@ const git = ({
     { cwd, encoding: 'utf8', env: ENV },
   );
 
+const headOf = (cwd: string): string =>
+  git({ cwd, args: ['rev-parse', 'HEAD'] }).trim();
+
 const scratch = (prefix: string): string => {
   const folder = fs.mkdtempSync(path.join(os.tmpdir(), prefix));
   made.push(folder);
@@ -122,15 +125,39 @@ describe('a committed take', () => {
     expect(take({ root, args: ['--check'] }).out).toContain(`GONE · ${RULE}`);
   });
 
-  it('clones the tag and runs that tag’s take, the clone gone after', () => {
+  it('clones the tag at the commit named, runs its take and locks that commit', () => {
     const source = aTaggedSource();
     const root = aBuildRepository(source);
-    const ran = take({ root, args: ['--tag', 'v1.0.0'] });
+    const commit = headOf(source);
+    const ran = take({ root, args: ['--tag', 'v1.0.0', '--sha', commit] });
     expect(ran.status).toBe(0);
     expect(fs.readFileSync(path.join(root, RULE), 'utf8')).toBe('tag\n');
     expect(fs.readFileSync(path.join(root, 'wow.lock'), 'utf8')).toMatch(
-      /^# design-ways-of-work 1\.0\.0\n/,
+      new RegExp(`^# design-ways-of-work 1\\.0\\.0 ${commit}\\n`),
     );
+  });
+
+  it('writes nothing from a tag that stands on another commit than the one named', () => {
+    const root = aBuildRepository(aTaggedSource());
+    const ran = take({
+      root,
+      args: ['--tag', 'v1.0.0', '--sha', '0'.repeat(40)],
+    });
+    expect(ran.status).toBe(1);
+    expect(ran.out).toContain('nothing taken');
+    expect(fs.existsSync(path.join(root, 'shared'))).toBe(false);
+  });
+
+  it('takes the same tag again at the lock’s commit, and refuses it once moved', () => {
+    const source = aTaggedSource();
+    const root = aBuildRepository(source);
+    take({ root, args: ['--tag', 'v1.0.0', '--sha', headOf(source)] });
+    expect(take({ root, args: ['--tag', 'v1.0.0'] }).status).toBe(0);
+    fs.writeFileSync(path.join(source, RULE), 'moved\n');
+    git({ cwd: source, args: ['commit', '-q', '-am', 'moved'] });
+    git({ cwd: source, args: ['tag', '-f', 'v1.0.0'] });
+    expect(take({ root, args: ['--tag', 'v1.0.0'] }).status).toBe(1);
+    expect(fs.readFileSync(path.join(root, RULE), 'utf8')).toBe('tag\n');
   });
 
   it('moves a hidden take to committed: its exclude block goes, the lock comes', () => {
@@ -156,10 +183,13 @@ describe('a committed take', () => {
     expect(fs.existsSync(path.join(root, 'wow.lock'))).toBe(true);
   });
 
-  it('refuses a name that is no release’s tag, and a take with no tag', () => {
+  it('refuses no release’s tag, a tag with no commit, and a take with no tag', () => {
     const root = aBuildRepository(aTaggedSource());
     expect(take({ root, args: ['--tag', 'main'] }).out).toContain(
       "no release's tag",
+    );
+    expect(take({ root, args: ['--tag', 'v1.0.0'] }).out).toContain(
+      'names no commit',
     );
     expect(take({ root, args: [] }).out).toContain('names its tag');
     expect(fs.existsSync(path.join(root, 'shared'))).toBe(false);

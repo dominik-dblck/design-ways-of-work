@@ -1,5 +1,5 @@
 /**
- * - `takenFiles` · what the last take wrote, by digest: not the product’s own
+ * - `takenFiles`, `takenHead` · what the last take wrote, by digest; its version
  * - `LOCK`, `writeRecord` · committed in `wow.lock`, or hidden in the git folder
  * - `writeExclude` · git’s exclude block, each worktree its own; none committed
  */
@@ -67,23 +67,42 @@ function takenFiles(root: string): ReadonlyMap<string, string> {
   );
 }
 
+// the lock's first line: the version taken, and the commit it stood on when the take knew it
+function takenHead(
+  root: string,
+):
+  | { readonly version: string; readonly commit: string | undefined }
+  | undefined {
+  const at = recordIn(root);
+  if (at === undefined || !fs.existsSync(at)) return undefined;
+  const first = fs.readFileSync(at, 'utf8').split('\n', 1)[0] ?? '';
+  const read = /^# design-ways-of-work (\S+)(?: ([0-9a-f]{40}))?$/.exec(first);
+  return read === null
+    ? undefined
+    : { version: read[1] ?? '', commit: read[2] };
+}
+
+// a committed lock names the commit taken, so a tag moved since is seen at the next take
 function writeRecord({
   root,
   version,
+  commit,
   digests,
   isCommitted,
 }: {
   readonly root: string;
   readonly version: string;
+  readonly commit: string | undefined;
   readonly digests: ReadonlyMap<string, string>;
   readonly isCommitted: boolean;
 }): void {
   const lines = [...digests]
     .sort(([one], [other]) => one.localeCompare(other))
     .map(([file, digest]) => `${file}\t${digest}`);
+  const head = [HEAD, version, ...(isCommitted && commit ? [commit] : [])];
   fs.writeFileSync(
     isCommitted ? path.join(root, LOCK) : recordOf(root),
-    `${HEAD} ${version}\n${lines.join('\n')}\n`,
+    `${head.join(' ')}\n${lines.join('\n')}\n`,
   );
 }
 
@@ -123,4 +142,4 @@ function writeExclude({
   );
 }
 
-export { LOCK, takenFiles, writeExclude, writeRecord };
+export { LOCK, takenFiles, takenHead, writeExclude, writeRecord };

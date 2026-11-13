@@ -1,8 +1,9 @@
 /**
- * - `fileDigestOf` · a file's sha256, or none when the disk lacks it
+ * - `fileDigestOf`, `commitOf` · a file's sha256; a clone's commit, none elsewhere
  * - `checkLock` · each file `wow.lock` names is on the disk as taken, none edited
  * - it reads the tree alone: a build repository's CI needs no way of working
  */
+import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -11,6 +12,20 @@ import { LOCK, takenFiles } from './takeRecord.ts';
 const fileDigestOf = (file: string): string | undefined =>
   fs.existsSync(file)
     ? createHash('sha256').update(fs.readFileSync(file)).digest('hex')
+    : undefined;
+
+// a hook's git hands its children its own folder: the clone's own is read, never the caller's
+const commitOf = (folder: string): string | undefined =>
+  fs.existsSync(path.join(folder, '.git'))
+    ? execFileSync('git', ['rev-parse', 'HEAD'], {
+        cwd: folder,
+        encoding: 'utf8',
+        env: Object.fromEntries(
+          Object.entries(process.env).filter(
+            ([name]) => !name.startsWith('GIT_'),
+          ),
+        ),
+      }).trim()
     : undefined;
 
 // a taken file gone or edited is red: its change goes to the way of working, then a tag
@@ -34,4 +49,4 @@ function checkLock(root: string): boolean {
   return drifted.length === 0;
 }
 
-export { checkLock, fileDigestOf };
+export { checkLock, commitOf, fileDigestOf };
