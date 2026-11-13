@@ -1294,3 +1294,9 @@ Each call: what, why, how to undo. None changes what the PM sees.
   `leavesOf`, `sectionOf`), the rest the product's own. Taking it now holds v0.22.0, and the lock with it,
   behind a product's renames. The second half: the scan on the homes with the scope's entries left out, the
   four renamed here, the product's list to eagle-design. Undo: the test back under `shared/tests/`.
+- eagle-dev's run showed no process at 10:15 (asked, then confirmed "heavy done"); this side's sample, commit
+  and gate ran under the lock from the tree. 9d47d8b reviewed by eagle-design, five findings, all mended: a
+  beat instead of a spin while another cleans a dead lock; the review record read through git from its last
+  commit on any ref, so an uncommitted record refuses (eagle-dev commits it before its mirror runs); each
+  holder's start time beside its pid, a reused pid reading as dead; the command's pid in the lock, held while
+  either lives; the homes test's header says "or would add". Undo: the commit reverted.

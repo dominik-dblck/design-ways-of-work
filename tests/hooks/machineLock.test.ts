@@ -1,4 +1,4 @@
-import { spawn, spawnSync } from 'node:child_process';
+import { execFileSync, spawn, spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -32,11 +32,11 @@ const envOf = (extra: Readonly<Record<string, string>>): NodeJS.ProcessEnv => ({
   ...extra,
 });
 
-// the command a run holds the machine for: it leaves a marker, then exits with the code asked
+// the command a run holds the machine for: it copies the lock to the marker, then exits with the code asked
 const marking = (code = 0): readonly string[] => [
   'python3',
   '-c',
-  `import sys; open(${JSON.stringify(marker)}, 'w').write('ran'); sys.exit(${String(code)})`,
+  `import shutil, sys; shutil.copy(${JSON.stringify(lock)}, ${JSON.stringify(marker)}); sys.exit(${String(code)})`,
 ];
 
 const locked = (
@@ -50,13 +50,20 @@ const locked = (
   return { status: done.status, out: `${done.stdout}${done.stderr}` };
 };
 
-const held = (pid: number | null): void => {
+const startOf = (pid: number): string =>
+  execFileSync('ps', ['-o', 'lstart=', '-p', String(pid)], {
+    encoding: 'utf8',
+  }).trim();
+
+const held = (processes: readonly { pid: number; started: string }[]): void => {
   fs.mkdirSync(path.dirname(lock), { recursive: true });
   fs.writeFileSync(
     lock,
-    JSON.stringify({ pid, label: 'another run', since: 'now' }),
+    JSON.stringify({ label: 'another run', since: 'now', processes }),
   );
 };
+
+const LIVE = { pid: process.pid, started: startOf(process.pid) };
 
 describe('one heavy run on the machine at a time', () => {
   it('a free machine: free, then the run runs and leaves no lock', () => {
@@ -67,13 +74,21 @@ describe('one heavy run on the machine at a time', () => {
     expect(fs.existsSync(lock)).toBe(false);
   });
 
+  it('the lock names the wrapper and, while it runs, its command', () => {
+    locked(['run', 'mine', '--', ...marking()]);
+    const record = JSON.parse(fs.readFileSync(marker, 'utf8')) as {
+      readonly processes: readonly { readonly pid: number }[];
+    };
+    expect(record.processes).toHaveLength(2);
+  });
+
   it("the command's exit code is the run's, and the lock still leaves", () => {
     expect(locked(['run', 'mine', '--', ...marking(3)]).status).toBe(3);
     expect(fs.existsSync(lock)).toBe(false);
   });
 
   it('a live holder: the run waits, says for whom, and runs once it leaves', async () => {
-    held(process.pid);
+    held([LIVE]);
     expect(locked(['status']).out).toContain('another run holds the machine');
     const waiting = spawn(
       'python3',
@@ -100,16 +115,27 @@ describe('one heavy run on the machine at a time', () => {
     expect(fs.existsSync(marker)).toBe(true);
   });
 
-  it('a dead holder: its lock is taken over, and the run runs', () => {
-    held(DEAD);
+  it.each([
+    ['a dead holder', [{ pid: DEAD, started: 'then' }]],
+    [
+      'a holder whose pid another process holds now',
+      [{ pid: process.pid, started: 'Mon Jan  1 00:00:00 2001' }],
+    ],
+  ])('%s: its lock is taken over, and the run runs', (_, processes) => {
+    held(processes);
     expect(locked(['status']).out).toContain('left a stale lock');
     const said = locked(['run', 'mine', '--', ...marking()]);
     expect(said.out).toContain('another run left a stale lock: taken over');
     expect(fs.existsSync(marker)).toBe(true);
   });
 
+  it('a killed wrapper whose command still runs: the machine stays held', () => {
+    held([{ pid: DEAD, started: 'then' }, LIVE]);
+    expect(locked(['status']).out).toContain('another run holds the machine');
+  });
+
   it('a run inside a held run passes at once, the outer lock kept', () => {
-    held(process.pid);
+    held([LIVE]);
     const said = locked(['run', 'inner', '--', ...marking()], {
       MACHINE_LOCK_HELD: 'outer',
     });

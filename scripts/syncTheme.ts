@@ -37,14 +37,25 @@ const git = (args: readonly string[]): string =>
     maxBuffer: 1 << 28,
   });
 const full = git(['rev-parse', '--verify', `${sha}^{commit}`]).trim();
-const recordFile = path.join(
-  BUILD_REPO,
-  BUILD_THEME.reviewed.replace('{sha}', full.slice(0, 8)),
-);
+// the record as committed there, on any branch: an uncommitted or edited one decides nothing
+const recordFile = BUILD_THEME.reviewed.replace('{sha}', full.slice(0, 8));
+const recordAt = git([
+  'log',
+  '-1',
+  '--all',
+  '--format=%H',
+  '--',
+  recordFile,
+]).trim();
+const committed = (): string | null => {
+  try {
+    return git(['show', `${recordAt}:${recordFile}`]);
+  } catch {
+    return null;
+  }
+};
 const refusal = reviewRefusal({
-  record: fs.existsSync(recordFile)
-    ? fs.readFileSync(recordFile, 'utf8')
-    : null,
+  record: recordAt === '' ? null : committed(),
   sha: full,
 });
 if (refusal !== null) {

@@ -1,6 +1,6 @@
 /**
- * - `tools/layout.ts` is the homes' map: a file git holds under a home's first
- *   folder stands in a home it names, or is a file the build writes from one
+ * - `tools/layout.ts` is the homes' map: a file git holds or would add under a
+ *   home's first folder stands in a home it names, or the build writes it
  */
 import { execFileSync } from 'node:child_process';
 import { describe, expect, it } from 'vitest';

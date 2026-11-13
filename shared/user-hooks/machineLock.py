@@ -16,7 +16,17 @@ LOCK = os.path.join(os.path.expanduser("~"), ".claude", "locks", "heavy.json")
 CLEANING = LOCK + ".cleaning"
 HELD = "MACHINE_LOCK_HELD"
 WAIT = float(os.environ.get("MACHINE_LOCK_WAIT", "15"))
+# the pause while another cleans a dead holder's lock: short, never a spin
+BEAT = min(WAIT, 1.0)
 CLEANING_STALE = 60
+
+
+# a process's start, so a pid the system gave again to another process reads as gone
+def started(pid):
+    done = subprocess.run(
+        ["ps", "-o", "lstart=", "-p", str(pid)], capture_output=True, text=True
+    )
+    return done.stdout.strip() or None
 
 
 def holder():
@@ -26,11 +36,16 @@ def holder():
     except FileNotFoundError:
         return None
     except (OSError, ValueError):
-        # a lock being written: held, its holder not yet named
-        return {"pid": None, "label": "a run starting", "since": ""}
+        # a lock being written: held, its processes not yet named
+        return {"label": "a run starting", "since": "", "processes": []}
 
 
-def is_alive(pid):
+def processes_of(now):
+    return [one for one in now.get("processes", []) if isinstance(one, dict)]
+
+
+def is_alive(process):
+    pid = process.get("pid")
     if not isinstance(pid, int):
         return True
     try:
@@ -38,8 +53,26 @@ def is_alive(pid):
     except ProcessLookupError:
         return False
     except PermissionError:
-        return True
-    return True
+        pass
+    return started(pid) == process.get("started")
+
+
+# held while the wrapper or its command lives: a killed wrapper leaves its command holding
+def is_stale(now):
+    held = processes_of(now)
+    if not held:
+        try:
+            return time.time() - os.path.getmtime(LOCK) > CLEANING_STALE
+        except OSError:
+            return False
+    return not any(is_alive(one) for one in held)
+
+
+def written(record):
+    scratch = f"{LOCK}.{os.getpid()}"
+    with open(scratch, "w", encoding="utf-8") as file:
+        json.dump(record, file)
+    os.replace(scratch, LOCK)
 
 
 def taken(label):
@@ -47,22 +80,20 @@ def taken(label):
     try:
         handle = os.open(LOCK, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o644)
     except FileExistsError:
-        return False
+        return None
+    record = {
+        "label": label,
+        "cwd": os.getcwd(),
+        "since": datetime.now().isoformat(timespec="seconds"),
+        "processes": [{"pid": os.getpid(), "started": started(os.getpid())}],
+    }
     with os.fdopen(handle, "w", encoding="utf-8") as file:
-        json.dump(
-            {
-                "pid": os.getpid(),
-                "label": label,
-                "cwd": os.getcwd(),
-                "since": datetime.now().isoformat(timespec="seconds"),
-            },
-            file,
-        )
-    return True
+        json.dump(record, file)
+    return record
 
 
 # a dead holder's lock removed, under the cleaner's own lock; the holder read again inside it
-def cleared(dead_pid):
+def cleared(dead):
     try:
         os.mkdir(CLEANING)
     except FileExistsError:
@@ -70,8 +101,7 @@ def cleared(dead_pid):
             os.rmdir(CLEANING)
         return False
     try:
-        now = holder()
-        if now is not None and now.get("pid") == dead_pid:
+        if holder() == dead:
             os.unlink(LOCK)
             return True
         return False
@@ -79,47 +109,49 @@ def cleared(dead_pid):
         os.rmdir(CLEANING)
 
 
+def is_ours(now):
+    held = processes_of(now) if now is not None else []
+    return bool(held) and held[0].get("pid") == os.getpid()
+
+
 def released():
-    now = holder()
-    if now is not None and now.get("pid") == os.getpid():
+    if is_ours(holder()):
         os.unlink(LOCK)
-
-
-def is_stale(now):
-    if now.get("pid") is None:
-        try:
-            return time.time() - os.path.getmtime(LOCK) > CLEANING_STALE
-        except OSError:
-            return False
-    return not is_alive(now.get("pid"))
 
 
 def acquired(label):
     told = None
-    while not taken(label):
+    while True:
+        record = taken(label)
+        if record is not None:
+            return record
         now = holder()
         if now is None:
             continue
         if is_stale(now):
-            if cleared(now.get("pid")):
+            if cleared(now):
                 print(f"machineLock · {now.get('label')} left a stale lock: taken over", flush=True)
+            else:
+                time.sleep(BEAT)
             continue
-        if told != now.get("pid"):
+        if told != now.get("since"):
             print(
                 f"machineLock · waiting: {now.get('label')} holds the machine since {now.get('since')}",
                 flush=True,
             )
-            told = now.get("pid")
+            told = now.get("since")
         time.sleep(WAIT)
 
 
 def run(label, command):
     if os.environ.get(HELD):
         return subprocess.call(command)
-    acquired(label)
-    child = None
+    record = acquired(label)
     try:
         child = subprocess.Popen(command, env={**os.environ, HELD: label})
+        if is_ours(holder()):
+            record["processes"].append({"pid": child.pid, "started": started(child.pid)})
+            written(record)
 
         def forwarded(signum, _frame):
             child.send_signal(signum)
