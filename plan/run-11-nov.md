@@ -1320,3 +1320,7 @@ Each call: what, why, how to undo. None changes what the PM sees.
   held it current. Call: `yarn sample` runs the build before its feature tier and refuses a design home file
   its build writes otherwise; `yarn sample --emit` writes it into the home. Only that file differed. Told to
   eagle-dev, whose mirror runs the sample. Undo: the commit reverted.
+- v0.23.0 out (e88fc6a) through the gate under the lock. Eagle-dev cut its branch from main on the PM's word:
+  `feature/shared-theme-and-atoms` at 38a280f9, the patch of 565dfa9b (one patch-id), its review record
+  committed and passing. `yarn sync:theme 38a280f9`: the 94 files byte-equal, the record's sha alone moves,
+  so the copy's provenance is main's line. Undo: the commit reverted.
