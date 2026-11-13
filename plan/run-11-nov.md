@@ -1485,3 +1485,9 @@ Each call: what, why, how to undo. None changes what the PM sees.
   (the board's, the contract's) are written in sentence case by a script, MVP, API and LGL kept; the skeleton's
   second sha is copied as eagle-dev stamped it, then moved off Eyebrow here in the same commit. Undo: each
   retired atom back from `legacy/` by `scripts/move.ts`, the type scale's overline as it was.
+- Eagle-dev's second sha, 2fee0535, stamped at v1.3.1 and reviewed there: `yarn sync:theme` copied 82 files from
+  the nine seeds (the first sha's four, then Breadcrumbs, Link, PageHeader, PersonaStrip, DialogContentWrapper)
+  and `hooks/useScrollFade.ts` they read. Calls: the copy set names what this repository retired (`RETIRED`,
+  Eyebrow's two files) as provided, so a copy never brings it back; the mode picker's head became a Label and
+  the side nav's default words left their capitals, here, after the copy. Undo: the copied files out by
+  `git rm`, `taken.ts` and the copy set as they were.

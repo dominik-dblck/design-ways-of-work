@@ -5,6 +5,12 @@
 import type { CopySet } from '../../scripts/syncFiles.ts';
 import { HELD } from './held.ts';
 
+// retired here, still read by the build side: a copy's import of it is moved off here, never copied back
+const RETIRED = [
+  'app/components/atoms/Eyebrow/index.ts',
+  'app/components/atoms/Eyebrow/Eyebrow.tsx',
+];
+
 const BUILD_THEME: CopySet = {
   // the copy lands in the design home, on the build side's own paths
   into: 'design',
@@ -14,9 +20,14 @@ const BUILD_THEME: CopySet = {
     'app/components/templates/SignedOutScreen/',
     'app/components/organisms/SideNav/',
     'app/components/organisms/LoginForm/',
+    'app/components/molecules/Breadcrumbs/',
+    'app/components/atoms/Link/',
+    'app/components/organisms/PageHeader/',
+    'app/components/organisms/PersonaStrip/',
+    'app/components/organisms/DialogContentWrapper/',
   ],
-  // imported where it stands: the product's tokens, and what this repository holds
-  provided: ['app/styles/tokens.ts', ...HELD],
+  // imported where it stands: the product's tokens, what this repository holds, what it retired (W116)
+  provided: ['app/styles/tokens.ts', ...HELD, ...RETIRED],
   // never copied, never imported: tests, the app's mark and name, its own layer
   left: [
     /\/__tests__\//,
