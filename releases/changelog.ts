@@ -5,11 +5,44 @@
 import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
 const NEXT: Unreleased = {
-  kind: 'patch',
-  what: '',
+  kind: 'minor',
+  what: 'what W116 left in capitals: the modes page’s labels in sentence case (Stop · always, Prepare, Where it lands), `NEW EVENT` kept as the log’s own marker; `.dbk-micro` drops its capitals and its loose tracking; the build side’s styling rule names `Text` or `Label`; `scripts/move.ts` takes away each folder a move leaves empty; the README says a take runs its migrations first, on the branch the gate names',
   action: 'none: move the pin to the tag',
   rules: { added: [], changed: [], removed: [] },
-  outputs: {},
+  outputs: {
+    'eagle-design': {
+      'output · yarn build':
+        'two files written from their modules: the modes’ data and the tokens',
+      'output · yarn cut-pack T-E19-00':
+        'the gate’s probe: two files more not committed, the two the build writes',
+      'dist · project/modes.js':
+        'the modes page’s labels in sentence case (W116)',
+      'dist · project/packs/T-E19-00.md':
+        'by the gate’s probe, the tokens file’s size and digest; the take leaves the pack as released',
+      'dist · project/tokens.js':
+        '`.dbk-micro` without capitals, at the normal tracking',
+      'written · app/styles/tokens.ts':
+        '`.dbk-micro` without capitals, at the normal tracking',
+      'written · fixtures/data/modes.json':
+        'the modes page’s labels in sentence case (W116)',
+      'written · fixtures/packs/T-E19-00.md':
+        'by the gate’s probe, the tokens file’s size and digest; the take leaves the pack as released',
+      'written · records/release-5-3-1.md':
+        'by the gate’s probe, the digests of the tokens and the modes’ files; the take leaves the record as released',
+      'written · vendor/wow/docs/process/modes/aboutToHoldsNote.ts':
+        'its stops and titles in sentence case (W116)',
+      'written · vendor/wow/docs/process/modes/holdsToLegend.ts':
+        'its stop samples in sentence case (W116)',
+      'written · vendor/wow/docs/process/modes/runsFeatureFirstRows.ts':
+        'its stop labels in sentence case (W116)',
+      'written · vendor/wow/docs/process/modes/runsFeatureLastRows.ts':
+        'its stop label in sentence case (W116)',
+      'written · vendor/wow/docs/process/modes/runsFeatureLoads.ts':
+        'its phases and step note in sentence case (W116)',
+      'written · vendor/wow/docs/process/modes/runsStandard.ts':
+        'its stop labels in sentence case (W116)',
+    },
+  },
 };
 
 const RELEASES: readonly Release[] = [
