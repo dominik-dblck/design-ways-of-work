@@ -5,11 +5,20 @@
 import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
 const NEXT: Unreleased = {
-  kind: 'patch',
-  what: '',
+  kind: 'minor',
+  what: '`Heading` is a shared atom: level 1 to 3 draws h1 to h3 at its step of the type ramp; a page whole is a template: `BoardPage`, `ContractPage` and `FeaturePage` move from organisms to `app/components/templates/`; an epic with no feature ticket gets its feature page from its tickets, their criteria naming a test as its cases and their edges as its decisions (D108); a release tag reads `release-<yyyy-mm-dd>-<what>`, one to three lowercase words saying what the release does (D109); `CLAUDE.md` holds 2000 words, a skill’s cap; a move from the build side copies its seeds alone, the theme, atoms and molecules held here (W110, W114)',
   action: 'none: move the pin to the tag',
   rules: { added: [], changed: [], removed: [] },
-  outputs: {},
+  outputs: {
+    'eagle-design': {
+      'dist · project/ticket-pipeline.md':
+        'the release tag reads `release-<yyyy-mm-dd>-<what>` (D109)',
+      'written · .claude/skills/design-release/SKILL.md':
+        'step 1: the tag `release-<yyyy-mm-dd>-<what>`, one to three lowercase words saying what the release does (D109)',
+      'written · docs/process/ticket-pipeline.md':
+        'the release tag reads `release-<yyyy-mm-dd>-<what>` (D109)',
+    },
+  },
 };
 
 const RELEASES: readonly Release[] = [

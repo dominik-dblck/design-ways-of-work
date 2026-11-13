@@ -23,8 +23,9 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
   tree's homes and runs its feature tier, ten of ten green; this repository's feature tier runs it. It takes
   no `dev/`, as a new design product does not.
 - The build side: `dev/` is copied from its repository by script and taken by eagle-design alone; its port is
-  parked. Its theme and atoms are copied into the design home by `yarn sync:theme <sha>`, the sha and each
-  file recorded in `ports/build-theme/taken.ts`. A sha reaches this side only past the build side's own gate:
+  parked. Its theme, atoms and molecules are held here since W110 (`ports/build-theme/held.ts`);
+  `yarn sync:theme <sha>` copies a move's seeds alone, W114's skeleton, the sha and each file recorded in
+  `ports/build-theme/taken.ts`. A sha reaches this side only past the build side's own gate:
   its architecture review, then this repository's sample run on a mirror. That mirror reads
   `scripts/syncTheme.ts`, `scripts/sample.ts`, `scripts/repos.ts` and `ports/consumers.ts`; a change to
   their shape is told to eagle-dev first.
@@ -47,7 +48,8 @@ waits for the PM's yes here. v1.2.0 is out: the WCAG fixes and the committed tak
 The PM's word of 13 Nov (W114): the app's skeleton joins the shared components, so a new app starts with it. The
 build side frees its seven (AppShell, SideNav, LoginForm, SignedOutScreen, Breadcrumbs, PageHeader,
 PersonaStrip) of the product, its binding kept in its own wrappers; they are copied here at its two reviewed
-shas. They go out as v1.3.0 with eagle-design's D108, one batch (W115).
+shas. v1.3.0 goes out without them, as eagle-dev waits on its tag to stamp the skeleton's first sha: D108,
+D109, `Heading`, the pages as templates and the sync's seeds; the skeleton goes out as v1.4.0 (W115).
 
 The PM's word of 13 Nov on shared components (W110): after v1.1.0 this repository holds the
 theme, atoms and molecules, a product keeps and extends its own and asks for one to be shared; and (W111) both
