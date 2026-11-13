@@ -10,6 +10,7 @@ describe('what this repository holds from the build side stands in its home', ()
     const gone = HELD.filter(
       (file) => !fs.existsSync(path.join(HERE, BUILD_THEME.into, file)),
     );
+    expect(HELD.length).toBeGreaterThan(0);
     expect(gone).toStrictEqual([]);
   });
 });
