@@ -1191,3 +1191,9 @@ Each call: what, why, how to undo. None changes what the PM sees.
   agents byte for byte), not names alone; making it any product's is the plan's build-side split (stage 4,
   parked, and a word to eagle-dev is the PM's). The new-project guide says the pipeline names the agents the
   build side holds. Undo: `dev` back in the sample's `wow.takes`.
+- The PM, 13 Nov, asked whether v1.0.0 goes out before task 23: "B · najpierw zadanie 23". v1.0.0 waits on the
+  build side's theme and atoms, and with it eagle-design's v1 and the spawn. Why: the PM's order. Undo: the
+  PM's word to release first.
+- eagle-design rehearsed stage 3 in a scratch clone (its `views/feature` merged into `port/wow`): one conflict,
+  the frozen notebooks' test (kept deleted; E11's digest joins its product registry), and three words its
+  spelling never read. Its recipe waits for the port's merge, which waits on the PM's fast-forward of `main`.
