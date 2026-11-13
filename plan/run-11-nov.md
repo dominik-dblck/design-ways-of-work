@@ -1300,3 +1300,6 @@ Each call: what, why, how to undo. None changes what the PM sees.
   commit on any ref, so an uncommitted record refuses (eagle-dev commits it before its mirror runs); each
   holder's start time beside its pid, a reused pid reading as dead; the command's pid in the lock, held while
   either lives; the homes test's header says "or would add". Undo: the commit reverted.
+- 9e30236 reviewed: two more, mended in 7c6902c (the record read from branches and remotes, never a stash; a
+  start not read leaves the pid alone to decide). v0.22.0 out (add6c36) through the gate under the lock;
+  `yarn hooks:user` installed the lock on this machine; eagle-dev and eagle-design wrap their heavy runs in it.

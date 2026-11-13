@@ -16,7 +16,7 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
 ## Who takes it
 
 - `ports/consumers.ts` names each repository the gate tries, and the branch it tries.
-- eagle-design: its branch `port/wow` takes the tags, each by its migrations (v0.20.0 at 68fd4ae); v0.21.0 is
+- eagle-design: its branch `port/wow` takes the tags, each by its migrations (v0.21.0 at 9f548b0); v0.22.0 is
   out for it to take. Its `main` still runs on its own copies and takes the port's line at stage 3
   (its fast-forward is the PM's word). The gate tries `port/wow`, taking `main` by the port's script.
 - argus-design: not spawned yet; its stack is decided, the one this repository defines (W24).
@@ -49,8 +49,10 @@ The PM's word of 13 Nov (W104) settled the rest: the relayed rules stand with th
 the build side's session directly, `.rehearsal/` is in this machine's Trash, and a product's board, pages and
 props get a check part (a task after v1.0.0). Task 23 is closed by v0.21.0: the build side's theme and atoms
 copied at eagle-dev's eed29307 on `feature/W26-shared-theme`, after its architecture review, nothing merged
-there. The PM's word of 13 Nov puts the build side's architecture guard on the homes before v1.0.0 (the run's
-task 25, in hand).
+there. The PM's word of 13 Nov puts the build side's architecture guard on the homes before v1.0.0 (W105, the
+run's task 25): its first half is out in v0.22.0 (the homes are the tree, one home per name on this
+repository's code, a sha synced only reviewed); its second half takes one home per name to the homes and the
+products. Heavy runs take turns on the machine through `~/.claude/hooks/machineLock.py` (W106), installed here.
 
 ## Known gaps
 

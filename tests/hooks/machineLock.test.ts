@@ -77,7 +77,19 @@ describe('one heavy run on the machine at a time', () => {
   });
 
   it('the lock names the wrapper and, while it runs, its command', () => {
-    locked(['run', 'mine', '--', ...marking()]);
+    // the command copies the lock once it is named there: the wrapper writes it just after it starts
+    const named = [
+      'python3',
+      '-c',
+      [
+        'import json, shutil, time',
+        'for _ in range(500):',
+        `    if len(json.load(open(${JSON.stringify(lock)}))["processes"]) == 2: break`,
+        '    time.sleep(0.01)',
+        `shutil.copy(${JSON.stringify(lock)}, ${JSON.stringify(marker)})`,
+      ].join('\n'),
+    ];
+    expect(locked(['run', 'mine', '--', ...named]).status).toBe(0);
     const record = JSON.parse(fs.readFileSync(marker, 'utf8')) as {
       readonly processes: readonly { readonly pid: number }[];
     };
