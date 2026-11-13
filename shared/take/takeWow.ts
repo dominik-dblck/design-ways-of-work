@@ -1,16 +1,16 @@
 /**
- * - `node takeWow.ts [--check] [--from dir]` · take the homes package.json names
- * - run from a copy of its folder: node strips no type under node_modules
- * - `--check` · the take would change nothing, and the record is current
+ * - `takeWow.ts [--check] [--tag v1.2.3 | --from dir]` · take what wow.takes names
+ * - hidden by default; `wow.commits` commits them, `--check` alone reads wow.lock
+ * - from node_modules run a copy of its folder: node strips no type under it
  */
-import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { filesOfHomes, HOMES } from './takeHomes.ts';
+import { checkLock, fileDigestOf } from './takeLock.ts';
 import { planTake } from './takePlan.ts';
 import type { Plan } from './takePlan.ts';
-import { takenFiles, writeExclude, writeRecord } from './takeRecord.ts';
+import { LOCK, takenFiles, writeExclude, writeRecord } from './takeRecord.ts';
 
 const ROOT = process.cwd();
 const PACKAGE = 'design-ways-of-work';
@@ -23,15 +23,24 @@ const argAfter = (flag: string): string | undefined => {
 const readJson = (file: string): Record<string, unknown> =>
   Object(JSON.parse(fs.readFileSync(file, 'utf8')));
 
-const digestOf = (file: string): string | undefined =>
-  fs.existsSync(file)
-    ? createHash('sha256').update(fs.readFileSync(file)).digest('hex')
-    : undefined;
+// what the product says of its take: `takes`, and for a committed one `commits` and `remote`
+const wowOf = (): Record<string, unknown> =>
+  Object(readJson(path.join(ROOT, 'package.json')).wow);
+
+const isCommitted = (): boolean => wowOf().commits === true;
+
+function remoteOf(): string {
+  const remote = wowOf().remote;
+  if (typeof remote !== 'string' || remote === '')
+    throw new Error(
+      'package.json · wow.remote names no repository to take a tag from',
+    );
+  return remote;
+}
 
 // the product names what it takes, nothing by default; a home wow lacks is a mistake in its list
 function homesTaken(): readonly (readonly [string, string])[] {
-  const wow = Object(readJson(path.join(ROOT, 'package.json')).wow);
-  const takes: unknown = wow.takes;
+  const takes: unknown = wowOf().takes;
   if (!Array.isArray(takes) || takes.length === 0)
     throw new Error(
       'package.json · wow.takes names no home of the way of working',
@@ -105,7 +114,7 @@ function theTag(source: string): Taken {
     ),
   );
   const wanted = new Map(
-    [...from].map(([at, here]) => [at, String(digestOf(here))] as const),
+    [...from].map(([at, here]) => [at, String(fileDigestOf(here))] as const),
   );
   return { version, from, wanted };
 }
@@ -114,7 +123,7 @@ function theTag(source: string): Taken {
 const digestsOnDisk = (files: readonly string[]): ReadonlyMap<string, string> =>
   new Map(
     files.flatMap((file) => {
-      const digest = digestOf(path.join(ROOT, file));
+      const digest = fileDigestOf(path.join(ROOT, file));
       return digest === undefined ? [] : [[file, digest] as const];
     }),
   );
@@ -142,6 +151,7 @@ function check({
   process.exitCode = isCurrent ? 0 : 1;
 }
 
+// a committed take's files and lock go into the product's next commit, its code owners reviewing
 function take({
   plan,
   tag,
@@ -149,20 +159,52 @@ function take({
   readonly plan: Plan;
   readonly tag: Taken;
 }): void {
+  const isInHistory = isCommitted();
   applyPlan({ plan, from: tag.from });
-  writeRecord({ root: ROOT, version: tag.version, digests: tag.wanted });
-  writeExclude({ root: ROOT, files: [...tag.wanted.keys()] });
+  writeRecord({
+    root: ROOT,
+    version: tag.version,
+    digests: tag.wanted,
+    isCommitted: isInHistory,
+  });
+  writeExclude({
+    root: ROOT,
+    files: isInHistory ? [] : [...tag.wanted.keys()],
+  });
   console.log(
     `${PACKAGE} ${tag.version} · ${tag.wanted.size} files taken: ${plan.writes.length} written, ${plan.removes.length} removed`,
   );
+  if (isInHistory) console.log(`  commit them with ${LOCK}`);
 }
 
-// a refusal stops the take before it writes anything, the check included
-function main(): void {
-  const source = path.resolve(
-    ROOT,
-    argAfter('--from') ?? path.join('node_modules', PACKAGE),
-  );
+// a committed take names its tag; with none asked, only its check runs, on the lock alone
+async function takeCommitted(): Promise<void> {
+  const tag = argAfter('--tag');
+  const isCheck = process.argv.includes('--check');
+  if (tag !== undefined) {
+    // loaded here alone: a hidden take's copied folder holds no guard beside it
+    const { takeAtTag } = await import('./takeTag.ts');
+    process.exitCode = takeAtTag({
+      root: ROOT,
+      tag,
+      remote: remoteOf(),
+      isCheck,
+    });
+  } else if (isCheck) process.exitCode = checkLock(ROOT) ? 0 : 1;
+  else
+    throw new Error(
+      `${PACKAGE} · a committed take names its tag: --tag v1.2.3`,
+    );
+}
+
+// a refusal stops the take before it writes anything; a committed file is wow's by the lock, not git
+async function main(): Promise<void> {
+  const from = argAfter('--from');
+  if (isCommitted() && from === undefined) {
+    await takeCommitted();
+    return;
+  }
+  const source = path.resolve(ROOT, from ?? path.join('node_modules', PACKAGE));
   const tag = theTag(source);
   const recorded = takenFiles(ROOT);
   const files = [...new Set([...tag.wanted.keys(), ...recorded.keys()])];
@@ -170,7 +212,7 @@ function main(): void {
     wanted: tag.wanted,
     recorded,
     onDisk: digestsOnDisk(files),
-    tracked: trackedFiles(),
+    tracked: isCommitted() ? new Set() : trackedFiles(),
   });
   for (const { file, why } of plan.refusals)
     console.log(`  REFUSED · ${file} · ${why}`);
@@ -183,4 +225,4 @@ function main(): void {
   else take({ plan, tag });
 }
 
-main();
+await main();

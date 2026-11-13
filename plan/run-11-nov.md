@@ -1435,3 +1435,12 @@ Each call: what, why, how to undo. None changes what the PM sees.
   change from its code owners. The PM picked A of three (W113): a build repository takes by a script a person
   runs, its files committed and recorded by digest. Call: the script comes first, in `shared/take/`, as stage 5's
   slice 0. Undo: the row out of the register.
+- Stage 5, slice 0 (W113): the take gains a committed mode. `wow.commits: true` in a repository's `package.json`
+  writes its record to `wow.lock` in the tree and no exclude block; a tracked file is no refusal, the lock saying
+  which files are the way of working's. `--tag v1.2.3` clones the tag from `wow.remote` and runs that tag's own
+  take on it, so a take always runs its own tag's rules; a name that is no release's tag is refused. `--check`
+  alone reads the lock, so a build repository's CI needs no access here. Every reader of the record
+  (`takenFiles`: knip's entries, the vendored files, the gate's clones) reads the lock first, a tree with no git
+  folder included. A hidden take that turns committed keeps its files: the hidden record is read until the lock
+  is written, and its exclude block goes. Design products stay hidden. Undo: revert the commit; no product
+  holds a lock yet.

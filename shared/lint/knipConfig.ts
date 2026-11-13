@@ -78,11 +78,7 @@ const BROWSER_FACE = [
 
 // a file the take wrote is the way of working's: a product judges its own code, never a home's
 const takenCode = (root: string): readonly string[] =>
-  fs.existsSync(path.join(root, '.git'))
-    ? [...takenFiles(root).keys()].filter((file) =>
-        /\.(?:ts|tsx|mts)$/.test(file),
-      )
-    : [];
+  [...takenFiles(root).keys()].filter((file) => /\.(?:ts|tsx|mts)$/.test(file));
 
 const knipConfig = (scope: RepoScope): KnipSettings => ({
   entry: [

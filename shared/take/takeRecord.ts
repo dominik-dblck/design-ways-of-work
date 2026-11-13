@@ -1,12 +1,13 @@
 /**
  * - `takenFiles` · what the last take wrote, by digest: not the product’s own
- * - `writeRecord`, `writeExclude` · the record and git’s exclude block
- * - each worktree its own, so nothing of wow enters a product’s history
+ * - `LOCK`, `writeRecord` · committed in `wow.lock`, or hidden in the git folder
+ * - `writeExclude` · git’s exclude block, each worktree its own; none committed
  */
 import fs from 'node:fs';
 import path from 'node:path';
 
 const HEAD = '# design-ways-of-work';
+const LOCK = 'wow.lock';
 
 // read off the files, never by running git: a generator reads the record with no child process
 function gitDirOf(root: string): string {
@@ -43,10 +44,17 @@ function blockMarks(root: string): {
   };
 }
 
+// a lock in the tree is the committed take's; a tree with no git folder took nothing hidden
+function recordIn(root: string): string | undefined {
+  const lock = path.join(root, LOCK);
+  if (fs.existsSync(lock)) return lock;
+  return fs.existsSync(path.join(root, '.git')) ? recordOf(root) : undefined;
+}
+
 // no record is a product that never took: nothing of it is wow's
 function takenFiles(root: string): ReadonlyMap<string, string> {
-  const at = recordOf(root);
-  if (!fs.existsSync(at)) return new Map();
+  const at = recordIn(root);
+  if (at === undefined || !fs.existsSync(at)) return new Map();
   return new Map(
     fs
       .readFileSync(at, 'utf8')
@@ -63,15 +71,20 @@ function writeRecord({
   root,
   version,
   digests,
+  isCommitted,
 }: {
   readonly root: string;
   readonly version: string;
   readonly digests: ReadonlyMap<string, string>;
+  readonly isCommitted: boolean;
 }): void {
   const lines = [...digests]
     .sort(([one], [other]) => one.localeCompare(other))
     .map(([file, digest]) => `${file}\t${digest}`);
-  fs.writeFileSync(recordOf(root), `${HEAD} ${version}\n${lines.join('\n')}\n`);
+  fs.writeFileSync(
+    isCommitted ? path.join(root, LOCK) : recordOf(root),
+    `${HEAD} ${version}\n${lines.join('\n')}\n`,
+  );
 }
 
 // anchored at the root, every pattern character escaped: a path is one file, never a glob
@@ -81,7 +94,7 @@ const pattern = (file: string): string =>
     .join('/')
     .replaceAll(/[\\*?[\]!# ]/g, '\\$&')}`;
 
-// the block is this worktree's alone: lines the product wrote, and every other worktree's block, stay
+// this worktree's block alone: the product's lines and every other worktree's stay; no file, no block
 function writeExclude({
   root,
   files,
@@ -98,6 +111,10 @@ function writeExclude({
       ? before
       : before.slice(0, start) +
         before.slice(before.indexOf(end, start) + end.length + 1);
+  if (files.length === 0) {
+    if (start !== -1) fs.writeFileSync(at, kept);
+    return;
+  }
   const block = [mark, ...[...files].sort().map(pattern), end].join('\n');
   fs.mkdirSync(path.dirname(at), { recursive: true });
   fs.writeFileSync(
@@ -106,4 +123,4 @@ function writeExclude({
   );
 }
 
-export { takenFiles, writeExclude, writeRecord };
+export { LOCK, takenFiles, writeExclude, writeRecord };

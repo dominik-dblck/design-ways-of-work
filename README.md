@@ -24,6 +24,15 @@ A repository takes it at a tag; nothing of it enters that repository's history.
    recorded by digest, and hidden from its git. A file it edited is never overwritten: the take stops.
 4. To move to a later tag it moves the pin and installs. The release's row says what it must do beside.
 
+A build repository takes by commit instead (W113): no dependency, no `postinstall`.
+
+1. Its `package.json` names `wow.takes`, `wow.commits: true` and `wow.remote`, this repository's address.
+2. `node shared/take/takeWow.ts --tag v1.2.3` clones the tag aside and runs that tag's own take: the files and
+   `wow.lock`, each file's digest, go into its next commit, its code owners reviewing. The first take runs the
+   script from a clone of the tag: `node <clone>/shared/take/takeWow.ts --from <clone>`.
+3. `node shared/take/takeWow.ts --check` reads the lock alone, so its CI needs no access here: a taken file
+   edited or gone is red.
+
 A new design product is written by `yarn spawn design <path> <Product> --company <Company>` (`scripts/spawn.ts`):
 the sample at the version's tag, its names filled in, pinned to that tag, installed, its first commit through its
 hooks, then its feature tier. Its row in `ports/consumers.ts` follows, so the gate tries it.
