@@ -1225,3 +1225,24 @@ Each call: what, why, how to undo. None changes what the PM sees.
   Trash (Finder refused the call; a `mv` into `~/.Trash` keeps it recoverable, the hard links leave this
   repository's files whole). Undo: each line of `CLAUDE.md` struck, the folder dragged back.
 - v0.20.0 out (0e4329d): the spawn, the guide, the commit tier on a branch with no commit, `belowOf`.
+- Task 23, the copy: `yarn sync:theme <sha>` (546898f) copies the build side's theme and 24 atoms at a named sha of
+  its repository, read only: the seeds and every local file they import; its tests, AppMark (the product's
+  mark), Wordmark (its name) and Link (`next/link`; a design product runs no Next) stay there. Only the import
+  specifiers change: the alias made relative, the extension written. Calls: a mechanical rewrite over asking the
+  build side to drop its alias, since one product tsconfig has none and the rewrite is total and tested; the
+  atoms' tests stay the build side's, they read its app theme. Undo: the copy retired by script.
+- The tokens: the shared theme and atoms read 94; a product without Eagle's rows lacks six, the draft, review and
+  ready pairs. They are the design system's now (`design-system/tokens/states.ts`); eagle-design's six rows leave
+  by the release's migration edit, its other states stay its own. Undo: the group and the edit reverted.
+- `lucide-react`: a product cannot add it before the atoms (knip calls it unused), so a migration names the
+  packages its release's homes read and yarn adds them, manifest and lock together (6be5abe). Undo: revert.
+- 1491dd3d tried in the sample: 45 lint findings and 2 tsc errors under this side's rules, all in the copy set;
+  the list went to eagle-dev directly (W104). This side's own: the pages wear `pagesTheme` (the shared theme,
+  code's type and inks added), the first theme and its palette retired to `legacy/` by script; `radiusOf` and
+  the parts the atoms read wait for eagle-dev's layout of `theme/`.
+- fb39a20a tried: the 47 findings mended, three left (`ChipKey` outside `types/`, `scales.ts` reading a part of
+  `theme/`, two exports no product reads); sent to eagle-dev. This side's: `radiusOf` read from the shared
+  `scales.ts` in the 14 home files that read it, `app/utils` and `app/constants` named React homes.
+- e5988895 taken: `tokenReads.ts` an entry, `ChipKey` in its types, the two exports Eagle's own; the copy of
+  fb39a20a went to the Trash unrecorded, the record reset, the sync rerun: 94 files, the sample green.
+  Undo: the commit reverted.

@@ -6,7 +6,7 @@ import type { ReactElement } from 'react';
 import type { TicketCounts } from '../../../../workspace/boardView.ts';
 import { barColourOf } from '../../../../theme/tones.ts';
 import { ORDER } from '../constants/boardPageStackedBarConstants.ts';
-import { radiusOf } from '../../../../theme/tokenReads.ts';
+import { radiusOf } from '../../../../styles/scales.ts';
 
 interface BoardPageStackedBarProps {
   readonly counts: TicketCounts;

@@ -5,7 +5,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { renderToString } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
 import { BoardPage } from '../../app/components/organisms/BoardPage/index.ts';
-import { theme } from '../../app/theme/theme.ts';
+import { pagesTheme } from '../../app/theme/pagesTheme.ts';
 import {
   columns,
   stats,
@@ -15,7 +15,7 @@ import {
 
 describe('the Board page', () => {
   const html = renderToString(
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={pagesTheme}>
       <BoardPage />
     </ThemeProvider>,
   );

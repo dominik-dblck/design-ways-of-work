@@ -11,7 +11,7 @@ import type {
   CombinationView,
   FeatureView,
 } from '../../../../workspace/featureView.ts';
-import { radiusOf } from '../../../../theme/tokenReads.ts';
+import { radiusOf } from '../../../../styles/scales.ts';
 import { useFeaturePageCount } from '../hooks/useFeaturePageCount.ts';
 import { FeaturePageCombinationTitle } from './FeaturePageCombinationTitle.tsx';
 

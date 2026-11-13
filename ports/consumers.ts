@@ -10,6 +10,7 @@ import { COUNT_FORMS } from './eagle-design/countForms.ts';
 import { HOME_FACTS } from './eagle-design/homeFacts.ts';
 import { WOW_FILES } from './eagle-design/wowFiles.ts';
 import { BACKUP_HOOK } from './eagle-design/backupHook.ts';
+import { BUILD_THEME_TAKEN } from './eagle-design/buildTheme.ts';
 import { GENERATED_FILES } from './eagle-design/generatedFiles.ts';
 import { HELD_BY } from './eagle-design/heldBy.ts';
 import { REWRITTEN } from './eagle-design/rewritten.ts';
@@ -60,6 +61,7 @@ const CONSUMERS: readonly [Consumer, ...Consumer[]] = [
       HELD_BY,
       SCOPE_PRESET_CUT,
       PRODUCT_HALVES,
+      BUILD_THEME_TAKEN,
     ],
     // its own work lands on `main`, which takes nothing yet: the branch holds `main` whole, or the gate is red
     port: {

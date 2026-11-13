@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
 import type { Progress } from '../../../../workspace/boardView.ts';
 import { barColourOf } from '../../../../theme/tones.ts';
-import { radiusOf } from '../../../../theme/tokenReads.ts';
+import { radiusOf } from '../../../../styles/scales.ts';
 
 interface BoardPageBarLegendProps {
   readonly legend: Progress['legend'];

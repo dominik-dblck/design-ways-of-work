@@ -1,7 +1,7 @@
 /**
  * - `ROUNDED` · each fold rounded on its own, with no rule drawn above it
  */
-import { radiusOf } from '../../../../theme/tokenReads.ts';
+import { radiusOf } from '../../../../styles/scales.ts';
 
 const ROUNDED = {
   borderRadius: radiusOf('uiRContainer'),

@@ -15,6 +15,7 @@ import { radii } from './tokens/radii.ts';
 import { roles } from './tokens/roles.ts';
 import { sizes } from './tokens/sizes.ts';
 import { spacing } from './tokens/spacing.ts';
+import { states } from './tokens/states.ts';
 import { surfaces } from './tokens/surfaces.ts';
 import { typography } from './tokens/typography.ts';
 
@@ -26,6 +27,7 @@ const designSystem: readonly TokenGroup[] = [
   ...radii,
   ...elevation,
   ...outlines,
+  ...states,
   ...inks,
   ...glyphs,
   ...hover,

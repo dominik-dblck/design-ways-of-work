@@ -6,7 +6,7 @@ import { renderToString } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
 import { FeaturePageCombinationsSection } from '../../app/components/organisms/FeaturePage/components/FeaturePageCombinationsSection.tsx';
 import { FeaturePage } from '../../app/components/organisms/FeaturePage/index.ts';
-import { theme } from '../../app/theme/theme.ts';
+import { pagesTheme } from '../../app/theme/pagesTheme.ts';
 import { productView } from '../../productView.ts';
 import {
   featureOf,
@@ -16,7 +16,7 @@ import {
 } from '../../app/workspace/featureView.ts';
 
 const drawn = (node: React.ReactElement): string =>
-  renderToString(<ThemeProvider theme={theme}>{node}</ThemeProvider>);
+  renderToString(<ThemeProvider theme={pagesTheme}>{node}</ThemeProvider>);
 
 const views = features().map(({ epic }) => featureOf(epic, productView));
 

@@ -5,7 +5,7 @@
 import { createTheme } from '@mui/material/styles';
 import type { CSSProperties } from 'react';
 import { paletteFor } from './palette.ts';
-import { lengthOf, tokenTextOf } from './tokenReads.ts';
+import { lengthOf, tokenTextOf } from '../../../../design/app/theme/tokenReads.ts';
 
 const theme = createTheme({
   cssVariables: { colorSchemeSelector: 'data-theme' },

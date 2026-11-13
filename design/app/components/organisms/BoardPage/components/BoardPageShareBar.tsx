@@ -4,7 +4,7 @@
 import Box from '@mui/material/Box';
 import type { ReactElement } from 'react';
 import { barColourOf } from '../../../../theme/tones.ts';
-import { radiusOf } from '../../../../theme/tokenReads.ts';
+import { radiusOf } from '../../../../styles/scales.ts';
 import { PERCENT } from '../constants/boardPageStatTileConstants.ts';
 
 interface BoardPageShareBarProps {

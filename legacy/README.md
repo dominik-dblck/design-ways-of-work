@@ -54,3 +54,10 @@ What a view stopped drawing when eagle-design's `main` changed it, kept as it st
   frontend epic that held them retired, and each epic collapses its components
 - `design/app/components/organisms/BoardPage/constants/boardPageNumberGroupConstants.ts` · a card's numbers
   wrapped on one line: the numbers fold now, each line a grid of tiles (`boardPageNumberLineConstants.ts`)
+
+## The pages' first theme
+
+Retired when the build side's theme came here by script (W25, W26): the design pages wear the shared theme.
+
+- `design/app/theme/theme.ts` and `design/app/theme/palette.ts` · this side's own MUI theme and palette, read
+  off the same tokens: `design/app/theme/pagesTheme.ts` builds on the shared theme, code's type and inks added

@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
 import type { EpicCard } from '../../../../workspace/boardView.ts';
 import { badgeToneOf } from '../../../../theme/tones.ts';
-import { radiusOf } from '../../../../theme/tokenReads.ts';
+import { radiusOf } from '../../../../styles/scales.ts';
 
 interface BoardPageEpicTileProps {
   readonly epic: EpicCard;

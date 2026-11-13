@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
 import type { ContractStat } from '../../../../workspace/contractView.ts';
 import { TILES } from '../constants/contractBodyStatsConstants.ts';
-import { radiusOf } from '../../../../theme/tokenReads.ts';
+import { radiusOf } from '../../../../styles/scales.ts';
 
 interface ContractBodyStatsProps {
   readonly stats: readonly ContractStat[];

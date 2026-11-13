@@ -11,7 +11,7 @@ import { words } from '../../../../workspace/boardView.ts';
 import type { TicketLine } from '../../../../workspace/boardView.ts';
 import { SectionHead } from '../../../atoms/SectionHead/index.ts';
 import { BoardPageTicketRow } from './BoardPageTicketRow.tsx';
-import { radiusOf } from '../../../../theme/tokenReads.ts';
+import { radiusOf } from '../../../../styles/scales.ts';
 
 interface BoardPageNextUpProps {
   readonly tickets: readonly TicketLine[];

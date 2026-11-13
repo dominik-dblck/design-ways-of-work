@@ -58,11 +58,13 @@ const RUN_HOMES: readonly string[] = [
   'shared',
 ];
 
-// the React code: a `.tsx` straight in `app/pages` is a page, bundled with all it imports; its theme
+// the React code: a `.tsx` straight in `app/pages` is a page, bundled with all it imports; its theme; the atoms' helpers
 const REACT_HOMES: readonly string[] = [
   'app/pages',
   'app/components',
   'app/theme',
+  'app/utils',
+  'app/constants',
 ];
 
 // an epic's own folder, its notebook published flat beside the sheet

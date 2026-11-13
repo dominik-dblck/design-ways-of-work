@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 import type { TicketLine } from '../../../../workspace/boardView.ts';
 import { toneOf } from '../../../../theme/tones.ts';
 import type { ReactElement } from 'react';
-import { radiusOf } from '../../../../theme/tokenReads.ts';
+import { radiusOf } from '../../../../styles/scales.ts';
 
 interface BoardPageTicketRowProps {
   readonly ticket: TicketLine;

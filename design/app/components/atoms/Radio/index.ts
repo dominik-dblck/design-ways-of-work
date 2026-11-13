@@ -1,0 +1,5 @@
+/**
+ * - `Radio` · its face, read from outside its folder
+ */
+export { Radio } from './Radio.tsx';
+export type { RadioProps } from './Radio.tsx';

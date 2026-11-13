@@ -5,7 +5,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { renderToString } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
 import { BoardPageTicketPanel } from '../../app/components/organisms/BoardPage/components/BoardPageTicketPanel.tsx';
-import { theme } from '../../app/theme/theme.ts';
+import { pagesTheme } from '../../app/theme/pagesTheme.ts';
 import { ticketDetailOf, words } from '../../app/workspace/boardView.ts';
 import { all as allTickets } from '../../roadmaps/tickets.ts';
 
@@ -19,7 +19,7 @@ describe('the ticket panel', () => {
       const ticket = ticketDetailOf(id);
       if (!ticket) throw new Error(`${id} did not open`);
       const html = renderToString(
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={pagesTheme}>
           <BoardPageTicketPanel ticket={ticket} onBack={() => undefined} />
         </ThemeProvider>,
       );

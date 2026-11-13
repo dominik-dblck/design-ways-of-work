@@ -2,8 +2,8 @@
  * - `paletteFor` · the MUI palette of one mode, code's inks too, each a token's
  */
 import type { PaletteOptions } from '@mui/material/styles';
-import type { Mode } from '../styles/tokens.ts';
-import { colourOf } from './tokenReads.ts';
+import type { Mode } from '../../../../design/app/styles/tokens.ts';
+import { colourOf } from '../../../../design/app/theme/tokenReads.ts';
 
 type Read = (key: Parameters<typeof colourOf>[0]) => string;
 

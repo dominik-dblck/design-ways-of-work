@@ -9,12 +9,14 @@ const BUILD_THEME: CopySet = {
   seeds: [
     'app/styles/theme.ts',
     'app/styles/preference.ts',
+    'app/styles/scales.ts',
+    'app/styles/tones.ts',
     'app/styles/theme/',
     'app/components/atoms/',
   ],
   // the product's own, imported where it stands: its tokens, written by its build
   provided: ['app/styles/tokens.ts'],
-  // never copied, never imported: tests, the app's mark and name, its own layer
+  // never copied, never imported: tests, the app's mark, name and router link, its own layer
   left: [
     /\/__tests__\//,
     /\.test\.tsx?$/,

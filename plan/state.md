@@ -16,15 +16,15 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
 ## Who takes it
 
 - `ports/consumers.ts` names each repository the gate tries, and the branch it tries.
-- eagle-design: its branch `port/wow` takes the tags, each by its migrations (v0.18.0 at 04628ac);
-  v0.19.0 is out for it to take. Its `main` still runs on its own copies and takes the port's line at stage 3
+- eagle-design: its branch `port/wow` takes the tags, each by its migrations (v0.20.0 at 68fd4ae). Its `main` still runs on its own copies and takes the port's line at stage 3
   (its fast-forward is the PM's word). The gate tries `port/wow`, taking `main` by the port's script.
 - argus-design: not spawned yet; its stack is decided, the one this repository defines (W24).
 - `examples/sample-product`: the smallest product, naming none; `yarn sample` builds it from nothing on the
   tree's homes and runs its feature tier, ten of ten green; this repository's feature tier runs it. It takes
   no `dev/`, as a new design product does not.
 - The build side: `dev/` is copied from its repository by script and taken by eagle-design alone; its port is
-  parked.
+  parked. Its theme and atoms are copied into the design home by `yarn sync:theme <sha>`, the sha and each
+  file recorded in `ports/build-theme/taken.ts`.
 
 ## What holds a change
 
@@ -43,8 +43,8 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
 
 The PM's word of 13 Nov (W104) settled the rest: the relayed rules stand with three more, this session talks to
 the build side's session directly, `.rehearsal/` is in this machine's Trash, and a product's board, pages and
-props get a check part (a task after v1.0.0). Task 23 has its sha: eagle-dev's 1491dd3d on
-`feature/W26-shared-theme`, read by `git archive`, nothing merged.
+props get a check part (a task after v1.0.0). Task 23 is in: the build side's theme and atoms copied at
+eagle-dev's e5988895 on `feature/W26-shared-theme`, read by git at that sha, nothing merged there.
 
 ## Known gaps
 

@@ -15,7 +15,7 @@ import type { Velocity } from '../../../../workspace/boardView.ts';
 import { BoardPageDayBars } from './BoardPageDayBars.tsx';
 import { SectionHead } from '../../../atoms/SectionHead/index.ts';
 import { BoardPageVelocityTable } from './BoardPageVelocityTable.tsx';
-import { radiusOf } from '../../../../theme/tokenReads.ts';
+import { radiusOf } from '../../../../styles/scales.ts';
 
 interface BoardPageVelocityPanelProps {
   readonly pace: Velocity;

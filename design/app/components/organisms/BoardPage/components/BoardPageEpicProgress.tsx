@@ -12,7 +12,7 @@ import { SectionHead } from '../../../atoms/SectionHead/index.ts';
 import { BoardPageBarLegend } from './BoardPageBarLegend.tsx';
 import { BoardPageEpicProgressRow } from './BoardPageEpicProgressRow.tsx';
 import { BoardPageStackedBar } from './BoardPageStackedBar.tsx';
-import { radiusOf } from '../../../../theme/tokenReads.ts';
+import { radiusOf } from '../../../../styles/scales.ts';
 
 interface BoardPageEpicProgressProps {
   readonly progress: Progress;
