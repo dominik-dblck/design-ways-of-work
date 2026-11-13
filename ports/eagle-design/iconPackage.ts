@@ -7,7 +7,7 @@ const ICON_PACKAGE: Migration = {
   release: '1.1.0',
   removes: [],
   moves: [],
-  // the build writes a named icon's SVG from `lucide-react`'s data: the static package is read by nothing
+  // nothing reads the static package: the build writes no icon file (W109)
   dropped: ['lucide-static'],
   tree: null,
 };

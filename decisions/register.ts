@@ -274,7 +274,7 @@ const SINCE: readonly Decision[] = [
     id: 'W109',
     title: 'icons come from lucide-react alone',
     held: '13 Nov · the PM’s word, here',
-    says: 'one icon package, `lucide-react`, the one the React code draws with; a static file that names an icon by its SVG path keeps it, the build writing that SVG from `lucide-react`’s data; `lucide-static` leaves every repository, by migration.',
+    says: 'one icon package, `lucide-react`, the one the React code draws with; no icon is an SVG file: the build writes none, and a row a legacy HTML page reads keeps its path as a string until that page retires; `lucide-static` leaves every repository, by migration.',
     from: 'plan/run-11-nov.md',
   },
 ];
