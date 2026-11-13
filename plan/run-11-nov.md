@@ -1514,3 +1514,9 @@ Each call: what, why, how to undo. None changes what the PM sees.
   rule names Text or Label; the modes page's 28 labels in sentence case by a script, a camelCase name kept and
   `NEW EVENT` kept as the log's own marker; `.dbk-micro` drops its capitals and takes the normal tracking;
   `scripts/move.ts` takes away each parent a move leaves empty. Undo: revert each commit.
+- The batch went out as v1.5.0, not the v1.4.1 the question named: every release whose outputs move has
+  been minor, and the modes page's words move in eagle-design. Undo: none needed, a version names no content.
+- Autonomy, 13 Nov evening, nothing waiting on this side: the build side's rule pages are now checked as
+  pairs, each module with its page, so a page left after its module went is red. The overline rule
+  (only Label and Heading draw it) waits for stage 5: a shared rule reaches the build side too, whose
+  code still draws it raw. Undo: revert the commit.

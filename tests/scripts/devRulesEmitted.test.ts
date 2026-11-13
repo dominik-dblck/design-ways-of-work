@@ -7,10 +7,13 @@ import type { RuleFile } from '../../design/docs/rules/ruleTypes.ts';
 import { HERE } from '../../scripts/repos.ts';
 
 const DEV_RULES = path.join(HERE, 'dev', 'rules');
-const BASES = fs
-  .readdirSync(DEV_RULES)
-  .filter((file) => file.endsWith('.ts'))
-  .map((file) => file.slice(0, -'.ts'.length));
+const basesOf = (extension: string): readonly string[] =>
+  fs
+    .readdirSync(DEV_RULES)
+    .filter((file) => file.endsWith(extension))
+    .map((file) => file.slice(0, -extension.length))
+    .sort();
+const BASES = basesOf('.ts');
 
 // both sides as the formatter leaves them: a product's run formats what it writes
 async function formatted(text: string, file: string): Promise<string> {
@@ -21,6 +24,11 @@ async function formatted(text: string, file: string): Promise<string> {
 describe('the build side’s rule files are what its rules print', () => {
   it('there are rule files to compare', () => {
     expect(BASES.length).toBeGreaterThan(0);
+  });
+
+  // a page left after its module went, or a module with no page, is a rule read two ways
+  it('each module has its page, and each page its module', () => {
+    expect(basesOf('.md')).toEqual(BASES);
   });
 
   it.each(BASES)('dev/rules/%s.md', async (base) => {

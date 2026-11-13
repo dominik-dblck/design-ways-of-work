@@ -41,6 +41,10 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
 
 ## Open for the PM
 
+For the PM's return, nothing else waiting on this side: argus-design's spawn (stage 3 of the plan, the PM's
+word); eagle-dev's take of `shared/` (stage 5), after its E23 pull request, on the PM's word; then the
+shared rule that only Label and Heading draw the overline, as it reaches the build side too.
+
 One point: W112's timing, as eagle-dev relayed the PM's word (a product builds a missing piece without asking
 first, asks only "do you have something like it?" during the work, and proposes it once, at its pull request),
 waits for the PM's yes here. v1.2.0 is out: the WCAG fixes and the committed take (W113).
