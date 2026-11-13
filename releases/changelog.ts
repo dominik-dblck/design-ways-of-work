@@ -5,11 +5,46 @@
 import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
 const NEXT: Unreleased = {
-  kind: 'patch',
-  what: '',
-  action: 'none: move the pin to the tag',
+  kind: 'minor',
+  what: 'the design system meets WCAG 2.2 AA where measured, in both modes and both layers: no text under 4.5:1, no target under 24 px, no control edge under 3:1; the code inks are palette roles with a step per mode (`--ink-code-keyword`, `-type`, `-string`, `-number`, `-comment`), a control’s edge takes `--bd-control`, a filled notice wears its signal pair, initials sit on n-600, a faded stack dims only its photo; `TokenVariables` is a shared atom writing every token per mode, and a dark OS with no mode chosen gets MUI’s dark palette beside the dark tokens; `colourOf` leaves `app/theme/tokenReads.ts`; a build repository takes by commit (W113): `wow.commits` writes `wow.lock` in its tree, `--tag` takes only at the commit `--sha` or the lock names, and `--check` reads the lock alone',
+  action:
+    'none: move the pin to the tag; a build repository takes by `node shared/take/takeWow.ts --tag <tag> --sha <its commit>`, as the README says',
   rules: { added: [], changed: [], removed: [] },
-  outputs: {},
+  outputs: {
+    'eagle-design': {
+      'output · yarn test':
+        'one test file more, its eight tests: a committed take checked by its lock; two in the theme’s: a dark OS’s palette, a code ink’s step per mode',
+      'dist · project/contract-page.js':
+        'the page wears the WCAG overrides and mounts `TokenVariables`',
+      'dist · project/packs/T-E19-00.md':
+        '`app/styles/tokens.ts` at its new digest: the code inks and the control edge',
+      'dist · project/scales.js':
+        'the code inks and `bdControl` among the tokens',
+      'dist · project/specCheck.js':
+        'the code inks’ and the control edge’s variables',
+      'dist · project/tokenReads.js':
+        'the code inks and `bdControl` among the tokens',
+      'dist · project/tokens.js': 'the code inks and `bdControl`, per mode',
+      'written · app/styles/tokens.ts':
+        'the code inks and the control edge, per mode',
+      'written · fixtures/packs/T-E19-00.md':
+        '`app/styles/tokens.ts` at its new digest',
+      'written · vendor/wow/app/styles/theme.ts':
+        '`muiDarkOf` and `tokenSheetOf` from the token sheet’s own file',
+      'written · vendor/wow/app/styles/theme/controlOverrides.ts':
+        'an outlined control’s edge on `--bd-control`',
+      'written · vendor/wow/app/styles/theme/markOverrides.ts':
+        'initials in white on n-600',
+      'written · vendor/wow/app/styles/theme/palette.ts':
+        'the code inks a role per mode, `text.ready`, `warning.dark` on y-500',
+      'written · vendor/wow/app/styles/theme/selectionOverrides.ts':
+        'a switch’s track on `--bd-control`, checked on g-500',
+      'written · vendor/wow/app/styles/theme/surfaceOverrides.ts':
+        'a filled notice wears its signal pair',
+      'written · vendor/wow/app/styles/theme/tokenSheet.ts':
+        'new: every token as its variable per mode, MUI’s dark beside the dark tokens',
+    },
+  },
 };
 
 const RELEASES: readonly Release[] = [
