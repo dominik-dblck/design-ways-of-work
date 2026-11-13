@@ -11,6 +11,7 @@ import type { ReactElement } from 'react';
 import type { EpicCard } from '../../../../workspace/boardView.ts';
 import { badgeToneOf } from '../../../../theme/tones.ts';
 import { radiusOf } from '../../../../styles/scales.ts';
+import { Label } from '../../../atoms/Label/index.ts';
 
 interface BoardPageEpicTileProps {
   readonly epic: EpicCard;
@@ -28,7 +29,7 @@ function BoardPageEpicTile({
       <CardActionArea onClick={() => onOpen(epic.id)} sx={{ p: 2 }}>
         <Stack spacing={1}>
           <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
-            <Typography variant="overline">{epic.id}</Typography>
+            <Label>{epic.id}</Label>
             <Chip
               size="small"
               variant="outlined"

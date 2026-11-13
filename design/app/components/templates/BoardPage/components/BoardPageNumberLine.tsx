@@ -8,6 +8,7 @@ import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
 import type { Stat } from '../../../../workspace/boardView.ts';
+import { Label } from '../../../atoms/Label/index.ts';
 import { NUMBER_GRID } from '../constants/boardPageNumberLineConstants.ts';
 import { BoardPageStatTile } from './BoardPageStatTile.tsx';
 
@@ -29,9 +30,7 @@ function BoardPageNumberLine({
     <Stack spacing={1}>
       <Tooltip title={means ?? ''}>
         <Stack direction="row" spacing={1} sx={{ alignItems: 'baseline' }}>
-          <Typography variant="overline" sx={{ fontWeight: 'fontWeightBold' }}>
-            {name}
-          </Typography>
+          <Label sx={{ fontWeight: 'fontWeightBold' }}>{name}</Label>
           {at === null ? null : (
             <Typography variant="caption" color="textSecondary">
               {at}

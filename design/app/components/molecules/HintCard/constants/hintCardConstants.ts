@@ -1,6 +1,6 @@
 /**
  * - `HINT_CARD_SX`, `HINT_CARD_RULE_SX` · a column of the card, the line between
- * - `HINT_CARD_TITLE_SX` · the eyebrow row, its count beside it
+ * - `HINT_CARD_TITLE_SX` · the label's row, its count beside it
  * - `HINT_LINE_SX`, `HINT_LEAD_SX`, `HINT_LINE_TEXT_SX` · one row and its parts
  */
 export const HINT_CARD_SX = {

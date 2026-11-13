@@ -13,6 +13,8 @@ export type LabelProps = {
   readonly id?: string | undefined;
   readonly tone?: Tone;
   readonly required?: boolean;
+  // one line, cut with an ellipsis
+  readonly line?: boolean;
   readonly testId?: string;
   readonly sx?: SxProps<Theme>;
 };
@@ -22,6 +24,7 @@ export function Label({
   id,
   tone = 'inherit',
   required = false,
+  line = false,
   sx,
   testId,
 }: LabelProps): React.ReactElement {
@@ -32,6 +35,7 @@ export function Label({
       data-testid={testId}
       variant="overline"
       component="span"
+      noWrap={line}
       color={toneInk[tone]}
     >
       {children}

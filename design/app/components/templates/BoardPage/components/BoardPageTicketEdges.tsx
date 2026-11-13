@@ -5,7 +5,7 @@
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
 import type { TicketDetail } from '../../../../workspace/boardView.ts';
-import { TitledList } from '../../../atoms/TitledList/index.ts';
+import { TitledList } from '../../../molecules/TitledList/index.ts';
 
 interface BoardPageTicketEdgesProps {
   readonly ticket: TicketDetail;

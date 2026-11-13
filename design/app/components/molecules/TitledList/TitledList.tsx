@@ -1,9 +1,10 @@
 /**
- * - `TitledList` · a label and its lines, one under another; nothing when none
+ * - `TitledList` · a quiet heading, its lines one under another; nothing when none
  */
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
+import { Heading } from '../../atoms/Heading/index.ts';
 
 interface TitledListProps {
   readonly label: string;
@@ -15,9 +16,9 @@ function TitledList({ label, lines }: TitledListProps): ReactElement | null {
   if (shown.length === 0) return null;
   return (
     <Stack spacing={0.75}>
-      <Typography variant="overline" color="textSecondary" component="h3">
+      <Heading level={3} quiet tone="secondary">
         {label}
-      </Typography>
+      </Heading>
       {shown.map((line, at) => (
         <Typography key={at} variant="body2">
           {line}

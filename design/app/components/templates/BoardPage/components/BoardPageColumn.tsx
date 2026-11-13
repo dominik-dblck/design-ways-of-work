@@ -5,6 +5,7 @@
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import type { ReactElement, ReactNode } from 'react';
+import { Heading } from '../../../atoms/Heading/index.ts';
 
 interface BoardPageColumnProps {
   readonly label: string;
@@ -22,9 +23,9 @@ function BoardPageColumn({
   return (
     <Stack spacing={1.5} sx={{ minWidth: 0 }}>
       <Stack spacing={0.25}>
-        <Typography variant="overline" component="h2">
+        <Heading level={2} quiet>
           {`${label} · ${count}`}
-        </Typography>
+        </Heading>
         <Typography variant="caption" color="textSecondary">
           {note}
         </Typography>

@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
 import { pickedEpic, words } from '../../../../workspace/boardView.ts';
 import type { ProgressRow } from '../../../../workspace/boardView.ts';
+import { Label } from '../../../atoms/Label/index.ts';
 import { BoardPageEpicProgressName } from './BoardPageEpicProgressName.tsx';
 import { BoardPageStackedBar } from './BoardPageStackedBar.tsx';
 import { GRID } from '../constants/boardPageEpicProgressRowConstants.ts';
@@ -27,13 +28,9 @@ function BoardPageEpicProgressRow({
       aria-label={`${words.openFeature} ${row.id} · ${row.name}`}
     >
       <Box sx={GRID}>
-        <Typography
-          variant="overline"
-          color="textSecondary"
-          sx={{ gridArea: 'id' }}
-        >
+        <Label tone="secondary" sx={{ gridArea: 'id' }}>
           {row.id}
-        </Typography>
+        </Label>
         <BoardPageEpicProgressName row={row} />
         <Box sx={{ gridArea: 'bar' }}>
           <BoardPageStackedBar counts={row.counts} />

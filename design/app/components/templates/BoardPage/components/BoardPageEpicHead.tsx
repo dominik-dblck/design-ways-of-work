@@ -12,6 +12,7 @@ import {
   words,
 } from '../../../../workspace/boardView.ts';
 import type { EpicCard } from '../../../../workspace/boardView.ts';
+import { Label } from '../../../atoms/Label/index.ts';
 
 function BoardPageEpicHead({
   epic,
@@ -20,7 +21,7 @@ function BoardPageEpicHead({
 }): ReactElement {
   return (
     <Stack spacing={0.75}>
-      <Typography variant="overline">{epic.id}</Typography>
+      <Label>{epic.id}</Label>
       <Typography variant="h5">{epic.name}</Typography>
       <Typography variant="body2" color="textSecondary">
         {epic.sub}

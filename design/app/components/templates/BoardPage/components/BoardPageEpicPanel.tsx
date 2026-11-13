@@ -4,13 +4,13 @@
  */
 import List from '@mui/material/List';
 import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
 import { words } from '../../../../workspace/boardView.ts';
 import type { EpicCard } from '../../../../workspace/boardView.ts';
 import { BoardPageEpicHead } from './BoardPageEpicHead.tsx';
 import { BoardPageTicketRow } from './BoardPageTicketRow.tsx';
-import { TitledList } from '../../../atoms/TitledList/index.ts';
+import { TitledList } from '../../../molecules/TitledList/index.ts';
+import { Heading } from '../../../atoms/Heading/index.ts';
 
 interface BoardPageEpicPanelProps {
   readonly epic: EpicCard;
@@ -29,9 +29,9 @@ function BoardPageEpicPanel({
       <BoardPageEpicHead epic={epic} />
       <TitledList label={words.epic.acceptance} lines={[epic.done]} />
       <Stack spacing={0.5}>
-        <Typography variant="overline" color="textSecondary" component="h3">
+        <Heading level={3} quiet tone="secondary">
           {words.epic.tickets}
-        </Typography>
+        </Heading>
         <List dense disablePadding>
           {epic.tickets.map((ticket) => (
             <BoardPageTicketRow

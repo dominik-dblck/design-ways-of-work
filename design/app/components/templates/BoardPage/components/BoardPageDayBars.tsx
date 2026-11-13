@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
+import { Heading } from '../../../atoms/Heading/index.ts';
 import { BoardPageDayBar } from './BoardPageDayBar.tsx';
 
 interface BoardPageDayBarsProps {
@@ -20,9 +21,9 @@ function BoardPageDayBars({
   const peak = Math.max(1, ...days.map((one) => one.value));
   return (
     <Stack spacing={1} sx={{ minWidth: 0 }}>
-      <Typography variant="overline" color="textSecondary" component="h3">
+      <Heading level={3} quiet tone="secondary">
         {label}
-      </Typography>
+      </Heading>
       <Box
         sx={{
           display: 'flex',

@@ -1,5 +1,5 @@
 /**
- * - `ChoiceCardGroupName` · what names the group: its eyebrow, or its own words
+ * - `ChoiceCardGroupName` · what names the group: its label, or its own words
  */
 export type ChoiceCardGroupName =
   | { readonly labelledBy: string; readonly label?: never }

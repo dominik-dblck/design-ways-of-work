@@ -1,6 +1,6 @@
 /**
  * - `FieldLabelToggle` · the switch a label row ends in: words, glyph, on or off
- * - `FieldLabelProps` · the row: the eyebrow, a note, a tag, a switch at its end
+ * - `FieldLabelProps` · the row: the label, a note, a tag, a switch at its end
  */
 import type { GlyphName } from '../../../atoms/Glyph/index.ts';
 import type { ChipMark } from '../../../../utils/chipFaceUtils.ts';

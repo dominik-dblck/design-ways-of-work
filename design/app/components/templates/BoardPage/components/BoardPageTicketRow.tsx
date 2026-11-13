@@ -10,6 +10,7 @@ import type { TicketLine } from '../../../../workspace/boardView.ts';
 import { toneOf } from '../../../../theme/tones.ts';
 import type { ReactElement } from 'react';
 import { radiusOf } from '../../../../styles/scales.ts';
+import { Label } from '../../../atoms/Label/index.ts';
 
 interface BoardPageTicketRowProps {
   readonly ticket: TicketLine;
@@ -29,9 +30,7 @@ function BoardPageTicketRow({
         borderRadius: radiusOf('uiRControl'),
       }}
     >
-      <Typography variant="overline" sx={{ flex: 'none' }}>
-        {ticket.id}
-      </Typography>
+      <Label sx={{ flex: 'none' }}>{ticket.id}</Label>
       <Typography variant="body2" sx={{ flex: 1 }}>
         {ticket.title}
       </Typography>

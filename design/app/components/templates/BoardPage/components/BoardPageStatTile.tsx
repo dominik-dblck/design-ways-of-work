@@ -8,6 +8,7 @@ import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
 import type { Stat } from '../../../../workspace/boardView.ts';
+import { Label } from '../../../atoms/Label/index.ts';
 import { VALUE } from '../constants/boardPageStatTileConstants.ts';
 import { BoardPageShareBar } from './BoardPageShareBar.tsx';
 
@@ -19,9 +20,9 @@ function BoardPageStatTile({ stat }: BoardPageStatTileProps): ReactElement {
   const { label, value, sub, share, note, href } = stat;
   const tile = (
     <Stack spacing={0.5} sx={{ minWidth: 0 }}>
-      <Typography variant="overline" color="textSecondary" noWrap>
+      <Label tone="secondary" line>
         {label}
-      </Typography>
+      </Label>
       <Stack direction="row" spacing={0.75} sx={{ alignItems: 'baseline' }}>
         <Typography variant="h5" component="span" sx={VALUE}>
           {value}

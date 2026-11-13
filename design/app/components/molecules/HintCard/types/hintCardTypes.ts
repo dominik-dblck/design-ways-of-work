@@ -1,6 +1,6 @@
 /**
  * - `HintCardRow` · one row: its lead, title, note, and whose faces it names
- * - `HintCardSection` · an eyebrow over rows, ruled off what stands above it
+ * - `HintCardSection` · a label over rows, ruled off what stands above it
  * - `HintCardProps` · a list read on hover; it holds no action, a control does
  */
 import type { FaceStackPerson } from '../../FaceStack/index.ts';

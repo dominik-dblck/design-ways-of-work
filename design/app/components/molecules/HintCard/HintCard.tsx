@@ -9,7 +9,7 @@ import { HintCardLine } from './components/HintCardLine.tsx';
 import { HintCardSectionRows } from './components/HintCardSectionRows.tsx';
 import { HintCardTitle } from './components/HintCardTitle.tsx';
 
-/** A tail with no rows draws nothing; every other section draws its eyebrow. */
+/** A tail with no rows draws nothing; every other section draws its label. */
 export function HintCard({
   label,
   count,

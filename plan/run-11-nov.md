@@ -1495,3 +1495,8 @@ Each call: what, why, how to undo. None changes what the PM sees.
   code read them (listed in `legacy/README.md`); the modes page's field and cite key become `label`, and
   eagle-design's migration for 1.4.0 (`ports/eagle-design/modesLabel.ts`) moves its key, as a key the
   product does not hold prints nothing; two comments mended. Undo: revert the commit.
+- Eagle-design's review of 1b5b50c: 18 pages drew the overline raw, so the label's look had two homes. Calls:
+  a span is a `Label` (it gains `line`, one line cut, as Text has), an h2 or h3 a `Heading` `quiet`; TitledList
+  moves to molecules by `scripts/move.ts`, as it now composes Heading and an atom composes none; seven comments
+  mended. A rule that only Label and Heading read the overline waits: a shared rule needs a gate on both sides.
+  Undo: revert the commit, TitledList back by the map run back.

@@ -9,6 +9,7 @@ import type { ReactElement } from 'react';
 import { boardHref } from '../../../../workspace/boardView.ts';
 import { featureWords as words } from '../../../../workspace/featureView.ts';
 import type { FeatureView } from '../../../../workspace/featureView.ts';
+import { Label } from '../../../atoms/Label/index.ts';
 import { FeaturePageEpicTabs } from './FeaturePageEpicTabs.tsx';
 import { FeaturePageSourceSection } from './FeaturePageSourceSection.tsx';
 
@@ -25,9 +26,7 @@ function FeaturePageHead({ view, onEpic }: FeaturePageHeadProps): ReactElement {
         size="small"
         sx={{ alignSelf: 'flex-start' }}
       >{`← ${words.board}`}</Button>
-      <Typography variant="overline" color="textSecondary">
-        {words.label}
-      </Typography>
+      <Label tone="secondary">{words.label}</Label>
       <FeaturePageEpicTabs epic={view.epic} onEpic={onEpic} />
       <Typography variant="h3" component="h1">
         {view.title}

@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
 import { contractWords as words } from '../../../../workspace/contractView.ts';
 import type { EndpointCode } from '../../../../workspace/contractView.ts';
+import { Label } from '../../../atoms/Label/index.ts';
 import { TONES } from '../constants/endpointFoldsHeadConstants.ts';
 
 interface EndpointFoldsHeadProps {
@@ -21,9 +22,7 @@ function EndpointFoldsHead({ endpoint }: EndpointFoldsHeadProps): ReactElement {
       useFlexGap
       sx={{ alignItems: 'baseline', flexWrap: 'wrap', width: '100%' }}
     >
-      <Typography variant="overline" color="textSecondary">
-        {endpoint.ticket}
-      </Typography>
+      <Label tone="secondary">{endpoint.ticket}</Label>
       <Typography variant="subtitle1" sx={{ flex: 1, minWidth: 200 }}>
         {endpoint.title}
       </Typography>

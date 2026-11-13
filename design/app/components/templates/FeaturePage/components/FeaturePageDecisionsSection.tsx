@@ -8,7 +8,7 @@ import type { ReactElement } from 'react';
 import { featureWords as words } from '../../../../workspace/featureView.ts';
 import type { Section } from '../../../../workspace/boardView.ts';
 import { FoldSection } from '../../../molecules/FoldSection/index.ts';
-import { TitledList } from '../../../atoms/TitledList/index.ts';
+import { TitledList } from '../../../molecules/TitledList/index.ts';
 
 function FeaturePageDecisionsSection({
   sections,

@@ -7,7 +7,7 @@ import type { ReactNode } from 'react';
 import Box from '@mui/material/Box';
 import type { ChoiceCardGroupName } from './types/choiceCardGroupTypes.ts';
 
-/** Named by the eyebrow it is labelled by, or by its own words when it has none. */
+/** Named by the label it is labelled by, or by its own words when it has none. */
 export function ChoiceCardGroup({
   children,
   ...name

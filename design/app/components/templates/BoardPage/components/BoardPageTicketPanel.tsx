@@ -10,7 +10,8 @@ import type { ReactElement } from 'react';
 import { words } from '../../../../workspace/boardView.ts';
 import type { TicketDetail } from '../../../../workspace/boardView.ts';
 import { BoardPageTicketEdges } from './BoardPageTicketEdges.tsx';
-import { TitledList } from '../../../atoms/TitledList/index.ts';
+import { TitledList } from '../../../molecules/TitledList/index.ts';
+import { Label } from '../../../atoms/Label/index.ts';
 import { toneOf } from '../../../../theme/tones.ts';
 
 interface BoardPageTicketPanelProps {
@@ -31,7 +32,7 @@ function BoardPageTicketPanel({
       </Button>
       <Stack spacing={0.75}>
         <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
-          <Typography variant="overline">{ticket.id}</Typography>
+          <Label>{ticket.id}</Label>
           <Chip size="small" variant="outlined" label={ticket.kindLabel} />
           <Chip
             size="small"

@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import type { ReactElement } from 'react';
 import { featureWords as words } from '../../../../workspace/featureView.ts';
 import type { JourneyCard } from '../../../../workspace/featureView.ts';
+import { Label } from '../../../atoms/Label/index.ts';
 import { FeaturePageJourneyChips } from './FeaturePageJourneyChips.tsx';
 import { FeaturePageJourneyStepItem } from './FeaturePageJourneyStepItem.tsx';
 
@@ -36,11 +37,7 @@ function FeaturePageJourneyItem({
             <FeaturePageJourneyStepItem key={step.n} step={step} />
           ))}
           <Typography variant="body2">
-            <Typography
-              component="span"
-              variant="overline"
-              color="textSecondary"
-            >{`${words.journeys.test} · `}</Typography>
+            <Label tone="secondary">{`${words.journeys.test} · `}</Label>
             {journey.test}
           </Typography>
         </Stack>
