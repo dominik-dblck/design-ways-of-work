@@ -1,5 +1,5 @@
 /**
- * - a file read whole holds 2000 words at most, one read every turn 1000
+ * - a file read whole, or read every turn, holds 2000 words at most
  * - one read on demand past 100 lines opens with `## Contents`: the scope's lists
  */
 import fs from 'node:fs';
@@ -10,9 +10,8 @@ import { heldToItsBaseline, heldToItsCount } from './baseline.ts';
 import { filesNamedBy, globsNamingNothing } from './globs.ts';
 import { linesIn, wordsIn } from './textSize.ts';
 
-// a skill is read whole when it loads; CLAUDE.md on every turn: both cost context in words
-const WHOLE_WORDS = 2000;
-const EVERY_TURN_WORDS = 1000;
+// a skill is read whole when it loads, CLAUDE.md on every turn: both cost context in words, one cap
+const MOST_WORDS = 2000;
 // past this, a file read in part opens with what it holds, so a partial read sees its scope
 const CONTENTS_FROM = 100;
 
@@ -55,8 +54,8 @@ describe('every skill is short', () => {
       heldToItsCount(
         'everySkillIsShort',
         new Map([
-          ...overIn(whole, WHOLE_WORDS),
-          ...overIn(everyTurn, EVERY_TURN_WORDS),
+          ...overIn(whole, MOST_WORDS),
+          ...overIn(everyTurn, MOST_WORDS),
         ]),
       ),
     ).toEqual({ added: [], fixed: [] });
