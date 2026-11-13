@@ -6,7 +6,7 @@ import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
 const NEXT: Unreleased = {
   kind: 'patch',
-  what: '',
+  what: 'a move from the build side brings its `atoms/Link`, an `a` unless a component is handed in, the app’s mark and name staying there; each `dev/rules/*.md` is checked against what its module prints, the printer in `design/tools/emit/rulesMarkdown.ts`',
   action: 'none: move the pin to the tag',
   rules: { added: [], changed: [], removed: [] },
   outputs: {},

@@ -50,6 +50,7 @@ build side frees its seven (AppShell, SideNav, LoginForm, SignedOutScreen, Bread
 PersonaStrip) of the product, its binding kept in its own wrappers; they are copied here at its two reviewed
 shas. v1.3.0 goes out without them, as eagle-dev waits on its tag to stamp the skeleton's first sha: D108,
 D109, `Heading`, the pages as templates and the sync's seeds; the skeleton goes out as v1.4.0 (W115).
+v1.3.1, on the PM's A for a third release that day, lets the build side's `atoms/Link` come with the second sha.
 
 The PM's word of 13 Nov on shared components (W110): after v1.1.0 this repository holds the
 theme, atoms and molecules, a product keeps and extends its own and asks for one to be shared; and (W111) both
