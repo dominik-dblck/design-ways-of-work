@@ -44,7 +44,9 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
 The PM's word of 13 Nov (W104) settled the rest: the relayed rules stand with three more, this session talks to
 the build side's session directly, `.rehearsal/` is in this machine's Trash, and a product's board, pages and
 props get a check part (a task after v1.0.0). Task 23 is in: the build side's theme and atoms copied at
-eagle-dev's e5988895 on `feature/W26-shared-theme`, read by git at that sha, nothing merged there.
+eagle-dev's e5988895 on `feature/W26-shared-theme`, read by git at that sha, nothing merged there; its
+architecture review's findings are mended there before v0.21.0 carries it. The PM's word of 13 Nov puts the
+build side's architecture guard on the homes before v1.0.0 (the run's task 25).
 
 ## Known gaps
 

@@ -4,12 +4,74 @@
  */
 import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
+const COUNTS =
+  'five entries more, the shared theme’s; the files copied counted as copied, the `.tsx` passed over no longer; fifteen vendored files more';
+const BUNDLED =
+  'an entry of the shared theme, bundled as each `.ts` straight in `app/styles`';
+const VENDORED =
+  'the build side reads the shared theme from the take now: vendored as taken, byte for byte';
+const PAGE = 'the page wears the shared theme';
+const STATE_ROWS = 'the six state rows in the design system’s group';
+const DIGEST = `the tokens module’s digest: ${STATE_ROWS}`;
+const SHARED_THEME = [
+  'preference',
+  'scales',
+  'theme',
+  'theme/chipFamilies',
+  'theme/controlOverrides',
+  'theme/cssVariables',
+  'theme/fades',
+  'theme/markOverrides',
+  'theme/mixins',
+  'theme/palette',
+  'theme/selectionOverrides',
+  'theme/surfaceOverrides',
+  'theme/typeScale',
+  'tokenReads',
+  'tones',
+];
+
 const NEXT: Unreleased = {
-  kind: 'patch',
-  what: '',
-  action: 'none: move the pin to the tag',
+  kind: 'minor',
+  what: 'the build side’s theme and atoms are this repository’s (W25, W26): `yarn sync:theme <sha>` copies them at a named sha of its repository, read only, into the design home on its own paths, and records the sha and each file; the pages wear the shared theme with code’s type and inks, their first theme retired; the draft, review and ready state pairs are the design system’s; a migration may add the packages its release’s homes read, and this one adds `lucide-react`, as the atoms draw with it; an entry’s bundle drops the `use client` warning as a page’s did; the build counts the files it copies, not the ones it passes over',
+  action:
+    'the migrations `ports/` names for the repository, on its checkout: `node scripts/migrate.ts <name> <checkout>`, run from this repository at the tag (for eagle-design, the six state rows leave `app/styles/productTokens.ts`, `pilcrow` leaves `scope.ts`’s words, `lucide-react` 1.69.0 is added); the build’s `app/styles/tokens.ts` and `vendor/wow/` committed; the pin to the tag in the same commit',
   rules: { added: [], changed: [], removed: [] },
-  outputs: {},
+  outputs: {
+    'eagle-design': {
+      'output · yarn build': `the tokens module written anew, ${STATE_ROWS}; ${COUNTS}`,
+      'output · yarn checks': COUNTS,
+      'output · yarn spec-check': COUNTS,
+      'output · yarn cut-pack T-E19-00': `${COUNTS}; the tokens, the pack and the record the build wrote wait uncommitted in the trial: 3 files, not 1`,
+      'dist · project/board-page.js': PAGE,
+      'dist · project/contract-page.js': PAGE,
+      'dist · project/feature-page.js': PAGE,
+      'dist · project/module-entries.json':
+        'the shared theme’s parts, each with its entry',
+      'dist · project/module-imports.json':
+        'the shared theme’s entries, each with what it imports',
+      'dist · project/packs/T-E19-00.md': DIGEST,
+      'dist · project/preference.js': BUNDLED,
+      'dist · project/productTokens.js':
+        'the six state rows leave the product’s tokens',
+      'dist · project/scales.js': BUNDLED,
+      'dist · project/specCheck.js': `the tokens it bundles: ${STATE_ROWS}`,
+      'dist · project/theme.js': BUNDLED,
+      'dist · project/tokenReads.js': BUNDLED,
+      'dist · project/tokens.js': STATE_ROWS,
+      'dist · project/tones.js': BUNDLED,
+      'written · app/styles/tokens.ts': `${STATE_ROWS}, their values as they were`,
+      'written · fixtures/packs/T-E19-00.md': DIGEST,
+      'written · records/release-5-3-1.md':
+        'the five shared theme entries the build side reads: 80 modules, 603 files',
+      ...Object.fromEntries(
+        SHARED_THEME.map((file) => [
+          `written · vendor/wow/app/styles/${file}.ts`,
+          VENDORED,
+        ]),
+      ),
+    },
+  },
 };
 
 const RELEASES: readonly Release[] = [

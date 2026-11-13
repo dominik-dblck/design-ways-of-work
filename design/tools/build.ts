@@ -48,7 +48,7 @@ function globalOf(file: string): string {
 }
 
 // MUI and the shared atoms mark their modules `use client`, which means nothing in one bundle
-const onwarn: InputOptions['onwarn'] = (warning, report) => {
+const onwarn: NonNullable<InputOptions['onwarn']> = (warning, report) => {
   if (warning.code !== 'MODULE_LEVEL_DIRECTIVE') report(warning);
 };
 
@@ -117,15 +117,16 @@ function refuseClashes(outputs: readonly string[]): void {
 
 // every file a home holds but its TypeScript, at its published path
 function copyFiles(): number {
-  const files = filesOf().filter((file) => !file.endsWith('.ts'));
-  for (const file of files) {
-    const at = publishedOf(file);
-    if (at === null) continue;
+  const published = filesOf().flatMap((file) => {
+    const at = file.endsWith('.ts') ? null : publishedOf(file);
+    return at === null ? [] : [[file, at] as const];
+  });
+  for (const [file, at] of published) {
     const to = path.join(OUT, at);
     fs.mkdirSync(path.dirname(to), { recursive: true });
     fs.copyFileSync(file, to);
   }
-  return files.length;
+  return published.length;
 }
 
 // each entry and the entries its files import, for the same scan: who reads whom

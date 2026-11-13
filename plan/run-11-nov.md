@@ -15,8 +15,8 @@ The PM, 12 Nov: "pomimo formularza kontynnuj robote", "czyli pokaz formularz ale
 the run goes on past task 4. A stop that asks the PM leaves a Slack DM of status and a push, and the work goes
 on meanwhile on the pick, written here with its why and undo; what is held for the PM still waits for them.
 
-Held for the PM: the first push and every tag (a release), a merge, a snapshot retaken, a message to eagle-dev,
-Argus's stack, the spawn of `argus-design`. The product repositories are read only from here.
+Held for the PM: the first push and a tag after 1.0.0 (W30), a merge, a snapshot retaken, Argus's stack, the
+spawn of `argus-design`; a message to eagle-dev is this session's since W104. The product repositories are read only from here.
 
 ## Progress
 
@@ -24,7 +24,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 
 | stage | what | done | of |
 | 1 | Foundation | 7 | 7 |
-| 2 | Design clean | 23 | 25 |
+| 2 | Design clean | 23 | 26 |
 | 3 | Eagle-design | 0 | 2 |
 | 4 | Spawn design | 2 | 3 |
 
@@ -52,7 +52,9 @@ feature tier: the homes green on a product that names none (the no-product test)
 product's names: its ids, names and paths in their texts · 20 · a change that holds no file runs no formatter ·
 21 · the build's output folder removed within the guard · 22 · the checks that build in the scratch, a field of
 the scope · 23 · the build side's theme and atoms held here (W25, W26), once it frees them · 24 · `dev/`, the
-build side's tree a design product takes, free of the product's names · 25 · v1.0.0 (the PM's word).
+build side's tree a design product takes, free of the product's names · 25 · the architecture guard the build
+side runs, carried to the homes: one home per name, the map that is the tree, the review rows and their skill, a
+move reviewed before its sha leaves (the PM, 13 Nov) · 26 · v1.0.0 (the PM's word).
 
 Stage 3, the design half of the plan's stage 5: 1 · eagle-design takes v1 by the rehearsed migration, the PM's
 word · 2 · both design repositories pinned to one tag, the gate green on both.
@@ -1246,3 +1248,19 @@ Each call: what, why, how to undo. None changes what the PM sees.
 - e5988895 taken: `tokenReads.ts` an entry, `ChipKey` in its types, the two exports Eagle's own; the copy of
   fb39a20a went to the Trash unrecorded, the record reset, the sync rerun: 94 files, the sample green.
   Undo: the commit reverted.
+- The gate on 1ea139e, red twice, each mine: `pilcrow` held both here and in eagle-design's scope (its spelling
+  config refuses that; the migration takes the product's line out), 45 `use client` warnings from the entries'
+  bundles (dropped as the pages' were), then a type `exactOptionalPropertyTypes` refuses (`NonNullable`). The
+  design home is type-checked by the sample alone: a change to it runs the sample before its commit, which I
+  skipped once. The build's copy count also counted the `.tsx` it never copies; it counts what it copies now.
+  Undo: each commit reverted.
+- The PM, 13 Nov: "pamietaj o arch review jak bedziesz przenosil, zapytaj eagle-dev jak pilnuje architektury my
+  powinnismy robic to samo szczegolnie w WoW". Eagle-dev's guard: 168 scans under `tests/architecture/` at
+  pre-push, each seen red once on a planted fault; a review skill reading only the touched layers' `review`
+  rows; a hook showing those rows at write time. Here already: import cycles, the atomic tiers, an export read,
+  a block written once, parts read through their entry. Not here: one home per name, the map that is the tree,
+  the review rows and their skill, a move reviewed before its sha leaves. Call: a task 25 before v1.0.0, so
+  1.0 carries the guard. Undo: the row struck, v1.0.0 back to 25.
+- Eagle-dev's review of W26 at e5988895: five findings, four in the copy set (a test of the shared theme built
+  with an empty layer, an app layer that cannot overwrite a shared palette role, two names, one comment). By
+  the PM's word relayed by eagle-dev, all five go in before v0.21.0; the release waits for its sha.
