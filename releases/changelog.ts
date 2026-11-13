@@ -5,59 +5,75 @@
 import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
 const NEXT: Unreleased = {
-  kind: 'minor',
-  what: 'the build side’s plain molecules are the design system’s (W108): 24 copied whole at its 7d8b3dd (W107), each word a molecule shows a `words` prop with a default, its headers naming no product; `scripts/syncFiles.ts` lets a retired file stand aside, so a sync no longer stops on it; the fades and the code face (`app/styles/fades.ts`, `app/styles/monoFamily.ts`) are files of their own, read by the type scale; icons come from `lucide-react` alone (W109): no SVG file is written, the build’s line names no icon count, and a migration drops `lucide-static` from a repository and from its stack; the gate tries eagle-design’s main; views come from the design system, a missing piece built in the product and proposed at its pull request (W112)',
-  action:
-    'none: move the pin to the tag; the take’s migration drops `lucide-static` from `package.json`',
+  kind: 'patch',
+  what: '',
+  action: 'none: move the pin to the tag',
   rules: { added: [], changed: [], removed: [] },
-  outputs: {
-    'eagle-design': {
-      'output · yarn build':
-        'no icon count: no SVG is written (W109); two scripts more, the fades and the code face; one file more taken',
-      'output · yarn checks': 'the build’s line, as `yarn build` says it',
-      'output · yarn spec-check': 'the build’s line, as `yarn build` says it',
-      'output · yarn cut-pack T-E19-00':
-        'the build’s line, as `yarn build` says it',
-      'dist · project/lucide-icons/*':
-        'no SVG written: icons come from `lucide-react` alone (W109)',
-      'dist · project/fades.js': 'new: the fades, a file of their own',
-      'dist · project/monoFamily.js':
-        'new: the code face, out of the type scale',
-      'dist · project/theme.js': 'the type scale reads the code face’s file',
-      'dist · project/module-entries.json':
-        'the fades’ and the code face’s files, at their new paths',
-      'dist · project/module-imports.json':
-        'the fades’ and the code face’s files, at their new paths',
-      'dist · project/productStack.js':
-        'the stack’s icons are `lucide-react` alone',
-      'dist · project/board-page.js':
-        'the stack’s icons are `lucide-react` alone',
-      'dist · project/boardView.js':
-        'the stack’s icons are `lucide-react` alone',
-      'dist · project/feature-page.js':
-        'the stack’s icons are `lucide-react` alone',
-      'dist · project/featureView.js':
-        'the stack’s icons are `lucide-react` alone',
-      'dist · project/modes.js': 'the stack’s icons are `lucide-react` alone',
-      'dist · project/refineCheck.js':
-        'the stack’s icons are `lucide-react` alone',
-      'written · records/release-5-3-1.md':
-        'the files the build side reads, at their new digests',
-      'written · vendor/wow/app/styles/fades.ts':
-        'the fades, a file of their own',
-      'written · vendor/wow/app/styles/monoFamily.ts':
-        'the code face, a file of its own',
-      'written · vendor/wow/app/styles/theme/fades.ts':
-        'retired: the fades moved to `app/styles/fades.ts`',
-      'written · vendor/wow/app/styles/theme/typeScale.ts':
-        'the code face read from its own file',
-      'written · vendor/wow/shared/stack/stacks.ts':
-        'the icons are `lucide-react` alone',
-    },
-  },
+  outputs: {},
 };
 
 const RELEASES: readonly Release[] = [
+  {
+    version: '1.1.0',
+    date: '2026-11-13',
+    kind: 'minor',
+    what: 'the build side’s plain molecules are the design system’s (W108): 24 copied whole at its 7d8b3dd (W107), each word a molecule shows a `words` prop with a default, its headers naming no product; `scripts/syncFiles.ts` lets a retired file stand aside, so a sync no longer stops on it; the fades and the code face (`app/styles/fades.ts`, `app/styles/monoFamily.ts`) are files of their own, read by the type scale; icons come from `lucide-react` alone (W109): no SVG file is written, the build’s line names no icon count, and a migration drops `lucide-static` from a repository and from its stack; the gate tries eagle-design’s main; views come from the design system, a missing piece built in the product and proposed at its pull request (W112)',
+    action:
+      'none: move the pin to the tag; the take’s migration drops `lucide-static` from `package.json`',
+    rules: { added: [], changed: [], removed: [] },
+    outputs: {
+      'eagle-design': {
+        'output · yarn build':
+          'no icon count: no SVG is written (W109); two scripts more, the fades and the code face; one file more taken',
+        'output · yarn checks': 'the build’s line, as `yarn build` says it',
+        'output · yarn spec-check': 'the build’s line, as `yarn build` says it',
+        'output · yarn cut-pack T-E19-00':
+          'the build’s line, as `yarn build` says it',
+        'dist · project/lucide-icons/*':
+          'no SVG written: icons come from `lucide-react` alone (W109)',
+        'dist · project/fades.js': 'new: the fades, a file of their own',
+        'dist · project/monoFamily.js':
+          'new: the code face, out of the type scale',
+        'dist · project/theme.js': 'the type scale reads the code face’s file',
+        'dist · project/module-entries.json':
+          'the fades’ and the code face’s files, at their new paths',
+        'dist · project/module-imports.json':
+          'the fades’ and the code face’s files, at their new paths',
+        'dist · project/productStack.js':
+          'the stack’s icons are `lucide-react` alone',
+        'dist · project/board-page.js':
+          'the stack’s icons are `lucide-react` alone',
+        'dist · project/boardView.js':
+          'the stack’s icons are `lucide-react` alone',
+        'dist · project/feature-page.js':
+          'the stack’s icons are `lucide-react` alone',
+        'dist · project/featureView.js':
+          'the stack’s icons are `lucide-react` alone',
+        'dist · project/modes.js': 'the stack’s icons are `lucide-react` alone',
+        'dist · project/refineCheck.js':
+          'the stack’s icons are `lucide-react` alone',
+        'written · records/release-5-3-1.md':
+          'the files the build side reads, at their new digests',
+        'written · vendor/wow/app/styles/fades.ts':
+          'the fades, a file of their own',
+        'written · vendor/wow/app/styles/monoFamily.ts':
+          'the code face, a file of its own',
+        'written · vendor/wow/app/styles/theme/fades.ts':
+          'retired: the fades moved to `app/styles/fades.ts`',
+        'written · vendor/wow/app/styles/theme/typeScale.ts':
+          'the code face read from its own file',
+        'written · vendor/wow/shared/stack/stacks.ts':
+          'the icons are `lucide-react` alone',
+      },
+    },
+    moved: {
+      design: [
+        'design/app/styles/theme/fades.ts → design/app/styles/fades.ts',
+        'design/tools/build/namedIcons.ts → gone',
+      ],
+    },
+    tried: { 'eagle-design': '967ff35' },
+  },
   {
     version: '1.0.0',
     date: '2026-11-13',
