@@ -15,11 +15,17 @@ const SHARED_STATES = [
   "      { name: '--st-ready-fg', light: 'var(--g-600)', dark: 'var(--g-200)', why: '5.56', whyDark: '9.26' },\n",
 ].join('');
 
+// the atoms' glyph name is the way of working's word now; the spelling check refuses one held twice
+const SHARED_WORD = "  'pilcrow',\n";
+
 const BUILD_THEME_TAKEN: Migration = {
   release: '0.21.0',
   removes: [],
   moves: [],
-  edits: [{ file: TOKENS, from: SHARED_STATES, to: '' }],
+  edits: [
+    { file: TOKENS, from: SHARED_STATES, to: '' },
+    { file: 'scope.ts', from: SHARED_WORD, to: '' },
+  ],
   // the atoms' glyphs, drawn by the build side's pin
   dependencies: { 'lucide-react': '1.69.0' },
   tree: null,

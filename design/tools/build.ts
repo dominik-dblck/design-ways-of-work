@@ -6,6 +6,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { build } from 'rolldown';
+import type { InputOptions } from 'rolldown';
 import { moduleEntries, moduleImports } from '../guards/sourceCheck.ts';
 import { copyNamedIcons } from './build/namedIcons.ts';
 import { writeVendored } from './build/vendored.ts';
@@ -46,6 +47,11 @@ function globalOf(file: string): string {
     .join('');
 }
 
+// MUI and the shared atoms mark their modules `use client`, which means nothing in one bundle
+const onwarn: InputOptions['onwarn'] = (warning, report) => {
+  if (warning.code !== 'MODULE_LEVEL_DIRECTIVE') report(warning);
+};
+
 async function bundle(file: string): Promise<void> {
   const name = globalOf(file);
   await build({
@@ -53,6 +59,7 @@ async function bundle(file: string): Promise<void> {
     write: true,
     logLevel: 'warn',
     resolve: { symlinks: false },
+    onwarn,
     output: {
       file: path.join(OUT, `${path.basename(file, '.ts')}.js`),
       format: 'iife',
@@ -89,10 +96,7 @@ async function bundlePage(file: string, page: Page): Promise<void> {
     write: true,
     logLevel: 'warn',
     resolve: { symlinks: false },
-    // MUI marks its modules `use client`, which means nothing in one bundle
-    onwarn: (warning, report) => {
-      if (warning.code !== 'MODULE_LEVEL_DIRECTIVE') report(warning);
-    },
+    onwarn,
     platform: 'browser',
     transform: { jsx: 'react-jsx' },
     output: {
