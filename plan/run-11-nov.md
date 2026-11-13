@@ -1324,3 +1324,13 @@ Each call: what, why, how to undo. None changes what the PM sees.
   `feature/shared-theme-and-atoms` at 38a280f9, the patch of 565dfa9b (one patch-id), its review record
   committed and passing. `yarn sync:theme 38a280f9`: the 94 files byte-equal, the record's sha alone moves,
   so the copy's provenance is main's line. Undo: the commit reverted.
+- Task 25, its last part: the rows held by `review` get their skill, `design-review` (`docs/skills/review.ts`),
+  each row of the side whose gate is `review` (seventeen) found by a grep of the emitted rule files and read
+  against the change before a commit, or against a sha sent. Call: no hook shows the rows at each write, as the
+  build side's does: this side's rule files go by concern, not by layer, so every edit would carry all of them;
+  the skill reads them once a change. This repository's own commits are read by eagle-design, each by its sha.
+  Undo: the skill file to `legacy/`.
+- The PM, 13 Nov, on Eagle's molecules (none taken; W25 named the atoms): "przeanlizuj i przegadaj z eagle-dev
+  co mozna reuzyc i warto przeniesc z designem tez mozesz zagadac". By imports, of 43: about 27 plain UI, 12
+  reading Eagle's domain, 4 Eagle's own. Eagle-design: a molecule moves once a second product reads it
+  (Segmented and Drawer now). Eagle-dev's view asked; the list goes to the PM for one decision.

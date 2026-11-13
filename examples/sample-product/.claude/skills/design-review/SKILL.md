@@ -1,0 +1,23 @@
+---
+name: design-review
+description: "Reads a change against every rule row whose gate is `review`, the rules no lint, test or scan holds, and mends or reports what breaks them. Use when a change to code is about to be committed, or another session sends a sha for review."
+---
+
+<!-- Written by `yarn build` from `docs/skills/review.ts`: edit the data, never this file. -->
+
+# design-review · a change read against the rules no check holds
+
+A rule a tool can hold is held by that tool (`docs/rules/checks.md`); the rows left to `review` are read here, every one, on every change that touches code.
+
+## Steps
+
+1. The rows: ``grep -n '| `review` ' docs/rules/*.md``, each row of this side whose gate is `review`, by its file and line.
+2. The change: `git diff --cached` before a commit, `git show <sha>` for a sha sent.
+3. Each row against each changed file it speaks to; a row that speaks to none of them is passed by its line.
+4. Each finding mended before the commit; on a sha sent, sent back by its file and line with the row it breaks.
+5. `yarn check:chunk` green, then the commit.
+
+## Never
+
+- A finding kept without the row's own exception, or a reason a reader can check, in the commit's body.
+- A row a tool could hold left to this reading: its check is written, and the row names the check as its gate.
