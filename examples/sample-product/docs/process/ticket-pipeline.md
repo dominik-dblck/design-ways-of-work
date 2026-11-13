@@ -122,7 +122,7 @@ reviews code then reads `ticket/_code.md`.
 ## The repository never writes to the design project
 
 The design project is the git repository, a file named by its path from its root, read at
-the commit the design session names — `release <full sha>`, tagged `release-<yyyy-mm-dd>-<n>`, never HEAD;
+the commit the design session names — `release <full sha>`, tagged `release-<yyyy-mm-dd>-<what>`, never HEAD;
 `git rev-parse release-<…>^{commit}` must equal it, or the run stops. A file comes through
 `yarn sheet:cache {file} --commit <sha>` (`cat-file blob <sha>:{file}`), a list or a size from `ls-tree`. Only read
 commands run there (`cat-file`, `ls-tree`, `rev-parse`; `log` or `diff --stat` between two named shas); a
