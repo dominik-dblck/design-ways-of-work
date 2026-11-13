@@ -1303,3 +1303,11 @@ Each call: what, why, how to undo. None changes what the PM sees.
 - 9e30236 reviewed: two more, mended in 7c6902c (the record read from branches and remotes, never a stash; a
   start not read leaves the pid alone to decide). v0.22.0 out (add6c36) through the gate under the lock;
   `yarn hooks:user` installed the lock on this machine; eagle-dev and eagle-design wrap their heavy runs in it.
+- Task 25, its second half, one home per name: `aNameHasOneHome` moved by script among the shared tests, every
+  product running it on its production files read from disk, with the lint rule's exemptions (an entry's API, a
+  family's one name). The lint rule stays: it reads the program alone, and a product's lint skips the homes. On
+  eagle-design's port the test finds two names, both the shared tests' (`leavesOf`, `sectionOf`), renamed by
+  script `registryLeavesOf` and `statusSectionOf`; the product renames nothing. The source page imports the
+  guard's finding type instead of deriving its own. The move rewrote two paths inside the test's planted texts,
+  mended after it (a known gap). The sample was red once on two renamed files left unformatted, then green.
+  Undo: the commit reverted.

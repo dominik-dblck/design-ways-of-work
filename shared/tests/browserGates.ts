@@ -10,7 +10,7 @@ import { codeOf } from './codeText.ts';
 import {
   sectionBulletsOf,
   firstCellsOf,
-  sectionOf,
+  statusSectionOf,
   subjectOf,
   unanswered,
 } from './statusFile.ts';
@@ -35,7 +35,9 @@ const unwalkedOf = (catalog: Catalog, status: string): readonly string[] => {
   const walked = new Set(
     Object.values(catalog).flatMap((entry) => entry.paths),
   );
-  const waived = sectionBulletsOf(sectionOf(status, WAIVED)).map(subjectOf);
+  const waived = sectionBulletsOf(statusSectionOf(status, WAIVED)).map(
+    subjectOf,
+  );
   return [
     ...FLOW_PATHS.filter((kind) => !walked.has(kind) && !waived.includes(kind)),
     ...waived
@@ -55,7 +57,7 @@ function rolesMissingOf({
   readonly status: string;
 }): readonly string[] {
   const taken = new Set(Object.values(catalog).map(({ userType }) => userType));
-  const waived = sectionBulletsOf(sectionOf(status, ROLES_WAIVED)).map(
+  const waived = sectionBulletsOf(statusSectionOf(status, ROLES_WAIVED)).map(
     subjectOf,
   );
   return [
@@ -68,8 +70,10 @@ function rolesMissingOf({
 
 // a red table of one row a flow, a flow in both lists, done claimed while one was never seen red
 function redFaultsOf(catalog: Catalog, status: string): readonly string[] {
-  const red = firstCellsOf(sectionOf(status, RED));
-  const notYet = sectionBulletsOf(sectionOf(status, NOT_YET)).map(subjectOf);
+  const red = firstCellsOf(statusSectionOf(status, RED));
+  const notYet = sectionBulletsOf(statusSectionOf(status, NOT_YET)).map(
+    subjectOf,
+  );
   const listed = [...red, ...notYet].sort().join(', ');
   const keys = Object.keys(catalog).sort().join(', ');
   return [
@@ -95,7 +99,7 @@ const statusFaultsOf = ({
   readonly root: string;
 }): readonly string[] => [
   ...ANSWERED.flatMap((heading) =>
-    sectionBulletsOf(sectionOf(status, heading)).map((bullet) =>
+    sectionBulletsOf(statusSectionOf(status, heading)).map((bullet) =>
       unanswered(bullet, root),
     ),
   ).filter((why) => why !== null),

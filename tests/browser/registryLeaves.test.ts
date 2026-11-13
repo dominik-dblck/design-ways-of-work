@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   helpersIn,
-  leavesOf,
+  registryLeavesOf,
   spelledIn,
   unreadOf,
 } from '../../shared/tests/registryLeaves.ts';
@@ -12,7 +12,7 @@ const REGISTRY = {
   text: "export const rowTestIds = { cell: { name: 'testid-name', size: 'testid-size' }, title: 'testid-title' };\nexport const sizeOf = (id: string) => `${rowTestIds.cell.size}-${id}`;",
 };
 const SPELLING = { roots: ROOTS, helpers: helpersIn([REGISTRY], ROOTS) };
-const LEAVES = leavesOf('rowTestIds', {
+const LEAVES = registryLeavesOf('rowTestIds', {
   cell: { name: 'testid-name', size: 'testid-size' },
   title: 'testid-title',
 });

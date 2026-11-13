@@ -10,7 +10,12 @@ import { scope } from '../../scope.ts';
 import { isARegistryExport } from '../e2e/theRegistry.ts';
 import { testsOf } from '../repoScope.ts';
 import { filesNamedBy, isNamedBy } from './globs.ts';
-import { helpersIn, leavesOf, spelledIn, unreadOf } from './registryLeaves.ts';
+import {
+  helpersIn,
+  registryLeavesOf,
+  spelledIn,
+  unreadOf,
+} from './registryLeaves.ts';
 
 const tier = 'none' in scope.browser ? null : scope.browser;
 const isCode = (file: string): boolean => /\.tsx?$/.test(file);
@@ -47,7 +52,7 @@ async function leavesHeld(): Promise<readonly string[]> {
     typeof module === 'object' && module !== null
       ? Object.entries(module)
           .filter(([root]) => isARegistryExport(root))
-          .flatMap(([root, held]) => leavesOf(root, held))
+          .flatMap(([root, held]) => registryLeavesOf(root, held))
       : [],
   );
 }

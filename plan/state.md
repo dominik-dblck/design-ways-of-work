@@ -51,8 +51,8 @@ props get a check part (a task after v1.0.0). Task 23 is closed by v0.21.0: the 
 copied at eagle-dev's eed29307 on `feature/W26-shared-theme`, after its architecture review, nothing merged
 there. The PM's word of 13 Nov puts the build side's architecture guard on the homes before v1.0.0 (W105, the
 run's task 25): its first half is out in v0.22.0 (the homes are the tree, one home per name on this
-repository's code, a sha synced only reviewed); its second half takes one home per name to the homes and the
-products. Heavy runs take turns on the machine through `~/.claude/hooks/machineLock.py` (W106), installed here.
+repository's code, a sha synced only reviewed); in its second half one home per name is a shared test every
+product runs, and the rows held by `review` get their skill. Heavy runs take turns on the machine through `~/.claude/hooks/machineLock.py` (W106), installed here.
 
 ## Known gaps
 
@@ -68,7 +68,8 @@ products. Heavy runs take turns on the machine through `~/.claude/hooks/machineL
   the port's build writes them back from its pin, so they settle at the next take. `scripts/portMerge.ts`
   could keep the port's side for what a build writes.
 - `scripts/move.ts` keeps a product's notebooks as written but does not refuse a move of what one imports,
-  as the migration does: the clone's tsc shows it.
+  as the migration does: the clone's tsc shows it. It also follows a relative path inside a string of code,
+  a test's planted import text too: such a text is mended after the move.
 - A halt explains a file by the command that first wrote it: a new file of a halted `yarn build` passes as
   the halt's, not as its own.
 - The gate reads a trunk's change to a home against the port's first base, so a change the port merged

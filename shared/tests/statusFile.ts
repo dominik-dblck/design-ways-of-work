@@ -1,5 +1,6 @@
 /**
- * - `sectionOf`, `sectionBulletsOf`, `firstCellsOf`, `subjectOf` · its parts
+ * - `statusSectionOf`, `sectionBulletsOf` · a heading's lines, and their bullets
+ * - `firstCellsOf`, `subjectOf` · a table's first cells, and a bullet's subject
  * - `unanswered` · why an bullet names no test that exists, null when it does
  */
 import fs from 'node:fs';
@@ -9,7 +10,10 @@ const A_TEST = /· `([^`]+)` › (.+)$/;
 const NOWHERE = /· nowhere · \S/;
 
 // the lines under a `## heading`, up to the next one; null when the heading is not there
-const sectionOf = (text: string, heading: string): readonly string[] | null => {
+const statusSectionOf = (
+  text: string,
+  heading: string,
+): readonly string[] | null => {
   const lines = text.split('\n');
   const at = lines.findIndex((line) => line.trim() === `## ${heading}`);
   if (at === -1) return null;
@@ -53,4 +57,10 @@ const unanswered = (bullet: string, root: string): string | null => {
     : `${bullet} · ${file} holds no test titled so`;
 };
 
-export { sectionBulletsOf, firstCellsOf, sectionOf, subjectOf, unanswered };
+export {
+  sectionBulletsOf,
+  firstCellsOf,
+  statusSectionOf,
+  subjectOf,
+  unanswered,
+};

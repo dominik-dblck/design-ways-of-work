@@ -8,9 +8,7 @@ import {
   ratchet,
   scanAll,
 } from '../../guards/sourceCheck.ts';
-
-// a finding as the scan answers it, read off the guard's own entry
-type SourceFinding = Awaited<ReturnType<typeof scanAll>>[number];
+import type { SourceFinding } from '../../guards/sourceCheck.ts';
 
 interface KindStanding {
   readonly kind: string;

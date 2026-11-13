@@ -1,5 +1,5 @@
 /**
- * - `leavesOf`, `unreadOf` · a registry's ids as paths, and those no file spells
+ * - `registryLeavesOf`, `unreadOf` · ids as paths, and those no file spells
  * - `spelledIn`, `helpersIn` · the paths a file spells: by name, alias or helper
  */
 import ts from 'typescript';
@@ -16,11 +16,11 @@ interface Spelling {
 }
 
 // each id under a root as a dotted path: `fooTestIds.row.cell`
-const leavesOf = (at: string, held: unknown): readonly string[] => {
+const registryLeavesOf = (at: string, held: unknown): readonly string[] => {
   if (typeof held === 'string') return [at];
   if (typeof held !== 'object' || held === null) return [];
   return Object.entries(held).flatMap(([key, inner]) =>
-    leavesOf(`${at}.${key}`, inner),
+    registryLeavesOf(`${at}.${key}`, inner),
   );
 };
 
@@ -147,4 +147,4 @@ const unreadOf = (
       .some((_, at) => spelled.has(names.slice(0, at + 2).join('.')));
   });
 
-export { helpersIn, leavesOf, spelledIn, unreadOf };
+export { helpersIn, registryLeavesOf, spelledIn, unreadOf };
