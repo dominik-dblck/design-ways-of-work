@@ -90,13 +90,18 @@ function imported(file: string, tree: Tree): string {
   return importsMoved(text, { file, moves, isBarrelled });
 }
 
-// a folder its moves leave empty goes with them
+function emptiedAway(folder: string): void {
+  if (folder === HERE || fs.readdirSync(folder).length > 0) return;
+  fs.rmdirSync(folder);
+  emptiedAway(path.dirname(folder));
+}
+
+// a folder its moves leave empty goes with them, and each parent left empty
 function movedByGit(moves: readonly Move[]): void {
   for (const { from, to } of moves) {
     fs.mkdirSync(path.dirname(path.join(HERE, to)), { recursive: true });
     execFileSync('git', ['mv', from, to], { cwd: HERE });
-    const left = path.dirname(path.join(HERE, from));
-    if (fs.readdirSync(left).length === 0) fs.rmdirSync(left);
+    emptiedAway(path.dirname(path.join(HERE, from)));
   }
 }
 
