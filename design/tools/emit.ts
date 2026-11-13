@@ -7,12 +7,11 @@ import type { DocumentFile } from '../docs/documents/documentTypes.ts';
 import type { RuleFile } from '../docs/rules/ruleTypes.ts';
 import type { SkillFile } from '../docs/skills/skillTypes.ts';
 import { withContents } from './emit/documentContents.ts';
+import { rulesMarkdown } from './emit/rulesMarkdown.ts';
 import { idsText } from './ids.ts';
 import { emitted, ROOT } from './layout.ts';
 import { tokensText } from './tokens.ts';
 import type { Emitted } from './layout.ts';
-
-const HEAD = ['Rule', 'Gate', 'Exceptions', 'Why'] as const;
 
 const isRuleFile = (loaded: unknown): loaded is RuleFile =>
   typeof loaded === 'object' &&
@@ -55,30 +54,6 @@ function skillMarkdown(one: Emitted, file: SkillFile): string {
       ),
     ]),
     '',
-  ].join('\n');
-}
-
-// the table padded to its widest cell per column, as the rule files were written
-function rulesMarkdown(file: RuleFile): string {
-  const rows = file.rows.map((row) => [
-    row.rule,
-    row.gate,
-    row.exceptions,
-    row.why,
-  ]);
-  const widths = HEAD.map((head, at) =>
-    Math.max(head.length, ...rows.map((row) => String(row[at]).length)),
-  );
-  const line = (cells: readonly string[]): string =>
-    `| ${cells.map((cell, at) => cell.padEnd(widths[at] ?? 0)).join(' | ')} |`;
-  const rule = `| ${widths.map((width) => '-'.repeat(width)).join(' | ')} |`;
-  return [
-    `# ${file.title}`,
-    file.intro,
-    line(HEAD),
-    rule,
-    ...rows.map(line),
-    file.outro,
   ].join('\n');
 }
 
