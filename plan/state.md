@@ -54,7 +54,8 @@ v1.3.1, on the PM's A for a third release that day, lets the build side's `atoms
 That sha, 2fee0535, is copied: the seven and what they read stand in the design home, out with v1.4.0.
 
 The PM's word of 13 Nov (W116), picked on the proposal page "Atoms to merge": no capitals, and three names,
-each one thing (Heading, Text, Label); Eyebrow and SectionHead retired, one Slider, one dot. All in v1.4.0.
+each one thing (Heading, Text, Label); Eyebrow and SectionHead retired, one Slider, one dot. All in v1.4.0,
+out at aba1fce with the skeleton; eagle-design takes it, eagle-dev at its own take of the design system.
 
 The PM's word of 13 Nov on shared components (W110): after v1.1.0 this repository holds the
 theme, atoms and molecules, a product keeps and extends its own and asks for one to be shared; and (W111) both

@@ -1505,3 +1505,8 @@ Each call: what, why, how to undo. None changes what the PM sees.
   its types move from BadgeDot into the Badge atom by `scripts/move.ts`, Badge's dot draws it with a `tone`, and
   the theme's own dot variant retires, so one size and one ring hold both. The copy set's `RETIRED` names the
   old paths, so a sync never copies them back. Undo: revert the commit, the map run back.
+- v1.4.0, out at aba1fce once the gate was green on eagle-design's main and each piece reviewed (W115). Calls:
+  minor, as v1.1.0 was, since the one product on the tag only runs the take's migration, while a repository
+  whose own code reads a retired name is told its heir in the row's action; the release, queued for the lock,
+  was stopped before it ran so eagle-design's wording note on the probe rows went in first. Undo: a patch
+  release puts back what a product needs, as a pushed tag is never moved.
