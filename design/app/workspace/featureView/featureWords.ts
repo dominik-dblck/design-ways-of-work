@@ -29,7 +29,7 @@ const FEATURE_WORDS = {
   },
   cases: {
     label: 'Test cases',
-    note: 'generated from the contract’s rows, one endpoint test each',
+    note: 'one test each: the contract’s rows, and the criteria of an epic built ticket by ticket',
     all: 'All',
     compound: 'two claims in one',
   },

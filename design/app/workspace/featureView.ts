@@ -8,7 +8,11 @@ import { byId as EPICS } from '../../roadmaps/backlog.ts';
 import { casesOfEpic, flat, named } from '../../sheet/cases/testCases.ts';
 import { listed, ticketDetailOf } from './boardView.ts';
 import { endpointsOf, piecesOf } from './contractView.ts';
-import { caseGroupsOf, caseKindsOf } from './featureView/featureCases.ts';
+import {
+  caseGroupsOf,
+  caseKindsOf,
+  criterionGroupsOf,
+} from './featureView/featureCases.ts';
 import { coverOf } from './featureView/featureCover.ts';
 import { journeysOf } from './featureView/featureJourneys.ts';
 import {
@@ -20,6 +24,7 @@ import { notesViewOf } from './featureView/featureNotes.ts';
 import { FEATURE_WORDS } from './featureView/featureWords.ts';
 import type { ProductFields, ProductView } from '../../tools/productTypes.ts';
 import type { FeatureTab, FeatureView } from './featureView/featureTypes.ts';
+import type { Section } from './boardView.ts';
 
 // every epic has its page, in the board list's order, its status the board's column
 function features(): readonly FeatureTab[] {
@@ -57,22 +62,44 @@ function fieldsView(fields: ProductFields | undefined): FieldsView {
   };
 }
 
+// an epic with no feature ticket is built ticket by ticket: its tickets are its page
+const builtOf = (
+  epic: string,
+  ticket: ReturnType<typeof TICKETS>[number] | undefined,
+): ReturnType<typeof TICKETS> =>
+  ticket ? [] : TICKETS().filter((one) => one.epic === epic);
+
+// each ticket's edges, its id before each section
+const edgesOf = (tickets: ReturnType<typeof TICKETS>): readonly Section[] =>
+  tickets.flatMap((one) =>
+    (ticketDetailOf(one.id)?.edgeSections ?? []).map((section) => ({
+      ...section,
+      label: `${one.id} · ${section.label}`,
+    })),
+  );
+
 function featureOf(epic: string, plugs: ProductView = {}): FeatureView {
   const ticket = TICKETS().find((one) => one.id === `T-${epic}-00`);
+  const built = builtOf(epic, ticket);
   const read = readOf(ticket);
   const groups = casesOfEpic(epic, named(read));
-  const caseGroups = caseGroupsOf(groups);
+  const caseGroups = [...caseGroupsOf(groups), ...criterionGroupsOf(built)];
   return {
     epic,
     title: `${epic} · ${EPICS[epic]?.name ?? ticket?.title ?? ''}`,
-    status: ticket?.status ?? '—',
+    status:
+      ticket?.status ??
+      features().find((one) => one.epic === epic)?.status ??
+      '—',
     journeys: journeysOf(epic, flat(groups)),
     cover: coverOf(epic, groups),
     endpoints: endpointsOf(epic, read),
     caseGroups,
     caseKinds: caseKindsOf(caseGroups),
     ...fieldsView(plugs.fieldsOf?.(epic)),
-    decisions: ticket ? (ticketDetailOf(ticket.id)?.edgeSections ?? []) : [],
+    decisions: ticket
+      ? (ticketDetailOf(ticket.id)?.edgeSections ?? [])
+      : edgesOf(built),
     notes: notesViewOf(epic),
     combinations: combinationsOf(epic),
     statesNamed: statesNamed(epic, plugs.statesOf),

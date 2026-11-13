@@ -6,6 +6,7 @@ import { describe, expect, it } from 'vitest';
 import { combinations } from '../../docs/process/projectPlan.ts';
 import { journeysOfEpic } from '../../sheet/cases/journeys.ts';
 import { all as COMMANDS } from '../../sheet/contract/commands.ts';
+import { all as TICKETS } from '../../roadmaps/tickets.ts';
 import {
   featureOf,
   features,
@@ -48,6 +49,46 @@ describe('the Feature view', () => {
       const cover = featureOf(epic).cover;
       expect(cover?.cases.ok).toBe(true);
       expect(cover?.cases.share).toBe(100);
+    }
+  });
+
+  it('shows an epic built ticket by ticket through its tickets: their criteria, edges and column', () => {
+    const tickets = TICKETS();
+    const byTicket = EPICS.filter(
+      (epic) => !tickets.some((one) => one.id === `T-${epic}-00`),
+    );
+    expect(byTicket.length).toBeGreaterThan(0);
+    for (const epic of byTicket) {
+      const view = featureOf(epic);
+      const own = tickets.filter((one) => one.epic === epic);
+      const tested = own.flatMap((one) =>
+        one.acceptance
+          .map((text, at) => ({ text, id: `c${at + 1}`, ticket: one.id }))
+          .filter((row) => row.text.includes(' · test (')),
+      );
+      const shown = view.caseGroups
+        .filter((group) => own.some((one) => one.id === group.endpoint))
+        .flatMap((group) =>
+          group.cases.map((one) => ({
+            one,
+            id: one.id,
+            ticket: group.endpoint,
+          })),
+        );
+      expect(shown.map(({ id, ticket }) => ({ id, ticket }))).toEqual(
+        tested.map(({ id, ticket }) => ({ id, ticket })),
+      );
+      // the claim leads, the tier is the kind, and the assertion ends the text whole
+      shown.forEach(({ one }, at) => {
+        const text = tested[at]?.text ?? '';
+        expect(text.startsWith(`${one.when} · test (${one.kind}`)).toBe(true);
+        expect(text.endsWith(one.then.split(' · ').at(-1) ?? '')).toBe(true);
+      });
+      const edges = own.reduce((sum, one) => sum + (one.edges?.length ?? 0), 0);
+      if (edges > 0) expect(view.decisions.length).toBeGreaterThan(0);
+      expect(view.status).toBe(
+        features().find((tab) => tab.epic === epic)?.status,
+      );
     }
   });
 
