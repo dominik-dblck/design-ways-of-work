@@ -25,7 +25,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 | stage | what | done | of |
 | 1 | Foundation | 7 | 7 |
 | 2 | Design clean | 26 | 26 |
-| 3 | Eagle-design | 1 | 7 |
+| 3 | Eagle-design | 2 | 7 |
 | 4 | Spawn design | 2 | 3 |
 | 5 | Eagle-dev takes WoW | 0 | 5 |
 | 6 | Argus build | 0 | 2 |
@@ -123,6 +123,7 @@ through it, end to end (W110).
 - 12:12 · stage 2 · 25 of 26 · the build side's architecture guard on the homes: the homes are the tree, a sha synced only reviewed, one home per name in every product, the review rows' skill (v0.22.0, v0.23.0, 729870d), eagle-design approved
 - 12:29 · stage 2 · 26 of 26 · v1.0.0 out (4cb1b34): the gate green on eagle-design's port/wow holding its main, the release naming 1.0.0
 - 13:37 · stage 3 · 1 of 2 · eagle-design's main holds v1.0.0
+- 08:56 · stage 3 · 2 of 7 · eagle-design batch 1: 91 booleans named as one, read on a clone: no naming-convention error left unsuppressed, 181 to 90 (1741579)
 
 ## Calls
 
