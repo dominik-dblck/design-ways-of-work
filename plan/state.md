@@ -41,9 +41,11 @@ A past log stands in `plan/log/` as it was written: its paths and its plans are 
 
 ## Open for the PM
 
-For the PM's return, nothing else waiting on this side: argus-design's spawn (stage 3 of the plan, the PM's
-word); eagle-dev's take of `shared/` (stage 5), after its E23 pull request, on the PM's word; then the
-shared rule that only Label and Heading draw the overline, as it reaches the build side too.
+The PM's word of 14 Nov: both Eagle repositories wholly on the way of working before argus-design's spawn,
+design first. eagle-design's 181 lint suppressions go to zero in its own repository, then a shared check holds
+a product's suppressions file empty; then eagle-dev's take of `shared/` (stage 5), after its E23 pull request,
+with no exemption the shared rules refuse; then the shared rule that only Label and Heading draw the overline;
+then argus-design's spawn (stage 3 of the plan, the PM's word).
 
 One point: W112's timing, as eagle-dev relayed the PM's word (a product builds a missing piece without asking
 first, asks only "do you have something like it?" during the work, and proposes it once, at its pull request),

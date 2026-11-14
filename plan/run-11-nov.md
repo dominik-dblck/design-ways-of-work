@@ -25,9 +25,9 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 | stage | what | done | of |
 | 1 | Foundation | 7 | 7 |
 | 2 | Design clean | 26 | 26 |
-| 3 | Eagle-design | 1 | 2 |
+| 3 | Eagle-design | 1 | 3 |
 | 4 | Spawn design | 2 | 3 |
-| 5 | Eagle-dev takes WoW | 0 | 4 |
+| 5 | Eagle-dev takes WoW | 0 | 5 |
 | 6 | Argus build | 0 | 2 |
 | 7 | Improvement loop | 0 | 2 |
 
@@ -59,15 +59,21 @@ build side's tree a design product takes, free of the product's names · 25 · t
 side runs, carried to the homes: one home per name, the map that is the tree, the review rows and their skill, a
 move reviewed before its sha leaves (the PM, 13 Nov) · 26 · v1.0.0 (the PM's word).
 
+The PM, 14 Nov: "zróbmy na 100% najpierw eagle dev i design, zacznij od design": both Eagle repositories wholly
+on the way of working before `argus-design`, so stage 3's task 2 first, then stage 5, then stage 4's task 3.
+
 Stage 3, the design half of the plan's stage 5: 1 · eagle-design takes v1 by the rehearsed migration, the PM's
-word · 2 · both design repositories pinned to one tag, the gate green on both.
+word · 2 · eagle-design's own code passes the shared rules with nothing suppressed, its 181 suppressions at
+zero, then a shared check holds a product's suppressions file empty · 3 · both design repositories pinned to
+one tag, the gate green on both.
 
 Stage 4, the plan's stage 3: 1 · `yarn spawn design <path> <name>`, the hooks installed with it · 2 · the
 new-project guide · 3 · `argus-design` spawned and green on its first commit, the PM's word.
 
 Stage 5, the PM's architecture (W110, W111; the plan's stages 4 and 5, its build half): 1 · the plan sent to
 eagle-dev · 2 · its theme, atoms and molecules taken by tag, its copies made taken files by migration · 3 · the
-build side's rules, process tools and skills taken, `dev/` cleaned of the product · 4 · the gate tries eagle-dev.
+build side's rules, process tools and skills taken, `dev/` cleaned of the product · 4 · the gate tries eagle-dev ·
+5 · eagle-dev's own code passes the shared rules with no exemption they refuse, inline or in a file.
 
 Stage 6: 1 · `spawn build` from a blank build repository green on every shared check · 2 · `argus-dev` spawned and
 green on its first commit, the PM's word.
@@ -1520,3 +1526,10 @@ Each call: what, why, how to undo. None changes what the PM sees.
   pairs, each module with its page, so a page left after its module went is red. The overline rule
   (only Label and Heading draw it) waits for stage 5: a shared rule reaches the build side too, whose
   code still draws it raw. Undo: revert the commit.
+- The PM, 14 Nov, on both Eagle repositories at 100% first, design first. Calls: eslint run on a clone of
+  eagle-design's main with an empty suppressions file finds the 181 as product code alone (91 booleans with
+  no prefix, 68 placeholder names and one entry's name, 14 files named by a number, 4 regexes, 2 word tables,
+  one `substr`), so no shared rule changes; the list, file by file, goes to eagle-design, whose repository it
+  is; the lock, a shared check refusing a product's non-empty suppressions file, goes out once eagle-design
+  is at zero, as before that it would turn the gate red. eagle-dev's file is empty already; its inline
+  exemptions are stage 5's task 5. Undo: the order back, `argus-design` before the cleanup.
