@@ -25,7 +25,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 | stage | what | done | of |
 | 1 | Foundation | 7 | 7 |
 | 2 | Design clean | 26 | 26 |
-| 3 | Eagle-design | 2 | 7 |
+| 3 | Eagle-design | 3 | 7 |
 | 4 | Spawn design | 2 | 3 |
 | 5 | Eagle-dev takes WoW | 0 | 5 |
 | 6 | Argus build | 0 | 2 |
@@ -124,6 +124,7 @@ through it, end to end (W110).
 - 12:29 · stage 2 · 26 of 26 · v1.0.0 out (4cb1b34): the gate green on eagle-design's port/wow holding its main, the release naming 1.0.0
 - 13:37 · stage 3 · 1 of 2 · eagle-design's main holds v1.0.0
 - 08:56 · stage 3 · 2 of 7 · eagle-design batch 1: 91 booleans named as one, read on a clone: no naming-convention error left unsuppressed, 181 to 90 (1741579)
+- 09:14 · stage 3 · 3 of 7 · eagle-design batch 2: 68 placeholder names and DOC, read on a clone: none left unsuppressed, 90 to 21 (3e7530d, 3a60b3b)
 
 ## Calls
 
