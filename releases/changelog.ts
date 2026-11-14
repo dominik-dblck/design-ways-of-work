@@ -18,8 +18,6 @@ const NEXT: Unreleased = {
     'eagle-design': {
       'output · yarn test':
         'two shared tests more, green: no suppressions file entry, no JSON written by hand',
-      'written · .prettierignore':
-        'by the migration, the three JSON files the build writes for the build side, under the tool-written files',
     },
   },
 };
