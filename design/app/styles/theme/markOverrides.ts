@@ -21,7 +21,6 @@ export type ChipVariants = NonNullable<
 
 // a state chip reads in sentence case · its words keep the specification's capitals
 const CHIP_VARIANTS: ChipVariants = [
-  // a chip with no colour sits on the subtle wash · MUI's default reads the selected fill, black under black ink
   {
     props: { variant: 'filled', color: 'default' },
     style: {
