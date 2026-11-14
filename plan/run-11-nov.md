@@ -25,7 +25,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 | stage | what | done | of |
 | 1 | Foundation | 7 | 7 |
 | 2 | Design clean | 26 | 26 |
-| 3 | Eagle-design | 1 | 3 |
+| 3 | Eagle-design | 1 | 7 |
 | 4 | Spawn design | 2 | 3 |
 | 5 | Eagle-dev takes WoW | 0 | 5 |
 | 6 | Argus build | 0 | 2 |
@@ -63,9 +63,12 @@ The PM, 14 Nov: "zróbmy na 100% najpierw eagle dev i design, zacznij od design"
 on the way of working before `argus-design`, so stage 3's task 2 first, then stage 5, then stage 4's task 3.
 
 Stage 3, the design half of the plan's stage 5: 1 · eagle-design takes v1 by the rehearsed migration, the PM's
-word · 2 · eagle-design's own code passes the shared rules with nothing suppressed, its 181 suppressions at
-zero, then a shared check holds a product's suppressions file empty · 3 · both design repositories pinned to
-one tag, the gate green on both.
+word · 2 to 5 · eagle-design's own code passes the shared rules with nothing suppressed, its 181 suppressions
+at zero in four batches, each a task: 2 · 91 booleans named as one (`isLent`, not `lent`) · 3 · 69 placeholder
+names (`list`, `value`, `data`, `item`, `num`) and one entry's name · 4 · 14 files named by their job, not a
+number · 5 · the last 7: 4 regexes, 2 word tables in their words files, one `substr` · 6 · a shared check holds
+a product's suppressions file empty, out in a release · 7 · both design repositories pinned to one tag, the
+gate green on both.
 
 Stage 4, the plan's stage 3: 1 · `yarn spawn design <path> <name>`, the hooks installed with it · 2 · the
 new-project guide · 3 · `argus-design` spawned and green on its first commit, the PM's word.
@@ -1533,3 +1536,7 @@ Each call: what, why, how to undo. None changes what the PM sees.
   is; the lock, a shared check refusing a product's non-empty suppressions file, goes out once eagle-design
   is at zero, as before that it would turn the gate red. eagle-dev's file is empty already; its inline
   exemptions are stage 5's task 5. Undo: the order back, `argus-design` before the cleanup.
+- The PM, 14 Nov: "dodaj do checkow etapy zebym widzial progress". Call: the cleanup is four of stage 3's
+  tasks, one per batch of eagle-design's fixes, and the lock a fifth, so the bars move with each batch; the
+  bars' hook itself is unchanged, as its source changes only in a release on the PM's word. Undo: the five
+  tasks folded back into one.
