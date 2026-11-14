@@ -11,7 +11,8 @@ const px = (key: LightToken): string => `${length(key)}px`;
 
 /** The variants every `Text` reads · h1–h3 and subtitle1 take the DS ramp. */
 export const TYPOGRAPHY: ThemeOptions['typography'] = {
-  fontFamily: 'var(--font-basis)',
+  // next/font sets the basis face · a page with no loader falls back to the token stack, never the browser's serif
+  fontFamily: 'var(--font-basis, var(--font-sans))',
   fontWeightRegular: 400,
   fontWeightMedium: 500,
   fontWeightBold: 700,
