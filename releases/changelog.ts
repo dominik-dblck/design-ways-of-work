@@ -6,32 +6,43 @@ import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
 const NEXT: Unreleased = {
   kind: 'patch',
-  what: 'a page with no font loader reads the token face: the type scale falls back from `--font-basis` to `--font-sans`, never the browser’s serif; a filled chip with no colour sits on `bgSubtle` with `fgPrimary`, where MUI’s default read the selected fill, black under black ink; the palette’s selected fill stays the build side’s',
+  what: '',
   action: 'none: move the pin to the tag',
   rules: { added: [], changed: [], removed: [] },
-  outputs: {
-    'eagle-design': {
-      'output · yarn test':
-        'two tests more, taken: the type’s fallback and the plain chip’s ground',
-      'dist · project/board-page.js':
-        'the theme’s type falls back to `--font-sans`; a plain chip on the subtle wash',
-      'dist · project/contract-page.js':
-        'the theme’s type falls back to `--font-sans`; a plain chip on the subtle wash',
-      'dist · project/feature-page.js':
-        'the theme’s type falls back to `--font-sans`; a plain chip on the subtle wash',
-      'dist · project/theme.js':
-        'the theme’s type falls back to `--font-sans`; a plain chip on the subtle wash',
-      'written · records/release-5-3-1.md':
-        'by the gate’s probe, the digests of the theme and its two changed files; the take leaves the record as released',
-      'written · vendor/wow/app/styles/theme/markOverrides.ts':
-        'a filled chip with no colour on `bgSubtle`, its ink `fgPrimary`',
-      'written · vendor/wow/app/styles/theme/typeScale.ts':
-        '`fontFamily` reads `var(--font-basis, var(--font-sans))`',
-    },
-  },
+  outputs: {},
 };
 
 const RELEASES: readonly Release[] = [
+  {
+    version: '1.5.1',
+    date: '2026-11-14',
+    kind: 'patch',
+    what: 'a page with no font loader reads the token face: the type scale falls back from `--font-basis` to `--font-sans`, never the browser’s serif; a filled chip with no colour sits on `bgSubtle` with `fgPrimary`, where MUI’s default read the selected fill, black under black ink; the palette’s selected fill stays the build side’s',
+    action: 'none: move the pin to the tag',
+    rules: { added: [], changed: [], removed: [] },
+    outputs: {
+      'eagle-design': {
+        'output · yarn test':
+          'two tests more, taken: the type’s fallback and the plain chip’s ground',
+        'dist · project/board-page.js':
+          'the theme’s type falls back to `--font-sans`; a plain chip on the subtle wash',
+        'dist · project/contract-page.js':
+          'the theme’s type falls back to `--font-sans`; a plain chip on the subtle wash',
+        'dist · project/feature-page.js':
+          'the theme’s type falls back to `--font-sans`; a plain chip on the subtle wash',
+        'dist · project/theme.js':
+          'the theme’s type falls back to `--font-sans`; a plain chip on the subtle wash',
+        'written · records/release-5-3-1.md':
+          'by the gate’s probe, the digests of the theme and its two changed files; the take leaves the record as released',
+        'written · vendor/wow/app/styles/theme/markOverrides.ts':
+          'a filled chip with no colour on `bgSubtle`, its ink `fgPrimary`',
+        'written · vendor/wow/app/styles/theme/typeScale.ts':
+          '`fontFamily` reads `var(--font-basis, var(--font-sans))`',
+      },
+    },
+    moved: {},
+    tried: { 'eagle-design': 'd8a8ceb' },
+  },
   {
     version: '1.5.0',
     date: '2026-11-13',
