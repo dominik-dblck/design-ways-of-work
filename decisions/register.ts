@@ -364,6 +364,13 @@ const SINCE: readonly Decision[] = [
     says: 'the spec rows of a component this repository ships stand here beside the component, one source of truth: a product takes them by tag and keeps only its own components’ rows. eagle-design’s 11 such spec files move here in stage 3, before `argus-design` is spawned.',
     from: 'plan/run-11-nov.md',
   },
+  {
+    id: 'W122',
+    title: 'the way of working is the one source of skills',
+    held: '14 Nov · the PM’s word, here',
+    says: 'a product holds no skill of its own: every skill a product runs, design or build, is written here and taken by tag, as a component is (W110), and one it wants is asked of this repository. The build side’s ticket skills, written here as one document, are printed into the build home as skills and taken; the planning skills this repository retired go to the build repository’s legacy as well. A shared check refuses a skill no tag brought.',
+    from: 'plan/run-11-nov.md',
+  },
 ];
 
 // a product's rows keep their words of the day and their order, each naming the row it was

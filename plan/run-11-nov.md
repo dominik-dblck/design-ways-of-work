@@ -77,9 +77,11 @@ new-project guide · 3 · `argus-design` spawned and green on its first commit, 
 
 Stage 5, the PM's architecture (W110, W111; the plan's stages 4 and 5, its build half): 1 · the plan sent to
 eagle-dev · 2 · its theme, atoms and molecules taken by tag, its copies made taken files by migration · 3 · the
-build side's rules, process tools and skills taken, `dev/` cleaned of the product · 4 · the gate tries eagle-dev ·
-5 · eagle-dev's own code passes the shared rules with no exemption they refuse, inline or in a file, and
-holds no JSON written by hand (W11).
+build side's rules, process tools and skills taken, `dev/` cleaned of the product; every skill it runs comes from
+here (W122): the ticket skills printed into `dev/` from their modules and taken, the 11 planning skills this
+repository retired moved to its legacy · 4 · the gate tries eagle-dev · 5 · eagle-dev's own code passes the shared
+rules with no exemption they refuse, inline or in a file, holds no JSON written by hand (W11) and no skill no tag
+brought (W122).
 
 Stage 6: 1 · `spawn build` from a blank build repository green on every shared check · 2 · `argus-dev` spawned and
 green on its first commit, the PM's word.
@@ -1570,3 +1572,11 @@ Each call: what, why, how to undo. None changes what the PM sees.
 - The PM, 14 Nov: "fajnie jak docelowo bedzie jednokierunkowa komunikacja", seeing the map's copies back from
   both Eagle repositories. Call: the aim is written down (W120), and the map draws each copy back as today's,
   to go one-way; the copies end once the originals live here (W110), so no task moves today. Undo: W120 out.
+- The PM, 14 Nov, seeing eagle-dev's 19 skills of its own on the map: "trzeba dodac skoro eagle-dev go uzywa,
+  ale on pobieral go od design, ale teraz powinien pobierac z WoW-a", then "WoW jest zrodlem prawdy dla skilli,
+  nie ma own skills - wszystkie uzywane powinny trafic do WoW a eagle je przejmuje jak komponenty". Measured:
+  11 of the 19 are the planning skills this repository moved to `legacy/dev/claude/skills`; 8 are the ticket
+  skills, written here in `design/docs/documents/ticket-pipeline/`; eagle-design runs the 9 design skills, all
+  taken. Call: W122, a product holds no skill of its own; stage 5's task 3 prints the ticket skills into `dev/`
+  and takes them, the 11 go to eagle-dev's legacy, and task 5 refuses a skill no tag brought. Order kept:
+  stage 3 first. Undo: W122 out, the tasks as they were.
