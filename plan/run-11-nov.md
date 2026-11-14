@@ -25,7 +25,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 | stage | what | done | of |
 | 1 | Foundation | 7 | 7 |
 | 2 | Design clean | 26 | 26 |
-| 3 | Eagle-design | 3 | 8 |
+| 3 | Eagle-design | 5 | 8 |
 | 4 | Spawn design | 2 | 3 |
 | 5 | Eagle-dev takes WoW | 0 | 5 |
 | 6 | Argus build | 0 | 2 |
@@ -126,6 +126,8 @@ through it, end to end (W110).
 - 13:37 · stage 3 · 1 of 2 · eagle-design's main holds v1.0.0
 - 08:56 · stage 3 · 2 of 7 · eagle-design batch 1: 91 booleans named as one, read on a clone: no naming-convention error left unsuppressed, 181 to 90 (1741579)
 - 09:14 · stage 3 · 3 of 7 · eagle-design batch 2: 68 placeholder names and DOC, read on a clone: none left unsuppressed, 90 to 21 (3e7530d, 3a60b3b)
+- 10:01 · stage 3 · 4 of 8 · eagle-design batch 3: 14 files named by their job, read on a clone, 21 to 7 (3098e55)
+- 10:01 · stage 3 · 5 of 8 · eagle-design batch 4: the last 7, read on a clone: 0 errors on 1418 files with no suppressions file, none inline (d8a8ceb)
 
 ## Calls
 
