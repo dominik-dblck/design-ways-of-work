@@ -329,6 +329,13 @@ const SINCE: readonly Decision[] = [
     says: 'the theme’s overline is a quiet label: the body face, the words as written, no letter spacing. Three names, each one thing: Heading titles a page or a section, Text holds words, Label is a short name over a thing (a field, a section, a card), its look defined once. Eyebrow and SectionHead retire, Text’s `overline` goes, HintCard’s `eyebrow` becomes `label`. One Slider takes a number or a list, and SplitSlider retires; BadgeDot and FailingMark draw Badge’s dot. All four go out in v1.4.0 with the skeleton; a product’s sheet rows that name them are its own to move.',
     from: 'plan/run-11-nov.md',
   },
+  {
+    id: 'W117',
+    title: 'JSON is an output, never an input',
+    held: '14 Nov · the PM’s word, here, on W11',
+    says: 'what a person or an agent writes is TypeScript, typed and linted; a JSON file stands only when a tool reads it by name (`package.json`, a `tsconfig`, a settings file) or a script writes it from a TypeScript module. Both Eagle repositories meet the shared rules with nothing suppressed before argus-design is spawned, eagle-design first.',
+    from: 'plan/run-11-nov.md',
+  },
 ];
 
 // a product's rows keep their words of the day and their order, each naming the row it was

@@ -25,7 +25,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 | stage | what | done | of |
 | 1 | Foundation | 7 | 7 |
 | 2 | Design clean | 26 | 26 |
-| 3 | Eagle-design | 1 | 8 |
+| 3 | Eagle-design | 1 | 7 |
 | 4 | Spawn design | 2 | 3 |
 | 5 | Eagle-dev takes WoW | 0 | 5 |
 | 6 | Argus build | 0 | 2 |
@@ -66,11 +66,10 @@ Stage 3, the design half of the plan's stage 5: 1 · eagle-design takes v1 by th
 word · 2 to 5 · eagle-design's own code passes the shared rules with nothing suppressed, its 181 suppressions
 at zero in four batches, each a task: 2 · 91 booleans named as one (`isLent`, not `lent`) · 3 · 69 placeholder
 names (`list`, `value`, `data`, `item`, `num`) and one entry's name · 4 · 14 files named by their job, not a
-number · 5 · the last 7: 4 regexes, 2 word tables in their words files, one `substr` · 6 · its data in
-TypeScript, no JSON but a file a tool reads by name (W11, said again by the PM on 14 Nov): its three
-`fixtures/data/*.json`, which the build side reads too · 7 · two shared checks, out in a release: a product's
-suppressions file empty, and no JSON but a file a tool reads by name · 8 · both design repositories pinned
-to one tag, the gate green on both.
+number · 5 · the last 7: 4 regexes, 2 word tables in their words files, one `substr` · 6 · two shared
+checks, out in a release: a product's suppressions file empty, and a JSON file only a tool reads by name or a
+script writes from a TypeScript module (W11) · 7 · both design repositories pinned to one tag, the gate green
+on both.
 
 Stage 4, the plan's stage 3: 1 · `yarn spawn design <path> <name>`, the hooks installed with it · 2 · the
 new-project guide · 3 · `argus-design` spawned and green on its first commit, the PM's word.
@@ -79,7 +78,7 @@ Stage 5, the PM's architecture (W110, W111; the plan's stages 4 and 5, its build
 eagle-dev · 2 · its theme, atoms and molecules taken by tag, its copies made taken files by migration · 3 · the
 build side's rules, process tools and skills taken, `dev/` cleaned of the product · 4 · the gate tries eagle-dev ·
 5 · eagle-dev's own code passes the shared rules with no exemption they refuse, inline or in a file, and
-holds no JSON but a file a tool reads by name (W11).
+holds no JSON written by hand (W11).
 
 Stage 6: 1 · `spawn build` from a blank build repository green on every shared check · 2 · `argus-dev` spawned and
 green on its first commit, the PM's word.
@@ -1549,3 +1548,8 @@ Each call: what, why, how to undo. None changes what the PM sees.
   `fixtures/data/*.json` become a task of stage 3, eagle-dev's (its scans' baselines, seed templates, ticket
   fixtures) part of stage 5's task 5; the check joins the suppressions lock, and the shared rule that names a
   scan's baseline `{scan}.json` moves to TypeScript with it. Undo: the task out, the check left unwritten.
+- The PM, 14 Nov, on what W11 means: "Json moze jako output, ale input pelen otypowany i olintowany". Calls:
+  a JSON file stands when a tool reads it by name or a script writes it from a TypeScript module; one written
+  by hand is red. eagle-design's three are its build's output, each from a module its `buildReads.json`
+  names, so its task leaves stage 3; a scan's baseline, which a script writes, may stay JSON, and the shared
+  rule that names it stands. Undo: the task back.
