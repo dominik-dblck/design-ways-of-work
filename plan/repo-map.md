@@ -17,8 +17,14 @@ repository never takes a design page. A page left in a scratchpad lost as well: 
 products (each a design and a build repository), then what each one takes: its skills, its rules, its checks,
 its ways of working.
 
-3 · how it is drawn: the levels in 3D, by CSS or by WebGL, both drawn on one scene model so they compare on
-the same data · open; the PM compares the two drawings.
+3 · how it is drawn · decided 14 Nov, the PM's words "css 3d duzo blizej zostawiamy to": CSS 3D; WebGL lost,
+farther from the look. The board beside it keeps Mermaid's square traces in the page's own colours ("chodzilo
+mi o uklad sciezek a nie o kolory plytki"): the way of working on the left in one dashed rim, its products on
+the right. A tool is drawn by its own mark (W119); a copy back is drawn as today's, to go one-way (W120).
+
+3a · a block picked opens a side panel · decided 14 Nov, the PM's words "po prawej zeby byl sidenav ... taki
+details kazdego klocka": a home lists its kinds, a kind every element with what it says and where it lives,
+a product what it takes and runs, a tool who runs it and what sets it up.
 
 4 · each shape it draws a `componentsSpec` row; a new one a draft · open.
 

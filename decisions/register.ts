@@ -343,6 +343,27 @@ const SINCE: readonly Decision[] = [
     says: 'the map starts from this repository, as the architecture holds both sides: the way of working, then its products, each a design and a build repository, then what each one takes (its skills, its rules, its checks, its ways of working). It is this repository’s own tool: a script writes its data as TypeScript from this repository and the products’ clones, and a page drawn from the design system shows it. A page template in the design home lost, as a build repository never takes one. It is refined point by point by the design-refine checklist, one point at a time, before it is built.',
     from: 'plan/repo-map.md',
   },
+  {
+    id: 'W119',
+    title: 'a tool is drawn by its own mark',
+    held: '14 Nov · the PM’s word, here, on the map',
+    says: 'where a page names a tool, it draws the mark its authors gave it: its logo as Simple Icons draws it, at a pinned version, else the mark the tool’s own site publishes, as they colour it. A script fetches them and writes them into a TypeScript module, no SVG file. It is W109’s one exception: every other glyph comes from `lucide-react`.',
+    from: 'plan/repo-map.md',
+  },
+  {
+    id: 'W120',
+    title: 'the way of working talks to its products one way',
+    held: '14 Nov · the PM’s word, here, as the aim',
+    says: 'a product takes this repository by a tag, and nothing comes back by a script: what a product wants shared comes as a request, and this repository writes it (W110). The copies that still run back from both Eagle repositories (the build side’s home, its skeleton, its theme) end once their originals live here.',
+    from: 'plan/run-11-nov.md',
+  },
+  {
+    id: 'W121',
+    title: 'a shared component’s spec rows stand beside it',
+    held: '14 Nov · the PM’s word, here, its pick A, on eagle-design’s ask',
+    says: 'the spec rows of a component this repository ships stand here beside the component, one source of truth: a product takes them by tag and keeps only its own components’ rows. eagle-design’s 11 such spec files move here in stage 3, before `argus-design` is spawned.',
+    from: 'plan/run-11-nov.md',
+  },
 ];
 
 // a product's rows keep their words of the day and their order, each naming the row it was

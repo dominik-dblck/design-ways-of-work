@@ -25,7 +25,7 @@ Printed by `~/.claude/hooks/runBars.py` (show · close <stage> <words>), never c
 | stage | what | done | of |
 | 1 | Foundation | 7 | 7 |
 | 2 | Design clean | 26 | 26 |
-| 3 | Eagle-design | 3 | 7 |
+| 3 | Eagle-design | 3 | 8 |
 | 4 | Spawn design | 2 | 3 |
 | 5 | Eagle-dev takes WoW | 0 | 5 |
 | 6 | Argus build | 0 | 2 |
@@ -68,8 +68,9 @@ at zero in four batches, each a task: 2 · 91 booleans named as one (`isLent`, n
 names (`list`, `value`, `data`, `item`, `num`) and one entry's name · 4 · 14 files named by their job, not a
 number · 5 · the last 7: 4 regexes, 2 word tables in their words files, one `substr` · 6 · two shared
 checks, out in a release: a product's suppressions file empty, and a JSON file only a tool reads by name or a
-script writes from a TypeScript module (W11) · 7 · both design repositories pinned to one tag, the gate green
-on both.
+script writes from a TypeScript module (W11) · 7 · the spec rows of the shared components, 11 of
+eagle-design's spec files, beside their components here, eagle-design reading them by tag (W121) · 8 · both
+design repositories pinned to one tag, the gate green on both.
 
 Stage 4, the plan's stage 3: 1 · `yarn spawn design <path> <name>`, the hooks installed with it · 2 · the
 new-project guide · 3 · `argus-design` spawned and green on its first commit, the PM's word.
@@ -1555,3 +1556,15 @@ Each call: what, why, how to undo. None changes what the PM sees.
   by hand is red. eagle-design's three are its build's output, each from a module its `buildReads.json`
   names, so its task leaves stage 3; a scan's baseline, which a script writes, may stay JSON, and the shared
   rule that names it stands. Undo: the task back.
+- eagle-design, 14 Nov: 11 of its 25 spec files describe components this repository ships (Button, Checkbox,
+  IconButton, Input, Switch, Text with Label and Heading, StateChip, BadgeDot, Dialog, SearchBox, the
+  theme's tooltip). Asked of the PM, its pick A: they move beside their components here as stage 3's task 7,
+  before the spawn, so `argus-design` takes them and eagle-design reads them by tag (W121); eagle-design's own
+  rows stay its own. Undo: the task out, the rows left in eagle-design.
+- The PM, 14 Nov, on the map: "dodaj ikony typescript prettier itp zamiast textowo", then "sciagnij
+  wszystkie skoro ktos zrobil narzedzie i nadal mu ikone". Call: a tool is drawn by its own mark, an exception
+  to W109 (W119): Simple Icons at a pinned version where it draws the tool, else the mark its authors
+  publish; a script writes them into a TypeScript module, no SVG file. Undo: lucide's glyphs back.
+- The PM, 14 Nov: "fajnie jak docelowo bedzie jednokierunkowa komunikacja", seeing the map's copies back from
+  both Eagle repositories. Call: the aim is written down (W120), and the map draws each copy back as today's,
+  to go one-way; the copies end once the originals live here (W110), so no task moves today. Undo: W120 out.
