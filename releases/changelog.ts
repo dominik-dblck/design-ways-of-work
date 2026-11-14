@@ -5,11 +5,23 @@
 import type { Release, Unreleased } from '../scripts/changelogTypes.ts';
 
 const NEXT: Unreleased = {
-  kind: 'patch',
-  what: '',
-  action: 'none: move the pin to the tag',
-  rules: { added: [], changed: [], removed: [] },
-  outputs: {},
+  kind: 'minor',
+  what: 'two shared tests, run in every repository that takes the shared home: `nothingIsSuppressedInAFile` refuses an entry in `eslint-suppressions.json`, an exception being a directive in the line it lets through; `dataIsWrittenAsTypeScript` refuses a JSON file that no tool opens by its name and no script writes, as the scope’s `generated` names it (W11, W117); the design preset names each JSON the build writes for the build side, `buildReads.json`, in `generated`; the checks rule on a tool’s exceptions drops the suppressions file, and the names rules drop the names it held',
+  action:
+    'none: move the pin to the tag; the take’s migration writes the three build-read files into `.prettierignore`',
+  rules: {
+    added: ['nothingIsSuppressedInAFile', 'dataIsWrittenAsTypeScript'],
+    changed: [],
+    removed: [],
+  },
+  outputs: {
+    'eagle-design': {
+      'output · yarn test':
+        'two shared tests more, green: no suppressions file entry, no JSON written by hand',
+      'written · .prettierignore':
+        'by the migration, the three JSON files the build writes for the build side, under the tool-written files',
+    },
+  },
 };
 
 const RELEASES: readonly Release[] = [

@@ -16,6 +16,7 @@ import { SCOPE_PRESET_CUT } from './eagle-design/scopePresetCut.ts';
 import { ICON_PACKAGE } from './eagle-design/iconPackage.ts';
 import { MIGRATION } from './eagle-design/migration.ts';
 import { MODES_LABEL } from './eagle-design/modesLabel.ts';
+import { BUILD_READS_IGNORED } from './eagle-design/buildReadsIgnored.ts';
 import { PRODUCT_HALVES } from './eagle-design/productHalves.ts';
 import { ROADMAP_READERS } from './eagle-design/roadmapReaders.ts';
 import { ROADMAP_TYPES } from './eagle-design/roadmapTypes.ts';
@@ -64,6 +65,7 @@ const CONSUMERS: readonly [Consumer, ...Consumer[]] = [
       BUILD_THEME_TAKEN,
       ICON_PACKAGE,
       MODES_LABEL,
+      BUILD_READS_IGNORED,
     ],
     // its `main` takes the tags itself: no branch stands between it and the gate
     port: null,
