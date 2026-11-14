@@ -336,6 +336,13 @@ const SINCE: readonly Decision[] = [
     says: 'what a person or an agent writes is TypeScript, typed and linted; a JSON file stands only when a tool reads it by name (`package.json`, a `tsconfig`, a settings file) or a script writes it from a TypeScript module. Both Eagle repositories meet the shared rules with nothing suppressed before argus-design is spawned, eagle-design first.',
     from: 'plan/run-11-nov.md',
   },
+  {
+    id: 'W118',
+    title: 'one map of the way of working, from it down to each product',
+    held: '14 Nov · the PM’s word, here, its A, then its correction the same hour',
+    says: 'the map starts from this repository, as the architecture holds both sides: the way of working, then its products, each a design and a build repository, then what each one takes (its skills, its rules, its checks, its ways of working). It is this repository’s own tool: a script writes its data as TypeScript from this repository and the products’ clones, and a page drawn from the design system shows it. A page template in the design home lost, as a build repository never takes one. It is refined point by point by the design-refine checklist, one point at a time, before it is built.',
+    from: 'plan/repo-map.md',
+  },
 ];
 
 // a product's rows keep their words of the day and their order, each naming the row it was
