@@ -6,6 +6,7 @@ import type { RepoScope } from '../shared/repoScope.ts';
 import { entryOfPart, filesOf, isEntry } from './layout.ts';
 import { readStarts } from './readStarts.ts';
 import { ROOT } from './root.ts';
+import { buildReads } from '../sheet/project.ts';
 import {
   GENERATORS,
   NAME_CASES,
@@ -47,7 +48,12 @@ const SCOPE_PRESET: Preset = {
     'shared/**/*.ts',
     'dev/**/*.ts',
   ],
-  generated: ['app/styles/tokens.ts', 'roadmaps/ids.ts'],
+  // the build writes each JSON the build side reads from a module's export: written, never by hand
+  generated: [
+    'app/styles/tokens.ts',
+    'roadmaps/ids.ts',
+    ...buildReads.json.map((one) => one.fixture),
+  ],
   react: ['app/**/*.tsx', 'app/components/**/*.ts'],
   entries: ENTRIES,
   parts: PARTS,
